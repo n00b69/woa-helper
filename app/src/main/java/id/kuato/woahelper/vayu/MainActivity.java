@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     checkuefi();
     x.tvDumpSensor.setText(getString(R.string.dump_sensors_title));
     x.tvDumpModem.setText(getString(R.string.dump_modem_title));
-    x.tvAppCreator.setText("Vern Kuato @2022");
+    x.tvAppCreator.setText("Vern Kuato & halal-beef @2023");
     x.tvBackupBoot.setText(getString(R.string.backup_boot_title));
     x.tvBackupSubtitle.setText(getString(R.string.backup_boot_subtitle));
     x.tvSensorSubtitle.setText(getString(R.string.dump_sensors_subtitle));
@@ -96,14 +96,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     x.tvUefiVersion.setText(
-        String.format(getString(R.string.uefi_version), uefiname).replace("/mnt/sdcard/UEFI/vayu-" ,"").replace(".img",""));
+        String.format(getString(R.string.uefi_version), "N/A"));
     x.tvBackupStatus.setText(
         String.format(getString(R.string.backup_status), findbackup.replace("/sdcard/", "")));
     x.cvGuide.setOnClickListener(
         new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-            String url = "https://github.com/Icesito68/Port-Windows-11-Poco-X3-pro";
+            String url = "https://github.com/woa-vayu/Port-Windows-11-Poco-X3-pro";
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.setData(Uri.parse(url));
             startActivity(i);
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
         new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-            String url = "https://t.me/winonvayu";
+            String url = "https://t.me/winonvayualt";
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.setData(Uri.parse(url));
             startActivity(i);
@@ -149,8 +149,8 @@ public class MainActivity extends AppCompatActivity {
                                               + "&& su -c dd if=/dev/block/by-name/modemst2 of=/sdcard/bootmodem_fs2 "
                                               + "&& su -c rmdir /mnt/Windows; su -c mkdir /mnt/Windows "
                                               + "&& su -c mount.ntfs /dev/block/by-name/win /mnt/Windows "
-                                              + "&& su -c mv /sdcard/bootmodem_fs1 /mnt/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_4271239f52792d6b/ "
-                                              + "&& su -c mv /sdcard/bootmodem_fs2 /mnt/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_4271239f52792d6b/ "
+                                              + "&& su -c mv /sdcard/bootmodem_fs1 /mnt/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_04af705613ed2d36/ "
+                                              + "&& su -c mv /sdcard/bootmodem_fs2 /mnt/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_04af705613ed2d36/ "
                                               + "&& su -c umount /mnt/Windows && su -c dd if="
                                               + finduefi
                                               + " of=/dev/block/by-name/boot && su -c reboot");
@@ -265,8 +265,8 @@ public class MainActivity extends AppCompatActivity {
                                               + "&& su -c dd if=/dev/block/by-name/modemst2 of=/sdcard/bootmodem_fs2 "
                                               + "&& su -c rmdir /mnt/Windows; su -c mkdir /mnt/Windows "
                                               + "&& su -c mount.ntfs /dev/block/by-name/win /mnt/Windows "
-                                              + "&& su -c mv /sdcard/bootmodem_fs1 /mnt/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_4271239f52792d6b/ "
-                                              + "&& su -c mv /sdcard/bootmodem_fs2 /mnt/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_4271239f52792d6b/ "
+                                              + "&& su -c mv /sdcard/bootmodem_fs1 /mnt/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_04af705613ed2d36/ "
+                                              + "&& su -c mv /sdcard/bootmodem_fs2 /mnt/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_04af705613ed2d36/ "
                                               + "&& su -c umount /mnt/Windows");
                                   messages.setText(
                                       "Modem Provisioned Successfully...\nEnjoy LTE on Windows :)");

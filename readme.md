@@ -27,7 +27,7 @@ Beta. Most of the feature works, but some cases may do not work. read [requireme
 
 • Rooted Devices
 
-• [Poco X3 Pro with installed Windows OS](https://github.com/Icesito68/Port-Windows-11-Poco-X3-pro/blob/main/README.md)
+• [Poco X3 Pro with Windows](https://github.com/woa-vayu/Port-Windows-11-Poco-X3-pro/blob/main/README.md)
 
-• UEFI Files from [HERE](https://github.com/degdag/edk2-msm/releases/latest)
+• UEFI Files from [HERE](https://github.com/woa-vayu/edk2-msm/releases/latest)
 </details>

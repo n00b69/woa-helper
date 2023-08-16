@@ -3,7 +3,7 @@
     <string name="app_name">WOA Helper - Vayu</string>
     <string name="error_title">An unexpected error occurred.\nSorry for the inconvenience.</string>
     <string name="app_title">Windows on ARM Helper - Vayu</string>
-    <string name="app_subtitle">v1.2"</string>
+    <string name="app_subtitle">v1.3"</string>
 
     <string name="dump_sensors_title">DUMP SENSORS</string>
     <string name="dump_modem_title">DUMP MODEM</string>
@@ -37,9 +37,9 @@
     <string name="please_wait">Please Wait...</string>
 
     <string name="flash_uefi_title">FLASH UEFI</string>
-    <string name="flash_uefi_subtitle">UEFI for the %s panel variant is ready to flash</string>
+    <string name="flash_uefi_subtitle">UEFI for the %s panel variant is ready to ne flashed</string>
     <string name="uefi_not_found">UEFI NOT FOUND</string>
-    <string name="uefi_not_found_subtitle">Please Download UEFI for VAYU and place your UEFI to the UEFI FOLDER in INTERNAL STORAGE</string>
+    <string name="uefi_not_found_subtitle">Please Download UEFI for the POCO X3 Pro and place your UEFI to the UEFI FOLDER in INTERNAL STORAGE</string>
 
     <string name="flash_uefi_question">Flash UEFI for the %s panel variant?</string>
 
