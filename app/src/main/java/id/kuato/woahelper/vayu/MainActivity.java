@@ -431,9 +431,9 @@ public class MainActivity extends AppCompatActivity {
       ShellUtils.Executer("su -c mkdir /sdcard/UEFI"); // Create UEFI Folder if it doesnt exist.
       finduefi =
         ShellUtils.Executer(
-            "su -c find /mnt/sdcard/UEFI/ -type f -name 'vayu-"
+            "su -c find /mnt/sdcard/UEFI/ -type f -name 'boot-vayu-"
                 + panel.toLowerCase()
-                + "-*'");
+                + ".img'");
     if (finduefi.isEmpty()) {
       x.cvFlashUefi.setEnabled(false);
       x.tvFlashUefi.setText(getString(R.string.uefi_not_found));
