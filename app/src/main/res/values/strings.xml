@@ -3,19 +3,20 @@
     <string name="app_name">WOA Helper - Vayu</string>
     <string name="error_title">An unexpected error occurred.\nSorry for the inconvenience.</string>
     <string name="app_title">Windows on ARM Helper - Vayu</string>
-    <string name="app_subtitle">v1.3"</string>
+    <string name="app_subtitle">v1.4"</string>
 
-    <string name="dump_sensors_title">DUMP SENSORS</string>
+    <string name="mnt_title">MOUNT/UNMOUNT WINDOWS</string>
     <string name="dump_modem_title">DUMP MODEM</string>
     <string name="quickboot_title">QUICKBOOT TO WINDOWS</string>
     <string name="backup_boot_title">BACKUP ANDROID BOOT</string>
 
-    <string name="dump_sensors_question">Dump sensors to Windows partition?</string>
+    <string name="mnt_question">%s Windows?\n(/sdcard/Windows)</string>
     <string name="dump_modem_question">Dump modem1st and modem2st to Windows partition?</string>
     <string name="quickboot_question">Quick Boot to Windows?</string>
     <string name="backup_boot_question">Backup current android boot to Internal Storage?</string>
 
-    <string name="dump_sensors_subtitle">Dump sensors to Windows is required one time only to repair the sensors on Windows</string>
+
+    <string name="mnt_subtitle">Mount/Unmount Windows partition in order to edit content inside</string>
     <string name="dump_modem_subtitle">Dump modem1st and modem2st to Windows to fix LTE on SIM1 on Windows everytime you want to boot to Windows</string>
     <string name="backup_boot_subtitle">Backup boot image to internal storage</string>
     <string name="quickboot_subtitle">Dump Modem, Flash UEFI, and Reboot to Windows in one click</string>
@@ -34,10 +35,11 @@
 
     <string name="yes">YES</string>
     <string name="dismiss">DISMISS</string>
+    <string name="no">NO</string>
     <string name="please_wait">Please Wait...</string>
 
     <string name="flash_uefi_title">FLASH UEFI</string>
-    <string name="flash_uefi_subtitle">UEFI for the %s panel variant is ready to ne flashed</string>
+    <string name="flash_uefi_subtitle">UEFI for the %s panel variant is ready to be flashed</string>
     <string name="uefi_not_found">UEFI NOT FOUND</string>
     <string name="uefi_not_found_subtitle">Please Download UEFI for the POCO X3 Pro and place your UEFI to the UEFI FOLDER in INTERNAL STORAGE</string>
 

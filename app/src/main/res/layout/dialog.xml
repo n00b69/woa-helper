@@ -63,6 +63,21 @@
                 android:textStyle="bold"
                 app:backgroundTint="?attr/colorAccent"
                 app:cornerRadius="@dimen/parentMargin" />
+
+           <com.google.android.material.button.MaterialButton
+                android:id="@+id/no"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
+                android:layout_weight="1"
+                android:animateLayoutChanges="true"
+                android:clipToOutline="true"
+                android:stateListAnimator="@anim/state_list_anim"
+                android:textStyle="bold"
+                app:backgroundTint="?attr/colorAccent"
+                app:cornerRadius="@dimen/parentMargin" />
+
         </LinearLayout>
     </LinearLayout>
 

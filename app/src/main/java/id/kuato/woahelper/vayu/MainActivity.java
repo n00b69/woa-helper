@@ -50,12 +50,12 @@ public class MainActivity extends AppCompatActivity {
     x.toolbarlayout.toolbar.setNavigationIcon(iconToolbar);
     checkdevice();
     checkuefi();
-    x.tvDumpSensor.setText(getString(R.string.dump_sensors_title));
+    x.tvMnt.setText(getString(R.string.mnt_title));
     x.tvDumpModem.setText(getString(R.string.dump_modem_title));
-    x.tvAppCreator.setText("Vern Kuato & halal-beef @2023");
+    x.tvAppCreator.setText("Marius586 & Vern Kuato & halal-beef @2023");
     x.tvBackupBoot.setText(getString(R.string.backup_boot_title));
     x.tvBackupSubtitle.setText(getString(R.string.backup_boot_subtitle));
-    x.tvSensorSubtitle.setText(getString(R.string.dump_sensors_subtitle));
+    x.tvMntSubtitle.setText(getString(R.string.mnt_subtitle));
     x.tvModemSubtitle.setText(getString(R.string.dump_modem_subtitle));
     x.tvQuickBoot.setText(getString(R.string.quickboot_title));
     x.tvBootSubtitle.setText(getString(R.string.quickboot_subtitle));
@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     dialog.setContentView(R.layout.dialog);
     dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
     MaterialButton yesButton = dialog.findViewById(R.id.yes);
+    MaterialButton noButton = dialog.findViewById(R.id.no);
     MaterialButton dismissButton = dialog.findViewById(R.id.dismiss);
     TextView messages = dialog.findViewById(R.id.messages);
     ImageView icons = dialog.findViewById(R.id.icon);
@@ -84,10 +85,9 @@ public class MainActivity extends AppCompatActivity {
 
     String uefiname = finduefi;
     String findbackup = ShellUtils.Executer(getString(R.string.findbackup));
-
+    
     if (uefiname.isEmpty()) {
       uefiname = getString(R.string.not_found);
-      x.tvUefiVersion.setTextColor(R.color.red);
     }
     if (findbackup.isEmpty()) {
       findbackup = getString(R.string.not_found);
@@ -95,8 +95,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    x.tvUefiVersion.setText(
-        String.format(getString(R.string.uefi_version), "N/A"));
     x.tvBackupStatus.setText(
         String.format(getString(R.string.backup_status), findbackup.replace("/sdcard/", "")));
     x.cvGuide.setOnClickListener(
@@ -125,8 +123,11 @@ public class MainActivity extends AppCompatActivity {
         new View.OnClickListener() {
           @Override
           public void onClick(View v) {
+          	ShowBlur();
+          	noButton.setText(getString(R.string.no));
             yesButton.setVisibility(View.VISIBLE);
-            ShowBlur();
+            dismissButton.setVisibility(View.GONE);
+            noButton.setVisibility(View.VISIBLE);
             icons.setImageDrawable(icon);
             messages.setText(getString(R.string.quickboot_question));
             yesButton.setText(getString(R.string.yes));
@@ -135,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                   @Override
                   public void onClick(View v) {
                     yesButton.setVisibility(View.GONE);
-                    dismissButton.setVisibility(View.GONE);
+                    noButton.setVisibility(View.GONE);
                     messages.setText(getString(R.string.please_wait));
                     new Handler()
                         .postDelayed(
@@ -145,13 +146,10 @@ public class MainActivity extends AppCompatActivity {
                                 try {
                                   String run =
                                       ShellUtils.Executer(
-                                          " su -c dd if=/dev/block/by-name/modemst1 of=/sdcard/bootmodem_fs1 "
-                                              + "&& su -c dd if=/dev/block/by-name/modemst2 of=/sdcard/bootmodem_fs2 "
-                                              + "&& su -c rmdir /mnt/Windows; su -c mkdir /mnt/Windows "
-                                              + "&& su -c mount.ntfs /dev/block/by-name/win /mnt/Windows "
-                                              + "&& su -c mv /sdcard/bootmodem_fs1 /mnt/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_04af705613ed2d36/ "
-                                              + "&& su -c mv /sdcard/bootmodem_fs2 /mnt/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_04af705613ed2d36/ "
-                                              + "&& su -c umount /mnt/Windows && su -c dd if="
+                                              "su -c if ! [ -a  /mnt/pass_through/0/emulated/0/Windows/Windows ]; then su -c mkdir /mnt/pass_through/0/emulated/0/Windows || true && su -mm -c mount.ntfs /dev/block/by-name/win /mnt/pass_through/0/emulated/0/Windows ; fi "
+                                                      + " && su -c dd if=/dev/block/by-name/modemst1 of=/mnt/pass_through/0/emulated/0/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_04af705613ed2d36/bootmodem_fs1 "
+                                                      + " && su -c dd if=/dev/block/by-name/modemst2 of=/mnt/pass_through/0/emulated/0/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_04af705613ed2d36/bootmodem_fs2 "
+                                                      + " && su -c dd if="
                                               + finduefi
                                               + " of=/dev/block/by-name/boot && su -c reboot");
                                   messages.setText("Reboot to windows now...");
@@ -173,26 +171,39 @@ public class MainActivity extends AppCompatActivity {
                     dialog.dismiss();
                   }
                 });
+                noButton.setOnClickListener(
+                new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                    HideBlur();
+                    dialog.dismiss();
+                  }
+                });
             dialog.setCancelable(false);
             dialog.show();
           }
         });
 
-    x.cvDumpSensor.setOnClickListener(
+    x.cvMnt.setOnClickListener(
         new View.OnClickListener() {
           @Override
           public void onClick(View v) {
+          	noButton.setText(getString(R.string.no));
+          	dismissButton.setText(getString(R.string.dismiss));
             yesButton.setVisibility(View.VISIBLE);
+            noButton.setVisibility(View.VISIBLE);
+            dismissButton.setVisibility(View.GONE);
             ShowBlur();
-            icons.setImageDrawable(sensors);
-            messages.setText(getString(R.string.dump_sensors_question));
+            icons.setImageDrawable(icon);
+            String mnt_question = ShellUtils.Executer("su -c if mount | grep /dev/block/sda33 >/dev/null ; then echo 'Unmount Windows?'; else echo 'Mount Windows?' ; fi");
+            messages.setText(mnt_question);
             yesButton.setText(getString(R.string.yes));
             yesButton.setOnClickListener(
                 new View.OnClickListener() {
                   @Override
                   public void onClick(View v) {
                     yesButton.setVisibility(View.GONE);
-                    dismissButton.setVisibility(View.GONE);
+                    noButton.setVisibility(View.GONE);
                     messages.setText(getString(R.string.please_wait));
                     new Handler()
                         .postDelayed(
@@ -202,17 +213,9 @@ public class MainActivity extends AppCompatActivity {
                                 try {
                                   String r =
                                       ShellUtils.Executer(
-                                          "su -c rmdir /mnt/Windows; su -c mkdir /mnt/Windows "
-                                              + "&& su -c mount.ntfs /dev/block/by-name/win /mnt/Windows "
-                                              + "&& su -c mkdir /mnt/persist "
-                                              + "&& su -c mount /dev/block/by-name/persist /mnt/persist "
-                                              + "&& su -c mkdir -p /mnt/Windows/Windows/System32/drivers/DriverData/QUALCOMM/fastRPC/persist "
-                                              + "&& su -c rm -rf /mnt/Windows/Windows/System32/drivers/DriverData/QUALCOMM/fastRPC/persist/sensors "
-                                              + "&& su -c cp -r /mnt/persist/sensors /mnt/Windows/Windows/System32/drivers/DriverData/QUALCOMM/fastRPC/persist/ "
-                                              + "&& su -c umount /mnt/persist "
-                                              + "&& su -c umount /mnt/Windows"
-                                              + "&& su -c rmdir /mnt/persist ");
-                                  messages.setText("Provisioning Sensors finished...");
+                                          "su -mm -c if [ -a /mnt/pass_through/0/emulated/0/Windows/Windows ]; then su -mm -c umount /dev/block/by-name/win && su -mm -c rmdir /mnt/pass_through/0/emulated/0/Windows; else su -mm -c mkdir /mnt/pass_through/0/emulated/0/Windows || true && su -mm -c umount /dev/block/by-name/win || true && su -mm -c mount.ntfs /dev/block/by-name/win /mnt/pass_through/0/emulated/0/Windows ; fi");
+                                  String stat = ShellUtils.Executer("su -c if mount | grep /dev/block/sda33 > /dev/null; then echo Mounted; else echo Unmounted ; fi");
+                                  messages.setText(stat);
                                   dismissButton.setVisibility(View.VISIBLE);
                                 } catch (Exception error) {
                                   error.printStackTrace();
@@ -232,6 +235,14 @@ public class MainActivity extends AppCompatActivity {
                     dialog.dismiss();
                   }
                 });
+                noButton.setOnClickListener(
+                new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                    HideBlur();
+                    dialog.dismiss();
+                  }
+                });
             dialog.setCancelable(false);
             dialog.show();
           }
@@ -241,6 +252,9 @@ public class MainActivity extends AppCompatActivity {
         new View.OnClickListener() {
           @Override
           public void onClick(View v) {
+          	noButton.setText(getString(R.string.no));
+          	dismissButton.setText(getString(R.string.dismiss));
+           dismissButton.setVisibility(View.GONE);
             yesButton.setVisibility(View.VISIBLE);
             ShowBlur();
             icons.setImageDrawable(modem);
@@ -250,7 +264,7 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                   @Override
                   public void onClick(View v) {
-                    dismissButton.setVisibility(View.GONE);
+                    noButton.setVisibility(View.GONE);
                     yesButton.setVisibility(View.GONE);
                     messages.setText(getString(R.string.please_wait));
                     new Handler()
@@ -261,13 +275,9 @@ public class MainActivity extends AppCompatActivity {
                                 try {
                                   String run =
                                       ShellUtils.Executer(
-                                          " su -c dd if=/dev/block/by-name/modemst1 of=/sdcard/bootmodem_fs1 "
-                                              + "&& su -c dd if=/dev/block/by-name/modemst2 of=/sdcard/bootmodem_fs2 "
-                                              + "&& su -c rmdir /mnt/Windows; su -c mkdir /mnt/Windows "
-                                              + "&& su -c mount.ntfs /dev/block/by-name/win /mnt/Windows "
-                                              + "&& su -c mv /sdcard/bootmodem_fs1 /mnt/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_04af705613ed2d36/ "
-                                              + "&& su -c mv /sdcard/bootmodem_fs2 /mnt/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_04af705613ed2d36/ "
-                                              + "&& su -c umount /mnt/Windows");
+                                              "su -c if ! [ -a  /mnt/pass_through/0/emulated/0/Windows/Windows ]; then su -c mkdir /mnt/pass_through/0/emulated/0/Windows || true && su -mm -c mount.ntfs /dev/block/by-name/win /mnt/pass_through/0/emulated/0/Windows ; fi "
+                                              + " && su -c dd if=/dev/block/by-name/modemst1 of=/mnt/pass_through/0/emulated/0/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_04af705613ed2d36/bootmodem_fs1 "
+                                              + "&& su -c dd if=/dev/block/by-name/modemst2 of=/mnt/pass_through/0/emulated/0/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_04af705613ed2d36/bootmodem_fs2 ");
                                   messages.setText(
                                       "Modem Provisioned Successfully...\nEnjoy LTE on Windows :)");
                                   dismissButton.setVisibility(View.VISIBLE);
@@ -288,6 +298,14 @@ public class MainActivity extends AppCompatActivity {
                     dialog.dismiss();
                   }
                 });
+                noButton.setOnClickListener(
+                new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                    HideBlur();
+                    dialog.dismiss();
+                  }
+                });
             dialog.setCancelable(false);
             dialog.show();
           }
@@ -297,6 +315,9 @@ public class MainActivity extends AppCompatActivity {
         new View.OnClickListener() {
           @Override
           public void onClick(View v) {
+          	noButton.setText(getString(R.string.no));
+          	dismissButton.setText(getString(R.string.dismiss));
+            dismissButton.setVisibility(View.GONE);
             ShowBlur();
             icons.setImageDrawable(uefi);
             yesButton.setVisibility(View.VISIBLE);
@@ -307,7 +328,7 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                   @Override
                   public void onClick(View v) {
-                    dismissButton.setVisibility(View.GONE);
+                    noButton.setVisibility(View.GONE);
                     yesButton.setVisibility(View.GONE);
                     messages.setText(getString(R.string.please_wait));
                     new Handler()
@@ -344,6 +365,14 @@ public class MainActivity extends AppCompatActivity {
                     dialog.dismiss();
                   }
                 });
+                noButton.setOnClickListener(
+                new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                    HideBlur();
+                    dialog.dismiss();
+                  }
+                });
             dialog.setCancelable(false);
             dialog.show();
           }
@@ -353,6 +382,10 @@ public class MainActivity extends AppCompatActivity {
         new View.OnClickListener() {
           @Override
           public void onClick(View v) {
+          	noButton.setVisibility(View.VISIBLE);
+          dismissButton.setVisibility(View.GONE);
+          	noButton.setText(getString(R.string.no));
+            dismissButton.setText(getString(R.string.dismiss));
             ShowBlur();
             icons.setImageDrawable(boot);
             yesButton.setVisibility(View.VISIBLE);
@@ -362,7 +395,7 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                   @Override
                   public void onClick(View v) {
-                    dismissButton.setVisibility(View.GONE);
+                    noButton.setVisibility(View.GONE);
                     yesButton.setVisibility(View.GONE);
                     messages.setText(getString(R.string.please_wait));
                     new Handler()
@@ -386,6 +419,14 @@ public class MainActivity extends AppCompatActivity {
                 });
             dismissButton.setText(getString(R.string.dismiss));
             dismissButton.setOnClickListener(
+                new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                    HideBlur();
+                    dialog.dismiss();
+                  }
+                });
+                noButton.setOnClickListener(
                 new View.OnClickListener() {
                   @Override
                   public void onClick(View v) {
@@ -431,9 +472,8 @@ public class MainActivity extends AppCompatActivity {
       ShellUtils.Executer("su -c mkdir /sdcard/UEFI"); // Create UEFI Folder if it doesnt exist.
       finduefi =
         ShellUtils.Executer(
-            "su -c find /mnt/sdcard/UEFI/ -type f -name 'boot-vayu-"
-                + panel.toLowerCase()
-                + ".img'");
+            "su -c find /mnt/sdcard/UEFI/ -type f  | grep '.img' | grep  "
+                + panel.toLowerCase() );
     if (finduefi.isEmpty()) {
       x.cvFlashUefi.setEnabled(false);
       x.tvFlashUefi.setText(getString(R.string.uefi_not_found));

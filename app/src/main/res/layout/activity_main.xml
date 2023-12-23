@@ -91,13 +91,6 @@
                             android:textSize="12dp" />
 
                         <TextView
-                            android:id="@+id/tv_uefi_version"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:textSize="12dp" />
-
-                        <TextView
                             android:id="@+id/tv_backup_status"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -224,7 +217,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cv_dump_sensor"
+                android:id="@+id/cv_mnt"
                 style="@style/Widget.Material3.CardView.Filled"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -250,7 +243,7 @@
 
                     <ImageView
                         android:layout_width="48dp"
-                        android:src="@drawable/ic_sensor"
+                        android:src="@drawable/ic_launcher_foreground"
                         android:scaleType="fitXY"
                         android:layout_height="48dp" />
 
@@ -260,13 +253,13 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/tv_dump_sensor"
+                            android:id="@+id/tv_mnt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/tv_sensor_subtitle"
+                            android:id="@+id/tv_mnt_subtitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="10dp"
