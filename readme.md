@@ -3,9 +3,9 @@
 <img src="Helper-dark.png" width="120" >
 <img src="Helper-light.png" width="120">
 </p>
-## ⚠️ **DISCLAIMER**
 
-We're not responsible for bricked devices, missing recovery partitions, dead microSD cards, dead cats or dogs, nuclear wars or you getting fired because you flash UEFI, provision modems and / or dump sensors from this apps. 
+> [!WARNING]
+> We're not responsible for bricked devices, missing recovery partitions, dead microSD cards, dead cats or dogs, nuclear wars or you getting fired because you flash UEFI, provision modems and / or dump sensors from this apps. 
 
 ## Project status
 
