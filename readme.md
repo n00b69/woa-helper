@@ -1,7 +1,7 @@
 # WoA-Helper-Vayu
 <p float="left" >
-<img src="https://github.com/Marius586/WoA-Helper/blob/main/Helper-dark.png" width="120" >
-<img src="https://github.com/Marius586/WoA-Helper/blob/main/Helper-light.png" width="120">
+<img src="Helper-dark.png" width="120" >
+<img src="Helper-light.png" width="120">
 </p>
 ## ⚠️ **DISCLAIMER**
 
