@@ -38,7 +38,7 @@ public class ShellUtils {
 			reader.close();
 			response = output.toString();
 		} catch (Exception e) {
-			response = "Exception: " + e.toString();
+			response = "Exception: " + e;
 		}
 		return response;
 	}

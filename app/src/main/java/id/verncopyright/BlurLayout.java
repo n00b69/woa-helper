@@ -66,7 +66,7 @@ public class BlurLayout extends CardView {
 		}
 	}
 
-	private Choreographer.FrameCallback invalidationLoop = new Choreographer.FrameCallback() {
+	private final Choreographer.FrameCallback invalidationLoop = new Choreographer.FrameCallback() {
 		@Override
 		public void doFrame(long frameTimeNanos) {
 			invalidate();

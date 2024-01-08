@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -18,8 +19,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="24dp"
             android:layout_marginTop="2dp"
+            android:layout_marginBottom="24dp"
             android:orientation="vertical"
             android:padding="24dp">
 
@@ -31,9 +32,9 @@
 
                 <ImageView
                     android:layout_width="96dp"
-                    android:src="@drawable/device"
+                    android:layout_height="200dp"
                     android:scaleType="fitXY"
-                    android:layout_height="200dp" />
+                    android:src="@drawable/device" />
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cv_info"
@@ -41,12 +42,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
                     android:adjustViewBounds="true"
                     android:animateLayoutChanges="true"
                     android:clickable="true"
-                    android:layout_weight="1"
                     android:elevation="@dimen/cardElevation"
-                    android:foreground="?android:attr/selectableItemBackground"
+                    android:foreground="@drawable/device"
                     android:gravity="center"
                     android:padding="@dimen/parentMargin"
                     android:stateListAnimator="@anim/state_list_anim"
@@ -63,10 +64,10 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginVertical="4dp"
                             android:gravity="center"
                             android:text="WINDOWS ON ARM"
                             android:textSize="14dp"
-                            android:layout_marginVertical="4dp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -91,7 +92,7 @@
                             android:textSize="12dp" />
 
                         <TextView
-                            android:id="@+id/tv_backup_status"
+                            android:id="@+id/tv_mount_status"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -100,62 +101,62 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="bottom"
                             android:layout_weight="1"
+                            android:gravity="bottom"
                             android:orientation="horizontal">
 
                             <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/cv_guide"
                                 style="@style/Widget.Material3.CardView.Filled"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/cv_guide"
+                                android:layout_margin="2dp"
+                                android:layout_weight="1"
                                 android:adjustViewBounds="true"
                                 android:animateLayoutChanges="true"
                                 android:clickable="true"
-                                android:layout_weight="1"
-                                android:layout_margin="2dp"
-                                app:cardBackgroundColor="@color/colorOnPrimary"
                                 android:elevation="@dimen/cardElevation"
                                 android:gravity="center"
                                 android:padding="@dimen/parentMargin"
                                 android:stateListAnimator="@anim/state_list_anim"
+                                app:cardBackgroundColor="@color/colorOnPrimary"
                                 app:cardCornerRadius="@dimen/cardCornerRadius"
                                 app:cardMaxElevation="0dp">
 
                                 <android.widget.TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="@string/guide"
+                                    android:gravity="center"
                                     android:paddingVertical="4dp"
-                                    android:textStyle="bold"
-                                    android:gravity="center" />
+                                    android:text="@string/guide"
+                                    android:textStyle="bold" />
                             </com.google.android.material.card.MaterialCardView>
 
                             <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/cv_group"
                                 style="@style/Widget.Material3.CardView.Filled"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="2dp"
-                                android:id="@+id/cv_group"
+                                android:layout_weight="1"
                                 android:adjustViewBounds="true"
-                                app:cardBackgroundColor="@color/colorOnPrimary"
                                 android:animateLayoutChanges="true"
                                 android:clickable="true"
-                                android:layout_weight="1"
                                 android:elevation="@dimen/cardElevation"
                                 android:gravity="center"
                                 android:padding="@dimen/parentMargin"
                                 android:stateListAnimator="@anim/state_list_anim"
+                                app:cardBackgroundColor="@color/colorOnPrimary"
                                 app:cardCornerRadius="@dimen/cardCornerRadius"
                                 app:cardMaxElevation="0dp">
 
                                 <android.widget.TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="@string/group"
+                                    android:gravity="center"
                                     android:paddingVertical="4dp"
-                                    android:textStyle="bold"
-                                    android:gravity="center" />
+                                    android:text="@string/group"
+                                    android:textStyle="bold" />
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -165,7 +166,7 @@
             </LinearLayout>
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cv_backup_boot"
+                android:id="@+id/cv_backup"
                 style="@style/Widget.Material3.CardView.Filled"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -176,7 +177,6 @@
                 android:clickable="true"
                 android:elevation="@dimen/cardElevation"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:gravity="center"
                 android:padding="@dimen/parentMargin"
                 android:stateListAnimator="@anim/state_list_anim"
                 app:cardCornerRadius="@dimen/cardCornerRadius"
@@ -185,34 +185,72 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center"
+                    android:layout_margin="0dp"
+                    android:gravity="left|center"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="48dp"
-                        android:src="@drawable/ic_disk"
+                        android:layout_height="48dp"
                         android:scaleType="fitXY"
-                        android:layout_height="48dp" />
+                        android:src="@drawable/ic_disk" />
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/tv_backup_boot"
+                            android:id="@+id/tv_backup"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginRight="30dp"
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/tv_backup_subtitle"
+                            android:id="@+id/tv_backup_sub"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="10dp"
                             android:textStyle="italic" />
                     </LinearLayout>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cv_backup2"
+                        style="@style/Widget.Material3.CardView.Filled"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_margin="0dp"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:animateLayoutChanges="true"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:stateListAnimator="@anim/state_list_anim"
+                        app:cardCornerRadius="@dimen/cardCornerRadius"
+                        app:cardMaxElevation="0dp">
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center|left"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_backup2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_backup_sub2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="10dp"
+                                android:textStyle="italic" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -243,9 +281,9 @@
 
                     <ImageView
                         android:layout_width="48dp"
-                        android:src="@drawable/ic_launcher_foreground"
+                        android:layout_height="48dp"
                         android:scaleType="fitXY"
-                        android:layout_height="48dp" />
+                        android:src="@drawable/ic_launcher_foreground" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -257,6 +295,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold" />
+
+                        <id.kuato.verncopyright.BlurLayout
+                            android:id="@+id/blur"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:clipToOutline="true" />
 
                         <TextView
                             android:id="@+id/tv_mnt_subtitle"
@@ -285,6 +330,7 @@
                 android:stateListAnimator="@anim/state_list_anim"
                 app:cardCornerRadius="@dimen/cardCornerRadius"
                 app:cardMaxElevation="0dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -294,9 +340,10 @@
 
                     <ImageView
                         android:layout_width="48dp"
-                        android:src="@drawable/ic_modem"
+                        android:layout_height="48dp"
                         android:scaleType="fitXY"
-                        android:layout_height="48dp" />
+                        android:src="@drawable/ic_modem" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -330,26 +377,26 @@
                 android:clickable="true"
                 android:elevation="@dimen/cardElevation"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:gravity="center"
                 android:padding="@dimen/parentMargin"
                 android:stateListAnimator="@anim/state_list_anim"
                 app:cardCornerRadius="@dimen/cardCornerRadius"
                 app:cardMaxElevation="0dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="4dp"
-                    android:gravity="center"
+                    android:gravity="left|center"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="48dp"
-                        android:src="@drawable/ic_uefi"
+                        android:layout_height="48dp"
                         android:scaleType="fitXY"
-                        android:layout_height="48dp" />
+                        android:src="@drawable/ic_uefi" />
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
@@ -357,6 +404,7 @@
                             android:id="@+id/tv_flash_uefi"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginRight="30dp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -364,11 +412,50 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="10dp"
-                            android:textStyle="italic"
-                            android:visibility="gone" />
+                            android:textStyle="italic" />
                     </LinearLayout>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cv_flash_uefi2"
+                        style="@style/Widget.Material3.CardView.Filled"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="0dp"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:animateLayoutChanges="true"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:stateListAnimator="@anim/state_list_anim"
+                        app:cardCornerRadius="@dimen/cardCornerRadius"
+                        app:cardMaxElevation="0dp"
+                        android:visibility="gone">
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="left|center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_flash_uefi2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_uefi_subtitle2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="10dp"
+                                android:textStyle="italic" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
+
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cv_quickboot"
@@ -382,24 +469,23 @@
                 android:clickable="true"
                 android:elevation="@dimen/cardElevation"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:gravity="center"
                 android:padding="@dimen/parentMargin"
                 android:stateListAnimator="@anim/state_list_anim"
-                android:visibility="gone"
                 app:cardCornerRadius="@dimen/cardCornerRadius"
                 app:cardMaxElevation="0dp">
+
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_margin="4dp"
-                    android:gravity="center"
+                    android:gravity="left|center"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="48dp"
-                        android:src="@drawable/ic_launcher_foreground"
+                        android:layout_height="48dp"
                         android:scaleType="fitXY"
-                        android:layout_height="48dp" />
+                        android:src="@drawable/ic_launcher_foreground" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -419,17 +505,49 @@
                             android:textSize="10dp"
                             android:textStyle="italic" />
                     </LinearLayout>
+
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cv_quickboot2"
+                        style="@style/Widget.Material3.CardView.Filled"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_margin="0dp"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:animateLayoutChanges="true"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:stateListAnimator="@anim/state_list_anim"
+                        android:visibility="gone"
+                        app:cardCornerRadius="@dimen/cardCornerRadius"
+                        app:cardMaxElevation="0dp">
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="left|center">
+
+                            <TextView
+                                android:id="@+id/tv_quick_boot2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_boot_subtitle2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="10dp"
+                                android:textStyle="italic" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
     </LinearLayout>
-
-    <id.kuato.verncopyright.BlurLayout
-        android:id="@+id/blur"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:clipToOutline="true" />
 
     <TextView
         android:id="@+id/tvAppCreator"

@@ -173,10 +173,6 @@ public class ColourUtils {
 				r = 0;
 				a = 255;
 				g = 0;
-			} else if (length == 0) {
-				r = 0;
-				a = 255;
-				g = 0;
 			} else if (length <= 2) {
 				a = 255;
 				r = 0;

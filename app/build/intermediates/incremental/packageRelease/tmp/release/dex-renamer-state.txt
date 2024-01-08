@@ -1,4 +1,0 @@
-#Wed Aug 16 01:13:22 BST 2023
-base.0=C\:\\Users\\Administrator\\Desktop\\WoA-Helper-main\\app\\build\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes.dex
-path.0=classes.dex
-renamed.0=classes.dex

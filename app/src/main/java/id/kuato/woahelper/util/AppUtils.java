@@ -144,10 +144,6 @@ public class AppUtils {
 	
 	public static boolean isDarkTheme(Context context) {
 		int currentNightMode = context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
-		if (currentNightMode == Configuration.UI_MODE_NIGHT_YES) {
-			return true;
-		} else {
-			return false;
-		}
+        return currentNightMode == Configuration.UI_MODE_NIGHT_YES;
 	}
 }
