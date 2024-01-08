@@ -13,7 +13,7 @@
     <string name="dump_modem_title">DUMP MODEM</string>
     <string name="quickboot_title">QUICKBOOT TO WINDOWS</string>
     <string name="quickboot_title1">QUICKBOOT 60Hz</string>
-    <string name="quickboot_title2">QUICKBOOT 120Hz</string>
+    <string name="quickboot_title2">120Hz</string>
     <string name="backup_boot_title">BACKUP BOOT TO ANDROID</string>
     <string name="backup_boot_title2">WINDOWS</string>
 
@@ -29,7 +29,7 @@
     <string name="dump_modem_subtitle">Dump modem1st and modem2st to Windows to fix LTE on SIM1 on Windows everytime you want to boot to Windows</string>
     <string name="backup_boot_subtitle">Backup boot image</string>
     <string name="quickboot_subtitle">Dump Modem, Flash UEFI, and Reboot to Windows in one click</string>
-    <string name="quickboot_subtitle1">60Hz</string>
+    <string name="quickboot_subtitle1">Boot windows \nwith modem and 60Hz</string>
     <string name="quickboot_subtitle2">120Hz</string>
 
 

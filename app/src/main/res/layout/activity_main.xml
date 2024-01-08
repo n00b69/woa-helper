@@ -385,7 +385,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="4dp"
+                    android:layout_margin="0dp"
                     android:gravity="left|center"
                     android:orientation="horizontal">
 
@@ -418,7 +418,7 @@
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/cv_flash_uefi2"
                         style="@style/Widget.Material3.CardView.Filled"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_margin="0dp"
                         android:layout_weight="1"
@@ -435,7 +435,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:gravity="left|center"
+                            android:gravity="center|left"
                             android:orientation="vertical">
 
                             <TextView
@@ -452,13 +452,11 @@
                                 android:textStyle="italic" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
-
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cv_quickboot"
+                android:id="@+id/cv_quick_boot"
                 style="@style/Widget.Material3.CardView.Filled"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -475,9 +473,9 @@
                 app:cardMaxElevation="0dp">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="4dp"
+                    android:layout_margin="0dp"
                     android:gravity="left|center"
                     android:orientation="horizontal">
 
@@ -488,7 +486,7 @@
                         android:src="@drawable/ic_launcher_foreground" />
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
@@ -496,6 +494,7 @@
                             android:id="@+id/tv_quick_boot"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginRight="30dp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -506,9 +505,8 @@
                             android:textStyle="italic" />
                     </LinearLayout>
 
-
                     <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/cv_quickboot2"
+                        android:id="@+id/cv_quick_boot2"
                         style="@style/Widget.Material3.CardView.Filled"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -519,16 +517,16 @@
                         android:clickable="true"
                         android:foreground="?android:attr/selectableItemBackground"
                         android:stateListAnimator="@anim/state_list_anim"
-                        android:visibility="gone"
                         app:cardCornerRadius="@dimen/cardCornerRadius"
-                        app:cardMaxElevation="0dp">
+                        app:cardMaxElevation="0dp"
+                        android:visibility="gone">
 
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:gravity="left|center">
+                            android:gravity="center|left"
+                            android:orientation="vertical">
 
                             <TextView
                                 android:id="@+id/tv_quick_boot2"
@@ -546,6 +544,10 @@
                     </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
+
+
+
+
         </LinearLayout>
     </LinearLayout>
 

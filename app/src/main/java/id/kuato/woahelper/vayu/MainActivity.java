@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-        x.cvQuickboot.setOnClickListener(
+        x.cvQuickBoot.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-        x.cvQuickboot2.setOnClickListener(
+        x.cvQuickBoot2.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -714,7 +714,7 @@ public class MainActivity extends AppCompatActivity {
                 x.tvQuickBoot.setText(getString(R.string.quickboot_title));
                 x.tvBootSubtitle.setText(getString(R.string.quickboot_subtitle));
                 x.tvFlashUefi.setText(getString(R.string.flash_uefi_title));
-                x.cvQuickboot.setVisibility(View.VISIBLE);
+                x.cvQuickBoot.setVisibility(View.VISIBLE);
                 x.cvFlashUefi.setEnabled(true);
                 x.tvUefiSubtitle.setText(String.format(getString(R.string.flash_uefi_subtitle), panel));
                 x.tvUefiSubtitle2.setText(String.format(getString(R.string.flash_uefi_subtitle2), panel));
@@ -725,7 +725,7 @@ public class MainActivity extends AppCompatActivity {
             x.tvQuickBoot.setText(getString(R.string.quickboot_title1));
             x.tvBootSubtitle.setText(getString(R.string.quickboot_subtitle1));
             dual=true;
-            x.cvQuickboot2.setVisibility(View.VISIBLE);
+            x.cvQuickBoot2.setVisibility(View.VISIBLE);
             x.tvQuickBoot2.setText(getString(R.string.quickboot_title2));
             x.tvBootSubtitle2.setText(getString(R.string.quickboot_subtitle2));
             x.cvFlashUefi.setEnabled(true);
@@ -734,7 +734,7 @@ public class MainActivity extends AppCompatActivity {
             x.cvFlashUefi2.setVisibility(View.VISIBLE);
             x.tvFlashUefi2.setText(getString(R.string.flash_uefi_title2));
             x.tvUefiSubtitle2.setText(String.format(getString(R.string.flash_uefi_subtitle2), panel));
-            x.cvQuickboot.setVisibility(View.VISIBLE);
+            x.cvQuickBoot.setVisibility(View.VISIBLE);
         }
 
     }
