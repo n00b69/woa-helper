@@ -73,6 +73,6 @@
     <string name="rm">su -c rmdir /mnt/pass_through/0/emulated/0/Windows</string>
     <string name="mk">su -c mkdir /mnt/pass_through/0/emulated/0/Windows || true</string>
     <string name="mount">su -mm -c mount.ntfs /dev/block/sda33 /mnt/pass_through/0/emulated/0/Windows</string>
-    <string name="backup">su -c dd if=/dev/block/by-name/boot of=/sdcard/Windows/boot.img</string>
+    <string name="backup">su -c dd if=/dev/block/by-name/boot of=/sdcard/boot.img</string>
     <string name="backup1">su -c dd if=/dev/block/by-name/boot of=/sdcard/Windows/boot.img bs=4m</string>
 </resources>
