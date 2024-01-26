@@ -31,23 +31,34 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="96dp"
-                    android:layout_height="200dp"
+                    android:id="@+id/NabuImage"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_148sdp"
+                    android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:src="@drawable/device" />
+                    android:src="@drawable/nabu"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/VayuImage"
+                    android:layout_width="@dimen/_78sdp"
+                    android:layout_height="@dimen/_150sdp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/vayu"
+                    android:visibility="visible" />
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cv_info"
                     style="@style/Widget.Material3.CardView.Filled"
-                    android:layout_width="match_parent"
+                    android:layout_width="221dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginLeft="@dimen/_4sdp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
                     android:animateLayoutChanges="true"
                     android:clickable="true"
                     android:elevation="@dimen/cardElevation"
-                    android:foreground="@drawable/device"
+                    android:foreground="@drawable/vayu"
                     android:gravity="center"
                     android:padding="@dimen/parentMargin"
                     android:stateListAnimator="@anim/state_list_anim"
@@ -67,36 +78,37 @@
                             android:layout_marginVertical="4dp"
                             android:gravity="center"
                             android:text="WINDOWS ON ARM"
-                            android:textSize="14dp"
+                            android:textSize="@dimen/_14sdp"
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/deviceName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="POCO X3 PRO (VAYU)"
-                            android:textSize="12dp" />
+                            android:textSize="@dimen/_12sdp" />
 
                         <TextView
                             android:id="@+id/tv_ramvalue"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:textSize="12dp" />
+                            android:textSize="@dimen/_12sdp" />
 
                         <TextView
                             android:id="@+id/tv_panel"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:textSize="12dp" />
+                            android:textSize="@dimen/_12sdp" />
 
                         <TextView
                             android:id="@+id/tv_mount_status"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:textSize="12dp" />
+                            android:textSize="@dimen/_12sdp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -128,6 +140,7 @@
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
                                     android:paddingVertical="4dp"
+                                    android:textSize="@dimen/_12sdp"
                                     android:text="@string/guide"
                                     android:textStyle="bold" />
                             </com.google.android.material.card.MaterialCardView>
@@ -155,6 +168,7 @@
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
                                     android:paddingVertical="4dp"
+                                    android:textSize="@dimen/_12sdp"
                                     android:text="@string/group"
                                     android:textStyle="bold" />
 
@@ -163,6 +177,7 @@
                         </LinearLayout>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
+
             </LinearLayout>
 
             <com.google.android.material.card.MaterialCardView
@@ -190,8 +205,9 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:id="@+id/disk"
+                        android:layout_width="@dimen/_48sdp"
+                        android:layout_height="@dimen/_48sdp"
                         android:scaleType="fitXY"
                         android:src="@drawable/ic_disk" />
 
@@ -205,13 +221,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="30dp"
+                            android:textSize="@dimen/_9sdp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tv_backup_sub"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="10dp"
+                            android:textSize="@dimen/_7sdp"
                             android:textStyle="italic" />
                     </LinearLayout>
 
@@ -241,13 +258,14 @@
                                 android:id="@+id/tv_backup2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textSize="@dimen/_9sdp"
                                 android:textStyle="bold" />
 
                             <TextView
                                 android:id="@+id/tv_backup_sub2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="10dp"
+                                android:textSize="@dimen/_7sdp"
                                 android:textStyle="italic" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
@@ -280,8 +298,9 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:id="@+id/windows_logo"
+                        android:layout_width="@dimen/_48sdp"
+                        android:layout_height="@dimen/_48sdp"
                         android:scaleType="fitXY"
                         android:src="@drawable/ic_launcher_foreground" />
 
@@ -294,6 +313,7 @@
                             android:id="@+id/tv_mnt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textSize="@dimen/_9sdp"
                             android:textStyle="bold" />
 
                         <id.kuato.verncopyright.BlurLayout
@@ -307,7 +327,7 @@
                             android:id="@+id/tv_mnt_subtitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="10dp"
+                            android:textSize="@dimen/_7sdp"
                             android:textStyle="italic" />
                     </LinearLayout>
                 </LinearLayout>
@@ -339,8 +359,9 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:id="@+id/modem_logo"
+                        android:layout_width="@dimen/_48sdp"
+                        android:layout_height="@dimen/_48sdp"
                         android:scaleType="fitXY"
                         android:src="@drawable/ic_modem" />
 
@@ -353,13 +374,14 @@
                             android:id="@+id/tv_dump_modem"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textSize="@dimen/_9sdp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tv_modem_subtitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="10dp"
+                            android:textSize="@dimen/_7sdp"
                             android:textStyle="italic" />
                     </LinearLayout>
                 </LinearLayout>
@@ -390,8 +412,9 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:id="@+id/uefi_logo"
+                        android:layout_width="@dimen/_48sdp"
+                        android:layout_height="@dimen/_48sdp"
                         android:scaleType="fitXY"
                         android:src="@drawable/ic_uefi" />
 
@@ -405,13 +428,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="30dp"
+                            android:textSize="@dimen/_9sdp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tv_uefi_subtitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="10dp"
+                            android:textSize="@dimen/_7sdp"
                             android:textStyle="italic" />
                     </LinearLayout>
 
@@ -465,6 +489,7 @@
                 android:adjustViewBounds="true"
                 android:animateLayoutChanges="true"
                 android:clickable="true"
+                android:visibility="gone"
                 android:elevation="@dimen/cardElevation"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:padding="@dimen/parentMargin"
@@ -480,8 +505,9 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:id="@+id/windowsLogo2"
+                        android:layout_width="@dimen/_48sdp"
+                        android:layout_height="@dimen/_48sdp"
                         android:scaleType="fitXY"
                         android:src="@drawable/ic_launcher_foreground" />
 
@@ -495,13 +521,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="30dp"
+                            android:textSize="@dimen/_9sdp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tv_boot_subtitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="10dp"
+                            android:textSize="@dimen/_7sdp"
                             android:textStyle="italic" />
                     </LinearLayout>
 
@@ -518,8 +545,7 @@
                         android:foreground="?android:attr/selectableItemBackground"
                         android:stateListAnimator="@anim/state_list_anim"
                         app:cardCornerRadius="@dimen/cardCornerRadius"
-                        app:cardMaxElevation="0dp"
-                        android:visibility="gone">
+                        app:cardMaxElevation="0dp">
 
 
                         <LinearLayout
