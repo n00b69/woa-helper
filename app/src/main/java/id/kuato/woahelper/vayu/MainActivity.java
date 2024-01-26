@@ -2,10 +2,17 @@ package id.kuato.woahelper.vayu;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.util.TypedValue;
+import android.view.Display;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowMetrics;
 import android.widget.ImageView;
 import android.net.Uri;
 import android.content.Intent;
@@ -17,6 +24,7 @@ import androidx.core.graphics.BlendModeCompat;
 import com.google.android.material.button.MaterialButton;
 //import com.itsaky.androidide.logsender.LogSender;
 import java.util.Locale;
+import java.util.logging.Logger;
 
 import android.widget.Switch;
 import android.widget.Toast;
@@ -39,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     String finduefi;
     String finduefi1;
     String finduefi2;
+    String device;
 
     boolean dual;
 
@@ -47,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Remove this line if you don't want AndroidIDE to show this app's logs
-        //LogSender.startLogging(this);
+        // LogSender.startLogging(this);
         super.onCreate(savedInstanceState);
         // Inflate and get instance of binding
         x = ActivityMainBinding.inflate(getLayoutInflater());
@@ -74,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         x.tvBackupSub.setText(getString(R.string.backup_boot_subtitle));
         x.tvMntSubtitle.setText(getString(R.string.mnt_subtitle));
         x.tvModemSubtitle.setText(getString(R.string.dump_modem_subtitle));
-
+        checkdevice();
         final Dialog dialog = new Dialog(MainActivity.this);
         dialog.setContentView(R.layout.dialog);
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -83,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
         MaterialButton dismissButton = dialog.findViewById(R.id.dismiss);
         TextView messages = dialog.findViewById(R.id.messages);
         ImageView icons = dialog.findViewById(R.id.icon);
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
 
         Drawable uefi = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_uefi, null);
         Drawable boot = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_disk, null);
@@ -95,6 +105,14 @@ public class MainActivity extends AppCompatActivity {
                 BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
                         getColor(R.color.colorPrimary), BlendModeCompat.SRC_IN));
 
+        if (device == "nabu") {
+            x.toolbarlayout.toolbar.setTitle(getString(R.string.app_title_nabu));
+            x.deviceName.setText("XIAOMI PAD 5 (NABU)");
+            x.NabuImage.setVisibility(View.VISIBLE);
+            x.VayuImage.setVisibility(View.GONE);
+            x.tvDumpModem.setVisibility(View.GONE);
+            x.cvDumpModem.setVisibility(View.GONE);
+        }
         x.tvRamvalue.setText(String.format(getString(R.string.ramvalue), ramvalue));
         x.tvPanel.setText(String.format(getString(R.string.paneltype), panel));
 
@@ -104,7 +122,12 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String url = "https://github.com/woa-vayu/Port-Windows-11-Poco-X3-pro";
+                        String url;
+                        if (device == "nabu") {
+                            url = "https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/tree/main";
+                        } else {
+                            url = "https://github.com/woa-vayu/Port-Windows-11-Poco-X3-pro";
+                        }
                         Intent i = new Intent(Intent.ACTION_VIEW);
                         i.setData(Uri.parse(url));
                         startActivity(i);
@@ -115,7 +138,12 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String url = "https://t.me/winonvayualt";
+                        String url;
+                        if (device == "nabu") {
+                            url = "t.me/nabuwoa";
+                        } else {
+                            url = "t.me/winonvayualt";
+                        }
                         Intent i = new Intent(Intent.ACTION_VIEW);
                         i.setData(Uri.parse(url));
                         startActivity(i);
@@ -151,7 +179,9 @@ public class MainActivity extends AppCompatActivity {
                                                             public void run() {
                                                                 try {
                                                                     mount();
-                                                                    dump();
+                                                                    if (device == "vayu") {
+                                                                        dump();
+                                                                    }
                                                                     unmount();
                                                                     if (dual)
                                                                         flash(finduefi1);
@@ -265,7 +295,7 @@ public class MainActivity extends AppCompatActivity {
                         dismissButton.setVisibility(View.GONE);
                         ShowBlur();
                         icons.setImageDrawable(icon);
-                        String mnt_stat = ShellUtils.Executer("su -c mount | grep /dev/block/sda33");
+                        String mnt_stat = ShellUtils.Executer("su -c mount | grep /dev/block/bootdevice/by-name/win");
                         if (mnt_stat.isEmpty())
                             messages.setText("Mount Windows?");
                         else
@@ -284,7 +314,7 @@ public class MainActivity extends AppCompatActivity {
                                                             @Override
                                                             public void run() {
                                                                 try {
-                                                                    String mnt_stat = ShellUtils.Executer("su -c mount | grep /dev/block/sda33");
+                                                                    String mnt_stat = ShellUtils.Executer("su -c mount | grep /dev/block/bootdevice/by-name/win");
                                                                     if (mnt_stat.isEmpty()) {
                                                                         mount();
                                                                         messages.setText("Windows mounted");
@@ -549,10 +579,18 @@ public class MainActivity extends AppCompatActivity {
                                                                 String mnt_stat = ShellUtils.Executer("su -c mount | grep /dev/block/sda33");
                                                                 if (mnt_stat.isEmpty()) {
                                                                     mount();
-                                                                    ShellUtils.Executer(getString(R.string.backup));
+                                                                    if (device == "nabu") {
+                                                                        ShellUtils.Executer(getString(R.string.backup_nabu));
+                                                                    } else {
+                                                                        ShellUtils.Executer(getString(R.string.backup));
+                                                                    }
                                                                     unmount();
                                                                 } else
-                                                                    ShellUtils.Executer(getString(R.string.backup));
+                                                                    if (device == "nabu") {
+                                                                        ShellUtils.Executer(getString(R.string.backup_nabu));
+                                                                    } else {
+                                                                        ShellUtils.Executer(getString(R.string.backup));
+                                                                    }
                                                                 messages.setText("Backup boot image successful...\n");
                                                                 dismissButton.setVisibility(View.VISIBLE);
                                                             }
@@ -610,10 +648,18 @@ public class MainActivity extends AppCompatActivity {
                                                     String mnt_stat = ShellUtils.Executer("su -c mount | grep /dev/block/sda33");
                                                     if (mnt_stat.isEmpty()) {
                                                         mount();
-                                                        ShellUtils.Executer(getString(R.string.backup1));
+                                                        if (device == "nabu") {
+                                                            ShellUtils.Executer(getString(R.string.backup1_nabu));
+                                                        } else {
+                                                            ShellUtils.Executer(getString(R.string.backup));
+                                                        }
                                                         unmount();
                                                     } else
-                                                        ShellUtils.Executer(getString(R.string.backup1));
+                                                        if (device == "nabu") {
+                                                        ShellUtils.Executer(getString(R.string.backup1_nabu));
+                                                        } else {
+                                                        ShellUtils.Executer(getString(R.string.backup));
+                                                        }
                                                     messages.setText("Backup boot image successful...\n");
                                                     dismissButton.setVisibility(View.VISIBLE);
                                                 }
@@ -650,7 +696,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void flash(String uefi) {
-        String run = ShellUtils.Executer("su -c dd if=" + uefi + " of=/dev/block/by-name/boot");
+        if (device == "nabu") {
+            String run_a = ShellUtils.Executer("su -c dd if=" + uefi + " of=/dev/block/sde14 bs=16M");
+            String run_b = ShellUtils.Executer("su -c dd if=" + uefi + " of=/dev/block/sde37 bs=16M");
+        } else {
+            String run = ShellUtils.Executer("su -c dd if=" + uefi + " of=/dev/block/by-name/boot");
+        }
     }
 
     public void mount() {
@@ -674,11 +725,20 @@ public class MainActivity extends AppCompatActivity {
 
     public void checkdevice() {
         try {
+            String sda = ShellUtils.Executer("su -c ls /dev/block/bootdevice/by-name/");
+            Boolean DetermineDevice = sda.contains("boot_a");
+            if (DetermineDevice) {
+                device = "nabu";
+            } else {
+                device = "vayu";
+            }
             String stram =
                     MemoryUtils.extractNumberFromString(new RAM().getMemory(getApplicationContext()));
             ram = Integer.parseInt(stram);
             if (ram > 600) {
                 ramvalue = 8;
+            } else if (ram > 800){
+                ramvalue = 12;
             } else {
                 ramvalue = 6;
             }
@@ -687,32 +747,44 @@ public class MainActivity extends AppCompatActivity {
         }
 
         String run = ShellUtils.Executer("su -c cat /proc/cmdline");
-        if (run.isEmpty()) {
-        } else if (run.contains("j20s_42")) {
-            panel = "Huaxing";
-        } else if (run.contains("j20s_36")) {
-            panel = "Tianma";
+        if (device == "vayu") {
+            if (run.isEmpty()) {
+            } else if (run.contains("j20s_42")) {
+                panel = "Huaxing";
+            } else if (run.contains("j20s_36")) {
+                panel = "Tianma";
+            } else {
+                panel = "Unknown";
+            }
         } else {
-            panel = "Unknown";
+            panel = "IPS LCD";
         }
     }
 
     public void checkuefi() {
 
         ShellUtils.Executer("su -c mkdir /sdcard/UEFI"); // Create UEFI Folder if it doesnt exist.
-        finduefi1 = ShellUtils.Executer(getString(R.string.uefiChk1) + "| grep  " + panel.toLowerCase());
-        finduefi2 = ShellUtils.Executer(getString(R.string.uefiChk2) + "| grep  " + panel.toLowerCase());
+        finduefi1 = ShellUtils.Executer(getString(R.string.uefiChk1));
+        finduefi2 = ShellUtils.Executer(getString(R.string.uefiChk2));
         if (finduefi1.isEmpty() || finduefi2.isEmpty()) {
             dual=false;
-            finduefi = ShellUtils.Executer(getString(R.string.uefiChk) +"| grep  " + panel.toLowerCase() );
+            finduefi = ShellUtils.Executer(getString(R.string.uefiChk));
             if (finduefi.isEmpty()) {
                 x.cvFlashUefi.setEnabled(false);
                 x.tvFlashUefi.setText(getString(R.string.uefi_not_found));
                 x.tvUefiSubtitle.setVisibility(View.VISIBLE);
-                x.tvUefiSubtitle.setText(getString(R.string.uefi_not_found_subtitle));
+                if (device == "nabu") {
+                    x.tvUefiSubtitle.setText(getString(R.string.uefi_not_found_subtitle_nabu));
+                } else {
+                    x.tvUefiSubtitle.setText(getString(R.string.uefi_not_found_subtitle));
+                }
             } else {
                 x.tvQuickBoot.setText(getString(R.string.quickboot_title));
-                x.tvBootSubtitle.setText(getString(R.string.quickboot_subtitle));
+                if (device == "nabu") {
+                    x.tvBootSubtitle.setText(getString(R.string.quickboot_subtitle_nabu));
+                } else {
+                    x.tvBootSubtitle.setText(getString(R.string.quickboot_subtitle));
+                }
                 x.tvFlashUefi.setText(getString(R.string.flash_uefi_title));
                 x.cvQuickBoot.setVisibility(View.VISIBLE);
                 x.cvFlashUefi.setEnabled(true);
