@@ -1,8 +1,9 @@
 <resources>
 
-    <string name="app_name">WOA Helper - Vayu</string>
+    <string name="app_name">WOA Helper</string>
     <string name="error_title">An unexpected error occurred.\nSorry for the inconvenience.</string>
     <string name="app_title">Windows on ARM Helper - Vayu</string>
+    <string name="app_title_nabu">Windows on ARM Helper - Nabu</string>
     <string name="app_subtitle">v1.5"</string>
 
     <string name="mounted">Mounted :%s</string>
@@ -29,6 +30,7 @@
     <string name="dump_modem_subtitle">Dump modem1st and modem2st to Windows to fix LTE on SIM1 on Windows everytime you want to boot to Windows</string>
     <string name="backup_boot_subtitle">Backup boot image</string>
     <string name="quickboot_subtitle">Dump Modem, Flash UEFI, and Reboot to Windows in one click</string>
+    <string name="quickboot_subtitle_nabu">Flash UEFI, and Reboot to Windows in one click</string>
     <string name="quickboot_subtitle1">Boot windows \nwith modem and 60Hz</string>
     <string name="quickboot_subtitle2">120Hz</string>
 
@@ -58,6 +60,7 @@
     <string name="flash_uefi_subtitle2">UEFI %s 120Hz</string>
     <string name="uefi_not_found">UEFI NOT FOUND</string>
     <string name="uefi_not_found_subtitle">Please Download UEFI for the POCO X3 Pro and place your UEFI to the UEFI FOLDER in INTERNAL STORAGE</string>
+    <string name="uefi_not_found_subtitle_nabu">Please Download UEFI for the XIAOMI PAD 5 and place your UEFI to the UEFI FOLDER in INTERNAL STORAGE</string>
 
     <string name="flash_uefi_question">Flash UEFI for the %s panel variant?</string>
     <string name="flash_uefi_question1">Flash 60Hz UEFI for the %s panel variant?</string>
@@ -69,10 +72,12 @@
 
     <string name="modem1">su -c dd if=/dev/block/by-name/modemst1 of=/mnt/pass_through/0/emulated/0/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_04af705613ed2d36/bootmodem_fs1 </string>
     <string name="modem2">su -c dd if=/dev/block/by-name/modemst2 of=/mnt/pass_through/0/emulated/0/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_04af705613ed2d36/bootmodem_fs2 </string>
-    <string name="unmount">su -mm -c umount /dev/block/sda33 </string>
+    <string name="unmount">su -mm -c umount /dev/block/bootdevice/by-name/win </string>
     <string name="rm">su -c rmdir /mnt/pass_through/0/emulated/0/Windows</string>
     <string name="mk">su -c mkdir /mnt/pass_through/0/emulated/0/Windows || true</string>
-    <string name="mount">su -mm -c mount.ntfs /dev/block/sda33 /mnt/pass_through/0/emulated/0/Windows</string>
+    <string name="mount">su -mm -c mount.ntfs /dev/block/bootdevice/by-name/win /mnt/pass_through/0/emulated/0/Windows</string>
     <string name="backup">su -c dd if=/dev/block/by-name/boot of=/sdcard/boot.img</string>
+    <string name="backup_nabu">su -c dd if=/dev/block/bootdevice/by-name/boot$(getprop ro.boot.slot_suffix) of=/sdcard/boot.img</string>
     <string name="backup1">su -c dd if=/dev/block/by-name/boot of=/sdcard/Windows/boot.img bs=4m</string>
+    <string name="backup1_nabu">su -c dd if=/dev/block/bootdevice/by-name/boot$(getprop ro.boot.slot_suffix) of=/sdcard/windows/boot.img</string>
 </resources>
