@@ -1,0 +1,94 @@
+<resources>
+    <string name="error_title">예상치 못한 오류가 발생했습니다.\n불편을 끼쳐드려 죄송합니다.</string>
+	<string name="backup_boot_title">BOOT 이미지 백업</string>
+	<string name="mnt_title">%s WINDOWS</string>
+    <string name="toolbox_title">WOA 도구</string>
+    <string name="dump_modem_title">MODEM 파티션 덤프</string>
+    <string name="flash_uefi_title">UEFI 플래시</string>
+	<string name="uefi_not_found">UEFI를 찾을 수 없습니다</string>
+    <string name="quickboot_title">WINDOWS로 즉시 부팅</string>
+	<string name="sta_title">STA 생성</string>
+    <string name="usbhost_title">USB 호스트 모드 옵션</string>
+    <string name="hibernation_title">최대 절전 모드 옵션</string>
+    <string name="software_title">ARM 소프트웨어</string>
+    <string name="rotation_title">화면 회전 옵션</string>
+    <string name="autoflash_title">자동 ANDROID 설치</string>
+    <string name="sensors_title">센서 덤프</string>
+    
+	<string name="backup_boot_subtitle">Boot 이미지를 Android 및 Windows로 백업합니다</string>
+    <string name="mnt_subtitle">내부 파일을 읽거나 편집하기 위한 Windows 파티션 마운트 전환합니다</string>
+	<string name="toolbox_subtitle">더욱 즐거운 Windows의 사용을 위한 도구 및 스크립트입니다</string>
+    <string name="dump_modem_subtitle">Windows의 SIM1에서 LTE 문제를 해결하기 위하여 모뎀 파티션을 Windows로 덤프합니다. Windows를 부팅하기 전에 항상 이 과정이 필요합니다</string>
+    <string name="flash_uefi_subtitle">Boot 파티션에 UEFI를 플래시합니다</string>
+    <string name="uefi_not_found_subtitle">%s의 UEFI 이미지를 다운로드하여 내부 저장소의 UEFI 폴더 (/sdcard/UEFI) 에 저장하세요</string>
+    <string name="quickboot_subtitle">Modem 파티션 덤프, UEFI 플래시 및 Windows 부팅을 원클릭으로 진행합니다</string>
+    <string name="quickboot_subtitle_nabu">UEFI 플래시 및 Windows 부팅을 원클릭으로 진행합니다</string>
+	<string name="sta_subtitle">Windows에 Switch to Android 앱을 추가합니다.</string>
+    <string name="usbhost_subtitle">USB 호스트 모드를 전환할 수 있는 스크립트를 C:\\Toolbox에 추가합니다.</string>
+    <string name="hibernation_subtitle">최대 절전 모드를 전환할 수 있는 스크립트를 C:\\Toolbox에 추가합니다.</string>
+    <string name="software_subtitle">ARM 소프트웨어가 포함된 브라우저 바로 가기를 C:\\Toolbox에 추가합니다.</string>
+    <string name="rotation_subtitle">바로가기로 화면을 회전할 수 있는 스크립트를 C:\\Toolbox에 추가합니다.\n(센서가 작동하지 않는 장치에 유용합니다)</string>
+    <string name="autoflash_subtitle">Windows가 부팅될 때마다 Android boot.img를 자동으로 설치하는 스크립트를 Windows에 추가합니다.</string>
+    <string name="sensors_subtitle">일부 장치의 Windows에서 센서가 작동하도록 하려면 이 과정은 한 번만 필요합니다.</string>
+	
+	<string name="backup_boot_question">현재 안드로이드 boot 이미지를 백업할까요?</string>
+	<string name="mount_question">/sdcard/Windows 에 Windows 파티션을 마운트할까요?</string>
+	<string name="unmount_question">Windows 파티션을 마운트 해제할까요?</string>
+    <string name="dump_modem_question">Modem1st 그리고 modem2st 파티션을 Windows로 덤프할까요?</string>
+	<string name="flash_uefi_question">UEFI를 플래시할까요?? \n그렇게 하면, 다음에 부팅할 때 윈도우로 부팅됩니다</string>
+    <string name="quickboot_question">Windows로 즉시 부팅할까요?</string>
+	<string name="sta_question">C:\\sta에 Switch to Android 앱을 생성하시겠습니까?</string>
+    <string name="usbhost_question">USB 호스트 모드 스크립트를 C:\\Toolbox에 복사하시겠습니까?</string>
+    <string name="hibernation_question">최대 절전 모드 옵션을 C:\\Toolbox에 복사하시겠습니까?</string>
+    <string name="software_question">브라우저 바로가기를 C:\\Toolbox에 복사하시겠습니까?</string>
+    <string name="rotation_question">회전 바로가기를 C:\\Toolbox에 복사하시겠습니까?</string>
+    <string name="autoflash_question">boot.img 자동 설치 스크립트를 Windows에 설치하시겠습니까?</string>
+    <string name="sensors_question">센서를 Windows로 덤프하시겠습니까?</string>
+	
+	<string name="wrong">문제가 발생했습니다</string>
+	<string name="ntfs">문제가 발생했습니다. \nWindows 파티션을 마운트하지 못하였습니다.\n텔레그램 채팅방에서 도움을 받으십시오.</string>
+	<string name="reboot">재부팅</string>
+	<string name="cancel">취소</string>
+	<string name="mounted">Windows 파티션을 마운트했습니다</string>
+	<string name="unmounted">Windows 파티션을 마운트 해제했습니다</string>
+	<string name="rebootr">재부팅이 필요합니다</string>
+	<string name="lte">Windows에서 LTE를 사용해보세요</string>
+	<string name="flash">UEFI를 성공적으로 플래시했습니다.\n다음에 부팅할 때 윈도우로 부팅됩니다</string>
+	<string name="backuped">Boot 이미지를 성공적으로 백업했습니다\n</string>
+	<string name="preferences">설정</string>
+	<string name="bwarn">!!경고!!\n UFS가 과부하될 수 있으므로, OTA 업데이트를 많이 받는 경우에만 활성화하세요</string>
+	<string name="agree">동의</string>
+	<string name="nonroot">루트 권한을 사용할 수 없습니다</string>
+	<string name="unsupported">!!경고!!\n지원되지 않는 기기입니다\n이 앱을 사용할 때 발생하는 위험은 사용자 본인의 책임입니다</string>
+	<string name="sure">알겠습니다. 앱을 사용하겠습니다.</string>
+	<string name="upanel">이 기기의 패널이 작동하는지 확인되지 않았습니다. 텔레그램 채팅에서 Windows에서의 상황이 어떠한지 알려주세요</string>
+	<string name="chat">채팅</string>
+	<string name="nah">아니요</string>
+	<string name="later">나중에</string>
+	<string name="done">Done!</string>
+	<string name="mountt">마운트</string>
+	<string name="unmountt">마운트 해제</string>
+	
+	<string name="last">마지막 백업 : %s</string>
+	<string name="slot">활성 슬롯 : %s</string>
+    <string name="ramvalue">램 : %sGB </string>
+    <string name="paneltype">패널 : %s</string>
+
+    <string name="guide">가이드</string>
+    <string name="group">채팅방</string>
+    <string name="not_found">찾을 수 없습니다</string>
+
+    <string name="yes">예</string>
+    <string name="dismiss">닫기</string>
+    <string name="no">아니요</string>
+    <string name="please_wait">잠시만 기다려 주세요...</string>
+    
+    <string name="preference1">즉시 부팅을 실행했을 때 boot.img를 강제로 백업합니다 (Windows)</string>
+    <string name="preference2">즉시 부팅을 실행했을 때 boot.img를 강제로 백업합니다 (Android)</string>
+    <string name="preference3">아무것도 감지되지 않으면 boot.img를 백업합니다 (Windows)</string>
+    <string name="preference4">아무것도 감지되지 않으면 boot.img를 백업합니다 (Android)</string>
+    <string name="preference5">QS Quickboot 타일에 대한 확인을 요구합니다</string>
+    <string name="preference6">언어 선택</string>
+    <string name="preference7">부팅 시 자동으로 Windows 파티션 마운트</string>
+	<string name="preference8">모뎀 덤프 기능 비활성화</string>
+</resources>

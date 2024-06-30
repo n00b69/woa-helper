@@ -1,0 +1,88 @@
+<resources>
+    <string name="error_title">Une erreur inattendue s\'est produite.\nDésolé pour la gêne occasionnée.</string>
+	<string name="backup_boot_title">SAUVEGARDER L\'IMAGE DE DÉMARRAGE</string>
+	<string name="mnt_title">%s WINDOWS</string>
+	<string name="toolbox_title">OUTILS WOA</string>
+	<string name="dump_modem_title">INSTALLER MODEM</string>
+    <string name="flash_uefi_title">FLASHEZ l\'UEFI</string>
+    <string name="uefi_not_found">UEFI INTROUVABLE</string>
+    <string name="quickboot_title">DÉMARRAGE RAPIDE VERS WINDOWS</string>
+	<string name="sensors_title">COPIER LES FICHIERS DES CAPTEURS</string>
+    
+	<string name="backup_boot_subtitle">Sauvegarde de l\'image de démarrage vers Android et/ou Windows</string>
+	<string name="mnt_subtitle">Activez l\'option "montage de la partition Windows" pour afficher ou modifier le contenu de la partition.</string>
+	<string name="toolbox_subtitle">Outils et scripts pour une expérience Windows agréable</string>
+	<string name="dump_modem_subtitle">Installez modem dans Windows pour corriger le LTE sur SIM1 dans Windows. Nécessaire avant chaque démarrage de Windows</string>
+	<string name="flash_uefi_subtitle">Flashez l\'UEFI sur la partition de démarrage</string>
+    <string name="uefi_not_found_subtitle">Téléchargez l\'image UEFI pour le %s et placez-la dans le DOSSIER UEFI du STOCKAGE INTERNE (/sdcard/UEFI).</string>
+    <string name="quickboot_subtitle">Installez le modem, flashez l\'UEFI et redémarrez sous Windows en un seul clic</string>
+    <string name="quickboot_subtitle_nabu">Flashez l\'UEFI et redémarrez sous Windows en un seul clic.</string>
+	<string name="sta_subtitle">Ajout de l\'application Switch to Android à Windows</string>
+    <string name="usbhost_subtitle">Ajoute un script à C:\\Toolbox qui vous permet de basculer le mode hôte USB</string>
+    <string name="hibernation_subtitle">Ajoute un script à C:\Toolbox qui vous permet de basculer le mode hôte USBAjoute un script à Windows qui lance automatiquement le fichier boot.img d\'Android lorsque Windows démarre</string>
+    <string name="software_subtitle">Ajoute des raccourcis de navigateur contenant des logiciels ARM à C:\\Toolbox</string>
+    <string name="rotation_subtitle">Ajoute un script à C:\\Toolbox qui vous permet de faire pivoter l\'écran à l\'aide d\'un raccourci\n(utile pour les appareils dont les capteurs ne fonctionnent pas)</string>
+    <string name="autoflash_subtitle">Ajoute un script à Windows qui lance automatiquement le fichier boot.img d\'Android lorsque Windows démarre</string>
+	<string name="sensors_subtitle">Cette opération n\'est nécessaire qu\'une seule fois sur CERTAINS appareils pour que les capteurs fonctionnent sous Windows</string>
+
+    <string name="backup_boot_question">Sauvegarder l\'image de démarrage d\'Android?</string>
+	<string name="mount_question">Monter Windows sur /sdcard/Windows?</string>
+	<string name="unmount_question">Démonter Windows?</string>
+    <string name="dump_modem_question">Installez modem1st et modem2st vers la partition Windows?</string>
+	<string name="flash_uefi_question">Flashez l\'UEFI ? \nSi c\'est le cas, le prochain démarrage se fera sous Windows</string>
+    <string name="quickboot_question">Démarrage rapide vers Windows?</string>
+	<string name="sta_question">Créer l\'application Switch to Android dans (C:\\sta)?</string>
+	<string name="usbhost_question">Copier le script USB Host Mode dans (C:\\Toolbox)?</string>
+	<string name="hibernation_question">Copier le bouton d\'hibernation dans C:\\Toolbox?</string>
+	<string name="software_question">Copier les raccourcis du navigateur dans C:\\Toolbox?</string>
+	<string name="rotation_question">Copier le raccourci de rotation dans C:\\Toolbox?</string>
+	<string name="autoflash_question">Installer le script boot.img autoflasher dans Windows?</string>
+	<string name="sensors_question">Copier les fichiers des capteurs vers Windows?</string>
+    
+    <string name="wrong">Quelque chose n\'a pas fonctionné</string>
+	<string name="ntfs">Quelque chose n\'a pas fonctionné, \nWindows n\'a pas pu être monté.\nDemander de l\'aide dans le Telegram.</string>
+	<string name="reboot">Redémarrage</string>
+	<string name="cancel">Annulez</string>
+	<string name="mounted">Windows est monté</string>
+	<string name="unmounted">Windows est démonté</string>
+	<string name="rebootr">Redémarrage nécessaire</string>
+	<string name="lte">Profitez de la LTE sous Windows</string>
+    <string name="flash">UEFI flashé avec succès.\nLe prochain démarrage se fera sous Windows. </string>
+	<string name="backuped">Image de démarrage sauvegardée avec succès...\n</string>
+	<string name="preferences">Préférences</string>
+	<string name="bwarn">ATTENTION ! L\'UFS peut être usé par cela, n\'activez que si vous recevez beaucoup de mises à jour OTA.</string>
+	<string name="agree">Acceptez</string>
+	<string name="nonroot">"Root" non détecté</string>
+	<string name="unsupported">ATTENTION !\n Appareil non pris en charge.\nL\'utilisation de cette application est à vos risques et périls.</string>
+	<string name="sure">OK, laissez-moi utiliser l\'application</string>
+	<string name="upanel">Le fonctionnement de votre panneau n\'a pas été confirmé, veuillez partager votre expérience de Windows dans le chat Telegram.</string>
+	<string name="chat">Discutez</string>
+	<string name="nah">Non</string>
+	<string name="later">Plus tard</string>
+	<string name="done">Done!</string>
+	<string name="mountt">MONTER</string>
+	<string name="unmountt">DÉMONTER</string>
+	
+	<string name="last">DERNIÈRE SAUVEGARDE : %s</string>
+	<string name="slot">FENTE : %s</string>
+    <string name="ramvalue">MÉMOIRE : %sGB </string>
+    <string name="paneltype">PANNEAU : %s</string>
+
+    <string name="guide">GUIDE</string>
+    <string name="group">GROUPE</string>
+    <string name="not_found">Non trouvé</string>
+
+    <string name="yes">OUI</string>
+    <string name="dismiss">REJET</string>
+    <string name="no">NON</string>
+    <string name="please_wait">Veuillez patienter...</string>
+
+    <string name="preference1">Devez sauvegarder le fichier boot.img lors du démarrage rapide (Windows)</string>
+    <string name="preference2">Devez sauvegarder le fichier boot.img lors du démarrage rapide (Android)</string>
+    <string name="preference3">Sauvegarde du fichier boot.img si aucun n\'est détecté (Windows)</string>
+    <string name="preference4">Sauvegarde du fichier boot.img si aucun n\'est détecté (Android)</string>
+    <string name="preference5">Demande de confirmation pour la tuile QS démarrage rapide</string>
+    <string name="preference6">Sélectionnez la langue</string>
+    <string name="preference7">Montez automatiquement Windows au démarrage de l\'appareil</string>
+	<string name="preference8">Désactiver la fonctionnalité de installer de modem</string>
+</resources>

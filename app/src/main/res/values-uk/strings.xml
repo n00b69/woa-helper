@@ -1,0 +1,94 @@
+﻿<resources>
+	<string name="error_title">Сталася неочікувана помилка.\nВибачте за незручності.</string>
+    <string name="backup_boot_title">РЕЗЕРВНА КОПІЯ BOOT ОБРАЗУ</string>
+	<string name="mnt_title">%s WINDOWS</string>
+    <string name="toolbox_title">WOA TOOLBOX</string>
+    <string name="dump_modem_title">ВИВАНТАЖИТИ MODEM</string>
+    <string name="flash_uefi_title">ПРОШИТИ UEFI</string>
+	<string name="uefi_not_found">UEFI НЕ ЗНАЙДЕНО</string>
+    <string name="quickboot_title">ШВИДКЕ ЗАВАНТАЖЕННЯ В WINDOWS</string>
+    <string name="sta_title">СТВОРЕННЯ STA</string>
+    <string name="usbhost_title">ПЕРЕМИКАЧ USB-HOST-РЕЖИМУ</string>
+    <string name="hibernation_title">ПЕРЕМИКАЧ В ГЛИБОКИЙ СОН</string>
+    <string name="software_title">ПРОГРАМНЕ ЗАБЕЗПЕЧЕННЯ ARM</string>
+    <string name="rotation_title">ПЕРЕМИКАЧ ОБЕРТАННЯ ЄКРАНУ</string>
+    <string name="autoflash_title">AUTO ANDROID FLASHER</string>
+	<string name="sensors_title">ДАМП ВСІХ Датчиків</string>
+
+    <string name="backup_boot_subtitle">Резервне копіювання Boot образу на Android та/або Windows</string>
+	<string name="mnt_subtitle">Перемкніть монтований розділ Windows, щоб переглядати або редагувати вміст усередині</string>
+	<string name="toolbox_subtitle">Інструменти та сценарії для більш приємного використання Windows</string>
+	<string name="dump_modem_subtitle">Вивантажте модем у Windows, щоб виправити LTE на SIM1 в Windows.  Необхідно перед кожним завантаженням Windows</string>
+    <string name="flash_uefi_subtitle">Прошити UEFI в boot</string>
+    <string name="uefi_not_found_subtitle">Будь ласка, завантажте образ UEFI для %s і помістіть його в ТЕКУ UEFI у ВНУТРІШНЬОМУ СХОВИЩІ (/sdcard/UEFI</string>
+	<string name="quickboot_subtitle">Дамп модему, перезавантаження UEFI та перезавантаження Windows одним клацанням миші</string>
+    <string name="quickboot_subtitle_nabu">Прошити UEFI та перезавантажити Windows одним клацанням миші</string>
+    <string name="sta_subtitle">Додавання "Переходу на Android" та до Windows</string>
+    <string name="usbhost_subtitle">Додає скрипт до C:\\Toolbox, який дозволяє перемикати в режим USB HOST</string>
+    <string name="hibernation_subtitle">Додає скрипт до C:\\Toolbox, який дозволяє перемикати в гібернацію</string>
+    <string name="software_subtitle">Додає ярлики браузера, що містять програмне забезпечення ARM, до C:\\Toolbox</string>
+    <string name="rotation_subtitle">Додано скрипт до C:\\Toolbox, який дозволяє повертати екран за допомогою ярлика\n(корисно для пристроїв без робочих датчиків)</string>
+    <string name="autoflash_subtitle">Додає скрипт до Windows, який автоматично прошиває Android boot.img при кожному завантаженні Windows</string>
+	<string name="sensors_subtitle">Це потрібно лише один раз на ДЕЯКИХ пристроях, щоб датчики працювали в Windows</string>
+	
+    <string name="backup_boot_question">Резервне копіювання поточного Boot образу Android?</string>
+	<string name="mount_question">Монтування Windows в /sdcard/Windows?</string>
+	<string name="unmount_question">Відмонтувати Windows?</string>
+	<string name="flash_uefi_question">UEFI прошивання?  \nЯкщо так, наступним завантаженням буде Windows</string>
+	<string name="dump_modem_question">Вивантажити модем 1 і модем 2 до розділу Windows?</string>
+    <string name="quickboot_question">Швидке завантаження в Windows?</string>
+	<string name="sta_question">Створіть лінк запуску в Android у C:\\sta?</string>
+    <string name="usbhost_question">Скопіюйте цей сценарій USB Host Mode до C:\\Toolbox</string>
+    <string name="hibernation_question">Скопіюйте цей перемикач сплячого режиму до C:\\Toolbox?</string>
+    <string name="software_question">Копіювати ярлик браузера до C:\\Toolbox?</string>
+    <string name="rotation_question">Копіювати ярлик обертання до C:\\Toolbox?</string>
+    <string name="autoflash_question">Встановити сценарій автопрошивки boot.img у Windows?</string>
+    <string name="sensors_question">Дамп датчиків в Windows?</string>
+	
+    <string name="wrong">Щось пішло не так</string>
+	<string name="ntfs">Щось пішло не так, \Windows не вдалося підключити.\nЗверніться за допомогою в Telegram-чат.</string>
+	<string name="reboot">Перезавантаження</string>
+	<string name="cancel">Відмінити</string>
+	<string name="mounted">Windows змонтований</string>
+	<string name="unmounted">Windows відмонтований</string>
+	<string name="rebootr">Потрібне перезавантаження</string>
+	<string name="lte">Насолоджуйтесь LTE в Windows</string>
+    <string name="flash">UEFI успішно прошито.\nНаступним завантаженням буде завантажено Windows </string>
+	<string name="backuped">Резервна копія Boot образу успішно створена...\n</string>
+	<string name="preferences">Налаштування</string>
+	<string name="bwarn">!!ПОПЕРЕДЖЕННЯ!!\n Через це UFS може бути стерта, увімкніть, лише якщо ви отримуєте багато оновлень OTA</string>
+	<string name="agree">Приймаю</string>
+	<string name="nonroot">Root не знайдено</string>
+	<string name="unsupported">!!УВАГА!!\nПристрій не підтримується\nВикористовуйте цю програму на свій страх і ризик</string>
+	<string name="sure">ОК, просто дозвольте мені використовувати цей додаток</string>
+	<string name="upanel">Робота вашої панелі не підтверджена, будь ласка, поділіться проблемою від Windows у чаті Telegram</string>
+	<string name="chat">Чат</string>
+	<string name="done">Done!</string>
+	<string name="nah">Ні</string>
+	<string name="later">Пізніше</string>
+	<string name="mountt">МОНТУВАННЯ</string>
+	<string name="unmountt">ВІДМОНТУВАТИ</string>
+	
+	<string name="last">ОСТАННЯ РЕЗЕРВНА КОПІЯ : %s</string>
+	<string name="slot">СЛОТ : %s</string>
+    <string name="ramvalue">ПАМЯТЬ : %sGB </string>
+    <string name="paneltype">ПАНЕЛЬ : %s</string>
+
+    <string name="guide">ПОСІБНИК</string>
+    <string name="group">ГРУПА</string>
+    <string name="not_found">Не знайдено</string>
+
+    <string name="yes">ТАК</string>
+    <string name="dismiss">ЗВІЛЬНИТИ</string>
+    <string name="no">НІ</string>
+    <string name="please_wait">Будь ласка, зачекайте...</string>
+
+    <string name="preference1">Примусове резервне копіювання boot.img під час швидкого завантаження (Windows)</string>
+    <string name="preference2">Примусове резервне копіювання boot.img під час швидкого завантаження (Android)</string>
+    <string name="preference3">Створіть резервну копію boot.img, якщо нічого не виявлено (Windows)</string>
+    <string name="preference4">Створіть резервну копію boot.img, якщо нічого не виявлено (Android)</string>
+    <string name="preference5">Вимагати підтвердження для швидкого завантаження QS tile</string>
+    <string name="preference6">Оберіть мову</string>
+    <string name="preference7">Автоматично монтувати Windows під час запуску пристрою</string>
+	<string name="preference8">Вимкнути функцію дампа модему</string>
+</resources>

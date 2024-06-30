@@ -1,0 +1,73 @@
+<resources>
+    <string name="error_title">Gözlənilməz xəta baş verdi.\nNarahatçılığa görə üzr istəyirik.</string>
+    <string name="backup_boot_title">BACK UP BOOT IMAGE</string>
+	<string name="mnt_title">%s WINDOWS</string>
+    <string name="toolbox_title">WOA TOOLBOX</string>
+    <string name="dump_modem_title">DUMP MODEM</string>
+    <string name="flash_uefi_title">FLASH UEFI</string>
+	<string name="uefi_not_found">UEFI TAPILMADI</string>
+    <string name="quickboot_title">QUICKBOOT TO WINDOWS</string>
+
+    <string name="backup_boot_subtitle">Android və/və ya Windows-da yükləmə şəklinin ehtiyat nüsxəsi</string>
+	<string name="mnt_subtitle">İçindəki məzmuna baxmaq və redaktə etmək üçün Windows bölməsinin "mount" yerini dəyişdirin.</string>
+    <string name="toolbox_subtitle">Daha rahat Windows təcrübəsi üçün alətlər və skriptlər</string>
+    <string name="dump_modem_subtitle">Windows-da SIM1-də LTE-ni düzəltmək üçün Windows-da Modem 1 və Modem 2-ni sıfırlayın (hər Windows açılışından əvvəl tələb olunur)</string>
+    <string name="flash_uefi_subtitle">Bölməni yükləmək üçün UEFI-ni FLASH edin</string>
+	<string name="uefi_not_found_subtitle">Lütfən, %s üçün UEFI "image" endirin və onu DAXİLİ YADDAŞdakı UEFI QOVLUĞuna yerləşdirin(/sdcard/UEFI)</string>
+    <string name="quickboot_subtitle">Bir kliklə Modemin "dump"-i, UEFI-in yüklənməsi və Windows-a reboot</string>
+    <string name="quickboot_subtitle_nabu">Bir kliklə UEFI-in yüklənməsi və Windows-a reboot</string>
+    
+	<string name="backup_boot_question">Cari Android sistemi "image" ehtiyat nüsxəsini yaradılsın?</string>
+	<string name="mount_question">Windows-u /sdcard/Windows qoşum?</string>
+	<string name="unmount_question">Windows-u söküm?</string>
+	<string name="dump_modem_question">Modem Windows bölməsinə atılsın?</string>
+    <string name="flash_uefi_question">Flash UEFI? \nƏgər belədirsə, növbəti yükləmə Windows-da olacaq</string>
+	<string name="quickboot_question">Windows-a "Quickboot" (sürətli yükləmə) keçirilsin?</string>
+
+    <string name="wrong">Xəta baş verdi</string>
+	<string name="ntfs">Xəta baş verdi, \nWindows-u qöşa bilmirəm.\nTelegram çatda kömək almaq</string>
+	<string name="reboot">Rebut</string>
+	<string name="cancel">Geri dön</string>
+	<string name="mounted">Windows quraşdırılıb</string>
+	<string name="unmounted">Windows söküldü</string>
+	<string name="rebootr">"Rebut"-a tələb olunur</string>
+	<string name="lte">Windows-da LTE-dən həzz alın</string>
+    <string name="flash">UEFI uğurla yazılıb.\nNövbəti yükləmə Windows-a yüklənəcək. </string>
+	<string name="backuped">Ehtiyat nüsxəsi uğurla yedəkləndi...\n</string>
+	<string name="preferences">Ayarlar</string>
+	<string name="bwarn">!!DİQQƏT!!\n UFS bununla köhnələ bilər, yalnız çoxlu OTA yeniləmələri alsanız aktivləşdirin</string>
+	<string name="agree">OK</string>
+	<string name="nonroot">Root tapılmadı</string>
+	<string name="unsupported">!!DİQQƏT!!\nCihaz dəstəklənmir\nBu proqramı öz riskinizlə istifadə edin</string>
+	<string name="sure">OK, mənə tətbiqdən istifadə etməyə icazə verin</string>
+	<string name="upanel">Panelinizin işləməsi təsdiqlənməyib, Windows təcrübənizi Telegram çatında paylaşın</string>
+	<string name="chat">Çat</string>
+	<string name="nah">Yox</string>
+	<string name="later">Sonra</string>
+	<string name="done">Done!</string>
+	<string name="mountt">MOUNT</string>
+	<string name="unmountt">UNMOUNT</string>
+	
+	<string name="last">AXIRINCI Ehtiyat nüsxəsi : %s</string>
+	<string name="slot">SLOT : %s</string>
+    <string name="ramvalue">YADDAŞ : %sGB </string>
+    <string name="paneltype">PANEL : %s</string>
+
+    <string name="guide">TƏLİMAT</string>
+    <string name="group">QRUP</string>
+    <string name="not_found">Tapılmadı :(</string>
+
+    <string name="yes">OK</string>
+    <string name="dismiss">YOX</string>
+    <string name="no">YOX</string>
+    <string name="please_wait">Zəhmət olmasa, gözləyin...</string>
+
+    <string name="preference1">Quickboot zamanı məcbur boot.img ehtiyat nüsxəsi yaradılsın(Windows)</string>
+    <string name="preference2">quickboot zamanı məcbur boot.img ehtiyat nüsxəsi yaradılsın(Android)</string>
+    <string name="preference3">Əgər aşkar olunmadı boot.img ehtiyat nüsxəsi yaradılsın (Windows)</string>
+    <string name="preference4">Əgər aşkar olunmadı boot.img ehtiyat nüsxəsi yaradılsın (Android)</string>
+    <string name="preference5">QS quickboot yükləmə üçün təsdiq tələb edin</string>
+    <string name="preference6">Dil seç</string>
+    <string name="preference7">Cihaz işə salındıqda Windows avtomatik quraşdırılsın</string>
+	<string name="preference8">Modem-in "dump" funksiyasını söndürmək</string>
+</resources>

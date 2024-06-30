@@ -1,0 +1,94 @@
+<resources>
+	<string name="error_title">Ein unerwarteter Fehler ist aufgetreten.\nEntschuldigen Sie die Unannehmlichkeiten.</string>
+    <string name="backup_boot_title">BOOT-IMAGE BACKUP ERSTELLEN</string>
+    <string name="mnt_title">%s WINDOWS</string>
+    <string name="toolbox_title">WOA TOOLBOX</string>
+	<string name="dump_modem_title">MODEM BEREITSTELLEN</string>
+    <string name="flash_uefi_title">FLASH UEFI</string>
+	<string name="uefi_not_found">UEFI NICHT GEFUNDEN</string>
+    <string name="quickboot_title">WINDOWS SCHNELLSTART</string>
+	<string name="sta_title">STA HERSTELLER</string>
+    <string name="usbhost_title">USB HOST MODUS UMSCHALTER</string>
+    <string name="hibernation_title">HIBERNATION UMSCHALTER</string>
+    <string name="software_title">ARM SOFTWARE</string>
+    <string name="rotation_title">BILDSCHIRMAUSRICHTUNGSUMSCHALTER</string>
+    <string name="autoflash_title">AUTOMATISCHER ANDROID FLASHER</string>
+	<string name="sensors_title">SENSOREN BEREITSTELLEN</string>
+
+    <string name="backup_boot_subtitle">Boot-Image Backup erstellen in Windows und/oder Android</string>
+    <string name="mnt_subtitle">Windows-Partition mounten um deren Inhalt anzuzeigen und zu ändern</string>
+	<string name="toolbox_subtitle">Tools und Scripts für ein besseres Windows Erlebnis</string>
+    <string name="dump_modem_subtitle">Modem bereitstellen um SIM1 in Windows verwenden zu können. Wird bei jedem Neustart benötigt um LTE in Windows nutzen zu können.</string>
+    <string name="flash_uefi_subtitle">UEFI zur Boot-Partition flashen</string>
+	<string name="uefi_not_found_subtitle">Bitte downloaden Sie das UEFI für %s und schieben Sie es in der UEFI Mappe in ihrem internen Speicher (/sdcard/UEFI)</string>
+    <string name="quickboot_subtitle">Modem bereitstellen, UEFI flashen, und zu Windows neustarten in einem klick</string>
+    <string name="quickboot_subtitle_nabu">UEFI flashen und zu Windows neustarten in einem klick</string>
+    <string name="sta_subtitle">Installiert die Switch to Android App in Windows</string>
+    <string name="usbhost_subtitle">Fügt in C:\\Toolbox einen Skript hinzu, mit dem Sie den USB Host Modus umschalten können</string>
+    <string name="hibernation_subtitle">Fügt in C:\\Toolbox einen Skript hinzu, mit dem Sie Hibernation umschalten können</string>
+    <string name="software_subtitle">Kopiert Browser-Verknüpfungen zur ARM Software zur C:\\Toolbox</string>
+    <string name="rotation_subtitle">Fügt in C:\\Toolbox einen Skript hinzu, mit dem Sie den Bildschirm mit einer Verknüpfung drehen können\n(nützlich für Geräte ohne funktionierende Sensoren)</string>
+    <string name="autoflash_subtitle">Installiert einen Autoflashskript der bei jedem Windows Start automatisch das Boot.img flasht</string>
+	<string name="sensors_subtitle">Wird in manche Geräte benötigt um Sensoren in Windows wirken zu lassen</string>
+	
+    <string name="backup_boot_question">Backup vom aktuellen Boot-Image erstellen?</string>
+    <string name="mount_question">Windows in /sdcard/Windows mounten?</string>
+	<string name="unmount_question">Unmount Windows?</string>
+    <string name="dump_modem_question">Modem1st und modem2st bereitstellen?</string>
+	<string name="flash_uefi_question">UEFI flashen? \nBeim nächsten Gerätestart landen Sie in Windows.</string>
+    <string name="quickboot_question">Schnellstart zur Windows?</string>
+	<string name="sta_question">Switch to Android App in C:\\sta herstellen?</string>
+    <string name="usbhost_question">USB Host Modus Skript nach C:\\Toolbox kopieren?</string>
+    <string name="hibernation_question">Hibernation Umschalter nach C:\\Toolbox kopieren?</string>
+    <string name="software_question">Browser-Verknüpfungen nach C:\\Toolbox kopieren?</string>
+    <string name="rotation_question">Bildschirmausrichtungsumschalter nach C:\\Toolbox kopieren?</string>
+    <string name="autoflash_question">Boot.img autoflasher Skript in Windows installieren?</string>
+    <string name="sensors_question">Sensoren bereitstellen?</string>
+    
+    <string name="wrong">Etwas ist schief gelaufen</string>
+	<string name="ntfs">Etwas ist schief gelaufen, \nWindows konnte nicht gemountet werden.\nFragen Sie nach Hilfe im Telegram-Chat.</string>
+	<string name="reboot">Neustart</string>
+	<string name="cancel">Annulieren</string>
+	<string name="mounted">Windows mounted</string>
+	<string name="unmounted">Windows unmounted</string>
+	<string name="rebootr">Neustart erförderlich</string>
+	<string name="lte">Viel spaß mit LTE in Windows</string>
+    <string name="flash">UEFI würde erfolgreich geflashed.\nBeim nächsten Gerätestart landen Sie in Windows. </string>
+	<string name="backuped">Boot-Image Backup würde erfolgreich erstellt\n</string>
+	<string name="preferences">Einstellungen</string>
+	<string name="bwarn">!!WARNING!!\n UFS kann durch diese Funktion schneller verschleißen, verwenden Sie es nur wenn Sie regelmäßige OTA-Updates erhalten </string>
+	<string name="agree">OK</string>
+	<string name="nonroot">Root nicht detektiert</string>
+	<string name="unsupported">!!WARNUNG!!\nGerät nicht unterstüzt\nBenutzung auf eigener Gefahr</string>
+	<string name="sure">OK, lass mich einfach die App nutzen</string>
+	<string name="upanel">Dein Display würde nicht als funktionsfähig bestätigt. Bitte schicken Sie Feedback über ihre Windows-Erfahrungen im Telegram-Chat</string>
+	<string name="chat">Chat</string>
+	<string name="nah">Nein</string>
+	<string name="later">Später</string>
+	<string name="done">Fertig!</string>
+	<string name="mountt">MOUNT</string>
+	<string name="unmountt">UNMOUNT</string>
+	
+	<string name="last">LETZTER BACKUP : %s</string>
+	<string name="slot">SLOT : %s</string>
+    <string name="ramvalue">RAM : %sGB </string>
+    <string name="paneltype">DISPLAY : %s</string>
+
+    <string name="guide">KURS</string>
+    <string name="group">GRUPPE</string>
+    <string name="not_found">Nicht gefunden</string>
+
+    <string name="yes">JA</string>
+    <string name="dismiss">SCHLIEßEN</string>
+    <string name="no">NEIN</string>
+    <string name="please_wait">Bitte warten...</string>
+
+    <string name="preference1">Boot.img Backup erstellen beim jeden Schnellstart (Windows)</string>
+    <string name="preference2">Boot.img Backup erstellen beim jeden Schnellstart (Android)</string>
+    <string name="preference3">Boot.img Backup erstellen indem keins vorhanden ist (Windows)</string>
+    <string name="preference4">Boot.img Backup erstellen indem keins vorhanden ist (Android)</string>
+    <string name="preference5">Bestätigung erforderlich beim QS quickboot Knopf </string>
+    <string name="preference6">Sprache auswählen</string>
+    <string name="preference7">Windows automatisch mounten beim Gerätestart</string>
+	<string name="preference8">Modem-bereitstellungsfunktion ausschalten</string>
+</resources>

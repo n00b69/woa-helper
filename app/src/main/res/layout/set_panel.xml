@@ -1,0 +1,80 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbarlayout"
+        layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/_7sdp">
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/modemdump"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:text="Disable modem dump option"
+            android:visibility="gone" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/backupQB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/preference1" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/backupQB_A"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/preference2" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/autobackup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/preference3" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/autobackup_a"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/preference4" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/confirmation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/preference5" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/automount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/preference7" />
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/securelock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/preference9" />
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save" />
+
+    </LinearLayout>
+</LinearLayout>

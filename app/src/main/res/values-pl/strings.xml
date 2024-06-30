@@ -1,0 +1,94 @@
+<resources>
+	<string name="error_title">Wystąpił nieoczekiwany błąd.\nPrzepraszamy za niezgodnośći.</string>
+	<string name="backup_boot_title">KOPIA OBRAZU ROZRUCHU</string>
+	<string name="mnt_title">%s WINDOWS</string>
+	<string name="toolbox_title">NARZĘDZIA WOA</string>
+	<string name="dump_modem_title">DUMP MODEM</string>
+	<string name="flash_uefi_title">WGRYWAJ UEFI</string>
+	<string name="uefi_not_found">UEFI NIE ZNALEZIONO</string>
+	<string name="quickboot_title">SZYBKI START DO WINDOWS</string>
+	<string name="sta_title">KREATOR STA</string>
+    <string name="usbhost_title">PRZEŁĄCZNIK TRYBU HOSTA USB</string>
+    <string name="hibernation_title">PRZEŁĄCZNIK HIBERNACJI</string>
+    <string name="software_title">OPROGRAMOWANIE ARM</string>
+    <string name="rotation_title">PRZEŁĄCZNIK OBROTU</string>
+    <string name="autoflash_title">AUTOMATYCZNY FLASHER ANDROIDA</string>
+	<string name="sensors_title">DUMP CZUJNIKÓW </string>
+    
+    <string name="backup_boot_subtitle">Zapisz obraz rozruchu systemu na Androidzie i/lub w systemie Windows</string>
+    <string name="mnt_subtitle">Przełącz montowanie partycji Windows w celu wyświetlenia lub edycji zawartości wewnątrz</string>
+    <string name="toolbox_subtitle">Narzędzia i skrypty dla  bardziej przyjemnej doświadczeniem z Windowsem</string>
+    <string name="dump_modem_subtitle">Zrzuć modem do Windows, aby naprawić LTE na karcie SIM1 w systemie Windows. Wymagane przed każdym uruchomieniem systemu Windows</string>
+	<string name="flash_uefi_subtitle">Wgraj UEFI do partycji rozruchowej</string>
+    <string name="uefi_not_found_subtitle">Proszę pobrać obraz UEFI dla %s i umieścić go w FOLDERZE UEFI na PAMIĘCI WEWNĘTRZNEJ (/sdcard/UEFI)</string>
+	<string name="quickboot_subtitle">Wyczyść modem, wgraj UEFI i uruchom ponownie do Windows jednym kliknięciem</string>
+    <string name="quickboot_subtitle_nabu">Wgraj UEFI i uruchom ponownie do Windows jednym kliknięciem</string>
+    <string name="sta_subtitle">Dodaje aplikację Przełącz na system Android do systemu Windows</string>
+    <string name="usbhost_subtitle">Dodaje skrypt do C:\Toolbox, który umożliwia przełączanie trybu hosta USB</string>
+    <string name="hibernation_subtitle">Dodaje skrypt do C:\Toolbox, który umożliwia przełączanie hibernacji</string>
+    <string name="software_subtitle">Dodaje skróty przeglądarki zawierające oprogramowanie ARM do C:\Toolbox</string>
+    <string name="rotation_subtitle">Dodaje skrypt do C:\Toolbox, który pozwala na obracanie ekranu za pomocą skrótun\(przydatne dla urządzeń bez działających czujników)</string>
+    <string name="autoflash_subtitle">Dodaje skrypt do systemu Windows, który automatycznie flashuje plik boot.img systemu Android przy każdym uruchomieniu systemu Windows</string>
+	<string name="sensors_subtitle">Jest to potrzebne tylko raz na NIEKTÓRYCH urządzeniach, aby czujniki działały w systemie Windows</string>
+	
+	<string name="backup_boot_question">Zapisać aktualny obraz rozruchu systemu Android?</string>
+	<string name="mount_question">Zamontować Windows na /sdcard/Windows?</string>
+	<string name="unmount_question">Odmontować Windows?</string>
+	<string name="dump_modem_question">Zrzucić modem1st i modem2st do partycji Windows?</string>
+    <string name="flash_uefi_question">Wgrać UEFI? \nJeśli tak, następne uruchomienie będzie w systemie Windows</string>
+    <string name="quickboot_question">Szybki start do Windows?</string>
+	<string name="sta_question">Utwórz aplikację Przełącz na Androida w C:\\sta?</string>
+    <string name="usbhost_question">Skopiować skrypt trybu hosta USB do C:\\Toolbox?</string>
+    <string name="hibernation_question">Skopiować przełącznik hibernacji do C:\\Toolbox?</string>
+    <string name="software_question">Skopiować skróty przeglądarki do C:\\Toolbox?</string>
+    <string name="rotation_question">Skopiować skrót do obracania do C:\\Toolbox?</string>
+    <string name="autoflash_question">Zainstalować skrypt autoflashera boot.img w systemie Windows?</string>
+    <string name="sensors_question">Dump czujniki do systemu Windows?</string>
+	
+	<string name="wrong">Coś poszło nie tak</string>
+	<string name="ntfs">Coś poszło nie tak, \nWindows nie mogło zostać zamontowane.\nPoproś o pomoc w czacie Telegram.</string>
+	<string name="reboot">Uruchom ponownie</string>
+	<string name="cancel">Anuluj</string>
+	<string name="mounted">Windows zamontowane</string>
+	<string name="unmounted">Windows odmontowane</string>
+	<string name="rebootr">Wymagane ponowne uruchomienie</string>
+	<string name="lte">Ciesz się LTE w systemie Windows</string>
+	<string name="flash">UEFI wgrane pomyślnie.\nNastępne uruchomienie będzie w systemie Windows. </string>
+	<string name="backuped">Obraz rozruchu zapisany pomyślnie\n</string>
+	<string name="preferences">Preferencje</string>
+	<string name="bwarn">!!OSTRZEŻENIE!!\n UFS może zostać zużyte przez to działanie, włącz tylko, jeśli otrzymujesz dużo aktualizacji OTA</string>
+	<string name="agree">Zgadzam się</string>
+	<string name="nonroot">Nie wykryto uprawnień roota</string>
+	<string name="unsupported">!!OSTRZEŻENIE!!\nUrządzenie nieobsługiwane\nKorzystanie z tej aplikacji na własne ryzyko</string>
+	<string name="sure">OK, pozwól mi tylko korzystać z aplikacji</string>
+	<string name="upanel">Twój panel nie został potwierdzony jako działający, podziel się swoim doświadczeniem z systemem Windows w czacie Telegramowym</string>
+	<string name="chat">Czat</string>
+	<string name="done">Done!</string>
+	<string name="nah">Nie</string>
+	<string name="later">Później</string>
+	<string name="mountt">MONTUJ</string>
+	<string name="unmountt">ODMONTUJ</string>
+	
+	<string name="last">OSTATNIA KOPIA ZAPASOWA : %s</string>
+	<string name="slot">SLOT : %s</string>
+    <string name="ramvalue">PAMIĘĆ: %sGB </string>
+    <string name="paneltype">PANEL: %s</string>
+
+    <string name="guide">PRZEWODNIK</string>
+    <string name="group">GRUPA</string>
+    <string name="not_found">Nie znaleziono</string>
+
+    <string name="yes">TAK</string>
+    <string name="dismiss">ODRZUĆ</string>
+    <string name="no">NIE</string>
+    <string name="please_wait">Proszę czekać...</string>
+	
+    <string name="preference1">Wymuś kopię zapasową obrazu rozruchu przy szybkim uruchamianiu (Windows)</string>
+    <string name="preference2">Wymuś kopię zapasową obrazu rozruchu przy szybkim uruchamianiu (Android)</string>
+    <string name="preference3">Zapisz obraz rozruchu jeśli nie zostanie wykryty (Windows)</string>
+    <string name="preference4">Zapisz obraz rozruchu jeśli nie zostanie wykryty (Android)</string>
+    <string name="preference5">Wymagaj potwierdzenia dla kafelka szybkiego uruchamiania QS</string>
+    <string name="preference6">Wybierz język</string>
+    <string name="preference7">Automatyczne montowanie Windows przy starcie urządzenia</string>
+	<string name="preference8">Wyłącz modem znikł funkcja</string>
+</resources>

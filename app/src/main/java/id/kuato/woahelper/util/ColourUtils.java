@@ -62,7 +62,7 @@ public class ColourUtils {
 	 */
 	@ColorInt
 	public static int lighter(@ColorInt int color, @FloatRange(from = 0.0, to = 1.0) float factor) {
-		// factor = 0.15f
+		// llfactor = 0.15f
 		int alpha = Color.alpha(color);
 		float red = ((Color.red(color) * (1 - factor) / 255 + factor) * 255);
 		float green = ((Color.green(color) * (1 - factor) / 255 + factor) * 255);

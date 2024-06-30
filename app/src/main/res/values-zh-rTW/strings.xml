@@ -1,0 +1,92 @@
+<resources>
+	<string name="error_title">發生了意料之外的問題\n很抱歉給您帶來不便</string>
+    <string name="backup_boot_title">備份BOOT分區</string>
+	<string name="mnt_title">%s WINDOWS</string>
+	<string name="toolbox_title">WOA 工具箱</string>
+    <string name="dump_modem_title">提取基帶</string>
+    <string name="flash_uefi_title">刷入UEFI</string>
+    <string name="uefi_not_found">找不到UEFI</string>
+    <string name="quickboot_title">快速啟動到WINDOWS</string>
+    <string name="sta_title">STA CREATOR</string>
+    <string name="usbhost_title">USB HOST MODE TOGGLE</string>
+    <string name="hibernation_title">HIBERNATION TOGGLE</string>
+    <string name="software_title">ARM SOFTWARE</string>
+    <string name="rotation_title">ROTATION TOGGLE</string>
+    <string name="autoflash_title">AUTO ANDROID FLASHER</string>
+
+    <string name="backup_boot_subtitle">備份boot分區到Windows和Android</string>
+	<string name="mnt_subtitle">切換安裝Windows的分區以便於編輯其中的內容</string>
+	<string name="toolbox_subtitle">提供更愉快的 Windows 體驗的工具和腳本</string>
+	<string name="dump_modem_subtitle">每次啟動Windows時提取modem到Windows分區來修復Sim1和LTE</string>
+	<string name="flash_uefi_subtitle">刷入UEFI到boot分區</string>
+	<string name="uefi_not_found_subtitle">請為 %s 下載UEFI並且把你下載的東西丟到內部儲存中UEFI資料夾裡面</string>
+	<string name="quickboot_subtitle">一鍵刷入UEFI並備份基頻同時啟動到Windows</string>
+    <string name="quickboot_subtitle_nabu">一鍵刷入UEFI並啟動到Windows</string>
+    <string name="sta_subtitle">Adds the Switch to Android app to Windows</string>
+    <string name="usbhost_subtitle">Adds a script to C:\\Toolbox which allows you to toggle USB Host Mode</string>
+    <string name="hibernation_subtitle">Adds a script to C:\\Toolbox which allows you to toggle hibernation</string>
+    <string name="software_subtitle">Adds browser shortcuts containing ARM software to C:\\Toolbox</string>
+    <string name="rotation_subtitle">Adds a script to C:\\Toolbox that lets you rotate the screen with a shortcut\n(useful for devices without working sensors)</string>
+    <string name="autoflash_subtitle">Adds a script to Windows which automatically flashes the Android boot.img whenever Windows boots</string>
+	
+    <string name="backup_boot_question">備份當前Android boot?</string>
+	<string name="mount_question">掛載Windows到/sdcard/Windows?</string>
+	<string name="unmount_question">取消掛載Windows?</string>
+	<string name="dump_modem_question">提取modem1st和modem2st到Windows分區?</string>
+	<string name="flash_uefi_question">刷入UEFI? \n如果刷入接下來將要啟動到Windows</string>
+    <string name="quickboot_question">快速啟動到Windows?</string>
+    <string name="sta_question">Create Switch to Android app in C:\\sta?</string>
+    <string name="usbhost_question">Copy USB Host Mode script to C:\\Toolbox?</string>
+    <string name="hibernation_question">Copy hibernation toggler to C:\\Toolbox?</string>
+    <string name="software_question">Copy browser shortcuts to C:\\Toolbox?</string>
+    <string name="rotation_question">Copy rotation shortcut to C:\\Toolbox?</string>
+    <string name="autoflash_question">Install boot.img autoflasher script into Windows?</string>
+    <string name="sensors_question">Dump sensors to Windows?</string>
+    
+	<string name="wrong">錯誤</string>
+	<string name="ntfs">出錯, \nWindows不能被掛載\n請在Telegram群聊中尋求協助</string>
+	<string name="reboot">重啟</string>
+	<string name="cancel">取消</string>
+	<string name="mounted">已掛載Windows</string>
+	<string name="unmounted">已取消掛載Windows</string>
+	<string name="rebootr">必須重啟</string>
+	<string name="lte">在Windows上享受LTE吧</string>
+    <string name="flash">UEFI刷入成功\n接下來將要啟動到Windows </string>
+	<string name="backuped">成功備份boot分區\n</string>
+	<string name="preferences">優先</string>
+	<string name="bwarn">!!警告!!\nUFS字庫可能會因此磨損，僅在有大量OTA更新時使用</string>
+	<string name="agree">同意</string>
+	<string name="nonroot">沒給root</string>
+	<string name="unsupported">!!警告!!\n設備不支援\n磚了不關我事</string>
+	<string name="sure">無論如何我都要用</string>
+	<string name="upanel">面板不知道有沒有正常運作，請在Telegram分享你的Windows狀況</string>
+	<string name="chat">聊天</string>
+	<string name="nah">取消</string>
+	<string name="later">稍后</string>
+	<string name="done">Done!</string>
+	<string name="mountt">掛載</string>
+	<string name="unmountt">取消掛載</string>
+	
+	<string name="last">最後一次備份 : %s</string>
+	<string name="slot">插槽 : %s</string>
+    <string name="ramvalue">RAM : %sGB </string>
+    <string name="paneltype">面板 : %s</string>
+
+    <string name="guide">嚮導</string>
+    <string name="group">群組</string>
+    <string name="not_found">未找到</string>
+
+    <string name="yes">確定</string>
+    <string name="dismiss">取消</string>
+    <string name="no">取消</string>
+    <string name="please_wait">稍安勿躁</string>
+
+    <string name="preference1">快速啟動時總是備份boot.img (Windows)</string>
+    <string name="preference2">快速啟動時總是備份boot.img (Android)</string>
+    <string name="preference3">當沒有被偵測到則備份boot.img (Windows)</string>
+    <string name="preference4">當沒有被偵測到則備份boot.img (Android)</string>
+    <string name="preference5">需要為QS快速啟動磁貼確認</string>
+    <string name="preference6">選擇語言</string>
+    <string name="preference7">在裝置啟動時自動安裝 Windows</string>
+	<string name="preference8">停用貓保存功能</string>
+</resources>

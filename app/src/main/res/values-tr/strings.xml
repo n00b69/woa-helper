@@ -1,0 +1,94 @@
+<resources>
+    <string name="error_title">Beklenmeyen bir hata oluştu.\nRahatsızlıktan ötürü kusura bakmayın.</string>
+	<string name="backup_boot_title">BOOT IMAJINI YEDEKLE</string>
+    <string name="mnt_title">%s WINDOWS</string>
+	<string name="toolbox_title">WOA Alet Kutusu</string>
+    <string name="dump_modem_title">MODEM\'İ DUMP ET</string>
+	<string name="flash_uefi_title">UEFI\'Yİ FLASHLA</string>
+	<string name="uefi_not_found">UEFI BULUNMADI</string>
+	<string name="quickboot_title">WINDOWS\'A QUICKBOOT ET</string>
+	<string name="sta_title">STA CREATOR</string>
+    <string name="usbhost_title">USB HOST MODE TOGGLE</string>
+    <string name="hibernation_title">HIBERNATION TOGGLE</string>
+    <string name="software_title">ARM SOFTWARE</string>
+    <string name="rotation_title">ROTATION TOGGLE</string>
+    <string name="autoflash_title">AUTO ANDROID FLASHER</string>
+    <string name="sensors_title">DUMP SENSORS</string>
+    
+    <string name="backup_boot_subtitle">Boot imajını Android ve/veya Windows\'a yedekleyin</string>
+	<string name="mnt_subtitle">İçindeki içeriği görüntülemek ya da düzenlemek için Windows bölümünü mount etmeyi açın</string>
+    <string name="toolbox_subtitle">Daha keyifli bir Windows deneyimi için araçlar ve komut dosyaları</string>
+	<string name="dump_modem_subtitle">Windows\'ta SIM1\'de LTE\'yi düzeltmek için modem\'yi Windows\'a dump edin. Her Windows bootu öncesi gereklidir</string>
+	<string name="flash_uefi_subtitle">UEFI\'yi boot bölmesine flashla</string>
+	<string name="uefi_not_found_subtitle">Lütfen UEFI imajını %s için indirin ve DAHİLİ DEPOLAMANIZDAKİ UEFI KLASÖRÜNE yerleştirin (/sdcard/UEFI)</string>
+	<string name="quickboot_subtitle">Tek tıkla modemi dumpla, UEFI\'yi flashla ve Windows\'a reboot et</string>
+    <string name="quickboot_subtitle_nabu">Bir tıkla UEFI flashla ve Wİndows\'a reboot et</string>
+	<string name="sta_subtitle">Adds the Switch to Android app to Windows</string>
+    <string name="usbhost_subtitle">Adds a script to C:\\Toolbox which allows you to toggle USB Host Mode</string>
+    <string name="hibernation_subtitle">Adds a script to C:\\Toolbox which allows you to toggle hibernation</string>
+    <string name="software_subtitle">Adds browser shortcuts containing ARM software to C:\\Toolbox</string>
+    <string name="rotation_subtitle">Adds a script to C:\\Toolbox that lets you rotate the screen with a shortcut\n(useful for devices without working sensors)</string>
+    <string name="autoflash_subtitle">Adds a script to Windows which automatically flashes the Android boot.img whenever Windows boots</string>
+    <string name="sensors_subtitle">This is only needed once on SOME devices to make sensors work in Windows</string>
+	
+	<string name="backup_boot_question">Mevcut Android boot imajı yedeklensin?</string>
+	<string name="mount_question">Windows /sdcard/Windows\'a mount edilsin?</string>
+	<string name="unmount_question">Windows unmount edilsin?</string>
+    <string name="dump_modem_question">Modem1st and modem2st Windows bölümüne dumplansın?</string>
+	<string name="flash_uefi_question">UEFI flashla? \nÖyleyse, bir sonraki boot Windows\'a olacak</string>
+    <string name="quickboot_question">Windows\'a quickboot edilsin?</string>
+	<string name="sta_question">Create Switch to Android app in C:\\sta?</string>
+    <string name="usbhost_question">Copy USB Host Mode script to C:\\Toolbox?</string>
+    <string name="hibernation_question">Copy hibernation toggler to C:\\Toolbox?</string>
+    <string name="software_question">Copy browser shortcuts to C:\\Toolbox?</string>
+    <string name="rotation_question">Copy rotation shortcut to C:\\Toolbox?</string>
+    <string name="autoflash_question">Install boot.img autoflasher script into Windows?</string>
+    <string name="sensors_question">Dump sensors to Windows?</string>
+	
+    <string name="wrong">Bir şeyler ters gitti</string>
+	<string name="ntfs">Bir şeyler ters gitti, \nWindows mount edilemedi.\nTelegram grubundan yardım isteyebilirsiniz</string>
+	<string name="reboot">Reboot</string>
+	<string name="cancel">İptal et</string>
+	<string name="mounted">Windows mount edildi</string>
+	<string name="unmounted">Windows unmount edildi</string>
+	<string name="rebootr">Reboot gereklidir</string>
+	<string name="lte">Windows\'ta LTE\'nin keyfini çıkarın</string>
+    <string name="flash">UEFI başarıyla flashlandı.\nSıradaki boot Windows\'a olacaktır. </string>
+	<string name="backuped">Boot imajı başarıyla yedeklendi...\n</string>
+	<string name="preferences">Tercihler</string>
+	<string name="bwarn">!!DİKKAT!!\n UFS bunula yıpranabilir, birçok OTA güncelleme alıyorsanız aktif edin</string>
+	<string name="agree">Onayla</string>
+	<string name="nonroot">Root algılanmadı</string>
+	<string name="unsupported">!!DİKKAT!!\nCihaz desteklenmiyor\nUygulamayı riski göze alıyorsanız kullanın</string>
+	<string name="sure">TAMAM, kullanmama müsade et</string>
+	<string name="upanel">Panelinizin çalıştığı teyit edilmemiştir, lütfen Telegram grubunda deneyiminizi paylaşın</string>
+	<string name="chat">Sohbet</string>
+	<string name="nah">Hayır</string>
+	<string name="later">Sonra</string>
+	<string name="done">Done!</string>
+	<string name="mountt">MOUNT</string>
+	<string name="unmountt">UNMOUNT</string>
+	
+	<string name="last">SON YEDEK : %s</string>
+	<string name="slot">SLOT : %s</string>
+    <string name="ramvalue">HAFIZA : %sGB </string>
+    <string name="paneltype">PANEL : %s</string>
+
+    <string name="guide">REHBER</string>
+    <string name="group">GRUP</string>
+    <string name="not_found">Bulunamadı</string>
+
+    <string name="yes">EVET</string>
+    <string name="dismiss">TAMAM</string>
+    <string name="no">HAYIR</string>
+    <string name="please_wait">Lütfen bekleyin...</string>
+
+    <string name="preference1">Quickboot ederken boot.img yedeklemeyi zorla (Windows)</string>
+    <string name="preference2">Quickboot ederken boot.img yedeklemeyi zorla (Android)</string>
+    <string name="preference3">Eğer bulunamazsa boot.img\'i yedekle (Windows)</string>
+    <string name="preference4">Eğer bulunamazsa boot.img\'i yedekle (Android)</string>
+    <string name="preference5">QS quickboot kutucuğu için onay iste</string>
+    <string name="preference6">Dil seç</string>
+    <string name="preference7">Cihaz açılışında otomatik olarak Windows\'u bağla</string>
+	<string name="preference8">Modem yedeklemesini devre dışı bırak</string>
+</resources>
