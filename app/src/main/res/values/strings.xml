@@ -1,131 +1,131 @@
 <resources>
-    <string name="language">en</string>
-    <string name="app_name" translatable="false">WOA Helper</string>
-    <string name="app_subtitle" translatable="false">v1.8.4"</string>
-    <string name="creator" translatable="false">the soc &amp; Marius586 &amp; Vern Kuato &amp; halal-beef @2024</string>
+	<string name="language">en</string>
+	<string name="app_name" translatable="false">WOA Helper</string>
+	<string name="app_subtitle" translatable="false">v1.8.4"</string>
+	<string name="creator" translatable="false">the soc &amp; Marius586 &amp; Vern Kuato &amp; halal-beef @2024</string>
 
-    <string name="error_title">An unexpected error occurred.\nSorry for the inconvenience.</string>
-    <string name="backup_boot_title">BACK UP BOOT IMAGE</string>
-    <string name="mnt_title">%s WINDOWS</string>
-    <string name="toolbox_title">WOA TOOLBOX</string>
-    <string name="dump_modem_title">DUMP MODEM</string>
-    <string name="flash_uefi_title">FLASH UEFI</string>
-    <string name="uefi_not_found">UEFI NOT FOUND</string>
-    <string name="quickboot_title">QUICKBOOT TO WINDOWS</string>
-    <string name="sta_title">STA CREATOR</string>
-    <string name="usbhost_title">USB HOST MODE TOGGLE</string>
-    <string name="hibernation_title">HIBERNATION TOGGLE</string>
-    <string name="software_title">ARM SOFTWARE</string>
-    <string name="rotation_title">ROTATION TOGGLE</string>
-    <string name="autoflash_title">AUTO ANDROID FLASHER</string>
-    <string name="sensors_title">DUMP SENSORS</string>
+	<string name="error_title">An unexpected error occurred.\nSorry for the inconvenience.</string>
+	<string name="backup_boot_title">BACK UP BOOT IMAGE</string>
+	<string name="mnt_title">%s WINDOWS</string>
+	<string name="toolbox_title">WOA TOOLBOX</string>
+	<string name="dump_modem_title">DUMP MODEM</string>
+	<string name="flash_uefi_title">FLASH UEFI</string>
+	<string name="uefi_not_found">UEFI NOT FOUND</string>
+	<string name="quickboot_title">QUICKBOOT TO WINDOWS</string>
+	<string name="sta_title">STA CREATOR</string>
+	<string name="usbhost_title">USB HOST MODE TOGGLE</string>
+	<string name="hibernation_title">HIBERNATION TOGGLE</string>
+	<string name="software_title">ARM SOFTWARE</string>
+	<string name="rotation_title">ROTATION TOGGLE</string>
+	<string name="autoflash_title">AUTO ANDROID FLASHER</string>
+	<string name="sensors_title">DUMP SENSORS</string>
 	<string name="atlasos_title">COPY ATLASOS / REVIOS FILES</string>
 	<string name="edge_title">EDGE REMOVER</string>
 	<string name="defender_title">DEFENDER REMOVER</string>
 	<string name="script_title">SCRIPT TOOLBOX</string>
 
-    <string name="backup_boot_subtitle">Back up boot image to Android and/or Windows</string>
-    <string name="mnt_subtitle">Toggle mounting Windows partition in order to view or edit content inside</string>
-    <string name="toolbox_subtitle">Tools and scripts for a more enjoyable Windows experience</string>
-    <string name="dump_modem_subtitle">Dump modem to Windows to fix LTE on SIM1 in Windows.\nRequired before every Windows boot</string>
-    <string name="flash_uefi_subtitle">Flash UEFI to boot partition</string>
-    <string name="uefi_not_found_subtitle">Please download the UEFI image for %s and place it in the UEFI FOLDER in INTERNAL STORAGE (/sdcard/UEFI)</string>
-    <string name="quickboot_subtitle">Dump modem, flash UEFI, and reboot to Windows in one click</string>
-    <string name="quickboot_subtitle_nabu">Flash UEFI and reboot to Windows in one click</string>
-    <string name="sta_subtitle">Adds the Switch to Android app to Windows</string>
-    <string name="usbhost_subtitle">Adds a script to C:\\Toolbox which allows you to toggle USB Host Mode</string>
-    <string name="hibernation_subtitle">Adds a script to C:\\Toolbox which allows you to toggle hibernation</string>
-    <string name="software_subtitle">Adds browser shortcuts containing ARM software to C:\\Toolbox</string>
-    <string name="rotation_subtitle">Adds a script to C:\\Toolbox that lets you rotate the screen with a shortcut\n(useful for devices without working sensors)</string>
-    <string name="autoflash_subtitle">Adds a script to Windows which automatically flashes the Android boot.img whenever Windows boots</string>
-    <string name="sensors_subtitle">This is only needed once on SOME devices to make sensors work in Windows</string>
+	<string name="backup_boot_subtitle">Back up boot image to Android and/or Windows</string>
+	<string name="mnt_subtitle">Toggle mounting Windows partition in order to view or edit content inside</string>
+	<string name="toolbox_subtitle">Tools and scripts for a more enjoyable Windows experience</string>
+	<string name="dump_modem_subtitle">Dump modem to Windows to fix LTE on SIM1 in Windows.\nRequired before every Windows boot</string>
+	<string name="flash_uefi_subtitle">Flash UEFI to boot partition</string>
+	<string name="uefi_not_found_subtitle">Please download the UEFI image for %s and place it in the UEFI FOLDER in INTERNAL STORAGE (/sdcard/UEFI)</string>
+	<string name="quickboot_subtitle">Dump modem, flash UEFI, and reboot to Windows in one click</string>
+	<string name="quickboot_subtitle_nabu">Flash UEFI and reboot to Windows in one click</string>
+	<string name="sta_subtitle">Adds the Switch to Android app to Windows</string>
+	<string name="usbhost_subtitle">Adds a script to C:\\Toolbox which allows you to toggle USB Host Mode</string>
+	<string name="hibernation_subtitle">Adds a script to C:\\Toolbox which allows you to toggle hibernation</string>
+	<string name="software_subtitle">Adds browser shortcuts containing ARM software to C:\\Toolbox</string>
+	<string name="rotation_subtitle">Adds a script to C:\\Toolbox that lets you rotate the screen with a shortcut\n(useful for devices without working sensors)</string>
+	<string name="autoflash_subtitle">Adds a script to Windows which automatically flashes the Android boot.img whenever Windows boots</string>
+	<string name="sensors_subtitle">This is only needed once on SOME devices to make sensors work in Windows</string>
 	<string name="atlasos_subtitle">Copies the AtlasOS or ReviOS playbook and AME Wizard to C:\\Toolbox</string>
 	<string name="edge_subtitle">Adds a script to C:\\Toolbox which allows you to remove Microsoft Edge</string>
 	<string name="defender_subtitle">Adds a script to C:\\Toolbox which allows you to remove Windows Defender</string>
 	<string name="script_subtitle">Adds an assortment of scripts and tweaks to C:\\Toolbox</string>
 
-    <string name="backup_boot_question">Back up current Android boot image?</string>
-    <string name="mount_question">Mount Windows to /sdcard/Windows?</string>
-    <string name="unmount_question">Unmount Windows?</string>
-    <string name="dump_modem_question">Dump modem1st and modem2st to Windows partition?</string>
-    <string name="flash_uefi_question">Flash UEFI? \nIf so, the next boot will be in Windows</string>
-    <string name="quickboot_question">Quickboot to Windows?</string>
-    <string name="sta_question">Create Switch to Android app in C:\\sta?</string>
-    <string name="usbhost_question">Copy USB Host Mode script to C:\\Toolbox?</string>
-    <string name="hibernation_question">Copy hibernation toggler to C:\\Toolbox?</string>
-    <string name="software_question">Copy browser shortcuts to C:\\Toolbox?</string>
-    <string name="rotation_question">Copy rotation shortcut to C:\\Toolbox?</string>
-    <string name="autoflash_question">Install boot.img autoflasher script into Windows?</string>
-    <string name="sensors_question">Dump sensors to Windows?</string>
+	<string name="backup_boot_question">Back up current Android boot image?</string>
+	<string name="mount_question">Mount Windows to /sdcard/Windows?</string>
+	<string name="unmount_question">Unmount Windows?</string>
+	<string name="dump_modem_question">Dump modem1st and modem2st to Windows partition?</string>
+	<string name="flash_uefi_question">Flash UEFI? \nIf so, the next boot will be in Windows</string>
+	<string name="quickboot_question">Quickboot to Windows?</string>
+	<string name="sta_question">Create Switch to Android app in C:\\sta?</string>
+	<string name="usbhost_question">Copy USB Host Mode script to C:\\Toolbox?</string>
+	<string name="hibernation_question">Copy hibernation toggler to C:\\Toolbox?</string>
+	<string name="software_question">Copy browser shortcuts to C:\\Toolbox?</string>
+	<string name="rotation_question">Copy rotation shortcut to C:\\Toolbox?</string>
+	<string name="autoflash_question">Install boot.img autoflasher script into Windows?</string>
+	<string name="sensors_question">Dump sensors to Windows?</string>
 	<string name="atlasos_question">Download and move AtlasOS or ReviOS playbook to C:\\Toolbox?</string>
 	<string name="edge_question">Copy Edge remover script to C:\\Toolbox?</string>
 	<string name="defender_question">Copy Defender remover script to C:\\Toolbox?</string>
 
-    <string name="wrong">Something went wrong</string>
-    <string name="ntfs">Something went wrong, \nWindows could not be mounted.\nRequest help in the Telegram chat.</string>
-    <string name="reboot">Reboot</string>
-    <string name="cancel">Cancel</string>
-    <string name="mounted">Windows mounted</string>
-    <string name="unmounted">Windows unmounted</string>
-    <string name="rebootr">Reboot required</string>
-    <string name="lte">Enjoy LTE in Windows</string>
-    <string name="flash">UEFI flashed successfully.\nNext boot will boot into Windows. </string>
-    <string name="backuped">Boot image backed up successfully\n</string>
-    <string name="preferences">Preferences</string>
-    <string name="bwarn">!!WARNING!!\n UFS may be worn down by this, enable only if you receive a lot of OTA updates</string>
-    <string name="agree">Agree</string>
-    <string name="nonroot">Root not detected</string>
-    <string name="unsupported">!!WARNING!!\nDevice unsupported\nUse this app at your own risk</string>
-    <string name="sure">OK, just let me use the app</string>
-    <string name="upanel">Your panel has not been confirmed to work, please share your Windows experience in the Telegram chat</string>
-    <string name="chat">Chat</string>
-    <string name="nah">Nah</string>
-    <string name="later">Later</string>
+	<string name="wrong">Something went wrong</string>
+	<string name="ntfs">Something went wrong, \nWindows could not be mounted.\nRequest help in the Telegram chat.</string>
+	<string name="reboot">Reboot</string>
+	<string name="cancel">Cancel</string>
+	<string name="mounted">Windows mounted</string>
+	<string name="unmounted">Windows unmounted</string>
+	<string name="rebootr">Reboot required</string>
+	<string name="lte">Enjoy LTE in Windows</string>
+	<string name="flash">UEFI flashed successfully.\nNext boot will boot into Windows. </string>
+	<string name="backuped">Boot image backed up successfully\n</string>
+	<string name="preferences">Preferences</string>
+	<string name="bwarn">!!WARNING!!\n UFS may be worn down by this, enable only if you receive a lot of OTA updates</string>
+	<string name="agree">Agree</string>
+	<string name="nonroot">Root not detected</string>
+	<string name="unsupported">!!WARNING!!\nDevice unsupported\nUse this app at your own risk</string>
+	<string name="sure">OK, just let me use the app</string>
+	<string name="upanel">Your panel has not been confirmed to work, please share your Windows experience in the Telegram chat</string>
+	<string name="chat">Chat</string>
+	<string name="nah">Nah</string>
+	<string name="later">Later</string>
 	<string name="done">Done!</string>
-    <string name="mountt">MOUNT</string>
-    <string name="unmountt">UNMOUNT</string>
+	<string name="mountt">MOUNT</string>
+	<string name="unmountt">UNMOUNT</string>
 
-    <string name="last">LAST BACKUP : %s</string>
-    <string name="slot">SLOT : %s</string>
-    <string name="ramvalue">MEMORY : %sGB </string>
-    <string name="paneltype">PANEL : %s</string>
+	<string name="last">LAST BACKUP : %s</string>
+	<string name="slot">SLOT : %s</string>
+	<string name="ramvalue">MEMORY : %sGB </string>
+	<string name="paneltype">PANEL : %s</string>
 
-    <string name="guide">GUIDE</string>
-    <string name="group">GROUP</string>
-    <string name="not_found">Not Found</string>
+	<string name="guide">GUIDE</string>
+	<string name="group">GROUP</string>
+	<string name="not_found">Not Found</string>
 
-    <string name="yes">YES</string>
-    <string name="dismiss">DISMISS</string>
-    <string name="no">NO</string>
-    <string name="please_wait">Please wait...</string>
+	<string name="yes">YES</string>
+	<string name="dismiss">DISMISS</string>
+	<string name="no">NO</string>
+	<string name="please_wait">Please wait...</string>
 
-    <string name="preference1">Force backup boot.img when quickboot (Windows)</string>
-    <string name="preference2">Force backup boot.img when quickboot (Android)</string>
-    <string name="preference3">Back up boot.img if none is detected (Windows)</string>
-    <string name="preference4">Back up boot.img if none is detected (Android)</string>
-    <string name="preference5">Require confirmation for QS quickboot tile</string>
-    <string name="preference6">Select language</string>
-    <string name="preference7">Automatically mount Windows on device start</string>
-    <string name="preference8">Disable modem dump functionality</string>
-    <string name="preference9">Require unlocked screen for quickboot</string>
+	<string name="preference1">Force backup boot.img when quickboot (Windows)</string>
+	<string name="preference2">Force backup boot.img when quickboot (Android)</string>
+	<string name="preference3">Back up boot.img if none is detected (Windows)</string>
+	<string name="preference4">Back up boot.img if none is detected (Android)</string>
+	<string name="preference5">Require confirmation for QS quickboot tile</string>
+	<string name="preference6">Select language</string>
+	<string name="preference7">Automatically mount Windows on device start</string>
+	<string name="preference8">Disable modem dump functionality</string>
+	<string name="preference9">Require unlocked screen for quickboot</string>
 
 
-    <string name="uefiChk" translatable="false">su -c find /mnt/sdcard/UEFI/ -type f  | grep ".img" | head -n 1 </string>
-    <string name="uefiChk1" translatable="false">su -c find /mnt/sdcard/UEFI/ -type f  | grep ".img" | grep "60" | head -n 1 </string>
-    <string name="uefiChk2" translatable="false">su -c find /mnt/sdcard/UEFI/ -type f  | grep ".img" | grep "120" |head -n 1</string>
+	<string name="uefiChk" translatable="false">su -c find /mnt/sdcard/UEFI/ -type f  | grep ".img" | head -n 1 </string>
+	<string name="uefiChk1" translatable="false">su -c find /mnt/sdcard/UEFI/ -type f  | grep ".img" | grep "60" | head -n 1 </string>
+	<string name="uefiChk2" translatable="false">su -c find /mnt/sdcard/UEFI/ -type f  | grep ".img" | grep "120" |head -n 1</string>
 
-    <string name="modem1" translatable="false">su -c dd bs=8M if=/dev/block/by-name/modemst1 of=/mnt/sdcard/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_04af705613ed2d36/bootmodem_fs1 </string>
-    <string name="modem2" translatable="false">su -c dd bs=8M if=/dev/block/by-name/modemst2 of=/mnt/sdcard/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_04af705613ed2d36/bootmodem_fs2 </string>
-    <string name="unmount" translatable="false">su -mm -c umount /mnt/sdcard/Windows </string>
-    <string name="rm" translatable="false">su -c rmdir /mnt/sdcard/Windows</string>
-    <string name="mk" translatable="false">su -c mkdir /mnt/sdcard/Windows || true</string>
-    <string name="mount" translatable="false"> mount -t ntfs %s /mnt/sdcard/Windows</string>
+	<string name="modem1" translatable="false">su -c dd bs=8M if=/dev/block/by-name/modemst1 of=/mnt/sdcard/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_04af705613ed2d36/bootmodem_fs1 </string>
+	<string name="modem2" translatable="false">su -c dd bs=8M if=/dev/block/by-name/modemst2 of=/mnt/sdcard/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_04af705613ed2d36/bootmodem_fs2 </string>
+	<string name="unmount" translatable="false">su -mm -c umount /mnt/sdcard/Windows </string>
+	<string name="rm" translatable="false">su -c rmdir /mnt/sdcard/Windows</string>
+	<string name="mk" translatable="false">su -c mkdir /mnt/sdcard/Windows || true</string>
+	<string name="mount" translatable="false"> mount -t ntfs %s /mnt/sdcard/Windows</string>
 	
 	<string name="unmount2" translatable="false">su -mm -c umount /mnt/Windows </string>
 	<string name="mount2" translatable="false"> mount -t ntfs %s /mnt/Windows</string>
 	<string name="rm2" translatable="false">su -c rmdir /mnt/Windows</string>
-    <string name="mk2" translatable="false">su -c mkdir /mnt/Windows || true</string>
+	<string name="mk2" translatable="false">su -c mkdir /mnt/Windows || true</string>
 
-    <string name="backup" translatable="false">su -c dd bs=8M if=/dev/block/by-name/boot$(getprop ro.boot.slot_suffix) of=/sdcard/boot.img</string>
-    <string name="backup1" translatable="false">su -c dd bs=8M if=/dev/block/by-name/boot$(getprop ro.boot.slot_suffix) of=/sdcard/Windows/boot.img</string>
+	<string name="backup" translatable="false">su -c dd bs=8M if=/dev/block/by-name/boot$(getprop ro.boot.slot_suffix) of=/sdcard/boot.img</string>
+	<string name="backup1" translatable="false">su -c dd bs=8M if=/dev/block/by-name/boot$(getprop ro.boot.slot_suffix) of=/sdcard/Windows/boot.img</string>
 </resources>

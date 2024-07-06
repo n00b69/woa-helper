@@ -1570,6 +1570,7 @@ public class MainActivity extends AppCompatActivity {
 								} else
 									messages.setText(getString(R.string.mounted));		
 							} else {
+								ShellUtils.fastCmd("mkdir /mnt/sdcard/Windows/Toolbox || true ");
 								ShellUtils.fastCmd("mkdir /mnt/sdcard/Windows/Toolbox/Rotation || true ");
 								ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/display.exe /mnt/sdcard/Windows/Toolbox/Rotation");
 								ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/RotationShortcut.lnk /mnt/sdcard/Windows/Toolbox/Rotation");
@@ -1600,7 +1601,7 @@ public class MainActivity extends AppCompatActivity {
 				});
 				dialog.setCancelable(false);
 				dialog.show();
-					}});		
+					}});
 					
 			z.cvEdge.setOnClickListener(new View.OnClickListener() {
 			@Override
