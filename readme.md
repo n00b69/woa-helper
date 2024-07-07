@@ -21,9 +21,10 @@ This project is in late stages of development. Most features have already been a
 - Edge Remover
 - Defender Remover
 - USB host mode toggle
-- display rotation script (for devices without sensors)
-- direct links to AtlasOS and ReviOS
-- etc.```
+- Display rotation script (for devices without sensors)
+- Direct links to AtlasOS and ReviOS
+- Android boot auto flasher (currently not working)
+- etc.
 - [x] Provisioning Modem
 - [x] Quick Boot to Windows
 
@@ -42,18 +43,28 @@ This project is in late stages of development. Most features have already been a
 - [the sog](https://github.com/n00b69) for updating Marius' fork and adding lots of features
 - [Ali](https://github.com/gixousiyq) for helping refine code and for the Arabic translation
 - Aven1us for the Azeri translation
-- Sui2786 & TTK for the Chinese translation
+- [Chiyuki](https://github.com/chiyuki0325), Sui2786 & TTK for the Chinese translation
 - Govrosh150 for the Czech translation
 - YourAvgEngineer for the French translation
-- ArToSeVeN for the Indonesian translation
-- galaxysollector for the Korean translation
+- [ArToSeVeN](https://github.com/Artoseven) for the Indonesian translation
+- [galaxysollector](https://github.com/galaxysollector) for the Korean translation
 - Win Polish for the Polish translation
-- AdrianoA3 for the Portuguese translation
+- [AdrianoA3](https://github.com/AdrianoA3) for the Portuguese translation
 - JadeKubPom for the Thai translation
-- sercancamli & ErdilS for the Turkish translation
-- Ost268 for the Ukrainian translation
+- sercancamli & [ErdilS](https://github.com/erdilS) for the Turkish translation
+- [Ost268](https://github.com/Ost268) for the Ukrainian translation
 - HieusayHi for the Vietnamese translation
-- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
