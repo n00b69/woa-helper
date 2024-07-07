@@ -51,7 +51,7 @@ This project is in late stages of development. Most features have already been a
 - Win Polish for the Polish translation
 - [AdrianoA3](https://github.com/AdrianoA3) for the Portuguese translation
 - JadeKubPom for the Thai translation
-- sercancamli & [ErdilS](https://github.com/erdilS) for the Turkish translation
+- sercancamli & [ErdilS](https://github.com/erdilS) & [Kaan Dikeç](https://github.com/dikeckaan) for the Turkish translation
 - [Ost268](https://github.com/Ost268) for the Ukrainian translation
 - HieusayHi for the Vietnamese translation
 

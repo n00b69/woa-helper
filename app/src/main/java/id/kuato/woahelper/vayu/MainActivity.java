@@ -578,6 +578,14 @@ public class MainActivity extends AppCompatActivity {
 					n.cvDumpModem.setVisibility(View.GONE);
 					break;
 				}
+				case "a52sxq":{
+					guidelink = "https://github.com/arminask/Port-Windows-11-Galaxy-A52s-5G";
+					grouplink = "https://t.me/a52sxq_uefi";
+					Drawable a52sxq = ResourcesCompat.getDrawable(getResources(), R.drawable.a52sxq, null);
+					x.VayuImage.setImageDrawable(a52sxq);
+					n.cvDumpModem.setVisibility(View.GONE);
+					break;
+				}
 				case "judyln":
 				case "judyp":
 				case "judypn":{
@@ -2174,7 +2182,7 @@ public class MainActivity extends AppCompatActivity {
 			dialog.show();
 			dialog.setCancelable(false);
 		}
-		String [] supported={"alphalm_lao_com","alphaplus_lao_com","alioth","alphalm","alphaplus","andromeda","betalm","betaplus_lao_com","betalm_lao_com","beryllium","bhima","cepheus","cheeseburger","curtana2","chiron","curtana","curtana_india","cmi","davinci","dumpling","dipper","durandal","durandal_india","enchilada","equuleus","excalibur","excalibur_india","flashlmdd","flashlmdd_lao_com","fajita","houji","joan","judyln","judyp","judypn","guacamole","guacamoleb","gram","hotdog","hotdogb","hotdogg","lisa","marble","mh2lm","mh2plus_lao_com","mh2lm_lao_com","mh2lm5g","mh2lm5g_lao_com","miatoll","nabu","pipa","OnePlus6","OnePlus6T","OnePlus7","OnePlus7Pro","OnePlus7Pro4G","OnePlus7T","OnePlus7TPro","OnePlus7TPro4G","OnePlus7TPro5G","perseus","polaris","Pong","pong","q2q","raphael","raphaelin","raphaels","RMX2170","RMX2061","sagit","surya","vayu","venus","winner","xpeng","G973F","SM-G973F","beyond1lte","beyond1qlte","G973U","G973U1","SM-G973U","SM-G973U1","G9730","SM-G9730","G973N","SM-G973N","G973X","SM-G973X","G973C","SM-G973C","SCV41","SM-SC41","beyond1"};
+		String [] supported={"a52sxq","alphalm_lao_com","alphaplus_lao_com","alioth","alphalm","alphaplus","andromeda","betalm","betaplus_lao_com","betalm_lao_com","beryllium","bhima","cepheus","cheeseburger","curtana2","chiron","curtana","curtana_india","cmi","davinci","dumpling","dipper","durandal","durandal_india","enchilada","equuleus","excalibur","excalibur_india","flashlmdd","flashlmdd_lao_com","fajita","houji","joan","judyln","judyp","judypn","guacamole","guacamoleb","gram","hotdog","hotdogb","hotdogg","lisa","marble","mh2lm","mh2plus_lao_com","mh2lm_lao_com","mh2lm5g","mh2lm5g_lao_com","miatoll","nabu","pipa","OnePlus6","OnePlus6T","OnePlus7","OnePlus7Pro","OnePlus7Pro4G","OnePlus7T","OnePlus7TPro","OnePlus7TPro4G","OnePlus7TPro5G","perseus","polaris","Pong","pong","q2q","raphael","raphaelin","raphaels","RMX2170","RMX2061","sagit","surya","vayu","venus","winner","xpeng","G973F","SM-G973F","beyond1lte","beyond1qlte","G973U","G973U1","SM-G973U","SM-G973U1","G9730","SM-G9730","G973N","SM-G973N","G973X","SM-G973X","G973C","SM-G973C","SCV41","SM-SC41","beyond1"};
 		device = ShellUtils.fastCmd("getprop ro.product.device ");
 		model=ShellUtils.fastCmd("getprop ro.product.model");
 		if (!Arrays.asList(supported).contains(device)) {
