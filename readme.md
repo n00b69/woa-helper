@@ -23,7 +23,7 @@ This project is in late stages of development. Most features have already been a
 - USB host mode toggle
 - display rotation script (for devices without sensors)
 - direct links to AtlasOS and ReviOS
-- etc.```
+- etc.
 - [x] Provisioning Modem
 - [x] Quick Boot to Windows
 
