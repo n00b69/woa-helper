@@ -98,9 +98,9 @@
 	<string name="preference2">在快速启动时总是备份 boot.img (Android)</string>
 	<string name="preference3">当没有被检测到则备份 boot.img (Windows)</string>
 	<string name="preference4">当没有被检测到则备份 boot.img (Android)</string>
-	<string name="preference5">需要为 QS 快速启动磁贴确认</string>
+	<string name="preference5">从操作中心快速启动到 Windows 时需要确认</string>
 	<string name="preference6">选择语言</string>
 	<string name="preference7">在装置启动时自动安装 Windows</string>
 	<string name="preference8">禁用自动提取基带功能</string>
-	<string name="preference9">Require unlocked screen for quickboot</string>
+	<string name="preference9">从操作中心快速启动到 Windows 需要先解锁屏幕</string>
 </resources>
