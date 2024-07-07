@@ -443,7 +443,7 @@ public class MainActivity extends AppCompatActivity {
 					break;
 				}
 				case "lisa":{
-					guidelink = "https://renegade-project.tech/";
+					guidelink = "https://github.com/ETCHDEV/Port-Windows-11-Xiaomi-11-Lite-NE";
 					grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA";
 					Drawable lisa = ResourcesCompat.getDrawable(getResources(), R.drawable.lisa, null);
 					x.VayuImage.setImageDrawable(lisa);
@@ -461,7 +461,7 @@ public class MainActivity extends AppCompatActivity {
 				case "gram":
 				case "joyeuse":
 				case "miatoll":{
-					guidelink = "https://github.com/Rubanoxd/Port-Windows-11-redmi-note-9_pro";
+					guidelink = "https://github.com/woa-miatoll/Port-Windows-11-Redmi-Note-9-Pro";
 					grouplink = "http://t.me/woamiatoll";
 					Drawable miatoll = ResourcesCompat.getDrawable(getResources(), R.drawable.miatoll, null);
 					x.VayuImage.setImageDrawable(miatoll);
@@ -608,7 +608,7 @@ public class MainActivity extends AppCompatActivity {
 				case "OnePlus7T":
 				case "OnePlus7":{
 					guidelink = "https://woa-msmnile.github.io/";
-					grouplink = "https://t.me/woa_msmnile_issues";
+					grouplink = "https://t.me/onepluswoachat";
 					Drawable unknown = ResourcesCompat.getDrawable(getResources(), R.drawable.unknown, null);
 					x.VayuImage.setImageDrawable(unknown);
 					break;
@@ -617,14 +617,14 @@ public class MainActivity extends AppCompatActivity {
 				case "OnePlus7TPro":
 				case "OnePlus7TPro4G":{
 					guidelink = "https://woa-msmnile.github.io/";
-					grouplink = "https://t.me/woa_msmnile_issues";
+					grouplink = "https://t.me/onepluswoachat";
 					Drawable hotdog = ResourcesCompat.getDrawable(getResources(), R.drawable.hotdog, null);
 					x.VayuImage.setImageDrawable(hotdog);
 					break;
 				}
 				case "OnePlus7TPro5G":{
 					guidelink = "https://woa-msmnile.github.io/";
-					grouplink = "https://t.me/woa_msmnile_issues";
+					grouplink = "https://t.me/onepluswoachat";
 					Drawable hotdog = ResourcesCompat.getDrawable(getResources(), R.drawable.hotdog, null);
 					x.VayuImage.setImageDrawable(hotdog);
 					n.cvDumpModem.setVisibility(View.GONE);
@@ -635,7 +635,7 @@ public class MainActivity extends AppCompatActivity {
 				case "hotdogg":
 				case "OnePlus7Pro4G":{
 					guidelink = "https://woa-msmnile.github.io/";
-					grouplink = "https://t.me/woa_msmnile_issues";
+					grouplink = "https://t.me/onepluswoachat";
 					Drawable guacamole = ResourcesCompat.getDrawable(getResources(), R.drawable.guacamole, null);
 					x.VayuImage.setImageDrawable(guacamole);
 					break;
