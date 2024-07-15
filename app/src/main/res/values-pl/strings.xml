@@ -13,7 +13,7 @@
 	<string name="software_title">OPROGRAMOWANIE ARM</string>
 	<string name="rotation_title">PRZEŁĄCZNIK OBROTU</string>
 	<string name="autoflash_title">AUTOMATYCZNY FLASHER ANDROIDA</string>
-	<string name="sensors_title">DUMP CZUJNIKÓW </string>
+	<string name="sensors_title">ZRZUCANIE CZUJNIKÓW </string>
 	<string name="atlasos_title">COPY ATLASOS / REVIOS FILES</string>
 	<string name="edge_title">EDGE REMOVER</string>
 	<string name="defender_title">DEFENDER REMOVER</string>
@@ -34,9 +34,9 @@
 	<string name="rotation_subtitle">Dodaje skrypt do C:\Toolbox, który pozwala na obracanie ekranu za pomocą skrótun\(przydatne dla urządzeń bez działających czujników)</string>
 	<string name="autoflash_subtitle">Dodaje skrypt do systemu Windows, który automatycznie flashuje plik boot.img systemu Android przy każdym uruchomieniu systemu Windows</string>
 	<string name="sensors_subtitle">Jest to potrzebne tylko raz na NIEKTÓRYCH urządzeniach, aby czujniki działały w systemie Windows</string>
-	<string name="atlasos_subtitle">Copies the AtlasOS or ReviOS playbook and AME Wizard to C:\\Toolbox</string>
-	<string name="edge_subtitle">Adds a script to C:\\Toolbox which allows you to remove Microsoft Edge</string>
-	<string name="defender_subtitle">Adds a script to C:\\Toolbox which allows you to remove Windows Defender</string>
+	<string name="atlasos_subtitle">Kopiuje playbook AtlasOS lub ReviOS i kreatora AME do C:\\Toolbox</string>
+	<string name="edge_subtitle">Dodaje skrypt do C:\\Toolbox, który pozwala usunąć Microsoft Edge</string>
+	<string name="defender_subtitle">Dodaje skrypt do C:\\Toolbox, który pozwala usunąć Windows Defender</string>
 	<string name="script_subtitle">Adds an assortment of scripts and tweaks to C:\\Toolbox</string>
 	
 	<string name="backup_boot_question">Zapisać aktualny obraz rozruchu systemu Android?</string>
@@ -51,13 +51,13 @@
 	<string name="software_question">Skopiować skróty przeglądarki do C:\\Toolbox?</string>
 	<string name="rotation_question">Skopiować skrót do obracania do C:\\Toolbox?</string>
 	<string name="autoflash_question">Zainstalować skrypt autoflashera boot.img w systemie Windows?</string>
-	<string name="sensors_question">Dump czujniki do systemu Windows?</string>
-	<string name="atlasos_question">Download and move AtlasOS or ReviOS playbook to C:\\Toolbox?</string>
+	<string name="sensors_question">Zrzucić czujniki do systemu Windows?</string>
+	<string name="atlasos_question">Pobrać i przenieść playbook AtlasOS lub ReviOS do C:\\Toolbox?</string>
 	<string name="edge_question">Copy Edge remover script to C:\\Toolbox?</string>
 	<string name="defender_question">Copy Defender remover script to C:\\Toolbox?</string>
 	
 	<string name="wrong">Coś poszło nie tak</string>
-	<string name="ntfs">Coś poszło nie tak, \nWindows nie mogło zostać zamontowane.\nPoproś o pomoc w czacie Telegram.</string>
+	<string name="ntfs">Coś poszło nie tak, \nWindows nie mogł zostać zamontowany.\nPoproś o pomoc w czacie Telegram.</string>
 	<string name="reboot">Uruchom ponownie</string>
 	<string name="cancel">Anuluj</string>
 	<string name="mounted">Windows zamontowane</string>
@@ -101,6 +101,6 @@
 	<string name="preference5">Wymagaj potwierdzenia dla kafelka szybkiego uruchamiania QS</string>
 	<string name="preference6">Wybierz język</string>
 	<string name="preference7">Automatyczne montowanie Windows przy starcie urządzenia</string>
-	<string name="preference8">Wyłącz modem znikł funkcja</string>
+	<string name="preference8">Wyłącz funkcję zrzutu modemu</string>
 	<string name="preference9">Require unlocked screen for quickboot</string>
 </resources>
