@@ -13,11 +13,11 @@
 	<string name="software_title">PHẦN MỀM ARM</string>
 	<string name="rotation_title">CHUYỂN ĐỔI QUAY</string>
 	<string name="autoflash_title">FLASH ANDROID TỰ ĐỘNG</string>
-	<string name="sensors_title">DUMP SENSORS</string>
-	<string name="atlasos_title">COPY ATLASOS / REVIOS FILES</string>
-	<string name="edge_title">EDGE REMOVER</string>
-	<string name="defender_title">DEFENDER REMOVER</string>
-	<string name="script_title">SCRIPT TOOLBOX</string>
+	<string name="sensors_title">16 NÉM CẢM BIẾN VÀO</string>
+	<string name="atlasos_title">SAO CHÉP ATLASOS/ REVISOS FILE</string>
+	<string name="edge_title">XÓA EDGE</string>
+	<string name="defender_title">XÓA DIỆT VIRUS CỦA WIN</string>
+	<string name="script_title">HỘP CÔNG CỤ SCRIPS</string>
 
 	<string name="backup_boot_subtitle">Sao lưu boot.img vào Android và/hoặc Windows</string>
 	<string name="mnt_subtitle">Chuyển đổi gắn phân vùng Windows để xem hoặc chỉnh sửa nội dung bên trong</string>
@@ -33,11 +33,11 @@
 	<string name="software_subtitle">Thêm lối tắt trình duyệt chứa phần mềm ARM vào C:\\Toolbox</string>
 	<string name="rotation_subtitle">Thêm tập lệnh vào C:\\Toolbox cho phép bạn xoay màn hình bằng phím tắt\n(hữu ích cho các thiết bị không có cảm biến hoạt động)</string>
 	<string name="autoflash_subtitle">Thêm tập lệnh vào Windows để tự động flash boot.img Android bất cứ khi nào Windows khởi động</string>
-	<string name="sensors_subtitle">This is only needed once on SOME devices to make sensors work in Windows</string>
-	<string name="atlasos_subtitle">Copies the AtlasOS or ReviOS playbook and AME Wizard to C:\\Toolbox</string>
-	<string name="edge_subtitle">Adds a script to C:\\Toolbox which allows you to remove Microsoft Edge</string>
-	<string name="defender_subtitle">Adds a script to C:\\Toolbox which allows you to remove Windows Defender</string>
-	<string name="script_subtitle">Adds an assortment of scripts and tweaks to C:\\Toolbox</string>
+	<string name="sensors_subtitle">Cái này chỉ cần 1 lần cho 1 số thiết bị nhất định để các cảm biến hoạt động </string>
+	<string name="atlasos_subtitle">Sao chép AtlasOS hoặc ReviOS playbook và Trình hướng dẫn AME vào C:\\Toolbox</string>
+	<string name="edge_subtitle">Thêm tập lệnh vào C:\\Toolbox cho phép bạn xóa Microsoft Edge</string>
+	<string name="defender_subtitle">Thêm tập lệnh vào C:\\Toolbox cho phép bạn xóa Windows Defender</string>
+	<string name="script_subtitle">Thêm nhiều loại tập lệnh và tweaks vào C:\\Toolbox</string>
 	
 	<string name="backup_boot_question">Có muốn sao lưu boot.img chứa?</string>
 	<string name="mount_question">Hiện file Windows vào /sdcard/Windows?</string>
@@ -52,9 +52,9 @@
 	<string name="rotation_question">Sao chép phím tắt xoay sang C:\\Toolbox?</string>
 	<string name="autoflash_question">Cài đặt tập lệnh tự động cài boot.img vào Windows?</string>
 	<string name="sensors_question">Ném cảm biến vào Windows?</string>
-	<string name="atlasos_question">Download and move AtlasOS or ReviOS playbook to C:\\Toolbox?</string>
-	<string name="edge_question">Copy Edge remover script to C:\\Toolbox?</string>
-	<string name="defender_question">Copy Defender remover script to C:\\Toolbox?</string>
+	<string name="atlasos_question">Tải xuống và di chuyển AtlasOS hoặc ReviOS playbook sang C:\\Toolbox?</string>
+	<string name="edge_question">Sao chép tập lệnh xóa Edge vào C:\\Toolbox?</string>
+	<string name="defender_question">Sao chép tập lệnh gỡ bỏ Defender vào C:\\Toolbox?</string>
 	
 	<string name="wrong">Lỗi ở đâu ý</string>
 	<string name="ntfs">Lỗi rồi, \nWindows không hiện file được.\nYêu cầu được trợ giúp trên Telegram.</string>
@@ -76,7 +76,7 @@
 	<string name="chat">Nhắn tin</string>
 	<string name="nah">KHÔNG</string>
 	<string name="later">SAU</string>
-	<string name="done">Done!</string>
+	<string name="done">XONG!</string>
 	<string name="mountt">HIỆN</string>
 	<string name="unmountt">KHÔNG HIỆN</string>
 	
@@ -102,5 +102,5 @@
 	<string name="preference6">Select language</string>
 	<string name="preference7">Tự động gắn Windows khi khởi động thiết bị</string>
 	<string name="preference8">Tắt chức năng kết xuất modem</string>
-	<string name="preference9">Require unlocked screen for quickboot</string>
+	<string name="preference9">Yêu cầu màn hình mở khóa để khởi động nhanh</string>
 </resources>
