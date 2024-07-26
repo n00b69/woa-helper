@@ -14,10 +14,10 @@ public class pref {
 	public static final String autobackup_A="woa autobackup android";
 	public static final String confirmation="woa quickboot confirmation";
 	public static final String autoMount="woa auto mount preference";
-
 	public static final String secure ="woa secure tile";
 	public static final String busybox="woa busybox location";
 	public static final String locale="woa active language locale";
+	public static final String version="woa last app version";
 
 	public static SharedPreferences getSharedPreference(Context context) {
 		return PreferenceManager.getDefaultSharedPreferences(context);
@@ -139,6 +139,14 @@ public class pref {
 		return getSharedPreference(context).getBoolean(secure,false);
 	}
 
-	
+	public static void setVersion(Context context, String value) {
+		SharedPreferences.Editor editor = getSharedPreference(context).edit();
+		editor.putString(version,value);
+		editor.apply();
+	}
+
+	public static String getVersion(Context context) {
+		return getSharedPreference(context).getString(version,"");
+	}
 }
 

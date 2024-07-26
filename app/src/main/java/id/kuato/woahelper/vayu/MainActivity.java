@@ -73,20 +73,18 @@ public class MainActivity extends AppCompatActivity {
 	double ramvalue;
 	String panel;
 	String mounted;
-	String dumpeddevices;
 	String finduefi;
 	String finduefi1;
-	String finduefi2;
 	String device;
 	String model;
 	public boolean backable;
 	String win;
 	boolean dual;
-	public int pressCount;
-	String vayugroup,nabugroup,cepheusgroup,raphaelgroup,mh2lmgroup,grouplink = "https://t.me/winonvayualt";
-	String vayuguide,nabuguide,cepheusguide,raphaelguide,mh2lmguide,guidelink = "https://github.com/woa-vayu/Port-Windows-11-Poco-X3-pro";
+	String grouplink = "https://t.me/winonvayualt";
+	String guidelink = "https://github.com/woa-vayu/Port-Windows-11-Poco-X3-pro";
 	String currentVersion = BuildConfig.VERSION_NAME;
 	private void copyAssets() {
+		ShellUtils.fastCmd(String.format("rm %s/*",getFilesDir()));
 		AssetManager assetManager = getAssets();
 		String[] files = null;
 		try {
@@ -114,6 +112,8 @@ public class MainActivity extends AppCompatActivity {
 			} catch (IOException ignored) {
 			}
 		}
+		ShellUtils.fastCmd("chmod 777 "+getFilesDir()+"/busybox");
+		pref.setbusybox(this,getFilesDir()+"/busybox ");
 	}
 
 	private void copyFile(InputStream in, OutputStream out) throws IOException {
@@ -143,56 +143,21 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
-		if(ShellUtils.fastCmd(String.format("ls %s |grep busybox", getFilesDir())).isEmpty()){
+		if(!Objects.equals(currentVersion, pref.getVersion(this))) {
 			copyAssets();
-			ShellUtils.fastCmd("chmod 777 "+getFilesDir()+"/busybox");
-			pref.setbusybox(this,getFilesDir()+"/busybox ");
+			pref.setVersion(this,currentVersion);
 		}
-		
-		if(ShellUtils.fastCmd(String.format("ls %s |grep stac.exe", getFilesDir())).isEmpty()){
-			copyAssets();
+		else {
+			String[] files = {"busybox","sta.exe", "Switch to Android.lnk", "usbhostmode.exe", "ARMSoftware.url", "TestedSoftware.url", "WorksOnWoa.url", "RotationShortcut.lnk", "display.exe", "RemoveEdge.ps1", "autoflasher.lnk", "DefenderRemover.exe"};
+			int i = 0;
+			while (!files[i].isEmpty()) {
+				if (ShellUtils.fastCmd(String.format(String.format("ls %s |grep %s", getFilesDir())), files[i]).isEmpty()) {
+					copyAssets();
+					break;
+				}
+				i++;
+			}
 		}
-		
-		if(ShellUtils.fastCmd(String.format("ls %s |grep \'Switch to Android.lnk\'", getFilesDir())).isEmpty()){
-			copyAssets();
-		}
-		
-		if(ShellUtils.fastCmd(String.format("ls %s |grep usbhostmode.exe", getFilesDir())).isEmpty()){
-			copyAssets();
-		}
-		
-		if(ShellUtils.fastCmd(String.format("ls %s |grep ARMSoftware.url", getFilesDir())).isEmpty()){
-			copyAssets();
-		}
-		
-		if(ShellUtils.fastCmd(String.format("ls %s |grep TestedSoftware.url", getFilesDir())).isEmpty()){
-			copyAssets();
-		}
-		
-		if(ShellUtils.fastCmd(String.format("ls %s |grep WorksOnWoa.url", getFilesDir())).isEmpty()){
-			copyAssets();
-		}
-		
-		if(ShellUtils.fastCmd(String.format("ls %s |grep RotationShortcut.lnk", getFilesDir())).isEmpty()){
-			copyAssets();
-		}
-		
-		if(ShellUtils.fastCmd(String.format("ls %s |grep display.exe", getFilesDir())).isEmpty()){
-			copyAssets();
-		}
-		
-		if(ShellUtils.fastCmd(String.format("ls %s |grep RemoveEdge.ps1", getFilesDir())).isEmpty()){
-			copyAssets();
-		}
-		
-		if(ShellUtils.fastCmd(String.format("ls %s |grep autoflasher.lnk", getFilesDir())).isEmpty()){
-			copyAssets();
-		}
-		
-		if(ShellUtils.fastCmd(String.format("ls %s |grep DefenderRemover.exe", getFilesDir())).isEmpty()){
-			copyAssets();
-		}
-
 		//createNotificationChannel();
 		super.onCreate(savedInstanceState);
 		final Dialog dialog = new Dialog(MainActivity.this);
@@ -732,7 +697,6 @@ public class MainActivity extends AppCompatActivity {
 		}
 		x.tvRamvalue.setText(String.format(getString(R.string.ramvalue), ramvalue));
 		x.tvPanel.setText(String.format(getString(R.string.paneltype), panel));
-		getString(R.string.dismiss);
 		x.cvGuide.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -1027,41 +991,37 @@ public class MainActivity extends AppCompatActivity {
 							mount();
 							String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + win);
 							ShellUtils.fastCmd("su -c \'if [ -e /dev/block/by-name/boot_a ] && [ -e /dev/block/by-name/boot_b ]; then boot_a=$(basename $(readlink -f /dev/block/by-name/boot_a)); boot_b=$(basename $(readlink -f /dev/block/by-name/boot_b)); printf \"%s\n%s\n%s\n%s\n\" \"$boot_a\" \"C:\\boot.img\" \"$boot_b\" \"C:\\boot.img\" > /sdcard/sta.conf; else boot=$(basename $(readlink -f /dev/block/by-name/boot)); printf \"%s\n%s\n\" \"$boot\" \"C:\\boot.img\" > /sdcard/sta.conf; fi\'");
-							ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/stac.exe /sdcard/sta.exe");
+							ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/sta.exe /sdcard/sta.exe");
 							if (mnt_stat.isEmpty()) {
-								messages.setText(getString(R.string.ntfs));
-									if (mnt_stat.isEmpty()) {
-										noButton.setVisibility(View.GONE);
-										yesButton.setText(getString(R.string.chat));
-										dismissButton.setText(getString(R.string.cancel));
-										yesButton.setVisibility(View.VISIBLE);
-										dismissButton.setVisibility(View.VISIBLE);
-										icons.setImageDrawable(download);
-										ShowBlur();
-										messages.setText(getString(R.string.ntfs));
-										dismissButton.setOnClickListener(new View.OnClickListener() {
-											@Override
-											public void onClick(View v) {
-												HideBlur();
-												dialog.dismiss();
-											}
-										});
-										yesButton.setOnClickListener(new View.OnClickListener() {
-											@Override
-											public void onClick(View v) {
-												Intent i = new Intent(Intent.ACTION_VIEW);
-												i.setData(Uri.parse("https://t.me/woahelperchat"));
-												startActivity(i);
-																}
-														});
-									dialog.setCancelable(false);
-									dialog.show();
-								} else
-									messages.setText(getString(R.string.mounted));		
-							} else {
+                                noButton.setVisibility(View.GONE);
+                                yesButton.setText(getString(R.string.chat));
+                                dismissButton.setText(getString(R.string.cancel));
+                                yesButton.setVisibility(View.VISIBLE);
+                                dismissButton.setVisibility(View.VISIBLE);
+                                icons.setImageDrawable(download);
+                                ShowBlur();
+                                messages.setText(getString(R.string.ntfs));
+                                dismissButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        HideBlur();
+                                        dialog.dismiss();
+                                    }
+                                });
+                                yesButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent i = new Intent(Intent.ACTION_VIEW);
+                                        i.setData(Uri.parse("https://t.me/woahelperchat"));
+                                        startActivity(i);
+                                                        }
+                                                });
+                                dialog.setCancelable(false);
+                                dialog.show();
+                            } else {
 								ShellUtils.fastCmd("mkdir /mnt/sdcard/Windows/sta || true ");
 								ShellUtils.fastCmd("cp /sdcard/sta.conf /mnt/sdcard/Windows/sta");
-								ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/stac.exe /mnt/sdcard/Windows/sta/sta.exe");
+								ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/ /mnt/sdcard/Windows/sta/sta.exe");
 								ShellUtils.fastCmd("cp \'/data/user/0/id.kuato.woahelper/files/Switch to Android.lnk\' /mnt/sdcard/Windows/Users/Default/Desktop");
 								messages.setText(getString(R.string.done));
 								dismissButton.setText(getString(R.string.dismiss));
@@ -1122,36 +1082,32 @@ public class MainActivity extends AppCompatActivity {
 							mount();
 							String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + win);
 							if (mnt_stat.isEmpty()) {
-								messages.setText(getString(R.string.ntfs));
-									if (mnt_stat.isEmpty()) {
-										noButton.setVisibility(View.GONE);
-										yesButton.setText(getString(R.string.chat));
-										dismissButton.setText(getString(R.string.cancel));
-										yesButton.setVisibility(View.VISIBLE);
-										dismissButton.setVisibility(View.VISIBLE);
-										icons.setImageDrawable(download);
-										ShowBlur();
-										messages.setText(getString(R.string.ntfs));
-										dismissButton.setOnClickListener(new View.OnClickListener() {
-											@Override
-											public void onClick(View v) {
-												HideBlur();
-												dialog.dismiss();
-											}
-										});
-										yesButton.setOnClickListener(new View.OnClickListener() {
-											@Override
-											public void onClick(View v) {
-												Intent i = new Intent(Intent.ACTION_VIEW);
-												i.setData(Uri.parse("https://t.me/woahelperchat"));
-												startActivity(i);
-																}
-														});
-									dialog.setCancelable(false);
-									dialog.show();
-								} else
-									messages.setText(getString(R.string.mounted));		
-							} else {
+                                noButton.setVisibility(View.GONE);
+                                yesButton.setText(getString(R.string.chat));
+                                dismissButton.setText(getString(R.string.cancel));
+                                yesButton.setVisibility(View.VISIBLE);
+                                dismissButton.setVisibility(View.VISIBLE);
+                                icons.setImageDrawable(download);
+                                ShowBlur();
+                                messages.setText(getString(R.string.ntfs));
+                                dismissButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        HideBlur();
+                                        dialog.dismiss();
+                                    }
+                                });
+                                yesButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent i = new Intent(Intent.ACTION_VIEW);
+                                        i.setData(Uri.parse("https://t.me/woahelperchat"));
+                                        startActivity(i);
+                                                        }
+                                                });
+                                dialog.setCancelable(false);
+                                dialog.show();
+                            } else {
 								ShellUtils.fastCmd("mkdir /mnt/sdcard/Windows/Toolbox || true ");
 								ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://github.com/n00b69/modified-playbooks/releases/download/ReviOS/Revi-PB-24.06.apbx -O /mnt/sdcard/Windows/Toolbox/Revi-PB-24.06.apbx ");
 								ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://download.ameliorated.io/AME%20Wizard%20Beta.zip -O /mnt/sdcard/Windows/Toolbox/AMEWizardBeta.zip");
@@ -1190,36 +1146,32 @@ public class MainActivity extends AppCompatActivity {
 							mount();
 							String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + win);
 							if (mnt_stat.isEmpty()) {
-								messages.setText(getString(R.string.ntfs));
-									if (mnt_stat.isEmpty()) {
-										noButton.setVisibility(View.GONE);
-										yesButton.setText(getString(R.string.chat));
-										dismissButton.setText(getString(R.string.cancel));
-										yesButton.setVisibility(View.VISIBLE);
-										dismissButton.setVisibility(View.VISIBLE);
-										icons.setImageDrawable(download);
-										ShowBlur();
-										messages.setText(getString(R.string.ntfs));
-										dismissButton.setOnClickListener(new View.OnClickListener() {
-											@Override
-											public void onClick(View v) {
-												HideBlur();
-												dialog.dismiss();
-											}
-										});
-										yesButton.setOnClickListener(new View.OnClickListener() {
-											@Override
-											public void onClick(View v) {
-												Intent i = new Intent(Intent.ACTION_VIEW);
-												i.setData(Uri.parse("https://t.me/woahelperchat"));
-												startActivity(i);
-																}
-														});
-									dialog.setCancelable(false);
-									dialog.show();
-								} else
-									messages.setText(getString(R.string.mounted));		
-							} else {
+                                noButton.setVisibility(View.GONE);
+                                yesButton.setText(getString(R.string.chat));
+                                dismissButton.setText(getString(R.string.cancel));
+                                yesButton.setVisibility(View.VISIBLE);
+                                dismissButton.setVisibility(View.VISIBLE);
+                                icons.setImageDrawable(download);
+                                ShowBlur();
+                                messages.setText(getString(R.string.ntfs));
+                                dismissButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        HideBlur();
+                                        dialog.dismiss();
+                                    }
+                                });
+                                yesButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent i = new Intent(Intent.ACTION_VIEW);
+                                        i.setData(Uri.parse("https://t.me/woahelperchat"));
+                                        startActivity(i);
+                                                        }
+                                                });
+                                dialog.setCancelable(false);
+                                dialog.show();
+                            } else {
 								ShellUtils.fastCmd("mkdir /mnt/sdcard/Windows/Toolbox || true ");
 								ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook_v0.4.0.apbx -O /mnt/sdcard/Windows/Toolbox/AtlasPlaybook_v0.4.0.apbx");
 								ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://download.ameliorated.io/AME%20Wizard%20Beta.zip -O /mnt/sdcard/Windows/Toolbox/AMEWizardBeta.zip");
@@ -1280,36 +1232,32 @@ public class MainActivity extends AppCompatActivity {
 							mount();
 							String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + win);
 							if (mnt_stat.isEmpty()) {
-								messages.setText(getString(R.string.ntfs));
-									if (mnt_stat.isEmpty()) {
-										noButton.setVisibility(View.GONE);
-										yesButton.setText(getString(R.string.chat));
-										dismissButton.setText(getString(R.string.cancel));
-										yesButton.setVisibility(View.VISIBLE);
-										dismissButton.setVisibility(View.VISIBLE);
-										icons.setImageDrawable(download);
-										ShowBlur();
-										messages.setText(getString(R.string.ntfs));
-										dismissButton.setOnClickListener(new View.OnClickListener() {
-											@Override
-											public void onClick(View v) {
-												HideBlur();
-												dialog.dismiss();
-											}
-										});
-										yesButton.setOnClickListener(new View.OnClickListener() {
-											@Override
-											public void onClick(View v) {
-												Intent i = new Intent(Intent.ACTION_VIEW);
-												i.setData(Uri.parse("https://t.me/woahelperchat"));
-												startActivity(i);
-																}
-														});
-									dialog.setCancelable(false);
-									dialog.show();
-								} else
-									messages.setText(getString(R.string.mounted));		
-							} else {
+                                noButton.setVisibility(View.GONE);
+                                yesButton.setText(getString(R.string.chat));
+                                dismissButton.setText(getString(R.string.cancel));
+                                yesButton.setVisibility(View.VISIBLE);
+                                dismissButton.setVisibility(View.VISIBLE);
+                                icons.setImageDrawable(download);
+                                ShowBlur();
+                                messages.setText(getString(R.string.ntfs));
+                                dismissButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        HideBlur();
+                                        dialog.dismiss();
+                                    }
+                                });
+                                yesButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent i = new Intent(Intent.ACTION_VIEW);
+                                        i.setData(Uri.parse("https://t.me/woahelperchat"));
+                                        startActivity(i);
+                                                        }
+                                                });
+                                dialog.setCancelable(false);
+                                dialog.show();
+                            } else {
 								ShellUtils.fastCmd("mkdir /mnt/sdcard/Windows/Toolbox || true ");
 								ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/usbhostmode.exe /mnt/sdcard/Windows/Toolbox");
 								messages.setText(getString(R.string.done));
@@ -1369,36 +1317,32 @@ public class MainActivity extends AppCompatActivity {
 							mount();
 							String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + win);
 							if (mnt_stat.isEmpty()) {
-								messages.setText(getString(R.string.ntfs));
-									if (mnt_stat.isEmpty()) {
-										noButton.setVisibility(View.GONE);
-										yesButton.setText(getString(R.string.chat));
-										dismissButton.setText(getString(R.string.cancel));
-										yesButton.setVisibility(View.VISIBLE);
-										dismissButton.setVisibility(View.VISIBLE);
-										icons.setImageDrawable(download);
-										ShowBlur();
-										messages.setText(getString(R.string.ntfs));
-										dismissButton.setOnClickListener(new View.OnClickListener() {
-											@Override
-											public void onClick(View v) {
-												HideBlur();
-												dialog.dismiss();
-											}
-										});
-										yesButton.setOnClickListener(new View.OnClickListener() {
-											@Override
-											public void onClick(View v) {
-												Intent i = new Intent(Intent.ACTION_VIEW);
-												i.setData(Uri.parse("https://t.me/woahelperchat"));
-												startActivity(i);
-																}
-														});
-									dialog.setCancelable(false);
-									dialog.show();
-								} else
-									messages.setText(getString(R.string.mounted));		
-							} else {
+                                noButton.setVisibility(View.GONE);
+                                yesButton.setText(getString(R.string.chat));
+                                dismissButton.setText(getString(R.string.cancel));
+                                yesButton.setVisibility(View.VISIBLE);
+                                dismissButton.setVisibility(View.VISIBLE);
+                                icons.setImageDrawable(download);
+                                ShowBlur();
+                                messages.setText(getString(R.string.ntfs));
+                                dismissButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        HideBlur();
+                                        dialog.dismiss();
+                                    }
+                                });
+                                yesButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent i = new Intent(Intent.ACTION_VIEW);
+                                        i.setData(Uri.parse("https://t.me/woahelperchat"));
+                                        startActivity(i);
+                                                        }
+                                                });
+                                dialog.setCancelable(false);
+                                dialog.show();
+                            } else {
 								ShellUtils.fastCmd("mkdir /mnt/sdcard/Windows/sta || true ");
 								ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/autoflasher.lnk \'/mnt/sdcard/Windows/ProgramData/Microsoft/Windows/Start Menu/Programs/Startup\'");
 								messages.setText(getString(R.string.done));
@@ -1458,36 +1402,32 @@ public class MainActivity extends AppCompatActivity {
 							mount();
 							String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + win);
 							if (mnt_stat.isEmpty()) {
-								messages.setText(getString(R.string.ntfs));
-									if (mnt_stat.isEmpty()) {
-										noButton.setVisibility(View.GONE);
-										yesButton.setText(getString(R.string.chat));
-										dismissButton.setText(getString(R.string.cancel));
-										yesButton.setVisibility(View.VISIBLE);
-										dismissButton.setVisibility(View.VISIBLE);
-										icons.setImageDrawable(download);
-										ShowBlur();
-										messages.setText(getString(R.string.ntfs));
-										dismissButton.setOnClickListener(new View.OnClickListener() {
-											@Override
-											public void onClick(View v) {
-												HideBlur();
-												dialog.dismiss();
-											}
-										});
-										yesButton.setOnClickListener(new View.OnClickListener() {
-											@Override
-											public void onClick(View v) {
-												Intent i = new Intent(Intent.ACTION_VIEW);
-												i.setData(Uri.parse("https://t.me/woahelperchat"));
-												startActivity(i);
-																}
-														});
-									dialog.setCancelable(false);
-									dialog.show();
-								} else
-									messages.setText(getString(R.string.mounted));		
-							} else {
+                                noButton.setVisibility(View.GONE);
+                                yesButton.setText(getString(R.string.chat));
+                                dismissButton.setText(getString(R.string.cancel));
+                                yesButton.setVisibility(View.VISIBLE);
+                                dismissButton.setVisibility(View.VISIBLE);
+                                icons.setImageDrawable(download);
+                                ShowBlur();
+                                messages.setText(getString(R.string.ntfs));
+                                dismissButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        HideBlur();
+                                        dialog.dismiss();
+                                    }
+                                });
+                                yesButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent i = new Intent(Intent.ACTION_VIEW);
+                                        i.setData(Uri.parse("https://t.me/woahelperchat"));
+                                        startActivity(i);
+                                                        }
+                                                });
+                                dialog.setCancelable(false);
+                                dialog.show();
+                            } else {
 								ShellUtils.fastCmd("mkdir /mnt/sdcard/Windows/Toolbox || true ");
 								ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/DefenderRemover.exe /mnt/sdcard/Windows/Toolbox/DefenderRemover.exe");
 								messages.setText(getString(R.string.done));
@@ -1548,36 +1488,32 @@ public class MainActivity extends AppCompatActivity {
 							mount();
 							String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + win);
 							if (mnt_stat.isEmpty()) {
-								messages.setText(getString(R.string.ntfs));
-									if (mnt_stat.isEmpty()) {
-										noButton.setVisibility(View.GONE);
-										yesButton.setText(getString(R.string.chat));
-										dismissButton.setText(getString(R.string.cancel));
-										yesButton.setVisibility(View.VISIBLE);
-										dismissButton.setVisibility(View.VISIBLE);
-										icons.setImageDrawable(download);
-										ShowBlur();
-										messages.setText(getString(R.string.ntfs));
-										dismissButton.setOnClickListener(new View.OnClickListener() {
-											@Override
-											public void onClick(View v) {
-												HideBlur();
-												dialog.dismiss();
-											}
-										});
-										yesButton.setOnClickListener(new View.OnClickListener() {
-											@Override
-											public void onClick(View v) {
-												Intent i = new Intent(Intent.ACTION_VIEW);
-												i.setData(Uri.parse("https://t.me/woahelperchat"));
-												startActivity(i);
-																}
-														});
-									dialog.setCancelable(false);
-									dialog.show();
-								} else
-									messages.setText(getString(R.string.mounted));		
-							} else {
+                                noButton.setVisibility(View.GONE);
+                                yesButton.setText(getString(R.string.chat));
+                                dismissButton.setText(getString(R.string.cancel));
+                                yesButton.setVisibility(View.VISIBLE);
+                                dismissButton.setVisibility(View.VISIBLE);
+                                icons.setImageDrawable(download);
+                                ShowBlur();
+                                messages.setText(getString(R.string.ntfs));
+                                dismissButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        HideBlur();
+                                        dialog.dismiss();
+                                    }
+                                });
+                                yesButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent i = new Intent(Intent.ACTION_VIEW);
+                                        i.setData(Uri.parse("https://t.me/woahelperchat"));
+                                        startActivity(i);
+                                                        }
+                                                });
+                                dialog.setCancelable(false);
+                                dialog.show();
+                            } else {
 								ShellUtils.fastCmd("mkdir /mnt/sdcard/Windows/Toolbox || true ");
 								ShellUtils.fastCmd("mkdir /mnt/sdcard/Windows/Toolbox/Rotation || true ");
 								ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/display.exe /mnt/sdcard/Windows/Toolbox/Rotation");
@@ -1639,36 +1575,32 @@ public class MainActivity extends AppCompatActivity {
 							mount();
 							String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + win);
 							if (mnt_stat.isEmpty()) {
-								messages.setText(getString(R.string.ntfs));
-									if (mnt_stat.isEmpty()) {
-										noButton.setVisibility(View.GONE);
-										yesButton.setText(getString(R.string.chat));
-										dismissButton.setText(getString(R.string.cancel));
-										yesButton.setVisibility(View.VISIBLE);
-										dismissButton.setVisibility(View.VISIBLE);
-										icons.setImageDrawable(download);
-										ShowBlur();
-										messages.setText(getString(R.string.ntfs));
-										dismissButton.setOnClickListener(new View.OnClickListener() {
-											@Override
-											public void onClick(View v) {
-												HideBlur();
-												dialog.dismiss();
-											}
-										});
-										yesButton.setOnClickListener(new View.OnClickListener() {
-											@Override
-											public void onClick(View v) {
-												Intent i = new Intent(Intent.ACTION_VIEW);
-												i.setData(Uri.parse("https://t.me/woahelperchat"));
-												startActivity(i);
-																}
-														});
-									dialog.setCancelable(false);
-									dialog.show();
-								} else
-									messages.setText(getString(R.string.mounted));		
-							} else {
+                                noButton.setVisibility(View.GONE);
+                                yesButton.setText(getString(R.string.chat));
+                                dismissButton.setText(getString(R.string.cancel));
+                                yesButton.setVisibility(View.VISIBLE);
+                                dismissButton.setVisibility(View.VISIBLE);
+                                icons.setImageDrawable(download);
+                                ShowBlur();
+                                messages.setText(getString(R.string.ntfs));
+                                dismissButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        HideBlur();
+                                        dialog.dismiss();
+                                    }
+                                });
+                                yesButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent i = new Intent(Intent.ACTION_VIEW);
+                                        i.setData(Uri.parse("https://t.me/woahelperchat"));
+                                        startActivity(i);
+                                                        }
+                                                });
+                                dialog.setCancelable(false);
+                                dialog.show();
+                            } else {
 								ShellUtils.fastCmd("mkdir /mnt/sdcard/Windows/Toolbox || true ");
 								ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/RemoveEdge.ps1 /mnt/sdcard/Windows/Toolbox");
 								messages.setText(getString(R.string.done));
@@ -1728,36 +1660,32 @@ public class MainActivity extends AppCompatActivity {
 							mount();
 							String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + win);
 							if (mnt_stat.isEmpty()) {
-								messages.setText(getString(R.string.ntfs));
-									if (mnt_stat.isEmpty()) {
-										noButton.setVisibility(View.GONE);
-										yesButton.setText(getString(R.string.chat));
-										dismissButton.setText(getString(R.string.cancel));
-										yesButton.setVisibility(View.VISIBLE);
-										dismissButton.setVisibility(View.VISIBLE);
-										icons.setImageDrawable(download);
-										ShowBlur();
-										messages.setText(getString(R.string.ntfs));
-										dismissButton.setOnClickListener(new View.OnClickListener() {
-											@Override
-											public void onClick(View v) {
-												HideBlur();
-												dialog.dismiss();
-											}
-										});
-										yesButton.setOnClickListener(new View.OnClickListener() {
-											@Override
-											public void onClick(View v) {
-												Intent i = new Intent(Intent.ACTION_VIEW);
-												i.setData(Uri.parse("https://t.me/woahelperchat"));
-												startActivity(i);
-																}
-														});
-									dialog.setCancelable(false);
-									dialog.show();
-								} else
-									messages.setText(getString(R.string.mounted));		
-							} else {
+                                noButton.setVisibility(View.GONE);
+                                yesButton.setText(getString(R.string.chat));
+                                dismissButton.setText(getString(R.string.cancel));
+                                yesButton.setVisibility(View.VISIBLE);
+                                dismissButton.setVisibility(View.VISIBLE);
+                                icons.setImageDrawable(download);
+                                ShowBlur();
+                                messages.setText(getString(R.string.ntfs));
+                                dismissButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        HideBlur();
+                                        dialog.dismiss();
+                                    }
+                                });
+                                yesButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent i = new Intent(Intent.ACTION_VIEW);
+                                        i.setData(Uri.parse("https://t.me/woahelperchat"));
+                                        startActivity(i);
+                                                        }
+                                                });
+                                dialog.setCancelable(false);
+                                dialog.show();
+                            } else {
 								ShellUtils.fastCmd("mkdir /mnt/sdcard/Windows/Toolbox || true ");
 								ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/WorksOnWoa.url /mnt/sdcard/Windows/Toolbox");
 								ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/TestedSoftware.url /mnt/sdcard/Windows/Toolbox");
