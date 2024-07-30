@@ -317,7 +317,7 @@ public class MainActivity extends AppCompatActivity {
 					n.cvDumpModem.setVisibility(View.GONE);
 					break;
 				}
-                case "flashlmdd":
+                                case "flashlmdd":
 				case "flashlmdd_lao_com":{
 					guidelink = "https://github.com/n00b69/woa-flashlmdd";
 					grouplink = "https://t.me/woahelperchat";
@@ -418,6 +418,7 @@ public class MainActivity extends AppCompatActivity {
 				case "curtana":
 				case "curtana2":
 				case "curtana_india":
+			        case "curtana_cn":
 				case "durandal":
 				case "durandal_india":
 				case "excalibur":
@@ -595,7 +596,8 @@ public class MainActivity extends AppCompatActivity {
 					x.VayuImage.setImageDrawable(hotdog);
 					break;
 				}
-				case "OnePlus7TPro5G":{
+				case "OnePlus7TPro5G":
+				case "OnePlus7TProNR":{
 					guidelink = "https://woa-msmnile.github.io/";
 					grouplink = "https://t.me/onepluswoachat";
 					Drawable hotdog = ResourcesCompat.getDrawable(getResources(), R.drawable.hotdog, null);
@@ -606,7 +608,8 @@ public class MainActivity extends AppCompatActivity {
 				case "guacamole":
 				case "OnePlus7Pro":
 				case "hotdogg":
-				case "OnePlus7Pro4G":{
+				case "OnePlus7Pro4G":
+				case "OP7ProNRSpr":{
 					guidelink = "https://woa-msmnile.github.io/";
 					grouplink = "https://t.me/onepluswoachat";
 					Drawable guacamole = ResourcesCompat.getDrawable(getResources(), R.drawable.guacamole, null);
@@ -2110,7 +2113,7 @@ public class MainActivity extends AppCompatActivity {
 			dialog.show();
 			dialog.setCancelable(false);
 		}
-		String [] supported={"a52sxq","alphalm_lao_com","alphaplus_lao_com","alioth","alphalm","alphaplus","andromeda","betalm","betaplus_lao_com","betalm_lao_com","beryllium","bhima","cepheus","cheeseburger","curtana2","chiron","curtana","curtana_india","cmi","davinci","dumpling","dipper","durandal","durandal_india","enchilada","equuleus","excalibur","excalibur_india","flashlmdd","flashlmdd_lao_com","fajita","houji","joan","judyln","judyp","judypn","guacamole","guacamoleb","gram","hotdog","hotdogb","hotdogg","lisa","marble","mh2lm","mh2plus_lao_com","mh2lm_lao_com","mh2lm5g","mh2lm5g_lao_com","miatoll","nabu","pipa","OnePlus6","OnePlus6T","OnePlus7","OnePlus7Pro","OnePlus7Pro4G","OnePlus7T","OnePlus7TPro","OnePlus7TPro4G","OnePlus7TPro5G","perseus","polaris","Pong","pong","q2q","raphael","raphaelin","raphaels","RMX2170","RMX2061","sagit","surya","vayu","venus","winner","xpeng","G973F","SM-G973F","beyond1lte","beyond1qlte","G973U","G973U1","SM-G973U","SM-G973U1","G9730","SM-G9730","G973N","SM-G973N","G973X","SM-G973X","G973C","SM-G973C","SCV41","SM-SC41","beyond1"};
+		String [] supported={"a52sxq","alphalm_lao_com","alphaplus_lao_com","alioth","alphalm","alphaplus","andromeda","betalm","betaplus_lao_com","betalm_lao_com","beryllium","bhima","cepheus","cheeseburger","curtana2","chiron","curtana","curtana_india","curtana_cn","cmi","davinci","dumpling","dipper","durandal","durandal_india","enchilada","equuleus","excalibur","excalibur_india","flashlmdd","flashlmdd_lao_com","fajita","houji","joan","judyln","judyp","judypn","guacamole","guacamoleb","gram","hotdog","hotdogb","hotdogg","lisa","marble","mh2lm","mh2plus_lao_com","mh2lm_lao_com","mh2lm5g","mh2lm5g_lao_com","miatoll","nabu","pipa","OnePlus6","OnePlus6T","OnePlus7","OnePlus7Pro","OnePlus7Pro4G","OnePlus7T","OnePlus7TPro","OnePlus7TPro4G","OnePlus7TPro5G","OP7ProNRSpr","OnePlus7TProNR","perseus","polaris","Pong","pong","q2q","raphael","raphaelin","raphaels","RMX2170","RMX2061","sagit","surya","vayu","venus","winner","xpeng","G973F","SM-G973F","beyond1lte","beyond1qlte","G973U","G973U1","SM-G973U","SM-G973U1","G9730","SM-G9730","G973N","SM-G973N","G973X","SM-G973X","G973C","SM-G973C","SCV41","SM-SC41","beyond1"};
 		device = ShellUtils.fastCmd("getprop ro.product.device ");
 		model=ShellUtils.fastCmd("getprop ro.product.model");
 		if (!Arrays.asList(supported).contains(device)) {
@@ -2215,7 +2218,7 @@ public class MainActivity extends AppCompatActivity {
 			x.tvToolboxSubtitle.setText(getString(R.string.toolbox_subtitle));
 			x.tvToolboxSubtitle.setVisibility(View.VISIBLE);
 			try {
-				String [] dumpeddevices={"bhima","cepheus","guacamole","guacamoleb","hotdog","hotdogb","OnePlus7","OnePlus7Pro","OnePlus7Pro4G","OnePlus7T","OnePlus7TPro","OnePlus7TPro4G","raphael","raphaelin","raphaels","vayu"};
+				String [] dumpeddevices={"bhima","cepheus","guacamole","guacamoleb","hotdog","hotdogb","OnePlus7","OnePlus7Pro","OnePlus7Pro4G","OnePlus7T","OnePlus7TPro","OnePlus7TPro4G","OP7ProNRSpr","raphael","raphaelin","raphaels","vayu"};
 				if (Arrays.asList(dumpeddevices).contains(device)) {
 					x.tvBootSubtitle.setText(getString(R.string.quickboot_subtitle));
 				} else {
