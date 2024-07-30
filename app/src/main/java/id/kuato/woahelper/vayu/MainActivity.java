@@ -664,7 +664,7 @@ public class MainActivity extends AppCompatActivity {
 					n.cvDumpModem.setVisibility(View.GONE);
 					break;
 				}
-					case "houji":{
+				case "houji":{
 					guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
 					grouplink = "https://t.me/dumanthecat";
 					Drawable houji = ResourcesCompat.getDrawable(getResources(), R.drawable.houji, null);
@@ -674,15 +674,15 @@ public class MainActivity extends AppCompatActivity {
 				}
 				case "marble":{
 					guidelink = "https://github.com/Xhdsos/woa-marble";
-					grouplink = "https://t.me/woa_marble_davinci";
+					grouplink = "https://t.me/woa_marble";
 					Drawable marble = ResourcesCompat.getDrawable(getResources(), R.drawable.marble, null);
 					x.VayuImage.setImageDrawable(marble);
 					n.cvDumpModem.setVisibility(View.GONE);
 					break;
 				}
 				case "davinci":{
-					guidelink = "https://github.com/Xhdsos/woa-marble";
-					grouplink = "https://t.me/woa_marble_davinci";
+					guidelink = "https://github.com/zxcwsurx/woa-davinci";
+					grouplink = "https://t.me/woa_davinci";
 					Drawable raphael = ResourcesCompat.getDrawable(getResources(), R.drawable.raphael, null);
 					x.VayuImage.setImageDrawable(raphael);
 					n.cvDumpModem.setVisibility(View.GONE);
