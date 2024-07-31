@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
 			String[] files = {"busybox","sta.exe", "Switch to Android.lnk", "usbhostmode.exe", "ARMSoftware.url", "TestedSoftware.url", "WorksOnWoa.url", "RotationShortcut.lnk", "display.exe", "RemoveEdge.ps1", "autoflasher.lnk", "DefenderRemover.exe"};
 			int i = 0;
 			while (!files[i].isEmpty()) {
-				if (ShellUtils.fastCmd(String.format(String.format("ls %s |grep %s", getFilesDir())), files[i]).isEmpty()) {
+				if (ShellUtils.fastCmd(String.format("ls %1$s |grep %2$s", getFilesDir(), files[i])).isEmpty()) {
 					copyAssets();
 					break;
 				}
