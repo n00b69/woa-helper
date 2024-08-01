@@ -87,7 +87,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="30dp"
                                 android:text="@string/sta_title"
-                                android:textSize="@dimen/_9sdp"
+                                android:textSize="@dimen/_10sdp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -95,7 +95,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/sta_subtitle"
-                                android:textSize="@dimen/_7sdp"
+                                android:textSize="@dimen/_8sdp"
                                 android:textStyle="italic" />
                         </LinearLayout>
 
@@ -144,7 +144,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="30dp"
                                 android:text="@string/script_title"
-                                android:textSize="@dimen/_9sdp"
+                                android:textSize="@dimen/_10sdp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -152,7 +152,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/script_subtitle"
-                                android:textSize="@dimen/_7sdp"
+                                android:textSize="@dimen/_8sdp"
                                 android:textStyle="italic" />
                         </LinearLayout>
 
@@ -201,7 +201,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="30dp"
                                 android:text="@string/flash_uefi_title"
-                                android:textSize="@dimen/_9sdp"
+                                android:textSize="@dimen/_10sdp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -209,7 +209,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/flash_uefi_subtitle"
-                                android:textSize="@dimen/_7sdp"
+                                android:textSize="@dimen/_8sdp"
                                 android:textStyle="italic" />
                         </LinearLayout>
                     </LinearLayout>
@@ -257,7 +257,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/dump_modem_title"
-                                android:textSize="@dimen/_9sdp"
+                                android:textSize="@dimen/_10sdp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -265,7 +265,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/dump_modem_subtitle"
-                                android:textSize="@dimen/_7sdp"
+                                android:textSize="@dimen/_8sdp"
                                 android:textStyle="italic" />
                         </LinearLayout>
                     </LinearLayout>
@@ -313,7 +313,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="30dp"
                                 android:text="@string/software_title"
-                                android:textSize="@dimen/_9sdp"
+                                android:textSize="@dimen/_10sdp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -321,7 +321,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/software_subtitle"
-                                android:textSize="@dimen/_7sdp"
+                                android:textSize="@dimen/_8sdp"
                                 android:textStyle="italic" />
                         </LinearLayout>
 
@@ -370,7 +370,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="30dp"
                                 android:text="@string/atlasos_title"
-                                android:textSize="@dimen/_9sdp"
+                                android:textSize="@dimen/_10sdp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -378,7 +378,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/atlasos_subtitle"
-                                android:textSize="@dimen/_7sdp"
+                                android:textSize="@dimen/_8sdp"
                                 android:textStyle="italic" />
                         </LinearLayout>
                     </LinearLayout>
