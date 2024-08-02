@@ -360,7 +360,7 @@
                             android:layout_width="@dimen/_48sdp"
                             android:layout_height="@dimen/_48sdp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/ic_uefi" />
+                            android:src="@drawable/toolbox" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"

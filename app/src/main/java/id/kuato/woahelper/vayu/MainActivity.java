@@ -1024,7 +1024,7 @@ public class MainActivity extends AppCompatActivity {
                             } else {
 								ShellUtils.fastCmd("mkdir /mnt/sdcard/Windows/sta || true ");
 								ShellUtils.fastCmd("cp /sdcard/sta.conf /mnt/sdcard/Windows/sta");
-								ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/ /mnt/sdcard/Windows/sta/sta.exe");
+								ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/sta.exe /mnt/sdcard/Windows/sta/sta.exe");
 								ShellUtils.fastCmd("cp \'/data/user/0/id.kuato.woahelper/files/Switch to Android.lnk\' /mnt/sdcard/Windows/Users/Default/Desktop");
 								messages.setText(getString(R.string.done));
 								dismissButton.setText(getString(R.string.dismiss));
@@ -1084,6 +1084,8 @@ public class MainActivity extends AppCompatActivity {
 						try {
 							mount();
 							String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + win);
+							ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://github.com/n00b69/modified-playbooks/releases/download/ReviOS/Revi-PB-24.06.apbx -O /sdcard/Revi-PB-24.06.apbx");
+							ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://download.ameliorated.io/AME%20Wizard%20Beta.zip -O /sdcard/AMEWizardBeta.zip");
 							if (mnt_stat.isEmpty()) {
                                 noButton.setVisibility(View.GONE);
                                 yesButton.setText(getString(R.string.chat));
@@ -1112,8 +1114,8 @@ public class MainActivity extends AppCompatActivity {
                                 dialog.show();
                             } else {
 								ShellUtils.fastCmd("mkdir /mnt/sdcard/Windows/Toolbox || true ");
-								ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://github.com/n00b69/modified-playbooks/releases/download/ReviOS/Revi-PB-24.06.apbx -O /mnt/sdcard/Windows/Toolbox/Revi-PB-24.06.apbx ");
-								ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://download.ameliorated.io/AME%20Wizard%20Beta.zip -O /mnt/sdcard/Windows/Toolbox/AMEWizardBeta.zip");
+								ShellUtils.fastCmd("cp /sdcard/Revi-PB-24.06.apbx /mnt/sdcard/Windows/Toolbox/Revi-PB-24.06.apbx");
+								ShellUtils.fastCmd("cp /sdcard/AMEWizardBeta.zip /mnt/sdcard/Windows/Toolbox");
 								messages.setText(getString(R.string.done));
 								dismissButton.setText(getString(R.string.dismiss));
 								dismissButton.setVisibility(View.VISIBLE);
@@ -1148,6 +1150,8 @@ public class MainActivity extends AppCompatActivity {
 						try {
 							mount();
 							String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + win);
+							ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook_v0.4.0.apbx -O /sdcard/AtlasPlaybook_v0.4.0.apbx");
+							ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://download.ameliorated.io/AME%20Wizard%20Beta.zip -O /sdcard/AMEWizardBeta.zip");
 							if (mnt_stat.isEmpty()) {
                                 noButton.setVisibility(View.GONE);
                                 yesButton.setText(getString(R.string.chat));
@@ -1176,8 +1180,8 @@ public class MainActivity extends AppCompatActivity {
                                 dialog.show();
                             } else {
 								ShellUtils.fastCmd("mkdir /mnt/sdcard/Windows/Toolbox || true ");
-								ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook_v0.4.0.apbx -O /mnt/sdcard/Windows/Toolbox/AtlasPlaybook_v0.4.0.apbx");
-								ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://download.ameliorated.io/AME%20Wizard%20Beta.zip -O /mnt/sdcard/Windows/Toolbox/AMEWizardBeta.zip");
+								ShellUtils.fastCmd("cp /sdcard/AtlasPlaybook_v0.4.0.apbx /mnt/sdcard/Windows/Toolbox/AtlasPlaybook_v0.4.0.apbx");
+								ShellUtils.fastCmd("cp /sdcard/AMEWizardBeta.zip /mnt/sdcard/Windows/Toolbox");
 								messages.setText(getString(R.string.done));
 								dismissButton.setText(getString(R.string.dismiss));
 								dismissButton.setVisibility(View.VISIBLE);
@@ -1234,6 +1238,7 @@ public class MainActivity extends AppCompatActivity {
 						try {
 							mount();
 							String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + win);
+							ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/usbhostmode.exe /sdcard");
 							if (mnt_stat.isEmpty()) {
                                 noButton.setVisibility(View.GONE);
                                 yesButton.setText(getString(R.string.chat));
@@ -1262,7 +1267,7 @@ public class MainActivity extends AppCompatActivity {
                                 dialog.show();
                             } else {
 								ShellUtils.fastCmd("mkdir /mnt/sdcard/Windows/Toolbox || true ");
-								ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/usbhostmode.exe /mnt/sdcard/Windows/Toolbox");
+								ShellUtils.fastCmd("cp /sdcard/usbhostmode.exe /mnt/sdcard/Windows/Toolbox");
 								messages.setText(getString(R.string.done));
 								dismissButton.setText(getString(R.string.dismiss));
 								dismissButton.setVisibility(View.VISIBLE);
@@ -1319,6 +1324,7 @@ public class MainActivity extends AppCompatActivity {
 						try {
 							mount();
 							String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + win);
+							ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/autoflasher.lnk /sdcard");
 							if (mnt_stat.isEmpty()) {
                                 noButton.setVisibility(View.GONE);
                                 yesButton.setText(getString(R.string.chat));
@@ -1346,8 +1352,7 @@ public class MainActivity extends AppCompatActivity {
                                 dialog.setCancelable(false);
                                 dialog.show();
                             } else {
-								ShellUtils.fastCmd("mkdir /mnt/sdcard/Windows/sta || true ");
-								ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/autoflasher.lnk \'/mnt/sdcard/Windows/ProgramData/Microsoft/Windows/Start Menu/Programs/Startup\'");
+								ShellUtils.fastCmd("cp /sdcard/autoflasher.lnk \'/mnt/sdcard/Windows/ProgramData/Microsoft/Windows/Start Menu/Programs/Startup\'");
 								messages.setText(getString(R.string.done));
 								dismissButton.setText(getString(R.string.dismiss));
 								dismissButton.setVisibility(View.VISIBLE);
@@ -1404,6 +1409,7 @@ public class MainActivity extends AppCompatActivity {
 						try {
 							mount();
 							String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + win);
+							ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/DefenderRemover.exe /sdcard");
 							if (mnt_stat.isEmpty()) {
                                 noButton.setVisibility(View.GONE);
                                 yesButton.setText(getString(R.string.chat));
@@ -1432,7 +1438,7 @@ public class MainActivity extends AppCompatActivity {
                                 dialog.show();
                             } else {
 								ShellUtils.fastCmd("mkdir /mnt/sdcard/Windows/Toolbox || true ");
-								ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/DefenderRemover.exe /mnt/sdcard/Windows/Toolbox/DefenderRemover.exe");
+								ShellUtils.fastCmd("cp /sdcard/DefenderRemover.exe /mnt/sdcard/Windows/Toolbox");
 								messages.setText(getString(R.string.done));
 								dismissButton.setText(getString(R.string.dismiss));
 								dismissButton.setVisibility(View.VISIBLE);
@@ -1490,6 +1496,8 @@ public class MainActivity extends AppCompatActivity {
 						try {
 							mount();
 							String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + win);
+							ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/display.exe /sdcard");
+							ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/RotationShortcut.lnk /sdcard");
 							if (mnt_stat.isEmpty()) {
                                 noButton.setVisibility(View.GONE);
                                 yesButton.setText(getString(R.string.chat));
@@ -1519,8 +1527,8 @@ public class MainActivity extends AppCompatActivity {
                             } else {
 								ShellUtils.fastCmd("mkdir /mnt/sdcard/Windows/Toolbox || true ");
 								ShellUtils.fastCmd("mkdir /mnt/sdcard/Windows/Toolbox/Rotation || true ");
-								ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/display.exe /mnt/sdcard/Windows/Toolbox/Rotation");
-								ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/RotationShortcut.lnk /mnt/sdcard/Windows/Toolbox/Rotation");
+								ShellUtils.fastCmd("cp /sdcard/display.exe /mnt/sdcard/Windows/Toolbox/Rotation");
+								ShellUtils.fastCmd("cp /sdcard/RotationShortcut.lnk /mnt/sdcard/Windows/Toolbox/Rotation");
 								messages.setText(getString(R.string.done));
 								dismissButton.setText(getString(R.string.dismiss));
 								dismissButton.setVisibility(View.VISIBLE);
@@ -1577,6 +1585,7 @@ public class MainActivity extends AppCompatActivity {
 						try {
 							mount();
 							String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + win);
+							ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/RemoveEdge.ps1 /sdcard");
 							if (mnt_stat.isEmpty()) {
                                 noButton.setVisibility(View.GONE);
                                 yesButton.setText(getString(R.string.chat));
@@ -1605,7 +1614,7 @@ public class MainActivity extends AppCompatActivity {
                                 dialog.show();
                             } else {
 								ShellUtils.fastCmd("mkdir /mnt/sdcard/Windows/Toolbox || true ");
-								ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/RemoveEdge.ps1 /mnt/sdcard/Windows/Toolbox");
+								ShellUtils.fastCmd("cp /sdcard/RemoveEdge.ps1 /mnt/sdcard/Windows/Toolbox");
 								messages.setText(getString(R.string.done));
 								dismissButton.setText(getString(R.string.dismiss));
 								dismissButton.setVisibility(View.VISIBLE);
@@ -1662,6 +1671,9 @@ public class MainActivity extends AppCompatActivity {
 						try {
 							mount();
 							String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + win);
+							ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/WorksOnWoa.url /sdcard");
+							ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/TestedSoftware.url /sdcard");
+							ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/ARMSoftware.url /sdcard");
 							if (mnt_stat.isEmpty()) {
                                 noButton.setVisibility(View.GONE);
                                 yesButton.setText(getString(R.string.chat));
@@ -1690,9 +1702,9 @@ public class MainActivity extends AppCompatActivity {
                                 dialog.show();
                             } else {
 								ShellUtils.fastCmd("mkdir /mnt/sdcard/Windows/Toolbox || true ");
-								ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/WorksOnWoa.url /mnt/sdcard/Windows/Toolbox");
-								ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/TestedSoftware.url /mnt/sdcard/Windows/Toolbox");
-								ShellUtils.fastCmd("cp /data/user/0/id.kuato.woahelper/files/ARMSoftware.url /mnt/sdcard/Windows/Toolbox");
+								ShellUtils.fastCmd("cp /sdcard/WorksOnWoa.url /mnt/sdcard/Windows/Toolbox");
+								ShellUtils.fastCmd("cp /sdcard/TestedSoftware.url /mnt/sdcard/Windows/Toolbox");
+								ShellUtils.fastCmd("cp /sdcard/ARMSoftware.url /mnt/sdcard/Windows/Toolbox");
 								messages.setText(getString(R.string.done));
 								dismissButton.setText(getString(R.string.dismiss));
 								dismissButton.setVisibility(View.VISIBLE);
