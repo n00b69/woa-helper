@@ -52,7 +52,7 @@ This project is in late stages of development. Most features have already been a
 - [AdrianoA3](https://github.com/AdrianoA3) for the Portuguese translation
 - JadeKubPom for the Thai translation
 - sercancamli & [ErdilS](https://github.com/erdilS) & [Kaan Dikeç](https://github.com/dikeckaan) for the Turkish translation
-- [Ost268](https://github.com/Ost268) for the Ukrainian translation
+- [Ost268](https://github.com/Ost268) and [Ilya114](https://github.com/Ilya114) for the Ukrainian translation
 - HieusayHi for the Vietnamese translation
 
 
