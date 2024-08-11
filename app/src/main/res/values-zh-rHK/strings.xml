@@ -7,7 +7,7 @@
 	<string name="flash_uefi_title">刷入 UEFI</string>
 	<string name="uefi_not_found">找不到 UEFI</string>
 	<string name="quickboot_title">快速啓動到 WINDOWS</string>
-	<string name="sta_title">創建</string>
+	<string name="sta_title">創建安卓切換工具</string>
 	<string name="usbhost_title">切換 USB 主機模式</string>
 	<string name="hibernation_title">切換休眠</string>
 	<string name="software_title">ARM 軟件</string>
