@@ -39,7 +39,7 @@ This project is in late stages of development. Most features have already been a
 - [KuatoDev](https://github.com/KuatoDev) for making the original app
 - [Halal Beef](https://github.com/halal-beef) for updating the original app
 - [Bibarub](https://github.com/bibarub) for being involved in the original app
-- [Marius586](https://github.com/Marius586) for updating the original app and adding lots of features
+- [Marius586](https://github.com/Marius586) for updating the original app, adding lots of features and refactoring code when needed
 - [the sog](https://github.com/n00b69) for updating Marius' fork and adding lots of features
 - [Ali](https://github.com/gixousiyq) for helping refine code and for the Arabic translation
 - Aven1us for the Azeri translation

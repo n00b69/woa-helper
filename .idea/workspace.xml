@@ -1,10 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+    <layouts>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+        <config>
+          <theme>@style/Theme.MyApplication</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/dialog.xml">
+        <config>
+          <theme>@style/Theme.MyApplication</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/scripts.xml">
+        <config>
+          <theme>@style/Theme.MyApplication</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/set_panel.xml">
+        <config>
+          <theme>@style/Theme.MyApplication</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/toolbox.xml">
+        <config>
+          <theme>@style/Theme.MyApplication</theme>
+        </config>
+      </layout>
+    </layouts>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce4ca8e1-c4e0-41b5-a6cf-a97b05c8bfcd" name="Changes" comment="" />
+    <list default="true" id="ce4ca8e1-c4e0-41b5-a6cf-a97b05c8bfcd" name="Changes" comment="a few needed changes">
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/anim/fade_in.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/anim/fade_out.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/anim/slide_in.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/anim/slide_out.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4.2/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4.2/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4.2/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4.2/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4.2/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/id/kuato/woahelper/preference/pref.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/id/kuato/woahelper/preference/pref.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/id/kuato/woahelper/vayu/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/id/kuato/woahelper/vayu/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/atlasos2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/atlasos2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_download.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_download.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/scripts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/scripts.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/set_panel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/set_panel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/toolbox.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/toolbox.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,11 +72,32 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[LMG810EAW0b7a3eac]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[ae30f928]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$/app">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="GenerateSignedApkSettings">
+    <option name="KEY_STORE_PATH" value="D:\sign.jks" />
+    <option name="KEY_ALIAS" value="smh" />
+    <option name="REMEMBER_PASSWORDS" value="true" />
+    <option name="BUILD_TARGET_KEY" value="apk" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -25,22 +105,37 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2ibqjd2hX6JpRkrxvKQKrmNRpNH" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2kGhyQqiYYSujYSro7MVvVPWh89" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/User/Desktop/WOAHelper"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;AnalyzeApkAction.lastApkPath&quot;: &quot;D:/hepler/app/build/intermediates/apk/debug/app-debug.apk&quot;,
+    &quot;ApkExportedModule&quot;: &quot;WoA_Helper_Vayu.app&quot;,
+    &quot;ExportApk.ApkPathForWoA_Helper_Vayu.app&quot;: &quot;D:\\hepler\\app&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/hepler/app/build/intermediates/apk/debug/app-debug.apk&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;ExportApk.BuildVariants&quot;: [
+      &quot;release&quot;
+    ],
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;PLAIN_TEXT&quot;
+    ]
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="WoA_Helper_Vayu.app.main" />
@@ -114,11 +209,24 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="ce4ca8e1-c4e0-41b5-a6cf-a97b05c8bfcd" name="Changes" comment="" />
-      <created>1719769760856</created>
+      <created>1722916078434</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1719769760856</updated>
+      <updated>1722916078434</updated>
     </task>
+    <task id="LOCAL-00001" summary="a few needed changes">
+      <option name="closed" value="true" />
+      <created>1722938177899</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1722938177899</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="a few needed changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="a few needed changes" />
   </component>
 </project>

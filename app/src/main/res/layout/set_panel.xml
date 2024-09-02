@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:id="@+id/settingsPanel"
     android:orientation="vertical">
 
     <include
@@ -70,6 +72,12 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/_5sdp"
             android:text="@string/preference9" />
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/mountLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/preference10" />
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"

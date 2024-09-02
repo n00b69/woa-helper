@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:screenOrientation="portrait"
+    android:id="@+id/mainlayout"
+    android:animateLayoutChanges="true"
     tools:context=".vayu.MainActivity">
 
     <LinearLayout

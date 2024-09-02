@@ -18,6 +18,7 @@ public class pref {
 	public static final String busybox="woa busybox location";
 	public static final String locale="woa active language locale";
 	public static final String version="woa last app version";
+	public static final String mountLocation="woa mount location";
 
 	public static SharedPreferences getSharedPreference(Context context) {
 		return PreferenceManager.getDefaultSharedPreferences(context);
@@ -147,6 +148,16 @@ public class pref {
 
 	public static String getVersion(Context context) {
 		return getSharedPreference(context).getString(version,"");
+	}
+
+	public static void setMountLocation(Context context, boolean value) {
+		SharedPreferences.Editor editor = getSharedPreference(context).edit();
+		editor.putBoolean(secure,value);
+		editor.apply();
+	}
+
+	public static boolean getMountLocation(Context context) {
+		return getSharedPreference(context).getBoolean(secure,false);
 	}
 }
 

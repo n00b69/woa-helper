@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:screenOrientation="portrait"
+    android:id="@+id/toolboxtab"
     tools:context=".vayu.MainActivity">
 
     <LinearLayout
@@ -94,6 +95,7 @@
                                 android:id="@+id/tv_sta_sub"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:gravity="left"
                                 android:text="@string/sta_subtitle"
                                 android:textSize="@dimen/_8sdp"
                                 android:textStyle="italic" />
@@ -151,6 +153,8 @@
                                 android:id="@+id/tv_scripts_sub"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:paddingRight="@dimen/_15sdp"
+android:gravity="left"
                                 android:text="@string/script_subtitle"
                                 android:textSize="@dimen/_8sdp"
                                 android:textStyle="italic" />
@@ -208,6 +212,8 @@
                                 android:id="@+id/tv_uefi_subtitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:paddingRight="@dimen/_15sdp"
+android:gravity="left"
                                 android:text="@string/flash_uefi_subtitle"
                                 android:textSize="@dimen/_8sdp"
                                 android:textStyle="italic" />
@@ -239,7 +245,6 @@
                         android:layout_margin="4dp"
                         android:gravity="center"
                         android:orientation="horizontal">
-
                         <ImageView
                             android:id="@+id/modem_logo"
                             android:layout_width="@dimen/_48sdp"
@@ -264,6 +269,8 @@
                                 android:id="@+id/tv_modem_subtitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:paddingRight="@dimen/_15sdp"
+android:gravity="left"
                                 android:text="@string/dump_modem_subtitle"
                                 android:textSize="@dimen/_8sdp"
                                 android:textStyle="italic" />
@@ -320,6 +327,8 @@
                                 android:id="@+id/tv_software_sub"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:paddingRight="@dimen/_15sdp"
+android:gravity="left"
                                 android:text="@string/software_subtitle"
                                 android:textSize="@dimen/_8sdp"
                                 android:textStyle="italic" />
@@ -377,6 +386,8 @@
                                 android:id="@+id/tv_atlasos_sub"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:paddingRight="@dimen/_15sdp"
+                                android:gravity="left"
                                 android:text="@string/atlasos_subtitle"
                                 android:textSize="@dimen/_8sdp"
                                 android:textStyle="italic" />
@@ -386,6 +397,6 @@
             </LinearLayout>
         </LinearLayout>
 
-    </LinearLayout>
 
+    </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
