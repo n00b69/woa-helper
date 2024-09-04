@@ -103,4 +103,5 @@
 	<string name="preference7">Montar a partição do Windows ao</string>
 	<string name="preference8">Desativar a instalação do arquivo de modem</string>
 	<string name="preference9">Require unlocked screen for quickboot</string>
+	<string name="preference10">Mount Windows to /mnt instead of /sdcard</string>
 </resources>

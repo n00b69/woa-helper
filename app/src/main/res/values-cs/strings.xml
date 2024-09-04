@@ -102,5 +102,6 @@
 	<string name="preference6">Vybrat jazyk</string>
 	<string name="preference7">Automaticky připojit Windows při spuštění zařízení</string>
 	<string name="preference8">Deaktivovat ukládání dat z modemu</string>
-	<string name="preference9">Vyžadovat odemčenou obrazovku pro rychlé spuštění ( QUICKBOOT )</string>
+	<string name="preference9">Vyžadovat odemčenou obrazovku pro rychlé spuštění (QUICKBOOT)</string>
+	<string name="preference10">Mount Windows to /mnt instead of /sdcard</string>
 </resources>

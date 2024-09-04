@@ -55,13 +55,27 @@ Tile tile =getQsTile();
     }
 
     private void mount() {
-        ShellUtils.fastCmd(getString(R.string.mk));
-        ShellUtils.fastCmd(String.format("su -mm -c "+pref.getbusybox(this)+getString(R.string.mount),win));
-    }
+		if (!pref.getMountLocation(this)) {
+        	ShellUtils.fastCmd(getString(R.string.mk));
+        	ShellUtils.fastCmd(String.format("su -mm -c "+pref.getbusybox(this)+getString(R.string.mount),win));
+    	}
+		else{
+			ShellUtils.fastCmd(getString(R.string.mk2));
+        	ShellUtils.fastCmd(String.format("su -mm -c "+pref.getbusybox(this)+getString(R.string.mount2),win));
+			}
+		}	
+		
     public void unmount() {
-        ShellUtils.fastCmd(getString(R.string.unmount));
-        ShellUtils.fastCmd(getString(R.string.rm));
-    }
+		if (!pref.getMountLocation(this)) {
+        	ShellUtils.fastCmd(getString(R.string.unmount));
+        	ShellUtils.fastCmd(getString(R.string.rm));
+    	}
+		else{
+			ShellUtils.fastCmd(getString(R.string.unmount2));
+        	ShellUtils.fastCmd(getString(R.string.rm2));
+			}
+		}
+
 
 
     // Called when the user removes your tile.

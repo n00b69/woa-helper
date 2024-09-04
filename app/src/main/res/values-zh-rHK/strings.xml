@@ -103,4 +103,5 @@
 	<string name="preference7">在裝置啓動時自動安裝 Windows</string>
 	<string name="preference8">禁用自動提取基帶功能</string>
 	<string name="preference9">從操作中心快速啓動到 Windows 需要先解鎖屏幕</string>
+	<string name="preference10">Mount Windows to /mnt instead of /sdcard</string>
 </resources>

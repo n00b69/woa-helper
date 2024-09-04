@@ -103,4 +103,5 @@
 	<string name="preference7">Automatyczne montowanie Windows przy starcie urządzenia</string>
 	<string name="preference8">Wyłącz funkcję zrzutu modemu</string>
 	<string name="preference9">Require unlocked screen for quickboot</string>
+	<string name="preference10">Mount Windows to /mnt instead of /sdcard</string>
 </resources>

@@ -103,4 +103,5 @@
 	<string name="preference7">Windows automatisch mounten beim Gerätestart</string>
 	<string name="preference8">Modem-bereitstellungsfunktion ausschalten</string>
 	<string name="preference9">Entsperrter Bildschirm für Quickboot erforderlich</string>
+	<string name="preference10">Mount Windows nach /mnt statt /sdcard</string>
 </resources>

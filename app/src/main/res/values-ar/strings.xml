@@ -103,4 +103,5 @@
 	<string name="preference7">وصل قسم تخزين الـWindows تلقائيا عند تشغيل الجهاز</string>
 	<string name="preference8">عطّل خاصية نسخ المودم</string>
 	<string name="preference9">فرض فتح قفل الشاشة حتى تستعمل الإقلاع السريع</string>
+	<string name="preference10">Mount Windows to /mnt instead of /sdcard</string>
 </resources>

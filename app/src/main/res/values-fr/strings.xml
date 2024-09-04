@@ -97,4 +97,5 @@
 	<string name="preference7">Montez automatiquement Windows au démarrage de l\'appareil</string>
 	<string name="preference8">Désactiver la fonctionnalité de installer de modem</string>
 	<string name="preference9">Require unlocked screen for quickboot</string>
+	<string name="preference10">Mount Windows to /mnt instead of /sdcard</string>
 </resources>

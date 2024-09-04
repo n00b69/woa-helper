@@ -16,7 +16,7 @@ public class MyQSTileService extends TileService {
 
 	String finduefi;
 	String device;
-
+	String win;
 
 	@Override
 	public void onTileAdded() {
@@ -57,13 +57,23 @@ public class MyQSTileService extends TileService {
 		if (!(Objects.equals(device, "nabu")||Objects.equals(device, "mh2lm")) || !(pref.getMODEM(this))) {
 			dump();
 		}
-		String found = ShellUtils.fastCmd("ls /sdcard/Windows | grep boot.img");
-		if (pref.getBACKUP(this)
-		|| (!pref.getAUTO(this) && found.isEmpty())) {
-			ShellUtils.fastCmd(getString(R.string.backup1));
-			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM HH:mm");
-			String currentDateAndTime = sdf.format(new Date());
-			pref.setDATE(this, currentDateAndTime);
+		String found = ShellUtils.fastCmd("ls "+(pref.getMountLocation(this)?"/mnt/Windows":"/mnt/sdcard/Windows")+" | grep boot.img");
+		if (!pref.getMountLocation(this)) {
+            if (pref.getBACKUP(this)
+			|| (!pref.getAUTO(this) && found.isEmpty())) {
+				ShellUtils.fastCmd(getString(R.string.backup1));
+				SimpleDateFormat sdf = new SimpleDateFormat("dd-MM HH:mm");
+				String currentDateAndTime = sdf.format(new Date());
+				pref.setDATE(this, currentDateAndTime);
+        	}
+			} else{
+            	if (pref.getBACKUP(this)
+				|| (!pref.getAUTO(this) && found.isEmpty())) {
+					ShellUtils.fastCmd(getString(R.string.backup2));
+					SimpleDateFormat sdf = new SimpleDateFormat("dd-MM HH:mm");
+					String currentDateAndTime = sdf.format(new Date());
+					pref.setDATE(this, currentDateAndTime);
+		}
 		}
 		found = ShellUtils.fastCmd("find /sdcard | grep boot.img");
 		if (pref.getBACKUP_A(this)
@@ -84,11 +94,24 @@ public class MyQSTileService extends TileService {
 			tile.updateTile();
 	}
 }
-	private void mount() {
-		ShellUtils.fastCmd(getString(R.string.mk));
-		ShellUtils.fastCmd(getString(R.string.mount));
-	}
+	//private void mount() {
+	//	ShellUtils.fastCmd(getString(R.string.mk));
+	//	ShellUtils.fastCmd(getString(R.string.mount));
+	//}
 
+	private void mount() {
+        String c ;
+        if (!pref.getMountLocation(this)) {
+            c = String.format("su -mm -c " + pref.getbusybox(this) + getString(R.string.mount), win);
+            ShellUtils.fastCmd(getString(R.string.mk));
+            ShellUtils.fastCmd(c);
+        } else{
+            c = String.format("su -mm -c " + pref.getbusybox(this) + getString(R.string.mount2), win);
+            ShellUtils.fastCmd(getString(R.string.mk2));
+            ShellUtils.fastCmd(c);
+	    }
+	}
+	
 	private void dump() {
 		ShellUtils.fastCmd(getString(R.string.modem1));
 		ShellUtils.fastCmd(getString(R.string.modem2));
@@ -105,6 +128,7 @@ public class MyQSTileService extends TileService {
 	public void checkuefi() {
 		checkdevice();
 		finduefi = ShellUtils.fastCmd(getString(R.string.uefiChk));
+		win = ShellUtils.fastCmd("realpath /dev/block/by-name/win");
 	}
 
 	// Called when the user removes your tile.

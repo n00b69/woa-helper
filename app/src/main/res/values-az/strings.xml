@@ -103,4 +103,5 @@
 	<string name="preference7">Cihaz işə salındıqda Windows avtomatik quraşdırılsın</string>
 	<string name="preference8">Modem-in "dump" funksiyasını söndürmək</string>
 	<string name="preference9">Require unlocked screen for quickboot</string>
+	<string name="preference10">Mount Windows to /mnt instead of /sdcard</string>
 </resources>

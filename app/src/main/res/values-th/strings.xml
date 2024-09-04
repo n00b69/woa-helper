@@ -103,4 +103,5 @@
 	<string name="preference7">ติดตั้ง Windows โดยอัตโนมัติเมื่อเริ่มต้นอุปกรณ์</string> 
 	<string name="preference8">ปิดใช้งานฟังก์ชันดัมพ์โมเด็ม</string>
 	<string name="preference9">ต้องใช้หน้าจอที่ปลดล็อคสำหรับการบูตอย่างรวดเร็ว</string>
+	<string name="preference10">Mount Windows to /mnt instead of /sdcard</string>
 </resources>

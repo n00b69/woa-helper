@@ -88,7 +88,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/usbhost_title"
-                                android:textSize="@dimen/_10sdp"
+                                android:textSize="@dimen/_11sdp"
                                 android:textStyle="bold" />
 
                             <id.kuato.verncopyright.BlurLayout
@@ -104,7 +104,7 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
                                 android:text="@string/usbhost_subtitle"
-                                android:textSize="@dimen/_8sdp"
+                                android:textSize="@dimen/_9sdp"
                                 android:paddingRight="@dimen/_15sdp"
                                 android:textStyle="italic" />
                         </LinearLayout>
@@ -153,7 +153,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/rotation_title"
-                                android:textSize="@dimen/_10sdp"
+                                android:textSize="@dimen/_11sdp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -162,7 +162,7 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
                                 android:text="@string/rotation_subtitle"
-                                android:textSize="@dimen/_8sdp"
+                                android:textSize="@dimen/_9sdp"
                                 android:paddingRight="@dimen/_15sdp"
                                 android:textStyle="italic" />
                         </LinearLayout>
@@ -211,7 +211,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="30dp"
                                 android:text="@string/autoflash_title"
-                                android:textSize="@dimen/_10sdp"
+                                android:textSize="@dimen/_11sdp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -220,7 +220,7 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
                                 android:text="@string/autoflash_subtitle"
-                                android:textSize="@dimen/_8sdp"
+                                android:textSize="@dimen/_9sdp"
                                 android:paddingRight="@dimen/_15sdp"
                                 android:textStyle="italic" />
                         </LinearLayout>
@@ -269,7 +269,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="30dp"
                                 android:text="@string/defender_title"
-                                android:textSize="@dimen/_10sdp"
+                                android:textSize="@dimen/_11sdp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -278,7 +278,7 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
                                 android:text="@string/defender_subtitle"
-                                android:textSize="@dimen/_8sdp"
+                                android:textSize="@dimen/_9sdp"
                                 android:paddingRight="@dimen/_15sdp"
                                 android:textStyle="italic" />
                         </LinearLayout>
@@ -330,14 +330,14 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="30dp"
                                 android:text="@string/hibernation_question"
-                                android:textSize="@dimen/_10sdp"
+                                android:textSize="@dimen/_11sdp"
                                 android:textStyle="bold" />
 
                             <TextView
                                 android:id="@+id/tv_hibernation_subtitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="@dimen/_8sdp"
+                                android:textSize="@dimen/_9sdp"
                                 android:gravity="left"
                                 android:textStyle="italic"
                                 android:paddingRight="@dimen/_15sdp" />
@@ -387,7 +387,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="30dp"
                                 android:text="@string/edge_title"
-                                android:textSize="@dimen/_10sdp"
+                                android:textSize="@dimen/_11sdp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -397,7 +397,7 @@
                                 android:gravity="left"
                                 android:paddingRight="@dimen/_15sdp"
                                 android:text="@string/edge_subtitle"
-                                android:textSize="@dimen/_8sdp"
+                                android:textSize="@dimen/_9sdp"
                                 android:textStyle="italic" />
                         </LinearLayout>
                     </LinearLayout>

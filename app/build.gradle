@@ -13,7 +13,7 @@ android {
         minSdk 24
         targetSdk 33
         versionCode 1
-        versionName "1.8.4_BETA13"
+        versionName "1.8.4_BETA15"
     }
 
 lint {

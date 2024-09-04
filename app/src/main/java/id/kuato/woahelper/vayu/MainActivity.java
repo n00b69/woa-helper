@@ -77,15 +77,14 @@ public class MainActivity extends AppCompatActivity  {
     String panel;
     String mounted;
     String finduefi;
-    String finduefi1;
     String device;
     String model;
     public int backable;
     public int depth;
     String win;
     boolean dual;
-    String grouplink = "https://t.me/winonvayualt";
-    String guidelink = "https://github.com/woa-vayu/Port-Windows-11-Poco-X3-pro";
+    String grouplink = "https://t.me/woahelperchat";
+    String guidelink = "https://github.com/n00b69/woa-vayu";
     String currentVersion = BuildConfig.VERSION_NAME;
     static final Object lock = new Object();
 
@@ -189,7 +188,7 @@ public class MainActivity extends AppCompatActivity  {
         if (win.isEmpty())
             win = ShellUtils.fastCmd("realpath /dev/block/by-name/mindows");
         Log.d("debug",win);
-        winpath=(pref.getMountLocation(MainActivity.this)?"/mnt/Windows/":"/mnt/sdcard/Windows/");
+        winpath = (pref.getMountLocation(MainActivity.this)?"/mnt/Windows":"/mnt/sdcard/Windows");
         String mount_stat = ShellUtils.fastCmd("su -c mount | grep " + win);
         if (mount_stat.isEmpty())
             mounted = "MOUNT";
@@ -634,6 +633,7 @@ public class MainActivity extends AppCompatActivity  {
                     n.cvDumpModem.setVisibility(View.GONE);
                     break;
                 }
+				case "winnerx":
                 case "winner": {
                     guidelink = "https://github.com/n00b69/woa-winner";
                     grouplink = "https://t.me/woa_msmnile_issues";
@@ -751,31 +751,38 @@ public class MainActivity extends AppCompatActivity  {
                             public void run() {
                                 try {
                                     mount();
-                                    String[] dumped = {"bhima", "cepheus", "guacamole", "guacamoleb", "gram", "hotdog", "hotdogb", "OnePlus7", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7T", "OnePlus7TPro", "OnePlus7TPro4G", "raphael", "raphaelin", "raphaels", "vayu"};
+                                    String[] dumped = {"bhima", "cepheus", "guacamole", "guacamoleb", "hotdog", "hotdogb", "OnePlus7", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7T", "OnePlus7TPro", "OnePlus7TPro4G", "raphael", "raphaelin", "raphaels", "vayu"};
                                     if (Arrays.asList(dumped).contains(device) || !(pref.getMODEM(MainActivity.this))) {
                                         dump();
                                     }
-                                    String found = ShellUtils.fastCmd("ls "+(pref.getMountLocation(MainActivity.this)?"/mnt/Windows/":"/mnt/sdcard/Windows/")+" | grep boot.img");
-                                    if (pref.getBACKUP(MainActivity.this)
-                                            || (!pref.getAUTO(MainActivity.this) && found.isEmpty())) {
-                                        ShellUtils.fastCmd(getString(R.string.backup1));
-                                        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM HH:mm");
-                                        String currentDateAndTime = sdf.format(new Date());
-                                        pref.setDATE(MainActivity.this, currentDateAndTime);
-                                    }
+                                    String found = ShellUtils.fastCmd("ls "+(pref.getMountLocation(MainActivity.this)?"/mnt/Windows":"/mnt/sdcard/Windows")+" | grep boot.img");
+									if (!pref.getMountLocation(MainActivity.this)) {
+           								if (pref.getBACKUP(MainActivity.this)
+										|| (!pref.getAUTO(MainActivity.this) && found.isEmpty())) {
+											ShellUtils.fastCmd(getString(R.string.backup1));
+											SimpleDateFormat sdf = new SimpleDateFormat("dd-MM HH:mm");
+											String currentDateAndTime = sdf.format(new Date());
+											pref.setDATE(MainActivity.this, currentDateAndTime);
+        								}
+										} else{
+            							if (pref.getBACKUP(MainActivity.this)
+										|| (!pref.getAUTO(MainActivity.this) && found.isEmpty())) {
+											ShellUtils.fastCmd(getString(R.string.backup2));
+											SimpleDateFormat sdf = new SimpleDateFormat("dd-MM HH:mm");
+											String currentDateAndTime = sdf.format(new Date());
+											pref.setDATE(MainActivity.this, currentDateAndTime);
+                                  	  }
+									}
                                     found = ShellUtils.fastCmd("find /sdcard | grep boot.img");
                                     if (pref.getBACKUP_A(MainActivity.this)
                                             || (!pref.getAUTO_A(MainActivity.this) && found.isEmpty())) {
-                                        ShellUtils.fastCmd(getString(R.string.backup));
-                                        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM HH:mm");
-                                        String currentDateAndTime = sdf.format(new Date());
-                                        pref.setDATE(MainActivity.this, currentDateAndTime);
+                                        	ShellUtils.fastCmd(getString(R.string.backup));
+                                        	SimpleDateFormat sdf = new SimpleDateFormat("dd-MM HH:mm");
+                                        	String currentDateAndTime = sdf.format(new Date());
+                                        	pref.setDATE(MainActivity.this, currentDateAndTime);
                                     }
-
-                                    if (dual)
-                                        flash(finduefi1);
-                                    else
-                                        flash(finduefi);
+									
+                                    flash(finduefi);
                                     ShellUtils.fastCmd("su -c svc power reboot");
                                     messages.setText(getString(R.string.wrong));
                                     dismissButton.setVisibility(View.VISIBLE);
@@ -867,7 +874,7 @@ public class MainActivity extends AppCompatActivity  {
                                             dialog.setCancelable(false);
                                             dialog.show();
                                         } else {
-                                            Log.d("debug",pref.getMountLocation(MainActivity.this) ? "/mnt/Windows/" : "/mnt/sdcard/Windows/");
+                                            Log.d("debug",pref.getMountLocation(MainActivity.this) ? "/mnt/Windows" : "/mnt/sdcard/Windows");
                                             messages.setText(getString(R.string.mounted) + "\n" + winpath);
                                         }
                                     } else {
@@ -1046,10 +1053,10 @@ public class MainActivity extends AppCompatActivity  {
                                 dialog.setCancelable(false);
                                 dialog.show();
                             } else {
-                                ShellUtils.fastCmd("mkdir "+winpath+"Windows/sta || true ");
-                                ShellUtils.fastCmd("cp /sdcard/sta.conf "+winpath+"Windows/sta");
-                                ShellUtils.fastCmd("cp "+getFilesDir()+"/sta.exe "+winpath+"sta/sta.exe");
-                                ShellUtils.fastCmd("cp \'"+getFilesDir()+"/Switch to Android.lnk\' "+winpath+"Users/Default/Desktop");
+                                ShellUtils.fastCmd("mkdir "+winpath+"/Windows/sta || true ");
+                                ShellUtils.fastCmd("cp /sdcard/sta.conf "+winpath+"/Windows/sta");
+                                ShellUtils.fastCmd("cp "+getFilesDir()+"/sta.exe "+winpath+"/sta/sta.exe");
+                                ShellUtils.fastCmd("cp \'"+getFilesDir()+"/Switch to Android.lnk\' "+winpath+"/Users/Default/Desktop");
                                 messages.setText(getString(R.string.done));
                                 dismissButton.setText(getString(R.string.dismiss));
                                 dismissButton.setVisibility(View.VISIBLE);
@@ -1143,9 +1150,9 @@ public class MainActivity extends AppCompatActivity  {
                                         }
                                         else {
                                             icons.setImageDrawable(atlasos);
-                                            ShellUtils.fastCmd("mkdir "+winpath+"Toolbox || true ");
-                                            ShellUtils.fastCmd("cp /sdcard/Revi-PB-24.06.apbx "+winpath+"Toolbox/Revi-PB-24.06.apbx");
-                                            ShellUtils.fastCmd("cp /sdcard/AMEWizardBeta.zip "+winpath+"Toolbox");
+                                            ShellUtils.fastCmd("mkdir "+winpath+"/Toolbox || true ");
+                                            ShellUtils.fastCmd("cp /sdcard/Revi-PB-24.06.apbx "+winpath+"/Toolbox/Revi-PB-24.06.apbx");
+                                            ShellUtils.fastCmd("cp /sdcard/AMEWizardBeta.zip "+winpath+"/Toolbox");
                                             bar.setProgress((int) (bar.getMax()), true);
                                             messages.setText(getString(R.string.done));
                                         }
@@ -1243,9 +1250,9 @@ public class MainActivity extends AppCompatActivity  {
                                         }
                                         else {
                                             icons.setImageDrawable(atlasos);
-                                            ShellUtils.fastCmd("mkdir "+winpath+"Toolbox || true ");
-                                            ShellUtils.fastCmd("cp /sdcard/AtlasPlaybook_v0.4.0.apbx "+winpath+"Toolbox/AtlasPlaybook_v0.4.0.apbx");
-                                            ShellUtils.fastCmd("cp /sdcard/AMEWizardBeta.zip "+winpath+"Toolbox");
+                                            ShellUtils.fastCmd("mkdir "+winpath+"/Toolbox || true ");
+                                            ShellUtils.fastCmd("cp /sdcard/AtlasPlaybook_v0.4.0.apbx "+winpath+"/Toolbox/AtlasPlaybook_v0.4.0.apbx");
+                                            ShellUtils.fastCmd("cp /sdcard/AMEWizardBeta.zip "+winpath+"/Toolbox");
                                             bar.setProgress(bar.getMax(),true);
                                             messages.setText(getString(R.string.done));
                                         }
@@ -1370,8 +1377,8 @@ public class MainActivity extends AppCompatActivity  {
                                 dialog.setCancelable(false);
                                 dialog.show();
                             } else {
-                                ShellUtils.fastCmd("mkdir "+winpath+"Toolbox || true ");
-                                ShellUtils.fastCmd("cp /sdcard/usbhostmode.exe "+winpath+"Toolbox");
+                                ShellUtils.fastCmd("mkdir "+winpath+"/Toolbox || true ");
+                                ShellUtils.fastCmd("cp /sdcard/usbhostmode.exe "+winpath+"/Toolbox");
                                 messages.setText(getString(R.string.done));
                                 dismissButton.setText(getString(R.string.dismiss));
                                 dismissButton.setVisibility(View.VISIBLE);
@@ -1459,7 +1466,7 @@ public class MainActivity extends AppCompatActivity  {
                                 dialog.setCancelable(false);
                                 dialog.show();
                             } else {
-                                ShellUtils.fastCmd("cp /sdcard/autoflasher.lnk \'"+winpath+"ProgramData/Microsoft/Windows/Start Menu/Programs/Startup\'");
+                                ShellUtils.fastCmd("cp /sdcard/autoflasher.lnk \'"+winpath+"/ProgramData/Microsoft/Windows/Start Menu/Programs/Startup\'");
                                 messages.setText(getString(R.string.done));
                                 dismissButton.setText(getString(R.string.dismiss));
                                 dismissButton.setVisibility(View.VISIBLE);
@@ -1547,8 +1554,8 @@ public class MainActivity extends AppCompatActivity  {
                                 dialog.setCancelable(false);
                                 dialog.show();
                             } else {
-                                ShellUtils.fastCmd("mkdir "+winpath+"Toolbox || true ");
-                                ShellUtils.fastCmd("cp /sdcard/DefenderRemover.exe "+winpath+"Toolbox");
+                                ShellUtils.fastCmd("mkdir "+winpath+"/Toolbox || true ");
+                                ShellUtils.fastCmd("cp /sdcard/DefenderRemover.exe "+winpath+"/Toolbox");
                                 messages.setText(getString(R.string.done));
                                 dismissButton.setText(getString(R.string.dismiss));
                                 dismissButton.setVisibility(View.VISIBLE);
@@ -1638,10 +1645,10 @@ public class MainActivity extends AppCompatActivity  {
                                 dialog.setCancelable(false);
                                 dialog.show();
                             } else {
-                                ShellUtils.fastCmd("mkdir "+winpath+"Toolbox || true ");
-                                ShellUtils.fastCmd("mkdir "+winpath+"Toolbox/Rotation || true ");
-                                ShellUtils.fastCmd("cp /sdcard/display.exe "+winpath+"Toolbox/Rotation");
-                                ShellUtils.fastCmd("cp /sdcard/RotationShortcut.lnk "+winpath+"Toolbox/Rotation");
+                                ShellUtils.fastCmd("mkdir "+winpath+"/Toolbox || true ");
+                                ShellUtils.fastCmd("mkdir "+winpath+"/Toolbox/Rotation || true ");
+                                ShellUtils.fastCmd("cp /sdcard/display.exe "+winpath+"/Toolbox/Rotation");
+                                ShellUtils.fastCmd("cp /sdcard/RotationShortcut.lnk "+winpath+"/Toolbox/Rotation");
                                 messages.setText(getString(R.string.done));
                                 dismissButton.setText(getString(R.string.dismiss));
                                 dismissButton.setVisibility(View.VISIBLE);
@@ -1729,8 +1736,8 @@ public class MainActivity extends AppCompatActivity  {
                                 dialog.setCancelable(false);
                                 dialog.show();
                             } else {
-                                ShellUtils.fastCmd("mkdir "+winpath+"Toolbox || true ");
-                                ShellUtils.fastCmd("cp /sdcard/RemoveEdge.ps1 "+winpath+"Toolbox");
+                                ShellUtils.fastCmd("mkdir "+winpath+"/Toolbox || true ");
+                                ShellUtils.fastCmd("cp /sdcard/RemoveEdge.ps1 "+winpath+"/Toolbox");
                                 messages.setText(getString(R.string.done));
                                 dismissButton.setText(getString(R.string.dismiss));
                                 dismissButton.setVisibility(View.VISIBLE);
@@ -1820,10 +1827,10 @@ public class MainActivity extends AppCompatActivity  {
                                 dialog.setCancelable(false);
                                 dialog.show();
                             } else {
-                                ShellUtils.fastCmd("mkdir "+winpath+"Toolbox || true ");
-                                ShellUtils.fastCmd("cp /sdcard/WorksOnWoa.url "+winpath+"Toolbox");
-                                ShellUtils.fastCmd("cp /sdcard/TestedSoftware.url "+winpath+"Toolbox");
-                                ShellUtils.fastCmd("cp /sdcard/ARMSoftware.url "+winpath+"Toolbox");
+                                ShellUtils.fastCmd("mkdir "+winpath+"/Toolbox || true ");
+                                ShellUtils.fastCmd("cp /sdcard/WorksOnWoa.url "+winpath+"/Toolbox");
+                                ShellUtils.fastCmd("cp /sdcard/TestedSoftware.url "+winpath+"/Toolbox");
+                                ShellUtils.fastCmd("cp /sdcard/ARMSoftware.url "+winpath+"/Toolbox");
                                 messages.setText(getString(R.string.done));
                                 dismissButton.setText(getString(R.string.dismiss));
                                 dismissButton.setVisibility(View.VISIBLE);
@@ -1936,7 +1943,7 @@ public class MainActivity extends AppCompatActivity  {
                                         pref.setDATE(MainActivity.this, currentDateAndTime);
                                         x.tvDate.setText(String.format(getString(R.string.last), pref.getDATE(MainActivity.this)));
                                         String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + win);
-                                        winBackup(mnt_stat.isEmpty());
+                                        winBackup();
                                         messages.setText(getString(R.string.backuped));
                                         dismissButton.setText(R.string.dismiss);
                                         dismissButton.setVisibility(View.VISIBLE);
@@ -2008,7 +2015,7 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 pref.setMountLocation(MainActivity.this,b);
-                winpath=(b?"/mnt/Windows/":"/mnt/sdcard/Windows/");
+                winpath = (b?"/mnt/Windows":"/mnt/sdcard/Windows");
             }
         });
 
@@ -2219,7 +2226,6 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     public void mount() {
-
         String c ;
         if (!pref.getMountLocation(MainActivity.this)) {
             c = String.format("su -mm -c " + pref.getbusybox(MainActivity.this) + getString(R.string.mount), win);
@@ -2233,21 +2239,60 @@ public class MainActivity extends AppCompatActivity  {
             mounted = getString(R.string.unmountt);
             x.tvMnt.setText(String.format(getString(R.string.mnt_title), mounted));
     }
-    public void winBackup(boolean m) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                if (m) {
-                    ShellUtils.fastCmd(getString(R.string.mk));
-                    ShellUtils.fastCmd(String.format(pref.getbusybox(MainActivity.this) + getString(R.string.mount), win));
-                    ShellUtils.fastCmd(getString(R.string.backup1));
-                    ShellUtils.fastCmd(getString(R.string.unmount));
-                    ShellUtils.fastCmd(getString(R.string.rm));
-                } else
-                    ShellUtils.fastCmd(getString(R.string.backup1));
-            }
-        }).start();
+	
+	public void winBackup() {
+		if (!pref.getMountLocation(MainActivity.this)) {
+			ShellUtils.fastCmd(getString(R.string.mk));
+			ShellUtils.fastCmd(String.format(pref.getbusybox(MainActivity.this) + getString(R.string.mount), win));
+			ShellUtils.fastCmd(getString(R.string.backup1));
+			ShellUtils.fastCmd(getString(R.string.unmount));
+			ShellUtils.fastCmd(getString(R.string.rm));
+        } else{
+			ShellUtils.fastCmd(getString(R.string.mk2));
+			ShellUtils.fastCmd(String.format(pref.getbusybox(MainActivity.this) + getString(R.string.mount2), win));
+			ShellUtils.fastCmd(getString(R.string.backup2));
+			ShellUtils.fastCmd(getString(R.string.unmount2));
+			ShellUtils.fastCmd(getString(R.string.rm2));
+        }
     }
+	
+//	public void winBackup(boolean m) {
+//        new Thread(new Runnable() {
+//			@Override
+//            public void run() {
+//				if (m) {
+//        			if (!pref.getMountLocation(MainActivity.this)) {
+//          				ShellUtils.fastCmd(getString(R.string.mk));
+//           				ShellUtils.fastCmd(String.format(pref.getbusybox(MainActivity.this) + getString(R.string.mount), win));
+//           				ShellUtils.fastCmd(getString(R.string.backup1));
+//           				ShellUtils.fastCmd(getString(R.string.unmount));
+//           				ShellUtils.fastCmd(getString(R.string.rm));
+//        			} else{
+//          				ShellUtils.fastCmd(getString(R.string.mk2));
+//          				ShellUtils.fastCmd(String.format(pref.getbusybox(MainActivity.this) + getString(R.string.mount2), win));
+//           				ShellUtils.fastCmd(getString(R.string.backup2));
+//           				ShellUtils.fastCmd(getString(R.string.unmount2));
+//           				ShellUtils.fastCmd(getString(R.string.rm2));
+//						}}
+//            }
+//        }).start();
+//    }
+	
+//    public void winBackup(boolean m) {
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                if (m) {
+//                    ShellUtils.fastCmd(getString(R.string.mk));
+//                    ShellUtils.fastCmd(String.format(pref.getbusybox(MainActivity.this) + getString(R.string.mount), win));
+//                    ShellUtils.fastCmd(getString(R.string.backup1));
+//                    ShellUtils.fastCmd(getString(R.string.unmount));
+//                    ShellUtils.fastCmd(getString(R.string.rm));
+//                } else
+//                    ShellUtils.fastCmd(getString(R.string.backup1));
+//            }
+//        }).start();
+//    }
 
     public void unmount() {
         if (!pref.getMountLocation(MainActivity.this)) {
@@ -2264,8 +2309,8 @@ public class MainActivity extends AppCompatActivity  {
 
 
     public void dump() {
-        ShellUtils.fastCmd(String.format(getString(R.string.modem1)),pref.getMountLocation(MainActivity.this)?"/mnt/Windows/":"/mnt/sdcard/Windows/");
-        ShellUtils.fastCmd(String.format(getString(R.string.modem2)),pref.getMountLocation(MainActivity.this)?"/mnt/Windows/":"/mnt/sdcard/Windows/");
+        ShellUtils.fastCmd(String.format(getString(R.string.modem1)),pref.getMountLocation(MainActivity.this)?"/mnt/Windows":"/mnt/sdcard/Windows");
+        ShellUtils.fastCmd(String.format(getString(R.string.modem2)),pref.getMountLocation(MainActivity.this)?"/mnt/Windows":"/mnt/sdcard/Windows");
     }
 
     public void checkdevice() {
@@ -2284,7 +2329,7 @@ public class MainActivity extends AppCompatActivity  {
             dialog.show();
             dialog.setCancelable(false);
         }
-        String[] supported = {"a52sxq", "alphalm_lao_com", "alphaplus_lao_com", "alioth", "alphalm", "alphaplus", "andromeda", "betalm", "betaplus_lao_com", "betalm_lao_com", "beryllium", "bhima", "cepheus", "cheeseburger", "curtana2", "chiron", "curtana", "curtana_india","joyeuse", "curtana_cn","curtanacn", "cmi", "davinci", "dumpling", "dipper", "durandal", "durandal_india", "enchilada", "equuleus", "excalibur", "excalibur_india", "flashlmdd", "flashlmdd_lao_com", "fajita", "houji", "joan", "judyln", "judyp", "judypn", "guacamole", "guacamoleb", "gram", "hotdog", "hotdogb", "hotdogg", "lisa", "marble", "mh2lm", "mh2plus_lao_com", "mh2lm_lao_com", "mh2lm5g", "mh2lm5g_lao_com", "miatoll", "nabu", "pipa", "OnePlus6", "OnePlus6T", "OnePlus7", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7T", "OnePlus7TPro", "OnePlus7TPro4G", "OnePlus7TPro5G", "OP7ProNRSpr", "OnePlus7TProNR", "perseus", "polaris", "Pong", "pong", "q2q", "raphael", "raphaelin", "raphaels", "RMX2170", "RMX2061", "sagit", "surya", "vayu", "venus", "winner", "xpeng", "G973F", "SM-G973F", "beyond1lte", "beyond1qlte", "G973U", "G973U1", "SM-G973U", "SM-G973U1", "G9730", "SM-G9730", "G973N", "SM-G973N", "G973X", "SM-G973X", "G973C", "SM-G973C", "SCV41", "SM-SC41", "beyond1"};
+        String[] supported = {"a52sxq", "alphalm_lao_com", "alphaplus_lao_com", "alioth", "alphalm", "alphaplus", "andromeda", "betalm", "betaplus_lao_com", "betalm_lao_com", "beryllium", "bhima", "cepheus", "cheeseburger", "curtana2", "chiron", "curtana", "curtana_india","joyeuse", "curtana_cn","curtanacn", "cmi", "davinci", "dumpling", "dipper", "durandal", "durandal_india", "enchilada", "equuleus", "excalibur", "excalibur_india", "flashlmdd", "flashlmdd_lao_com", "fajita", "houji", "joan", "judyln", "judyp", "judypn", "guacamole", "guacamoleb", "gram", "hotdog", "hotdogb", "hotdogg", "lisa", "marble", "mh2lm", "mh2plus_lao_com", "mh2lm_lao_com", "mh2lm5g", "mh2lm5g_lao_com", "miatoll", "nabu", "pipa", "OnePlus6", "OnePlus6T", "OnePlus7", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7T", "OnePlus7TPro", "OnePlus7TPro4G", "OnePlus7TPro5G", "OP7ProNRSpr", "OnePlus7TProNR", "perseus", "polaris", "Pong", "pong", "q2q", "raphael", "raphaelin", "raphaels", "RMX2170", "RMX2061", "sagit", "surya", "vayu", "venus", "winner", "winnerx", "xpeng", "G973F", "SM-G973F", "beyond1lte", "beyond1qlte", "G973U", "G973U1", "SM-G973U", "SM-G973U1", "G9730", "SM-G9730", "G973N", "SM-G973N", "G973X", "SM-G973X", "G973C", "SM-G973C", "SCV41", "SM-SC41", "beyond1"};
         device = ShellUtils.fastCmd("getprop ro.product.device ");
         model = ShellUtils.fastCmd("getprop ro.product.model");
         if (!Arrays.asList(supported).contains(device)) {

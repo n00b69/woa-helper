@@ -103,4 +103,5 @@
 	<string name="preference7">Cihaz açılışında otomatik olarak Windows\'u bağla</string>
 	<string name="preference8">Modem yedeklemesini devre dışı bırak</string>
 	<string name="preference9">Quickboot için ekran kilidi açmayı zorunlu kıl</string>
+	<string name="preference10">Mount Windows to /mnt instead of /sdcard</string>
 </resources>

@@ -103,4 +103,5 @@
 	<string name="preference7">Tự động gắn Windows khi khởi động thiết bị</string>
 	<string name="preference8">Tắt chức năng kết xuất modem</string>
 	<string name="preference9">Yêu cầu màn hình mở khóa để khởi động nhanh</string>
+	<string name="preference10">Mount Windows to /mnt instead of /sdcard</string>
 </resources>

@@ -103,4 +103,5 @@
 	<string name="preference7">Windows automatisch mounten wanneer uw toestel opstart</string>
 	<string name="preference8">Modem functie uitschakelen</string>
 	<string name="preference9">Vereist ontgrendeld scherm voor quickboot</string>
+	<string name="preference10">Mount Windows naar /mnt i.p.v /sdcard</string>
 </resources>

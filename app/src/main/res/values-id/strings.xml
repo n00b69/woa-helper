@@ -103,4 +103,5 @@
 	<string name="preference7">Memasang Windows secara otomatis saat perangkat dimulai</string>
 	<string name="preference8">Nonaktifkan fungsionalitas dump modem</string>
 	<string name="preference9">Memerlukan layar yang tidak terkunci untuk quickboot</string>
+	<string name="preference10">Mount Windows to /mnt instead of /sdcard</string>
 </resources>
