@@ -111,14 +111,16 @@
 	<string name="preference10">Mount Windows to /mnt instead of /sdcard</string>
 	
 	<string name="uefiChk" translatable="false">su -c find /mnt/sdcard/UEFI/ -type f  | grep ".img" | head -n 1 </string>
+	
 	<string name="modem1" translatable="false">su -c dd bs=8M if=/dev/block/by-name/modemst1 of=/mnt/sdcard/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_04af705613ed2d36/bootmodem_fs1 </string>
 	<string name="modem2" translatable="false">su -c dd bs=8M if=/dev/block/by-name/modemst2 of=/mnt/sdcard/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_04af705613ed2d36/bootmodem_fs2 </string>
-	
 	<string name="mount" translatable="false"> mount -t ntfs %s /mnt/sdcard/Windows</string>
 	<string name="unmount" translatable="false">su -mm -c umount /mnt/sdcard/Windows </string>
 	<string name="rm" translatable="false">rmdir /mnt/sdcard/Windows</string>
 	<string name="mk" translatable="false">mkdir /mnt/sdcard/Windows || true</string>
 	
+	<string name="modem12" translatable="false">su -c dd bs=8M if=/dev/block/by-name/modemst1 of=/mnt/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_04af705613ed2d36/bootmodem_fs1 </string>
+	<string name="modem22" translatable="false">su -c dd bs=8M if=/dev/block/by-name/modemst2 of=/mnt/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_04af705613ed2d36/bootmodem_fs2 </string>
 	<string name="mount2" translatable="false"> mount -t ntfs %s /mnt/Windows</string>
 	<string name="unmount2" translatable="false">su -mm -c umount /mnt/Windows </string>
 	<string name="rm2" translatable="false">rmdir /mnt/Windows</string>
