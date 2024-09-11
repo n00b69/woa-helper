@@ -2309,8 +2309,13 @@ public class MainActivity extends AppCompatActivity  {
 
 
     public void dump() {
-        ShellUtils.fastCmd(String.format(getString(R.string.modem1)),pref.getMountLocation(MainActivity.this)?"/mnt/Windows":"/mnt/sdcard/Windows");
-        ShellUtils.fastCmd(String.format(getString(R.string.modem2)),pref.getMountLocation(MainActivity.this)?"/mnt/Windows":"/mnt/sdcard/Windows");
+		if (!pref.getMountLocation(MainActivity.this)) {
+            ShellUtils.fastCmd(getString(R.string.modem1));
+            ShellUtils.fastCmd(getString(R.string.modem2));
+        } else{
+            ShellUtils.fastCmd(getString(R.string.modem12));
+            ShellUtils.fastCmd(getString(R.string.modem22));
+        }
     }
 
     public void checkdevice() {
