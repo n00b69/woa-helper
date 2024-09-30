@@ -57,7 +57,7 @@ public class MyQSTileService extends TileService {
 		if (!(Objects.equals(device, "nabu")||Objects.equals(device, "mh2lm")) || !(pref.getMODEM(this))) {
 			dump();
 		}
-		String found = ShellUtils.fastCmd("ls "+(pref.getMountLocation(this)?"/mnt/Windows":"/mnt/sdcard/Windows")+" | grep boot.img");
+		String found = ShellUtils.fastCmd("ls "+(pref.getMountLocation(this)?"/mnt/sdcard/LOL":"/mnt/sdcard/Windows")+" | grep boot.img");
 		if (!pref.getMountLocation(this)) {
             if (pref.getBACKUP(this)
 			|| (!pref.getAUTO(this) && found.isEmpty())) {

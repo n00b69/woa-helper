@@ -1086,7 +1086,7 @@ public class MainActivity extends AppCompatActivity  {
                 dialog.show();
             }
         });
-
+		
         n.cvAtlasos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1103,7 +1103,7 @@ public class MainActivity extends AppCompatActivity  {
                 if (!isNetworkConnected(MainActivity.this)){
                     noButton.setVisibility(View.GONE);
                     yesButton.setVisibility(View.GONE);
-                    messages.setText("No internet connection\nConnect to internet and try again");
+                    messages.setText("No internet connection\nConnect to the internet and try again");
                 }
                 dismissButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -1134,10 +1134,11 @@ public class MainActivity extends AppCompatActivity  {
                                 } catch (InterruptedException e) {
                                     throw new RuntimeException(e);
                                 }
+								bar.setProgress((int) (bar.getMax() * 0.00), true);
                                 ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://github.com/n00b69/modified-playbooks/releases/download/ReviOS/Revi-PB-24.06.apbx -O /sdcard/Revi-PB-24.06.apbx");
                                 bar.setProgress((int) (bar.getMax() * 0.5), true);
                                 ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://download.ameliorated.io/AME%20Wizard%20Beta.zip -O /sdcard/AMEWizardBeta.zip");
-                                bar.setProgress((int) (bar.getMax()*0.8), true);
+                                bar.setProgress((int) (bar.getMax() * 0.8), true);
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -1233,10 +1234,11 @@ public class MainActivity extends AppCompatActivity  {
                                 } catch (InterruptedException e) {
                                     throw new RuntimeException(e);
                                 }
+								bar.setProgress((int) (bar.getMax() * 0.00), true);
                                 ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook_v0.4.0.apbx -O /sdcard/AtlasPlaybook_v0.4.0.apbx");
                                 bar.setProgress((int) (bar.getMax() * 0.5), true);
                                 ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://download.ameliorated.io/AME%20Wizard%20Beta.zip -O /sdcard/AMEWizardBeta.zip");
-                                bar.setProgress((int) (bar.getMax()*0.8), true);
+                                bar.setProgress((int) (bar.getMax() * 0.8), true);
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -1496,7 +1498,203 @@ public class MainActivity extends AppCompatActivity  {
                 dialog.show();
             }
         });
+		
+		z.cvSetup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShowBlur();
+                noButton.setText(getString(R.string.no));
+                yesButton.setText(getString(R.string.yes));
+                dismissButton.setVisibility(View.GONE);
+                noButton.setVisibility(View.VISIBLE);
+                yesButton.setVisibility(View.VISIBLE);
+                messages.setText(getString(R.string.setup_question));
+                icons.setVisibility(View.VISIBLE);
+                icons.setImageDrawable(mnt);
+                if (!isNetworkConnected(MainActivity.this)){
+                    noButton.setVisibility(View.GONE);
+                    yesButton.setVisibility(View.GONE);
+                    messages.setText("No internet connection\nConnect to the internet and try again");
+                }
+                noButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        HideBlur();
+                        dialog.dismiss();
+                    }
+                });
+                yesButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        noButton.setVisibility(View.GONE);
+                        yesButton.setVisibility(View.GONE);
+                        dismissButton.setVisibility(View.GONE);
+                        bar.setVisibility(View.VISIBLE);
+                        bar.setProgress(0);
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                icons.setVisibility(View.VISIBLE);
+                                icons.setImageDrawable(download);
+                                try {
+                                    Thread.sleep(100);
+                                } catch (InterruptedException e) {
+                                    throw new RuntimeException(e);
+                                }
+								bar.setProgress((int) (bar.getMax() * 0.00), true);
+                                ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2005vcredist_x64.EXE /sdcard/");
+                                bar.setProgress((int) (bar.getMax() * 0.05), true);
+                                ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2005vcredist_x86.EXE /sdcard/");
+                                bar.setProgress((int) (bar.getMax() * 0.1), true);
+								ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2008vcredist_x64.exe /sdcard/");
+                                bar.setProgress((int) (bar.getMax() * 0.15), true);
+								ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2008vcredist_x86.exe /sdcard/");
+                                bar.setProgress((int) (bar.getMax() * 0.2), true);
+								ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2010vcredist_x64.exe /sdcard/");
+                                bar.setProgress((int) (bar.getMax() * 0.25), true);
+								ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2010vcredist_x86.exe /sdcard/");
+                                bar.setProgress((int) (bar.getMax() * 0.3), true);
+								ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2012vcredist_x64.exe /sdcard/");
+                                bar.setProgress((int) (bar.getMax() * 0.35), true);
+								ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2012vcredist_x86.exe /sdcard/");
+                                bar.setProgress((int) (bar.getMax() * 0.4), true);
+								ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2013vcredist_x64.exe /sdcard/");
+                                bar.setProgress((int) (bar.getMax() * 0.45), true);
+								ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2013vcredist_x86.exe /sdcard/");
+                                bar.setProgress((int) (bar.getMax() * 0.5), true);
+								ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2015VC_redist.x64.exe /sdcard/");
+                                bar.setProgress((int) (bar.getMax() * 0.55), true);
+								ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2015VC_redist.x86.exe /sdcard/");
+                                bar.setProgress((int) (bar.getMax() * 0.6), true);
+								ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2022VC_redist.arm64.exe /sdcard/");
+                                bar.setProgress((int) (bar.getMax() * 0.65), true);
+								ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/dxwebsetup.exe /sdcard/");
+                                bar.setProgress((int) (bar.getMax() * 0.7), true);
+								ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/oalinst.exe /sdcard/");
+                                bar.setProgress((int) (bar.getMax() * 0.75), true);
+								ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/PhysX-9.13.0604-SystemSoftware-Legacy.msi /sdcard/");
+                                bar.setProgress((int) (bar.getMax() * 0.8), true);
+								ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/PhysX-9.19.0218-SystemSoftware.exe /sdcard/");
+                                bar.setProgress((int) (bar.getMax() * 0.85), true);
+								ShellUtils.fastCmd(getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/xnafx40_redist.msi /sdcard/");
+                                bar.setProgress((int) (bar.getMax() * 0.9), true);
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        mount();
+                                        String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + win);
+                                        Log.d("path",mnt_stat);
+                                        if (mnt_stat.isEmpty()) {
+                                            yesButton.setVisibility(View.VISIBLE);
+                                            icons.setVisibility(View.GONE);
+                                            messages.setText(getString(R.string.ntfs)+"\nFiles downloaded in internal storage");
+                                        }
+                                        else {
+                                            icons.setImageDrawable(mnt);
+                                            ShellUtils.fastCmd("mkdir "+winpath+"/Toolbox || true ");
+                                            ShellUtils.fastCmd("cp /sdcard/2005vcredist_x64.EXE "+winpath+"/Toolbox/");
+                                            ShellUtils.fastCmd("cp /sdcard/2005vcredist_x86.EXE "+winpath+"/Toolbox/");
+											ShellUtils.fastCmd("cp /sdcard/2008vcredist_x64.exe "+winpath+"/Toolbox/");
+                                            ShellUtils.fastCmd("cp /sdcard/2008vcredist_x86.exe "+winpath+"/Toolbox/");
+											ShellUtils.fastCmd("cp /sdcard/2010vcredist_x64.exe "+winpath+"/Toolbox/");
+                                            ShellUtils.fastCmd("cp /sdcard/2010vcredist_x86.exe "+winpath+"/Toolbox/");
+											ShellUtils.fastCmd("cp /sdcard/2012vcredist_x64.exe "+winpath+"/Toolbox/");
+                                            ShellUtils.fastCmd("cp /sdcard/2012vcredist_x86.exe "+winpath+"/Toolbox/");
+											ShellUtils.fastCmd("cp /sdcard/2013vcredist_x64.exe "+winpath+"/Toolbox/");
+                                            ShellUtils.fastCmd("cp /sdcard/2013vcredist_x86.exe "+winpath+"/Toolbox/");
+											ShellUtils.fastCmd("cp /sdcard/2015VC_redist.x64.exe "+winpath+"/Toolbox/");
+                                            ShellUtils.fastCmd("cp /sdcard/2015VC_redist.x86.exe "+winpath+"/Toolbox/");
+											ShellUtils.fastCmd("cp /sdcard/2022VC_redist.arm64.exe "+winpath+"/Toolbox/");
+                                            ShellUtils.fastCmd("cp /sdcard/dxwebsetup.exe "+winpath+"/Toolbox/");
+											ShellUtils.fastCmd("cp /sdcard/oalinst.exe "+winpath+"/Toolbox/");
+                                            ShellUtils.fastCmd("cp /sdcard/PhysX-9.13.0604-SystemSoftware-Legacy.msi "+winpath+"/Toolbox/");
+											ShellUtils.fastCmd("cp /sdcard/PhysX-9.19.0218-SystemSoftware.exe "+winpath+"/Toolbox/");
+                                            ShellUtils.fastCmd("cp /sdcard/xnafx40_redist.msi "+winpath+"/Toolbox/");
+											ShellUtils.fastCmd("rm /sdcard/2005vcredist_x64.EXE");
+                                            ShellUtils.fastCmd("rm /sdcard/2005vcredist_x86.EXE");
+											ShellUtils.fastCmd("rm /sdcard/2008vcredist_x64.exe");
+                                            ShellUtils.fastCmd("rm /sdcard/2008vcredist_x86.exe");
+											ShellUtils.fastCmd("rm /sdcard/2010vcredist_x64.exe");
+                                            ShellUtils.fastCmd("rm /sdcard/2010vcredist_x86.exe");
+											ShellUtils.fastCmd("rm /sdcard/2012vcredist_x64.exe");
+                                            ShellUtils.fastCmd("rm /sdcard/2012vcredist_x86.exe");
+											ShellUtils.fastCmd("rm /sdcard/2013vcredist_x64.exe");
+                                            ShellUtils.fastCmd("rm /sdcard/2013vcredist_x86.exe");
+											ShellUtils.fastCmd("rm /sdcard/2015VC_redist.x64.exe");
+                                            ShellUtils.fastCmd("rm /sdcard/2015VC_redist.x86.exe");
+											ShellUtils.fastCmd("rm /sdcard/2022VC_redist.arm64.exe");
+                                            ShellUtils.fastCmd("rm /sdcard/dxwebsetup.exe");
+											ShellUtils.fastCmd("rm /sdcard/oalinst.exe");
+                                            ShellUtils.fastCmd("rm /sdcard/PhysX-9.13.0604-SystemSoftware-Legacy.msi");
+											ShellUtils.fastCmd("rm /sdcard/PhysX-9.19.0218-SystemSoftware.exe");
+                                            ShellUtils.fastCmd("rm /sdcard/xnafx40_redist.msi");
+                                            bar.setProgress(bar.getMax(),true);
+                                            messages.setText(getString(R.string.done));
+                                        }
+                                        dismissButton.setVisibility(View.VISIBLE);
+                                        bar.setVisibility(View.GONE);
+                                    }
+                                });
+                            }
+                        }).start();
+                        messages.setText(getString(R.string.please_wait));
+                        try {
+                            mount();
+                            String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + win);
+                            if (mnt_stat.isEmpty()) {
+                                noButton.setVisibility(View.GONE);
+                                yesButton.setText(getString(R.string.chat));
+                                dismissButton.setText(getString(R.string.dismiss));
+                                ShowBlur();
+                                dismissButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        HideBlur();
+                                        icons.setVisibility(View.VISIBLE);
+                                        dialog.dismiss();
+                                    }
+                                });
+                                yesButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent i = new Intent(Intent.ACTION_VIEW);
+                                        i.setData(Uri.parse("https://t.me/woahelperchat"));
+                                        startActivity(i);
+                                    }
+                                });
+                                dialog.setCancelable(false);
+                                dialog.show();
+                            } else {
+                                dismissButton.setText(getString(R.string.dismiss));
+                                dismissButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        HideBlur();
+                                        icons.setVisibility(View.VISIBLE);
+                                        dialog.dismiss();
+                                    }
+                                });
+                            }
+                            dismissButton.setText(getString(R.string.dismiss));
+                            dismissButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    HideBlur();
+                                    icons.setVisibility(View.VISIBLE);
+                                    dialog.dismiss();
+                                }
+                            });
+                        } catch (Exception error) {
+                            error.printStackTrace();
+                        }
+                    }
+                });
 
+                dialog.setCancelable(false);
+                dialog.show();
+            }
+        });
+		
         z.cvDefender.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

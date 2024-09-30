@@ -14,23 +14,22 @@ import com.topjohnwu.superuser.ShellUtils;
 public class automount extends BroadcastReceiver {
 
 
-    String win;
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        String busyBox=getSharedPreference(context).getString(busybox,"");
-        win = ShellUtils.fastCmd("su -c realpath /dev/block/by-name/win");
-        if(win.isEmpty())
-            win = ShellUtils.fastCmd("su -c realpath /dev/block/by-name/mindows");
-        boolean ok=getSharedPreference(context).getBoolean(autoMount,false);
-        if(ok){
+	String win;
+	@Override
+	public void onReceive(Context context, Intent intent) {
+	boolean ok=getSharedPreference(context).getBoolean(autoMount,false);
+	if(ok){
+	String busyBox=getSharedPreference(context).getString(busybox,"");
+		win = ShellUtils.fastCmd("su -c realpath /dev/block/by-name/win");
+		if(win.isEmpty())
+			win = ShellUtils.fastCmd("su -c realpath /dev/block/by-name/mindows");
 			if (!getSharedPreference(context).getBoolean(mountLocation,false)) {
 				ShellUtils.fastCmd("su -c mkdir /mnt/sdcard/Windows || true");
 				ShellUtils.fastCmd(String.format("su -mm -c "+busyBox+" mount -t ntfs %s /mnt/sdcard/Windows", win));
-				}
-				else{
-					ShellUtils.fastCmd("su -c mkdir /mnt/Windows || true");
-					ShellUtils.fastCmd(String.format("su -mm -c "+busyBox+" mount -t ntfs %s /mnt/Windows", win));
-					}
-        	}
-    };
+			} else{
+				ShellUtils.fastCmd("su -c mkdir /mnt/Windows || true");
+				ShellUtils.fastCmd(String.format("su -mm -c "+busyBox+" mount -t ntfs %s /mnt/Windows", win));
+			}
+		}
+	};
 }

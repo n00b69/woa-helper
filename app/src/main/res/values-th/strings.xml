@@ -18,6 +18,7 @@
 	<string name="edge_title">ลบ EDGE</string>
 	<string name="defender_title">ลบ DEFENDER</string>
 	<string name="script_title">กล่องเครื่องมือสคริปต์</string>
+	<string name="setup_title">FRAMEWORK INSTALLERS</string>
 
 	<string name="backup_boot_subtitle">สำรองข้อมูลพาร์ติชั่นสำหรับบูตเข้าสู่ Windows และ Android</string>
 	<string name="mnt_subtitle">สลับพาร์ติชันที่ติดตั้ง Windows เพื่อให้คุณสามารถแก้ไขเนื้อหาได้</string>
@@ -38,6 +39,7 @@
 	<string name="edge_subtitle">เพิ่มสคริปต์ที่ C:\\Toolbox ซึ่งช่วยให้คุณสามารถลบ Microsoft Edge ได้</string>
 	<string name="defender_subtitle">เพิ่มสคริปต์ที่ C:\\Toolbox ซึ่งช่วยให้คุณสามารถลบ Windows Defender ได้</string>
 	<string name="script_subtitle">เพิ่มสคริปต์และการปรับแต่งต่างๆ ที่ C:\\Toolbox</string>
+	<string name="setup_subtitle">Adds installers for several frameworks into C:\\Toolbox</string>
 	
 	<string name="backup_boot_question">สำรองข้อมูลการบูตเข้าสู่ Android ปัจจุบัน?</string>
 	<string name="mount_question">ทำการเชื่อมต่อ Windows ไปที่ /sdcard/Windows?</string>
@@ -55,6 +57,7 @@
 	<string name="atlasos_question">ดาวน์โหลดและย้าย AtlasOS หรือ ReviOS playbook ไปที่ C:\\Toolbox?</string>
 	<string name="edge_question">คัดลอกสคริปต์ลบ Edge ไปที่ C:\\Toolbox?</string>
 	<string name="defender_question">คัดลอกสคริปต์ลบ Defender ไปที่ C:\\Toolbox?</string>
+	<string name="setup_question">Download and move C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, and XNAF installers to C:\\Toolbox?\n(this may take some time)</string>
 	
 	<string name="wrong">ข้อผิดพลาด</string>
 	<string name="ntfs">เกิดข้อผิดพลาด \nไม่สามาทำการเชื่อมต่อ Windows ได้\nขอความช่วยเหลือในการแชททาง Telegram.</string>

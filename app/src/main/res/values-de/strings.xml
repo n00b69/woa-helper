@@ -18,6 +18,7 @@
 	<string name="edge_title">EDGE ENTFERNER</string>
 	<string name="defender_title">DEFENDER ENTFERNER</string>
 	<string name="script_title">SCRIPT TOOLBOX</string>
+	<string name="setup_title">FRAMEWORK INSTALLERS</string>
 
 	<string name="backup_boot_subtitle">Boot-Image Backup erstellen in Windows und/oder Android</string>
 	<string name="mnt_subtitle">Windows-Partition mounten um deren Inhalt anzuzeigen und zu ändern</string>
@@ -38,6 +39,7 @@
 	<string name="edge_subtitle">Fügt in C:\\Toolbox einen Skript hinzu, mit dem Sie Microsoft Edge entfernen können</string>
 	<string name="defender_subtitle">Fügt in C:\\Toolbox einen Skript hinzu, mit dem Sie Windows Defender entfernen können</string>
 	<string name="script_subtitle">Fügt in C:\\Toolbox mehrere Skript und Tweaks hinzu</string>
+	<string name="setup_subtitle">Fügt in C:\\Toolbox mehrere Framework Installers hinzu</string>
 	
 	<string name="backup_boot_question">Backup vom aktuellen Boot-Image erstellen?</string>
 	<string name="mount_question">Windows in /sdcard/Windows mounten?</string>
@@ -55,6 +57,7 @@
 	<string name="atlasos_question">AtlasOS oder ReviOS Playbook herunterladen und nach C:\\Toolbox kopieren?</string>
 	<string name="edge_question">Edge entferner Skript nach C:\\Toolbox kopieren?</string>
 	<string name="defender_question">Defender entferner Skript nach C:\\Toolbox kopieren?</string>
+	<string name="setup_question">C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX und XNAF Installers herunterladen und nach C:\\Toolbox kopieren?\n(es kann eine weile dauern)</string>
 	
 	<string name="wrong">Etwas ist schief gelaufen</string>
 	<string name="ntfs">Etwas ist schief gelaufen, \nWindows konnte nicht gemountet werden.\nFragen Sie nach Hilfe im Telegram-Chat.</string>

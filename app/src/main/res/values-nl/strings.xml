@@ -18,6 +18,7 @@
 	<string name="edge_title">EDGE VERWIJDERAAR</string>
 	<string name="defender_title">DEFENDER VERWIJDERAAR</string>
 	<string name="script_title">SCRIPT TOOLBOX</string>
+	<string name="setup_title">FRAMEWORK INSTALLERS</string>
 	
 	<string name="backup_boot_subtitle">Back up boot image naar Android en/of Windows</string>
 	<string name="mnt_subtitle">Mount/unmount de Windows partitie om de bestanden te kunnen bekijken of wijzigen</string>
@@ -38,6 +39,7 @@
 	<string name="edge_subtitle">Plaatst een script in C:\\Toolbox waarmee je Microsoft Edge kan verwijderen</string>
 	<string name="defender_subtitle">Plaatst een script in C:\\Toolbox waarmee je Windows Defender kan verwijderen</string>
 	<string name="script_subtitle">Plaatst meerdere scripts en tweaks in C:\\Toolbox</string>
+	<string name="setup_subtitle">Plaatst installers voor verschillende frameworks in C:\\Toolbox</string>
 	
 	<string name="backup_boot_question">Back up huidige Android boot image?</string>
 	<string name="mount_question">Mount Windows naar /sdcard/Windows?</string>
@@ -55,6 +57,7 @@
 	<string name="atlasos_question">Download en kopieer AtlasOS of ReviOS playbook naar C:\\Toolbox?</string>
 	<string name="edge_question">Kopieer Edge verwijder script naar C:\\Toolbox?</string>
 	<string name="defender_question">Kopieer Defender verwijder script naar C:\\Toolbox?</string>
+	<string name="setup_question">Download en kopieer C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, en XNAF installers naar C:\\Toolbox?\n(dit kan enkele momenten duren)</string>
 	
 	<string name="wrong">Een fout is opgetreden</string>
 	<string name="ntfs">Een fout is opgetreden, \nWindows kon niet gemount worden.\nVraag om hulp in de Telegram chat.</string>

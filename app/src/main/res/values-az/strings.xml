@@ -18,6 +18,7 @@
 	<string name="edge_title">EDGE REMOVER</string>
 	<string name="defender_title">DEFENDER REMOVER</string>
 	<string name="script_title">SCRIPT TOOLBOX</string>
+	<string name="setup_title">FRAMEWORK INSTALLERS</string>
 
 	<string name="backup_boot_subtitle">Android və/və ya Windows-da yükləmə şəklinin ehtiyat nüsxəsi</string>
 	<string name="mnt_subtitle">İçindəki məzmuna baxmaq və redaktə etmək üçün Windows bölməsinin "mount" yerini dəyişdirin.</string>
@@ -38,6 +39,7 @@
 	<string name="edge_subtitle">Adds a script to C:\\Toolbox which allows you to remove Microsoft Edge</string>
 	<string name="defender_subtitle">Adds a script to C:\\Toolbox which allows you to remove Windows Defender</string>
 	<string name="script_subtitle">Adds an assortment of scripts and tweaks to C:\\Toolbox</string>
+	<string name="setup_subtitle">Adds installers for several frameworks into C:\\Toolbox</string>
 	
 	<string name="backup_boot_question">Cari Android sistemi "image" ehtiyat nüsxəsini yaradılsın?</string>
 	<string name="mount_question">Windows-u /sdcard/Windows qoşum?</string>
@@ -55,6 +57,7 @@
 	<string name="atlasos_question">Download and move AtlasOS or ReviOS playbook to C:\\Toolbox?</string>
 	<string name="edge_question">Copy Edge remover script to C:\\Toolbox?</string>
 	<string name="defender_question">Copy Defender remover script to C:\\Toolbox?</string>
+	<string name="setup_question">Download and move C++ Redistributables and DirectX, OpenGL, OpenAL, PhysX, XNAF installers to C:\\Toolbox?\n(this may take some time)</string>
 
 	<string name="wrong">Xəta baş verdi</string>
 	<string name="ntfs">Xəta baş verdi, \nWindows-u qöşa bilmirəm.\nTelegram çatda kömək almaq</string>

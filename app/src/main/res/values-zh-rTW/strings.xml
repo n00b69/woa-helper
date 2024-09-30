@@ -18,6 +18,7 @@
 	<string name="edge_title">EDGE 卸載器</string>
 	<string name="defender_title">DEFENDER 卸載器</string>
 	<string name="script_title">腳本工具箱</string>
+	<string name="setup_title">FRAMEWORK INSTALLERS</string>
 	
 	<string name="backup_boot_subtitle">備份 boot 分區到 Windows 和 Android</string>
 	<string name="mnt_subtitle">掛載安裝 Windows 的分區以查看或編輯其中的內容</string>
@@ -38,6 +39,7 @@
 	<string name="edge_subtitle">將卸載 Microsoft Edge 的腳本添加到 C:\\Toolbox</string>
 	<string name="defender_subtitle">將卸載 Windows Defender 的腳本添加到 C:\\Toolbox</string>
 	<string name="script_subtitle">將一系列優化腳本添加到 C:\\Toolbox</string>
+	<string name="setup_subtitle">Adds installers for several frameworks into C:\\Toolbox</string>
 	
 	<string name="backup_boot_question">確認備份當前 Android 的 boot 鏡像?</string>
 	<string name="mount_question">確認掛載 Windows 到 /sdcard/Windows?</string>
@@ -55,6 +57,7 @@
 	<string name="atlasos_question">是否要在 C:\\Toolbox 中下載 AtlasOS / ReviOS playbook?</string>
 	<string name="edge_question">是否在 C:\\Toolbox 中安裝 Edge 卸載器?</string>
 	<string name="defender_question">是否在 C:\\Toolbox 中安裝 Defender 卸載器?</string>
+	<string name="setup_question">Download and move C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, and XNAF installers to C:\\Toolbox?\n(this may take some time)</string>
 	
 	<string name="wrong">錯誤</string>
 	<string name="ntfs">出錯, \nWindows 不能被掛載。\n請在 Telegram 羣聊中尋求幫助。</string>
