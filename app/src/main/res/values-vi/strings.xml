@@ -39,7 +39,7 @@
 	<string name="edge_subtitle">Thêm tập lệnh vào C:\\Toolbox cho phép bạn xóa Microsoft Edge</string>
 	<string name="defender_subtitle">Thêm tập lệnh vào C:\\Toolbox cho phép bạn xóa Windows Defender</string>
 	<string name="script_subtitle">Thêm nhiều loại tập lệnh và tweaks vào C:\\Toolbox</string>
-	<string name="setup_subtitle">Adds installers for several frameworks into C:\\Toolbox</string>
+	<string name="setup_subtitle">Thêm trình cài đặt cho một số framework vào C:\\Toolbox</string>
 	
 	<string name="backup_boot_question">Có muốn sao lưu boot.img chứa?</string>
 	<string name="mount_question">Hiện file Windows vào /sdcard/Windows?</string>
@@ -57,7 +57,7 @@
 	<string name="atlasos_question">Tải xuống và di chuyển AtlasOS hoặc ReviOS playbook sang C:\\Toolbox?</string>
 	<string name="edge_question">Sao chép tập lệnh xóa Edge vào C:\\Toolbox?</string>
 	<string name="defender_question">Sao chép tập lệnh gỡ bỏ Defender vào C:\\Toolbox?</string>
-	<string name="setup_question">Download and move C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, and XNAF installers to C:\\Toolbox?\n(this may take some time)</string>
+	<string name="setup_question">Tải xuống và di chuyển trình cài đặt C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX và XNAF vào C:\\Toolbox?\n(có thể mất một thời gian)</string>
 	
 	<string name="wrong">Lỗi ở đâu ý</string>
 	<string name="ntfs">Lỗi rồi, \nWindows không hiện file được.\nYêu cầu được trợ giúp trên Telegram.</string>
@@ -106,5 +106,5 @@
 	<string name="preference7">Tự động gắn Windows khi khởi động thiết bị</string>
 	<string name="preference8">Tắt chức năng kết xuất modem</string>
 	<string name="preference9">Yêu cầu màn hình mở khóa để khởi động nhanh</string>
-	<string name="preference10">Mount Windows to /mnt instead of /sdcard</string>
+	<string name="preference10">Gắn Windows vào /mnt thay vì /sdcard</string>
 </resources>

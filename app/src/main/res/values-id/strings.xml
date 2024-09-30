@@ -57,7 +57,7 @@
 	<string name="atlasos_question">Unduh dan pindahkan buku pedoman AtlasOS atau ReviOS ke C:\\Toolbox?</string>
 	<string name="edge_question">Salin skrip penghapus Edge ke C:\\Toolbox?</string>
 	<string name="defender_question">Salin skrip penghapus Defender ke C:\\Toolbox?</string>
-	<string name="setup_question">Unduh dan pindahkan C++ Redistributables dan penginstal DirectX, OpenGL, OpenAL, PhysX, XNAF to C:\\Toolbox?\n(this may take some time)</string>
+	<string name="setup_question">Unduh dan pindahkan C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, dan XNA ke C:\\Toolbox?\n(ini mungkin memerlukan waktu)</string>
 	
 	<string name="wrong">Ada yang tidak benar</string>
 	<string name="ntfs">Ada yang tidak beres, \nWindows tidak dapat dipasang.\nMinta bantuan di obrolan Telegram.</string>

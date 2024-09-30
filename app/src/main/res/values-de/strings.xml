@@ -57,7 +57,7 @@
 	<string name="atlasos_question">AtlasOS oder ReviOS Playbook herunterladen und nach C:\\Toolbox kopieren?</string>
 	<string name="edge_question">Edge entferner Skript nach C:\\Toolbox kopieren?</string>
 	<string name="defender_question">Defender entferner Skript nach C:\\Toolbox kopieren?</string>
-	<string name="setup_question">C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX und XNAF Installers herunterladen und nach C:\\Toolbox kopieren?\n(es kann eine weile dauern)</string>
+	<string name="setup_question">C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX und XNA framework Installers herunterladen und nach C:\\Toolbox kopieren?\n(es kann eine weile dauern)</string>
 	
 	<string name="wrong">Etwas ist schief gelaufen</string>
 	<string name="ntfs">Etwas ist schief gelaufen, \nWindows konnte nicht gemountet werden.\nFragen Sie nach Hilfe im Telegram-Chat.</string>

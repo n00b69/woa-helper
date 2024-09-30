@@ -57,7 +57,7 @@
 	<string name="atlasos_question">Download en kopieer AtlasOS of ReviOS playbook naar C:\\Toolbox?</string>
 	<string name="edge_question">Kopieer Edge verwijder script naar C:\\Toolbox?</string>
 	<string name="defender_question">Kopieer Defender verwijder script naar C:\\Toolbox?</string>
-	<string name="setup_question">Download en kopieer C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, en XNAF installers naar C:\\Toolbox?\n(dit kan enkele momenten duren)</string>
+	<string name="setup_question">Download en kopieer C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, en XNA framework installers naar C:\\Toolbox?\n(dit kan enkele momenten duren)</string>
 	
 	<string name="wrong">Een fout is opgetreden</string>
 	<string name="ntfs">Een fout is opgetreden, \nWindows kon niet gemount worden.\nVraag om hulp in de Telegram chat.</string>
