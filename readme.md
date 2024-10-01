@@ -55,6 +55,7 @@ This project is in late stages of development. Most features have already been a
 - [Ost268](https://github.com/Ost268) and [Ilya114](https://github.com/Ilya114) for the Ukrainian translation
 - HieusayHi for the Vietnamese translation
 - [Graphael](https://github.com/saulgoodman4534) for the Romanian translation
+- carloss15 for the Spanish translation
 
 
 
