@@ -12,13 +12,13 @@
         <string name="hibernation_title">ПЕРЕКЛЮЧАТЕЛЬ СПЯЩЕГО РЕЖИМА</string>
         <string name="software_title">ARM ПРОГРАММЫ</string>
         <string name="rotation_title">ПЕРЕКЛЮЧАТЕЛЬ ОРИЕНТАЦИИ</string>
-        <string name="autoflash_title">АВТОМАТИЧЕСКАЯ ПРОШИВКА ANDROID</string>
+        <string name="autoflash_title">АВТОМАТИЧЕСКАЯ ПРОШИВКА ANDROID BOOT</string>
         <string name="sensors_title">СДАМПИТЬ СЕНСОРЫ</string>
         <string name="atlasos_title">КОПИРОВАТЬ ФАЙЛЫ ATLASOS / REVIOS FILES</string>
         <string name="edge_title">УДАЛИТЬ EDGE</string>
         <string name="defender_title">УДАЛИТЬ DEFENDER</string>
         <string name="script_title">СКРИПТ TOOLBOX</string>
-		<string name="setup_title">FRAMEWORK INSTALLERS</string>
+		<string name="setup_title">УСТАНОВЩИКИ ФРЕЙМВОРКОВ</string>
 
         <string name="backup_boot_subtitle">Сохранить бэкап boot в Android и/или Windows</string>
         <string name="mnt_subtitle">Вы можете смонтировать раздел Windows для просмотра и изменения содержимого</string>
@@ -39,7 +39,7 @@
         <string name="edge_subtitle">Добавляет скрипт в C:\\Toolbox для удаления Microsoft Edge</string>
         <string name="defender_subtitle">Добавляет скрипт в C:\\Toolbox для удаления Защитника Windows</string>
         <string name="script_subtitle">Добавляет набор скриптов и настроек в C:\\Toolbox</string>
-		<string name="setup_subtitle">Adds installers for several frameworks into C:\\Toolbox</string>
+		<string name="setup_subtitle">Добавляет установщики для нескольких фреймворков в C:\\Toolbox</string>
 		
         <string name="backup_boot_question">Вы хотите сохранить текущий образ boot?</string>
         <string name="mount_question">Смонтировать Windows в /sdcard/Windows?</string>
@@ -57,7 +57,7 @@
         <string name="atlasos_question">Загрузить и переместить AtlasOS или ReviOS playbook в C:\\Toolbox?</string>
 		<string name="edge_question">Скопировать скрипт для удаления Edge в C:\\Toolbox?</string>
 		<string name="defender_question">Скопировать скрипт для удаления Defender в C:\\Toolbox?</string>
-		<string name="setup_question">Download and move C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, and XNAF installers to C:\\Toolbox?\n(this may take some time)</string>
+		<string name="setup_question">Скачать и переместить установщики C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, и XNAF в C:\\Toolbox?\n(это может занять немного времени)</string>
 
 		<string name="wrong">Что-то пошло не так</string>
 		<string name="ntfs">Что-то пошло не так, \nРаздел Windows не может быть смонтирован.\nОбратитесь за помощью в чат Telegram.</string>
@@ -106,5 +106,5 @@
 		<string name="preference7">Автоматически монтировать Windows при запуске устройства</string>
 		<string name="preference8">Отключить функцию дампа modem</string>
 		<string name="preference9">Запрашивать разблокированный экран для быстрой загрузки в Windows</string>
-		<string name="preference10">Mount Windows to /mnt instead of /sdcard</string>
+		<string name="preference10">Смонтировать Windows в /mnt вместо /sdcard</string>
 </resources>
