@@ -44,7 +44,7 @@ This project is in late stages of development. Most features have already been a
 - [Ali](https://github.com/gixousiyq) for helping refine code and for the Arabic translation
 - Aven1us for the Azeri translation
 - [Chiyuki](https://github.com/chiyuki0325), Sui2786 & TTK for the Chinese translation
-- Govrosh150 for the Czech translation
+- [index986](https://github.com/index986) for the Czech translation
 - YourAvgEngineer for the French translation
 - [ArToSeVeN](https://github.com/Artoseven) for the Indonesian translation
 - [galaxysollector](https://github.com/galaxysollector) for the Korean translation
