@@ -13,12 +13,12 @@
 	<string name="software_title">SOFTWARE ARM</string>
 	<string name="rotation_title">CAMBIO DE ROTACIÓN</string>
 	<string name="autoflash_title">FLASHEO AUTOMÁTICO DE ANDROID</string>
-	<string name="sensors_title">DUMP SENSORS</string>
-	<string name="atlasos_title">COPY ATLASOS / REVIOS FILES</string>
-	<string name="edge_title">EDGE REMOVER</string>
-	<string name="defender_title">DEFENDER REMOVER</string>
-	<string name="script_title">SCRIPT TOOLBOX</string>
-	<string name="setup_title">FRAMEWORK INSTALLERS</string>
+	<string name="sensors_title">COPIAR FIRMWARE DE SENSORES A WINDOWS</string>
+	<string name="atlasos_title">COPIAR ARCHIVOS DE ATLASOS / REVIOS</string>
+	<string name="edge_title">ELIMINAR MICROSOFT EDGE</string>
+	<string name="defender_title">ELIMINAR WINDOWS DEFENDER</string>
+	<string name="script_title">AÑADIR SCRIPTS</string>
+	<string name="setup_title">INSTALAR FRAMEWORKS</string>
 	
 	<string name="backup_boot_subtitle">Respaldar la imagen de arranque en Android y/o Windows</string>
 	<string name="mnt_subtitle">Activar/desactivar el montaje de la partición de Windows para ver o editar el contenido dentro</string>
@@ -34,12 +34,12 @@
 	<string name="software_subtitle">Agrega accesos directos del navegador que contienen software ARM a C:\\Toolbox</string>
 	<string name="rotation_subtitle">Agrega un script a C:\\Toolbox que te permite rotar la pantalla con un acceso directo\n(útil para dispositivos a los que no les funcionen los sensores)</string>
 	<string name="autoflash_subtitle">Agrega un script a Windows que muestra automáticamente el archivo boot.img de Android cada vez que se inicia Windows</string>
-	<string name="sensors_subtitle">This is only needed once on SOME devices to make sensors work in Windows</string>
-	<string name="atlasos_subtitle">Copies the AtlasOS or ReviOS playbook and AME Wizard to C:\\Toolbox</string>
-	<string name="edge_subtitle">Adds a script to C:\\Toolbox which allows you to remove Microsoft Edge</string>
-	<string name="defender_subtitle">Adds a script to C:\\Toolbox which allows you to remove Windows Defender</string>
-	<string name="script_subtitle">Adds an assortment of scripts and tweaks to C:\\Toolbox</string>
-	<string name="setup_subtitle">Adds installers for several frameworks into C:\\Toolbox</string>
+	<string name="sensors_subtitle">Esto solo es necesario en algunos dispositivos para que los sensores funcionen en Windows</string>
+	<string name="atlasos_subtitle">Copia el playbook de ReviOS o AtlasOS y AME Wizard a C:\\Toolbox</string>
+	<string name="edge_subtitle">Añade un script a C:\\Toolbox que te permite eliminar Microsoft Edge</string>
+	<string name="defender_subtitle">Añade un script a C:\\Toolbox que te permite eliminar Windows Defender</string>
+	<string name="script_subtitle">Añade un conjunto de scripts y modificaciones a C:\\Toolbox</string>
+	<string name="setup_subtitle">Añade instaladores de diversos frameworks a C:\\Toolbox</string>
 	
 	<string name="backup_boot_question">¿Respaldar la imagen de arranque actual de Android?</string>
 	<string name="mount_question">¿Montar Windows en /sdcard/Windows?</string>
@@ -47,17 +47,17 @@
 	<string name="dump_modem_question">¿Desea dumpear modem1st y modem2st a la partición de Windows?</string>
 	<string name="flash_uefi_question">¿Flashear UEFI? \nSi es así, el próximo arranque será en Windows</string>
 	<string name="quickboot_question">¿Arranque rápido a Windows?</string>
-	<string name="sta_question">Create Switch to Android app in C:\\sta?</string>
-	<string name="usbhost_question">Copy USB Host Mode script to C:\\Toolbox?</string>
-	<string name="hibernation_question">Copy hibernation toggler to C:\\Toolbox?</string>
-	<string name="software_question">Copy browser shortcuts to C:\\Toolbox?</string>
-	<string name="rotation_question">Copy rotation shortcut to C:\\Toolbox?</string>
-	<string name="autoflash_question">Install boot.img autoflasher script into Windows?</string>
-	<string name="sensors_question">Dump sensors to Windows?</string>
-	<string name="atlasos_question">Download and move AtlasOS or ReviOS playbook to C:\\Toolbox?</string>
-	<string name="edge_question">Copy Edge remover script to C:\\Toolbox?</string>
-	<string name="defender_question">Copy Defender remover script to C:\\Toolbox?</string>
-	<string name="setup_question">Download and move C++ Redistributables and DirectX, OpenGL, OpenAL, PhysX, XNAF installers to C:\\Toolbox?\n(this may take some time)</string>
+	<string name="sta_question">¿Crear app para cambiar a Android en C:\\sta?</string>
+	<string name="usbhost_question">¿Copiar el script de USB en modo host a C:\\Toolbox?</string>
+	<string name="hibernation_question">¿Copiar el botón de activar/desactivar hibernación a C:\\Toolbox?</string>
+	<string name="software_question">¿Copiar los accesos directos de los navegadores web a  C:\\Toolbox?</string>
+	<string name="rotation_question">¿Copiar acceso directo de rotación a C:\\Toolbox?</string>
+	<string name="autoflash_question">¿Instalar el script para flashear automaticamente boot.img en Windows?</string>
+	<string name="sensors_question">¿Copiar el firmware de sensores en Windows?</string>
+	<string name="atlasos_question">¿Descargar y mover el playbook de ReviOS o AtlasOS a C:\\Toolbox?</string>
+	<string name="edge_question">¿Copiar script para eliminar Microsoft Edge a C:\\Toolbox?</string>
+	<string name="defender_question">¿Copiar script para eliminar Windows Defender a C:\\Toolbox?</string>
+	<string name="setup_question">¿Descargar y mover los instaladores de: C++ Redistributables y DirectX, OpenGL, OpenAL, PhysX, XNAF a C:\\Toolbox?\n(puede tardar un tiempo)</string>
 	
 	<string name="wrong">Algo salió mal</string>
 	<string name="ntfs">Algo salió mal, \nWindows no se pudo montar.\nSolicita ayuda en el grupo de Telegram.</string>
@@ -79,7 +79,7 @@
 	<string name="chat">Chat</string>
 	<string name="nah">No</string>
 	<string name="later">Más tarde</string>
-	<string name="done">Done!</string>
+	<string name="done">¡Completado!</string>
 	<string name="mountt">MONTAR</string>
 	<string name="unmountt">DESMONTAR</string>
 
@@ -93,7 +93,7 @@
 	<string name="not_found">No encontrado</string>
 
 	<string name="yes">SÍ</string>
-	<string name="dismiss">Aceptar</string>
+	<string name="dismiss">CANCELAR</string>
 	<string name="no">NO</string>
 	<string name="please_wait">Por favor espera...</string>
 
@@ -105,6 +105,6 @@
 	<string name="preference6">Seleccionar idioma</string>
 	<string name="preference7">Montar Windows automáticamente al iniciar el dispositivo</string>
 	<string name="preference8">Desactivar el volcado del módem</string>
-	<string name="preference9">Require unlocked screen for quickboot</string>
-	<string name="preference10">Mount Windows to /mnt instead of /sdcard</string>
+	<string name="preference9">Requerir pantalla desbloqueada para el arranque rápido</string>
+	<string name="preference10">Inicializar la partición de Windows en /mnt en lugar de /sdcard</string>
 </resources>
