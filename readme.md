@@ -23,6 +23,7 @@ This project is in late stages of development. Most features have already been a
 - USB host mode toggle
 - Display rotation script (for devices without sensors)
 - Direct links to AtlasOS and ReviOS
+- Direct links to framework installers (DirectX, C++ redistributables, XNA framework, OpenAL, OpenGL compatibility pack) 
 - Android boot auto flasher (currently not working)
 - etc.
 - [x] Provisioning Modem
