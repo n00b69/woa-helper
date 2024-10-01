@@ -57,12 +57,12 @@
 	<string name="atlasos_question">Stáhnout a přesunout AtlasOS nebo ReviOS playbook do C:\\Toolbox?</string>
 	<string name="edge_question">Zkopírovat skript pro odstranění Microsoft Edge do C:\\Toolbox?</string>
 	<string name="defender_question">Zkopírovat skript pro odstranění Defenderu do C:\\Toolbox?</string>
-	<string name="setup_question">Stáhněte a přesuňte C++ Redistributables DirectX, OpenGL, OpenAL, PhysX, a XNA framework do C:\\Toolbox?\n(může to chvíli trvat)</string>
+	<string name="setup_question">Stáhnout a přesunout C++ Redistributables DirectX, OpenGL, OpenAL, PhysX, a XNA framework do C:\\Toolbox?\n(může to chvíli trvat)</string>
 	
 	<string name="wrong">Něco se pokazilo</string>
 	<string name="ntfs">Něco se pokazilo, \nWindows se nepodařilo připojit.\nPožádejte o pomoc v Telegram chatu.</string>
 	<string name="reboot">Restartovat</string>
-	<string name="cancel">Zrušení</string>
+	<string name="cancel">Zrušit</string>
 	<string name="mounted">Windows namontován</string>
 	<string name="unmounted">Windows odpojen</string>
 	<string name="rebootr">Je vyžadován restart</string>
