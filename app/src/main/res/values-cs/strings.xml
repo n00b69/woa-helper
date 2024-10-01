@@ -18,7 +18,7 @@
 	<string name="edge_title">EDGE REMOVER</string>
 	<string name="defender_title">DEFENDER REMOVER</string>
 	<string name="script_title">SCRIPT TOOLBOX</string>
-	<string name="setup_title">FRAMEWORK INSTALLERS</string>
+	<string name="setup_title">FRAMEWORK INSTALÁTORY</string>
 	
 	<string name="backup_boot_subtitle">Zálohujte boot image na Android a/nebo Windows</string>
 	<string name="mnt_subtitle">Chcete-li zobrazit nebo upravit obsah uvnitř, přepněte připojovací oddíl Windows</string>
@@ -39,7 +39,7 @@
 	<string name="edge_subtitle">Přidá skript do C:\\Toolbox, který vám umožní odebrat Microsoft Edge</string>
 	<string name="defender_subtitle">Přidá skript do C:\\Toolbox, který vám umožní odebrat Windows Defender</string>
 	<string name="script_subtitle">Přidává sortiment skriptů a vylepšení do C:\\Toolbox</string>
-	<string name="setup_subtitle">Adds installers for several frameworks into C:\\Toolbox</string>
+	<string name="setup_subtitle">Přidá instalátory pro několik frameworku do C:\\Toolbox</string>
 	
 	<string name="backup_boot_question">Zálohovat aktuální spouštěcí obraz Androidu?</string>
 	<string name="mount_question">Připojit Windows na /sdcard/Windows?</string>
@@ -57,7 +57,7 @@
 	<string name="atlasos_question">Stáhnout a přesunout AtlasOS nebo ReviOS playbook do C:\\Toolbox?</string>
 	<string name="edge_question">Zkopírovat skript pro odstranění Microsoft Edge do C:\\Toolbox?</string>
 	<string name="defender_question">Zkopírovat skript pro odstranění Defenderu do C:\\Toolbox?</string>
-	<string name="setup_question">Download and move C++ Redistributables and DirectX, OpenGL, OpenAL, PhysX, XNAF installers to C:\\Toolbox?\n(this may take some time)</string>
+	<string name="setup_question">Stáhněte a přesuňte C++ Redistributables DirectX, OpenGL, OpenAL, PhysX, a XNA framework do C:\\Toolbox?\n(může to chvíli trvat)</string>
 	
 	<string name="wrong">Něco se pokazilo</string>
 	<string name="ntfs">Něco se pokazilo, \nWindows se nepodařilo připojit.\nPožádejte o pomoc v Telegram chatu.</string>
@@ -77,7 +77,7 @@
 	<string name="sure">Dobře, nech mě používat aplikaci</string>
 	<string name="upanel">Nebylo potvrzeno, že váše obrazovka (touchscreen) funguje v režimu Windows, podělte se prosím o své zkušenosti s Windows v chatu Telegram</string>
 	<string name="chat">Chat</string>
-	<string name="nah">No</string>
+	<string name="nah">Ne</string>
 	<string name="later">Později</string>
 	<string name="done">Hotovo!</string>
 	<string name="mountt">Namontovat</string>
@@ -106,5 +106,5 @@
 	<string name="preference7">Automaticky připojit Windows při spuštění zařízení</string>
 	<string name="preference8">Deaktivovat ukládání dat z modemu</string>
 	<string name="preference9">Vyžadovat odemčenou obrazovku pro rychlé spuštění (QUICKBOOT)</string>
-	<string name="preference10">Mount Windows to /mnt instead of /sdcard</string>
+	<string name="preference10">Připojte Windows do /mnt místo /sdcard</string>
 </resources>
