@@ -18,7 +18,6 @@
 	<string name="edge_title">ȘTERGERE EDGE</string>
 	<string name="defender_title">ȘTERGERE DEFENDER</string>
 	<string name="script_title">CUTIE DE SCRIPTURI</string>
-	<string name="setup_title">FRAMEWORK INSTALLERS</string>
 	<string name="setup_title">INSTAlATORI DE FRAMEWORC</string>
 
 	<string name="backup_boot_subtitle">Backup la imaginea de pornite în Android și/sau în Windows</string>
@@ -76,7 +75,6 @@
 	<string name="nonroot">Root nu a fost găsit</string>
 	<string name="unsupported">!!Avertisment!!\nDispozitivul nu se soportează\nFolosiți această aplicație cu riscul dumneavoastră</string>
 	<string name="sure">OK, dămi să mă folosesc cu aplicație</string>
-	<string name="upanel">Your panel has not been confirmed to work, please share your Windows experience in the Telegram chat</string>
 	<string name="upanel">Panoul dumneavoastră nu a fost confirmat ca funcționând, vă rugăm să împărtășiți experiența dumneavoastră cu Windows în chatul de Telegram</string>
 	<string name="chat">Chat</string>
 	<string name="nah">Nu</string>
@@ -109,5 +107,4 @@
 	<string name="preference8">Dezactivează funcționalitatea de dump a modemului</string>
 	<string name="preference9">Cere ecran deblocat pentru quickboot</string>
 	<string name="preference10">Montează Windows în /mnt în loc de /sdcard</string>
-
 </resources>
