@@ -3,7 +3,7 @@
 	<string name="backup_boot_title">خذ نسخة احتياطية من الـ BOOT</string>
 	<string name="mnt_title">%s WINDOWS</string>
 	<string name="toolbox_title">صندوق ادوات WOA</string>
-	<string name="dump_modem_title">إصلاح المودم</string>
+	<string name="dump_modem_title">نسخ ملفات المودم</string>
 	<string name="flash_uefi_title">فلّش الـ UEFI</string>
 	<string name="uefi_not_found">لم يتم العثور على UEFI</string>
 	<string name="quickboot_title">إقلاع سريع لـ WINDOWS</string>
@@ -17,7 +17,8 @@
 	<string name="atlasos_title">انسخ ملفات AtlasOS / ReviOS</string>
 	<string name="edge_title">مزيل متصفح Edge</string>
 	<string name="defender_title">مزيل Windows Defender</string>
-	<string name="script_title">صندوق ادوات البرامج النصية</string>
+	<string name="script_title">صندوق ادوات البرامج النصية (scripts)</string>
+	<string name="setup_title">مثبتات الـ FRAMEWORK</string>
 	
 	<string name="backup_boot_subtitle">خذ نسخة احتياطية للـ Boot لاندرويد او/و Windows</string>
 	<string name="mnt_subtitle">تبديل حالة الربط او الماونت لـ Windows حتى تستطيع تعديل محتوياته</string>
@@ -38,11 +39,13 @@
 	<string name="edge_subtitle">يضيف برنامج نصي إلى C:\\Toolbox والذي يمكنك من حذف Microsoft Edge</string>
 	<string name="defender_subtitle">يضيف برنامج نصي إلى C:\\Toolbox والذي يمكنك من حذف Windows Defender</string>
 	<string name="script_subtitle">يضيف تشكيلة من البرامج النصية إلى C:\\Toolbox</string>
+    <string name="setup_subtitle">يضيف مثبتات للعديد من الـ frameworks إلى C:\\Toolbox</string>
+
 	
 	<string name="backup_boot_question">انسخ الـ Boot الحالي؟</string>
 	<string name="mount_question">ماونت Windows في المسار \n/sdcard/Windows?</string>
-	<string name="unmount_question">إلغاء تنصيب او ماونت Windows؟</string>
-	<string name="dump_modem_question">هل تريد نسخ المودم إلى Windows؟</string>
+	<string name="unmount_question">إلغاء ماونت Windows؟</string>
+	<string name="dump_modem_question">هل تريد نسخ ملفات المودم إلى Windows؟</string>
 	<string name="flash_uefi_question">فلّش الـ UEFI؟ \nحتى يُقلع Windows عند إعادة التشغيل القادمة.</string>
 	<string name="quickboot_question">الإقلاع السريع إلى Windows؟</string>
 	<string name="sta_question">اصنع تطبيق التبديل الى Android في C:\\sta؟</string>
@@ -55,13 +58,15 @@
 	<string name="atlasos_question">نزّل وانقل AtlasOS او ReviOS إلى C:\\Toolbox؟</string>
 	<string name="edge_question">إنسخ مزيل Edge إلى C:\\Toolbox؟</string>
 	<string name="defender_question">إنسخ مزيل Windows Defender إلى C:\\Toolbox؟</string>
+    <string name="setup_question">نزل وثبت C++ Redistributables و DirectX, OpenGL, OpenAL, PhysX, مثبت XNAF إلى C:\\Toolbox?\n(قد يستغرق هذا بعض الوقت)</string>
+
 
 	<string name="wrong">حدث خطأ ما</string>
 	<string name="ntfs">حدث خطأٌ ما، \nفشل عمل Mount لـ Windows، \nأطلب المساعدة في الدردشة على تطبيق التيليجرام</string>
 	<string name="reboot">إعادة التشغيل</string>
 	<string name="cancel">إلغاء</string>
-	<string name="mounted">تم ربط او ماونت Windows</string>
-	<string name="unmounted">تم إلغاء ربط او ماونت Windows</string>
+	<string name="mounted">تم الماونت لـ Windows</string>
+	<string name="unmounted">تم إلغاء الماونت لـ Windows</string>
 	<string name="rebootr">إعادة التشغيل مطلوبه</string>
 	<string name="lte">استمتع بالبيانات الخلوية في Windows</string>
 	<string name="flash">تم تفليش الUEFI بنجاح. \nإعادة التشغيل القادمة ستقلع نظام Windows </string>
@@ -103,4 +108,5 @@
 	<string name="preference7">وصل قسم تخزين الـWindows تلقائيا عند تشغيل الجهاز</string>
 	<string name="preference8">عطّل خاصية نسخ المودم</string>
 	<string name="preference9">فرض فتح قفل الشاشة حتى تستعمل الإقلاع السريع</string>
+	<string name="preference10">Mount Windows إلى /mnt بدلاً من /sdcard</string>
 </resources>
