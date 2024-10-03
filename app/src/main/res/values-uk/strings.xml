@@ -106,5 +106,5 @@
 	<string name="preference7">Автоматично монтувати Windows під час запуску пристрою</string>
 	<string name="preference8">Вимкнути функцію дампа модему</string>
 	<string name="preference9">Для швидкого завантаження потрібен розблокований екран</string>
-	<string name="preference10">Mount Windows to /mnt instead of /sdcard</string>
+	<string name="preference10">Змонтувати Windows в /mnt замість /sdcard</string>
 </resources>
