@@ -18,7 +18,7 @@
 	<string name="edge_title">ВИДАЛЯЧ EDGE</string>
 	<string name="defender_title">ВИДАЛЯЧ DEFENDER</string>
 	<string name="script_title">ПАНЕЛЬ СКРІПТІВ</string>
-	<string name="setup_title">FRAMEWORK INSTALLERS</string>
+	<string name="setup_title">ВСТАНОВЛЮВАЧІ FRAMEWORK</string>
 
 	<string name="backup_boot_subtitle">Резервне копіювання Boot образу на Android та/або Windows</string>
 	<string name="mnt_subtitle">Перемкніть монтований розділ Windows, щоб переглядати або редагувати вміст усередині</string>
@@ -39,7 +39,7 @@
 	<string name="edge_subtitle">Додає скрипт в C:\\Toolbox який дозволяє видалити Microsoft Edge</string>
 	<string name="defender_subtitle">Додає скрипт в C:\\Toolbox який дозволяє видалити Windows Defender</string>
 	<string name="script_subtitle">Додає асортимент скриптів і твиків в C:\\Toolbox</string>
-	<string name="setup_subtitle">Adds installers for several frameworks into C:\\Toolbox</string>
+	<string name="setup_subtitle">Додає встановлювачі фреймворків в C:\\Toolbox</string>
 	
 	<string name="backup_boot_question">Зробити резервне копіювання поточного Boot образу Android?</string>
 	<string name="mount_question">Змонтувати Windows в /sdcard/Windows?</string>
