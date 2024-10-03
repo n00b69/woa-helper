@@ -3,7 +3,7 @@
 	<string name="backup_boot_title">DAȚI BACKUP LA IMAGINEA DE PORNIRE</string>
 	<string name="mnt_title">%s WINDOWS</string>
 	<string name="toolbox_title">WOA TOOLBOX</string>
-	<string name="dump_modem_title"></string>
+	<string name="dump_modem_title">DUMP MODEM</string>
 	<string name="flash_uefi_title">FLASH UEFI</string>
 	<string name="uefi_not_found">UEFI NU A FOST GĂSIT</string>
 	<string name="quickboot_title">PORNIRE RAPIDĂ ÎN WINDOWS</string>
