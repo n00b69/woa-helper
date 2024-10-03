@@ -57,7 +57,7 @@
 	<string name="atlasos_question">Завантажити і перемістити AtlasOS або ReviOS в C:\\Toolbox?</string>
 	<string name="edge_question">Скопіювати скрипт видалення Edge в C:\\Toolbox?</string>
 	<string name="defender_question">Скопіювати скрипт видалення Defender в C:\\Toolbox?</string>
-	<string name="setup_question">Download and move C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, and XNAF installers to C:\\Toolbox?\n(this may take some time)</string>
+	<string name="setup_question">Завантажити і перемістити у C:\\Toolbox встановлювачі C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX і XNAF?\n(це може заняти деякий час)</string>
 	
 	<string name="wrong">Щось пішло не так</string>
 	<string name="ntfs">Щось пішло не так, \nне вдалося змонтувати Windows.\nЗверніться за допомогою в Telegram-чат.</string>
