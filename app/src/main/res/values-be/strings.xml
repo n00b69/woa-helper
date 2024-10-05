@@ -9,11 +9,9 @@
     <string name="quickboot_title">ХУТКІ ЗАПУСК У WINDOWS</string>
     <string name="sta_title">СТВАРЭННЕ STA</string>
     <string name="usbhost_title">ПЕРАКЛЮЧАЛЬНІК РЭЖЫМУ USB</string>
-    <string name="hibernation_title">ПЕРАКЛЮЧАЛЬНІК РЭЖЫМУ СНА</string>
     <string name="software_title">ARM ПРАГРАМЫ</string>
     <string name="rotation_title">ПЕРАКЛЮЧАЛЬНІК АРЫЕНТАЦЫІ</string>
     <string name="autoflash_title">АЎТАМАТЫЧНАЯ ПРАШЫЎКА ANDROID</string>
-    <string name="sensors_title">КАПІЯВАЦЬ ФАЙЛЫ ДАТЧЫКАЎ У WINDOWS</string>
     <string name="atlasos_title">КАПІРАВАЦЬ ФАЙЛЫ ATLASOS / REVIOS</string>
     <string name="edge_title">ВЫДАЛІЦЬ EDGE</string>
     <string name="defender_title">ВЫДАЛІЦЬ DEFENDER</string>
@@ -30,11 +28,9 @@
     <string name="quickboot_subtitle_nabu">Прашыць UEFI і перазагрузіцца ў Windows адным клікам!</string>
     <string name="sta_subtitle">Дадае прыкладанне Switch to Android у Windows</string>
     <string name="usbhost_subtitle">Дадае скрыпт у C:\\Toolbox для пераключэння рэжыму USB</string>
-    <string name="hibernation_subtitle">Дадае скрыпт у C:\\Toolbox для пераключэння рэжыму сну</string>
     <string name="software_subtitle">Дадае спасылку на сайт з праграмамі для ARM у C:\\Toolbox</string>
     <string name="rotation_subtitle">Дадае скрыпт у C:\\Toolbox для пераключэння арыентацыі экрана праз ярлык\n (Карысна для прылад без працуючых сенсараў)</string>
     <string name="autoflash_subtitle">Дадае скрыпт у Windows для аўтаматычнай прашыўкі Android boot.img пры запуску Windows</string>
-    <string name="sensors_subtitle">Неабходна толькі адзін раз на некаторых прыладах, каб сенсары працавалі ў Windows</string>
     <string name="atlasos_subtitle">Капіруе AtlasOS або ReviOS playbook і AME Wizard у C:\\Toolbox</string>
     <string name="edge_subtitle">Дадае скрыпт у C:\\Toolbox для выдалення Microsoft Edge</string>
     <string name="defender_subtitle">Дадае скрыпт у C:\\Toolbox для выдалення Windows Defender</string>
@@ -42,18 +38,16 @@
     <string name="setup_subtitle">Дадае ўстаноўнікі для некалькіх фрэймворкаў у C:\\Toolbox</string>
 
     <string name="backup_boot_question">Вы хочаце захаваць бягучы вобраз boot?</string>
-    <string name="mount_question">Змантаваць Windows у /sdcard/Windows?</string>
+    <string name="mount_question">Змантаваць Windows у %s?</string>
     <string name="unmount_question">Размантаваць раздзел Windows?</string>
     <string name="dump_modem_question">Захаваць дамп modem1st і modem2st у Windows?</string>
     <string name="flash_uefi_question">Прашыць UEFI? \nКалі так, наступны запуск будзе ў Windows</string>
     <string name="quickboot_question">Перазагрузіцца ў Windows?</string>
     <string name="sta_question">Стварыць прыкладанне Switch to Android у C:\\sta?</string>
     <string name="usbhost_question">Скапіраваць скрыпт для пераключэння рэжымаў USB у C:\\Toolbox?</string>
-    <string name="hibernation_question">Скапіраваць пераключальнік рэжыму сну ў C:\\Toolbox?</string>
     <string name="software_question">Скапіраваць спасылку на сайт у C:\\Toolbox?</string>
     <string name="rotation_question">Скапіраваць спасылку для пераключэння арыентацыі экрана ў C:\\Toolbox?</string>
     <string name="autoflash_question">Усталяваць скрыпт аўтаматычнай прашыўкі boot.img у Windows?</string>
-    <string name="sensors_question">Дампаваць сенсары ў Windows?</string>
     <string name="atlasos_question">Загрузіць і перанесці AtlasOS або ReviOS playbook у C:\\Toolbox?</string>
     <string name="edge_question">Скапіраваць скрыпт для выдалення Edge у C:\\Toolbox?</string>
     <string name="defender_question">Скапіраваць скрыпт для выдалення Defender у C:\\Toolbox?</string>

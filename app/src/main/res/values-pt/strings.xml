@@ -9,11 +9,9 @@
 	<string name="quickboot_title">REINÍCIO RÁPIDO PARA O WINDOWS</string>
 	<string name="sta_title">SWITCH TO ANDROID</string>
 	<string name="usbhost_title">MODO USB</string>
-	<string name="hibernation_title">INTERRUPTOR DA HIBERNAÇÃO</string>
 	<string name="software_title">PROGRAMAS EM ARM</string>
 	<string name="rotation_title">ROTAÇÃO DA TELA</string>
 	<string name="autoflash_title">AUTO INSTALADOR DO ANDROID</string>
-	<string name="sensors_title">COPIAR SENSORES</string>
 	<string name="atlasos_title">COPIAR ARQUIVOS DO ATLAS/REVI OS</string>
 	<string name="edge_title">REMOVER O EDGE</string>
 	<string name="defender_title">REMOVER O DEFENDER</string>
@@ -30,11 +28,9 @@
 	<string name="quickboot_subtitle_nabu">Flash UEFI and reboot to Windows in one click</string>
 	<string name="sta_subtitle">Adiciona o programa Switch to Android ao Windows</string>
 	<string name="usbhost_subtitle">Adiciona um script em C:\\Toolbox que permite alternar o modo USB</string>
-	<string name="hibernation_subtitle">Adiciona um script em C:\\Toolbox que permite alternar a hibernação</string>
 	<string name="software_subtitle">Adiciona atalhos contendo programas em ARM em C:\\Toolbox</string>
 	<string name="rotation_subtitle">Adiciona um script em C:\\Toolbox que permite rotacionar a tela\n(útil para dispositivos sem sensores funcionais)</string>
 	<string name="autoflash_subtitle">Adicionar um script ao Windows que automaticamente instala o boot.img do Android sempre que o Windows for iniciado</string>
-	<string name="sensors_subtitle">Isso é necessário somente uma vez em ALGUNS dispositivos para fazer os sensores funcionarem no Windows</string>
 	<string name="atlasos_subtitle">Copia o playbook do Atlas OS ou ReviOS e o AME Wizard para C:\\Toolbox</string>
 	<string name="edge_subtitle">Adiciona um script para C:\\Toolbox que permite remover o Microsoft Edge</string>
 	<string name="defender_subtitle">Adiciona um script para C:\\Toolbox que permite remover o Windows Defender</string>
@@ -42,18 +38,16 @@
 	<string name="setup_subtitle">Adiciona instaladores de vários frameworks para C:\\Toolbox</string>
 	
 	<string name="backup_boot_question">Criar backup da imagem de boot atual do Android?</string>
-	<string name="mount_question">Montar Windows em /sdcard/Windows?</string>
+	<string name="mount_question">Montar Windows em %s?</string>
 	<string name="unmount_question">Desmontar Windows?</string>
 	<string name="dump_modem_question">Despejar modem1st e modem2st para a partição do Windows?</string>
 	<string name="flash_uefi_question">Instalar UEFI? \nSe sim, a próxima inicialização será para o Windows</string>
 	<string name="quickboot_question">Reinício rápido para oWindows?</string>
 	<string name="sta_question">Criar o app Switch to Android em C:\\sta?</string>
 	<string name="usbhost_question">Copiar script de modo host do USB para C:\\Toolbox?</string>
-	<string name="hibernation_question">Copiar interruptor de hibernação para C:\\Toolbox?</string>
 	<string name="software_question">Copiar atalhos para programas ARM para C:\\Toolbox?</string>
 	<string name="rotation_question">Copiar atalho de rotação da tela para C:\\Toolbox?</string>
 	<string name="autoflash_question">Instalar no Windows o script de autoinstalação do boot.img do Android?</string>
-	<string name="sensors_question">Copiar sensores para Windows?</string>
 	<string name="atlasos_question">Baixar e mover AtlasOS ou ReviOS playbook para C:\\Toolbox?</string>
 	<string name="edge_question">Copiar script removedor do Edge para C:\\Toolbox?</string>
 	<string name="defender_question">Copiar script removedor do Defender para C:\\Toolbox?</string>

@@ -14,11 +14,9 @@
 	<string name="quickboot_title">QUICKBOOT TO WINDOWS</string>
 	<string name="sta_title">STA CREATOR</string>
 	<string name="usbhost_title">USB HOST MODE TOGGLE</string>
-	<string name="hibernation_title">HIBERNATION TOGGLE</string>
 	<string name="software_title">ARM SOFTWARE</string>
 	<string name="rotation_title">ROTATION TOGGLE</string>
 	<string name="autoflash_title">AUTO ANDROID FLASHER</string>
-	<string name="sensors_title">DUMP SENSORS</string>
 	<string name="atlasos_title">COPY ATLASOS / REVIOS FILES</string>
 	<string name="edge_title">EDGE REMOVER</string>
 	<string name="defender_title">DEFENDER REMOVER</string>
@@ -35,11 +33,9 @@
 	<string name="quickboot_subtitle_nabu">Flash UEFI and reboot to Windows in one click</string>
 	<string name="sta_subtitle">Adds the Switch to Android app to Windows</string>
 	<string name="usbhost_subtitle">Adds a script to C:\\Toolbox which allows you to toggle USB Host Mode</string>
-	<string name="hibernation_subtitle">Adds a script to C:\\Toolbox which allows you to toggle hibernation</string>
 	<string name="software_subtitle">Adds browser shortcuts containing ARM software to C:\\Toolbox</string>
 	<string name="rotation_subtitle">Adds a script to C:\\Toolbox that lets you rotate the screen with a shortcut\n(useful for devices without working sensors)</string>
 	<string name="autoflash_subtitle">Adds a script to Windows which automatically flashes the Android boot.img whenever Windows boots</string>
-	<string name="sensors_subtitle">This is only needed once on SOME devices to make sensors work in Windows</string>
 	<string name="atlasos_subtitle">Copies the AtlasOS or ReviOS playbook and AME Wizard to C:\\Toolbox</string>
 	<string name="edge_subtitle">Adds a script to C:\\Toolbox which allows you to remove Microsoft Edge</string>
 	<string name="defender_subtitle">Adds a script to C:\\Toolbox which allows you to remove Windows Defender</string>
@@ -47,18 +43,16 @@
 	<string name="setup_subtitle">Adds installers for several frameworks into C:\\Toolbox</string>
 
 	<string name="backup_boot_question">Back up current Android boot image?</string>
-	<string name="mount_question">Mount Windows to /sdcard/Windows?</string>
+	<string name="mount_question">Mount Windows to %s?</string>
 	<string name="unmount_question">Unmount Windows?</string>
 	<string name="dump_modem_question">Dump modem1st and modem2st to Windows partition?</string>
 	<string name="flash_uefi_question">Flash UEFI? \nIf so, the next boot will be in Windows</string>
 	<string name="quickboot_question">Quickboot to Windows?</string>
 	<string name="sta_question">Create Switch to Android app in C:\\sta?</string>
 	<string name="usbhost_question">Copy USB Host Mode script to C:\\Toolbox?</string>
-	<string name="hibernation_question">Copy hibernation toggler to C:\\Toolbox?</string>
 	<string name="software_question">Copy browser shortcuts to C:\\Toolbox?</string>
 	<string name="rotation_question">Copy rotation shortcut to C:\\Toolbox?</string>
 	<string name="autoflash_question">Install boot.img autoflasher script into Windows?</string>
-	<string name="sensors_question">Dump sensors to Windows?</string>
 	<string name="atlasos_question">Download and move AtlasOS or ReviOS playbook to C:\\Toolbox?</string>
 	<string name="edge_question">Copy Edge remover script to C:\\Toolbox?</string>
 	<string name="defender_question">Copy Defender remover script to C:\\Toolbox?</string>
@@ -113,22 +107,22 @@
 	<string name="preference9">Require unlocked screen for quickboot</string>
 	<string name="preference10">Mount Windows to /mnt instead of /sdcard</string>
 	
-	<string name="uefiChk" translatable="false">su -c find /mnt/sdcard/UEFI/ -type f  | grep ".img" | head -n 1 </string>
-	
-	<string name="modem1" translatable="false">su -c dd bs=8M if=/dev/block/by-name/modemst1 of=/mnt/sdcard/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_04af705613ed2d36/bootmodem_fs1 </string>
-	<string name="modem2" translatable="false">su -c dd bs=8M if=/dev/block/by-name/modemst2 of=/mnt/sdcard/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_04af705613ed2d36/bootmodem_fs2 </string>
 	<string name="mount" translatable="false"> mount -t ntfs %s /mnt/sdcard/Windows</string>
 	<string name="unmount" translatable="false">su -mm -c umount /mnt/sdcard/Windows </string>
 	<string name="rm" translatable="false">rmdir /mnt/sdcard/Windows</string>
 	<string name="mk" translatable="false">mkdir /mnt/sdcard/Windows || true</string>
 	
-	<string name="modem12" translatable="false">su -c dd bs=8M if=/dev/block/by-name/modemst1 of=/mnt/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_04af705613ed2d36/bootmodem_fs1 </string>
-	<string name="modem22" translatable="false">su -c dd bs=8M if=/dev/block/by-name/modemst2 of=/mnt/Windows/Windows/System32/DriverStore/FileRepository/qcremotefs8150.inf_arm64_04af705613ed2d36/bootmodem_fs2 </string>
 	<string name="mount2" translatable="false"> mount -t ntfs %s /mnt/Windows</string>
 	<string name="unmount2" translatable="false">su -mm -c umount /mnt/Windows </string>
 	<string name="rm2" translatable="false">rmdir /mnt/Windows</string>
 	<string name="mk2" translatable="false">mkdir /mnt/Windows || true</string>
 
+	<string name="modem1" translatable="false">su -c dd bs=8M if=/dev/block/by-name/modemst1 of=$(find /mnt/sdcard/Windows/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/bootmodem_fs1 bs=8388608</string>
+	<string name="modem2" translatable="false">su -c dd bs=8M if=/dev/block/by-name/modemst2 of=$(find /mnt/sdcard/Windows/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/bootmodem_fs2 bs=8388608</string>
+	<string name="modem12" translatable="false">su -c dd bs=8M if=/dev/block/by-name/modemst1 of=$(find /mnt/Windows/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/bootmodem_fs1 bs=8388608</string>
+	<string name="modem22" translatable="false">su -c dd bs=8M if=/dev/block/by-name/modemst2 of=$(find /mnt/Windows/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/bootmodem_fs2 bs=8388608</string>
+	
+	<string name="uefiChk" translatable="false">su -c find /mnt/sdcard/UEFI/ -type f  | grep ".img" | head -n 1 </string>
 	<string name="backup" translatable="false">dd bs=8M if=/dev/block/by-name/boot$(getprop ro.boot.slot_suffix) of=/sdcard/boot.img</string>
 	<string name="backup1" translatable="false">dd bs=8M if=/dev/block/by-name/boot$(getprop ro.boot.slot_suffix) of=/mnt/sdcard/Windows/boot.img</string>
 	<string name="backup2" translatable="false">dd bs=8M if=/dev/block/by-name/boot$(getprop ro.boot.slot_suffix) of=/mnt/Windows/boot.img</string>

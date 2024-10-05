@@ -9,11 +9,9 @@
 	<string name="quickboot_title">QUICKBOOT TO WINDOWS</string>
 	<string name="sta_title">STA CREATOR</string>
 	<string name="usbhost_title">PŘEPNUTI REŽIMU USB HOST</string>
-	<string name="hibernation_title">PŘEPNUTI HIBERNACE</string>
 	<string name="software_title">ARM SOFTWARE</string>
 	<string name="rotation_title">PŘEPÍNAČ OTOČENÍ</string>
 	<string name="autoflash_title">AUTO ANDROID FLASHER</string>
-	<string name="sensors_title">DUMP SENSORS</string>
 	<string name="atlasos_title">ZKOPÍROVAT SOUBORY ATLASOS / REVIOS</string>
 	<string name="edge_title">EDGE REMOVER</string>
 	<string name="defender_title">DEFENDER REMOVER</string>
@@ -30,11 +28,9 @@
 	<string name="quickboot_subtitle_nabu">Flash UEFI a restartování Windows jedním kliknutím</string>
 	<string name="sta_subtitle">Přidát aplikaci Přepnout na Android do Windows</string>
 	<string name="usbhost_subtitle">Přidát skript do C:\\Toolbox, který vám umožní přepínat režim USB host mode</string>
-	<string name="hibernation_subtitle">Přidát skript do C:\\Toolbox, který vám umožní přepnout hibernaci</string>
 	<string name="software_subtitle">Přidát zástupce prohlížeče obsahující software ARM do C:\\Toolbox</string>
 	<string name="rotation_subtitle">Přidát skript do C:\\Toolbox, který vám umožní otočit obrazovku pomocí zkratky\n(Užitečné pro zařízení bez funkčních senzorů)</string>
 	<string name="autoflash_subtitle">Přidát skript do systému Windows, který automaticky zobrazí soubor Android boot.img při každém spuštění systému Windows</string>
-	<string name="sensors_subtitle">Je to potřeba pouze jednou na NĚKTERÝCH zařízeních, aby senzory fungovaly ve Windows</string>
 	<string name="atlasos_subtitle">Zkopírovat AtlasOS nebo ReviOS playbook a AME Wizard do C:\\Toolbox</string>
 	<string name="edge_subtitle">Přidá skript do C:\\Toolbox, který vám umožní odebrat Microsoft Edge</string>
 	<string name="defender_subtitle">Přidá skript do C:\\Toolbox, který vám umožní odebrat Windows Defender</string>
@@ -42,18 +38,16 @@
 	<string name="setup_subtitle">Přidá instalátory pro několik frameworku do C:\\Toolbox</string>
 	
 	<string name="backup_boot_question">Zálohovat aktuální spouštěcí obraz Androidu?</string>
-	<string name="mount_question">Připojit Windows na /sdcard/Windows?</string>
+	<string name="mount_question">Připojit Windows na %s?</string>
 	<string name="unmount_question">Odpojit Windows?</string>
 	<string name="dump_modem_question">Zkopírovat modem1st a modem2st do oddílu Windows?</string>
 	<string name="flash_uefi_question">Flash UEFI? \nPokud ano, další spuštění bude ve Windows</string>
 	<string name="quickboot_question">Quickboot to Windows?</string>
 	<string name="sta_question">Vytvořte aplikaci Switch to Android v C:\\sta?</string>
 	<string name="usbhost_question">Zkopírovat skript USB host mode do C:\\Toolbox?</string>
-	<string name="hibernation_question">Zkopírovat přepínač hibernace do C:\\Toolbox?</string>
 	<string name="software_question">Zkopírovat zástupce prohlížeče do C:\\Toolbox?</string>
 	<string name="rotation_question">Zkopírovat zástupce otáčení do C:\\Toolbox?</string>
 	<string name="autoflash_question">Nainstalovat skript boot.img autoflasher do Windows?</string>
-	<string name="sensors_question">Zkopírovat senzory do Windows?</string>
 	<string name="atlasos_question">Stáhnout a přesunout AtlasOS nebo ReviOS playbook do C:\\Toolbox?</string>
 	<string name="edge_question">Zkopírovat skript pro odstranění Microsoft Edge do C:\\Toolbox?</string>
 	<string name="defender_question">Zkopírovat skript pro odstranění Defenderu do C:\\Toolbox?</string>

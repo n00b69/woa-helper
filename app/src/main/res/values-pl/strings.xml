@@ -9,11 +9,9 @@
 	<string name="quickboot_title">SZYBKI START DO WINDOWS</string>
 	<string name="sta_title">KREATOR STA</string>
 	<string name="usbhost_title">PRZEŁĄCZNIK TRYBU HOSTA USB</string>
-	<string name="hibernation_title">PRZEŁĄCZNIK HIBERNACJI</string>
 	<string name="software_title">OPROGRAMOWANIE ARM</string>
 	<string name="rotation_title">PRZEŁĄCZNIK OBROTU</string>
 	<string name="autoflash_title">AUTOMATYCZNY FLASHER ANDROIDA</string>
-	<string name="sensors_title">ZRZUCANIE CZUJNIKÓW </string>
 	<string name="atlasos_title">KOPIUJ PLIKI ATLASOS / REVIOS</string>
 	<string name="edge_title">USUWANIE KRAWĘDZI</string>
 	<string name="defender_title">USUWANIE DEFENDERA</string>
@@ -30,11 +28,9 @@
 	<string name="quickboot_subtitle_nabu">Wgraj UEFI i uruchom ponownie do Windows jednym kliknięciem</string>
 	<string name="sta_subtitle">Dodaje aplikację Przełącz na system Android do systemu Windows</string>
 	<string name="usbhost_subtitle">Dodaje skrypt do C:\Toolbox, który umożliwia przełączanie trybu hosta USB</string>
-	<string name="hibernation_subtitle">Dodaje skrypt do C:\Toolbox, który umożliwia przełączanie hibernacji</string>
 	<string name="software_subtitle">Dodaje skróty przeglądarki zawierające oprogramowanie ARM do C:\Toolbox</string>
 	<string name="rotation_subtitle">Dodaje skrypt do C:\Toolbox, który pozwala na obracanie ekranu za pomocą skrótun\(przydatne dla urządzeń bez działających czujników)</string>
 	<string name="autoflash_subtitle">Dodaje skrypt do systemu Windows, który automatycznie flashuje plik boot.img systemu Android przy każdym uruchomieniu systemu Windows</string>
-	<string name="sensors_subtitle">Jest to potrzebne tylko raz na NIEKTÓRYCH urządzeniach, aby czujniki działały w systemie Windows</string>
 	<string name="atlasos_subtitle">Kopiuje playbook AtlasOS lub ReviOS i kreatora AME do C:\\Toolbox</string>
 	<string name="edge_subtitle">Dodaje skrypt do C:\\Toolbox, który pozwala usunąć Microsoft Edge</string>
 	<string name="defender_subtitle">Dodaje skrypt do C:\\Toolbox, który pozwala usunąć Windows Defender</string>
@@ -42,20 +38,18 @@
 	<string name="setup_subtitle">Dodaje instalatory dla kilku frameworków do C:\\Toolbox</string>
 	
 	<string name="backup_boot_question">Zapisać aktualny obraz rozruchu systemu Android?</string>
-	<string name="mount_question">Zamontować Windows na /sdcard/Windows?</string>
+	<string name="mount_question">Zamontować Windows na %s?</string>
 	<string name="unmount_question">Odmontować Windows?</string>
 	<string name="dump_modem_question">Zrzucić modem1st i modem2st do partycji Windows?</string>
 	<string name="flash_uefi_question">Wgrać UEFI? \nJeśli tak, następne uruchomienie będzie w systemie Windows</string>
 	<string name="quickboot_question">Szybki start do Windows?</string>
 	<string name="sta_question">Utwórz aplikację Przełącz na Androida w C:\\sta?</string>
 	<string name="usbhost_question">Skopiować skrypt trybu hosta USB do C:\\Toolbox?</string>
-	<string name="hibernation_question">Skopiować przełącznik hibernacji do C:\\Toolbox?</string>
 	<string name="software_question">Skopiować skróty przeglądarki do C:\\Toolbox?</string>
 	<string name="rotation_question">Skopiować skrót do obracania do C:\\Toolbox?</string>
 	<string name="autoflash_question">Zainstalować skrypt autoflashera boot.img w systemie Windows?</string>
-	<string name="sensors_question">Zrzucić czujniki do systemu Windows?</string>
 	<string name="atlasos_question">Pobrać i przenieść playbook AtlasOS lub ReviOS do C:\\Toolbox?</string>
-	<string name="edge_question">Skopiować skrypt usuwania Edge'a do C:\\Toolbox?</string>
+	<string name="edge_question">Skopiować skrypt usuwania Edge\'a do C:\\Toolbox?</string>
 	<string name="defender_question">Skopiuj skrypt usuwania Defendera do C:\\Toolbox?</string>
 	<string name="setup_question">Pobierz i przenieś pakiety redystrybucyjne C++ oraz instalatory DirectX, OpenGL, OpenAL, PhysX, XNAF do C:\\Toolbox?\n(może to zająć trochę czasu)</string>
 	

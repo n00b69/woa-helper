@@ -57,7 +57,7 @@ public class MyQSTileService extends TileService {
 		if (!(Objects.equals(device, "nabu")||Objects.equals(device, "mh2lm")) || !(pref.getMODEM(this))) {
 			dump();
 		}
-		String found = ShellUtils.fastCmd("ls "+(pref.getMountLocation(this)?"/mnt/sdcard/LOL":"/mnt/sdcard/Windows")+" | grep boot.img");
+		String found = ShellUtils.fastCmd("ls "+(pref.getMountLocation(this)?"/mnt/Windows":"/mnt/sdcard/Windows")+" | grep boot.img");
 		if (!pref.getMountLocation(this)) {
             if (pref.getBACKUP(this)
 			|| (!pref.getAUTO(this) && found.isEmpty())) {
@@ -113,9 +113,14 @@ public class MyQSTileService extends TileService {
 	}
 	
 	private void dump() {
-		ShellUtils.fastCmd(getString(R.string.modem1));
-		ShellUtils.fastCmd(getString(R.string.modem2));
-	}
+		if (!pref.getMountLocation(this)) {
+            ShellUtils.fastCmd(getString(R.string.modem1));
+			ShellUtils.fastCmd(getString(R.string.modem2));
+        } else{
+            ShellUtils.fastCmd(getString(R.string.modem12));
+			ShellUtils.fastCmd(getString(R.string.modem22));
+        }
+    }
 
 	public void flash() {
 		ShellUtils.fastCmd("su -c dd if=" + finduefi + " of=/dev/block/bootdevice/by-name/boot$(getprop ro.boot.slot_suffix) bs=16M");

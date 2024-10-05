@@ -9,11 +9,9 @@
 	<string name="quickboot_title">ШВИДКЕ ЗАВАНТАЖЕННЯ В WINDOWS</string>
 	<string name="sta_title">СТВОРЕННЯ STA</string>
 	<string name="usbhost_title">ПЕРЕМИКАЧ USB-HOST РЕЖИМУ</string>
-	<string name="hibernation_title">ПЕРЕМИКАЧ В ГЛИБОКИЙ СОН</string>
 	<string name="software_title">ПРОГРАМНЕ ЗАБЕЗПЕЧЕННЯ ARM</string>
 	<string name="rotation_title">ПЕРЕМИКАЧ ОБЕРТАННЯ ЄКРАНУ</string>
 	<string name="autoflash_title">АВТОПРОШИВКА ANDROID</string>
-	<string name="sensors_title">ДАМП ВСІХ СЕНСОРІВ</string>
 	<string name="atlasos_title">СКОПІЮВАТИ ФАЙЛИ ATLASOS / REVIOS</string>
 	<string name="edge_title">ВИДАЛЯЧ EDGE</string>
 	<string name="defender_title">ВИДАЛЯЧ DEFENDER</string>
@@ -30,11 +28,9 @@
 	<string name="quickboot_subtitle_nabu">Прошити UEFI та перезавантажити Windows одним клацанням</string>
 	<string name="sta_subtitle">Додає "Перехід на Android" у Windows</string>
 	<string name="usbhost_subtitle">Додає скрипт до C:\\Toolbox який дозволяє перемикати телефон в режим USB Host</string>
-	<string name="hibernation_subtitle">Додає скрипт до C:\\Toolbox який дозволяє перемикати телефон в гібернацію</string>
 	<string name="software_subtitle">Додає ярлики браузера, що містять програмне забезпечення ARM до C:\\Toolbox</string>
 	<string name="rotation_subtitle">Додає скрипт до C:\\Toolbox, який дозволяє повертати екран за допомогою ярлика\n(корисно для пристроїв без робочих датчиків)</string>
 	<string name="autoflash_subtitle">Додає скрипт до Windows, який автоматично прошиває Android boot.img при кожному завантаженні Windows</string>
-	<string name="sensors_subtitle">Це потрібно лише один раз на ДЕЯКИХ пристроях, щоб датчики працювали в Windows</string>
 	<string name="atlasos_subtitle">Копіює AtlasOS або ReviOS і AME Wizard в C:\\Toolbox</string>
 	<string name="edge_subtitle">Додає скрипт в C:\\Toolbox який дозволяє видалити Microsoft Edge</string>
 	<string name="defender_subtitle">Додає скрипт в C:\\Toolbox який дозволяє видалити Windows Defender</string>
@@ -42,22 +38,20 @@
 	<string name="setup_subtitle">Додає встановлювачі фреймворків в C:\\Toolbox</string>
 	
 	<string name="backup_boot_question">Зробити резервне копіювання поточного Boot образу Android?</string>
-	<string name="mount_question">Змонтувати Windows в /sdcard/Windows?</string>
+	<string name="mount_question">Змонтувати Windows в %s?</string>
 	<string name="unmount_question">Відмонтувати Windows?</string>
 	<string name="flash_uefi_question">Прошити UEFI? \nЯкщо так, наступним завантаженням буде Windows</string>
 	<string name="dump_modem_question">Вивантажити modem1st і modem2st до розділу Windows?</string>
 	<string name="quickboot_question">Швидке завантаження в Windows?</string>
 	<string name="sta_question">Створити додаток запуску Android в C:\\sta?</string>
 	<string name="usbhost_question">Скопіювати сценарій USB Host Mode до C:\\Toolbox?</string>
-	<string name="hibernation_question">Скопіювати перемикач сплячого режиму до C:\\Toolbox?</string>
 	<string name="software_question">Скопіювати ярлик браузера до C:\\Toolbox?</string>
 	<string name="rotation_question">Скопіювати ярлик обертання до C:\\Toolbox?</string>
 	<string name="autoflash_question">Встановити сценарій автопрошивки boot.img у Windows?</string>
-	<string name="sensors_question">Зробити дамп сенсорів в Windows?</string>
 	<string name="atlasos_question">Завантажити і перемістити AtlasOS або ReviOS в C:\\Toolbox?</string>
 	<string name="edge_question">Скопіювати скрипт видалення Edge в C:\\Toolbox?</string>
 	<string name="defender_question">Скопіювати скрипт видалення Defender в C:\\Toolbox?</string>
-	<string name="setup_question">Завантажити і перемістити у C:\\Toolbox встановлювачі C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX і XNAF?\n(це може заняти деякий час)</string>
+	<string name="setup_question">Завантажити і перемістити у C:\\Toolbox встановлювачі C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX і XNA?\n(це може заняти деякий час)</string>
 	
 	<string name="wrong">Щось пішло не так</string>
 	<string name="ntfs">Щось пішло не так, \nне вдалося змонтувати Windows.\nЗверніться за допомогою в Telegram-чат.</string>

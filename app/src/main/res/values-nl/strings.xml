@@ -1,4 +1,5 @@
 <resources>
+	<string name="error_title">Een onverwachte fout is opgetreden.\nExcuses voor het ongemak.</string>
 	<string name="backup_boot_title">BACK UP BOOT IMAGE</string>
 	<string name="mnt_title">%s WINDOWS</string>
 	<string name="toolbox_title">WOA TOOLBOX</string>
@@ -6,14 +7,11 @@
 	<string name="flash_uefi_title">UEFI FLASHEN</string>
 	<string name="uefi_not_found">UEFI NIET GEVONDEN</string>
 	<string name="quickboot_title">WINDOWS SNELSTARTEN</string>
-	<string name="error_title">Een onverwachte fout is opgetreden.\nExcuses voor het ongemak.</string>
 	<string name="sta_title">STA MAKER</string>
 	<string name="usbhost_title">USB HOST MODUS SCHAKELAAR</string>
-	<string name="hibernation_title">HIBERNATION SCHAKELAAR</string>
 	<string name="software_title">ARM SOFTWARE</string>
 	<string name="rotation_title">ROTATIE SHORTCUT</string>
 	<string name="autoflash_title">AUTO ANDROID FLASHER</string>
-	<string name="sensors_title">DUMP SENSORS</string>
 	<string name="atlasos_title">KOPIEER ATLASOS / REVIOS INSTALLER</string>
 	<string name="edge_title">EDGE VERWIJDERAAR</string>
 	<string name="defender_title">DEFENDER VERWIJDERAAR</string>
@@ -30,11 +28,9 @@
 	<string name="quickboot_subtitle_nabu">UEFI flashen en Windows starten in een klik</string>
 	<string name="sta_subtitle">Plaatst de Switch to Android app in Windows</string>
 	<string name="usbhost_subtitle">Plaatst een script in C:\\Toolbox waarmee je USB Host Modus aan/uit kan zetten</string>
-	<string name="hibernation_subtitle">Plaatst een script in C:\\Toolbox waarmee je hibernation aan/uit kan zetten</string>
 	<string name="software_subtitle">Plaatst browser snelkoppelingen met ARM software in C:\\Toolbox</string>
 	<string name="rotation_subtitle">Plaatst een script in C:\\Toolbox waarmee je het scherm kan draaien\n(handig voor toestellen zonder werkende sensors)</string>
 	<string name="autoflash_subtitle">Installeert een Windows script die automatisch de Android boot.img flasht</string>
-	<string name="sensors_subtitle">Dit is op sommige toestellen nodig om sensors in Windows werkende te maken</string>
 	<string name="atlasos_subtitle">Kopieert de AtlasOS of ReviOS playbook en AME Wizard naar C:\\Toolbox</string>
 	<string name="edge_subtitle">Plaatst een script in C:\\Toolbox waarmee je Microsoft Edge kan verwijderen</string>
 	<string name="defender_subtitle">Plaatst een script in C:\\Toolbox waarmee je Windows Defender kan verwijderen</string>
@@ -42,7 +38,7 @@
 	<string name="setup_subtitle">Plaatst installers voor verschillende frameworks in C:\\Toolbox</string>
 	
 	<string name="backup_boot_question">Back up huidige Android boot image?</string>
-	<string name="mount_question">Mount Windows naar /sdcard/Windows?</string>
+	<string name="mount_question">Mount Windows naar %s?</string>
 	<string name="unmount_question">Unmount Windows?</string>
 	<string name="dump_modem_question">Modem1st en modem2st gereedmaken?</string>
 	<string name="flash_uefi_question">UEFI flashen? \nIndien ja, geraakt u bij de volgende keer dat uw toestel start in Windows</string>

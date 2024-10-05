@@ -9,11 +9,9 @@
 	<string name="quickboot_title">WINDOWS SCHNELLSTART</string>
 	<string name="sta_title">STA HERSTELLER</string>
 	<string name="usbhost_title">USB HOST MODUS UMSCHALTER</string>
-	<string name="hibernation_title">HIBERNATION UMSCHALTER</string>
 	<string name="software_title">ARM SOFTWARE</string>
 	<string name="rotation_title">BILDSCHIRMAUSRICHTUNGSUMSCHALTER</string>
 	<string name="autoflash_title">AUTOMATISCHER ANDROID FLASHER</string>
-	<string name="sensors_title">SENSOREN BEREITSTELLEN</string>
 	<string name="atlasos_title">ATLASOS / REVIOS INSTALLIEREN</string>
 	<string name="edge_title">EDGE ENTFERNER</string>
 	<string name="defender_title">DEFENDER ENTFERNER</string>
@@ -30,11 +28,9 @@
 	<string name="quickboot_subtitle_nabu">UEFI flashen und zu Windows neustarten in einem klick</string>
 	<string name="sta_subtitle">Installiert die Switch to Android App in Windows</string>
 	<string name="usbhost_subtitle">Fügt in C:\\Toolbox einen Skript hinzu, mit dem Sie den USB Host Modus umschalten können</string>
-	<string name="hibernation_subtitle">Fügt in C:\\Toolbox einen Skript hinzu, mit dem Sie Hibernation umschalten können</string>
 	<string name="software_subtitle">Kopiert Browser-Verknüpfungen zur ARM Software zur C:\\Toolbox</string>
 	<string name="rotation_subtitle">Fügt in C:\\Toolbox einen Skript hinzu, mit dem Sie den Bildschirm mit einer Verknüpfung drehen können\n(nützlich für Geräte ohne funktionierende Sensoren)</string>
 	<string name="autoflash_subtitle">Installiert einen Autoflashskript der bei jedem Windows Start automatisch das Boot.img flasht</string>
-	<string name="sensors_subtitle">Wird in manche Geräte benötigt um Sensoren in Windows wirken zu lassen</string>
 	<string name="atlasos_subtitle">Kopiert die AtlasOS oder ReviOS Playbook und AME Wizard zur C:\\Toolbox</string>
 	<string name="edge_subtitle">Fügt in C:\\Toolbox einen Skript hinzu, mit dem Sie Microsoft Edge entfernen können</string>
 	<string name="defender_subtitle">Fügt in C:\\Toolbox einen Skript hinzu, mit dem Sie Windows Defender entfernen können</string>
@@ -42,18 +38,16 @@
 	<string name="setup_subtitle">Fügt in C:\\Toolbox mehrere Framework Installers hinzu</string>
 	
 	<string name="backup_boot_question">Backup vom aktuellen Boot-Image erstellen?</string>
-	<string name="mount_question">Windows in /sdcard/Windows mounten?</string>
+	<string name="mount_question">Windows in %s mounten?</string>
 	<string name="unmount_question">Unmount Windows?</string>
 	<string name="dump_modem_question">Modem1st und modem2st bereitstellen?</string>
 	<string name="flash_uefi_question">UEFI flashen? \nBeim nächsten Gerätestart landen Sie in Windows.</string>
 	<string name="quickboot_question">Schnellstart zur Windows?</string>
 	<string name="sta_question">Switch to Android App in C:\\sta herstellen?</string>
 	<string name="usbhost_question">USB Host Modus Skript nach C:\\Toolbox kopieren?</string>
-	<string name="hibernation_question">Hibernation Umschalter nach C:\\Toolbox kopieren?</string>
 	<string name="software_question">Browser-Verknüpfungen nach C:\\Toolbox kopieren?</string>
 	<string name="rotation_question">Bildschirmausrichtungsumschalter nach C:\\Toolbox kopieren?</string>
 	<string name="autoflash_question">Boot.img autoflasher Skript in Windows installieren?</string>
-	<string name="sensors_question">Sensoren bereitstellen?</string>
 	<string name="atlasos_question">AtlasOS oder ReviOS Playbook herunterladen und nach C:\\Toolbox kopieren?</string>
 	<string name="edge_question">Edge entferner Skript nach C:\\Toolbox kopieren?</string>
 	<string name="defender_question">Defender entferner Skript nach C:\\Toolbox kopieren?</string>

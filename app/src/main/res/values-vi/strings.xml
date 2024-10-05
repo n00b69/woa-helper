@@ -9,11 +9,9 @@
 	<string name="quickboot_title">KHỞI ĐỘNG NHANH WINDOWS</string>
 	<string name="sta_title">NGƯỜI SÁNG TẠO STA</string>
 	<string name="usbhost_title">CHUYỂN CHẾ ĐỘ CHỦ USB</string>
-	<string name="hibernation_title">CHUYỂN ĐỔI NGỦ ĐÔNG</string>
 	<string name="software_title">PHẦN MỀM ARM</string>
 	<string name="rotation_title">CHUYỂN ĐỔI QUAY</string>
 	<string name="autoflash_title">FLASH ANDROID TỰ ĐỘNG</string>
-	<string name="sensors_title">16 NÉM CẢM BIẾN VÀO</string>
 	<string name="atlasos_title">SAO CHÉP ATLASOS/ REVISOS FILE</string>
 	<string name="edge_title">XÓA EDGE</string>
 	<string name="defender_title">XÓA DIỆT VIRUS CỦA WIN</string>
@@ -30,11 +28,9 @@
 	<string name="quickboot_subtitle_nabu">Cài UEFI và khởi động lại Windows chỉ bằng một cú nhấp chuột</string>
 	<string name="sta_subtitle">Thêm ứng dụng Chuyển sang Android vào Windows</string>
 	<string name="usbhost_subtitle">Thêm tập lệnh vào C:\\Toolbox cho phép bạn chuyển đổi Chế độ máy chủ USB</string>
-	<string name="hibernation_subtitle">Thêm tập lệnh vào C:\\Toolbox cho phép bạn chuyển sang chế độ ngủ đông</string>
 	<string name="software_subtitle">Thêm lối tắt trình duyệt chứa phần mềm ARM vào C:\\Toolbox</string>
 	<string name="rotation_subtitle">Thêm tập lệnh vào C:\\Toolbox cho phép bạn xoay màn hình bằng phím tắt\n(hữu ích cho các thiết bị không có cảm biến hoạt động)</string>
 	<string name="autoflash_subtitle">Thêm tập lệnh vào Windows để tự động flash boot.img Android bất cứ khi nào Windows khởi động</string>
-	<string name="sensors_subtitle">Cái này chỉ cần 1 lần cho 1 số thiết bị nhất định để các cảm biến hoạt động </string>
 	<string name="atlasos_subtitle">Sao chép AtlasOS hoặc ReviOS playbook và Trình hướng dẫn AME vào C:\\Toolbox</string>
 	<string name="edge_subtitle">Thêm tập lệnh vào C:\\Toolbox cho phép bạn xóa Microsoft Edge</string>
 	<string name="defender_subtitle">Thêm tập lệnh vào C:\\Toolbox cho phép bạn xóa Windows Defender</string>
@@ -42,18 +38,16 @@
 	<string name="setup_subtitle">Thêm trình cài đặt cho một số framework vào C:\\Toolbox</string>
 	
 	<string name="backup_boot_question">Có muốn sao lưu boot.img chứa?</string>
-	<string name="mount_question">Hiện file Windows vào /sdcard/Windows?</string>
+	<string name="mount_question">Hiện file Windows vào %s?</string>
 	<string name="unmount_question">Không hiện Windows nữa?</string>
 	<string name="dump_modem_question">Có muốn đưa modem1st và modem2st vào phân vùng Windows?</string>
 	<string name="flash_uefi_question">Cài UEFI? \nNếu vậy thì lần khởi động tiếp theo sẽ là trong Windows</string>
 	<string name="quickboot_question">Khởi động nhanh vào Windows?</string>
 	<string name="sta_question">Tạo ứng dụng Chuyển sang Android trong C:\\sta?</string>
 	<string name="usbhost_question">Sao chép tập lệnh Chế độ máy chủ USB vào C:\\Toolbox?</string>
-	<string name="hibernation_question">Sao chép nút chuyển đổi chế độ ngủ đông sang C:\\Toolbox?</string>
 	<string name="software_question">Sao chép phím tắt trình duyệt vào C:\\Toolbox?</string>
 	<string name="rotation_question">Sao chép phím tắt xoay sang C:\\Toolbox?</string>
 	<string name="autoflash_question">Cài đặt tập lệnh tự động cài boot.img vào Windows?</string>
-	<string name="sensors_question">Ném cảm biến vào Windows?</string>
 	<string name="atlasos_question">Tải xuống và di chuyển AtlasOS hoặc ReviOS playbook sang C:\\Toolbox?</string>
 	<string name="edge_question">Sao chép tập lệnh xóa Edge vào C:\\Toolbox?</string>
 	<string name="defender_question">Sao chép tập lệnh gỡ bỏ Defender vào C:\\Toolbox?</string>

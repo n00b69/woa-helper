@@ -13,11 +13,12 @@ import java.util.Objects;
 import id.kuato.woahelper.R;
 import com.topjohnwu.superuser.ShellUtils;
 import id.kuato.woahelper.preference.pref;
-public class mount_tile extends TileService {
 
+public class mount_tile extends TileService {
 
     String win;
     String mnt_stat;
+	
     @Override
     public void onStartListening() {
         super.onStartListening();
@@ -29,8 +30,8 @@ public class mount_tile extends TileService {
         super.onStopListening();
 
     }
-
-    // Called when the user taps on your tile in an active or inactive state.
+	
+	// Called when the user taps on your tile in an active or inactive state.
     @Override
     public void onClick() {
         super.onClick();
@@ -41,8 +42,8 @@ public class mount_tile extends TileService {
         update();
     }
 
-private void update(){
-Tile tile =getQsTile();
+    private void update(){
+    Tile tile =getQsTile();
         win = ShellUtils.fastCmd("su -c realpath /dev/block/by-name/win");
         if(win.isEmpty())
             win = ShellUtils.fastCmd("su -c realpath /dev/block/by-name/mindows");
@@ -55,15 +56,17 @@ Tile tile =getQsTile();
     }
 
     private void mount() {
-		if (!pref.getMountLocation(this)) {
-        	ShellUtils.fastCmd(getString(R.string.mk));
-        	ShellUtils.fastCmd(String.format("su -mm -c "+pref.getbusybox(this)+getString(R.string.mount),win));
-    	}
-		else{
-			ShellUtils.fastCmd(getString(R.string.mk2));
-        	ShellUtils.fastCmd(String.format("su -mm -c "+pref.getbusybox(this)+getString(R.string.mount2),win));
-			}
-		}	
+        String c ;
+        if (!pref.getMountLocation(this)) {
+            c = String.format("su -mm -c " + pref.getbusybox(this) + getString(R.string.mount), win);
+            ShellUtils.fastCmd(getString(R.string.mk));
+            ShellUtils.fastCmd(c);
+        } else{
+            c = String.format("su -mm -c " + pref.getbusybox(this) + getString(R.string.mount2), win);
+            ShellUtils.fastCmd(getString(R.string.mk2));
+            ShellUtils.fastCmd(c);
+	    }
+	}	
 		
     public void unmount() {
 		if (!pref.getMountLocation(this)) {
