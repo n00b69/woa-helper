@@ -1,11 +1,11 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:screenOrientation="portrait"
-    android:id="@+id/mainlayout"
     android:animateLayoutChanges="true"
+    android:screenOrientation="portrait"
     tools:context=".main.MainActivity">
 
     <LinearLayout
@@ -454,9 +454,9 @@
                                 android:id="@+id/tv_boot_subtitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:paddingRight="@dimen/_7sdp"
                                 android:textSize="@dimen/_9sdp"
-                                android:textStyle="italic"
-                                android:paddingRight="@dimen/_7sdp" />
+                                android:textStyle="italic" />
                         </LinearLayout>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>

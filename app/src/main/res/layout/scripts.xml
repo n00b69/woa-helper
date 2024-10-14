@@ -1,10 +1,10 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scriptstab"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:screenOrientation="portrait"
-    android:id="@+id/scriptstab"
     tools:context=".main.MainActivity">
 
     <LinearLayout
@@ -106,9 +106,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
+                                android:paddingRight="@dimen/_15sdp"
                                 android:text="@string/usbhost_subtitle"
                                 android:textSize="@dimen/_9sdp"
-                                android:paddingRight="@dimen/_15sdp"
                                 android:textStyle="italic" />
                         </LinearLayout>
                     </LinearLayout>
@@ -166,9 +166,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
+                                android:paddingRight="@dimen/_15sdp"
                                 android:text="@string/rotation_subtitle"
                                 android:textSize="@dimen/_9sdp"
-                                android:paddingRight="@dimen/_15sdp"
                                 android:textStyle="italic" />
                         </LinearLayout>
                     </LinearLayout>
@@ -225,8 +225,8 @@
                                 android:id="@+id/tv_setup_sub"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:paddingRight="@dimen/_15sdp"
                                 android:gravity="left"
+                                android:paddingRight="@dimen/_15sdp"
                                 android:text="@string/setup_subtitle"
                                 android:textSize="@dimen/_9sdp"
                                 android:textStyle="italic" />
@@ -286,9 +286,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
+                                android:paddingRight="@dimen/_15sdp"
                                 android:text="@string/defender_subtitle"
                                 android:textSize="@dimen/_9sdp"
-                                android:paddingRight="@dimen/_15sdp"
                                 android:textStyle="italic" />
                         </LinearLayout>
 

@@ -20,82 +20,75 @@ public class WindowPreference {
     private static final int EDGE_TO_EDGE_BAR_ALPHA = 128;
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    private static final int EDGE_TO_EDGE_FLAGS = View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-            | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+    private static final int EDGE_TO_EDGE_FLAGS = View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
 
     private final Context context;
 
-    public WindowPreference(Context context) {
+    public WindowPreference(final Context context) {
         this.context = context;
     }
 
     @SuppressWarnings("ApplySharedPref")
     public void toggleEdgeToEdgeEnabled() {
-        this.getSharedPreferences().edit().putBoolean(KEY_EDGE_TO_EDGE_ENABLED, !this.isEdgeToEdgeEnabled()).commit();
+        getSharedPreferences().edit().putBoolean(WindowPreference.KEY_EDGE_TO_EDGE_ENABLED, !isEdgeToEdgeEnabled()).commit();
     }
 
     public boolean isEdgeToEdgeEnabled() {
-        return this.getSharedPreferences().getBoolean(KEY_EDGE_TO_EDGE_ENABLED, Build.VERSION_CODES.Q <= Build.VERSION.SDK_INT);
+        return getSharedPreferences().getBoolean(WindowPreference.KEY_EDGE_TO_EDGE_ENABLED, Build.VERSION_CODES.Q <= Build.VERSION.SDK_INT);
     }
 
     @SuppressWarnings("RestrictTo")
-    public void applyEdgeToEdgePreference(Window window, int color) {
+    public void applyEdgeToEdgePreference(final Window window, final int color) {
         if (Build.VERSION_CODES.LOLLIPOP > Build.VERSION.SDK_INT) {
             return;
         }
-        boolean edgeToEdgeEnabled = this.isEdgeToEdgeEnabled();
+        final boolean edgeToEdgeEnabled = isEdgeToEdgeEnabled();
 
-        int statusBarColor = this.getStatusBarColor(this.isEdgeToEdgeEnabled());
-        int navbarColor = this.getNavBarColor(this.isEdgeToEdgeEnabled());
+        final int statusBarColor = getStatusBarColor(isEdgeToEdgeEnabled());
+        final int navbarColor = getNavBarColor(isEdgeToEdgeEnabled());
 
-        boolean lightBackground = MaterialColors.isColorLight(
-                MaterialColors.getColor(this.context, android.R.attr.colorBackground, Color.BLACK));
-        boolean lightNavbar = MaterialColors.isColorLight(navbarColor);
-        boolean showDarkNavbarIcons = lightNavbar || (Color.TRANSPARENT == navbarColor && lightBackground);
+        final boolean lightBackground = MaterialColors.isColorLight(MaterialColors.getColor(context, android.R.attr.colorBackground, Color.BLACK));
+        final boolean lightNavbar = MaterialColors.isColorLight(navbarColor);
+        final boolean showDarkNavbarIcons = lightNavbar || (Color.TRANSPARENT == navbarColor && lightBackground);
 
-        View decorView = window.getDecorView();
-        int currentStatusBar = MaterialColors.isColorLight(color) && Build.VERSION_CODES.M <= Build.VERSION.SDK_INT
-                ? View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                : 0;
-        int currentNavBar = showDarkNavbarIcons && Build.VERSION_CODES.O <= Build.VERSION.SDK_INT
-                ? View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-                : 0;
+        final View decorView = window.getDecorView();
+        final int currentStatusBar = MaterialColors.isColorLight(color) && Build.VERSION_CODES.M <= Build.VERSION.SDK_INT ? View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR : 0;
+        final int currentNavBar = showDarkNavbarIcons && Build.VERSION_CODES.O <= Build.VERSION.SDK_INT ? View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR : 0;
 
         window.setNavigationBarColor(navbarColor);
         window.setStatusBarColor(statusBarColor);
-        int systemUiVisibility = (edgeToEdgeEnabled ? EDGE_TO_EDGE_FLAGS : View.SYSTEM_UI_FLAG_VISIBLE) | currentStatusBar
-                | currentNavBar;
+        final int systemUiVisibility = (edgeToEdgeEnabled ? WindowPreference.EDGE_TO_EDGE_FLAGS : View.SYSTEM_UI_FLAG_VISIBLE) | currentStatusBar | currentNavBar;
 
         decorView.setSystemUiVisibility(systemUiVisibility);
     }
 
     @SuppressWarnings("RestrictTo")
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private int getStatusBarColor(boolean isEdgeToEdgeEnabled) {
+    private int getStatusBarColor(final boolean isEdgeToEdgeEnabled) {
         if (isEdgeToEdgeEnabled && Build.VERSION_CODES.M > Build.VERSION.SDK_INT) {
-            int opaqueStatusBarColor = MaterialColors.getColor(this.context, android.R.attr.statusBarColor, Color.BLACK);
-            return ColorUtils.setAlphaComponent(opaqueStatusBarColor, EDGE_TO_EDGE_BAR_ALPHA);
+            final int opaqueStatusBarColor = MaterialColors.getColor(context, android.R.attr.statusBarColor, Color.BLACK);
+            return ColorUtils.setAlphaComponent(opaqueStatusBarColor, WindowPreference.EDGE_TO_EDGE_BAR_ALPHA);
         }
         if (isEdgeToEdgeEnabled) {
             return Color.TRANSPARENT;
         }
-        return MaterialColors.getColor(this.context, android.R.attr.statusBarColor, Color.BLACK);
+        return MaterialColors.getColor(context, android.R.attr.statusBarColor, Color.BLACK);
     }
 
     @SuppressWarnings("RestrictTo")
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private int getNavBarColor(boolean isEdgeToEdgeEnabled) {
+    private int getNavBarColor(final boolean isEdgeToEdgeEnabled) {
         if (isEdgeToEdgeEnabled && Build.VERSION_CODES.O_MR1 > Build.VERSION.SDK_INT) {
-            int opaqueNavBarColor = MaterialColors.getColor(this.context, android.R.attr.navigationBarColor, Color.BLACK);
-            return ColorUtils.setAlphaComponent(opaqueNavBarColor, EDGE_TO_EDGE_BAR_ALPHA);
+            final int opaqueNavBarColor = MaterialColors.getColor(context, android.R.attr.navigationBarColor, Color.BLACK);
+            return ColorUtils.setAlphaComponent(opaqueNavBarColor, WindowPreference.EDGE_TO_EDGE_BAR_ALPHA);
         }
         if (isEdgeToEdgeEnabled) {
             return Color.TRANSPARENT;
         }
-        return MaterialColors.getColor(this.context, android.R.attr.navigationBarColor, Color.BLACK);
+        return MaterialColors.getColor(context, android.R.attr.navigationBarColor, Color.BLACK);
     }
 
     private SharedPreferences getSharedPreferences() {
-        return this.context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+        return context.getSharedPreferences(WindowPreference.PREFERENCES_NAME, Context.MODE_PRIVATE);
     }
 }

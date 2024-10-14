@@ -35,11 +35,11 @@
         <ProgressBar
             android:id="@+id/progress"
             style="?android:attr/progressBarStyleHorizontal"
-            android:progress="0"
-            android:max="100"
-            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_5sdp" />
+            android:layout_height="@dimen/_5sdp"
+            android:max="100"
+            android:progress="0"
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,9 +58,9 @@
                 android:clipToOutline="true"
                 android:stateListAnimator="@animator/state_list_anim"
                 android:textStyle="bold"
+                android:visibility="gone"
                 app:backgroundTint="?attr/colorAccent"
                 app:cornerRadius="@dimen/parentMargin"
-                android:visibility="gone"
                 tools:targetApi="s" />
 
 
@@ -75,9 +75,9 @@
                 android:clipToOutline="true"
                 android:stateListAnimator="@animator/state_list_anim"
                 android:textStyle="bold"
+                android:visibility="gone"
                 app:backgroundTint="?attr/colorAccent"
                 app:cornerRadius="@dimen/parentMargin"
-                android:visibility="gone"
                 tools:targetApi="s" />
 
             <com.google.android.material.button.MaterialButton
@@ -90,11 +90,11 @@
                 android:animateLayoutChanges="true"
                 android:clipToOutline="true"
                 android:stateListAnimator="@animator/state_list_anim"
-                android:textStyle="bold"
                 android:text="No"
+                android:textStyle="bold"
+                android:visibility="gone"
                 app:backgroundTint="?attr/colorAccent"
                 app:cornerRadius="@dimen/parentMargin"
-                android:visibility="gone"
                 tools:targetApi="s" />
 
         </LinearLayout>

@@ -14,32 +14,7 @@ android {
         versionName = "1.8.4_BETA21"
 
         resConfigs(
-            "ar",
-            "az",
-            "be",
-            "cs",
-            "de",
-            "en",
-            "es",
-            "fr",
-            "in",
-            "ko",
-            "ms",
-            "nl",
-            "pl",
-            "pt",
-            "ru",
-            "ro",
-            "th",
-            "tr",
-            "uk",
-            "vi",
-            "zh",
-            "zh-rCN",
-            "zh-rHK",
-            "zh-rMO",
-            "zh-rSG",
-            "zh-rTW"
+            "ar", "az", "be", "cs", "de", "en", "es", "fr", "in", "ko", "ms", "nl", "pl", "pt", "ru", "ro", "th", "tr", "uk", "vi", "zh", "zh-rCN", "zh-rHK", "zh-rMO", "zh-rSG", "zh-rTW"
         )
     }
 
@@ -48,8 +23,7 @@ android {
             isShrinkResources = true
             isMinifyEnabled = true
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
             isDebuggable = false
             isJniDebuggable = false

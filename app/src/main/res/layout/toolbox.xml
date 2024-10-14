@@ -1,10 +1,10 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolboxtab"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:screenOrientation="portrait"
-    android:id="@+id/toolboxtab"
     tools:context=".main.MainActivity">
 
     <LinearLayout
@@ -157,8 +157,8 @@
                                 android:id="@+id/tv_scripts_sub"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:paddingRight="@dimen/_15sdp"
                                 android:gravity="left"
+                                android:paddingRight="@dimen/_15sdp"
                                 android:text="@string/script_subtitle"
                                 android:textSize="@dimen/_9sdp"
                                 android:textStyle="italic" />
@@ -218,8 +218,8 @@
                                 android:id="@+id/tv_uefi_subtitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:paddingRight="@dimen/_15sdp"
                                 android:gravity="left"
+                                android:paddingRight="@dimen/_15sdp"
                                 android:text="@string/flash_uefi_subtitle"
                                 android:textSize="@dimen/_9sdp"
                                 android:textStyle="italic" />
@@ -278,8 +278,8 @@
                                 android:id="@+id/tv_dbkp_subtitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:paddingRight="@dimen/_15sdp"
                                 android:gravity="left"
+                                android:paddingRight="@dimen/_15sdp"
                                 android:text="@string/dbkp_subtitle"
                                 android:textSize="@dimen/_9sdp"
                                 android:textStyle="italic" />
@@ -338,8 +338,8 @@
                                 android:id="@+id/tv_modem_subtitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:paddingRight="@dimen/_15sdp"
                                 android:gravity="left"
+                                android:paddingRight="@dimen/_15sdp"
                                 android:text="@string/dump_modem_subtitle"
                                 android:textSize="@dimen/_9sdp"
                                 android:textStyle="italic" />
@@ -398,8 +398,8 @@
                                 android:id="@+id/tv_software_sub"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:paddingRight="@dimen/_15sdp"
                                 android:gravity="left"
+                                android:paddingRight="@dimen/_15sdp"
                                 android:text="@string/software_subtitle"
                                 android:textSize="@dimen/_9sdp"
                                 android:textStyle="italic" />
@@ -459,8 +459,8 @@
                                 android:id="@+id/tv_atlasos_sub"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:paddingRight="@dimen/_15sdp"
                                 android:gravity="left"
+                                android:paddingRight="@dimen/_15sdp"
                                 android:text="@string/atlasos_subtitle"
                                 android:textSize="@dimen/_9sdp"
                                 android:textStyle="italic" />

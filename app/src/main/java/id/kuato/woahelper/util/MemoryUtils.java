@@ -18,11 +18,11 @@ package id.kuato.woahelper.util;
 
 public class MemoryUtils {
 
-    private String floatForm(double d) {
+    private String floatForm(final double d) {
         return String.format(java.util.Locale.US, "%.2f", d);
     }
 
-    String bytesToHuman(long size) {
+    String bytesToHuman(final long size) {
         final long Kb = 1024L;
         final long Mb = Kb << 10;
         final long Gb = Mb << 10;
@@ -30,19 +30,13 @@ public class MemoryUtils {
         final long Pb = Tb << 10;
         final long Eb = Pb << 10;
 
-        if (Kb > size)
-            return this.floatForm(size);
-        if (Mb > size)
-            return this.floatForm((double) size / Kb);
-        if (Gb > size)
-            return this.floatForm((double) size / Mb);
-        if (Tb > size)
-            return this.floatForm((double) size / Gb);
-        if (Pb > size)
-            return this.floatForm((double) size / Tb);
-        if (Eb > size)
-            return this.floatForm((double) size / Pb);
-        return this.floatForm((double) size / Eb);
+        if (Kb > size) return floatForm(size);
+        if (Mb > size) return floatForm((double) size / Kb);
+        if (Gb > size) return floatForm((double) size / Mb);
+        if (Tb > size) return floatForm((double) size / Gb);
+        if (Pb > size) return floatForm((double) size / Tb);
+        if (Eb > size) return floatForm((double) size / Pb);
+        return floatForm((double) size / Eb);
 
     }
 

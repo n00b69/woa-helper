@@ -32,9 +32,9 @@ import android.view.ViewGroup;
 
 import androidx.cardview.widget.CardView;
 
-import id.kuato.woahelper.R;
-
 import java.lang.ref.WeakReference;
+
+import id.kuato.woahelper.R;
 
 public class BlurLayout extends CardView {
 
@@ -46,30 +46,30 @@ public class BlurLayout extends CardView {
     private int mFPS;
     private WeakReference<View> mActivityView;
 
-    public BlurLayout(Context context) {
+    public BlurLayout(final Context context) {
         super(context, null);
     }
 
-    public BlurLayout(Context context, AttributeSet attrs) {
+    public BlurLayout(final Context context, final AttributeSet attrs) {
         super(context, attrs);
         BlurKit.init(context);
 
-        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.BlurLayout, 0, 0);
+        final TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.BlurLayout, 0, 0);
 
         try {
-            this.mDownscaleFactor = a.getFloat(R.styleable.BlurLayout_downscaleFactor, DEFAULT_DOWNSCALE_FACTOR);
-            this.mBlurRadius = a.getInteger(R.styleable.BlurLayout_blurRadius, DEFAULT_BLUR_RADIUS);
-            this.mFPS = a.getInteger(R.styleable.BlurLayout_fps, DEFAULT_FPS);
+            mDownscaleFactor = a.getFloat(R.styleable.BlurLayout_downscaleFactor, BlurLayout.DEFAULT_DOWNSCALE_FACTOR);
+            mBlurRadius = a.getInteger(R.styleable.BlurLayout_blurRadius, BlurLayout.DEFAULT_BLUR_RADIUS);
+            mFPS = a.getInteger(R.styleable.BlurLayout_fps, BlurLayout.DEFAULT_FPS);
         } finally {
             a.recycle();
         }
 
-        if (0 < this.mFPS) {
-            final Choreographer.FrameCallback invalidationLoop = new Choreographer.FrameCallback() {
+        if (0 < mFPS) {
+            Choreographer.FrameCallback invalidationLoop = new Choreographer.FrameCallback() {
                 @Override
-                public void doFrame(long frameTimeNanos) {
-                    BlurLayout.this.invalidate();
-                    Choreographer.getInstance().postFrameCallbackDelayed(this, 1000 / BlurLayout.this.mFPS);
+                public void doFrame(final long frameTimeNanos) {
+                    invalidate();
+                    Choreographer.getInstance().postFrameCallbackDelayed(this, 1000 / mFPS);
                 }
             };
             Choreographer.getInstance().postFrameCallback(invalidationLoop);
@@ -79,45 +79,45 @@ public class BlurLayout extends CardView {
     @Override
     public void invalidate() {
         super.invalidate();
-        Bitmap bitmap = this.blur();
+        final Bitmap bitmap = blur();
         if (null != bitmap) {
-            this.setBackground(new BitmapDrawable(bitmap));
+            setBackground(new BitmapDrawable(bitmap));
         }
     }
 
     private Bitmap blur() {
-        if (null == this.getContext()) {
+        if (null == getContext()) {
             return null;
         }
 
-        if (null == this.mActivityView || null == this.mActivityView.get()) {
-            this.mActivityView = new WeakReference<>(this.getActivityView());
-            if (null == this.mActivityView.get()) {
+        if (null == mActivityView || null == mActivityView.get()) {
+            mActivityView = new WeakReference<>(getActivityView());
+            if (null == mActivityView.get()) {
                 return null;
             }
         }
 
-        Point pointRelativeToActivityView = this.getPositionInScreen();
+        final Point pointRelativeToActivityView = getPositionInScreen();
 
-        this.setAlpha(0);
+        setAlpha(0);
 
-        int screenWidth = this.mActivityView.get().getWidth();
-        int screenHeight = this.mActivityView.get().getHeight();
+        final int screenWidth = mActivityView.get().getWidth();
+        final int screenHeight = mActivityView.get().getHeight();
 
-        int width = (int) (this.getWidth() * this.mDownscaleFactor);
-        int height = (int) (this.getHeight() * this.mDownscaleFactor);
+        final int width = (int) (getWidth() * mDownscaleFactor);
+        final int height = (int) (getHeight() * mDownscaleFactor);
 
-        int x = (int) (pointRelativeToActivityView.x * this.mDownscaleFactor);
-        int y = (int) (pointRelativeToActivityView.y * this.mDownscaleFactor);
+        final int x = (int) (pointRelativeToActivityView.x * mDownscaleFactor);
+        final int y = (int) (pointRelativeToActivityView.y * mDownscaleFactor);
 
-        int xPadding = this.getWidth() / 8;
-        int yPadding = this.getHeight() / 8;
+        final int xPadding = getWidth() / 8;
+        final int yPadding = getHeight() / 8;
 
         int leftOffset = -xPadding;
         leftOffset = 0 <= x + leftOffset ? leftOffset : 0;
 
         int rightOffset = xPadding;
-        rightOffset = x + this.getWidth() + rightOffset <= screenWidth ? rightOffset : screenWidth - this.getWidth() - x;
+        rightOffset = x + getWidth() + rightOffset <= screenWidth ? rightOffset : screenWidth - getWidth() - x;
 
         int topOffset = -yPadding;
         topOffset = 0 <= y + topOffset ? topOffset : 0;
@@ -127,27 +127,22 @@ public class BlurLayout extends CardView {
 
         Bitmap bitmap;
         try {
-            bitmap = this.getDownscaledBitmapForView(this.mActivityView.get(),
-                    new Rect(pointRelativeToActivityView.x + leftOffset, pointRelativeToActivityView.y + topOffset,
-                            pointRelativeToActivityView.x + this.getWidth() + Math.abs(leftOffset) + rightOffset,
-                            pointRelativeToActivityView.y + this.getHeight() + Math.abs(topOffset) + bottomOffset),
-                    this.mDownscaleFactor);
-        } catch (NullPointerException e) {
+            bitmap = getDownscaledBitmapForView(mActivityView.get(), new Rect(pointRelativeToActivityView.x + leftOffset, pointRelativeToActivityView.y + topOffset, pointRelativeToActivityView.x + getWidth() + Math.abs(leftOffset) + rightOffset, pointRelativeToActivityView.y + getHeight() + Math.abs(topOffset) + bottomOffset), mDownscaleFactor);
+        } catch (final NullPointerException e) {
             return null;
         }
-        bitmap = BlurKit.getInstance().blur(bitmap, this.mBlurRadius);
-        bitmap = Bitmap.createBitmap(bitmap, (int) (Math.abs(leftOffset) * this.mDownscaleFactor),
-                (int) (Math.abs(topOffset) * this.mDownscaleFactor), width, height);
-        this.setAlpha(1);
+        bitmap = BlurKit.getInstance().blur(bitmap, mBlurRadius);
+        bitmap = Bitmap.createBitmap(bitmap, (int) (Math.abs(leftOffset) * mDownscaleFactor), (int) (Math.abs(topOffset) * mDownscaleFactor), width, height);
+        setAlpha(1);
 
         return bitmap;
     }
 
     private View getActivityView() {
-        Activity activity;
+        final Activity activity;
         try {
-            activity = (Activity) this.getContext();
-        } catch (ClassCastException e) {
+            activity = (Activity) getContext();
+        } catch (final ClassCastException e) {
             return null;
         }
 
@@ -155,18 +150,18 @@ public class BlurLayout extends CardView {
     }
 
     private Point getPositionInScreen() {
-        return this.getPositionInScreen(this);
+        return getPositionInScreen(this);
     }
 
-    private Point getPositionInScreen(View view) {
-        if (null == this.getParent()) {
+    private Point getPositionInScreen(final View view) {
+        if (null == getParent()) {
             return new Point();
         }
 
-        ViewGroup parent;
+        final ViewGroup parent;
         try {
             parent = (ViewGroup) view.getParent();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             return new Point();
         }
 
@@ -174,27 +169,27 @@ public class BlurLayout extends CardView {
             return new Point();
         }
 
-        Point point = this.getPositionInScreen(parent);
+        final Point point = getPositionInScreen(parent);
         point.offset((int) view.getX(), (int) view.getY());
         return point;
     }
 
-    private Bitmap getDownscaledBitmapForView(View view, Rect crop, float downscaleFactor) throws NullPointerException {
-        View screenView = view.getRootView();
+    private Bitmap getDownscaledBitmapForView(final View view, final Rect crop, final float downscaleFactor) throws NullPointerException {
+        final View screenView = view.getRootView();
 
-        int width = (int) (crop.width() * downscaleFactor);
-        int height = (int) (crop.height() * downscaleFactor);
+        final int width = (int) (crop.width() * downscaleFactor);
+        final int height = (int) (crop.height() * downscaleFactor);
 
         if (0 >= screenView.getWidth() || 0 >= screenView.getHeight() || 0 >= width || 0 >= height) {
             throw new NullPointerException();
         }
 
-        float dx = -crop.left * downscaleFactor;
-        float dy = -crop.top * downscaleFactor;
+        final float dx = -crop.left * downscaleFactor;
+        final float dy = -crop.top * downscaleFactor;
 
-        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_4444);
-        Canvas canvas = new Canvas(bitmap);
-        Matrix matrix = new Matrix();
+        final Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_4444);
+        final Canvas canvas = new Canvas(bitmap);
+        final Matrix matrix = new Matrix();
         matrix.preScale(downscaleFactor, downscaleFactor);
         matrix.postTranslate(dx, dy);
         canvas.setMatrix(matrix);
@@ -203,17 +198,17 @@ public class BlurLayout extends CardView {
         return bitmap;
     }
 
-    public void setDownscaleFactor(float downscaleFactor) {
-        this.mDownscaleFactor = downscaleFactor;
-        this.invalidate();
+    public void setDownscaleFactor(final float downscaleFactor) {
+        mDownscaleFactor = downscaleFactor;
+        invalidate();
     }
 
-    public void setBlurRadius(int blurRadius) {
-        this.mBlurRadius = blurRadius;
-        this.invalidate();
+    public void setBlurRadius(final int blurRadius) {
+        mBlurRadius = blurRadius;
+        invalidate();
     }
 
-    public void setFPS(int fps) {
-        this.mFPS = fps;
+    public void setFPS(final int fps) {
+        mFPS = fps;
     }
 }
