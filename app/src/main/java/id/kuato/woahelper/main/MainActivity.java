@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         if (Objects.equals(currentVersion, pref.getVersion(this))) {
-            String[] files = {"guacamole.fd", "hotdog.fd", "dbkp8150.cfg", "dbkp.hotdog.bin", "busybox", "sta.exe", "Switch to Android.lnk", "usbhostmode.exe", "ARMSoftware.url", "TestedSoftware.url", "WorksOnWoa.url", "RotationShortcut.lnk", "display.exe", "RemoveEdge.ps1", "autoflasher.lnk", "DefenderRemover.exe"};
+            String[] files = {"tabletmode.vbs", "guacamole.fd", "hotdog.fd", "dbkp8150.cfg", "dbkp.hotdog.bin", "busybox", "sta.exe", "Switch to Android.lnk", "usbhostmode.exe", "ARMSoftware.url", "TestedSoftware.url", "WorksOnWoa.url", "RotationShortcut.lnk", "display.exe", "RemoveEdge.ps1", "autoflasher.lnk", "DefenderRemover.exe"};
             int i = 0;
             while (!files[i].isEmpty()) {
                 if (ShellUtils.fastCmd(String.format("ls %1$s |grep %2$s", getFilesDir(), files[i])).isEmpty()) {
@@ -900,8 +900,7 @@ public class MainActivity extends AppCompatActivity {
                             ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/sta || true ");
                             ShellUtils.fastCmd("cp /sdcard/sta.conf " + MainActivity.this.winpath + "/sta");
                             ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sta.exe " + MainActivity.this.winpath + "/sta/sta.exe");
-                            ShellUtils.fastCmd("cp '" + MainActivity.this.getFilesDir() + "/Switch to Android.lnk' " + MainActivity.this.winpath + "/Users/Default/Desktop");
-                            ShellUtils.fastCmd("cp '" + MainActivity.this.getFilesDir() + "/Switch to Android.lnk' " + MainActivity.this.winpath + "/Users/*/Desktop");
+                            ShellUtils.fastCmd("cp '" + MainActivity.this.getFilesDir() + "/Switch to Android.lnk' " + MainActivity.this.winpath + "/Users/Public/Desktop");
                             messages.setText(MainActivity.this.getString(R.string.done));
                             dismissButton.setText(MainActivity.this.getString(R.string.dismiss));
                             dismissButton.setVisibility(View.VISIBLE);
@@ -1605,6 +1604,87 @@ public class MainActivity extends AppCompatActivity {
                         ShellUtils.fastCmd("cp /sdcard/RotationShortcut.lnk " + this.winpath + "/Toolbox/Rotation");
                         ShellUtils.fastCmd("rm /sdcard/display.exe");
                         ShellUtils.fastCmd("rm /sdcard/RotationShortcut.lnk");
+                        messages.setText(this.getString(R.string.done));
+                        dismissButton.setText(this.getString(R.string.dismiss));
+                        dismissButton.setVisibility(View.VISIBLE);
+                        dismissButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v15) {
+                                MainActivity.this.HideBlur();
+                                dialog.dismiss();
+                            }
+                        });
+                    }
+                    dismissButton.setText(this.getString(R.string.dismiss));
+                    dismissButton.setVisibility(View.VISIBLE);
+                    dismissButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v15) {
+                            MainActivity.this.HideBlur();
+                            dialog.dismiss();
+                        }
+                    });
+                } catch (Exception error) {
+                    error.printStackTrace();
+                }
+            });
+            dialog.setCancelable(false);
+            dialog.show();
+        });
+		
+		this.z.cvTablet.setOnClickListener(v -> {
+            this.ShowBlur();
+            noButton.setText(this.getString(R.string.no));
+            yesButton.setText(this.getString(R.string.yes));
+            dismissButton.setVisibility(View.GONE);
+            noButton.setVisibility(View.VISIBLE);
+            yesButton.setVisibility(View.VISIBLE);
+            messages.setText(this.getString(R.string.tablet_question));
+            icons.setVisibility(View.VISIBLE);
+            icons.setImageDrawable(sensors);
+            noButton.setOnClickListener(v14 -> {
+                this.HideBlur();
+                dialog.dismiss();
+            });
+            yesButton.setOnClickListener(v15 -> {
+                noButton.setVisibility(View.GONE);
+                yesButton.setVisibility(View.GONE);
+                dismissButton.setVisibility(View.GONE);
+                try {
+                    this.mount();
+                    String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + this.win);
+                    ShellUtils.fastCmd("cp " + this.getFilesDir() + "/tabletmode.vbs /sdcard/");
+                    if (mnt_stat.isEmpty()) {
+                        noButton.setVisibility(View.GONE);
+                        yesButton.setText(this.getString(R.string.chat));
+                        dismissButton.setText(this.getString(R.string.cancel));
+                        yesButton.setVisibility(View.VISIBLE);
+                        dismissButton.setVisibility(View.VISIBLE);
+                        icons.setVisibility(View.GONE);
+                        this.ShowBlur();
+                        messages.setText(this.getString(R.string.ntfs));
+                        dismissButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v15) {
+                                MainActivity.this.HideBlur();
+                                icons.setVisibility(View.VISIBLE);
+                                dialog.dismiss();
+                            }
+                        });
+                        yesButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v15) {
+                                Intent i = new Intent(Intent.ACTION_VIEW);
+                                i.setData(Uri.parse("https://t.me/woahelperchat"));
+                                MainActivity.this.startActivity(i);
+                            }
+                        });
+                        dialog.setCancelable(false);
+                        dialog.show();
+                    } else {
+                        ShellUtils.fastCmd("mkdir " + this.winpath + "/Toolbox || true ");
+                        ShellUtils.fastCmd("cp /sdcard/tabletmode.vbs " + this.winpath + "/Toolbox");
+                        ShellUtils.fastCmd("rm /sdcard/tabletmode.vbs");
                         messages.setText(this.getString(R.string.done));
                         dismissButton.setText(this.getString(R.string.dismiss));
                         dismissButton.setVisibility(View.VISIBLE);
