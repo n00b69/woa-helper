@@ -35,13 +35,16 @@
     </style>
 
     <style name="TopCutCardView" parent="@style/Widget.Material3.CardView.Filled">
-        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MaterialCardView.CutTop</item>
-        <item name="android:clipToOutline">true</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MaterialCardView.CutTop
+        </item>
+        <item name="android:clipToOutline" tools:targetApi="s">true</item>
     </style>
 
     <style name="BottomCutCardView" parent="@style/Widget.Material3.CardView.Filled">
-        <item name="android:clipToOutline">true</item>
-        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MaterialCardView.CutBottom</item>
+        <item name="android:clipToOutline" tools:targetApi="s">true</item>
+        <item name="shapeAppearanceOverlay">
+            @style/ShapeAppearanceOverlay.MaterialCardView.CutBottom
+        </item>
     </style>
 
     <style name="ShapeAppearanceOverlay.MaterialCardView.CutTop" parent="">
@@ -66,7 +69,8 @@
 
     <style name="MyThemeOverlay.MaterialComponents.MaterialAlertDialog" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
         <item name="android:backgroundDimAmount">0.7</item>
-        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MyApp.Dialog.Rounded</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MyApp.Dialog.Rounded
+        </item>
     </style>
 
     <style name="ShapeAppearanceOverlay.MyApp.Dialog.Rounded" parent="">
@@ -76,7 +80,8 @@
 
     <style name="AlertDialogCustom" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
         <item name="android:backgroundDimAmount">0.7</item>
-        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MyApp.Dialog.Rounded</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MyApp.Dialog.Rounded
+        </item>
     </style>
 
 </resources>
