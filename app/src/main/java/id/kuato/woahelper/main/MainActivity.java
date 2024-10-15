@@ -256,6 +256,13 @@ public class MainActivity extends AppCompatActivity {
         myTextView00.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
         this.x.deviceName.setText(this.model + " (" + this.device + ")");
         if (Objects.equals(this.device, "nabu")) {
+			this.guidelink = "https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/tree/main";
+            this.grouplink = "https://t.me/nabuwoa";
+            this.x.NabuImage.setVisibility(View.VISIBLE);
+            this.x.DeviceImage.setVisibility(View.GONE);
+            this.x.tvPanel.setVisibility(View.VISIBLE);
+            this.n.cvDumpModem.setVisibility(View.GONE);
+			this.n.cvDbkp.setVisibility(View.GONE);
             TextView myTextView2 = this.findViewById(R.id.deviceName);
             myTextView2.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
             TextView myTextView3 = this.findViewById(R.id.tv_panel);
@@ -303,8 +310,8 @@ public class MainActivity extends AppCompatActivity {
                     this.x.NabuImage.setVisibility(View.VISIBLE);
                     this.x.DeviceImage.setVisibility(View.GONE);
                     this.x.tvPanel.setVisibility(View.VISIBLE);
-                    this.n.tvDumpModem.setVisibility(View.GONE);
                     this.n.cvDumpModem.setVisibility(View.GONE);
+					this.n.cvDbkp.setVisibility(View.GONE);
                 }
                 case "cepheus" -> {
                     this.guidelink = "https://github.com/woacepheus/Port-Windows-11-Xiaomi-Mi-9";
@@ -335,7 +342,6 @@ public class MainActivity extends AppCompatActivity {
                     this.grouplink = "https://t.me/woahelperchat";
                     this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.flashlmdd, null));
                     this.n.cvDumpModem.setVisibility(View.GONE);
-                    this.n.cvDbkp.setVisibility(View.GONE);
                 }
                 case "alphalm", "alphaplus", "alphalm_lao_com", "alphaplus_lao_com" -> {
                     this.guidelink = "https://github.com/n00b69/woa-alphaplus";
@@ -482,6 +488,7 @@ public class MainActivity extends AppCompatActivity {
                     this.guidelink = "https://woa-msmnile.github.io/";
                     this.grouplink = "https://t.me/woa_msmnile_issues";
                     this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.unknown, null));
+					this.n.cvDumpModem.setVisibility(View.GONE);
                 }
                 case "OnePlus6", "fajita" -> {
                     this.guidelink = "https://github.com/WoA-OnePlus-6-Series/WoA-on-OnePlus6-Series";
@@ -499,8 +506,8 @@ public class MainActivity extends AppCompatActivity {
                     this.guidelink = "https://github.com/n00b69/woa-op7";
                     this.grouplink = "https://t.me/onepluswoachat";
                     this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.hotdog, null));
-                    this.n.cvFlashUefi.setVisibility(View.GONE);
                     this.n.cvDbkp.setVisibility(View.VISIBLE);
+                    this.n.cvFlashUefi.setVisibility(View.GONE);
                 }
                 case "guacamole", "OnePlus7Pro", "OnePlus7Pro4G" -> {
                     this.guidelink = "https://github.com/n00b69/woa-op7";
