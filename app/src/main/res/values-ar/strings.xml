@@ -13,7 +13,7 @@
     <string name="rotation_title">التحكم في دوران الشاشة</string>
     <string name="autoflash_title">فلاش الاندرويد التلقائي</string>
     <string name="atlasos_title">انسخ ملفات AtlasOS / ReviOS</string>
-    <string name="defender_title">مزيل Edge & Windows Defender</string>
+    <string name="defender_title">مزيل Windows Defender / Edge</string>
     <string name="script_title">صندوق ادوات البرامج النصية (scripts)</string>
     <string name="setup_title">مثبتات الـ FRAMEWORK</string>
     <string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
@@ -32,7 +32,7 @@
     <string name="rotation_subtitle">يضيف برنامج تنفيذي يسمح لك بالتحكم في دوران الشاشة\n(مفيدٌ للأجهزة التي لا تملك حساسات شغالة)</string>
     <string name="autoflash_subtitle">يضيف برنامج نصي إلى ويندوز يقوم بتفليش Boot.img الخاص باندرويد في كل مرة يقلع فيها Windows</string>
     <string name="atlasos_subtitle">ينسخ AtlasOS او ReviOS و برنامج AME Wizard إلى C:\\Toolbox</string>
-    <string name="defender_subtitle">يضيف برنامج نصي إلى C:\\Toolbox والذي يمكنك من حذف Microsoft Edge & Windows Defender</string>
+    <string name="defender_subtitle">يضيف برنامج نصي إلى C:\\Toolbox والذي يمكنك من حذف Microsoft Edge / Windows Defender</string>
     <string name="script_subtitle">يضيف تشكيلة من البرامج النصية إلى C:\\Toolbox</string>
     <string name="setup_subtitle">يضيف مثبتات للعديد من الـ frameworks إلى C:\\Toolbox</string>
     <string name="dbkp_subtitle">Patches the kernel for seamless dualbooting</string>
@@ -49,7 +49,7 @@
     <string name="rotation_question">إنسخ اختصار التحكم بدوران الشاشة إلى C:\\Toolbox؟</string>
     <string name="autoflash_question">قم بتثبيت برنامج تفليش الBoot.img التلقائي إلى Windows؟</string>
     <string name="atlasos_question">نزّل وانقل AtlasOS او ReviOS إلى C:\\Toolbox؟</string>
-    <string name="defender_question">إنسخ مزيل Edge & Windows Defender إلى C:\\Toolbox؟</string>
+    <string name="defender_question">إنسخ مزيل Edge / Windows Defender إلى C:\\Toolbox؟</string>
     <string name="setup_question">نزل وثبت C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, مثبت XNA إلى C:\\Toolbox?\n(قد يستغرق هذا بعض الوقت)</string>
     <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS ONEPLUS 7(T) PRO 4G!!!</string>
 

@@ -13,7 +13,7 @@
     <string name="rotation_title">ROTATION TOGGLE</string>
     <string name="autoflash_title">AUTO ANDROID FLASHER</string>
     <string name="atlasos_title">COPY ATLASOS / REVIOS FILES</string>
-    <string name="defender_title">EDGE & DEFENDER REMOVER</string>
+    <string name="defender_title">EDGE / DEFENDER REMOVER</string>
     <string name="script_title">SCRIPT TOOLBOX</string>
     <string name="setup_title">FRAMEWORK INSTALLERS</string>
     <string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
@@ -32,7 +32,7 @@
     <string name="rotation_subtitle">Ajoute un script à C:\\Toolbox qui vous permet de faire pivoter l\’écran à l\'aide d\'un raccourci\n(utile pour les appareils dont les capteurs ne fonctionnent pas)</string>
     <string name="autoflash_subtitle">Ajoute un script à Windows qui lance automatiquement le fichier boot.img d\’Android lorsque Windows démarre</string>
     <string name="atlasos_subtitle">Copies the AtlasOS or ReviOS playbook and AME Wizard to C:\\Toolbox</string>
-    <string name="defender_subtitle">Adds a script to C:\\Toolbox which allows you to remove Microsoft Edge & Windows Defender</string>
+    <string name="defender_subtitle">Adds a script to C:\\Toolbox which allows you to remove Microsoft Edge / Windows Defender</string>
     <string name="script_subtitle">Adds an assortment of scripts and tweaks to C:\\Toolbox</string>
     <string name="setup_subtitle">Adds installers for several frameworks into C:\\Toolbox</string>
     <string name="dbkp_subtitle">Patches the kernel for seamless dualbooting</string>
@@ -49,7 +49,7 @@
     <string name="rotation_question">Copier le raccourci de rotation dans C:\\Toolbox?</string>
     <string name="autoflash_question">Installer le script boot.img autoflasher dans Windows?</string>
     <string name="atlasos_question">Download and move AtlasOS or ReviOS playbook to C:\\Toolbox?</string>
-    <string name="defender_question">Copy Edge & Defender remover scripts to C:\\Toolbox?</string>
+    <string name="defender_question">Copy Edge / Defender remover scripts to C:\\Toolbox?</string>
     <string name="setup_question">Download and move C++ Redistributables and DirectX, OpenGL, OpenAL, PhysX, XNAF installers to C:\\Toolbox?\n(this may take some time)</string>
     <string name="dbkp_question">Patch and flash your current kernel?n\!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS ONEPLUS 7(T) PRO 4G!!!</string>
 

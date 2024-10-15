@@ -13,7 +13,7 @@
     <string name="rotation_title">ROTATIE SHORTCUT</string>
     <string name="autoflash_title">AUTO ANDROID FLASHER</string>
     <string name="atlasos_title">KOPIEER ATLASOS / REVIOS INSTALLER</string>
-    <string name="defender_title">EDGE & DEFENDER VERWIJDERAAR</string>
+    <string name="defender_title">EDGE / DEFENDER VERWIJDERAAR</string>
     <string name="script_title">SCRIPT TOOLBOX</string>
     <string name="setup_title">FRAMEWORK INSTALLERS</string>
     <string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
@@ -32,7 +32,7 @@
     <string name="rotation_subtitle">Plaatst een script in C:\\Toolbox waarmee je het scherm kan draaien\n(handig voor toestellen zonder werkende sensors)</string>
     <string name="autoflash_subtitle">Installeert een Windows script die automatisch de Android boot.img flasht</string>
     <string name="atlasos_subtitle">Kopieert de AtlasOS of ReviOS playbook en AME Wizard naar C:\\Toolbox</string>
-    <string name="defender_subtitle">Plaatst een script in C:\\Toolbox waarmee je Microsoft Edge & Windows Defender kan verwijderen</string>
+    <string name="defender_subtitle">Plaatst een script in C:\\Toolbox waarmee je Microsoft Edge / Windows Defender kan verwijderen</string>
     <string name="script_subtitle">Plaatst meerdere scripts en tweaks in C:\\Toolbox</string>
     <string name="setup_subtitle">Plaatst installers voor verschillende frameworks in C:\\Toolbox</string>
     <string name="dbkp_subtitle">Patcht de kernel om naadloos dualbooten te kunnen</string>
@@ -49,7 +49,7 @@
     <string name="rotation_question">Kopieer rotatie snelkoppeling naar C:\\Toolbox?</string>
     <string name="autoflash_question">Installeer boot.img autoflasher script in Windows?</string>
     <string name="atlasos_question">Download en kopieer AtlasOS of ReviOS playbook naar C:\\Toolbox?</string>
-    <string name="defender_question">Kopieer Edge & Defender verwijder scripts naar C:\\Toolbox?</string>
+    <string name="defender_question">Kopieer Edge / Defender verwijder scripts naar C:\\Toolbox?</string>
     <string name="setup_question">Download en kopieer C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, en XNA framework installers naar C:\\Toolbox?\n(dit kan enkele momenten duren)</string>
     <string name="dbkp_question">Patch uw huidige kernel en flash de nieuwe boot image?\n!!!DRUK NIET OP JA ALS UW TOESTEL NIET DE ONEPLUS 7(T) PRO 4G IS!!!</string>
 

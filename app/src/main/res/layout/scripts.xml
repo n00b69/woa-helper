@@ -325,7 +325,7 @@
                             android:layout_height="@dimen/_48sdp"
                             android:contentDescription="TODO"
                             android:scaleType="fitXY"
-                            android:src="@drawable/ic_sensor" />
+                            android:src="@drawable/edge" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"

@@ -13,7 +13,7 @@
     <string name="rotation_title">EKRAN DONDURME ANAHTARI</string>
     <string name="autoflash_title">OTOMATIK ANDROID FLASHLAYICI</string>
     <string name="atlasos_title">ATLASOS / REVIOS DOSYALARINI KOPYALA</string>
-    <string name="defender_title">EDGE & DEFENDER SILICI</string>
+    <string name="defender_title">EDGE / DEFENDER SILICI</string>
     <string name="script_title">SCRIPT ARAÇ KUTUSU</string>
     <string name="setup_title">FRAMEWORK INSTALLERS</string>
     <string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
@@ -32,7 +32,7 @@
     <string name="rotation_subtitle">Kısayol ile ekranı döndürmenizi sağlayan bir scripti C:\\Toolbox içine ekler\n(çalışmayan sensörlü cihazlar için kullanışlıdır)</string>
     <string name="autoflash_subtitle">Windows her başlatıldığında Android boot.img dosyasını otomatik olarak flaşlayan bir scripti Windows\’a ekler</string>
     <string name="atlasos_subtitle">AtlasOS veya ReviOS kitapçığını ve AME Wizard\’ı C:\\Toolbox içine kopyalar</string>
-    <string name="defender_subtitle">Microsoft Edge & Windows Defender\’ı kaldırmanızı sağlayan bir scripti C:\\Toolbox içine ekler</string>
+    <string name="defender_subtitle">Microsoft Edge / Windows Defender\’ı kaldırmanızı sağlayan bir scripti C:\\Toolbox içine ekler</string>
     <string name="script_subtitle">Çeşitli scriptler ve tweaks\’i C:\\Toolbox içine ekler</string>
     <string name="setup_subtitle">Adds installers for several frameworks into C:\\Toolbox</string>
     <string name="dbkp_subtitle">Patches the kernel for seamless dualbooting</string>
@@ -49,7 +49,7 @@
     <string name="rotation_question">Dönüş kısayolunu C:\\Toolbox içine kopyalalım mı?</string>
     <string name="autoflash_question">Windows içine boot.img otomatik flaşlayıcı scripti yükleyelim mi?</string>
     <string name="atlasos_question">AtlasOS veya ReviOS kitapçığını C:\\Toolbox içine indirip taşıyalim mı?</string>
-    <string name="defender_question">Edge & Defender kaldırıcı scripti C:\\Toolbox içine kopyalalım mı?</string>
+    <string name="defender_question">Edge / Defender kaldırıcı scripti C:\\Toolbox içine kopyalalım mı?</string>
     <string name="setup_question">Download and move C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, and XNA framework installers to C:\\Toolbox?\n(this may take some time)</string>
     <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS ONEPLUS 7(T) PRO 4G!!!</string>
 

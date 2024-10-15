@@ -13,7 +13,7 @@
     <string name="rotation_title">旋轉屏幕方向</string>
     <string name="autoflash_title">自動刷入安卓</string>
     <string name="atlasos_title">複製 ATLASOS / REVIOS 文件</string>
-    <string name="defender_title">EDGE & DEFENDER 卸載器</string>
+    <string name="defender_title">EDGE / DEFENDER 卸載器</string>
     <string name="script_title">腳本工具箱</string>
     <string name="setup_title">FRAMEWORK INSTALLERS</string>
     <string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
@@ -32,7 +32,7 @@
     <string name="rotation_subtitle">將旋轉屏幕的腳本添加到 C:\\Toolbox\n（用於重力傳感器不能工作的設備）</string>
     <string name="autoflash_subtitle">向 Windows 添加一個腳本，每當 Windows 啓動時，該腳本會自動刷入安卓 boot 鏡像</string>
     <string name="atlasos_subtitle">將 AtlasOS / ReviOS playbook 和 AME Wizard 添加到 C:\\Toolbox</string>
-    <string name="defender_subtitle">將卸載 Microsoft Edge & Windows Defender 的腳本添加到 C:\\Toolbox</string>
+    <string name="defender_subtitle">將卸載 Microsoft Edge / Windows Defender 的腳本添加到 C:\\Toolbox</string>
     <string name="script_subtitle">將一系列優化腳本添加到 C:\\Toolbox</string>
     <string name="setup_subtitle">Adds installers for several frameworks into C:\\Toolbox</string>
     <string name="dbkp_subtitle">Patches the kernel for seamless dualbooting</string>
@@ -49,7 +49,7 @@
     <string name="rotation_question">是否在 C:\\Toolbox 中安裝旋轉屏幕腳本?</string>
     <string name="autoflash_question">是否將 boot.img 自動刷入腳本安裝到 Windows?</string>
     <string name="atlasos_question">是否要在 C:\\Toolbox 中下載 AtlasOS / ReviOS playbook?</string>
-    <string name="defender_question">是否在 C:\\Toolbox 中安裝 Edge & Defender 卸載器?</string>
+    <string name="defender_question">是否在 C:\\Toolbox 中安裝 Edge / Defender 卸載器?</string>
     <string name="setup_question">Download and move C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, and XNA framework installers to C:\\Toolbox?\n(this may take some time)</string>
     <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS ONEPLUS 7(T) PRO 4G!!!</string>
 

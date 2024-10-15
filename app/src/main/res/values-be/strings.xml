@@ -13,7 +13,7 @@
     <string name="rotation_title">ПЕРАКЛЮЧАЛЬНІК АРЫЕНТАЦЫІ</string>
     <string name="autoflash_title">АЎТАМАТЫЧНАЯ ПРАШЫЎКА ANDROID</string>
     <string name="atlasos_title">КАПІРАВАЦЬ ФАЙЛЫ ATLASOS / REVIOS</string>
-    <string name="defender_title">ВЫДАЛІЦЬ EDGE & DEFENDER</string>
+    <string name="defender_title">ВЫДАЛІЦЬ EDGE / DEFENDER</string>
     <string name="script_title">СКРЫПТ TOOLBOX</string>
     <string name="setup_title">ЎСТАНОЎНІКІ ФРЭЙМВОРКАЎ</string>
     <string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
@@ -32,7 +32,7 @@
     <string name="rotation_subtitle">Дадае скрыпт у C:\\Toolbox для пераключэння арыентацыі экрана праз ярлык\n (Карысна для прылад без працуючых сенсараў)</string>
     <string name="autoflash_subtitle">Дадае скрыпт у Windows для аўтаматычнай прашыўкі Android boot.img пры запуску Windows</string>
     <string name="atlasos_subtitle">Капіруе AtlasOS або ReviOS playbook і AME Wizard у C:\\Toolbox</string>
-    <string name="defender_subtitle">Дадае скрыпт у C:\\Toolbox для выдалення Microsoft Edge & Windows Defender</string>
+    <string name="defender_subtitle">Дадае скрыпт у C:\\Toolbox для выдалення Microsoft Edge / Windows Defender</string>
     <string name="script_subtitle">Дадае набор скрыптаў і налад у C:\\Toolbox</string>
     <string name="setup_subtitle">Дадае ўстаноўнікі для некалькіх фрэймворкаў у C:\\Toolbox</string>
     <string name="dbkp_subtitle">Patches the kernel for seamless dualbooting</string>
@@ -49,7 +49,7 @@
     <string name="rotation_question">Скапіраваць спасылку для пераключэння арыентацыі экрана ў C:\\Toolbox?</string>
     <string name="autoflash_question">Усталяваць скрыпт аўтаматычнай прашыўкі boot.img у Windows?</string>
     <string name="atlasos_question">Загрузіць і перанесці AtlasOS або ReviOS playbook у C:\\Toolbox?</string>
-    <string name="defender_question">Скапіраваць скрыпт для выдалення Edge & Defender у C:\\Toolbox?</string>
+    <string name="defender_question">Скапіраваць скрыпт для выдалення Edge / Defender у C:\\Toolbox?</string>
     <string name="setup_question">Спампаваць і змясціць C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX і XNA усталёўнікі ў C:\\Toolbox?\n(гэта можа заняць некаторы час)</string>
     <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS ONEPLUS 7(T) PRO 4G!!!</string>
 
