@@ -13,8 +13,7 @@
     <string name="rotation_title">화면 회전 옵션</string>
     <string name="autoflash_title">자동 ANDROID 설치</string>
     <string name="atlasos_title">ATLASOS / REVIOS 파일 복사</string>
-    <string name="edge_title">EDGE 제거</string>
-    <string name="defender_title">DEFENDER 제거</string>
+    <string name="defender_title">EDGE & DEFENDER 제거</string>
     <string name="script_title">스크립트 도구</string>
     <string name="setup_title">FRAMEWORK INSTALLERS</string>
     <string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
@@ -33,8 +32,7 @@
     <string name="rotation_subtitle">바로가기로 화면을 회전할 수 있는 스크립트를 C:\\Toolbox에 추가합니다\n(센서가 작동하지 않는 장치에 유용합니다)</string>
     <string name="autoflash_subtitle">Windows가 부팅될 때마다 Android boot.img를 자동으로 설치하는 스크립트를 Windows에 추가합니다</string>
     <string name="atlasos_subtitle">AtlasOS 또는 ReviOS 플레이북 및 AME Wizard를 C:\\Toolbox로 복사합니다</string>
-    <string name="edge_subtitle">Microsoft Edge를 제거할 수 있도록 하는 스크립트를 C:\\Toolbox에 추가합니다</string>
-    <string name="defender_subtitle">Windows Defender를 제거할 수 있도록 하는 스크립트를 C:\\Toolbox에 추가합니다</string>
+    <string name="defender_subtitle">Microsoft Edge & Windows Defender를 제거할 수 있도록 하는 스크립트를 C:\\Toolbox에 추가합니다</string>
     <string name="script_subtitle">다양한 스크립트와 기능을 C:\\Toolbox에 추가합니다</string>
     <string name="setup_subtitle">Adds installers for several frameworks into C:\\Toolbox</string>
     <string name="dbkp_subtitle">Patches the kernel for seamless dualbooting</string>
@@ -51,8 +49,7 @@
     <string name="rotation_question">회전 바로가기를 C:\\Toolbox에 복사하시겠습니까?</string>
     <string name="autoflash_question">boot.img 자동 설치 스크립트를 Windows에 설치하시겠습니까?</string>
     <string name="atlasos_question">AtlasOS 또는 ReviOS 플레이북을 다운로드 하고 C:\\Toolbox로 이동하시겠습니까?</string>
-    <string name="edge_question">Edge 제거 스크립트를 C:\\Toolbox로 복사하시겠습니까?</string>
-    <string name="defender_question">Defender 제거 스크립트를 C:\\Toolbox로 복사하시겠습니까?</string>
+    <string name="defender_question">Edge & Defender 제거 스크립트를 C:\\Toolbox로 복사하시겠습니까?</string>
     <string name="setup_question">Download and move C++ Redistributables and DirectX, OpenGL, OpenAL, PhysX, XNAF installers to C:\\Toolbox?\n(this may take some time)</string>
     <string name="dbkp_question">Patch and flash your current kernel?n\!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS ONEPLUS 7(T) PRO 4G!!!</string>
 

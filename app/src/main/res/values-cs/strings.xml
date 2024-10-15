@@ -13,8 +13,7 @@
     <string name="rotation_title">PŘEPÍNAČ OTOČENÍ</string>
     <string name="autoflash_title">AUTO ANDROID FLASHER</string>
     <string name="atlasos_title">ZKOPÍROVAT SOUBORY ATLASOS / REVIOS</string>
-    <string name="edge_title">EDGE REMOVER</string>
-    <string name="defender_title">DEFENDER REMOVER</string>
+    <string name="defender_title">EDGE & DEFENDER REMOVER</string>
     <string name="script_title">SCRIPT TOOLBOX</string>
     <string name="setup_title">FRAMEWORK INSTALÁTORY</string>
     <string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
@@ -33,8 +32,7 @@
     <string name="rotation_subtitle">Přidát skript do C:\\Toolbox, který vám umožní otočit obrazovku pomocí zkratky\n(Užitečné pro zařízení bez funkčních senzorů)</string>
     <string name="autoflash_subtitle">Přidát skript do systému Windows, který automaticky zobrazí soubor Android boot.img při každém spuštění systému Windows</string>
     <string name="atlasos_subtitle">Zkopírovat AtlasOS nebo ReviOS playbook a AME Wizard do C:\\Toolbox</string>
-    <string name="edge_subtitle">Přidá skript do C:\\Toolbox, který vám umožní odebrat Microsoft Edge</string>
-    <string name="defender_subtitle">Přidá skript do C:\\Toolbox, který vám umožní odebrat Windows Defender</string>
+    <string name="defender_subtitle">Přidá skript do C:\\Toolbox, který vám umožní odebrat Microsoft Edge & Windows Defender</string>
     <string name="script_subtitle">Přidává sortiment skriptů a vylepšení do C:\\Toolbox</string>
     <string name="setup_subtitle">Přidá instalátory pro několik frameworku do C:\\Toolbox</string>
     <string name="dbkp_subtitle">Patches the kernel for seamless dualbooting</string>
@@ -51,8 +49,7 @@
     <string name="rotation_question">Zkopírovat zástupce otáčení do C:\\Toolbox?</string>
     <string name="autoflash_question">Nainstalovat skript boot.img autoflasher do Windows?</string>
     <string name="atlasos_question">Stáhnout a přesunout AtlasOS nebo ReviOS playbook do C:\\Toolbox?</string>
-    <string name="edge_question">Zkopírovat skript pro odstranění Microsoft Edge do C:\\Toolbox?</string>
-    <string name="defender_question">Zkopírovat skript pro odstranění Defenderu do C:\\Toolbox?</string>
+    <string name="defender_question">Zkopírovat skript pro odstranění Microsoft Edge & Defenderu do C:\\Toolbox?</string>
     <string name="setup_question">Stáhnout a přesunout C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, a XNA framework do C:\\Toolbox?\n(může to chvíli trvat)</string>
     <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS ONEPLUS 7(T) PRO 4G!!!</string>
 

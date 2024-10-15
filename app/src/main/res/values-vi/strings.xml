@@ -13,8 +13,7 @@
     <string name="rotation_title">CHUYỂN ĐỔI QUAY</string>
     <string name="autoflash_title">FLASH ANDROID TỰ ĐỘNG</string>
     <string name="atlasos_title">SAO CHÉP ATLASOS/ REVISOS FILE</string>
-    <string name="edge_title">XÓA EDGE</string>
-    <string name="defender_title">XÓA DIỆT VIRUS CỦA WIN</string>
+    <string name="defender_title">XÓA EDGE & DIỆT VIRUS CỦA WIN</string>
     <string name="script_title">HỘP CÔNG CỤ SCRIPS</string>
     <string name="setup_title">FRAMEWORK INSTALLERS</string>
     <string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
@@ -33,8 +32,7 @@
     <string name="rotation_subtitle">Thêm tập lệnh vào C:\\Toolbox cho phép bạn xoay màn hình bằng phím tắt\n(hữu ích cho các thiết bị không có cảm biến hoạt động)</string>
     <string name="autoflash_subtitle">Thêm tập lệnh vào Windows để tự động flash boot.img Android bất cứ khi nào Windows khởi động</string>
     <string name="atlasos_subtitle">Sao chép AtlasOS hoặc ReviOS playbook và Trình hướng dẫn AME vào C:\\Toolbox</string>
-    <string name="edge_subtitle">Thêm tập lệnh vào C:\\Toolbox cho phép bạn xóa Microsoft Edge</string>
-    <string name="defender_subtitle">Thêm tập lệnh vào C:\\Toolbox cho phép bạn xóa Windows Defender</string>
+    <string name="defender_subtitle">Thêm tập lệnh vào C:\\Toolbox cho phép bạn xóa Microsoft Edge & Windows Defender</string>
     <string name="script_subtitle">Thêm nhiều loại tập lệnh và tweaks vào C:\\Toolbox</string>
     <string name="setup_subtitle">Thêm trình cài đặt cho một số framework vào C:\\Toolbox</string>
     <string name="dbkp_subtitle">Patches the kernel for seamless dualbooting</string>
@@ -51,8 +49,7 @@
     <string name="rotation_question">Sao chép phím tắt xoay sang C:\\Toolbox?</string>
     <string name="autoflash_question">Cài đặt tập lệnh tự động cài boot.img vào Windows?</string>
     <string name="atlasos_question">Tải xuống và di chuyển AtlasOS hoặc ReviOS playbook sang C:\\Toolbox?</string>
-    <string name="edge_question">Sao chép tập lệnh xóa Edge vào C:\\Toolbox?</string>
-    <string name="defender_question">Sao chép tập lệnh gỡ bỏ Defender vào C:\\Toolbox?</string>
+    <string name="defender_question">Sao chép tập lệnh gỡ bỏ Edge & Defender vào C:\\Toolbox?</string>
     <string name="setup_question">Tải xuống và di chuyển trình cài đặt C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX và XNA vào C:\\Toolbox?\n(có thể mất một thời gian)</string>
     <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS ONEPLUS 7(T) PRO 4G!!!</string>
 

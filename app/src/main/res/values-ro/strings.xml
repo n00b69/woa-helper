@@ -13,8 +13,7 @@
     <string name="rotation_title">COMUTARE ROTAȚIE</string>
     <string name="autoflash_title">FLASHER ANDROID AUTOMAT</string>
     <string name="atlasos_title">COPIEAZĂ FIȘIERE ATLASOS / REVIOS</string>
-    <string name="edge_title">ȘTERGERE EDGE</string>
-    <string name="defender_title">ȘTERGERE DEFENDER</string>
+    <string name="defender_title">ȘTERGERE EDGE & DEFENDER</string>
     <string name="script_title">CUTIE DE SCRIPTURI</string>
     <string name="setup_title">FIȘIERE INSTALARE FRAMEWORK</string>
     <string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
@@ -33,8 +32,7 @@
     <string name="rotation_subtitle">Va adăuga un script la C:\\Toolbox care îți va permite sa rotești ecranul cu o comandă rapidă\n(folositor pentru dispozitivele cu senzori nefuncționali)</string>
     <string name="autoflash_subtitle">Va adăuga un script în Windows care va instala automat imagine de pornire Android oricând veți porni Windows</string>
     <string name="atlasos_subtitle">Copiază playbook-urile AtlasOS sau ReviOS și AME Wizard la C:\\Toolbox</string>
-    <string name="edge_subtitle">Va adăuga un script la C:\\Toolbox care îți va permite să ștergi Microsoft Edge</string>
-    <string name="defender_subtitle">Va adăuga un script la C:\\Toolbox care îți va permite să ștergi Windows Defender</string>
+    <string name="defender_subtitle">Va adăuga un script la C:\\Toolbox care îți va permite să ștergi Microsoft Edge & Windows Defender</string>
     <string name="script_subtitle">Va adăuga un sortiment de scripturi și modificări la C:\\Toolbox</string>
     <string name="setup_subtitle">Adaugă fișiere de instalare pentru mai multe framework-uri în C:\\Toolbox</string>
     <string name="dbkp_subtitle">Patches the kernel for seamless dualbooting</string>
@@ -51,8 +49,7 @@
     <string name="rotation_question">Copiază shortcut-ul de rotire în C:\\Toolbox?</string>
     <string name="autoflash_question">Adaugă boot.img autoflasher script în Windows?</string>
     <string name="atlasos_question">Descarcă și mută AtlasOS sau ReviOS playbook în C:\\Toolbox?</string>
-    <string name="edge_question">Copiază Edge remover script în C:\\Toolbox?</string>
-    <string name="defender_question">Copiază Defender remover script în C:\\Toolbox?</string>
+    <string name="defender_question">Copiază Edge & Defender remover script în C:\\Toolbox?</string>
     <string name="setup_question">Descarcă și mută fișierele de instalare pentru C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, și XNA framework în C:\\Toolbox?\n(poate să ea ceva timp)</string>
     <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS ONEPLUS 7(T) PRO 4G!!!</string>
 

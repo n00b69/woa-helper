@@ -13,8 +13,7 @@
     <string name="rotation_title">BERALIH ROTASI</string>
     <string name="autoflash_title">FLASHER ANDROID OTOMATIS</string>
     <string name="atlasos_title">SALIN FILE ATLASOS / REVIOS</string>
-    <string name="edge_title">PENGHAPUS EDGE</string>
-    <string name="defender_title">PENGHAPUS DEFENDER</string>
+    <string name="defender_title">PENGHAPUS EDGE & DEFENDER</string>
     <string name="script_title">KOTAK ALAT SKRIP</string>
     <string name="setup_title">PEMASANG KERANGKA KERJA</string>
     <string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
@@ -33,8 +32,7 @@
     <string name="rotation_subtitle">Menambahkan skrip ke C:\\Toolbox yang memungkinkan Anda memutar layar dengan pintasan(berguna untuk perangkat tanpa sensor yang berfungsi)</string>
     <string name="autoflash_subtitle">Menambahkan skrip ke Windows yang secara otomatis mem-flash boot.img Android setiap kali Windows melakukan booting</string>
     <string name="atlasos_subtitle">Menyalin buku pedoman AtlasOS atau ReviOS dan AME Wizard keC:\\Toolbox</string>
-    <string name="edge_subtitle">Menambahkan skrip ke C:\\Toolbox yang memungkinkan Anda menghapus Microsoft Edge</string>
-    <string name="defender_subtitle">Menambahkan skrip ke C:\\Toolbox yang memungkinkan Anda menghapus Windows Defender</string>
+    <string name="defender_subtitle">Menambahkan skrip ke C:\\Toolbox yang memungkinkan Anda menghapus Microsoft Edge & Windows Defender</string>
     <string name="script_subtitle">Menambahkan berbagai macam skrip dan tweak ke C:\\Toolbox</string>
     <string name="setup_subtitle">Menambahkan penginstal untuk beberapa kerangka kerja ke dalam C:\\Toolbox</string>
     <string name="dbkp_subtitle">Patches the kernel for seamless dualbooting</string>
@@ -51,10 +49,9 @@
     <string name="rotation_question">Salin pintasan rotasi ke C:\\Toolbox?</string>
     <string name="autoflash_question">Instal skrip autoflasher boot.img ke Windows?</string>
     <string name="atlasos_question">Unduh dan pindahkan buku pedoman AtlasOS atau ReviOS ke C:\\Toolbox?</string>
-    <string name="edge_question">Salin skrip penghapus Edge ke C:\\Toolbox?</string>
-    <string name="defender_question">Salin skrip penghapus Defender ke C:\\Toolbox?</string>
+    <string name="defender_question">Salin skrip penghapus Edge & Defender ke C:\\Toolbox?</string>
     <string name="setup_question">Unduh dan pindahkan C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, dan XNA ke C:\\Toolbox?\n(ini mungkin memerlukan waktu)</string>
-    <string name="dbkp_question">Patch and flash your current kernel?n\!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS ONEPLUS 7(T) PRO 4G!!!</string>
+    <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS ONEPLUS 7(T) PRO 4G!!!</string>
 
     <string name="wrong">Ada yang tidak benar</string>
     <string name="ntfs">Ada yang tidak beres, \nWindows tidak dapat dipasang.\nMinta bantuan di obrolan Telegram.</string>

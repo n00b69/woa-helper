@@ -14,7 +14,7 @@
     <string name="autoflash_title">AUTOMATISCHER ANDROID FLASHER</string>
     <string name="atlasos_title">ATLASOS / REVIOS INSTALLIEREN</string>
     <string name="edge_title">EDGE ENTFERNER</string>
-    <string name="defender_title">DEFENDER ENTFERNER</string>
+    <string name="defender_title">EDGE & DEFENDER ENTFERNER</string>
     <string name="script_title">SCRIPT TOOLBOX</string>
     <string name="setup_title">FRAMEWORK INSTALLERS</string>
     <string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
@@ -33,8 +33,7 @@
     <string name="rotation_subtitle">Fügt in C:\\Toolbox einen Skript hinzu, mit dem Sie den Bildschirm mit einer Verknüpfung drehen können\n(nützlich für Geräte ohne funktionierende Sensoren)</string>
     <string name="autoflash_subtitle">Installiert einen Autoflashskript der bei jedem Windows Start automatisch das Boot.img flasht</string>
     <string name="atlasos_subtitle">Kopiert die AtlasOS oder ReviOS Playbook und AME Wizard zur C:\\Toolbox</string>
-    <string name="edge_subtitle">Fügt in C:\\Toolbox einen Skript hinzu, mit dem Sie Microsoft Edge entfernen können</string>
-    <string name="defender_subtitle">Fügt in C:\\Toolbox einen Skript hinzu, mit dem Sie Windows Defender entfernen können</string>
+    <string name="defender_subtitle">Fügt in C:\\Toolbox einen Skript hinzu, mit dem Sie Microsoft Edge & Windows Defender entfernen können</string>
     <string name="script_subtitle">Fügt in C:\\Toolbox mehrere Skript und Tweaks hinzu</string>
     <string name="setup_subtitle">Fügt in C:\\Toolbox mehrere Framework Installers hinzu</string>
     <string name="dbkp_subtitle">Patcht den kernel um nahtlos dualbooten zu können</string>
@@ -51,8 +50,7 @@
     <string name="rotation_question">Bildschirmausrichtungsumschalter nach C:\\Toolbox kopieren?</string>
     <string name="autoflash_question">Boot.img autoflasher Skript in Windows installieren?</string>
     <string name="atlasos_question">AtlasOS oder ReviOS Playbook herunterladen und nach C:\\Toolbox kopieren?</string>
-    <string name="edge_question">Edge entferner Skript nach C:\\Toolbox kopieren?</string>
-    <string name="defender_question">Defender entferner Skript nach C:\\Toolbox kopieren?</string>
+    <string name="defender_question">Edge & Defender entferner Skript nach C:\\Toolbox kopieren?</string>
     <string name="setup_question">C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX und XNA framework Installers herunterladen und nach C:\\Toolbox kopieren?\n(es kann eine weile dauern)</string>
     <string name="dbkp_question">Kernel patchen und das neue Boot Image flashen?\n!!!DRÜCKE NICHT AUF JA WENN DU KEIN ONEPLUS 7(T) PRO 4G HAST!!!</string>
 

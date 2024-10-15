@@ -13,8 +13,7 @@
     <string name="rotation_title">ПЕРЕКЛЮЧАТЕЛЬ ОРИЕНТАЦИИ</string>
     <string name="autoflash_title">АВТОМАТИЧЕСКАЯ ПРОШИВКА ANDROID BOOT</string>
     <string name="atlasos_title">КОПИРОВАТЬ ФАЙЛЫ ATLASOS / REVIOS FILES</string>
-    <string name="edge_title">УДАЛИТЬ EDGE</string>
-    <string name="defender_title">УДАЛИТЬ DEFENDER</string>
+    <string name="defender_title">УДАЛИТЬ EDGE & DEFENDER</string>
     <string name="script_title">СКРИПТ TOOLBOX</string>
     <string name="setup_title">УСТАНОВЩИКИ ФРЕЙМВОРКОВ</string>
     <string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
@@ -33,8 +32,7 @@
     <string name="rotation_subtitle">Добавляет скрипт в C:\\Toolbox для переключения ориентации экрана с помощью ярлыка\n (Полезно для устройств без работающих сенсоров)</string>
     <string name="autoflash_subtitle">Добавляет скрипт в Windows для автоматической прошивки Android boot.img при загрузке Windows</string>
     <string name="atlasos_subtitle">Копирует AtlasOS or ReviOS playbook и AME Wizard в C:\\Toolbox</string>
-    <string name="edge_subtitle">Добавляет скрипт в C:\\Toolbox для удаления Microsoft Edge</string>
-    <string name="defender_subtitle">Добавляет скрипт в C:\\Toolbox для удаления Защитника Windows</string>
+    <string name="defender_subtitle">Добавляет скрипт в C:\\Toolbox для удаления Защитника Microsoft Edge & Windows Defender</string>
     <string name="script_subtitle">Добавляет набор скриптов и настроек в C:\\Toolbox</string>
     <string name="setup_subtitle">Добавляет установщики для нескольких фреймворков в C:\\Toolbox</string>
     <string name="dbkp_subtitle">Patches the kernel for seamless dualbooting</string>
@@ -51,8 +49,7 @@
     <string name="rotation_question">Скопировать ярлык для переключения ориентации экрана в C:\\Toolbox?</string>
     <string name="autoflash_question">Установить скрипт автоматической прошивки boot.img в Windows?</string>
     <string name="atlasos_question">Загрузить и переместить AtlasOS или ReviOS playbook в C:\\Toolbox?</string>
-    <string name="edge_question">Скопировать скрипт для удаления Edge в C:\\Toolbox?</string>
-    <string name="defender_question">Скопировать скрипт для удаления Defender в C:\\Toolbox?</string>
+    <string name="defender_question">Скопировать скрипт для удаления Edge & Defender в C:\\Toolbox?</string>
     <string name="setup_question">Скачать и переместить установщики C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, и XNA в C:\\Toolbox?\n(это может занять немного времени)</string>
     <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS ONEPLUS 7(T) PRO 4G!!!</string>
 
