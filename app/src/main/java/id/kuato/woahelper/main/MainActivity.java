@@ -1493,7 +1493,7 @@ public class MainActivity extends AppCompatActivity {
             yesButton.setVisibility(View.VISIBLE);
             messages.setText(this.getString(R.string.defender_question));
             icons.setVisibility(View.VISIBLE);
-            icons.setImageDrawable(sensors);
+            icons.setImageDrawable(edge);
             noButton.setOnClickListener(v8 -> {
                 this.HideBlur();
                 dialog.dismiss();
@@ -1506,6 +1506,7 @@ public class MainActivity extends AppCompatActivity {
                     this.mount();
                     String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + this.win);
                     ShellUtils.fastCmd("cp " + this.getFilesDir() + "/DefenderRemover.exe /sdcard");
+					ShellUtils.fastCmd("cp " + this.getFilesDir() + "/RemoveEdge.ps1 /sdcard");
                     if (mnt_stat.isEmpty()) {
                         noButton.setVisibility(View.GONE);
                         yesButton.setText(this.getString(R.string.chat));
@@ -1531,6 +1532,8 @@ public class MainActivity extends AppCompatActivity {
                         ShellUtils.fastCmd("mkdir " + this.winpath + "/Toolbox || true ");
                         ShellUtils.fastCmd("cp /sdcard/DefenderRemover.exe " + this.winpath + "/Toolbox");
                         ShellUtils.fastCmd("rm /sdcard/DefenderRemover.exe");
+						ShellUtils.fastCmd("cp /sdcard/RemoveEdge.ps1 " + this.winpath + "/Toolbox");
+                        ShellUtils.fastCmd("rm /sdcard/RemoveEdge.ps1");
                         messages.setText(this.getString(R.string.done));
                         dismissButton.setText(this.getString(R.string.dismiss));
                         dismissButton.setVisibility(View.VISIBLE);
@@ -1720,92 +1723,6 @@ public class MainActivity extends AppCompatActivity {
             dialog.show();
         });
 
-        this.z.cvEdge.setOnClickListener(v -> {
-            this.ShowBlur();
-            noButton.setText(this.getString(R.string.no));
-            yesButton.setText(this.getString(R.string.yes));
-            dismissButton.setVisibility(View.GONE);
-            noButton.setVisibility(View.VISIBLE);
-            yesButton.setVisibility(View.VISIBLE);
-            messages.setText(this.getString(R.string.edge_question));
-            icons.setVisibility(View.VISIBLE);
-            icons.setImageDrawable(edge);
-            noButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    MainActivity.this.HideBlur();
-                    dialog.dismiss();
-                }
-            });
-            yesButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    noButton.setVisibility(View.GONE);
-                    yesButton.setVisibility(View.GONE);
-                    dismissButton.setVisibility(View.GONE);
-                    try {
-                        MainActivity.this.mount();
-                        String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + MainActivity.this.win);
-                        ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/RemoveEdge.ps1 /sdcard");
-                        if (mnt_stat.isEmpty()) {
-                            noButton.setVisibility(View.GONE);
-                            yesButton.setText(MainActivity.this.getString(R.string.chat));
-                            dismissButton.setText(MainActivity.this.getString(R.string.cancel));
-                            yesButton.setVisibility(View.VISIBLE);
-                            dismissButton.setVisibility(View.VISIBLE);
-                            icons.setVisibility(View.GONE);
-                            MainActivity.this.ShowBlur();
-                            messages.setText(MainActivity.this.getString(R.string.ntfs));
-                            dismissButton.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    MainActivity.this.HideBlur();
-                                    icons.setVisibility(View.VISIBLE);
-                                    dialog.dismiss();
-                                }
-                            });
-                            yesButton.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    Intent i = new Intent(Intent.ACTION_VIEW);
-                                    i.setData(Uri.parse("https://t.me/woahelperchat"));
-                                    MainActivity.this.startActivity(i);
-                                }
-                            });
-                            dialog.setCancelable(false);
-                            dialog.show();
-                        } else {
-                            ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/Toolbox || true ");
-                            ShellUtils.fastCmd("cp /sdcard/RemoveEdge.ps1 " + MainActivity.this.winpath + "/Toolbox");
-                            ShellUtils.fastCmd("rm /sdcard/RemoveEdge.ps1");
-                            messages.setText(MainActivity.this.getString(R.string.done));
-                            dismissButton.setText(MainActivity.this.getString(R.string.dismiss));
-                            dismissButton.setVisibility(View.VISIBLE);
-                            dismissButton.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    MainActivity.this.HideBlur();
-                                    dialog.dismiss();
-                                }
-                            });
-                        }
-                        dismissButton.setText(MainActivity.this.getString(R.string.dismiss));
-                        dismissButton.setVisibility(View.VISIBLE);
-                        dismissButton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                MainActivity.this.HideBlur();
-                                dialog.dismiss();
-                            }
-                        });
-                    } catch (Exception error) {
-                        error.printStackTrace();
-                    }
-                }
-            });
-            dialog.setCancelable(false);
-            dialog.show();
-        });
 
         this.n.cvSoftware.setOnClickListener(v -> {
             this.ShowBlur();
