@@ -55,7 +55,7 @@
     <string name="rotation_question">Copy rotation shortcut to C:\\Toolbox?</string>
     <string name="autoflash_question">Install boot.img autoflasher script into Windows?</string>
     <string name="atlasos_question">Download and move AtlasOS or ReviOS playbook to C:\\Toolbox?</string>
-    <string name="defender_question">Copy Edge & Defender remover scriptss to C:\\Toolbox?</string>
+    <string name="defender_question">Copy Edge & Defender remover scripts to C:\\Toolbox?</string>
     <string name="setup_question">Download and move C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, and XNA framework installers to C:\\Toolbox?\n(this may take some time)</string>
     <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS ONEPLUS 7(T) PRO 4G!!!</string>
 	<string name="tablet_question">Copy tablet mode script to C:\\Toolbox?</string>
