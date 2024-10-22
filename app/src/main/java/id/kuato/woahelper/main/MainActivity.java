@@ -718,7 +718,7 @@ public class MainActivity extends AppCompatActivity {
                                         dismissButton.setVisibility(View.VISIBLE);
                                         icons.setVisibility(View.GONE);
                                         MainActivity.this.ShowBlur();
-                                        messages.setText(MainActivity.this.getString(R.string.ntfs));
+                                        messages.setText(getString(R.string.mountfail));
                                         dismissButton.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
@@ -873,7 +873,7 @@ public class MainActivity extends AppCompatActivity {
                     dismissButton.setVisibility(View.GONE);
                     try {
                         MainActivity.this.mount();
-                        ShellUtils.fastCmd("su -c 'if [ -e /dev/block/by-name/boot_a ] && [ -e /dev/block/by-name/boot_b ]; then boot_a=$(basename $(readlink -f /dev/block/by-name/boot_a)); boot_b=$(basename $(readlink -f /dev/block/by-name/boot_b)); printf \"%s\n%s\n%s\n%s\n\" \"$boot_a\" \"C:\\boot.img\" \"$boot_b\" \"C:\\boot.img\" > /sdcard/sta.conf; else boot=$(basename $(readlink -f /dev/block/by-name/boot)); printf \"%s\n%s\n\" \"$boot\" \"C:\\boot.img\" > /sdcard/sta.conf; fi'");
+                        // ShellUtils.fastCmd("su -c 'if [ -e /dev/block/by-name/boot_a ] && [ -e /dev/block/by-name/boot_b ]; then boot_a=$(basename $(readlink -f /dev/block/by-name/boot_a)); boot_b=$(basename $(readlink -f /dev/block/by-name/boot_b)); printf \"%s\n%s\n%s\n%s\n\" \"$boot_a\" \"C:\\boot.img\" \"$boot_b\" \"C:\\boot.img\" > /sdcard/sta.conf; else boot=$(basename $(readlink -f /dev/block/by-name/boot)); printf \"%s\n%s\n\" \"$boot\" \"C:\\boot.img\" > /sdcard/sta.conf; fi'");
                         ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sta.exe /sdcard/sta.exe");
                         String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + MainActivity.this.win);
                         if (mnt_stat.isEmpty()) {
@@ -884,7 +884,7 @@ public class MainActivity extends AppCompatActivity {
                             dismissButton.setVisibility(View.VISIBLE);
                             icons.setVisibility(View.GONE);
                             MainActivity.this.ShowBlur();
-                            messages.setText(MainActivity.this.getString(R.string.ntfs));
+                            messages.setText(getString(R.string.mountfail));
                             dismissButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -905,7 +905,7 @@ public class MainActivity extends AppCompatActivity {
                             dialog.show();
                         } else {
                             ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/sta || true ");
-                            ShellUtils.fastCmd("cp /sdcard/sta.conf " + MainActivity.this.winpath + "/sta");
+                            // ShellUtils.fastCmd("cp /sdcard/sta.conf " + MainActivity.this.winpath + "/sta");
                             ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sta.exe " + MainActivity.this.winpath + "/sta/sta.exe");
                             ShellUtils.fastCmd("cp '" + MainActivity.this.getFilesDir() + "/Switch to Android.lnk' " + MainActivity.this.winpath + "/Users/Public/Desktop");
                             messages.setText(MainActivity.this.getString(R.string.done));
@@ -953,7 +953,7 @@ public class MainActivity extends AppCompatActivity {
                 yesButton.setVisibility(View.GONE);
                 dismissButton.setVisibility(View.VISIBLE);
                 dismissButton.setText(this.getString(R.string.dismiss));
-                messages.setText("No internet connection\nConnect to the internet and try again");
+                messages.setText(this.getString(R.string.internet));
             }
             dismissButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -997,7 +997,7 @@ public class MainActivity extends AppCompatActivity {
                                     if (mnt_stat.isEmpty()) {
                                         icons.setVisibility(View.GONE);
                                         yesButton.setVisibility(View.VISIBLE);
-                                        messages.setText(MainActivity.this.getString(R.string.ntfs) + "\nFiles downloaded in internal storage");
+                                        messages.setText(MainActivity.this.getString(R.string.mountfail) + "\nFiles downloaded in internal storage");
                                     } else {
                                         icons.setImageDrawable(atlasos);
                                         ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/Toolbox || true ");
@@ -1093,7 +1093,7 @@ public class MainActivity extends AppCompatActivity {
                         if (mnt_stat.isEmpty()) {
                             yesButton.setVisibility(View.VISIBLE);
                             icons.setVisibility(View.GONE);
-                            messages.setText(this.getString(R.string.ntfs) + "\nFiles downloaded in internal storage");
+                            messages.setText(this.getString(R.string.mountfail) + "\nFiles downloaded in internal storage");
                         } else {
                             icons.setImageDrawable(atlasos);
                             ShellUtils.fastCmd("mkdir " + this.winpath + "/Toolbox || true ");
@@ -1183,7 +1183,7 @@ public class MainActivity extends AppCompatActivity {
                         dismissButton.setVisibility(View.VISIBLE);
                         icons.setVisibility(View.GONE);
                         this.ShowBlur();
-                        messages.setText(this.getString(R.string.ntfs));
+                        messages.setText(this.getString(R.string.mountfail));
                         dismissButton.setOnClickListener(v19 -> {
                             this.HideBlur();
                             icons.setVisibility(View.VISIBLE);
@@ -1259,7 +1259,7 @@ public class MainActivity extends AppCompatActivity {
 //								 dismissButton.setVisibility(View.VISIBLE);
 //								 icons.setVisibility(View.GONE);
 //								 ShowBlur();
-//								 messages.setText(getString(R.string.ntfs));
+//								 messages.setText(getString(R.string.mountfail));
 //								 dismissButton.setOnClickListener(new View.OnClickListener() {
 //									@Override
 //									public void onClick(View v) {
@@ -1325,7 +1325,7 @@ public class MainActivity extends AppCompatActivity {
                 yesButton.setVisibility(View.GONE);
                 dismissButton.setVisibility(View.VISIBLE);
                 dismissButton.setText(this.getString(R.string.dismiss));
-                messages.setText("No internet connection\nConnect to the internet and try again");
+                messages.setText(this.getString(R.string.internet));
             }
             dismissButton.setOnClickListener(v1 -> {
                 this.HideBlur();
@@ -1393,7 +1393,7 @@ public class MainActivity extends AppCompatActivity {
                         if (mnt_stat.isEmpty()) {
                             yesButton.setVisibility(View.VISIBLE);
                             icons.setVisibility(View.GONE);
-                            messages.setText(this.getString(R.string.ntfs) + "\nFiles downloaded in internal storage");
+                            messages.setText(this.getString(R.string.mountfail) + "\nFiles downloaded in internal storage");
                         } else {
                             icons.setImageDrawable(mnt);
                             ShellUtils.fastCmd("mkdir " + this.winpath + "/Toolbox || true ");
@@ -1515,7 +1515,7 @@ public class MainActivity extends AppCompatActivity {
                         dismissButton.setVisibility(View.VISIBLE);
                         icons.setVisibility(View.GONE);
                         this.ShowBlur();
-                        messages.setText(this.getString(R.string.ntfs));
+                        messages.setText(this.getString(R.string.mountfail));
                         dismissButton.setOnClickListener(v10 -> {
                             this.HideBlur();
                             icons.setVisibility(View.VISIBLE);
@@ -1588,7 +1588,7 @@ public class MainActivity extends AppCompatActivity {
                         dismissButton.setVisibility(View.VISIBLE);
                         icons.setVisibility(View.GONE);
                         this.ShowBlur();
-                        messages.setText(this.getString(R.string.ntfs));
+                        messages.setText(this.getString(R.string.mountfail));
                         dismissButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v15) {
@@ -1672,7 +1672,7 @@ public class MainActivity extends AppCompatActivity {
                         dismissButton.setVisibility(View.VISIBLE);
                         icons.setVisibility(View.GONE);
                         this.ShowBlur();
-                        messages.setText(this.getString(R.string.ntfs));
+                        messages.setText(this.getString(R.string.mountfail));
                         dismissButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v15) {
@@ -1761,7 +1761,7 @@ public class MainActivity extends AppCompatActivity {
                             dismissButton.setVisibility(View.VISIBLE);
                             icons.setVisibility(View.GONE);
                             MainActivity.this.ShowBlur();
-                            messages.setText(MainActivity.this.getString(R.string.ntfs));
+                            messages.setText(getString(R.string.mountfail));
                             dismissButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -1882,7 +1882,7 @@ public class MainActivity extends AppCompatActivity {
                 yesButton.setVisibility(View.GONE);
                 dismissButton.setVisibility(View.VISIBLE);
                 dismissButton.setText(this.getString(R.string.dismiss));
-                messages.setText("No internet connection\nConnect to the internet and try again");
+				messages.setText(this.getString(R.string.internet));
             }
             yesButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -1914,7 +1914,7 @@ public class MainActivity extends AppCompatActivity {
                                     ShellUtils.fastCmd("su -mm -c mv new-boot.img patched-boot.img");
                                     ShellUtils.fastCmd("dd if=/sdcard/dbkp/patched-boot.img of=/dev/block/by-name/boot_a bs=16M");
                                     ShellUtils.fastCmd("dd if=/sdcard/dbkp/patched-boot.img of=/dev/block/by-name/boot_b bs=16M");
-                                    messages.setText("Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/patched-boot.img.\nUse your alert slider to switch between Windows and Android.");
+                                    messages.setText(getString(R.string.op7));
                                     dismissButton.setVisibility(View.VISIBLE);
                                 } else if ("hotdog".equals(bedan) || "OnePlus7TPro".equals(bedan) || "OnePlus7TPro4G".equals(bedan)) {
                                     // Do hotdog logic here
@@ -1935,7 +1935,7 @@ public class MainActivity extends AppCompatActivity {
                                     ShellUtils.fastCmd("su -mm -c mv new-boot.img patched-boot.img");
                                     ShellUtils.fastCmd("dd if=/sdcard/dbkp/patched-boot.img of=/dev/block/by-name/boot_a bs=16M");
                                     ShellUtils.fastCmd("dd if=/sdcard/dbkp/patched-boot.img of=/dev/block/by-name/boot_b bs=16M");
-                                    messages.setText("Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/patched-boot.img.\nUse your alert slider to switch between Windows and Android.");
+                                    messages.setText(getString(R.string.op7));
                                     dismissButton.setVisibility(View.VISIBLE);
                                 }
                             } catch (Exception error) {
@@ -2352,7 +2352,44 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void checkuefi() {
+//    public void checkntfs() {
+//		this.findntfs = ShellUtils.fastCmd(this.getString(R.string.ntfsChk));
+//		if (!findntfs.isEmpty()) {
+//			#### DO NOTHING I GUESS
+//		} else {
+//			dialog.show();
+//			messages.setText(getString(R.string.ntfs));
+//			yesButton.setText(getString(R.string.yes));
+//			dismissButton.setText(getString(R.string.nah));
+//			noButton.setText(getString(R.string.later));
+//			yesButton.setVisibility(View.VISIBLE);
+//			noButton.setVisibility(View.VISIBLE);
+//			dismissButton.setVisibility(View.VISIBLE);
+//			yesButton.setOnClickListener(new View.OnClickListener() {
+//				@Override
+//				public void onClick(View v) {
+//					Intent i = new Intent(Intent.ACTION_VIEW);
+//					#### INSTALL NTFS3G MAGISK MODULE HERE
+//                    dialog.dismiss();
+//                    pref.setAGREE(MainActivity.this, true);
+//				}
+//            });
+//            noButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                    dialog.dismiss();
+//                }
+//            });
+//            dismissButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    dialog.dismiss();
+//                    pref.setAGREE(MainActivity.this, true);
+//                }
+//            });
+//        }
+	
+	public void checkuefi() {
         ShellUtils.fastCmd("su -c mkdir /sdcard/UEFI");
         this.finduefi = ShellUtils.fastCmd(this.getString(R.string.uefiChk));
         this.device = ShellUtils.fastCmd("getprop ro.product.device ");

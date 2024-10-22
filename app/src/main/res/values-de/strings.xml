@@ -54,7 +54,10 @@
     <string name="dbkp_question">Kernel patchen und das neue Boot Image flashen?\n!!!DRÜCKE NICHT AUF JA WENN DU KEIN ONEPLUS 7(T) PRO 4G HAST!!!</string>
 
     <string name="wrong">Etwas ist schief gelaufen</string>
-    <string name="ntfs">Etwas ist schief gelaufen, \nWindows konnte nicht gemountet werden.\nFragen Sie nach Hilfe im Telegram-Chat.</string>
+    <string name="mountfail">Etwas ist schief gelaufen, \nWindows konnte nicht gemountet werden.\nFragen Sie nach Hilfe im Telegram-Chat.</string>
+	<string name="ntfs">Windows konnte nicht gemountet werden. \nNTFS Unterstützung nicht gefunden. \nInstallier NTFS3G Module?</string>
+	<string name="internet">Keine Internetverbindung gefunden.\nVerbinden Sie mit das Internet und versuchen Sie es erneut.</string>
+	<string name="op7">Boot Image würde gepatcht und geflasht.\nDas gepatchte Image finden Sie auch unter /sdcard/dbkp/patched-boot.img.\nVerwenden Sie Ihren Alert Slider, um zwischen Windows und Android zu wechseln.</string>
     <string name="reboot">Neustart</string>
     <string name="cancel">Annulieren</string>
     <string name="mounted">Windows mounted</string>

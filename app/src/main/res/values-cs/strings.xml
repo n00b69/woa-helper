@@ -54,7 +54,10 @@
     <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS ONEPLUS 7(T) PRO 4G!!!</string>
 
     <string name="wrong">Něco se pokazilo</string>
-    <string name="ntfs">Něco se pokazilo, \nWindows se nepodařilo připojit.\nPožádejte o pomoc v Telegram chatu.</string>
+    <string name="mountfail">Něco se pokazilo, \nWindows se nepodařilo připojit.\nPožádejte o pomoc v Telegram chatu.</string>
+	<string name="ntfs">Windows could not be mounted. \nNTFS support not detected. \nInstall NTFS3G module?</string>
+	<string name="internet">No internet connection found.\nConnect to the internet and try again.</string>
+	<string name="op7">Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/dbkp/patched-boot.img.\nUse your alert slider to switch between Windows and Android.</string>
     <string name="reboot">Restartovat</string>
     <string name="cancel">Zrušit</string>
     <string name="mounted">Windows namontován</string>
