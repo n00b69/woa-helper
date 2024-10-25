@@ -491,13 +491,13 @@ public class MainActivity extends AppCompatActivity {
 					this.n.cvDumpModem.setVisibility(View.GONE);
                 }
                 case "OnePlus6", "fajita" -> {
-                    this.guidelink = "https://github.com/WoA-OnePlus-6-Series/WoA-on-OnePlus6-Series";
+                    this.guidelink = "https://github.com/n00b69/woa-op6";
                     this.grouplink = "https://t.me/WinOnOP6";
                     this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.fajita, null));
                     this.n.cvDumpModem.setVisibility(View.GONE);
                 }
                 case "OnePlus6T", "enchilada" -> {
-                    this.guidelink = "https://github.com/WoA-OnePlus-6-Series/WoA-on-OnePlus6-Series";
+                    this.guidelink = "https://github.com/n00b69/woa-op6";
                     this.grouplink = "https://t.me/WinOnOP6";
                     this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.enchilada, null));
                     this.n.cvDumpModem.setVisibility(View.GONE);
