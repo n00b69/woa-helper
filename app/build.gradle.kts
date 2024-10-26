@@ -13,7 +13,7 @@ android {
         versionCode = 3
         versionName = "1.8.4_BETA23"
 
-        resConfigs(
+        resourceConfigurations += listOf(
             "ar", "az", "be", "cs", "de", "en", "es", "fr", "in", "ko", "ms", "nl", "pl", "pt", "ru", "ro", "th", "tr", "uk", "vi", "zh", "zh-rCN", "zh-rHK", "zh-rMO", "zh-rSG", "zh-rTW"
         )
     }

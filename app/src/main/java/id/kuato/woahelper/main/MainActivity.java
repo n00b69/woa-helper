@@ -2,8 +2,6 @@ package id.kuato.woahelper.main;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -15,7 +13,6 @@ import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
@@ -153,20 +150,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is not in the Support Library.
-        if (Build.VERSION_CODES.O <= Build.VERSION.SDK_INT) {
-            final CharSequence name = "WoA helper";
-            final String description = "Windows on ARM assistant";
-            final int importance = NotificationManager.IMPORTANCE_LOW;
-            NotificationChannel channel = new NotificationChannel("IMPORTANCE_NONE", name, importance);
-            channel.setDescription(description);
-            NotificationManager notificationManager = this.getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -209,11 +192,10 @@ public class MainActivity extends AppCompatActivity {
         this.checkuefi();
         this.win = ShellUtils.fastCmd("realpath /dev/block/by-name/win");
         if (this.win.isEmpty()) this.win = ShellUtils.fastCmd("realpath /dev/block/by-name/mindows");
-        Log.d("debug", this.win);
         this.winpath = (pref.getMountLocation(this) ? "/mnt/Windows" : "/mnt/sdcard/Windows");
         String mount_stat = ShellUtils.fastCmd("su -c mount | grep " + this.win);
-        if (mount_stat.isEmpty()) this.mounted = "MOUNT";
-        else this.mounted = "UNMOUNT";
+        if (mount_stat.isEmpty()) this.mounted = getString(R.string.mountt);
+        else this.mounted = getString(R.string.unmountt);
         if (pref.getMODEM(this)) this.n.cvDumpModem.setVisibility(View.GONE);
         this.x.tvMnt.setText(String.format(this.getString(R.string.mnt_title), this.mounted));
         this.x.tvBackup.setText(this.getString(R.string.backup_boot_title));
@@ -243,6 +225,8 @@ public class MainActivity extends AppCompatActivity {
         settings.setColorFilter(BlendModeColorFilterCompat.createBlendModeColorFilterCompat(this.getColor(R.color.colorPrimary), BlendModeCompat.SRC_IN));
         Drawable back = ResourcesCompat.getDrawable(this.getResources(), R.drawable.back_arrow, null);
         back.setColorFilter(BlendModeColorFilterCompat.createBlendModeColorFilterCompat(this.getColor(R.color.colorPrimary), BlendModeCompat.SRC_IN));
+
+
 
 
         this.d.toolbarlayout.back.setImageDrawable(back);
@@ -2149,9 +2133,9 @@ public class MainActivity extends AppCompatActivity {
         this.k.automount.setOnCheckedChangeListener((compoundButton, b) -> pref.setAutoMount(this, b));
 
         this.k.button.setOnClickListener(v -> {
-            this.k.settingsPanel.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out));
+            this.k.settingsPanel.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_out));
             this.setContentView(this.x.getRoot());
-            this.x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in));
+            this.x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_in));
             this.backable = 0;
         });
     }
@@ -2167,20 +2151,20 @@ public class MainActivity extends AppCompatActivity {
         final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
         switch (viewGroup.getId()) {
             case R.id.scriptstab:
-                this.z.scriptstab.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out));
+                this.z.scriptstab.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_out));
                 this.setContentView(this.n.getRoot());
-                this.n.toolboxtab.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in));
+                this.n.toolboxtab.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_in));
                 this.backable++;
                 break;
             case R.id.toolboxtab:
-                this.n.toolboxtab.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out));
+                this.n.toolboxtab.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_out));
                 this.setContentView(this.x.getRoot());
-                this.x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in));
+                this.x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_in));
                 break;
             case R.id.settingsPanel:
-                this.k.settingsPanel.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out));
+                this.k.settingsPanel.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_out));
                 this.setContentView(this.x.getRoot());
-                this.x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in));
+                this.x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_in));
                 break;
             case R.id.mainlayout:
                 this.finish();
@@ -2391,7 +2375,7 @@ public class MainActivity extends AppCompatActivity {
 	
 	public void checkuefi() {
         ShellUtils.fastCmd("su -c mkdir /sdcard/UEFI");
-        this.finduefi = ShellUtils.fastCmd(this.getString(R.string.uefiChk));
+        this.finduefi = "\""+ShellUtils.fastCmd(this.getString(R.string.uefiChk))+"\"";
         this.device = ShellUtils.fastCmd("getprop ro.product.device ");
         if (finduefi.contains("img")) {
             this.x.tvQuickBoot.setText(getString(R.string.quickboot_title));

@@ -30,6 +30,7 @@ public class mount_tile extends TileService {
 
     private void update() {
         final Tile tile = getQsTile();
+        if (isSecure() && !pref.getSecure(this)){ tile.setState(0);return;}
         win = ShellUtils.fastCmd("su -c realpath /dev/block/by-name/win");
         if (win.isEmpty()) win = ShellUtils.fastCmd("su -c realpath /dev/block/by-name/mindows");
         mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + win);

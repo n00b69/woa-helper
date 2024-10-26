@@ -160,12 +160,12 @@ public enum pref {
 
     public static void setMountLocation(final Context context, final boolean value) {
         final SharedPreferences.Editor editor = pref.getSharedPreference(context).edit();
-        editor.putBoolean(pref.secure, value);
+        editor.putBoolean(pref.mountLocation, value);
         editor.apply();
     }
 
     public static boolean getMountLocation(final Context context) {
-        return pref.getSharedPreference(context).getBoolean(pref.secure, false);
+        return pref.getSharedPreference(context).getBoolean(pref.mountLocation, false);
     }
 }
 
