@@ -63,7 +63,6 @@ import id.kuato.woahelper.util.RAM;
 public class MainActivity extends AppCompatActivity {
 
 
-    static final Object lock = new Object();
     private static final float SIZE = 12.0F;
     private static final float SIZE1 = 15.0F;
     private static final float SIZE2 = 30.0F;
@@ -76,20 +75,16 @@ public class MainActivity extends AppCompatActivity {
     public LangaugesBinding l;
     public String winpath;
     public int backable;
-    public int depth;
-    int ram;
     String panel;
     String mounted;
     String finduefi;
     String device;
     String model;
     String win;
-    boolean dual;
     String grouplink = "https://t.me/woahelperchat";
     String guidelink = "";
     String currentVersion = BuildConfig.VERSION_NAME;
     private ExecutorService executorService = Executors.newFixedThreadPool(4);
-    private Context context;
     private double ramvalue;
 
     public static String extractNumberFromString(String source) {
@@ -155,20 +150,21 @@ public class MainActivity extends AppCompatActivity {
 
         if (Objects.equals(currentVersion, pref.getVersion(this))) {
             String[] files = {"tabletmode.vbs", "guacamole.fd", "hotdog.fd", "dbkp8150.cfg", "dbkp.hotdog.bin", "busybox", "sta.exe", "Switch to Android.lnk", "usbhostmode.exe", "ARMSoftware.url", "TestedSoftware.url", "WorksOnWoa.url", "RotationShortcut.lnk", "display.exe", "RemoveEdge.ps1", "autoflasher.lnk", "DefenderRemover.exe"};
-            int i = 0;
-            while (!files[i].isEmpty()) {
+            for (int i = 0; !files[i].isEmpty(); i++) {
                 if (ShellUtils.fastCmd(String.format("ls %1$s |grep %2$s", getFilesDir(), files[i])).isEmpty()) {
                     copyAssets();
                     break;
                 }
-                i++;
             }
         } else {
             copyAssets();
             pref.setVersion(this, currentVersion);
         }
-        //createNotificationChannel();
+
         super.onCreate(savedInstanceState);
+
+
+        //createNotificationChannel();
         final Dialog dialog = new Dialog(this);
         final Dialog languages = new Dialog(this);
         dialog.setContentView(R.layout.dialog);
@@ -239,6 +235,15 @@ public class MainActivity extends AppCompatActivity {
         TextView myTextView00 = this.findViewById(R.id.tv_date);
         myTextView00.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
         this.x.deviceName.setText(this.model + " (" + this.device + ")");
+
+        TextView deviceNameView = this.findViewById(R.id.deviceName);
+        TextView tvPanelView = this.findViewById(R.id.tv_panel);
+        TextView tvRamValueView = this.findViewById(R.id.tv_ramvalue);
+        TextView guideTextView = this.findViewById(R.id.guide_text);
+        TextView groupTextView = this.findViewById(R.id.group_text);
+        TextView tvSlotView = this.findViewById(R.id.tv_slot);
+        TextView textView = this.findViewById(R.id.text);
+
         if (Objects.equals(this.device, "nabu")) {
 			this.guidelink = "https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/tree/main";
             this.grouplink = "https://t.me/nabuwoa";
@@ -247,18 +252,18 @@ public class MainActivity extends AppCompatActivity {
             this.x.tvPanel.setVisibility(View.VISIBLE);
             this.n.cvDumpModem.setVisibility(View.GONE);
 			this.n.cvDbkp.setVisibility(View.GONE);
-            TextView myTextView2 = this.findViewById(R.id.deviceName);
-            myTextView2.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
-            TextView myTextView3 = this.findViewById(R.id.tv_panel);
-            myTextView3.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
-            TextView myTextView4 = this.findViewById(R.id.tv_ramvalue);
-            myTextView4.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
-            TextView myTextView5 = this.findViewById(R.id.guide_text);
-            myTextView5.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
-            TextView myTextView6 = this.findViewById(R.id.group_text);
-            myTextView6.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
-            TextView myTextView7 = this.findViewById(R.id.tv_slot);
-            myTextView7.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
+
+            deviceNameView.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
+
+            tvPanelView.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
+
+            tvRamValueView.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
+
+            guideTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
+
+            groupTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
+
+            tvSlotView.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
 
             int orientation = this.getResources().getConfiguration().orientation;
             if (Configuration.ORIENTATION_PORTRAIT == orientation) {
@@ -270,20 +275,20 @@ public class MainActivity extends AppCompatActivity {
             }
         } else {
             this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-            TextView myTextView1 = this.findViewById(R.id.text);
-            myTextView1.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE1);
-            TextView myTextView2 = this.findViewById(R.id.deviceName);
-            myTextView2.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
-            TextView myTextView3 = this.findViewById(R.id.tv_panel);
-            myTextView3.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
-            TextView myTextView4 = this.findViewById(R.id.tv_ramvalue);
-            myTextView4.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
-            TextView myTextView5 = this.findViewById(R.id.guide_text);
-            myTextView5.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
-            TextView myTextView6 = this.findViewById(R.id.group_text);
-            myTextView6.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
-            TextView myTextView7 = this.findViewById(R.id.tv_slot);
-            myTextView7.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
+
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE1);
+
+            deviceNameView.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
+
+            tvPanelView.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
+
+            tvRamValueView.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
+
+            guideTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
+
+            groupTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
+
+            tvSlotView.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
 
             this.n.cvDbkp.setVisibility(View.GONE);
 
@@ -1333,43 +1338,45 @@ public class MainActivity extends AppCompatActivity {
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
+
+                    String[] files = {
+                            "2005vcredist_x64.EXE",
+                            "2005vcredist_x86.EXE",
+                            "2008vcredist_x64.exe",
+                            "2008vcredist_x86.exe",
+                            "2010vcredist_x64.exe",
+                            "2010vcredist_x86.exe",
+                            "2012vcredist_x64.exe",
+                            "2012vcredist_x86.exe",
+                            "2013vcredist_x64.exe",
+                            "2013vcredist_x86.exe",
+                            "2015VC_redist.x64.exe",
+                            "2015VC_redist.x86.exe",
+                            "2022VC_redist.arm64.exe",
+                            "dxwebsetup.exe",
+                            "oalinst.exe",
+                            "PhysX-9.13.0604-SystemSoftware-Legacy.msi",
+                            "PhysX-9.19.0218-SystemSoftware.exe",
+                            "xnafx40_redist.msi"
+                    };
+
                     bar.setProgress((int) (bar.getMax() * 0.00), true);
-                    ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2005vcredist_x64.EXE -O /sdcard/2005vcredist_x64.EXE");
-                    bar.setProgress((int) (bar.getMax() * 0.05), true);
-                    ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2005vcredist_x86.EXE -O /sdcard/2005vcredist_x86.EXE");
-                    bar.setProgress((int) (bar.getMax() * 0.1), true);
-                    ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2008vcredist_x64.exe -O /sdcard/2008vcredist_x64.exe");
-                    bar.setProgress((int) (bar.getMax() * 0.15), true);
-                    ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2008vcredist_x86.exe -O /sdcard/2008vcredist_x86.exe");
-                    bar.setProgress((int) (bar.getMax() * 0.2), true);
-                    ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2010vcredist_x64.exe -O /sdcard/2010vcredist_x64.exe");
-                    bar.setProgress((int) (bar.getMax() * 0.25), true);
-                    ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2010vcredist_x86.exe -O /sdcard/2010vcredist_x86.exe");
-                    bar.setProgress((int) (bar.getMax() * 0.3), true);
-                    ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2012vcredist_x64.exe -O /sdcard/2012vcredist_x64.exe");
-                    bar.setProgress((int) (bar.getMax() * 0.35), true);
-                    ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2012vcredist_x86.exe -O /sdcard/2012vcredist_x86.exe");
-                    bar.setProgress((int) (bar.getMax() * 0.4), true);
-                    ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2013vcredist_x64.exe -O /sdcard/2013vcredist_x64.exe");
-                    bar.setProgress((int) (bar.getMax() * 0.45), true);
-                    ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2013vcredist_x86.exe -O /sdcard/2013vcredist_x86.exe");
-                    bar.setProgress((int) (bar.getMax() * 0.5), true);
-                    ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2015VC_redist.x64.exe -O /sdcard/2015VC_redist.x64.exe");
-                    bar.setProgress((int) (bar.getMax() * 0.55), true);
-                    ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2015VC_redist.x86.exe -O /sdcard/2015VC_redist.x86.exe");
-                    bar.setProgress((int) (bar.getMax() * 0.6), true);
-                    ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2022VC_redist.arm64.exe -O /sdcard/2022VC_redist.arm64.exe");
-                    bar.setProgress((int) (bar.getMax() * 0.65), true);
-                    ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/dxwebsetup.exe -O /sdcard/dxwebsetup.exe");
-                    bar.setProgress((int) (bar.getMax() * 0.7), true);
-                    ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/oalinst.exe -O /sdcard/oalinst.exe");
-                    bar.setProgress((int) (bar.getMax() * 0.75), true);
-                    ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/PhysX-9.13.0604-SystemSoftware-Legacy.msi -O /sdcard/PhysX-9.13.0604-SystemSoftware-Legacy.msi");
-                    bar.setProgress((int) (bar.getMax() * 0.8), true);
-                    ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/PhysX-9.19.0218-SystemSoftware.exe -O /sdcard/PhysX-9.19.0218-SystemSoftware.exe");
-                    bar.setProgress((int) (bar.getMax() * 0.85), true);
-                    ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/xnafx40_redist.msi -O /sdcard/xnafx40_redist.msi");
-                    bar.setProgress((int) (bar.getMax() * 0.9), true);
+
+                    // Base URL for downloads
+                    String baseUrl = "https://github.com/n00b69/woasetup/releases/download/Installers/";
+
+                    // Iterate through the files and download each one
+                    for (int i = 0; i < files.length; i++) {
+                        String fileName = files[i];
+                        String downloadUrl = baseUrl + fileName;
+                        String localPath = "/sdcard/" + fileName;
+
+                        // Execute the download command
+                        ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget " + downloadUrl + " -O " + localPath);
+
+                        // Update the progress bar
+                        bar.setProgress((int) (bar.getMax() * ((i + 1) * 0.05)), true);
+                    }
                     this.runOnUiThread(() -> {
                         this.mount();
                         String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + this.win);
@@ -1380,43 +1387,18 @@ public class MainActivity extends AppCompatActivity {
                             messages.setText(this.getString(R.string.mountfail) + "\nFiles downloaded in internal storage");
                         } else {
                             icons.setImageDrawable(mnt);
+
+
+                            // Copy files to the toolbox
                             ShellUtils.fastCmd("mkdir " + this.winpath + "/Toolbox || true ");
-                            ShellUtils.fastCmd("cp /sdcard/2005vcredist_x64.EXE " + this.winpath + "/Toolbox/");
-                            ShellUtils.fastCmd("cp /sdcard/2005vcredist_x86.EXE " + this.winpath + "/Toolbox/");
-                            ShellUtils.fastCmd("cp /sdcard/2008vcredist_x64.exe " + this.winpath + "/Toolbox/");
-                            ShellUtils.fastCmd("cp /sdcard/2008vcredist_x86.exe " + this.winpath + "/Toolbox/");
-                            ShellUtils.fastCmd("cp /sdcard/2010vcredist_x64.exe " + this.winpath + "/Toolbox/");
-                            ShellUtils.fastCmd("cp /sdcard/2010vcredist_x86.exe " + this.winpath + "/Toolbox/");
-                            ShellUtils.fastCmd("cp /sdcard/2012vcredist_x64.exe " + this.winpath + "/Toolbox/");
-                            ShellUtils.fastCmd("cp /sdcard/2012vcredist_x86.exe " + this.winpath + "/Toolbox/");
-                            ShellUtils.fastCmd("cp /sdcard/2013vcredist_x64.exe " + this.winpath + "/Toolbox/");
-                            ShellUtils.fastCmd("cp /sdcard/2013vcredist_x86.exe " + this.winpath + "/Toolbox/");
-                            ShellUtils.fastCmd("cp /sdcard/2015VC_redist.x64.exe " + this.winpath + "/Toolbox/");
-                            ShellUtils.fastCmd("cp /sdcard/2015VC_redist.x86.exe " + this.winpath + "/Toolbox/");
-                            ShellUtils.fastCmd("cp /sdcard/2022VC_redist.arm64.exe " + this.winpath + "/Toolbox/");
-                            ShellUtils.fastCmd("cp /sdcard/dxwebsetup.exe " + this.winpath + "/Toolbox/");
-                            ShellUtils.fastCmd("cp /sdcard/oalinst.exe " + this.winpath + "/Toolbox/");
-                            ShellUtils.fastCmd("cp /sdcard/PhysX-9.13.0604-SystemSoftware-Legacy.msi " + this.winpath + "/Toolbox/");
-                            ShellUtils.fastCmd("cp /sdcard/PhysX-9.19.0218-SystemSoftware.exe " + this.winpath + "/Toolbox/");
-                            ShellUtils.fastCmd("cp /sdcard/xnafx40_redist.msi " + this.winpath + "/Toolbox/");
-                            ShellUtils.fastCmd("rm /sdcard/2005vcredist_x64.EXE");
-                            ShellUtils.fastCmd("rm /sdcard/2005vcredist_x86.EXE");
-                            ShellUtils.fastCmd("rm /sdcard/2008vcredist_x64.exe");
-                            ShellUtils.fastCmd("rm /sdcard/2008vcredist_x86.exe");
-                            ShellUtils.fastCmd("rm /sdcard/2010vcredist_x64.exe");
-                            ShellUtils.fastCmd("rm /sdcard/2010vcredist_x86.exe");
-                            ShellUtils.fastCmd("rm /sdcard/2012vcredist_x64.exe");
-                            ShellUtils.fastCmd("rm /sdcard/2012vcredist_x86.exe");
-                            ShellUtils.fastCmd("rm /sdcard/2013vcredist_x64.exe");
-                            ShellUtils.fastCmd("rm /sdcard/2013vcredist_x86.exe");
-                            ShellUtils.fastCmd("rm /sdcard/2015VC_redist.x64.exe");
-                            ShellUtils.fastCmd("rm /sdcard/2015VC_redist.x86.exe");
-                            ShellUtils.fastCmd("rm /sdcard/2022VC_redist.arm64.exe");
-                            ShellUtils.fastCmd("rm /sdcard/dxwebsetup.exe");
-                            ShellUtils.fastCmd("rm /sdcard/oalinst.exe");
-                            ShellUtils.fastCmd("rm /sdcard/PhysX-9.13.0604-SystemSoftware-Legacy.msi");
-                            ShellUtils.fastCmd("rm /sdcard/PhysX-9.19.0218-SystemSoftware.exe");
-                            ShellUtils.fastCmd("rm /sdcard/xnafx40_redist.msi");
+                            for (String file : files) {
+                                ShellUtils.fastCmd("cp /sdcard/" + file + " " + this.winpath + "/Toolbox/");
+                            }
+
+                            // Remove files from the source directory
+                            for (String file : files) {
+                                ShellUtils.fastCmd("rm /sdcard/" + file);
+                            }
                             bar.setProgress(bar.getMax(), true);
                             messages.setText(this.getString(R.string.done));
                         }
