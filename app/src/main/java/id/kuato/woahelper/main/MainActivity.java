@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         if (Objects.equals(currentVersion, pref.getVersion(this))) {
-            String[] files = {"tabletmode.vbs", "guacamole.fd", "hotdog.fd", "dbkp8150.cfg", "dbkp.hotdog.bin", "busybox", "sta.exe", "Switch to Android.lnk", "usbhostmode.exe", "ARMSoftware.url", "TestedSoftware.url", "WorksOnWoa.url", "RotationShortcut.lnk", "display.exe", "RemoveEdge.ps1", "autoflasher.lnk", "DefenderRemover.exe"};
+            String[] files = {"tabletmode.vbs", "guacamole.fd", "hotdog.fd", "dbkp8150.cfg", "dbkp.hotdog.bin", "busybox", "sta.exe", "Switch to Android.lnk", "usbhostmode.exe", "ARMSoftware.url", "TestedSoftware.url", "WorksOnWoa.url", "RotationShortcut.lnk", "display.exe", "RemoveEdge.bat", "autoflasher.lnk", "DefenderRemover.exe"};
             int i = 0;
             while (!files[i].isEmpty()) {
                 if (ShellUtils.fastCmd(String.format("ls %1$s |grep %2$s", getFilesDir(), files[i])).isEmpty()) {
@@ -949,7 +949,6 @@ public class MainActivity extends AppCompatActivity {
             noButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     noButton.setVisibility(View.GONE);
                     yesButton.setVisibility(View.GONE);
                     dismissButton.setVisibility(View.GONE);
@@ -1490,7 +1489,7 @@ public class MainActivity extends AppCompatActivity {
                     this.mount();
                     String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + this.win);
                     ShellUtils.fastCmd("cp " + this.getFilesDir() + "/DefenderRemover.exe /sdcard");
-					ShellUtils.fastCmd("cp " + this.getFilesDir() + "/RemoveEdge.ps1 /sdcard");
+					ShellUtils.fastCmd("cp " + this.getFilesDir() + "/RemoveEdge.bat /sdcard");
                     if (mnt_stat.isEmpty()) {
                         noButton.setVisibility(View.GONE);
                         yesButton.setText(this.getString(R.string.chat));
@@ -1516,8 +1515,8 @@ public class MainActivity extends AppCompatActivity {
                         ShellUtils.fastCmd("mkdir " + this.winpath + "/Toolbox || true ");
                         ShellUtils.fastCmd("cp /sdcard/DefenderRemover.exe " + this.winpath + "/Toolbox");
                         ShellUtils.fastCmd("rm /sdcard/DefenderRemover.exe");
-						ShellUtils.fastCmd("cp /sdcard/RemoveEdge.ps1 " + this.winpath + "/Toolbox");
-                        ShellUtils.fastCmd("rm /sdcard/RemoveEdge.ps1");
+						ShellUtils.fastCmd("cp /sdcard/RemoveEdge.bat " + this.winpath + "/Toolbox");
+                        ShellUtils.fastCmd("rm /sdcard/RemoveEdge.bat");
                         messages.setText(this.getString(R.string.done));
                         dismissButton.setText(this.getString(R.string.dismiss));
                         dismissButton.setVisibility(View.VISIBLE);
