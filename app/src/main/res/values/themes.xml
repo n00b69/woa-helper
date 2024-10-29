@@ -24,7 +24,8 @@
         <item name="preferenceTheme">@style/PreferenceFragment.Material</item>
         <item name="android:windowTranslucentStatus">false</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">?attr/colorSurfaceVariant</item>
+        <item name="android:statusBarColor">?attr/colorOnSurfaceInverse</item>
+        <item name="android:navigationBarColor">@color/transparent</item>
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:windowContentTransitions">true</item>
     </style>
