@@ -1,10 +1,12 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:screenOrientation="portrait"
-    tools:context=".vayu.MainActivity">
+    tools:context=".main.MainActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -47,15 +49,17 @@
                         android:layout_width="@dimen/_115sdp"
                         android:layout_height="@dimen/_138sdp"
                         android:layout_gravity="center"
+                        android:contentDescription="TODO"
                         android:paddingBottom="@dimen/_4sdp"
                         android:scaleType="fitXY"
                         android:src="@drawable/nabu"
                         android:visibility="gone" />
 
                     <ImageView
-                        android:id="@+id/VayuImage"
+                        android:id="@+id/DeviceImage"
                         android:layout_width="@dimen/_115sdp"
                         android:layout_height="@dimen/_138sdp"
+                        android:contentDescription="TODO"
                         android:scaleType="fitXY"
                         android:src="@drawable/vayu" />
 
@@ -70,10 +74,11 @@
                         android:animateLayoutChanges="true"
                         android:clickable="true"
                         android:elevation="@dimen/cardElevation"
+                        android:focusable="true"
                         android:foreground="@drawable/vayu"
                         android:gravity="center"
                         android:padding="@dimen/parentMargin"
-                        android:stateListAnimator="@anim/state_list_anim"
+                        android:stateListAnimator="@animator/state_list_anim"
                         app:cardCornerRadius="@dimen/cardCornerRadius"
                         app:cardMaxElevation="0dp">
 
@@ -149,9 +154,10 @@
                                     android:animateLayoutChanges="true"
                                     android:clickable="true"
                                     android:elevation="@dimen/cardElevation"
+                                    android:focusable="true"
                                     android:gravity="center"
                                     android:padding="@dimen/parentMargin"
-                                    android:stateListAnimator="@anim/state_list_anim"
+                                    android:stateListAnimator="@animator/state_list_anim"
                                     app:cardBackgroundColor="@color/colorOnPrimary"
                                     app:cardCornerRadius="@dimen/cardCornerRadius"
                                     app:cardMaxElevation="0dp">
@@ -178,9 +184,10 @@
                                     android:animateLayoutChanges="true"
                                     android:clickable="true"
                                     android:elevation="@dimen/cardElevation"
+                                    android:focusable="true"
                                     android:gravity="center"
                                     android:padding="@dimen/parentMargin"
-                                    android:stateListAnimator="@anim/state_list_anim"
+                                    android:stateListAnimator="@animator/state_list_anim"
                                     app:cardBackgroundColor="@color/colorOnPrimary"
                                     app:cardCornerRadius="@dimen/cardCornerRadius"
                                     app:cardMaxElevation="0dp">
@@ -222,9 +229,10 @@
                     android:animateLayoutChanges="true"
                     android:clickable="true"
                     android:elevation="@dimen/cardElevation"
+                    android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:padding="@dimen/parentMargin"
-                    android:stateListAnimator="@anim/state_list_anim"
+                    android:stateListAnimator="@animator/state_list_anim"
                     app:cardCornerRadius="@dimen/cardCornerRadius"
                     app:cardMaxElevation="0dp">
 
@@ -239,6 +247,7 @@
                             android:id="@+id/disk"
                             android:layout_width="@dimen/_48sdp"
                             android:layout_height="@dimen/_48sdp"
+                            android:contentDescription="TODO"
                             android:scaleType="fitXY"
                             android:src="@drawable/ic_disk" />
 
@@ -253,7 +262,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="30dp"
                                 android:text="@string/backup_boot_title"
-                                android:textSize="@dimen/_10sdp"
+                                android:textSize="@dimen/_11sdp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -261,7 +270,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/backup_boot_subtitle"
-                                android:textSize="@dimen/_8sdp"
+                                android:textSize="@dimen/_9sdp"
                                 android:textStyle="italic" />
                         </LinearLayout>
 
@@ -279,10 +288,11 @@
                     android:animateLayoutChanges="true"
                     android:clickable="true"
                     android:elevation="@dimen/cardElevation"
+                    android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:gravity="center"
                     android:padding="@dimen/parentMargin"
-                    android:stateListAnimator="@anim/state_list_anim"
+                    android:stateListAnimator="@animator/state_list_anim"
                     app:cardCornerRadius="@dimen/cardCornerRadius"
                     app:cardMaxElevation="0dp">
 
@@ -297,6 +307,7 @@
                             android:id="@+id/windows_logo"
                             android:layout_width="@dimen/_48sdp"
                             android:layout_height="@dimen/_48sdp"
+                            android:contentDescription="TODO"
                             android:scaleType="fitXY"
                             android:src="@drawable/mnt" />
 
@@ -310,7 +321,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/mnt_title"
-                                android:textSize="@dimen/_10sdp"
+                                android:textSize="@dimen/_11sdp"
                                 android:textStyle="bold" />
 
                             <id.kuato.verncopyright.BlurLayout
@@ -318,19 +329,20 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
-                                android:clipToOutline="true" />
+                                android:clipToOutline="true"
+                                tools:targetApi="s" />
 
                             <TextView
                                 android:id="@+id/tv_mnt_subtitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/mnt_subtitle"
-                                android:textSize="@dimen/_8sdp"
+                                android:textSize="@dimen/_9sdp"
                                 android:textStyle="italic" />
                         </LinearLayout>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
-				
+
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cv_toolbox"
                     style="@style/Widget.Material3.CardView.Filled"
@@ -342,9 +354,10 @@
                     android:animateLayoutChanges="true"
                     android:clickable="true"
                     android:elevation="@dimen/cardElevation"
+                    android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:padding="@dimen/parentMargin"
-                    android:stateListAnimator="@anim/state_list_anim"
+                    android:stateListAnimator="@animator/state_list_anim"
                     app:cardCornerRadius="@dimen/cardCornerRadius"
                     app:cardMaxElevation="0dp">
 
@@ -359,6 +372,7 @@
                             android:id="@+id/toolbox"
                             android:layout_width="@dimen/_48sdp"
                             android:layout_height="@dimen/_48sdp"
+                            android:contentDescription="TODO"
                             android:scaleType="fitXY"
                             android:src="@drawable/toolbox" />
 
@@ -373,7 +387,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="30dp"
                                 android:text="@string/toolbox_title"
-                                android:textSize="@dimen/_10sdp"
+                                android:textSize="@dimen/_11sdp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -381,7 +395,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/toolbox_subtitle"
-                                android:textSize="@dimen/_8sdp"
+                                android:textSize="@dimen/_9sdp"
                                 android:textStyle="italic" />
                         </LinearLayout>
                     </LinearLayout>
@@ -398,9 +412,10 @@
                     android:animateLayoutChanges="true"
                     android:clickable="true"
                     android:elevation="@dimen/cardElevation"
+                    android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:padding="@dimen/parentMargin"
-                    android:stateListAnimator="@anim/state_list_anim"
+                    android:stateListAnimator="@animator/state_list_anim"
                     android:visibility="gone"
                     app:cardCornerRadius="@dimen/cardCornerRadius"
                     app:cardMaxElevation="0dp">
@@ -416,6 +431,7 @@
                             android:id="@+id/windowsLogo2"
                             android:layout_width="@dimen/_48sdp"
                             android:layout_height="@dimen/_48sdp"
+                            android:contentDescription="TODO"
                             android:scaleType="fitXY"
                             android:src="@drawable/ic_launcher_foreground"
                             android:text="@string/quickboot_title" />
@@ -431,16 +447,16 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="30dp"
                                 android:text="@string/quickboot_question"
-                                android:textSize="@dimen/_10sdp"
+                                android:textSize="@dimen/_11sdp"
                                 android:textStyle="bold" />
 
                             <TextView
                                 android:id="@+id/tv_boot_subtitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="@dimen/_8sdp"
-                                android:textStyle="italic"
-                                android:paddingRight="@dimen/_7sdp" />
+                                android:paddingRight="@dimen/_7sdp"
+                                android:textSize="@dimen/_9sdp"
+                                android:textStyle="italic" />
                         </LinearLayout>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>

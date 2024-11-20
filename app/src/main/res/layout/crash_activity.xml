@@ -1,21 +1,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginEnd="40dp"
         android:layout_marginStart="40dp"
-        android:orientation="vertical" >
+        android:layout_marginEnd="40dp"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/iv_error"
             android:layout_width="250dp"
             android:layout_height="250dp"
             android:layout_gravity="center_horizontal"
+            android:contentDescription="TODO"
             android:src="@drawable/ic_bug" />
 
         <TextView
@@ -28,13 +28,15 @@
             android:textSize="24sp" />
 
         <LinearLayout
+            style="?android:attr/buttonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/b_restart"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -43,6 +45,7 @@
 
             <Button
                 android:id="@+id/b_detail"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"

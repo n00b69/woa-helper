@@ -1,5 +1,4 @@
-<animated-vector
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:aapt="http://schemas.android.com/aapt">
     <aapt:attr name="android:drawable">
         <vector
@@ -10,14 +9,14 @@
             android:viewportHeight="48">
             <path
                 android:name="path"
-                android:pathData="M 40 12 L 22 12 L 18 8 L 8 8 C 5.8 8 4 9.8 4 12 L 4 20 L 44 20 L 44 16 C 44 13.8 42.2 12 40 12 Z"
                 android:fillColor="#ffa000"
-                android:strokeWidth="1"/>
+                android:pathData="M 40 12 L 22 12 L 18 8 L 8 8 C 5.8 8 4 9.8 4 12 L 4 20 L 44 20 L 44 16 C 44 13.8 42.2 12 40 12 Z"
+                android:strokeWidth="1" />
             <path
                 android:name="path_1"
-                android:pathData="M 40 12 L 8 12 C 5.8 12 4 13.8 4 16 L 4 36 C 4 38.2 5.8 40 8 40 L 40 40 C 42.2 40 44 38.2 44 36 L 44 16 C 44 13.8 42.2 12 40 12 Z"
                 android:fillColor="#ffca28"
-                android:strokeWidth="1"/>
+                android:pathData="M 40 12 L 8 12 C 5.8 12 4 13.8 4 16 L 4 36 C 4 38.2 5.8 40 8 40 L 40 40 C 42.2 40 44 38.2 44 36 L 44 16 C 44 13.8 42.2 12 40 12 Z"
+                android:strokeWidth="1" />
         </vector>
     </aapt:attr>
 </animated-vector>

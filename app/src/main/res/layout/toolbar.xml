@@ -1,46 +1,50 @@
 <com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:backgroundTint="?attr/colorSurfaceVariant" >
+    android:backgroundTint="?attr/colorOnSurfaceInverse">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <ImageButton
-        android:id="@+id/back"
-        android:layout_marginLeft="@dimen/_12sdp"
-        android:layout_marginTop="@dimen/_12sdp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:src="@drawable/back_arrow"
-        android:visibility="gone"/>
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:animateLayoutChanges="true"
-        android:gravity="center_vertical"
-        app:subtitleCentered="false"
-        app:titleCentered="false"
-        app:titleTextAppearance="@style/Toolbar.TitleText">
 
         <ImageButton
-            android:id="@+id/settings"
-            android:layout_marginRight="@dimen/_12sdp"
-            style="@style/Widget.Material3.CardView.Filled"
+            android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:clickable="true"
-            android:elevation="@dimen/cardElevation"
+            android:layout_marginLeft="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
             android:background="@android:color/transparent"
-            android:src="@drawable/settings"
-            android:visibility="gone"/>
+            android:contentDescription="TODO"
+            android:src="@drawable/back_arrow"
+            android:visibility="gone" />
 
-    </com.google.android.material.appbar.MaterialToolbar>
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:animateLayoutChanges="true"
+            android:gravity="center_vertical"
+            app:subtitleCentered="false"
+            app:titleCentered="false"
+            app:titleTextAppearance="@style/Toolbar.TitleText">
+
+            <ImageButton
+                android:id="@+id/settings"
+                style="@style/Widget.Material3.CardView.Filled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="@dimen/_12sdp"
+                android:background="@android:color/transparent"
+                android:clickable="true"
+                android:contentDescription="TODO"
+                android:elevation="@dimen/cardElevation"
+                android:focusable="true"
+                android:src="@drawable/settings"
+                android:visibility="gone" />
+
+        </com.google.android.material.appbar.MaterialToolbar>
     </LinearLayout>
 </com.google.android.material.appbar.AppBarLayout>

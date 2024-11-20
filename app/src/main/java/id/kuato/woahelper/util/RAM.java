@@ -3,22 +3,19 @@ package id.kuato.woahelper.util;
 import android.app.ActivityManager;
 import android.content.Context;
 
-import id.kuato.woahelper.util.MemoryUtils;
-
 public class RAM {
 
-	public long getTotalMemory(Context context) {
-		ActivityManager actManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-		ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
-		assert actManager != null;
-		actManager.getMemoryInfo(memInfo);
-		long totalMemory = memInfo.totalMem;
-		return totalMemory;
-	}
+    public final long getTotalMemory(final Context context) {
+        final ActivityManager actManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        final ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
+        assert null != actManager;
+        actManager.getMemoryInfo(memInfo);
+        return memInfo.totalMem;
+    }
 
-	public String getMemory(Context context) {
-		String mem;
-		mem = new MemoryUtils().bytesToHuman(getTotalMemory(context));
-		return mem;
-	}
+    public final String getMemory(final Context context) {
+        final String mem;
+        mem = new MemoryUtils().bytesToHuman(getTotalMemory(context));
+        return mem;
+    }
 }

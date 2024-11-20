@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="id.kuato.woahelper">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,13 +13,11 @@
         android:localeConfig="@xml/languages"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
-        android:theme="@style/Theme.MyApplication">
-        <activity
-            android:name=".vayu.toolboxsar"
-            android:exported="false" />
+        android:theme="@style/Theme.MyApplication"
+        tools:targetApi="tiramisu">
 
         <receiver
-            android:name=".vayu.automount"
+            android:name=".main.automount"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -30,7 +28,7 @@
         </receiver>
 
         <service
-            android:name=".vayu.MyQSTileService"
+            android:name=".main.quickboot_tile"
             android:exported="true"
             android:icon="@drawable/qs_tile"
             android:label="Quickboot"
@@ -40,7 +38,7 @@
             </intent-filter>
         </service>
         <service
-            android:name=".vayu.mount_tile"
+            android:name=".main.mount_tile"
             android:exported="true"
             android:icon="@drawable/mnt2"
             android:label="Mount win"
@@ -51,7 +49,7 @@
         </service>
 
         <activity
-            android:name=".vayu.MainActivity"
+            android:name=".main.MainActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true">
             <intent-filter>

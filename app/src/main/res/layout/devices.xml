@@ -21,7 +21,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -44,7 +44,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="POCO X3 PRO \n\vayu/bhima\nRAM : 6/8GB\nSTORAGE : 128/256GB"
+                            android:text=""
                             android:textSize="@dimen/_13sdp" />
 
                         <LinearLayout
@@ -65,9 +65,10 @@
                                 android:animateLayoutChanges="true"
                                 android:clickable="true"
                                 android:elevation="@dimen/cardElevation"
+                                android:focusable="true"
                                 android:gravity="center"
                                 android:padding="@dimen/parentMargin"
-                                android:stateListAnimator="@anim/state_list_anim"
+                                android:stateListAnimator="@animator/state_list_anim"
                                 app:cardBackgroundColor="@color/colorOnPrimary"
                                 app:cardCornerRadius="@dimen/cardCornerRadius"
                                 app:cardMaxElevation="0dp">
@@ -94,9 +95,10 @@
                                 android:animateLayoutChanges="true"
                                 android:clickable="true"
                                 android:elevation="@dimen/cardElevation"
+                                android:focusable="true"
                                 android:gravity="center"
                                 android:padding="@dimen/parentMargin"
-                                android:stateListAnimator="@anim/state_list_anim"
+                                android:stateListAnimator="@animator/state_list_anim"
                                 app:cardBackgroundColor="@color/colorOnPrimary"
                                 app:cardCornerRadius="@dimen/cardCornerRadius"
                                 app:cardMaxElevation="0dp">
@@ -137,7 +139,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="XIAOMI PAD 5\nnabu\nRAM : 6GB\n(8GB China)\nSTORAGE : 128/256GB"
+                            android:text=""
                             android:textSize="@dimen/_13sdp" />
 
                         <LinearLayout
@@ -158,9 +160,10 @@
                                 android:animateLayoutChanges="true"
                                 android:clickable="true"
                                 android:elevation="@dimen/cardElevation"
+                                android:focusable="true"
                                 android:gravity="center"
                                 android:padding="@dimen/parentMargin"
-                                android:stateListAnimator="@anim/state_list_anim"
+                                android:stateListAnimator="@animator/state_list_anim"
                                 app:cardBackgroundColor="@color/colorOnPrimary"
                                 app:cardCornerRadius="@dimen/cardCornerRadius"
                                 app:cardMaxElevation="0dp">
@@ -187,9 +190,10 @@
                                 android:animateLayoutChanges="true"
                                 android:clickable="true"
                                 android:elevation="@dimen/cardElevation"
+                                android:focusable="true"
                                 android:gravity="center"
                                 android:padding="@dimen/parentMargin"
-                                android:stateListAnimator="@anim/state_list_anim"
+                                android:stateListAnimator="@animator/state_list_anim"
                                 app:cardBackgroundColor="@color/colorOnPrimary"
                                 app:cardCornerRadius="@dimen/cardCornerRadius"
                                 app:cardMaxElevation="0dp">
@@ -208,288 +212,6 @@
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_width="@dimen/_115sdp"
-                        android:layout_height="@dimen/_138sdp"
-                        android:layout_margin="@dimen/_9sdp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/raphael" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="@dimen/_9sdp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="XIAOMI MI 9T PRO /\nREDMI K20 PRO \nraphael/raphaelin\nRAM : 6/8/12GB\nSTORAGE : 64/128/256/512GB"
-                            android:textSize="@dimen/_13sdp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="bottom"
-                            android:orientation="horizontal">
-
-                            <com.google.android.material.card.MaterialCardView
-                                android:id="@+id/cv_guide_raphael"
-                                style="@style/Widget.Material3.CardView.Filled"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="2dp"
-                                android:layout_weight="1"
-                                android:adjustViewBounds="true"
-                                android:animateLayoutChanges="true"
-                                android:clickable="true"
-                                android:elevation="@dimen/cardElevation"
-                                android:gravity="center"
-                                android:padding="@dimen/parentMargin"
-                                android:stateListAnimator="@anim/state_list_anim"
-                                app:cardBackgroundColor="@color/colorOnPrimary"
-                                app:cardCornerRadius="@dimen/cardCornerRadius"
-                                app:cardMaxElevation="0dp">
-
-                                <android.widget.TextView
-                                    android:id="@+id/guide_text_raphael"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:paddingVertical="4dp"
-                                    android:text="@string/guide"
-                                    android:textSize="@dimen/_12sdp"
-                                    android:textStyle="bold" />
-                            </com.google.android.material.card.MaterialCardView>
-
-                            <com.google.android.material.card.MaterialCardView
-                                android:id="@+id/cv_group_raphael"
-                                style="@style/Widget.Material3.CardView.Filled"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="2dp"
-                                android:layout_weight="1"
-                                android:adjustViewBounds="true"
-                                android:animateLayoutChanges="true"
-                                android:clickable="true"
-                                android:elevation="@dimen/cardElevation"
-                                android:gravity="center"
-                                android:padding="@dimen/parentMargin"
-                                android:stateListAnimator="@anim/state_list_anim"
-                                app:cardBackgroundColor="@color/colorOnPrimary"
-                                app:cardCornerRadius="@dimen/cardCornerRadius"
-                                app:cardMaxElevation="0dp">
-
-                                <android.widget.TextView
-                                    android:id="@+id/group_text_raphael"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:paddingVertical="4dp"
-                                    android:text="@string/group"
-                                    android:textSize="@dimen/_12sdp"
-                                    android:textStyle="bold" />
-
-                            </com.google.android.material.card.MaterialCardView>
-
-                        </LinearLayout>
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_width="@dimen/_115sdp"
-                        android:layout_height="@dimen/_138sdp"
-                        android:layout_margin="@dimen/_9sdp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/cepheus" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="@dimen/_9sdp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="XIAOMI MI 9\ncepheus\nRAM : 6/8GB\nSTORAGE : 64/128/256GB"
-                            android:textSize="@dimen/_13sdp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="bottom"
-                            android:orientation="horizontal">
-
-                            <com.google.android.material.card.MaterialCardView
-                                android:id="@+id/cv_guide_cepheus"
-                                style="@style/Widget.Material3.CardView.Filled"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="2dp"
-                                android:layout_weight="1"
-                                android:adjustViewBounds="true"
-                                android:animateLayoutChanges="true"
-                                android:clickable="true"
-                                android:elevation="@dimen/cardElevation"
-                                android:gravity="center"
-                                android:padding="@dimen/parentMargin"
-                                android:stateListAnimator="@anim/state_list_anim"
-                                app:cardBackgroundColor="@color/colorOnPrimary"
-                                app:cardCornerRadius="@dimen/cardCornerRadius"
-                                app:cardMaxElevation="0dp">
-
-                                <android.widget.TextView
-                                    android:id="@+id/guide_text_cepheus"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:paddingVertical="4dp"
-                                    android:text="@string/guide"
-                                    android:textSize="@dimen/_12sdp"
-                                    android:textStyle="bold" />
-                            </com.google.android.material.card.MaterialCardView>
-
-                            <com.google.android.material.card.MaterialCardView
-                                android:id="@+id/cv_group_cepheus"
-                                style="@style/Widget.Material3.CardView.Filled"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="2dp"
-                                android:layout_weight="1"
-                                android:adjustViewBounds="true"
-                                android:animateLayoutChanges="true"
-                                android:clickable="true"
-                                android:elevation="@dimen/cardElevation"
-                                android:gravity="center"
-                                android:padding="@dimen/parentMargin"
-                                android:stateListAnimator="@anim/state_list_anim"
-                                app:cardBackgroundColor="@color/colorOnPrimary"
-                                app:cardCornerRadius="@dimen/cardCornerRadius"
-                                app:cardMaxElevation="0dp">
-
-                                <android.widget.TextView
-                                    android:id="@+id/group_text_cepheus"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:paddingVertical="4dp"
-                                    android:text="@string/group"
-                                    android:textSize="@dimen/_12sdp"
-                                    android:textStyle="bold" />
-
-                            </com.google.android.material.card.MaterialCardView>
-
-                        </LinearLayout>
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:layout_width="@dimen/_115sdp"
-                    android:layout_height="@dimen/_138sdp"
-                    android:layout_margin="@dimen/_9sdp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/mh2lm" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/_9sdp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="LG G8X \nmh2lm\nRAM : 6GB\nSTORAGE : 128GB"
-                        android:textSize="@dimen/_13sdp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="bottom"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.card.MaterialCardView
-                            android:id="@+id/cv_guide_mh2lm"
-                            style="@style/Widget.Material3.CardView.Filled"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="2dp"
-                            android:layout_weight="1"
-                            android:adjustViewBounds="true"
-                            android:animateLayoutChanges="true"
-                            android:clickable="true"
-                            android:elevation="@dimen/cardElevation"
-                            android:gravity="center"
-                            android:padding="@dimen/parentMargin"
-                            android:stateListAnimator="@anim/state_list_anim"
-                            app:cardBackgroundColor="@color/colorOnPrimary"
-                            app:cardCornerRadius="@dimen/cardCornerRadius"
-                            app:cardMaxElevation="0dp">
-
-                            <android.widget.TextView
-                                android:id="@+id/guide_text_mh2lm"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:paddingVertical="4dp"
-                                android:text="@string/guide"
-                                android:textSize="@dimen/_12sdp"
-                                android:textStyle="bold" />
-                        </com.google.android.material.card.MaterialCardView>
-
-                        <com.google.android.material.card.MaterialCardView
-                            android:id="@+id/cv_group_mh2lm"
-                            style="@style/Widget.Material3.CardView.Filled"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="2dp"
-                            android:layout_weight="1"
-                            android:adjustViewBounds="true"
-                            android:animateLayoutChanges="true"
-                            android:clickable="true"
-                            android:elevation="@dimen/cardElevation"
-                            android:gravity="center"
-                            android:padding="@dimen/parentMargin"
-                            android:stateListAnimator="@anim/state_list_anim"
-                            app:cardBackgroundColor="@color/colorOnPrimary"
-                            app:cardCornerRadius="@dimen/cardCornerRadius"
-                            app:cardMaxElevation="0dp">
-
-                            <android.widget.TextView
-                                android:id="@+id/group_text_mh2lm"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:paddingVertical="4dp"
-                                android:text="@string/group"
-                                android:textSize="@dimen/_12sdp"
-                                android:textStyle="bold" />
-
-                        </com.google.android.material.card.MaterialCardView>
-
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
 
             </LinearLayout>
 

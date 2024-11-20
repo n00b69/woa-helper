@@ -16,50 +16,28 @@ package id.kuato.woahelper.util;
  *  * limitations under the License.
  *  */
 
-import android.app.ActivityManager;
-import android.content.Context;
-
 public class MemoryUtils {
-	private static String ERROR;
 
-	public static String extractNumberFromString(String source) {
-		StringBuilder result = new StringBuilder(100);
-		for (char ch : source.toCharArray()) {
-			if (ch >= '0' && ch <= '9') {
-				result.append(ch);
-			}
-		}
-		return result.toString();
-	}
+    private String floatForm(final double d) {
+        return String.format(java.util.Locale.US, "%.2f", d);
+    }
 
-	public String floatForm(double d) {
-		return String.format(java.util.Locale.US, "%.2f", d);
-	}
+    String bytesToHuman(final long size) {
+        final long Kb = 1024L;
+        final long Mb = Kb << 10;
+        final long Gb = Mb << 10;
+        final long Tb = Gb << 10;
+        final long Pb = Tb << 10;
+        final long Eb = Pb << 10;
 
-	public String bytesToHuman(long size) {
-		long Kb = 1024;
-		long Mb = Kb * 1024;
-		long Gb = Mb * 1024;
-		long Tb = Gb * 1024;
-		long Pb = Tb * 1024;
-		long Eb = Pb * 1024;
+        if (Kb > size) return floatForm(size);
+        if (Mb > size) return floatForm((double) size / Kb);
+        if (Gb > size) return floatForm((double) size / Mb);
+        if (Tb > size) return floatForm((double) size / Gb);
+        if (Pb > size) return floatForm((double) size / Tb);
+        if (Eb > size) return floatForm((double) size / Pb);
+        return floatForm((double) size / Eb);
 
-		if (size < Kb)
-			return floatForm(size);
-		if (size >= Kb && size < Mb)
-			return floatForm((double) size / Kb);
-		if (size >= Mb && size < Gb)
-			return floatForm((double) size / Mb);
-		if (size >= Gb && size < Tb)
-			return floatForm((double) size / Gb);
-		if (size >= Tb && size < Pb)
-			return floatForm((double) size / Tb);
-		if (size >= Pb && size < Eb)
-			return floatForm((double) size / Pb);
-		if (size >= Eb)
-			return floatForm((double) size / Eb);
-
-		return "0";
-	}
+    }
 
 }
