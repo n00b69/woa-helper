@@ -57,7 +57,7 @@
     <string name="mountfail">Een fout is opgetreden, \nWindows kon niet gemount worden.\nVraag om hulp in de Telegram chat.</string>
 	<string name="ntfs">Windows kon niet gemount worden. \nNTFS ondersteuning niet gevonden. \nInstalleer NTFS3G module?</string>
 	<string name="internet">Geen internetverbinding gevonden.\nMaak verbinding met internet en probeer het opnieuw.</string>
-	<string name="op7">Boot image is gepatcht en geinstalleerd.\nDe gepatchte boot.img is ook te vinden in /sdcard/dbkp/patched-boot.img.\nGebruik uw alert slider om te schakelen tussen Windows en Android.</string>
+	<string name="op7">Boot image is gepatcht en geinstalleerd.\nDe gepatchte boot.img is ook te vinden in /sdcard/patched-boot.img.\nGebruik uw alert slider om te schakelen tussen Windows en Android.</string>
     <string name="reboot">Herstart</string>
     <string name="cancel">Annuleren</string>
     <string name="mounted">Windows mounted</string>

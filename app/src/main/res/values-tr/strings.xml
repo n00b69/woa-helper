@@ -57,7 +57,7 @@
     <string name="mountfail">Bir şeyler ters gitti, \nWindows mount edilemedi.\nTelegram grubundan yardım isteyebilirsiniz</string>
 	<string name="ntfs">Windows could not be mounted. \nNTFS support not detected. \nInstall NTFS3G module?</string>
 	<string name="internet">No internet connection found.\nConnect to the internet and try again.</string>
-	<string name="op7">Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/dbkp/patched-boot.img.\nUse your alert slider to switch between Windows and Android.</string>
+	<string name="op7">Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/patched-boot.img.\nUse your alert slider to switch between Windows and Android.</string>
     <string name="reboot">Yeniden başlat</string>
     <string name="cancel">İptal et</string>
     <string name="mounted">Windows bağlandı</string>
