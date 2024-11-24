@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (Objects.equals(currentVersion, pref.getVersion(this))) {
-            String[] files = {"tabletmode.vbs", "guacamole.fd", "hotdog.fd", "dbkp8150.cfg", "dbkp.hotdog.bin", "busybox", "sta.exe", "sdd.exe", "sdd.conf", "Switch to Android.lnk", "usbhostmode.exe", "ARMSoftware.url", "TestedSoftware.url", "WorksOnWoa.url", "RotationShortcut.lnk", "display.exe", "RemoveEdge.bat", "autoflasher.lnk", "DefenderRemover.exe"};
+            String[] files = {"tabletmode.vbs", "guacamole.fd", "hotdog.fd", "dbkp8150.cfg", "dbkp.hotdog.bin", "busybox", "sta.exe", "sdd.exe", "sdd.conf", "Switch to Android.lnk", "usbhostmode.exe", "ARMSoftware.url", "TestedSoftware.url", "WorksOnWoa.url", "RotationShortcut.lnk", "display.exe", "RemoveEdge.bat", "DefenderRemover.exe"};
             int i = 0;
             while (!files[i].isEmpty()) {
                 if (ShellUtils.fastCmd(String.format("ls %1$s |grep %2$s", getFilesDir(), files[i])).isEmpty()) {
@@ -577,6 +577,12 @@ public class MainActivity extends AppCompatActivity {
                     this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
                     this.grouplink = "https://t.me/dumanthecat";
                     this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.redfin, null));
+                    this.n.cvDumpModem.setVisibility(View.GONE);
+                }
+                case "e3q" -> {
+                    this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
+                    this.grouplink = "https://t.me/biskupmuf";
+                    this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.e3q, null));
                     this.n.cvDumpModem.setVisibility(View.GONE);
                 }
                 default -> {
@@ -1207,94 +1213,6 @@ public class MainActivity extends AppCompatActivity {
             dialog.setCancelable(false);
             dialog.show();
         });
-
-//		 z.cvAutoflash.setOnClickListener(new View.OnClickListener() {
-//			 @Override
-//			 public void onClick(View v) {
-//				 ShowBlur();
-//				 noButton.setText(getString(R.string.no));
-//				 yesButton.setText(getString(R.string.yes));
-//				 dismissButton.setVisibility(View.GONE);
-//				 noButton.setVisibility(View.VISIBLE);
-//				 yesButton.setVisibility(View.VISIBLE);
-//				 messages.setText(getString(R.string.autoflash_question));
-//				 icons.setVisibility(View.VISIBLE);
-//				 icons.setImageDrawable(adrod2);
-//				 noButton.setOnClickListener(new View.OnClickListener() {
-//					 @Override
-//					 public void onClick(View v) {
-//						 HideBlur();
-//						 dialog.dismiss();
-//					 }
-//				 });
-//				 yesButton.setOnClickListener(new View.OnClickListener() {
-//					 @Override
-//					 public void onClick(View v) {
-//						 noButton.setVisibility(View.GONE);
-//						 yesButton.setVisibility(View.GONE);
-//						 dismissButton.setVisibility(View.GONE);
-//						 try {
-//							 mount();
-//							 String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + win);
-//							 ShellUtils.fastCmd("cp "+getFilesDir()+"/autoflasher.lnk /sdcard");
-//							 if (mnt_stat.isEmpty()) {
-//								 noButton.setVisibility(View.GONE);
-//								 yesButton.setText(getString(R.string.chat));
-//								 dismissButton.setText(getString(R.string.cancel));
-//								 yesButton.setVisibility(View.VISIBLE);
-//								 dismissButton.setVisibility(View.VISIBLE);
-//								 icons.setVisibility(View.GONE);
-//								 ShowBlur();
-//								 messages.setText(getString(R.string.mountfail));
-//								 dismissButton.setOnClickListener(new View.OnClickListener() {
-//									@Override
-//									public void onClick(View v) {
-//										HideBlur();
-//										icons.setVisibility(View.VISIBLE);
-//										dialog.dismiss();
-//									}
-//								});
-//								yesButton.setOnClickListener(new View.OnClickListener() {
-//									@Override
-//									public void onClick(View v) {
-//										Intent i = new Intent(Intent.ACTION_VIEW);
-//										i.setData(Uri.parse("https://t.me/woahelperchat"));
-//										startActivity(i);
-//									}
-//								});
-//								dialog.setCancelable(false);
-//								dialog.show();
-//							} else {
-//								ShellUtils.fastCmd("cp /sdcard/autoflasher.lnk \'"+winpath+"/ProgramData/Microsoft/Windows/Start Menu/Programs/Startup\'");
-//								messages.setText(getString(R.string.done));
-//								dismissButton.setText(getString(R.string.dismiss));
-//								dismissButton.setVisibility(View.VISIBLE);
-//								dismissButton.setOnClickListener(new View.OnClickListener() {
-//									@Override
-//									public void onClick(View v) {
-//										HideBlur();
-//										dialog.dismiss();
-//									}
-//								});
-//							}
-//							dismissButton.setText(getString(R.string.dismiss));
-//							dismissButton.setVisibility(View.VISIBLE);
-//							dismissButton.setOnClickListener(new View.OnClickListener() {
-//								@Override
-//								public void onClick(View v) {
-//									HideBlur();
-//									dialog.dismiss();
-//								}
-//							});
-//						} catch (Exception error) {
-//							error.printStackTrace();
-//						}
-//					}
-//				});
-//				dialog.setCancelable(false);
-//				dialog.show();
-//			}
-//		});
 
         this.z.cvSetup.setOnClickListener(v -> {
             this.ShowBlur();
@@ -2262,7 +2180,7 @@ public class MainActivity extends AppCompatActivity {
         yesButton.setVisibility(View.GONE);
         noButton.setVisibility(View.GONE);
         dismissButton.setVisibility(View.GONE);
-        String[] supported = {"a52sxq", "alpha_lao_com", "alphalm_lao_com", "alphaplus_lao_com", "alioth", "alphalm", "alphaplus", "andromeda", "betalm", "beta_lao_com", "betaplus_lao_com", "betalm_lao_com", "beryllium", "bhima", "cepheus", "cheeseburger", "curtana2", "chiron", "curtana", "curtana_india", "joyeuse", "curtana_cn", "curtanacn", "cmi", "davinci", "dumpling", "dipper", "durandal", "durandal_india", "enchilada", "equuleus", "excalibur", "excalibur_india", "flashlmdd", "flash_lao_com", "flashlm", "flashlmdd_lao_com", "fajita", "houji", "joan", "judyln", "judyp", "judypn", "guacamole", "guacamoleb", "gram", "hotdog", "hotdogb", "hotdogg", "lisa", "marble", "meizu20pro", "husky", "redfin", "mh2lm", "mh2plus_lao_com", "mh2lm_lao_com", "mh2lm5g", "mh2lm5g_lao_com", "miatoll", "nabu", "pipa", "OnePlus6", "OnePlus6T", "OnePlus7", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7T", "OnePlus7TPro", "OnePlus7TPro4G", "OnePlus7TPro5G", "OP7ProNRSpr", "OnePlus7TProNR", "perseus", "polaris", "Pong", "pong", "q2q", "raphael", "raphaelin", "raphaels", "RMX2170", "RMX2061", "sagit", "surya", "vayu", "venus", "winner", "winnerx", "xpeng", "G973F", "SM-G973F", "beyond1lte", "beyond1qlte", "G973U", "G973U1", "SM-G973U", "SM-G973U1", "G9730", "SM-G9730", "G973N", "SM-G973N", "G973X", "SM-G973X", "G973C", "SM-G973C", "SCV41", "SM-SC41", "beyond1"};
+        String[] supported = {"a52sxq", "alpha_lao_com", "alphalm_lao_com", "alphaplus_lao_com", "alioth", "alphalm", "alphaplus", "andromeda", "betalm", "beta_lao_com", "betaplus_lao_com", "betalm_lao_com", "beryllium", "bhima", "cepheus", "cheeseburger", "curtana2", "chiron", "curtana", "curtana_india", "joyeuse", "curtana_cn", "curtanacn", "cmi", "davinci", "dumpling", "dipper", "durandal", "durandal_india", "enchilada", "equuleus", "excalibur", "excalibur_india", "flashlmdd", "flash_lao_com", "flashlm", "flashlmdd_lao_com", "fajita", "houji", "joan", "judyln", "judyp", "judypn", "guacamole", "guacamoleb", "gram", "hotdog", "hotdogb", "hotdogg", "lisa", "marble", "meizu20pro", "husky", "redfin", "mh2lm", "mh2plus_lao_com", "mh2lm_lao_com", "mh2lm5g", "mh2lm5g_lao_com", "miatoll", "nabu", "pipa", "OnePlus6", "OnePlus6T", "OnePlus7", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7T", "OnePlus7TPro", "OnePlus7TPro4G", "OnePlus7TPro5G", "OP7ProNRSpr", "OnePlus7TProNR", "perseus", "polaris", "Pong", "pong", "q2q", "raphael", "raphaelin", "raphaels", "RMX2170", "RMX2061", "sagit", "surya", "vayu", "venus", "winner", "winnerx", "xpeng", "G973F", "SM-G973F", "beyond1lte", "beyond1qlte", "G973U", "G973U1", "SM-G973U", "SM-G973U1", "G9730", "SM-G9730", "G973N", "SM-G973N", "G973X", "SM-G973X", "G973C", "SM-G973C", "SCV41", "SM-SC41", "beyond1", "e3q"};
         this.device = ShellUtils.fastCmd("getprop ro.product.device ");
         this.model = ShellUtils.fastCmd("getprop ro.product.model");
         if (!Arrays.asList(supported).contains(this.device)) {
