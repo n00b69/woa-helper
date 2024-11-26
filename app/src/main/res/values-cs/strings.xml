@@ -36,8 +36,8 @@
     <string name="defender_subtitle">Přidá skript do C:\\Toolbox, který vám umožní odebrat Microsoft Edge / Windows Defender</string>
     <string name="script_subtitle">Přidává sortiment skriptů a vylepšení do C:\\Toolbox</string>
     <string name="setup_subtitle">Přidá instalátory pro několik frameworku do C:\\Toolbox</string>
-    <string name="dbkp_subtitle">Patches the kernel for seamless dualbooting</string>
-	<string name="tablet_subtitle">Adds a script to C:\\Toolbox which allows you to toggle tablet mode</string>
+    <string name="dbkp_subtitle">Provádí úpravu kernelu pro bezproblémové dualbootování</string>
+	<string name="tablet_subtitle">Přidává skript do C:\\Toolbox, který umožňuje přepínat tabletový režim</string>
 
     <string name="backup_boot_question">Zálohovat aktuální spouštěcí obraz Androidu?</string>
     <string name="mount_question">Připojit Windows na %s?</string>
@@ -53,8 +53,8 @@
     <string name="atlasos_question">Stáhnout a přesunout AtlasOS nebo ReviOS playbook do C:\\Toolbox?</string>
     <string name="defender_question">Zkopírovat skript pro odstranění Microsoft Edge / Defenderu do C:\\Toolbox?</string>
     <string name="setup_question">Stáhnout a přesunout C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, a XNA framework do C:\\Toolbox?\n(může to chvíli trvat)</string>
-    <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
-	<string name="tablet_question">Copy tablet mode script to C:\\Toolbox?</string>
+    <string name="dbkp_question">Přidat kód pro dualboot do boot.img? \n!!!NEKLIKEJTE NA ANO, POKUD VAŠE ZAŘÍZENÍ NENÍ %s!!!</string>
+	<string name="tablet_question">Zkopírovat skript pro tabletový režim do C:\Toolbox?</string>
 
     <string name="wrong">Něco se pokazilo</string>
     <string name="mountfail">Něco se pokazilo, \nWindows se nepodařilo připojit.\nPožádejte o pomoc v Telegram chatu.</string>
