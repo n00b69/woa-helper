@@ -13,6 +13,7 @@ public enum pref {
     public static final String backup_quick_A = "woa backup when quickboot android";
     public static final String backup_date = "woa last backup date";
     public static final String agreed = "woa unsupported";
+	public static final String agreedntfs = "ntfs unsupported";
     public static final String autobackup = "woa autobackup";
     public static final String autobackup_A = "woa autobackup android";
     public static final String confirmation = "woa quickboot confirmation";
@@ -96,6 +97,16 @@ public enum pref {
 
     public static boolean getAGREE(final Context context) {
         return pref.getSharedPreference(context).getBoolean(pref.agreed, false);
+    }
+	
+	public static void setAGREENTFS(final Context context, final boolean value) {
+        final SharedPreferences.Editor editor = pref.getSharedPreference(context).edit();
+        editor.putBoolean(pref.agreedntfs, value);
+        editor.apply();
+    }
+
+    public static boolean getAGREENTFS (final Context context) {
+        return pref.getSharedPreference(context).getBoolean(pref.agreedntfs, false);
     }
 
     public static void setBACKUP(final Context context, final boolean value) {

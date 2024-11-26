@@ -58,7 +58,7 @@
 
     <string name="wrong">Coś poszło nie tak</string>
     <string name="mountfail">Coś poszło nie tak, \nWindows nie mogł zostać zamontowany.\nPoproś o pomoc w czacie Telegram.</string>
-	<string name="ntfs">Windows could not be mounted. \nNTFS support not detected. \nInstall NTFS3G module?</string>
+	<string name="ntfs">NTFS support not detected. \nInstall NTFS3G module?</string>
 	<string name="internet">No internet connection found.\nConnect to the internet and try again.</string>
 	<string name="partition">No Windows partition detected.</string>
 	<string name="internalstorage">\nFiles downloaded in internal storage</string>

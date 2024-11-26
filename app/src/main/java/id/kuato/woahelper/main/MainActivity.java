@@ -186,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
         this.checkuefi();
 		this.checkRoot();
 		this.checkdbkpmodel();
+		this.checkntfs();
         this.win = ShellUtils.fastCmd("realpath /dev/block/by-name/win");
         if (this.win.isEmpty()) this.win = ShellUtils.fastCmd("realpath /dev/block/by-name/mindows");
         this.winpath = (pref.getMountLocation(this) ? "/mnt/Windows" : "/mnt/sdcard/Windows");
@@ -1290,7 +1291,7 @@ public class MainActivity extends AppCompatActivity {
                     bar.setProgress((int) (bar.getMax() * 0.75), true);
                     ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/PhysX-9.13.0604-SystemSoftware-Legacy.msi -O /sdcard/PhysX-9.13.0604-SystemSoftware-Legacy.msi");
                     bar.setProgress((int) (bar.getMax() * 0.8), true);
-                    ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/PhysX-9.19.0218-SystemSoftware.exe -O /sdcard/PhysX-9.19.0218-SystemSoftware.exe");
+                    ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/PhysX_9.23.1019_SystemSoftware.exe -O /sdcard/PhysX_9.23.1019_SystemSoftware.exe");
                     bar.setProgress((int) (bar.getMax() * 0.85), true);
                     ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/xnafx40_redist.msi -O /sdcard/xnafx40_redist.msi");
                     bar.setProgress((int) (bar.getMax() * 0.9), true);
@@ -2343,43 +2344,80 @@ public class MainActivity extends AppCompatActivity {
             this.x.cvQuickBoot.setEnabled(true); 
         }
     }
-	
-//    public void checkntfs() {
-//		this.findntfs = ShellUtils.fastCmd(this.getString(R.string.ntfsChk));
-//		if (!findntfs.isEmpty()) {
-//			#### DO NOTHING I GUESS
-//		} else {
-//			dialog.show();
-//			messages.setText(getString(R.string.ntfs));
-//			yesButton.setText(getString(R.string.yes));
-//			dismissButton.setText(getString(R.string.nah));
-//			noButton.setText(getString(R.string.later));
-//			yesButton.setVisibility(View.VISIBLE);
-//			noButton.setVisibility(View.VISIBLE);
-//			dismissButton.setVisibility(View.VISIBLE);
-//			yesButton.setOnClickListener(new View.OnClickListener() {
-//				@Override
-//				public void onClick(View v) {
-//					Intent i = new Intent(Intent.ACTION_VIEW);
-//					#### INSTALL NTFS3G MAGISK MODULE HERE
-//                    dialog.dismiss();
-//                    pref.setAGREE(MainActivity.this, true);
-//				}
-//            });
-//            noButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                    dialog.dismiss();
-//                }
-//            });
-//            dismissButton.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    dialog.dismiss();
-//                    pref.setAGREE(MainActivity.this, true);
-//                }
-//            });
-//        }
+		
+	public void checkntfs() {
+		if (!pref.getAGREENTFS(this)) {
+		String ntfsmodule = ShellUtils.fastCmd("su -mm -c find /data/adb/modules | grep ntfs3g");
+		if (ntfsmodule.isEmpty()) {
+			String findntfs = ShellUtils.fastCmd(this.getString(R.string.ntfsChk));
+			if (findntfs.isEmpty()) {
+				final Dialog dialog = new Dialog(this);
+				dialog.setContentView(R.layout.dialog);
+        		dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        		MaterialButton yesButton = dialog.findViewById(R.id.yes);
+        		MaterialButton noButton = dialog.findViewById(R.id.no);
+        		MaterialButton dismissButton = dialog.findViewById(R.id.dismiss);
+        		TextView messages = dialog.findViewById(R.id.messages);
+            	yesButton.setVisibility(View.VISIBLE);
+            	noButton.setVisibility(View.VISIBLE);
+            	dismissButton.setVisibility(View.VISIBLE);
+				messages.setText(getString(R.string.ntfs));
+				yesButton.setText(getString(R.string.yes));
+            	dismissButton.setText(getString(R.string.nah));
+            	noButton.setText(getString(R.string.later));
+				dialog.show();
+            	dialog.setCancelable(false);
+				noButton.setOnClickListener(new View.OnClickListener() {
+            		@Override
+            		public void onClick(View v) {
+                	    dialog.dismiss();
+                	}
+            		});
+				dismissButton.setOnClickListener(new View.OnClickListener() {
+                	@Override
+                	public void onClick(View v) {
+                 	   dialog.dismiss();
+                 	   pref.setAGREENTFS(MainActivity.this, true);
+                	}
+            	});
+           		yesButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Intent i = new Intent(Intent.ACTION_VIEW);
+                	    ShellUtils.fastCmd("su -mm -c mkdir /data/adb/modules/ntfs3g || true");
+						ShellUtils.fastCmd("su -mm -c unzip " + MainActivity.this.getFilesDir() + "/ntfs3g.zip -d /data/adb/modules/ntfs3g");
+						ShellUtils.fastCmd("chmod 777 /data/adb/modules/ntfs3g");
+						pref.setAGREENTFS(MainActivity.this, true);
+						messages.setText(MainActivity.this.getString(R.string.done));
+                    	yesButton.setVisibility(View.VISIBLE);
+                    	noButton.setVisibility(View.GONE);
+                    	dismissButton.setVisibility(View.VISIBLE);
+						yesButton.setText(getString(R.string.reboot));
+            			dismissButton.setText(getString(R.string.later));
+						dismissButton.setOnClickListener(new View.OnClickListener() {
+                			@Override
+                			public void onClick(View v) {
+                    			dialog.dismiss();
+                			}
+            			});
+						yesButton.setOnClickListener(new View.OnClickListener() {
+                			@Override
+                			public void onClick(View v) {
+                    			ShellUtils.fastCmd("su -c svc power reboot");
+                        		messages.setText(getString(R.string.wrong));
+                        		dismissButton.setVisibility(View.VISIBLE);
+                			}
+            			});
+					}
+            	});
+			}
+		} else {
+            checkwin();
+        }
+        } else {
+            checkwin();
+        }
+	}
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {

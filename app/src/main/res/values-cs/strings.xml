@@ -58,7 +58,7 @@
 
     <string name="wrong">Něco se pokazilo</string>
     <string name="mountfail">Něco se pokazilo, \nWindows se nepodařilo připojit.\nPožádejte o pomoc v Telegram chatu.</string>
-	<string name="ntfs">Windows could not be mounted. \nNTFS support not detected. \nInstall NTFS3G module?</string>
+	<string name="ntfs">NTFS support not detected. \nInstall NTFS3G module?</string>
 	<string name="internet">No internet connection found.\nConnect to the internet and try again.</string>
 	<string name="partition">No Windows partition detected.</string>
 	<string name="internalstorage">\nFiles downloaded in internal storage</string>

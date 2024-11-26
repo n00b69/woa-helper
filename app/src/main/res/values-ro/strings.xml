@@ -58,7 +58,7 @@
 
     <string name="wrong">Ceva a mers prost</string>
     <string name="mountfail">Ceva a mers prost, \nWindows nu poate fi montat.\nCere ajutor în grupul de Telegram.</string>
-	<string name="ntfs">Windows could not be mounted. \nNTFS support not detected. \nInstall NTFS3G module?</string>
+	<string name="ntfs">NTFS support not detected. \nInstall NTFS3G module?</string>
 	<string name="internet">No internet connection found.\nConnect to the internet and try again.</string>
 	<string name="partition">No Windows partition detected.</string>
 	<string name="internalstorage">\nFiles downloaded in internal storage</string>

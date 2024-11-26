@@ -58,7 +58,7 @@
 
     <string name="wrong">Etwas ist schief gelaufen</string>
     <string name="mountfail">Etwas ist schief gelaufen, \nWindows konnte nicht gemountet werden.\nFragen Sie nach Hilfe im Telegram-Chat.</string>
-	<string name="ntfs">Windows konnte nicht gemountet werden. \nNTFS Unterstützung nicht gefunden. \nInstallier NTFS3G Module?</string>
+	<string name="ntfs">NTFS Unterstützung nicht gefunden. \nInstallier NTFS3G Module?</string>
 	<string name="internet">Keine Internetverbindung gefunden.\nVerbinden Sie mit das Internet und versuchen Sie es erneut.</string>
     <string name="partition">Keine Windows Partition gefunden.</string>
 	<string name="internalstorage">\nDateien würden im Internen Speicher heruntergeladen.</string>

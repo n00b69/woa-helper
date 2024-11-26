@@ -58,7 +58,7 @@
 
     <string name="wrong">Algo deu errado</string>
     <string name="mountfail">Algo deu errado, \nWindows não pôde ser montado.\nObtenha ajuda no grupo do Telegram.</string>
-	<string name="ntfs">Windows could not be mounted. \nNTFS support not detected. \nInstall NTFS3G module?</string>
+	<string name="ntfs">NTFS support not detected. \nInstall NTFS3G module?</string>
 	<string name="internet">No internet connection found.\nConnect to the internet and try again.</string>
 	<string name="partition">No Windows partition detected.</string>
 	<string name="internalstorage">\nFiles downloaded in internal storage</string>
