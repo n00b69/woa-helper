@@ -53,7 +53,7 @@
     <string name="atlasos_question">Download en kopieer AtlasOS of ReviOS playbook naar C:\\Toolbox?</string>
     <string name="defender_question">Kopieer Edge / Defender verwijder scripts naar C:\\Toolbox?</string>
     <string name="setup_question">Download en kopieer C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, en XNA framework installers naar C:\\Toolbox?\n(dit kan enkele momenten duren)</string>
-    <string name="dbkp_question">Patch uw huidige kernel en flash de nieuwe boot image?\n!!!DRUK NIET OP JA ALS UW TOESTEL NIET DE ONEPLUS 7(T) PRO 4G OF XIAOMI MI 9 IS!!!</string>
+    <string name="dbkp_question">Patch uw huidige kernel en flash de nieuwe boot image?\n!!!DRUK NIET OP JA ALS UW TOESTEL NIET DE %s IS!!!</string>
 	<string name="tablet_question">Kopieer tablet modus script naar C:\\Toolbox?</string>
 
     <string name="wrong">Een fout is opgetreden</string>

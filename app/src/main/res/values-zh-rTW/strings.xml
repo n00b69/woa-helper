@@ -53,7 +53,7 @@
     <string name="atlasos_question">是否要在 C:\\Toolbox 中下載 AtlasOS / ReviOS playbook?</string>
     <string name="defender_question">是否在 C:\\Toolbox 中安裝 Edge / Defender 卸載器?</string>
     <string name="setup_question">Download and move C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, and XNA framework installers to C:\\Toolbox?\n(this may take some time)</string>
-    <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS ONEPLUS 7(T) PRO 4G OR XIAOMI MI 9!!!</string>
+    <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
 	<string name="tablet_question">Copy tablet mode script to C:\\Toolbox?</string>
 
     <string name="wrong">錯誤</string>

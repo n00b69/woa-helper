@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
     String finduefi;
     String device;
     String model;
+	String dbkpmodel;
     String win;
     boolean dual;
     String grouplink = "https://t.me/woahelperchat";
@@ -184,6 +185,7 @@ public class MainActivity extends AppCompatActivity {
         this.checkdevice();
         this.checkuefi();
 		this.checkRoot();
+		this.checkdbkpmodel();
         this.win = ShellUtils.fastCmd("realpath /dev/block/by-name/win");
         if (this.win.isEmpty()) this.win = ShellUtils.fastCmd("realpath /dev/block/by-name/mindows");
         this.winpath = (pref.getMountLocation(this) ? "/mnt/Windows" : "/mnt/sdcard/Windows");
@@ -1776,7 +1778,7 @@ public class MainActivity extends AppCompatActivity {
             dismissButton.setVisibility(View.GONE);
             yesButton.setText(this.getString(R.string.yes));
             noButton.setText(this.getString(R.string.no));
-            messages.setText(this.getString(R.string.dbkp_question));
+            messages.setText(this.getString(R.string.dbkp_question, this.dbkpmodel));
             icons.setVisibility(View.VISIBLE);
             icons.setImageDrawable(uefi);
             if (!isNetworkConnected(this)) {
@@ -2271,44 +2273,18 @@ public class MainActivity extends AppCompatActivity {
             if (Objects.equals(panel, "2")) panel = "f1p2_2";
         }
     }
-
-//    public void checkntfs() {
-//		this.findntfs = ShellUtils.fastCmd(this.getString(R.string.ntfsChk));
-//		if (!findntfs.isEmpty()) {
-//			#### DO NOTHING I GUESS
-//		} else {
-//			dialog.show();
-//			messages.setText(getString(R.string.ntfs));
-//			yesButton.setText(getString(R.string.yes));
-//			dismissButton.setText(getString(R.string.nah));
-//			noButton.setText(getString(R.string.later));
-//			yesButton.setVisibility(View.VISIBLE);
-//			noButton.setVisibility(View.VISIBLE);
-//			dismissButton.setVisibility(View.VISIBLE);
-//			yesButton.setOnClickListener(new View.OnClickListener() {
-//				@Override
-//				public void onClick(View v) {
-//					Intent i = new Intent(Intent.ACTION_VIEW);
-//					#### INSTALL NTFS3G MAGISK MODULE HERE
-//                    dialog.dismiss();
-//                    pref.setAGREE(MainActivity.this, true);
-//				}
-//            });
-//            noButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                    dialog.dismiss();
-//                }
-//            });
-//            dismissButton.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    dialog.dismiss();
-//                    pref.setAGREE(MainActivity.this, true);
-//                }
-//            });
-//        }
 	
+	public void checkdbkpmodel() {
+		String dbkpmodel = ShellUtils.fastCmd("getprop ro.product.device");
+			if ("guacamole".equals(dbkpmodel) || "OnePlus7Pro".equals(dbkpmodel) || "OnePlus7Pro4G".equals(dbkpmodel)) {
+                this.dbkpmodel = "ONEPLUS 7 PRO";
+        	} else if ("hotdog".equals(dbkpmodel) || "OnePlus7TPro".equals(dbkpmodel) || "OnePlus7TPro4G".equals(dbkpmodel)) {
+                this.dbkpmodel = "ONEPLUS 7T PRO";
+        	} else if ("cepheus".equals(dbkpmodel)) {
+				this.dbkpmodel = "XIAOMI MI 9";
+			}
+		}
+
 	public void checkuefi() {
         ShellUtils.fastCmd("su -c mkdir /sdcard/UEFI");
         this.finduefi = "\""+ShellUtils.fastCmd(this.getString(R.string.uefiChk))+"\"";
@@ -2367,6 +2343,43 @@ public class MainActivity extends AppCompatActivity {
             this.x.cvQuickBoot.setEnabled(true); 
         }
     }
+	
+//    public void checkntfs() {
+//		this.findntfs = ShellUtils.fastCmd(this.getString(R.string.ntfsChk));
+//		if (!findntfs.isEmpty()) {
+//			#### DO NOTHING I GUESS
+//		} else {
+//			dialog.show();
+//			messages.setText(getString(R.string.ntfs));
+//			yesButton.setText(getString(R.string.yes));
+//			dismissButton.setText(getString(R.string.nah));
+//			noButton.setText(getString(R.string.later));
+//			yesButton.setVisibility(View.VISIBLE);
+//			noButton.setVisibility(View.VISIBLE);
+//			dismissButton.setVisibility(View.VISIBLE);
+//			yesButton.setOnClickListener(new View.OnClickListener() {
+//				@Override
+//				public void onClick(View v) {
+//					Intent i = new Intent(Intent.ACTION_VIEW);
+//					#### INSTALL NTFS3G MAGISK MODULE HERE
+//                    dialog.dismiss();
+//                    pref.setAGREE(MainActivity.this, true);
+//				}
+//            });
+//            noButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                    dialog.dismiss();
+//                }
+//            });
+//            dismissButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    dialog.dismiss();
+//                    pref.setAGREE(MainActivity.this, true);
+//                }
+//            });
+//        }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {

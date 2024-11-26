@@ -53,7 +53,7 @@
     <string name="atlasos_question">AtlasOS 또는 ReviOS 플레이북을 다운로드 하고 C:\\Toolbox로 이동하시겠습니까?</string>
     <string name="defender_question">Edge / Defender 제거 스크립트를 C:\\Toolbox로 복사하시겠습니까?</string>
     <string name="setup_question">Download and move C++ Redistributables and DirectX, OpenGL, OpenAL, PhysX, XNAF installers to C:\\Toolbox?\n(this may take some time)</string>
-    <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS ONEPLUS 7(T) PRO 4G OR XIAOMI MI 9!!!</string>
+    <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
 	<string name="tablet_question">Copy tablet mode script to C:\\Toolbox?</string>
 
     <string name="wrong">문제가 발생했습니다</string>

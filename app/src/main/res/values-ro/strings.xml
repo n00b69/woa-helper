@@ -53,7 +53,7 @@
     <string name="atlasos_question">Descarcă și mută AtlasOS sau ReviOS playbook în C:\\Toolbox?</string>
     <string name="defender_question">Copiază Edge / Defender remover script în C:\\Toolbox?</string>
     <string name="setup_question">Descarcă și mută fișierele de instalare pentru C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, și XNA framework în C:\\Toolbox?\n(poate să ea ceva timp)</string>
-    <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS ONEPLUS 7(T) PRO 4G OR XIAOMI MI 9!!!</string>
+    <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
 	<string name="tablet_question">Copy tablet mode script to C:\\Toolbox?</string>
 
     <string name="wrong">Ceva a mers prost</string>

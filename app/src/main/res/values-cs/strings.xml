@@ -53,7 +53,7 @@
     <string name="atlasos_question">Stáhnout a přesunout AtlasOS nebo ReviOS playbook do C:\\Toolbox?</string>
     <string name="defender_question">Zkopírovat skript pro odstranění Microsoft Edge / Defenderu do C:\\Toolbox?</string>
     <string name="setup_question">Stáhnout a přesunout C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, a XNA framework do C:\\Toolbox?\n(může to chvíli trvat)</string>
-    <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS ONEPLUS 7(T) PRO 4G OR XIAOMI MI 9!!!</string>
+    <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
 	<string name="tablet_question">Copy tablet mode script to C:\\Toolbox?</string>
 
     <string name="wrong">Něco se pokazilo</string>
