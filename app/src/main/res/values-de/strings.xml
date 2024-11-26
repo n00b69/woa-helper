@@ -17,6 +17,7 @@
     <string name="script_title">SCRIPT TOOLBOX</string>
     <string name="setup_title">FRAMEWORK INSTALLERS</string>
     <string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
+	<string name="tablet_title">TABLET MODE SKRIPT</string>
 
     <string name="backup_boot_subtitle">Boot-Image Backup erstellen in Windows und/oder Android</string>
     <string name="mnt_subtitle">Windows-Partition mounten um deren Inhalt anzuzeigen und zu ändern</string>
@@ -36,7 +37,8 @@
     <string name="script_subtitle">Fügt in C:\\Toolbox mehrere Skript und Tweaks hinzu</string>
     <string name="setup_subtitle">Fügt in C:\\Toolbox mehrere Framework Installers hinzu</string>
     <string name="dbkp_subtitle">Patcht den kernel um nahtlos dualbooten zu können</string>
-
+	<string name="tablet_subtitle">Fügt in C:\\Toolbox einen Skript hinzu womit Sie den Tablet-Modus umschalten können</string>
+	
     <string name="backup_boot_question">Backup vom aktuellen Boot-Image erstellen?</string>
     <string name="mount_question">Windows in %s mounten?</string>
     <string name="unmount_question">Unmount Windows?</string>
@@ -51,14 +53,18 @@
     <string name="atlasos_question">AtlasOS oder ReviOS Playbook herunterladen und nach C:\\Toolbox kopieren?</string>
     <string name="defender_question">Edge / Defender entferner Skript nach C:\\Toolbox kopieren?</string>
     <string name="setup_question">C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX und XNA framework Installers herunterladen und nach C:\\Toolbox kopieren?\n(es kann eine weile dauern)</string>
-    <string name="dbkp_question">Kernel patchen und das neue Boot Image flashen?\n!!!DRÜCKE NICHT AUF JA WENN DU KEIN ONEPLUS 7(T) PRO 4G HAST!!!</string>
+    <string name="dbkp_question">Kernel patchen und das neue Boot Image flashen?\n!!!DRÜCKE NICHT AUF JA WENN DU KEIN ONEPLUS 7(T) PRO 4G ODER XIAOMI MI 9 HAST!!!</string>
+	<string name="tablet_question">Tablet-Modus Skript nach C:\\Toolbox kopieren?</string>
 
     <string name="wrong">Etwas ist schief gelaufen</string>
     <string name="mountfail">Etwas ist schief gelaufen, \nWindows konnte nicht gemountet werden.\nFragen Sie nach Hilfe im Telegram-Chat.</string>
 	<string name="ntfs">Windows konnte nicht gemountet werden. \nNTFS Unterstützung nicht gefunden. \nInstallier NTFS3G Module?</string>
 	<string name="internet">Keine Internetverbindung gefunden.\nVerbinden Sie mit das Internet und versuchen Sie es erneut.</string>
+    <string name="partition">Keine Windows Partition gefunden.</string>
+	<string name="internalstorage">\nDateien würden im Internen Speicher heruntergeladen.</string>
 	<string name="op7">Boot Image würde gepatcht und geflasht.\nDas gepatchte Image finden Sie auch unter /sdcard/patched-boot.img.\nVerwenden Sie Ihren Alert Slider, um zwischen Windows und Android zu wechseln.</string>
-    <string name="reboot">Neustart</string>
+	<string name="cepheus">Boot Image würde gepatcht und geflasht.\nDas gepatchte Image finden Sie auch unter /sdcard/patched-boot.img.\nVerwenden Sie Ihren Assistant Knopf, um zwischen Windows und Android zu wechseln.</string>
+	<string name="reboot">Neustart</string>
     <string name="cancel">Annulieren</string>
     <string name="mounted">Windows mounted</string>
     <string name="unmounted">Windows unmounted</string>

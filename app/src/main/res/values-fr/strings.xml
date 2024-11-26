@@ -17,6 +17,7 @@
     <string name="script_title">SCRIPT TOOLBOX</string>
     <string name="setup_title">FRAMEWORK INSTALLERS</string>
     <string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
+	<string name="tablet_title">TABLET MODE SCRIPT</string>
 
     <string name="backup_boot_subtitle">Sauvegarde de l\’image de démarrage vers Android et/ou Windows</string>
     <string name="mnt_subtitle">Activez l\’option "montage de la partition Windows" pour afficher ou modifier le contenu de la partition.</string>
@@ -36,6 +37,7 @@
     <string name="script_subtitle">Adds an assortment of scripts and tweaks to C:\\Toolbox</string>
     <string name="setup_subtitle">Adds installers for several frameworks into C:\\Toolbox</string>
     <string name="dbkp_subtitle">Patches the kernel for seamless dualbooting</string>
+	<string name="tablet_subtitle">Adds a script to C:\\Toolbox which allows you to toggle tablet mode</string>
 
     <string name="backup_boot_question">Sauvegarder l\’image de démarrage d\'Android?</string>
     <string name="mount_question">Monter Windows sur %s?</string>
@@ -51,13 +53,17 @@
     <string name="atlasos_question">Download and move AtlasOS or ReviOS playbook to C:\\Toolbox?</string>
     <string name="defender_question">Copy Edge / Defender remover scripts to C:\\Toolbox?</string>
     <string name="setup_question">Download and move C++ Redistributables and DirectX, OpenGL, OpenAL, PhysX, XNAF installers to C:\\Toolbox?\n(this may take some time)</string>
-    <string name="dbkp_question">Patch and flash your current kernel?n\!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS ONEPLUS 7(T) PRO 4G!!!</string>
+    <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS ONEPLUS 7(T) PRO 4G OR XIAOMI MI 9!!!</string>
+	<string name="tablet_question">Copy tablet mode script to C:\\Toolbox?</string>
 
     <string name="wrong">Quelque chose n\’a pas fonctionné</string>
     <string name="mountfail">Quelque chose n\’a pas fonctionné, \nWindows n\'a pas pu être monté.\nDemander de l\'aide dans le Telegram.</string>
 	<string name="ntfs">Windows could not be mounted. \nNTFS support not detected. \nInstall NTFS3G module?</string>
 	<string name="internet">No internet connection found.\nConnect to the internet and try again.</string>
+	<string name="partition">No Windows partition detected.</string>
+	<string name="internalstorage">\nFiles downloaded in internal storage</string>
 	<string name="op7">Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/patched-boot.img.\nUse your alert slider to switch between Windows and Android.</string>
+	<string name="cepheus">Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/patched-boot.img.\nUse your assistant button to switch between Windows and Android.</string>
     <string name="reboot">Redémarrage</string>
     <string name="cancel">Annulez</string>
     <string name="mounted">Windows est monté</string>

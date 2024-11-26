@@ -17,6 +17,7 @@
     <string name="script_title">СКРИПТ TOOLBOX</string>
     <string name="setup_title">УСТАНОВЩИКИ ФРЕЙМВОРКОВ</string>
     <string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
+	<string name="tablet_title">TABLET MODE SCRIPT</string>
 
     <string name="backup_boot_subtitle">Сохранить бэкап boot в Android и/или Windows</string>
     <string name="mnt_subtitle">Вы можете смонтировать раздел Windows для просмотра и изменения содержимого</string>
@@ -36,6 +37,7 @@
     <string name="script_subtitle">Добавляет набор скриптов и настроек в C:\\Toolbox</string>
     <string name="setup_subtitle">Добавляет установщики для нескольких фреймворков в C:\\Toolbox</string>
     <string name="dbkp_subtitle">Patches the kernel for seamless dualbooting</string>
+	<string name="tablet_subtitle">Adds a script to C:\\Toolbox which allows you to toggle tablet mode</string>
 
     <string name="backup_boot_question">Вы хотите сохранить текущий образ boot?</string>
     <string name="mount_question">Смонтировать Windows в %s?</string>
@@ -51,13 +53,17 @@
     <string name="atlasos_question">Загрузить и переместить AtlasOS или ReviOS playbook в C:\\Toolbox?</string>
     <string name="defender_question">Скопировать скрипт для удаления Edge / Defender в C:\\Toolbox?</string>
     <string name="setup_question">Скачать и переместить установщики C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, и XNA в C:\\Toolbox?\n(это может занять немного времени)</string>
-    <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS ONEPLUS 7(T) PRO 4G!!!</string>
+    <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS ONEPLUS 7(T) PRO 4G OR XIAOMI MI 9!!!</string>
+	<string name="tablet_question">Copy tablet mode script to C:\\Toolbox?</string>
 
     <string name="wrong">Что-то пошло не так</string>
     <string name="mountfail">Что-то пошло не так, \nРаздел Windows не может быть смонтирован.\nОбратитесь за помощью в чат Telegram.</string>
 	<string name="ntfs">Windows could not be mounted. \nNTFS support not detected. \nInstall NTFS3G module?</string>
 	<string name="internet">No internet connection found.\nConnect to the internet and try again.</string>
+	<string name="partition">No Windows partition detected.</string>
+	<string name="internalstorage">\nFiles downloaded in internal storage</string>
 	<string name="op7">Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/patched-boot.img.\nUse your alert slider to switch between Windows and Android.</string>
+	<string name="cepheus">Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/patched-boot.img.\nUse your assistant button to switch between Windows and Android.</string>
     <string name="reboot">Перезагрузка</string>
     <string name="cancel">Отмена</string>
     <string name="mounted">Windows смонтирован</string>

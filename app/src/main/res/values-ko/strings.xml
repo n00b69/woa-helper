@@ -17,6 +17,7 @@
     <string name="script_title">스크립트 도구</string>
     <string name="setup_title">FRAMEWORK INSTALLERS</string>
     <string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
+	<string name="tablet_title">TABLET MODE SCRIPT</string>
 
     <string name="backup_boot_subtitle">boot 이미지를 Android 및 Windows로 백업합니다</string>
     <string name="mnt_subtitle">내부 파일을 읽거나 편집하기 위하여 Windows 파티션을 마운트 및 마운트 해제합니다</string>
@@ -36,6 +37,7 @@
     <string name="script_subtitle">다양한 스크립트와 기능을 C:\\Toolbox에 추가합니다</string>
     <string name="setup_subtitle">Adds installers for several frameworks into C:\\Toolbox</string>
     <string name="dbkp_subtitle">Patches the kernel for seamless dualbooting</string>
+	<string name="tablet_subtitle">Adds a script to C:\\Toolbox which allows you to toggle tablet mode</string>
 
     <string name="backup_boot_question">현재 안드로이드 boot 이미지를 백업하시겠습니까?</string>
     <string name="mount_question">%s에 Windows 파티션을 마운트하시겠습니까?</string>
@@ -51,13 +53,17 @@
     <string name="atlasos_question">AtlasOS 또는 ReviOS 플레이북을 다운로드 하고 C:\\Toolbox로 이동하시겠습니까?</string>
     <string name="defender_question">Edge / Defender 제거 스크립트를 C:\\Toolbox로 복사하시겠습니까?</string>
     <string name="setup_question">Download and move C++ Redistributables and DirectX, OpenGL, OpenAL, PhysX, XNAF installers to C:\\Toolbox?\n(this may take some time)</string>
-    <string name="dbkp_question">Patch and flash your current kernel?n\!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS ONEPLUS 7(T) PRO 4G!!!</string>
+    <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS ONEPLUS 7(T) PRO 4G OR XIAOMI MI 9!!!</string>
+	<string name="tablet_question">Copy tablet mode script to C:\\Toolbox?</string>
 
     <string name="wrong">문제가 발생했습니다</string>
     <string name="mountfail">문제가 발생했습니다. \nWindows 파티션을 마운트하지 못하였습니다.\n텔레그램 채팅방에서 도움을 받으십시오.</string>
 	<string name="ntfs">Windows could not be mounted. \nNTFS support not detected. \nInstall NTFS3G module?</string>
 	<string name="internet">No internet connection found.\nConnect to the internet and try again.</string>
+	<string name="partition">No Windows partition detected.</string>
+	<string name="internalstorage">\nFiles downloaded in internal storage</string>
 	<string name="op7">Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/patched-boot.img.\nUse your alert slider to switch between Windows and Android.</string>
+	<string name="cepheus">Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/patched-boot.img.\nUse your assistant button to switch between Windows and Android.</string>
     <string name="reboot">재부팅</string>
     <string name="cancel">취소</string>
     <string name="mounted">Windows 파티션을 마운트했습니다</string>

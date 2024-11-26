@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (Objects.equals(currentVersion, pref.getVersion(this))) {
-            String[] files = {"tabletmode.vbs", "guacamole.fd", "hotdog.fd", "dbkp8150.cfg", "dbkp.hotdog.bin", "busybox", "sta.exe", "sdd.exe", "sdd.conf", "Switch to Android.lnk", "usbhostmode.exe", "ARMSoftware.url", "TestedSoftware.url", "WorksOnWoa.url", "RotationShortcut.lnk", "display.exe", "RemoveEdge.bat", "DefenderRemover.exe"};
+            String[] files = {"tabletmode.vbs", "guacamole.fd", "hotdog.fd", "dbkp8150.cfg", "dbkp.hotdog.bin", "dbkp.cepheus.bin", "busybox", "sta.exe", "sdd.exe", "sdd.conf", "Switch to Android.lnk", "usbhostmode.exe", "ARMSoftware.url", "TestedSoftware.url", "WorksOnWoa.url", "RotationShortcut.lnk", "display.exe", "RemoveEdge.bat", "DefenderRemover.exe"};
             int i = 0;
             while (!files[i].isEmpty()) {
                 if (ShellUtils.fastCmd(String.format("ls %1$s |grep %2$s", getFilesDir(), files[i])).isEmpty()) {
@@ -293,6 +293,8 @@ public class MainActivity extends AppCompatActivity {
                     this.grouplink = "http://t.me/woacepheus";
                     this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.cepheus, null));
                     this.x.tvPanel.setVisibility(View.VISIBLE);
+					this.n.cvDbkp.setVisibility(View.VISIBLE);
+                    this.n.cvFlashUefi.setVisibility(View.GONE);
                 }
                 case "raphael", "raphaelin", "raphaels" -> {
                     this.guidelink = "https://github.com/woa-raphael/woa-raphael";
@@ -867,8 +869,8 @@ public class MainActivity extends AppCompatActivity {
                         MainActivity.this.mount();
                         // ShellUtils.fastCmd("su -c 'if [ -e /dev/block/by-name/boot_a ] && [ -e /dev/block/by-name/boot_b ]; then boot_a=$(basename $(readlink -f /dev/block/by-name/boot_a)); boot_b=$(basename $(readlink -f /dev/block/by-name/boot_b)); printf \"%s\n%s\n%s\n%s\n\" \"$boot_a\" \"C:\\boot.img\" \"$boot_b\" \"C:\\boot.img\" > /sdcard/sta.conf; else boot=$(basename $(readlink -f /dev/block/by-name/boot)); printf \"%s\n%s\n\" \"$boot\" \"C:\\boot.img\" > /sdcard/sta.conf; fi'");
                         ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sta.exe /sdcard/sta.exe");
-						// ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sta.exe /sdcard/sdd.exe");
-						// ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sta.exe /sdcard/sdd.conf");
+						ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.exe /sdcard/sdd.exe");
+						ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.conf /sdcard/sdd.conf");
                         String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + MainActivity.this.win);
                         if (mnt_stat.isEmpty()) {
                             noButton.setVisibility(View.GONE);
@@ -900,8 +902,8 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/sta || true ");
                             ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sta.exe " + MainActivity.this.winpath + "/sta/sta.exe");
-							// ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.exe " + MainActivity.this.winpath + "/sta/sdd.exe");
-							// ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.conf " + MainActivity.this.winpath + "/sta/sdd.conf");
+							ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.exe " + MainActivity.this.winpath + "/sta/sdd.exe");
+							ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.conf " + MainActivity.this.winpath + "/sta/sdd.conf");
                             ShellUtils.fastCmd("cp '" + MainActivity.this.getFilesDir() + "/Switch to Android.lnk' " + MainActivity.this.winpath + "/Users/Public/Desktop");
                             messages.setText(MainActivity.this.getString(R.string.done));
                             dismissButton.setText(MainActivity.this.getString(R.string.dismiss));
@@ -991,7 +993,7 @@ public class MainActivity extends AppCompatActivity {
                                     if (mnt_stat.isEmpty()) {
                                         icons.setVisibility(View.GONE);
                                         yesButton.setVisibility(View.VISIBLE);
-                                        messages.setText(MainActivity.this.getString(R.string.mountfail) + "\nFiles downloaded in internal storage");
+                                        messages.setText(MainActivity.this.getString(R.string.mountfail) + (R.string.internalstorage));
                                     } else {
                                         icons.setImageDrawable(atlasos);
                                         ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/Toolbox || true ");
@@ -1800,21 +1802,23 @@ public class MainActivity extends AppCompatActivity {
                     messages.setText(MainActivity.this.getString(R.string.please_wait));
                     icons.setVisibility(View.VISIBLE);
                     new Thread(()->{
-                        ShellUtils.fastCmd("mkdir /sdcard/dbkp");
+                        ShellUtils.fastCmd("mkdir /sdcard/dbkp || true");
                         ShellUtils.fastCmd(MainActivity.this.getString(R.string.backup));
                         ShellUtils.fastCmd("rm /sdcard/original-boot.img || true");
                         ShellUtils.fastCmd("cp /sdcard/boot.img /sdcard/dbkp/boot.img");
                         ShellUtils.fastCmd("su -mm -c mv /sdcard/boot.img /sdcard/original-boot.img");
                         ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp8150.cfg /sdcard/dbkp");
                         ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp.hotdog.bin /sdcard/dbkp");
+						ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp.cepheus.bin /sdcard/dbkp");
                         ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woa-op7/releases/download/DBKP/dbkp -O /sdcard/dbkp/dbkp");
+						ShellUtils.fastCmd("cp /sdcard/dbkp/dbkp "+getFilesDir());
+						ShellUtils.fastCmd("chmod 777 " + MainActivity.this.getFilesDir() + "/dbkp");
                         String bedan = ShellUtils.fastCmd("getprop ro.product.device");
                         if ("guacamole".equals(bedan) || "OnePlus7Pro".equals(bedan) || "OnePlus7Pro4G".equals(bedan)) {
-                            // Do guacamole logic here
                             ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woa-op7/releases/download/DBKP/guacamole.fd -O /sdcard/dbkp/guacamole.fd");
                             ShellUtils.fastCmd("cd /sdcard/dbkp");
                             ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) unpack boot.img\" | su -c sh");
-                            ShellUtils.fastCmd("su -mm -c /sdcard/dbkp/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/guacamole.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp8150.cfg /sdcard/dbkp/dbkp.hotdog.bin");
+                            ShellUtils.fastCmd("su -mm -c " + MainActivity.this.getFilesDir() + "/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/guacamole.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp8150.cfg /sdcard/dbkp/dbkp.hotdog.bin");
                             ShellUtils.fastCmd("su -mm -c rm /sdcard/dbkp/kernel");
                             ShellUtils.fastCmd("su -mm -c mv output kernel");
                             ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) repack boot.img\" | su -c sh");
@@ -1824,11 +1828,10 @@ public class MainActivity extends AppCompatActivity {
                             ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_a bs=16M");
                             ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16M");
                         } else if ("hotdog".equals(bedan) || "OnePlus7TPro".equals(bedan) || "OnePlus7TPro4G".equals(bedan)) {
-                            // Do hotdog logic here
                             ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woa-op7/releases/download/DBKP/hotdog.fd -O /sdcard/dbkp/hotdog.fd");
                             ShellUtils.fastCmd("cd /sdcard/dbkp");
                             ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) unpack boot.img\" | su -c sh");
-                            ShellUtils.fastCmd("su -mm -c /sdcard/dbkp/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/hotdog.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp8150.cfg /sdcard/dbkp/dbkp.hotdog.bin");
+                            ShellUtils.fastCmd("su -mm -c " + MainActivity.this.getFilesDir() + "/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/hotdog.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp8150.cfg /sdcard/dbkp/dbkp.hotdog.bin");
                             ShellUtils.fastCmd("su -mm -c rm /sdcard/dbkp/kernel");
                             ShellUtils.fastCmd("su -mm -c mv output kernel");
                             ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) repack boot.img\" | su -c sh");
@@ -1837,9 +1840,25 @@ public class MainActivity extends AppCompatActivity {
                             ShellUtils.fastCmd("rm -r /sdcard/dbkp");
                             ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_a bs=16M");
                             ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16M");
+                        } else if ("cepheus".equals(bedan)) {
+                            ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woa-everything/releases/download/Files/cepheus.fd -O /sdcard/dbkp/cepheus.fd");
+                            ShellUtils.fastCmd("cd /sdcard/dbkp");
+                            ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) unpack boot.img\" | su -c sh");
+                            ShellUtils.fastCmd("su -mm -c " + MainActivity.this.getFilesDir() + "/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/cepheus.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp8150.cfg /sdcard/dbkp/dbkp.cepheus.bin");
+                            ShellUtils.fastCmd("su -mm -c rm /sdcard/dbkp/kernel");
+                            ShellUtils.fastCmd("su -mm -c mv output kernel");
+                            ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) repack boot.img\" | su -c sh");
+                            ShellUtils.fastCmd("su -mm -c cp new-boot.img /sdcard/new-boot.img");
+                            ShellUtils.fastCmd("su -mm -c mv /sdcard/new-boot.img /sdcard/patched-boot.img");
+                            ShellUtils.fastCmd("rm -r /sdcard/dbkp");
+                            ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot bs=16M");
                         }
                         runOnUiThread(()->{
-                        messages.setText(getString(R.string.op7));
+					if ("guacamole".equals(bedan) || "OnePlus7Pro".equals(bedan) || "OnePlus7Pro4G".equals(bedan) || "hotdog".equals(bedan) || "OnePlus7TPro".equals(bedan) || "OnePlus7TPro4G".equals(bedan)) {
+						messages.setText(getString(R.string.op7));
+					} else if ("cepheus".equals(bedan)) {
+						messages.setText(getString(R.string.cepheus));
+					} 
                         dismissButton.setText(getString(R.string.dismiss));
                         dismissButton.setVisibility(View.VISIBLE);
                         dismissButton.setOnClickListener(new View.OnClickListener() {
@@ -2336,7 +2355,7 @@ public class MainActivity extends AppCompatActivity {
             yesButton.setVisibility(View.GONE);
             noButton.setVisibility(View.GONE);
             dismissButton.setVisibility(View.GONE);
-            messages.setText("No Windows partition detected");
+            messages.setText(getString(R.string.partition));
             dialog.show();
             dialog.setCancelable(false);
 			this.x.cvMnt.setEnabled(false);
@@ -2346,7 +2365,6 @@ public class MainActivity extends AppCompatActivity {
 			this.x.cvMnt.setEnabled(true);
 			this.x.cvToolbox.setEnabled(true);
             this.x.cvQuickBoot.setEnabled(true); 
-			
         }
     }
 

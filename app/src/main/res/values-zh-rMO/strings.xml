@@ -17,6 +17,7 @@
     <string name="script_title">腳本工具箱</string>
     <string name="setup_title">FRAMEWORK INSTALLERS</string>
     <string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
+	<string name="tablet_title">TABLET MODE SCRIPT</string>
 
     <string name="backup_boot_subtitle">備份 boot 分區到 Windows 和 Android</string>
     <string name="mnt_subtitle">掛載安裝 Windows 的分區以查看或編輯其中的內容</string>
@@ -36,6 +37,7 @@
     <string name="script_subtitle">將一系列優化腳本添加到 C:\\Toolbox</string>
     <string name="setup_subtitle">Adds installers for several frameworks into C:\\Toolbox</string>
     <string name="dbkp_subtitle">Patches the kernel for seamless dualbooting</string>
+	<string name="tablet_subtitle">Adds a script to C:\\Toolbox which allows you to toggle tablet mode</string>
 
     <string name="backup_boot_question">確認備份當前 Android 的 boot 鏡像?</string>
     <string name="mount_question">確認掛載 Windows 到 %s?</string>
@@ -51,13 +53,17 @@
     <string name="atlasos_question">是否要在 C:\\Toolbox 中下載 AtlasOS / ReviOS playbook?</string>
     <string name="defender_question">是否在 C:\\Toolbox 中安裝 Edge / Defender 卸載器?</string>
     <string name="setup_question">Download and move C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, and XNA framework installers to C:\\Toolbox?\n(this may take some time)</string>
-    <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS ONEPLUS 7(T) PRO 4G!!!</string>
+    <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS ONEPLUS 7(T) PRO 4G OR XIAOMI MI 9!!!</string>
+	<string name="tablet_question">Copy tablet mode script to C:\\Toolbox?</string>
 
     <string name="wrong">錯誤</string>
     <string name="mountfail">出錯, \nWindows 不能被掛載。\n請在 Telegram 羣聊中尋求幫助。</string>
 	<string name="ntfs">Windows could not be mounted. \nNTFS support not detected. \nInstall NTFS3G module?</string>
 	<string name="internet">No internet connection found.\nConnect to the internet and try again.</string>
+	<string name="partition">No Windows partition detected.</string>
+	<string name="internalstorage">\nFiles downloaded in internal storage</string>
 	<string name="op7">Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/patched-boot.img.\nUse your alert slider to switch between Windows and Android.</string>
+	<string name="cepheus">Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/patched-boot.img.\nUse your assistant button to switch between Windows and Android.</string>
     <string name="reboot">重啓</string>
     <string name="cancel">取消</string>
     <string name="mounted">已掛載 Windows</string>

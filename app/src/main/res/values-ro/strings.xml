@@ -17,6 +17,7 @@
     <string name="script_title">CUTIE DE SCRIPTURI</string>
     <string name="setup_title">FIȘIERE INSTALARE FRAMEWORK</string>
     <string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
+	<string name="tablet_title">TABLET MODE SCRIPT</string>
 
     <string name="backup_boot_subtitle">Backup la imaginea de pornite în Android și/sau în Windows</string>
     <string name="mnt_subtitle">Montează partiția Windows pentru a vedea sau edita conținutul său</string>
@@ -36,6 +37,7 @@
     <string name="script_subtitle">Va adăuga un sortiment de scripturi și modificări la C:\\Toolbox</string>
     <string name="setup_subtitle">Adaugă fișiere de instalare pentru mai multe framework-uri în C:\\Toolbox</string>
     <string name="dbkp_subtitle">Patches the kernel for seamless dualbooting</string>
+	<string name="tablet_subtitle">Adds a script to C:\\Toolbox which allows you to toggle tablet mode</string>
 
     <string name="backup_boot_question">Salvați imagine curentă de pornire Android?</string>
     <string name="mount_question">Montați Windows la %s?</string>
@@ -51,13 +53,17 @@
     <string name="atlasos_question">Descarcă și mută AtlasOS sau ReviOS playbook în C:\\Toolbox?</string>
     <string name="defender_question">Copiază Edge / Defender remover script în C:\\Toolbox?</string>
     <string name="setup_question">Descarcă și mută fișierele de instalare pentru C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, și XNA framework în C:\\Toolbox?\n(poate să ea ceva timp)</string>
-    <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS ONEPLUS 7(T) PRO 4G!!!</string>
+    <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS ONEPLUS 7(T) PRO 4G OR XIAOMI MI 9!!!</string>
+	<string name="tablet_question">Copy tablet mode script to C:\\Toolbox?</string>
 
     <string name="wrong">Ceva a mers prost</string>
     <string name="mountfail">Ceva a mers prost, \nWindows nu poate fi montat.\nCere ajutor în grupul de Telegram.</string>
 	<string name="ntfs">Windows could not be mounted. \nNTFS support not detected. \nInstall NTFS3G module?</string>
 	<string name="internet">No internet connection found.\nConnect to the internet and try again.</string>
+	<string name="partition">No Windows partition detected.</string>
+	<string name="internalstorage">\nFiles downloaded in internal storage</string>
 	<string name="op7">Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/patched-boot.img.\nUse your alert slider to switch between Windows and Android.</string>
+	<string name="cepheus">Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/patched-boot.img.\nUse your assistant button to switch between Windows and Android.</string>
     <string name="reboot">Repornire</string>
     <string name="cancel">Anulare</string>
     <string name="mounted">Windows este montat</string>

@@ -17,6 +17,7 @@
     <string name="script_title">SCRIPT TOOLBOX</string>
     <string name="setup_title">FRAMEWORK INSTALLERS</string>
     <string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
+	<string name="tablet_title">TABLET MODE SCRIPT</string>
 
     <string name="backup_boot_subtitle">Back up boot image naar Android en/of Windows</string>
     <string name="mnt_subtitle">Mount/unmount de Windows partitie om de bestanden te kunnen bekijken of wijzigen</string>
@@ -36,7 +37,8 @@
     <string name="script_subtitle">Plaatst meerdere scripts en tweaks in C:\\Toolbox</string>
     <string name="setup_subtitle">Plaatst installers voor verschillende frameworks in C:\\Toolbox</string>
     <string name="dbkp_subtitle">Patcht de kernel om naadloos dualbooten te kunnen</string>
-
+	<string name="tablet_subtitle">Plaatst een script in C:\\Toolbox waarmee je de tablet modus aan/uit kan zetten</string>
+	
     <string name="backup_boot_question">Back up huidige Android boot image?</string>
     <string name="mount_question">Mount Windows naar %s?</string>
     <string name="unmount_question">Unmount Windows?</string>
@@ -51,13 +53,17 @@
     <string name="atlasos_question">Download en kopieer AtlasOS of ReviOS playbook naar C:\\Toolbox?</string>
     <string name="defender_question">Kopieer Edge / Defender verwijder scripts naar C:\\Toolbox?</string>
     <string name="setup_question">Download en kopieer C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, en XNA framework installers naar C:\\Toolbox?\n(dit kan enkele momenten duren)</string>
-    <string name="dbkp_question">Patch uw huidige kernel en flash de nieuwe boot image?\n!!!DRUK NIET OP JA ALS UW TOESTEL NIET DE ONEPLUS 7(T) PRO 4G IS!!!</string>
+    <string name="dbkp_question">Patch uw huidige kernel en flash de nieuwe boot image?\n!!!DRUK NIET OP JA ALS UW TOESTEL NIET DE ONEPLUS 7(T) PRO 4G OF XIAOMI MI 9 IS!!!</string>
+	<string name="tablet_question">Kopieer tablet modus script naar C:\\Toolbox?</string>
 
     <string name="wrong">Een fout is opgetreden</string>
     <string name="mountfail">Een fout is opgetreden, \nWindows kon niet gemount worden.\nVraag om hulp in de Telegram chat.</string>
 	<string name="ntfs">Windows kon niet gemount worden. \nNTFS ondersteuning niet gevonden. \nInstalleer NTFS3G module?</string>
 	<string name="internet">Geen internetverbinding gevonden.\nMaak verbinding met internet en probeer het opnieuw.</string>
+	<string name="partition">Geen Windows partitie gevonden.</string>
+	<string name="internalstorage">\nBestanden zijn in uw interne geheugen opgeslagen</string>
 	<string name="op7">Boot image is gepatcht en geinstalleerd.\nDe gepatchte boot.img is ook te vinden in /sdcard/patched-boot.img.\nGebruik uw alert slider om te schakelen tussen Windows en Android.</string>
+	<string name="cepheus">Boot image is gepatcht en geinstalleerd.\nDe gepatchte boot.img is ook te vinden in /sdcard/patched-boot.img.\nGebruik uw assistant knop om te schakelen tussen Windows en Android.</string>
     <string name="reboot">Herstart</string>
     <string name="cancel">Annuleren</string>
     <string name="mounted">Windows mounted</string>
