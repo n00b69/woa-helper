@@ -161,7 +161,6 @@ public class MainActivity extends AppCompatActivity {
             copyAssets();
             pref.setVersion(this, currentVersion);
         }
-        //createNotificationChannel();
         super.onCreate(savedInstanceState);
         final Dialog dialog = new Dialog(this);
         final Dialog languages = new Dialog(this);
@@ -207,18 +206,17 @@ public class MainActivity extends AppCompatActivity {
         ImageView icons = dialog.findViewById(R.id.icon);
         ProgressBar bar = dialog.findViewById(R.id.progress);
         DisplayMetrics metrics = this.getResources().getDisplayMetrics();
-        Drawable androidlogo1 = ResourcesCompat.getDrawable(this.getResources(), R.drawable.androidlogo1, null);
-        Drawable androidlogo2 = ResourcesCompat.getDrawable(this.getResources(), R.drawable.androidlogo2, null);
+        Drawable android = ResourcesCompat.getDrawable(this.getResources(), R.drawable.android, null);
         Drawable atlasos = ResourcesCompat.getDrawable(this.getResources(), R.drawable.atlasos2, null);
-        Drawable uefi = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_uefi, null);
-        Drawable boot = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_disk, null);
-        Drawable sensors = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_sensor, null);
-        Drawable edge = ResourcesCompat.getDrawable(this.getResources(), R.drawable.edge2, null);
-        Drawable download = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_download, null);
-        Drawable modem = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_modem, null);
+		Drawable boot = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_disk, null);
+		Drawable download = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_download, null);
+		Drawable edge = ResourcesCompat.getDrawable(this.getResources(), R.drawable.edge2, null);
+		Drawable icon = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_launcher_foreground, null);
+		Drawable modem = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_modem, null);
         Drawable mnt = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_mnt, null);
-        Drawable icon = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_launcher_foreground, null);
+        Drawable sensors = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_sensor, null);
         Drawable settings = ResourcesCompat.getDrawable(this.getResources(), R.drawable.settings, null);
+		Drawable uefi = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_uefi, null);
         settings.setColorFilter(BlendModeColorFilterCompat.createBlendModeColorFilterCompat(this.getColor(R.color.colorPrimary), BlendModeCompat.SRC_IN));
         Drawable back = ResourcesCompat.getDrawable(this.getResources(), R.drawable.back_arrow, null);
         back.setColorFilter(BlendModeColorFilterCompat.createBlendModeColorFilterCompat(this.getColor(R.color.colorPrimary), BlendModeCompat.SRC_IN));
@@ -233,14 +231,8 @@ public class MainActivity extends AppCompatActivity {
         TextView myTextView00 = this.findViewById(R.id.tv_date);
         myTextView00.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
         this.x.deviceName.setText(this.model + " (" + this.device + ")");
-        if (Objects.equals(this.device, "nabu")) {
-			this.guidelink = "https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/tree/main";
-            this.grouplink = "https://t.me/nabuwoa";
-            this.x.NabuImage.setVisibility(View.VISIBLE);
-            this.x.DeviceImage.setVisibility(View.GONE);
-            this.x.tvPanel.setVisibility(View.VISIBLE);
-            this.n.cvDumpModem.setVisibility(View.GONE);
-			this.n.cvDbkp.setVisibility(View.GONE);
+		this.n.cvDbkp.setVisibility(View.GONE);
+        if (Objects.equals(this.device, "nabu") || Objects.equals(this.device, "pipa") || Objects.equals(this.device, "winner") || Objects.equals(this.device, "winnerx") || Objects.equals(this.device, "q2q") || Objects.equals(this.device, "t860") || Objects.equals(this.device, "t865")) {
             TextView myTextView2 = this.findViewById(R.id.deviceName);
             myTextView2.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
             TextView myTextView3 = this.findViewById(R.id.tv_panel);
@@ -253,7 +245,6 @@ public class MainActivity extends AppCompatActivity {
             myTextView6.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
             TextView myTextView7 = this.findViewById(R.id.tv_slot);
             myTextView7.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
-
             int orientation = this.getResources().getConfiguration().orientation;
             if (Configuration.ORIENTATION_PORTRAIT == orientation) {
                 this.x.app.setOrientation(LinearLayout.VERTICAL);
@@ -278,9 +269,7 @@ public class MainActivity extends AppCompatActivity {
             myTextView6.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
             TextView myTextView7 = this.findViewById(R.id.tv_slot);
             myTextView7.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
-
-            this.n.cvDbkp.setVisibility(View.GONE);
-
+		}
             switch (this.device) {
                 case "nabu" -> {
                     this.guidelink = "https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/tree/main";
@@ -530,6 +519,12 @@ public class MainActivity extends AppCompatActivity {
                     this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.q2q, null));
                     this.n.cvDumpModem.setVisibility(View.GONE);
                 }
+                case "t860", "t865" -> {
+                    this.guidelink = "https://project-aloha.github.io/";
+                    this.grouplink = "https://t.me/project_aloha_issues";
+                    this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.unknown, null));
+                    this.n.cvDumpModem.setVisibility(View.GONE);
+                }
                 case "RMX2061" -> {
                     this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
                     this.grouplink = "https://t.me/realme6PROwindowsARM64";
@@ -597,7 +592,6 @@ public class MainActivity extends AppCompatActivity {
                     this.grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA";
                 }
             }
-        }
         this.x.tvRamvalue.setText(String.format(this.getString(R.string.ramvalue), this.ramvalue));
         this.x.tvPanel.setText(String.format(this.getString(R.string.paneltype), this.panel));
         this.x.cvGuide.setOnClickListener(v -> {
@@ -854,7 +848,7 @@ public class MainActivity extends AppCompatActivity {
             yesButton.setVisibility(View.VISIBLE);
             messages.setText(this.getString(R.string.sta_question));
             icons.setVisibility(View.VISIBLE);
-            icons.setImageDrawable(androidlogo1);
+            icons.setImageDrawable(android);
             noButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -1091,7 +1085,7 @@ public class MainActivity extends AppCompatActivity {
                         if (mnt_stat.isEmpty()) {
                             yesButton.setVisibility(View.VISIBLE);
                             icons.setVisibility(View.GONE);
-                            messages.setText(this.getString(R.string.mountfail) + "\nFiles downloaded in internal storage");
+                            messages.setText(MainActivity.this.getString(R.string.mountfail) + (R.string.internalstorage));
                         } else {
                             icons.setImageDrawable(atlasos);
                             ShellUtils.fastCmd("mkdir " + this.winpath + "/Toolbox || true ");
@@ -1302,7 +1296,7 @@ public class MainActivity extends AppCompatActivity {
                         if (mnt_stat.isEmpty()) {
                             yesButton.setVisibility(View.VISIBLE);
                             icons.setVisibility(View.GONE);
-                            messages.setText(this.getString(R.string.mountfail) + "\nFiles downloaded in internal storage");
+                            messages.setText(MainActivity.this.getString(R.string.mountfail) + (R.string.internalstorage));
                         } else {
                             icons.setImageDrawable(mnt);
                             ShellUtils.fastCmd("mkdir " + this.winpath + "/Toolbox || true ");
@@ -2202,7 +2196,7 @@ public class MainActivity extends AppCompatActivity {
         yesButton.setVisibility(View.GONE);
         noButton.setVisibility(View.GONE);
         dismissButton.setVisibility(View.GONE);
-        String[] supported = {"a52sxq", "alpha_lao_com", "alphalm_lao_com", "alphaplus_lao_com", "alioth", "alphalm", "alphaplus", "andromeda", "betalm", "beta_lao_com", "betaplus_lao_com", "betalm_lao_com", "beryllium", "bhima", "cepheus", "cheeseburger", "curtana2", "chiron", "curtana", "curtana_india", "joyeuse", "curtana_cn", "curtanacn", "cmi", "davinci", "dumpling", "dipper", "durandal", "durandal_india", "enchilada", "equuleus", "excalibur", "excalibur_india", "flashlmdd", "flash_lao_com", "flashlm", "flashlmdd_lao_com", "fajita", "houji", "joan", "judyln", "judyp", "judypn", "guacamole", "guacamoleb", "gram", "hotdog", "hotdogb", "hotdogg", "lisa", "marble", "meizu20pro", "husky", "redfin", "mh2lm", "mh2plus_lao_com", "mh2lm_lao_com", "mh2lm5g", "mh2lm5g_lao_com", "miatoll", "nabu", "pipa", "OnePlus6", "OnePlus6T", "OnePlus7", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7T", "OnePlus7TPro", "OnePlus7TPro4G", "OnePlus7TPro5G", "OP7ProNRSpr", "OnePlus7TProNR", "perseus", "polaris", "Pong", "pong", "q2q", "raphael", "raphaelin", "raphaels", "RMX2170", "RMX2061", "sagit", "surya", "vayu", "venus", "winner", "winnerx", "xpeng", "G973F", "SM-G973F", "beyond1lte", "beyond1qlte", "G973U", "G973U1", "SM-G973U", "SM-G973U1", "G9730", "SM-G9730", "G973N", "SM-G973N", "G973X", "SM-G973X", "G973C", "SM-G973C", "SCV41", "SM-SC41", "beyond1", "e3q"};
+        String[] supported = {"a52sxq", "alpha_lao_com", "alphalm_lao_com", "alphaplus_lao_com", "alioth", "alphalm", "alphaplus", "andromeda", "betalm", "beta_lao_com", "betaplus_lao_com", "betalm_lao_com", "beryllium", "bhima", "cepheus", "cheeseburger", "curtana2", "chiron", "curtana", "curtana_india", "joyeuse", "curtana_cn", "curtanacn", "cmi", "davinci", "dumpling", "dipper", "durandal", "durandal_india", "enchilada", "equuleus", "excalibur", "excalibur_india", "flashlmdd", "flash_lao_com", "flashlm", "flashlmdd_lao_com", "fajita", "houji", "joan", "judyln", "judyp", "judypn", "guacamole", "guacamoleb", "gram", "hotdog", "hotdogb", "hotdogg", "lisa", "marble", "meizu20pro", "husky", "redfin", "mh2lm", "mh2plus_lao_com", "mh2lm_lao_com", "mh2lm5g", "mh2lm5g_lao_com", "miatoll", "nabu", "pipa", "OnePlus6", "OnePlus6T", "OnePlus7", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7T", "OnePlus7TPro", "OnePlus7TPro4G", "OnePlus7TPro5G", "OP7ProNRSpr", "OnePlus7TProNR", "perseus", "polaris", "Pong", "pong", "q2q", "t860", "t865", "raphael", "raphaelin", "raphaels", "RMX2170", "RMX2061", "sagit", "surya", "vayu", "venus", "winner", "winnerx", "xpeng", "G973F", "SM-G973F", "beyond1lte", "beyond1qlte", "G973U", "G973U1", "SM-G973U", "SM-G973U1", "G9730", "SM-G9730", "G973N", "SM-G973N", "G973X", "SM-G973X", "G973C", "SM-G973C", "SCV41", "SM-SC41", "beyond1", "e3q"};
         this.device = ShellUtils.fastCmd("getprop ro.product.device ");
         this.model = ShellUtils.fastCmd("getprop ro.product.model");
         if (!Arrays.asList(supported).contains(this.device)) {
@@ -2231,9 +2225,9 @@ public class MainActivity extends AppCompatActivity {
         String run = ShellUtils.fastCmd(" su -c cat /proc/cmdline ");
         if (run.isEmpty()) panel = "Unknown";
         else {
-            if (run.contains("j20s_42") || run.contains("k82_42")) {
+            if (run.contains("j20s_42") || run.contains("k82_42") || run.contains("42_02_0b")) {
                 panel = "Huaxing";
-            } else if (run.contains("j20s_36") || run.contains("k82_36")) {
+            } else if (run.contains("j20s_36") || run.contains("k82_36") || run.contains("36_02_0a")) {
                 panel = "Tianma";
             } else {
                 panel = ShellUtils.fastCmd("su -c cat /proc/cmdline | tr ' :=' '\n'|grep dsi|tr ' _' '\n'|tail -3|head -1 ");
@@ -2430,7 +2424,7 @@ public class MainActivity extends AppCompatActivity {
         TextView myTextView6 = this.findViewById(R.id.group_text);
         TextView myTextView7 = this.findViewById(R.id.tv_slot);
         TextView myTextView8 = this.findViewById(R.id.tv_date);
-        if (Configuration.ORIENTATION_LANDSCAPE != newConfig.orientation && Objects.equals(this.device, "nabu")) {
+        if (Configuration.ORIENTATION_LANDSCAPE != newConfig.orientation && Objects.equals(this.device, "nabu") || Objects.equals(this.device, "pipa") || Objects.equals(this.device, "winner") || Objects.equals(this.device, "winnerx") || Objects.equals(this.device, "q2q") || Objects.equals(this.device, "t860") || Objects.equals(this.device, "t865")) {
             this.x.app.setOrientation(LinearLayout.VERTICAL);
             this.x.top.setOrientation(LinearLayout.HORIZONTAL);
             myTextView1.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE2);
@@ -2441,7 +2435,7 @@ public class MainActivity extends AppCompatActivity {
             myTextView6.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
             myTextView7.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
             myTextView8.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
-        } else if (Configuration.ORIENTATION_PORTRAIT != newConfig.orientation && Objects.equals(this.device, "nabu")) {
+        } else if (Configuration.ORIENTATION_PORTRAIT != newConfig.orientation && Objects.equals(this.device, "nabu") || Objects.equals(this.device, "pipa") || Objects.equals(this.device, "winner") || Objects.equals(this.device, "winnerx") || Objects.equals(this.device, "q2q") || Objects.equals(this.device, "t860") || Objects.equals(this.device, "t865")) {
             this.x.app.setOrientation(LinearLayout.HORIZONTAL);
             this.x.top.setOrientation(LinearLayout.VERTICAL);
             myTextView1.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);

@@ -76,7 +76,7 @@
                         android:elevation="@dimen/cardElevation"
                         android:focusable="true"
                         android:foreground="@drawable/vayu"
-                        android:gravity="center"
+                        android:gravity="left"
                         android:padding="@dimen/parentMargin"
                         android:stateListAnimator="@animator/state_list_anim"
                         app:cardCornerRadius="@dimen/cardCornerRadius"
@@ -103,7 +103,7 @@
                                 android:id="@+id/deviceName"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
+                                android:gravity="left"
                                 android:text="POCO X3 PRO (VAYU)"
                                 android:textSize="@dimen/_12sdp" />
 
@@ -111,14 +111,14 @@
                                 android:id="@+id/tv_ramvalue"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
+                                android:gravity="left"
                                 android:textSize="@dimen/_12sdp" />
 
                             <TextView
                                 android:id="@+id/tv_panel"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
+                                android:gravity="left"
                                 android:textSize="@dimen/_12sdp"
                                 android:visibility="gone" />
 
@@ -126,14 +126,14 @@
                                 android:id="@+id/tv_date"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
+                                android:gravity="left"
                                 android:textSize="@dimen/_12sdp" />
 
                             <TextView
                                 android:id="@+id/tv_slot"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
+                                android:gravity="left"
                                 android:textSize="@dimen/_10sdp" />
 
                             <LinearLayout
@@ -269,6 +269,7 @@
                                 android:id="@+id/tv_backup_sub"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+								android:gravity="left"
                                 android:text="@string/backup_boot_subtitle"
 								android:paddingRight="@dimen/_15sdp"
                                 android:textSize="@dimen/_9sdp"
@@ -337,6 +338,7 @@
                                 android:id="@+id/tv_mnt_subtitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+								android:gravity="left"
                                 android:text="@string/mnt_subtitle"
 								android:paddingRight="@dimen/_15sdp"
                                 android:textSize="@dimen/_9sdp"
@@ -396,6 +398,7 @@
                                 android:id="@+id/tv_toolbox_subtitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+								android:gravity="left"
                                 android:text="@string/toolbox_subtitle"
 								android:paddingRight="@dimen/_15sdp"
                                 android:textSize="@dimen/_9sdp"
@@ -457,6 +460,7 @@
                                 android:id="@+id/tv_boot_subtitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+								android:gravity="left"
                                 android:paddingRight="@dimen/_15sdp"
                                 android:textSize="@dimen/_9sdp"
                                 android:textStyle="italic" />
@@ -465,7 +469,6 @@
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
         </LinearLayout>
-
 
     </LinearLayout>
 

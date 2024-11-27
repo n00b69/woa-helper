@@ -16,7 +16,7 @@
     <string name="defender_title">USUWANIE EDGE / DEFENDERA</string>
     <string name="script_title">ZESTAW NARZĘDZI SKRYPTÓW</string>
     <string name="setup_title">INSTALATORY FRAMEWORKÓW</string>
-    <string name="dbkp_title">ŁATKA JĄDRA (kernelu) DLA DUALBOOTu</string>
+    <string name="dbkp_title">ŁATKA JĄDRA DLA DUALBOOTU</string>
 	<string name="tablet_title">SKRYPT TRYBU TABLETU</string>
 
     <string name="backup_boot_subtitle">Zapisuje obraz rozruchu systemu na Androidzie i/lub w systemie Windows</string>

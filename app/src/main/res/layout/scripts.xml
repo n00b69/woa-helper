@@ -35,7 +35,6 @@
                 android:layout_marginBottom="6dp"
                 android:gravity="center"
                 android:orientation="vertical">
-
             </LinearLayout>
 
             <LinearLayout

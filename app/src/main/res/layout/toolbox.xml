@@ -404,7 +404,6 @@
                                 android:textSize="@dimen/_9sdp"
                                 android:textStyle="italic" />
                         </LinearLayout>
-
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -469,7 +468,6 @@
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
         </LinearLayout>
-
 
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
