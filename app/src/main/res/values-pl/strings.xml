@@ -85,6 +85,9 @@
     <string name="later">Później</string>
     <string name="mountt">ZAMONTUJ</string>
     <string name="unmountt">ODMONTUJ</string>
+    <string name="update">AKTUALIZACJA</string>
+    <string name="update1">Dostępna jest aktualizacja</string>
+    <string name="update2">Aktualizowanie...</string>
 
     <string name="last">OSTATNI ZRZUT : %s</string>
     <string name="slot">SLOT : %s</string>
@@ -110,4 +113,5 @@
     <string name="preference8">Wyłącz funkcję zrzutu modemu</string>
     <string name="preference9">Wymagaj odblokowanego ekranu do szybkiego uruchamiania</string>
     <string name="preference10">Zamontuj pliki systemu Windows do /mnt zamiast do /sdcard</string>
+    <string name="preference11">Wyłącz sprawdzanie aktualizacji aplikacji</string>
 </resources>

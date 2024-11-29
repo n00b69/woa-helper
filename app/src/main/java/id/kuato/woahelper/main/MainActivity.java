@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		if (Objects.equals(currentVersion, pref.getVersion(this))) {
-			String[] files = {"tabletmode.vbs", "guacamole.fd", "hotdog.fd", "dbkp8150.cfg", "dbkp.hotdog.bin", "dbkp.cepheus.bin", "busybox", "sta.exe", "sdd.exe", "sdd.conf", "Switch to Android.lnk", "usbhostmode.exe", "ARMSoftware.url", "TestedSoftware.url", "WorksOnWoa.url", "RotationShortcut.lnk", "display.exe", "RemoveEdge.bat", "DefenderRemover.exe"};
+			String[] files = {"tabletmode.vbs", "guacamole.fd", "hotdog.fd", "dbkp8150.cfg", "dbkp.hotdog.bin", "dbkp.cepheus.bin", "busybox", "install.bat", "sta.exe", "sdd.exe", "sdd.conf", "Switch to Android.lnk", "usbhostmode.exe", "ARMSoftware.url", "TestedSoftware.url", "WorksOnWoa.url", "RotationShortcut.lnk", "display.exe", "RemoveEdge.bat", "DefenderRemover.exe"};
 			int i = 0;
 			while (!files[i].isEmpty()) {
 				if (ShellUtils.fastCmd(String.format("ls %1$s |grep %2$s", getFilesDir(), files[i])).isEmpty()) {
@@ -817,8 +817,8 @@ public class MainActivity extends AppCompatActivity {
 					messages.setText(this.getString(R.string.done));
 					dismissButton.setVisibility(View.VISIBLE);
 					dismissButton.setOnClickListener(v4 -> {
-					this.HideBlur();
-					dialog.dismiss();
+						this.HideBlur();
+						dialog.dismiss();
 					});
 				}
 			});
@@ -1060,6 +1060,7 @@ public class MainActivity extends AppCompatActivity {
 			yesButton.setOnClickListener(v6 -> {
 				noButton.setVisibility(View.GONE);
 				yesButton.setVisibility(View.GONE);
+				messages.setText(this.getString(R.string.please_wait));
 				mount();
 				String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + MainActivity.this.win);
 				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/WorksOnWoa.url /sdcard");
@@ -1079,8 +1080,8 @@ public class MainActivity extends AppCompatActivity {
 					messages.setText(this.getString(R.string.done));
 					dismissButton.setVisibility(View.VISIBLE);
 					dismissButton.setOnClickListener(v7 -> {
-					this.HideBlur();
-					dialog.dismiss();
+						this.HideBlur();
+						dialog.dismiss();
 					});
 				}
 			});
@@ -1155,11 +1156,14 @@ public class MainActivity extends AppCompatActivity {
 										ShellUtils.fastCmd("cp /sdcard/AMEWizardBeta.zip " + MainActivity.this.winpath + "/Toolbox");
 										ShellUtils.fastCmd("su -mm -c rm /sdcard/ReviPlaybook.apbx");
 										ShellUtils.fastCmd("su -mm -c rm /sdcard/AMEWizardBeta.zip");
-										bar.setProgress(bar.getMax(), true);
-										messages.setText(MainActivity.this.getString(R.string.done));
+										bar.setVisibility(View.GONE);
+										messages.setText(getString(R.string.done));
+										dismissButton.setVisibility(View.VISIBLE);
+										dismissButton.setOnClickListener(v8 -> {
+											HideBlur();
+											dialog.dismiss();
+										});
 									}
-									dismissButton.setVisibility(View.VISIBLE);
-									bar.setVisibility(View.GONE);
 								}
 							});
 						}
@@ -1208,11 +1212,14 @@ public class MainActivity extends AppCompatActivity {
 										ShellUtils.fastCmd("cp /sdcard/AMEWizardBeta.zip " + MainActivity.this.winpath + "/Toolbox");
 										ShellUtils.fastCmd("su -mm -c rm /sdcard/AtlasPlaybook.apbx");
 										ShellUtils.fastCmd("su -mm -c rm /sdcard/AMEWizardBeta.zip");
-										bar.setProgress(bar.getMax(), true);
-										messages.setText(MainActivity.this.getString(R.string.done));
+										bar.setVisibility(View.GONE);
+										messages.setText(getString(R.string.done));
+										dismissButton.setVisibility(View.VISIBLE);
+										dismissButton.setOnClickListener(v9 -> {
+											HideBlur();
+											dialog.dismiss();
+										});
 									}
-									dismissButton.setVisibility(View.VISIBLE);
-									bar.setVisibility(View.GONE);
 								}
 							});
 						}
@@ -1234,13 +1241,14 @@ public class MainActivity extends AppCompatActivity {
 			messages.setText(this.getString(R.string.usbhost_question));
 			icons.setVisibility(View.VISIBLE);
 			icons.setImageDrawable(mnt);
-			noButton.setOnClickListener(v8 -> {
+			noButton.setOnClickListener(v10 -> {
 				this.HideBlur();
 				dialog.dismiss();
 			});
-			yesButton.setOnClickListener(v9 -> {
+			yesButton.setOnClickListener(v11 -> {
 				noButton.setVisibility(View.GONE);
 				yesButton.setVisibility(View.GONE);
+				messages.setText(this.getString(R.string.please_wait));
 				mount();
 				String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + MainActivity.this.win);
 				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/usbhostmode.exe /sdcard");
@@ -1253,9 +1261,9 @@ public class MainActivity extends AppCompatActivity {
 					ShellUtils.fastCmd("rm /sdcard/usbhostmode.exe");
 					messages.setText(this.getString(R.string.done));
 					dismissButton.setVisibility(View.VISIBLE);
-					dismissButton.setOnClickListener(v10 -> {
-					this.HideBlur();
-					dialog.dismiss();
+					dismissButton.setOnClickListener(v12 -> {
+						this.HideBlur();
+						dialog.dismiss();
 					});
 				}
 			});
@@ -1274,13 +1282,14 @@ public class MainActivity extends AppCompatActivity {
 			messages.setText(this.getString(R.string.rotation_question));
 			icons.setVisibility(View.VISIBLE);
 			icons.setImageDrawable(boot);
-			noButton.setOnClickListener(v11 -> {
+			noButton.setOnClickListener(v13 -> {
 				this.HideBlur();
 				dialog.dismiss();
 			});
-			yesButton.setOnClickListener(v12 -> {
+			yesButton.setOnClickListener(v14 -> {
 				noButton.setVisibility(View.GONE);
 				yesButton.setVisibility(View.GONE);
+				messages.setText(this.getString(R.string.please_wait));
 				mount();
 				String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + MainActivity.this.win);
 				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/display.exe /sdcard/");
@@ -1297,7 +1306,7 @@ public class MainActivity extends AppCompatActivity {
 					ShellUtils.fastCmd("rm /sdcard/RotationShortcut.lnk");
 					messages.setText(this.getString(R.string.done));
 					dismissButton.setVisibility(View.VISIBLE);
-					dismissButton.setOnClickListener(v13 -> {
+					dismissButton.setOnClickListener(v15 -> {
 					this.HideBlur();
 					dialog.dismiss();
 					});
@@ -1318,13 +1327,14 @@ public class MainActivity extends AppCompatActivity {
 			messages.setText(this.getString(R.string.tablet_question));
 			icons.setVisibility(View.VISIBLE);
 			icons.setImageDrawable(sensors);
-			noButton.setOnClickListener(v14 -> {
+			noButton.setOnClickListener(v16 -> {
 				this.HideBlur();
 				dialog.dismiss();
 			});
-			yesButton.setOnClickListener(v15 -> {
+			yesButton.setOnClickListener(v17 -> {
 				noButton.setVisibility(View.GONE);
 				yesButton.setVisibility(View.GONE);
+				messages.setText(this.getString(R.string.please_wait));
 				mount();
 				String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + MainActivity.this.win);
 				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/tabletmode.vbs /sdcard/");
@@ -1337,7 +1347,7 @@ public class MainActivity extends AppCompatActivity {
 					ShellUtils.fastCmd("rm /sdcard/tabletmode.vbs");
 					messages.setText(this.getString(R.string.done));
 					dismissButton.setVisibility(View.VISIBLE);
-					dismissButton.setOnClickListener(v16 -> {
+					dismissButton.setOnClickListener(v18 -> {
 					this.HideBlur();
 					dialog.dismiss();
 					});
@@ -1351,6 +1361,7 @@ public class MainActivity extends AppCompatActivity {
 			this.ShowBlur();
 			noButton.setText(this.getString(R.string.no));
 			yesButton.setText(this.getString(R.string.yes));
+			dismissButton.setText(this.getString(R.string.dismiss));
 			dismissButton.setVisibility(View.GONE);
 			noButton.setVisibility(View.VISIBLE);
 			yesButton.setVisibility(View.VISIBLE);
@@ -1362,80 +1373,99 @@ public class MainActivity extends AppCompatActivity {
 				noButton.setText(this.getString(R.string.dismiss));
 				messages.setText(this.getString(R.string.internet));
 			}
-			noButton.setOnClickListener(v17 -> {
-				this.HideBlur();
-				dialog.dismiss();
+			noButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					MainActivity.this.HideBlur();
+					dialog.dismiss();
+				}
 			});
-			yesButton.setOnClickListener(v18 -> {
-				noButton.setVisibility(View.GONE);
-				yesButton.setVisibility(View.GONE);
-				bar.setVisibility(View.VISIBLE);
-				bar.setProgress(0);
-				new Thread(() -> {
-					icons.setVisibility(View.VISIBLE);
-					icons.setImageDrawable(download);
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						throw new RuntimeException(e);
-					}
-					ShellUtils.fastCmd("mkdir /sdcard/Frameworks || true");
-					bar.setProgress((int) (bar.getMax() * 0.00), true);
-					ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/PhysX-9.13.0604-SystemSoftware-Legacy.msi -O /sdcard/Frameworks/PhysX-9.13.0604-SystemSoftware-Legacy.msi");
-					bar.setProgress((int) (bar.getMax() * 0.1), true);
-					ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/PhysX_9.23.1019_SystemSoftware.exe -O /sdcard/Frameworks/PhysX_9.23.1019_SystemSoftware.exe");
-					bar.setProgress((int) (bar.getMax() * 0.2), true);
-					ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/xnafx40_redist.msi -O /sdcard/Frameworks/xnafx40_redist.msi");
-					bar.setProgress((int) (bar.getMax() * 0.25), true);
-					ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2005vcredist_x64.EXE -O /sdcard/Frameworks/2005vcredist_x64.EXE");
-					bar.setProgress((int) (bar.getMax() * 0.3), true);
-					ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2005vcredist_x86.EXE -O /sdcard/Frameworks/2005vcredist_x86.EXE");
-					bar.setProgress((int) (bar.getMax() * 0.35), true);
-					ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2008vcredist_x64.exe -O /sdcard/Frameworks/2008vcredist_x64.exe");
-					bar.setProgress((int) (bar.getMax() * 0.4), true);
-					ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2008vcredist_x86.exe -O /sdcard/Frameworks/2008vcredist_x86.exe");
-					bar.setProgress((int) (bar.getMax() * 0.45), true);
-					ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2010vcredist_x64.exe -O /sdcard/Frameworks/2010vcredist_x64.exe");
-					bar.setProgress((int) (bar.getMax() * 0.5), true);
-					ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2010vcredist_x86.exe -O /sdcard/Frameworks/2010vcredist_x86.exe");
-					bar.setProgress((int) (bar.getMax() * 0.55), true);
-					ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2012vcredist_x64.exe -O /sdcard/Frameworks/2012vcredist_x64.exe");
-					bar.setProgress((int) (bar.getMax() * 0.6), true);
-					ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2012vcredist_x86.exe -O /sdcard/Frameworks/2012vcredist_x86.exe");
-					bar.setProgress((int) (bar.getMax() * 0.65), true);
-					ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2013vcredist_x64.exe -O /sdcard/Frameworks/2013vcredist_x64.exe");
-					bar.setProgress((int) (bar.getMax() * 0.7), true);
-					ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2013vcredist_x86.exe -O /sdcard/Frameworks/2013vcredist_x86.exe");
-					bar.setProgress((int) (bar.getMax() * 0.75), true);
-					ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2015VC_redist.x64.exe -O /sdcard/Frameworks/2015VC_redist.x64.exe");
-					bar.setProgress((int) (bar.getMax() * 0.8), true);
-					ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2015VC_redist.x86.exe -O /sdcard/Frameworks/2015VC_redist.x86.exe");
-					bar.setProgress((int) (bar.getMax() * 0.85), true);
-					ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2022VC_redist.arm64.exe -O /sdcard/Frameworks/2022VC_redist.arm64.exe");
-					bar.setProgress((int) (bar.getMax() * 0.9), true);
-					ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/dxwebsetup.exe -O /sdcard/Frameworks/dxwebsetup.exe");
-					bar.setProgress((int) (bar.getMax() * 0.95), true);
-					ShellUtils.fastCmd(this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/oalinst.exe -O /sdcard/Frameworks/oalinst.exe");
-					bar.setProgress((int) (bar.getMax() * 1.00), true);
-					this.runOnUiThread(() -> {
-						this.mount();
-						String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + this.win);
-						Log.d("path", mnt_stat);
-						if (mnt_stat.isEmpty()) {
-							yesButton.setVisibility(View.VISIBLE);
-							icons.setVisibility(View.GONE);
-							messages.setText(MainActivity.this.getString(R.string.mountfail) + (R.string.internalstorage));
-						} else {
-							icons.setImageDrawable(mnt);
-							ShellUtils.fastCmd("mkdir " + this.winpath + "/Toolbox || true ");
-							ShellUtils.fastCmd("cp -r /sdcard/Frameworks " + this.winpath + "/Toolbox/");
-							ShellUtils.fastCmd("rm -r /sdcard/Frameworks");
-							messages.setText(this.getString(R.string.done));
+			yesButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					noButton.setVisibility(View.GONE);
+					yesButton.setVisibility(View.GONE);
+					messages.setText(getString(R.string.please_wait));
+					bar.setVisibility(View.VISIBLE);
+					bar.setProgress(0);
+					new Thread(new Runnable() {
+						@Override
+						public void run() {
+							icons.setVisibility(View.VISIBLE);
+							icons.setImageDrawable(download);
+							try {
+								Thread.sleep(100);
+							} catch (InterruptedException e) {
+								throw new RuntimeException(e);
+							}
+							ShellUtils.fastCmd("mkdir /sdcard/Frameworks || true");
+							ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/install.bat /sdcard/Frameworks/install.bat");
+							bar.setProgress((int) (bar.getMax() * 0.00), true);
+							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/PhysX-9.13.0604-SystemSoftware-Legacy.msi -O /sdcard/Frameworks/PhysX-9.13.0604-SystemSoftware-Legacy.msi");
+							bar.setProgress((int) (bar.getMax() * 0.1), true);
+							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/PhysX_9.23.1019_SystemSoftware.exe -O /sdcard/Frameworks/PhysX_9.23.1019_SystemSoftware.exe");
+							bar.setProgress((int) (bar.getMax() * 0.2), true);
+							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/xnafx40_redist.msi -O /sdcard/Frameworks/xnafx40_redist.msi");
+							bar.setProgress((int) (bar.getMax() * 0.25), true);
+							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2005vcredist_x64.EXE -O /sdcard/Frameworks/2005vcredist_x64.EXE");
+							bar.setProgress((int) (bar.getMax() * 0.3), true);
+							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2005vcredist_x86.EXE -O /sdcard/Frameworks/2005vcredist_x86.EXE");
+							bar.setProgress((int) (bar.getMax() * 0.35), true);
+							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2008vcredist_x64.exe -O /sdcard/Frameworks/2008vcredist_x64.exe");
+							bar.setProgress((int) (bar.getMax() * 0.4), true);
+							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2008vcredist_x86.exe -O /sdcard/Frameworks/2008vcredist_x86.exe");
+							bar.setProgress((int) (bar.getMax() * 0.45), true);
+							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2010vcredist_x64.exe -O /sdcard/Frameworks/2010vcredist_x64.exe");
+							bar.setProgress((int) (bar.getMax() * 0.5), true);
+							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2010vcredist_x86.exe -O /sdcard/Frameworks/2010vcredist_x86.exe");
+							bar.setProgress((int) (bar.getMax() * 0.55), true);
+							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2012vcredist_x64.exe -O /sdcard/Frameworks/2012vcredist_x64.exe");
+							bar.setProgress((int) (bar.getMax() * 0.6), true);
+							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2012vcredist_x86.exe -O /sdcard/Frameworks/2012vcredist_x86.exe");
+							bar.setProgress((int) (bar.getMax() * 0.65), true);
+							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2013vcredist_x64.exe -O /sdcard/Frameworks/2013vcredist_x64.exe");
+							bar.setProgress((int) (bar.getMax() * 0.7), true);
+							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2013vcredist_x86.exe -O /sdcard/Frameworks/2013vcredist_x86.exe");
+							bar.setProgress((int) (bar.getMax() * 0.75), true);
+							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2015VC_redist.x64.exe -O /sdcard/Frameworks/2015VC_redist.x64.exe");
+							bar.setProgress((int) (bar.getMax() * 0.8), true);
+							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2015VC_redist.x86.exe -O /sdcard/Frameworks/2015VC_redist.x86.exe");
+							bar.setProgress((int) (bar.getMax() * 0.85), true);
+							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2022VC_redist.arm64.exe -O /sdcard/Frameworks/2022VC_redist.arm64.exe");
+							bar.setProgress((int) (bar.getMax() * 0.9), true);
+							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/dxwebsetup.exe -O /sdcard/Frameworks/dxwebsetup.exe");
+							bar.setProgress((int) (bar.getMax() * 0.95), true);
+							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/oalinst.exe -O /sdcard/Frameworks/oalinst.exe");
+							bar.setProgress((int) (bar.getMax() * 1.00), true);
+							MainActivity.this.runOnUiThread(new Runnable() {
+								@Override
+								public void run() {
+									MainActivity.this.mount();
+									String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + win);
+									Log.d("path", mnt_stat);
+									if (mnt_stat.isEmpty()) {
+										yesButton.setVisibility(View.VISIBLE);
+										icons.setVisibility(View.GONE);
+										messages.setText(MainActivity.this.getString(R.string.mountfail) + (R.string.internalstorage));
+									} else {
+										icons.setImageDrawable(mnt);
+										ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/Toolbox || true ");
+										ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/Toolbox/Frameworks || true ");
+										ShellUtils.fastCmd("cp /sdcard/Frameworks/* " + MainActivity.this.winpath + "/Toolbox/Frameworks");
+										ShellUtils.fastCmd("rm -r /sdcard/Frameworks");
+										bar.setVisibility(View.GONE);
+										messages.setText(getString(R.string.done));
+										dismissButton.setVisibility(View.VISIBLE);
+										dismissButton.setOnClickListener(v19 -> {
+											HideBlur();
+											dialog.dismiss();
+										});
+									}
+								}
+							});
 						}
-						dismissButton.setVisibility(View.VISIBLE);
-						bar.setVisibility(View.GONE);
-					});
-				}).start();
+					}).start();
+				}
 			});
 			dialog.setCancelable(false);
 			dialog.show();
@@ -1452,13 +1482,14 @@ public class MainActivity extends AppCompatActivity {
 			messages.setText(this.getString(R.string.defender_question));
 			icons.setVisibility(View.VISIBLE);
 			icons.setImageDrawable(edge);
-			noButton.setOnClickListener(v19 -> {
+			noButton.setOnClickListener(v20 -> {
 				this.HideBlur();
 				dialog.dismiss();
 			});
-			yesButton.setOnClickListener(v20 -> {
+			yesButton.setOnClickListener(v21 -> {
 				noButton.setVisibility(View.GONE);
 				yesButton.setVisibility(View.GONE);
+				messages.setText(this.getString(R.string.please_wait));
 				mount();
 				String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + this.win);
 				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/DefenderRemover.exe /sdcard");
@@ -1474,9 +1505,9 @@ public class MainActivity extends AppCompatActivity {
 					ShellUtils.fastCmd("rm /sdcard/RemoveEdge.bat");
 					messages.setText(this.getString(R.string.done));
 					dismissButton.setVisibility(View.VISIBLE);
-					dismissButton.setOnClickListener(v21 -> {
-					this.HideBlur();
-					dialog.dismiss();
+					dismissButton.setOnClickListener(v22 -> {
+						this.HideBlur();
+						dialog.dismiss();
 					});
 				}
 			});
@@ -1604,7 +1635,7 @@ public class MainActivity extends AppCompatActivity {
 					}
 				}).start();
 			}
-			dismissButton.setOnClickListener(v21 -> {
+			dismissButton.setOnClickListener(v23 -> {
 				this.HideBlur();
 				dialog.dismiss();
 			});
