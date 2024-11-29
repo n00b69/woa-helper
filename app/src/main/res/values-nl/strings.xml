@@ -85,6 +85,9 @@
     <string name="done">Klaar!</string>
     <string name="mountt">MOUNT</string>
     <string name="unmountt">UNMOUNT</string>
+	<string name="update">UPDATE</string>
+	<string name="update1">Update beschikbaar</string>
+	<string name="update2">Updating...</string>
 
     <string name="last">LAATSTE BACKUP : %s</string>
     <string name="slot">SLOT : %s</string>
@@ -110,4 +113,5 @@
     <string name="preference8">Modem functie uitschakelen</string>
     <string name="preference9">Vereist ontgrendeld scherm voor quickboot</string>
     <string name="preference10">Mount Windows naar /mnt i.p.v /sdcard</string>
+	<string name="preference11">Zoeken naar app-updates stopzetten</string>
 </resources>

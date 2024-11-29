@@ -12,12 +12,12 @@
     <string name="software_title">ซอฟต์แวร์ ARM</string>
     <string name="rotation_title">สลับการหมุน</string>
     <string name="autoflash_title">แฟลช Android อัตโนมัติ</string>
-    <string name="atlasos_title">COPY ATLASOS / REVIOS FILES</string>
+    <string name="atlasos_title">คัดลอกไฟล์ ATLASOS / REVIOS</string>
     <string name="defender_title">ลบ EDGE / DEFENDER</string>
     <string name="script_title">กล่องเครื่องมือสคริปต์</string>
     <string name="setup_title">ติดตั้งเฟรมเวิร์ก</string>
-    <string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
-	<string name="tablet_title">TABLET MODE SCRIPT</string>
+    <string name="dbkp_title">โปรแกรมแก้ไขเคอร์เนล DUALBOOT</string>
+	<string name="tablet_title">สคริปต์โหมดแท็บเล็ต</string>
 
     <string name="backup_boot_subtitle">สำรองข้อมูลพาร์ติชั่นสำหรับบูตเข้าสู่ Windows และ Android</string>
     <string name="mnt_subtitle">สลับพาร์ติชันที่ติดตั้ง Windows เพื่อให้คุณสามารถแก้ไขเนื้อหาได้</string>
@@ -36,8 +36,8 @@
     <string name="defender_subtitle">เพิ่มสคริปต์ที่ C:\\Toolbox ซึ่งช่วยให้คุณสามารถลบ Microsoft Edge / Windows Defender ได้</string>
     <string name="script_subtitle">เพิ่มสคริปต์และการปรับแต่งต่างๆ ที่ C:\\Toolbox</string>
     <string name="setup_subtitle">เพิ่มตัวติดตั้งสำหรับเฟรมเวิร์กต่างๆ ลงใน C:\\Toolbox</string>
-    <string name="dbkp_subtitle">Patches the kernel for seamless dualbooting</string>
-	<string name="tablet_subtitle">Adds a script to C:\\Toolbox which allows you to toggle tablet mode</string>
+    <string name="dbkp_subtitle">แก้ไขเคอร์เนลเพื่อการบูตคู่แบบราบรื่น</string>
+	<string name="tablet_subtitle">เพิ่มสคริปต์ไปที่ C:\\Toolbox ซึ่งช่วยให้คุณสามารถสลับโหมดแท็บเล็ตได้</string>
 
     <string name="backup_boot_question">สำรองข้อมูลการบูตเข้าสู่ Android ปัจจุบัน?</string>
     <string name="mount_question">ทำการเชื่อมต่อ Windows ไปที่ %s?</string>
@@ -53,17 +53,17 @@
     <string name="atlasos_question">ดาวน์โหลดและย้าย AtlasOS หรือ ReviOS playbook ไปที่ C:\\Toolbox?</string>
     <string name="defender_question">คัดลอกสคริปต์ลบ Edge / Defender ไปที่ C:\\Toolbox?</string>
     <string name="setup_question">ดาวน์โหลดและย้ายตัวติดตั้ง C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX และ XNA ไปที่ C:\\Toolbox?\n(อาจใช้เวลาสักครู่)</string>
-    <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
-	<string name="tablet_question">Copy tablet mode script to C:\\Toolbox?</string>
+    <string name="dbkp_question">แก้ไขและแฟลชเคอร์เนลปัจจุบันของคุณใช่ไหม\n!!!อย่ากด "ใช่" ยกเว้นว่าอุปกรณ์ของคุณคือ %s!!!</string>
+	<string name="tablet_question">คัดลอกสคริปต์โหมดแท็บเล็ตไปที่ C:\\Toolbox?</string>
 
     <string name="wrong">ข้อผิดพลาด</string>
     <string name="mountfail">เกิดข้อผิดพลาด \nไม่สามาทำการเชื่อมต่อ Windows ได้\nขอความช่วยเหลือในการแชททาง Telegram.</string>
-	<string name="ntfs">NTFS support not detected. \nInstall NTFS3G module?</string>
-	<string name="internet">No internet connection found.\nConnect to the internet and try again.</string>
-	<string name="partition">No Windows partition detected.</string>
-	<string name="internalstorage">\nFiles downloaded in internal storage</string>
-	<string name="op7">Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/patched-boot.img.\nUse your alert slider to switch between Windows and Android.</string>
-	<string name="cepheus">Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/patched-boot.img.\nUse your assistant button to switch between Windows and Android.</string>
+	<string name="ntfs">ไม่พบการรองรับ NTFS \ติดตั้งโมดูล NTFS3G หรือไม่?</string>
+	<string name="internet">ไม่พบการเชื่อมต่ออินเทอร์เน็ต\nโปรดเชื่อมต่ออินเทอร์เน็ตแล้วลองอีกครั้ง</string>
+	<string name="partition">ไม่พบพาร์ติชัน Windows</string>
+	<string name="internalstorage">\nไฟล์ที่ดาวน์โหลดลงในที่เก็บข้อมูลภายใน</string>
+	<string name="op7">image การบูตได้รับการแก้ไขและแฟลชแล้ว\nยังสามารถพบ image ที่แก้ไขแล้วได้ที่ /sdcard/patched-boot.img\nใช้แถบเลื่อนการแจ้งเตือนเพื่อสลับระหว่าง Windows และ Android</string>
+	<string name="cepheus">image การบูตได้รับการแก้ไขและแฟลชแล้ว\nยังสามารถพบ image ที่แก้ไขแล้วได้ที่ /sdcard/patched-boot.img\nใช้ปุ่มผู้ช่วยของคุณเพื่อสลับระหว่าง Windows และ Android</string>
     <string name="reboot">เริ่มใหม่</string>
     <string name="cancel">ยกเลิก</string>
     <string name="mounted">การเชื่อมต่อ Windows</string>
@@ -85,6 +85,9 @@
     <string name="later">ภายหลัง</string>
     <string name="mountt">การเชื่อมต่อ</string>
     <string name="unmountt">ยกเลิกการเชื่อมต่อ</string>
+	<string name="update">อัปเดต</string>
+	<string name="update1">อัปเดตพร้อมใช้งานแล้ว</string>
+	<string name="update2">กำลังอัปเดต...</string>
 
     <string name="last">การสำรองข้อมูลครั้งล่าสุด : %s</string>
     <string name="slot">ช่อง : %s</string>
@@ -110,4 +113,5 @@
     <string name="preference8">ปิดใช้งานฟังก์ชันดัมพ์โมเด็ม</string>
     <string name="preference9">ต้องใช้หน้าจอที่ปลดล็อคสำหรับการบูตอย่างรวดเร็ว</string>
     <string name="preference10">เชื่อมต่อ Windows ไปที่ /mnt แทน /sdcard</string>
+	<string name="preference11">ปิดการตรวจสอบการอัปเดตแอป</string>
 </resources>

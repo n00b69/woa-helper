@@ -11,7 +11,7 @@ android {
         minSdk = 25
         targetSdk = 34
         versionCode = 3
-        versionName = "1.8.4_BETA28"
+        versionName = "1.8.4_BETA30"
 
         resourceConfigurations += listOf(
             "ar", "az", "be", "cs", "de", "en", "es", "fa", "fr", "in", "ko", "ms", "nl", "pl", "pt", "ru", "ro", "th", "tr", "uk", "vi", "zh", "zh-rCN", "zh-rHK", "zh-rMO", "zh-rSG", "zh-rTW"

@@ -36,7 +36,7 @@
     <string name="defender_subtitle">将卸载 Microsoft Edge / Windows Defender 的脚本添加到 C:\\Toolbox</string>
     <string name="script_subtitle">将一系列优化脚本添加到 C:\\Toolbox</string>
     <string name="setup_subtitle">将一些运行库的安装包添加到 C:\\Toolbox</string>
-   <string name="dbkp_subtitle">修补内核以更快捷地切换双系统</string>
+    <string name="dbkp_subtitle">修补内核以更快捷地切换双系统</string>
 	<string name="tablet_subtitle">将快捷切换平板模式的脚本添加到 C:\\Toolbox</string>
 
     <string name="backup_boot_question">确认备份当前 Android 的 boot 镜像?</string>
@@ -85,6 +85,9 @@
     <string name="done">完成!</string>
     <string name="mountt">挂载</string>
     <string name="unmountt">解除挂载</string>
+	<string name="update">更新</string>
+    <string name="update1">有可用的更新</string>
+    <string name="update2">正在更新...</string>
 
     <string name="last">最后一次备份 : %s</string>
     <string name="slot">插槽 : %s</string>
@@ -110,4 +113,5 @@
     <string name="preference8">禁用自动提取基带功能</string>
     <string name="preference9">从操作中心快速启动到 Windows 需要先解锁屏幕</string>
     <string name="preference10">把 Windows 分区挂载到 /mnt 而不是 /sdcard</string>
+	<string name="preference11">禁用应用更新检查</string>
 </resources>

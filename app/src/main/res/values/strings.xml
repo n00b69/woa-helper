@@ -89,6 +89,9 @@
     <string name="done">Done!</string>
     <string name="mountt">MOUNT</string>
     <string name="unmountt">UNMOUNT</string>
+	<string name="update">UPDATE</string>
+	<string name="update1">Update available</string>
+	<string name="update2">Updating...</string>
 
     <string name="last">LAST BACKUP : %s</string>
     <string name="slot">SLOT : %s</string>
