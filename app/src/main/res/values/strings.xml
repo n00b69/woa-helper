@@ -117,6 +117,7 @@
     <string name="preference8">Disable modem dump functionality</string>
     <string name="preference9">Require unlocked screen for quickboot</string>
     <string name="preference10">Mount Windows to /mnt instead of /sdcard</string>
+	<string name="preference11">Disable checking for app updates</string>
 
     <string name="mount" translatable="false"> mount -t ntfs %s /mnt/sdcard/Windows</string>
     <string name="unmount" translatable="false">su -mm -c umount /mnt/sdcard/Windows </string>
