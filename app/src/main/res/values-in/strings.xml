@@ -16,8 +16,8 @@
     <string name="defender_title">PENGHAPUS EDGE / DEFENDER</string>
     <string name="script_title">KOTAK ALAT SKRIP</string>
     <string name="setup_title">PEMASANG KERANGKA KERJA</string>
-    <string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
-	<string name="tablet_title">TABLET MODE SCRIPT</string>
+    <string name="dbkp_title">PENAMBAH KERNEL DUALBOOT</string>
+	<string name="tablet_title">SKRIP MODE TABLET</string>
 
     <string name="backup_boot_subtitle">Cadangkan image booting ke Android dan/atau Windows</string>
     <string name="mnt_subtitle">Alihkan pemasangan partisi Windows untuk melihat atau mengedit konten di dalamnya</string>
@@ -36,8 +36,8 @@
     <string name="defender_subtitle">Menambahkan skrip ke C:\\Toolbox yang memungkinkan Anda menghapus Microsoft Edge / Windows Defender</string>
     <string name="script_subtitle">Menambahkan berbagai macam skrip dan tweak ke C:\\Toolbox</string>
     <string name="setup_subtitle">Menambahkan penginstal untuk beberapa kerangka kerja ke dalam C:\\Toolbox</string>
-    <string name="dbkp_subtitle">Patches the kernel for seamless dualbooting</string>
-	<string name="tablet_subtitle">Adds a script to C:\\Toolbox which allows you to toggle tablet mode</string>
+    <string name="dbkp_subtitle">Menambal kernel untuk dualbooting yang lancar</string>
+	<string name="tablet_subtitle">Menambahkan skrip ke C:\\Toolbox yang memungkinkan Anda untuk beralih mode tablet</string>
 
     <string name="quickboot_question">Boot cepat ke Windows?</string>
     <string name="backup_boot_question">Cadangkan image boot Android saat ini?</string>
@@ -53,17 +53,17 @@
     <string name="atlasos_question">Unduh dan pindahkan buku pedoman AtlasOS atau ReviOS ke C:\\Toolbox?</string>
     <string name="defender_question">Salin skrip penghapus Edge / Defender ke C:\\Toolbox?</string>
     <string name="setup_question">Unduh dan pindahkan C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, dan XNA ke C:\\Toolbox?\n(ini mungkin memerlukan waktu)</string>
-    <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
-	<string name="tablet_question">Copy tablet mode script to C:\\Toolbox?</string>
+    <string name="dbkp_question">Patch dan flash kernel Anda saat ini?\n!!!JANGAN TEKAN YA KECUALI PERANGKAT ANDA %s!!!</string>
+	<string name="tablet_question">Salin skrip mode tablet ke C:\\Toolbox?</string>
 
     <string name="wrong">Ada yang tidak benar</string>
     <string name="mountfail">Ada yang tidak beres, \nWindows tidak dapat dipasang.\nMinta bantuan di obrolan Telegram.</string>
-	<string name="ntfs">NTFS support not detected. \nInstall NTFS3G module?</string>
-	<string name="internet">No internet connection found.\nConnect to the internet and try again.</string>
-	<string name="partition">No Windows partition detected.</string>
-	<string name="internalstorage">\nFiles downloaded in internal storage</string>
-	<string name="op7">Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/patched-boot.img.\nUse your alert slider to switch between Windows and Android.</string>
-	<string name="cepheus">Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/patched-boot.img.\nUse your assistant button to switch between Windows and Android.</string>
+	<string name="ntfs">Dukungan NTFS tidak terdeteksi. \Instal modul NTFS 3G?</string>
+	<string name="internet">Tidak ditemukan koneksi internet.\nHubungkan ke internet dan coba lagi.</string>
+	<string name="partition">Tidak ada partisi Windows yang terdeteksi.</string>
+	<string name="internalstorage">\nFile diunduh di penyimpanan internal</string>
+	<string name="op7">Gambar boot telah ditambal dan di-flash.\nGambar yang ditambal juga dapat ditemukan di /sdcard/patched-boot.img.\nGunakan slider peringatan Anda untuk beralih antara Windows dan Android.</string>
+	<string name="cepheus">Gambar boot telah ditambal dan di-flash.\nGambar yang ditambal juga dapat ditemukan di /sdcard/patched-boot.img.\nGunakan tombol asisten Anda untuk beralih antara Windows dan Android.</string>
     <string name="reboot">Mulai Ulang</string>
     <string name="cancel">Batal</string>
     <string name="mounted">Windows dipasang</string>
@@ -85,6 +85,9 @@
     <string name="done">Selesai!</string>
     <string name="mountt">PASANG</string>
     <string name="unmountt">LEPAS</string>
+    <string name="update">PEMBARUAN</string>
+    <string name="update1">Pembaruan Tersedia</string>
+    <string name="update2">Memperbarui...</string>
 
     <string name="last">CADANGAN TERAKHIR : %s</string>
     <string name="slot">SLOT : %s</string>
@@ -110,4 +113,5 @@
     <string name="preference8">Nonaktifkan fungsionalitas dump modem</string>
     <string name="preference9">Memerlukan layar yang tidak terkunci untuk quickboot</string>
     <string name="preference10">Pasang Windows ke /mnt bukan ke /sdcard</string>
+    <string name="preference11">Nonaktifkan Pemeriksaan Pembaruan Aplikasi</string>
 </resources>

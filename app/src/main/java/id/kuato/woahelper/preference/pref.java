@@ -23,6 +23,7 @@ public enum pref {
     public static final String locale = "woa active language locale";
     public static final String version = "woa last app version";
     public static final String mountLocation = "woa mount location";
+	public static final String appUpdate = "woa app update";
 
     public static SharedPreferences getSharedPreference(final Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context);
@@ -177,6 +178,16 @@ public enum pref {
 
     public static boolean getMountLocation(final Context context) {
         return pref.getSharedPreference(context).getBoolean(pref.mountLocation, false);
+    }
+	
+	public static void setAppUpdate(final Context context, final boolean value) {
+        final SharedPreferences.Editor editor = pref.getSharedPreference(context).edit();
+        editor.putBoolean(pref.appUpdate, value);
+        editor.apply();
+    }
+
+    public static boolean getAppUpdate(final Context context) {
+        return pref.getSharedPreference(context).getBoolean(pref.appUpdate, false);
     }
 }
 

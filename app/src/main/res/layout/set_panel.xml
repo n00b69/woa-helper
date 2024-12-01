@@ -78,7 +78,13 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/_5sdp"
             android:text="@string/preference10" />
-
+			
+		<com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/appUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/preference11" />
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"

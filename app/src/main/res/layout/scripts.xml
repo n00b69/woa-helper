@@ -35,7 +35,6 @@
                 android:layout_marginBottom="6dp"
                 android:gravity="center"
                 android:orientation="vertical">
-
             </LinearLayout>
 
             <LinearLayout
@@ -59,7 +58,6 @@
                     android:elevation="@dimen/cardElevation"
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground"
-                    android:gravity="center"
                     android:padding="@dimen/parentMargin"
                     android:stateListAnimator="@animator/state_list_anim"
                     app:cardCornerRadius="@dimen/cardCornerRadius"
@@ -68,8 +66,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="4dp"
-                        android:gravity="center"
+                        android:layout_margin="0dp"
+                        android:gravity="left|center"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -127,7 +125,6 @@
                     android:elevation="@dimen/cardElevation"
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground"
-                    android:gravity="center"
                     android:padding="@dimen/parentMargin"
                     android:stateListAnimator="@animator/state_list_anim"
                     app:cardCornerRadius="@dimen/cardCornerRadius"
@@ -136,8 +133,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="4dp"
-                        android:gravity="center"
+                        android:layout_margin="0dp"
+                        android:gravity="left|center"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -187,7 +184,6 @@
                     android:elevation="@dimen/cardElevation"
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground"
-                    android:gravity="center"
                     android:padding="@dimen/parentMargin"
                     android:stateListAnimator="@animator/state_list_anim"
                     app:cardCornerRadius="@dimen/cardCornerRadius"
@@ -196,8 +192,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="4dp"
-                        android:gravity="center"
+                        android:layout_margin="0dp"
+                        android:gravity="left|center"
                         android:orientation="horizontal">
 
                         <ImageView

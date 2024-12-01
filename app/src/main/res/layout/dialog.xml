@@ -63,7 +63,6 @@
                 app:cornerRadius="@dimen/parentMargin"
                 tools:targetApi="s" />
 
-
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/no"
                 style="@style/Widget.MaterialComponents.Button"
@@ -99,5 +98,4 @@
 
         </LinearLayout>
     </LinearLayout>
-
 </com.google.android.material.card.MaterialCardView>
