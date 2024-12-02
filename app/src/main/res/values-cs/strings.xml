@@ -58,12 +58,12 @@
 
     <string name="wrong">Něco se pokazilo</string>
     <string name="mountfail">Něco se pokazilo, \nWindows se nepodařilo připojit.\nPožádejte o pomoc v Telegram chatu.</string>
-	<string name="ntfs">NTFS support not detected. \nInstall NTFS3G module?</string>
-	<string name="internet">No internet connection found.\nConnect to the internet and try again.</string>
-	<string name="partition">No Windows partition detected.</string>
-	<string name="internalstorage">Files downloaded in internal storage</string>
-	<string name="op7">Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/patched-boot.img.\nUse your alert slider to switch between Windows and Android.</string>
-	<string name="cepheus">Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/patched-boot.img.\nUse your assistant button to switch between Windows and Android.</string>
+	<string name="ntfs">Podpora NTFS nebyla detekována. \nNainstalovat modul NTFS3G?</string>
+	<string name="internet">Nebylo nalezeno internetové připojení. \nPřipojte se k internetu a zkuste to znovu.</string>
+	<string name="partition">Nebyl detekován oddíl Windows.</string>
+	<string name="internalstorage">Soubory staženy do interního úložiště.</string>
+	<string name="op7">Obraz spousteni byl upraven a nahrán. \nUpravený obraz lze také najít na /sdcard/patched-boot.img. \nPoužijte alert slider pro přepínání mezi Windows a Androidem."</string>
+	<string name="cepheus">Obraz spousteni byl upraven a nahrán. \nUpravený obraz lze také najít na /sdcard/patched-boot.img. \nPoužijte tlačítko asistenta pro přepínání mezi Windows a Android.</string>
     <string name="reboot">Restartovat</string>
     <string name="cancel">Zrušit</string>
     <string name="mounted">Windows namontován</string>

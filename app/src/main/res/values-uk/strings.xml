@@ -85,6 +85,9 @@
     <string name="later">Пізніше</string>
     <string name="mountt">МОНТУВАННЯ</string>
     <string name="unmountt">ВІДМОНТУВАТИ</string>
+	<string name="update">ОНОВЛЕННЯ</string>
+    <string name="update1">Доступно оновлення</string>
+    <string name="update2">Оновлення...</string>
 
     <string name="last">ОСТАННЯ РЕЗЕРВНА КОПІЯ : %s</string>
     <string name="slot">СЛОТ : %s</string>
@@ -110,8 +113,5 @@
     <string name="preference8">Вимкнути функцію дампа модему</string>
     <string name="preference9">Для швидкого завантаження потрібен розблокований екран</string>
     <string name="preference10">Змонтувати Windows в /mnt замість /sdcard</string>
-    <string name="update">ОНОВЛЕННЯ</string>
-    <string name="update1">Доступно оновлення</string>
-    <string name="update2">Оновлення...</string>
     <string name="preference11">Вимкнути перевірку оновлень додатка</string>
 </resources>

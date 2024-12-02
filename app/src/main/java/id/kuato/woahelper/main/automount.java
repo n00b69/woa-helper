@@ -20,10 +20,12 @@ public class automount extends BroadcastReceiver {
 			if ("/dev/block/by-name/win".equals(win)) win = ShellUtils.fastCmd("su -mm -c realpath /dev/block/by-name/mindows");
 			if (pref.getSharedPreference(context).getBoolean(pref.mountLocation, false)) {
 				ShellUtils.fastCmd("su -mm -c mkdir /mnt/Windows || true");
-				ShellUtils.fastCmd("su -mm -c /data/data/id.kuato.woahelper/files/mount.ntfs " + win + " /mnt/Windows");
+				ShellUtils.fastCmd("cd /data/data/id.kuato.woahelper/files");
+				ShellUtils.fastCmd("su -mm -c ./mount.ntfs " + win + " /mnt/Windows");
 			} else {
 				ShellUtils.fastCmd("su -mm -c mkdir /mnt/sdcard/Windows || true");
-				ShellUtils.fastCmd("su -mm -c /data/data/id.kuato.woahelper/files/mount.ntfs " + win + " /mnt/sdcard/Windows");
+				ShellUtils.fastCmd("cd /data/data/id.kuato.woahelper/files");
+				ShellUtils.fastCmd("su -mm -c mount.ntfs " + win + " /mnt/sdcard/Windows");
 			}
 		}
 	}

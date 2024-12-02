@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
 		this.win = ShellUtils.fastCmd("realpath /dev/block/by-name/win");
 		if ("/dev/block/by-name/win".equals(this.win)) this.win = ShellUtils.fastCmd("realpath /dev/block/by-name/mindows");
 		this.winpath = (pref.getMountLocation(this) ? "/mnt/Windows" : "/mnt/sdcard/Windows");
-		String mount_stat = ShellUtils.fastCmd("su -c mount | grep " + this.win);
+		String mount_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + this.win);
 		if (mount_stat.isEmpty()) this.mounted = getString(R.string.mountt);
 		else this.mounted = getString(R.string.unmountt);
 		if (pref.getMODEM(this)) this.n.cvDumpModem.setVisibility(View.GONE);
@@ -585,7 +585,7 @@ public class MainActivity extends AppCompatActivity {
 							String currentDateAndTime = sdf.format(new Date());
 							pref.setDATE(MainActivity.this, currentDateAndTime);
 							MainActivity.this.x.tvDate.setText(String.format(MainActivity.this.getString(R.string.last), pref.getDATE(MainActivity.this)));
-							String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + MainActivity.this.win);
+							String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
 							MainActivity.this.winBackup();
 							messages.setText(MainActivity.this.getString(R.string.backuped));
 							dismissButton.setText(R.string.dismiss);
@@ -637,7 +637,7 @@ public class MainActivity extends AppCompatActivity {
 			noButton.setText(this.getString(R.string.no));
 			yesButton.setText(this.getString(R.string.yes));
 			dismissButton.setText(this.getString(R.string.dismiss));
-			String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + this.win);
+			String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + this.win);
 			if (mnt_stat.isEmpty()) messages.setText(String.format(this.getString(R.string.mount_question), this.winpath));
 			else messages.setText(this.getString(R.string.unmount_question));
 			yesButton.setOnClickListener(new View.OnClickListener() {
@@ -651,10 +651,10 @@ public class MainActivity extends AppCompatActivity {
 						public void run() {
 							try {
 								Log.d("debug", MainActivity.this.winpath);
-								String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + MainActivity.this.win);
+								String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
 								if (mnt_stat.isEmpty()) {
 									MainActivity.this.mount();
-									mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + MainActivity.this.win);
+									mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
 									if (mnt_stat.isEmpty()) {
 										dialog.dismiss();
 										mountfail();
@@ -716,24 +716,15 @@ public class MainActivity extends AppCompatActivity {
 							this.dump();
 						}
 						String found = ShellUtils.fastCmd("ls " + (pref.getMountLocation(this) ? "/mnt/Windows" : "/mnt/sdcard/Windows") + " | grep boot.img");
-						if (pref.getMountLocation(this)) {
-							if (pref.getBACKUP(this) || (!pref.getAUTO(this) && found.isEmpty())) {
-								ShellUtils.fastCmd(this.getString(R.string.backup2));
-								SimpleDateFormat sdf = new SimpleDateFormat("dd-MM HH:mm", Locale.US);
-								String currentDateAndTime = sdf.format(new Date());
-								pref.setDATE(this, currentDateAndTime);
-							}
-						} else {
-							if (pref.getBACKUP(this) || (!pref.getAUTO(this) && found.isEmpty())) {
-								ShellUtils.fastCmd(this.getString(R.string.backup1));
-								SimpleDateFormat sdf = new SimpleDateFormat("dd-MM HH:mm", Locale.US);
-								String currentDateAndTime = sdf.format(new Date());
-								pref.setDATE(this, currentDateAndTime);
-							}
+						if (pref.getBACKUP(this) || (!pref.getAUTO(this) && found.isEmpty())) {
+							ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/boot$(getprop ro.boot.slot_suffix) of=" + this.winpath + "/boot.img");
+							SimpleDateFormat sdf = new SimpleDateFormat("dd-MM HH:mm", Locale.US);
+							String currentDateAndTime = sdf.format(new Date());
+							pref.setDATE(this, currentDateAndTime);
 						}
 						found = ShellUtils.fastCmd("find /sdcard | grep boot.img");
 						if (pref.getBACKUP_A(this) || (!pref.getAUTO_A(this) && found.isEmpty())) {
-							ShellUtils.fastCmd(this.getString(R.string.backup));
+							ShellUtils.fastCmd(MainActivity.this.getString(R.string.backup));
 							SimpleDateFormat sdf = new SimpleDateFormat("dd-MM HH:mm", Locale.US);
 							String currentDateAndTime = sdf.format(new Date());
 							pref.setDATE(this, currentDateAndTime);
@@ -797,7 +788,7 @@ public class MainActivity extends AppCompatActivity {
 				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.exe /sdcard/sdd.exe");
 				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.conf /sdcard/sdd.conf");
 				mount();
-				String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + MainActivity.this.win);
+				String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
 				if (mnt_stat.isEmpty()) {
 					dialog.dismiss();
 					mountfail();
@@ -839,7 +830,6 @@ public class MainActivity extends AppCompatActivity {
 			messages.setText(this.getString(R.string.dump_modem_question));
 			noButton.setText(this.getString(R.string.no));
 			yesButton.setText(this.getString(R.string.yes));
-			dismissButton.setText(this.getString(R.string.dismiss));
 			yesButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -849,23 +839,15 @@ public class MainActivity extends AppCompatActivity {
 					new Handler().postDelayed(new Runnable() {
 						@Override
 						public void run() {
-							String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + MainActivity.this.win);
+							String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
 							if (mnt_stat.isEmpty()) {
 								MainActivity.this.mount();
 								MainActivity.this.dump();
-								MainActivity.this.unmount();
 							} else MainActivity.this.dump();
 							messages.setText(MainActivity.this.getString(R.string.lte));
 							dismissButton.setVisibility(View.VISIBLE);
 						}
 					}, 50);
-				}
-			});
-			dismissButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					MainActivity.this.HideBlur();
-					dialog.dismiss();
 				}
 			});
 			noButton.setOnClickListener(new View.OnClickListener() {
@@ -1059,7 +1041,7 @@ public class MainActivity extends AppCompatActivity {
 				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/ARMSoftware.url /sdcard");
 				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/ARMRepo.url /sdcard");
 				mount();
-				String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + MainActivity.this.win);
+				String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
 				if (mnt_stat.isEmpty()) {
 					dialog.dismiss();
 					mountfail();
@@ -1140,7 +1122,7 @@ public class MainActivity extends AppCompatActivity {
 								@Override
 								public void run() {
 									MainActivity.this.mount();
-									String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + MainActivity.this.win);
+									String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
 									if (mnt_stat.isEmpty()) {
 										icons.setVisibility(View.GONE);
 										yesButton.setVisibility(View.VISIBLE);
@@ -1196,7 +1178,7 @@ public class MainActivity extends AppCompatActivity {
 								@Override
 								public void run() {
 									MainActivity.this.mount();
-									String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + MainActivity.this.win);
+									String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
 									if (mnt_stat.isEmpty()) {
 										icons.setVisibility(View.GONE);
 										yesButton.setVisibility(View.VISIBLE);
@@ -1247,7 +1229,7 @@ public class MainActivity extends AppCompatActivity {
 				messages.setText(this.getString(R.string.please_wait));
 				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/usbhostmode.exe /sdcard");
 				mount();
-				String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + MainActivity.this.win);
+				String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
 				if (mnt_stat.isEmpty()) {
 					dialog.dismiss();
 					mountfail();
@@ -1289,7 +1271,7 @@ public class MainActivity extends AppCompatActivity {
 				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/display.exe /sdcard/");
 				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/RotationShortcut.lnk /sdcard/");
 				mount();
-				String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + MainActivity.this.win);
+				String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
 				if (mnt_stat.isEmpty()) {
 					dialog.dismiss();
 					mountfail();
@@ -1333,7 +1315,7 @@ public class MainActivity extends AppCompatActivity {
 				messages.setText(this.getString(R.string.please_wait));
 				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/Optimized_Taskbar_Control_V3.0.exe /sdcard/");
 				mount();
-				String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + MainActivity.this.win);
+				String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
 				if (mnt_stat.isEmpty()) {
 					dialog.dismiss();
 					mountfail();
@@ -1437,7 +1419,7 @@ public class MainActivity extends AppCompatActivity {
 								@Override
 								public void run() {
 									MainActivity.this.mount();
-									String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + win);
+									String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + win);
 									Log.d("path", mnt_stat);
 									if (mnt_stat.isEmpty()) {
 										yesButton.setVisibility(View.VISIBLE);
@@ -1489,7 +1471,7 @@ public class MainActivity extends AppCompatActivity {
 				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/DefenderRemover.exe /sdcard");
 				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/RemoveEdge.bat /sdcard");
 				mount();
-				String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + this.win);
+				String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + this.win);
 				if (mnt_stat.isEmpty()) {
 					dialog.dismiss();
 					mountfail();
@@ -1551,6 +1533,7 @@ public class MainActivity extends AppCompatActivity {
 		this.x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in));
 		this.backable = 0;
 		});
+		
 		this.k.backupQB.setOnCheckedChangeListener((compoundButton, b) -> {
 			if (pref.getBACKUP(this)) {
 				pref.setBACKUP(this, false);
@@ -1716,7 +1699,8 @@ public class MainActivity extends AppCompatActivity {
 	
 	public void mount() {
 		ShellUtils.fastCmd("mkdir " + this.winpath + " || true");
-		ShellUtils.fastCmd("su -mm -c " + MainActivity.this.getFilesDir() + "/mount.ntfs " + this.win + " " + this.winpath);
+		ShellUtils.fastCmd("cd /data/data/id.kuato.woahelper/files");
+		ShellUtils.fastCmd("su -mm -c ./mount.ntfs " + this.win + " " + this.winpath);
 		this.mounted = this.getString(R.string.unmountt);
 		this.x.tvMnt.setText(String.format(this.getString(R.string.mnt_title), this.mounted));
 	}

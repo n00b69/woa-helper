@@ -83,7 +83,8 @@ public class quickboot_tile extends TileService {
 
 	private void mount() {
 		ShellUtils.fastCmd("mkdir " + winpath + " || true");
-		ShellUtils.fastCmd("su -mm -c /data/data/id.kuato.woahelper/files/mount.ntfs " + win + " " + winpath);
+		ShellUtils.fastCmd("cd /data/data/id.kuato.woahelper/files");
+		ShellUtils.fastCmd("su -mm -c ./mount.ntfs " + win + " " + winpath);
 	}
 
 	private void dump() {
