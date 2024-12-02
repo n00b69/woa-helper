@@ -16,8 +16,8 @@
     <string name="defender_title">ELIMINAR MICROSOFT EDGE / WINDOWS DEFENDER</string>
     <string name="script_title">AÑADIR SCRIPTS</string>
     <string name="setup_title">INSTALAR FRAMEWORKS</string>
-    <string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
-	<string name="tablet_title">TABLET MODE SCRIPT</string>
+    <string name="dbkp_title">PARCHEAR KERNEL PARA DUALBOOT</string>
+	<string name="tablet_title">SCRIPT MODO TABLET</string>
 
     <string name="backup_boot_subtitle">Respaldar la imagen de arranque en Android y/o Windows</string>
     <string name="mnt_subtitle">Activar/desactivar el montaje de la partición de Windows para ver o editar el contenido dentro</string>
@@ -36,8 +36,8 @@
     <string name="defender_subtitle">Añade un script a C:\\Toolbox que te permite eliminar Microsoft Edge / Windows Defender</string>
     <string name="script_subtitle">Añade un conjunto de scripts y modificaciones a C:\\Toolbox</string>
     <string name="setup_subtitle">Añade instaladores de diversos frameworks a C:\\Toolbox</string>
-    <string name="dbkp_subtitle">Patches the kernel for seamless dualbooting</string>
-	<string name="tablet_subtitle">Adds a script to C:\\Toolbox which allows you to toggle tablet mode</string>
+    <string name="dbkp_subtitle">Parchea el kernel para hacer dualboot</string>
+	<string name="tablet_subtitle">Añade un script a C:\\Toolbox que te permita habilitar el modo tablet</string>
 
     <string name="backup_boot_question">¿Respaldar la imagen de arranque actual de Android?</string>
     <string name="mount_question">¿Montar Windows en %s?</string>
@@ -53,17 +53,17 @@
     <string name="atlasos_question">¿Descargar y mover el playbook de ReviOS o AtlasOS a C:\\Toolbox?</string>
     <string name="defender_question">¿Copiar script para eliminar Microsoft Edge / Windows Defender a C:\\Toolbox?</string>
     <string name="setup_question">¿Descargar y mover los instaladores de: C++ Redistributables y DirectX, OpenGL, OpenAL, PhysX, XNAF a C:\\Toolbox?\n(puede tardar un tiempo)</string>
-    <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
-	<string name="tablet_question">Copy tablet mode script to C:\\Toolbox?</string>
+    <string name="dbkp_question">¿Parchear y flashear el kernel actual?\n!!!NO LO PRESIONES A MENOS QUE TU DISPOSITIVO SEA %s!!!</string>
+	<string name="tablet_question">¿Copiar el script del modo tablet a C:\\Toolbox?</string>
 
     <string name="wrong">Algo salió mal</string>
     <string name="mountfail">Algo salió mal, \nWindows no se pudo montar.\nSolicita ayuda en el grupo de Telegram.</string>
-	<string name="ntfs">NTFS support not detected. \nInstall NTFS3G module?</string>
-	<string name="internet">No internet connection found.\nConnect to the internet and try again.</string>
-	<string name="partition">No Windows partition detected.</string>
-	<string name="internalstorage">\nFiles downloaded in internal storage</string>
-	<string name="op7">Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/patched-boot.img.\nUse your alert slider to switch between Windows and Android.</string>
-	<string name="cepheus">Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/patched-boot.img.\nUse your assistant button to switch between Windows and Android.</string>
+	<string name="ntfs">El soporte de NTFS no ha sido detectado. \nPrueba a instalar el módulo de NTFS3G</string>
+	<string name="internet">No hay conexión a internet.\nConectate a una red y prueba de nuevo.</string>
+	<string name="partition">No se ha detectado ninguna partición con Windows.</string>
+	<string name="internalstorage">Archivos descargados en el almacenamiento interno</string>
+	<string name="op7">La imagen "boot" ha sido parcheada y flasheada.\nLa imagen parcheada puede ser encontrada en: /sdcard/patched-boot.img.\nUsa tu "Alert Slider" para cambiar entre Windows y Android.</string>
+	<string name="cepheus">La imagen "boot" ha sido parcheada y flasheada.\nLa imagen parcheada puede ser encontrada en: /sdcard/patched-boot.img.\nUsa tu "Alert Slider" para cambiar entre Windows y Android.</string>
     <string name="reboot">Reiniciar</string>
     <string name="cancel">Cancelar</string>
     <string name="mounted">Windows montado</string>
@@ -85,6 +85,9 @@
     <string name="done">¡Completado!</string>
     <string name="mountt">MONTAR</string>
     <string name="unmountt">DESMONTAR</string>
+    <string name="update">ACTUALIZAR</string>
+    <string name="update1">ACTUALIZACIÓN DISPONIBLE</string>
+    <string name="update2">Actualizando...</string>
 
     <string name="last">ÚLTIMA COPIA DE SEGURIDAD : %s</string>
     <string name="slot">RANURA : %s</string>
@@ -110,4 +113,5 @@
     <string name="preference8">Desactivar el volcado del módem</string>
     <string name="preference9">Requerir pantalla desbloqueada para el arranque rápido</string>
     <string name="preference10">Inicializar la partición de Windows en /mnt en lugar de /sdcard</string>
+    <string name="preference11">Dejar de comprobar nuevas actualizaciones de la app</string>
 </resources>

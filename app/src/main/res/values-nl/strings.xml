@@ -61,7 +61,7 @@
 	<string name="ntfs">NTFS ondersteuning niet gevonden. \nInstalleer NTFS3G module?</string>
 	<string name="internet">Geen internetverbinding gevonden.\nMaak verbinding met internet en probeer het opnieuw.</string>
 	<string name="partition">Geen Windows partitie gevonden.</string>
-	<string name="internalstorage">\nBestanden zijn in uw interne geheugen opgeslagen</string>
+	<string name="internalstorage">Bestanden zijn in uw interne geheugen opgeslagen</string>
 	<string name="op7">Boot image is gepatcht en geinstalleerd.\nDe gepatchte boot.img is ook te vinden in /sdcard/patched-boot.img.\nGebruik uw alert slider om te schakelen tussen Windows en Android.</string>
 	<string name="cepheus">Boot image is gepatcht en geinstalleerd.\nDe gepatchte boot.img is ook te vinden in /sdcard/patched-boot.img.\nGebruik uw assistant knop om te schakelen tussen Windows en Android.</string>
     <string name="reboot">Herstart</string>

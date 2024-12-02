@@ -16,8 +16,8 @@
     <string name="defender_title">ВИДАЛЯЧ EDGE / DEFENDER</string>
     <string name="script_title">ПАНЕЛЬ СКРІПТІВ</string>
     <string name="setup_title">ВСТАНОВЛЮВАЧІ FRAMEWORK</string>
-    <string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
-	<string name="tablet_title">TABLET MODE SCRIPT</string>
+    <string name="dbkp_title">ПАТЧЕР ЯДРА DUALBOOT</string>
+	<string name="tablet_title">СЦЕНАРІЙ РЕЖИМУ ПЛАНШЕТА</string>
 
     <string name="backup_boot_subtitle">Резервне копіювання Boot образу на Android та/або Windows</string>
     <string name="mnt_subtitle">Перемкніть монтований розділ Windows, щоб переглядати або редагувати вміст усередині</string>
@@ -36,8 +36,8 @@
     <string name="defender_subtitle">Додає скрипт в C:\\Toolbox який дозволяє видалити Microsoft Edge / Windows Defender</string>
     <string name="script_subtitle">Додає асортимент скриптів і твиків в C:\\Toolbox</string>
     <string name="setup_subtitle">Додає встановлювачі фреймворків в C:\\Toolbox</string>
-    <string name="dbkp_subtitle">Patches the kernel for seamless dualbooting</string>
-	<string name="tablet_subtitle">Adds a script to C:\\Toolbox which allows you to toggle tablet mode</string>
+    <string name="dbkp_subtitle">Виправляє ядро ​​для безпроблемного подвійного завантаження</string>
+    <string name="tablet_subtitle">Додає сценарій до C:\\Toolbox, який дозволяє вмикати режим планшета</string>
 
     <string name="backup_boot_question">Зробити резервне копіювання поточного Boot образу Android?</string>
     <string name="mount_question">Змонтувати Windows в %s?</string>
@@ -53,17 +53,17 @@
     <string name="atlasos_question">Завантажити і перемістити AtlasOS або ReviOS в C:\\Toolbox?</string>
     <string name="defender_question">Скопіювати скрипт видалення Edge / Defender в C:\\Toolbox?</string>
     <string name="setup_question">Завантажити і перемістити у C:\\Toolbox встановлювачі C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX і XNA?\n(це може заняти деякий час)</string>
-    <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
-	<string name="tablet_question">Copy tablet mode script to C:\\Toolbox?</string>
+    <string name="dbkp_question">Виправити та прошити поточне ядро?\n!!!НЕ НАТИСКАЙТЕ ТАК, ЯКЩО ВАШ ПРИСТРІЙ НЕ ПОТРЕБУЄ ЦЬОГО %s!!!!</string>
+	<string name="tablet_question">Копіювати сценарій ввімкнення/вимкнення режиму планшета до C:\\Toolbox?</string>
 
     <string name="wrong">Щось пішло не так</string>
     <string name="mountfail">Щось пішло не так, \nне вдалося змонтувати Windows.\nЗверніться за допомогою в Telegram-чат.</string>
-	<string name="ntfs">NTFS support not detected. \nInstall NTFS3G module?</string>
-	<string name="internet">No internet connection found.\nConnect to the internet and try again.</string>
-	<string name="partition">No Windows partition detected.</string>
-	<string name="internalstorage">\nFiles downloaded in internal storage</string>
-	<string name="op7">Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/patched-boot.img.\nUse your alert slider to switch between Windows and Android.</string>
-	<string name="cepheus">Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/patched-boot.img.\nUse your assistant button to switch between Windows and Android.</string>
+	<string name="ntfs">NTFS не підтримується у даній системі. \nВстановити модуль NTFS3G?</string>
+	<string name="internet">Не знайдено інтернет з\'єднання.\nПідключіться до інтернету і спробуйте знову.</string>
+	<string name="partition">Не знайдено розділ із Windows.</string>
+	<string name="internalstorage">Файли завантажено у внутрішнє сховище.</string>
+	<string name="op7">Завантажувальний образ було виправлено та прошито.\nВиправлений образ також можна знайти у /sdcard/patched-boot.img.\nВикористовуйте повзунок, щоб перемикатися між Windows та Android.</string>
+	<string name="cepheus">Завантажувальний образ було виправлено та прошито.\nВиправлений образ також можна знайти у /sdcard/patched-boot.img.\nВикористовуйте кнопку помічника, щоб перемикатися між Windows та Android.</string>
     <string name="reboot">Перезавантаження</string>
     <string name="cancel">Відмінити</string>
     <string name="mounted">Windows змонтований</string>
@@ -110,4 +110,8 @@
     <string name="preference8">Вимкнути функцію дампа модему</string>
     <string name="preference9">Для швидкого завантаження потрібен розблокований екран</string>
     <string name="preference10">Змонтувати Windows в /mnt замість /sdcard</string>
+    <string name="update">ОНОВЛЕННЯ</string>
+    <string name="update1">Доступно оновлення</string>
+    <string name="update2">Оновлення...</string>
+    <string name="preference11">Вимкнути перевірку оновлень додатка</string>
 </resources>

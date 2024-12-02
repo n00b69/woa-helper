@@ -61,7 +61,7 @@
 	<string name="ntfs">未檢測到 NTFS 支持。\n是否安裝 ntfs-3g 內核模塊?</string>
 	<string name="internet">未連接到互聯網。\n請聯網後重試。</string>
     <string name="partition">未檢測到 Windows 分區。</string>
-	<string name="internalstorage">\n文件已下載到內部存儲。</string>
+	<string name="internalstorage">文件已下載到內部存儲。</string>
 	<string name="op7">已修補並刷入 Boot 分區鏡像。\n你也可以在 /sdcard/patched-boot.img 找到修補後的鏡像。\n在開機時撥動手機右側的按鍵以切換 Windows 和安卓。</string>
 	<string name="cepheus">已修補並刷入 Boot 分區鏡像。\n你也可以在 /sdcard/patched-boot.img 找到修補後的鏡像。\n在開機時按下小愛 AI 按鍵以切換 Windows 和安卓。</string>
     <string name="reboot">重啓</string>

@@ -61,7 +61,7 @@
 	<string name="ntfs">ไม่พบการรองรับ NTFS \ติดตั้งโมดูล NTFS3G หรือไม่?</string>
 	<string name="internet">ไม่พบการเชื่อมต่ออินเทอร์เน็ต\nโปรดเชื่อมต่ออินเทอร์เน็ตแล้วลองอีกครั้ง</string>
 	<string name="partition">ไม่พบพาร์ติชัน Windows</string>
-	<string name="internalstorage">\nไฟล์ที่ดาวน์โหลดลงในที่เก็บข้อมูลภายใน</string>
+	<string name="internalstorage">ไฟล์ที่ดาวน์โหลดลงในที่เก็บข้อมูลภายใน</string>
 	<string name="op7">image การบูตได้รับการแก้ไขและแฟลชแล้ว\nยังสามารถพบ image ที่แก้ไขแล้วได้ที่ /sdcard/patched-boot.img\nใช้แถบเลื่อนการแจ้งเตือนเพื่อสลับระหว่าง Windows และ Android</string>
 	<string name="cepheus">image การบูตได้รับการแก้ไขและแฟลชแล้ว\nยังสามารถพบ image ที่แก้ไขแล้วได้ที่ /sdcard/patched-boot.img\nใช้ปุ่มผู้ช่วยของคุณเพื่อสลับระหว่าง Windows และ Android</string>
     <string name="reboot">เริ่มใหม่</string>

@@ -61,7 +61,7 @@
 	<string name="ntfs">未检测到 NTFS 支持。\n是否安装 ntfs-3g 内核模块?</string>
 	<string name="internet">未连接到互联网。\n请联网后重试。</string>
     <string name="partition">未检测到 Windows 分区。</string>
-	<string name="internalstorage">\n文件已下载到内部存储。</string>
+	<string name="internalstorage">文件已下载到内部存储。</string>
 	<string name="op7">已修补并刷入 Boot 分区镜像。\n你也可以在 /sdcard/patched-boot.img 找到修补后的镜像。\n在开机时拨动手机右侧的按键以切换 Windows 和安卓。</string>
 	<string name="cepheus">已修补并刷入 Boot 分区镜像。\n你也可以在 /sdcard/patched-boot.img 找到修补后的镜像。\n在开机时按下小爱 AI 按键以切换 Windows 和安卓。</string>
     <string name="reboot">重启</string>

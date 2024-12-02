@@ -61,7 +61,7 @@
 	<string name="ntfs">Nie wykryto wsparcia dla NTFS. \nZainstalować moduł NTFS3G?</string>
 	<string name="internet">Nie znaleziono połączenia z Internetem.\nPołącz się z siecią i spróbuj ponownie.</string>
 	<string name="partition">Nie wykryto partycji Windows.</string>
-	<string name="internalstorage">\nPliki zostały pobrane do pamięci wewnętrznej</string>
+	<string name="internalstorage">Pliki zostały pobrane do pamięci wewnętrznej</string>
 	<string name="op7">Obraz rozruchu został zmodyfikowany i wgrany.\nZmodyfikowany obraz można również znaleźć w /sdcard/patched-boot.img.\nUżyj przełącznika trybu dźwięku, aby przełączać się miedzy systemami Windows i Android.</string>
 	<string name="cepheus">Obraz rozruchu został zmodyfikowany i wgrany.\nZmodyfikowany obraz można również znaleźć w /sdcard/patched-boot.img.\nUżyj przycisku asystenta, aby przełączać się miedzy systemami Windows i Android.</string>
     <string name="reboot">Uruchom ponownie</string>

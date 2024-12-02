@@ -49,7 +49,6 @@ import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import id.kuato.woahelper.BuildConfig;
 import id.kuato.woahelper.R;
 import id.kuato.woahelper.databinding.ActivityMainBinding;
 import id.kuato.woahelper.databinding.DevicesBinding;
@@ -63,11 +62,7 @@ import id.kuato.woahelper.util.RAM;
 public class MainActivity extends AppCompatActivity {
 
 	public final class BuildConfig {
-	public static final boolean DEBUG = false;
-	public static final String APPLICATION_ID = "id.kuato.woahelper";
-	public static final String BUILD_TYPE = "release";
-	public static final int VERSION_CODE = 3;
-	public static final String VERSION_NAME = "1.8.4_BETA30";
+	public static final String VERSION_NAME = "1.8.4_BETA31";
 	}
 	static final Object lock = new Object();
 	private static final float SIZE = 12.0F;
@@ -137,6 +132,9 @@ public class MainActivity extends AppCompatActivity {
 			}
 		}
 		ShellUtils.fastCmd("chmod 777 " + this.getFilesDir() + "/busybox");
+		ShellUtils.fastCmd("chmod 777 " + this.getFilesDir() + "/mount.ntfs");
+		ShellUtils.fastCmd("chmod 777 " + this.getFilesDir() + "/libfuse-lite.so");
+		ShellUtils.fastCmd("chmod 777 " + this.getFilesDir() + "/libntfs-3g.so");
 		pref.setbusybox(this, this.getFilesDir() + "/busybox ");
 	}
 
@@ -151,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		if (Objects.equals(currentVersion, pref.getVersion(this))) {
-			String[] files = {"tabletmode.vbs", "guacamole.fd", "hotdog.fd", "dbkp8150.cfg", "dbkp.hotdog.bin", "dbkp.cepheus.bin", "busybox", "install.bat", "sta.exe", "sdd.exe", "sdd.conf", "Switch to Android.lnk", "usbhostmode.exe", "ARMSoftware.url", "TestedSoftware.url", "WorksOnWoa.url", "RotationShortcut.lnk", "display.exe", "RemoveEdge.bat", "DefenderRemover.exe"};
+			String[] files = {"Optimized_Taskbar_Control_V3.0.exe", "guacamole.fd", "hotdog.fd", "dbkp8150.cfg", "dbkp.hotdog.bin", "dbkp.cepheus.bin", "busybox", "install.bat", "sta.exe", "sdd.exe", "sdd.conf", "Switch to Android.lnk", "usbhostmode.exe", "ARMSoftware.url", "ARMRepo.url", "TestedSoftware.url", "WorksOnWoa.url", "RotationShortcut.lnk", "display.exe", "RemoveEdge.bat", "DefenderRemover.exe"};
 			int i = 0;
 			while (!files[i].isEmpty()) {
 				if (ShellUtils.fastCmd(String.format("ls %1$s |grep %2$s", getFilesDir(), files[i])).isEmpty()) {
@@ -189,19 +187,14 @@ public class MainActivity extends AppCompatActivity {
 		this.checkupdate();
 		this.checkRoot();
 		this.checkdbkpmodel();
-		this.checkntfs();
 		this.win = ShellUtils.fastCmd("realpath /dev/block/by-name/win");
-		// DOESN'T WORK LMAOOOO if (this.win.isEmpty()) this.win = ShellUtils.fastCmd("realpath /dev/block/by-name/mindows");
+		if ("/dev/block/by-name/win".equals(this.win)) this.win = ShellUtils.fastCmd("realpath /dev/block/by-name/mindows");
 		this.winpath = (pref.getMountLocation(this) ? "/mnt/Windows" : "/mnt/sdcard/Windows");
 		String mount_stat = ShellUtils.fastCmd("su -c mount | grep " + this.win);
 		if (mount_stat.isEmpty()) this.mounted = getString(R.string.mountt);
 		else this.mounted = getString(R.string.unmountt);
 		if (pref.getMODEM(this)) this.n.cvDumpModem.setVisibility(View.GONE);
 		this.x.tvMnt.setText(String.format(this.getString(R.string.mnt_title), this.mounted));
-		this.x.tvBackup.setText(this.getString(R.string.backup_boot_title));
-		this.x.tvBackupSub.setText(this.getString(R.string.backup_boot_subtitle));
-		this.x.tvMntSubtitle.setText(this.getString(R.string.mnt_subtitle));
-		this.n.tvModemSubtitle.setText(this.getString(R.string.dump_modem_subtitle));
 		this.x.tvDate.setText(String.format(this.getString(R.string.last), pref.getDATE(this)));
 		MaterialButton yesButton = dialog.findViewById(R.id.yes);
 		MaterialButton noButton = dialog.findViewById(R.id.no);
@@ -224,7 +217,6 @@ public class MainActivity extends AppCompatActivity {
 		settings.setColorFilter(BlendModeColorFilterCompat.createBlendModeColorFilterCompat(this.getColor(R.color.colorPrimary), BlendModeCompat.SRC_IN));
 		Drawable back = ResourcesCompat.getDrawable(this.getResources(), R.drawable.back_arrow, null);
 		back.setColorFilter(BlendModeColorFilterCompat.createBlendModeColorFilterCompat(this.getColor(R.color.colorPrimary), BlendModeCompat.SRC_IN));
-
 		this.d.toolbarlayout.back.setImageDrawable(back);
 		this.x.toolbarlayout.settings.setImageDrawable(settings);
 
@@ -593,6 +585,7 @@ public class MainActivity extends AppCompatActivity {
 							String currentDateAndTime = sdf.format(new Date());
 							pref.setDATE(MainActivity.this, currentDateAndTime);
 							MainActivity.this.x.tvDate.setText(String.format(MainActivity.this.getString(R.string.last), pref.getDATE(MainActivity.this)));
+							String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + MainActivity.this.win);
 							MainActivity.this.winBackup();
 							messages.setText(MainActivity.this.getString(R.string.backuped));
 							dismissButton.setText(R.string.dismiss);
@@ -627,7 +620,7 @@ public class MainActivity extends AppCompatActivity {
 							dismissButton.setText(R.string.dismiss);
 							dismissButton.setVisibility(View.VISIBLE);
 						}
-					}, 50);
+					}, 25);
 				}
 			});
 			dialog.setCancelable(false);
@@ -635,15 +628,15 @@ public class MainActivity extends AppCompatActivity {
 		});
 		
 		this.x.cvMnt.setOnClickListener(v -> {
-			noButton.setText(this.getString(R.string.no));
+			this.ShowBlur();
 			noButton.setVisibility(View.VISIBLE);
-			yesButton.setText(this.getString(R.string.yes));
-			dismissButton.setText(this.getString(R.string.dismiss));
 			yesButton.setVisibility(View.VISIBLE);
 			dismissButton.setVisibility(View.GONE);
-			this.ShowBlur();
 			icons.setVisibility(View.VISIBLE);
 			icons.setImageDrawable(mnt);
+			noButton.setText(this.getString(R.string.no));
+			yesButton.setText(this.getString(R.string.yes));
+			dismissButton.setText(this.getString(R.string.dismiss));
 			String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + this.win);
 			if (mnt_stat.isEmpty()) messages.setText(String.format(this.getString(R.string.mount_question), this.winpath));
 			else messages.setText(this.getString(R.string.unmount_question));
@@ -679,7 +672,7 @@ public class MainActivity extends AppCompatActivity {
 								error.printStackTrace();
 							}
 						}
-					}, 50);
+					}, 25);
 				}
 			});
 			dismissButton.setOnClickListener(new View.OnClickListener() {
@@ -702,14 +695,15 @@ public class MainActivity extends AppCompatActivity {
 
 		this.x.cvQuickBoot.setOnClickListener(v -> {
 			this.ShowBlur();
-			noButton.setText(this.getString(R.string.no));
-			yesButton.setText(this.getString(R.string.yes));
+			noButton.setVisibility(View.VISIBLE);
 			yesButton.setVisibility(View.VISIBLE);
 			dismissButton.setVisibility(View.GONE);
-			noButton.setVisibility(View.VISIBLE);
 			icons.setVisibility(View.VISIBLE);
 			icons.setImageDrawable(icon);
 			messages.setText(this.getString(R.string.quickboot_question));
+			noButton.setText(this.getString(R.string.no));
+			yesButton.setText(this.getString(R.string.yes));
+			dismissButton.setText(this.getString(R.string.dismiss));
 			yesButton.setOnClickListener(v1 -> {
 				yesButton.setVisibility(View.GONE);
 				noButton.setVisibility(View.GONE);
@@ -753,7 +747,6 @@ public class MainActivity extends AppCompatActivity {
 					}
 				}, 50);
 			});
-			dismissButton.setText(this.getString(R.string.dismiss));
 			dismissButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -784,15 +777,15 @@ public class MainActivity extends AppCompatActivity {
 
 		this.n.cvSta.setOnClickListener(v -> {
 			this.ShowBlur();
+			noButton.setVisibility(View.VISIBLE);
+			yesButton.setVisibility(View.VISIBLE);
+			dismissButton.setVisibility(View.GONE);
+			icons.setVisibility(View.VISIBLE);
+			icons.setImageDrawable(android);
+			messages.setText(this.getString(R.string.sta_question));
 			noButton.setText(this.getString(R.string.no));
 			yesButton.setText(this.getString(R.string.yes));
 			dismissButton.setText(MainActivity.this.getString(R.string.dismiss));
-			dismissButton.setVisibility(View.GONE);
-			noButton.setVisibility(View.VISIBLE);
-			yesButton.setVisibility(View.VISIBLE);
-			messages.setText(this.getString(R.string.sta_question));
-			icons.setVisibility(View.VISIBLE);
-			icons.setImageDrawable(android);
 			noButton.setOnClickListener(v2 -> {
 				this.HideBlur();
 				dialog.dismiss();
@@ -800,11 +793,11 @@ public class MainActivity extends AppCompatActivity {
 			yesButton.setOnClickListener(v3 -> {
 				noButton.setVisibility(View.GONE);
 				yesButton.setVisibility(View.GONE);
-				mount();
-				String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + MainActivity.this.win);
 				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sta.exe /sdcard/sta.exe");
 				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.exe /sdcard/sdd.exe");
 				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.conf /sdcard/sdd.conf");
+				mount();
+				String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + MainActivity.this.win);
 				if (mnt_stat.isEmpty()) {
 					dialog.dismiss();
 					mountfail();
@@ -838,15 +831,15 @@ public class MainActivity extends AppCompatActivity {
 		
 		this.n.cvDumpModem.setOnClickListener(v -> {
 			this.ShowBlur();
-			noButton.setText(this.getString(R.string.no));
-			dismissButton.setText(this.getString(R.string.dismiss));
-			yesButton.setText(this.getString(R.string.yes));
-			dismissButton.setVisibility(View.GONE);
-			yesButton.setVisibility(View.VISIBLE);
 			noButton.setVisibility(View.VISIBLE);
+			yesButton.setVisibility(View.VISIBLE);
+			dismissButton.setVisibility(View.GONE);
 			icons.setVisibility(View.VISIBLE);
 			icons.setImageDrawable(modem);
 			messages.setText(this.getString(R.string.dump_modem_question));
+			noButton.setText(this.getString(R.string.no));
+			yesButton.setText(this.getString(R.string.yes));
+			dismissButton.setText(this.getString(R.string.dismiss));
 			yesButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -888,15 +881,15 @@ public class MainActivity extends AppCompatActivity {
 		
 		this.n.cvFlashUefi.setOnClickListener(v -> {
 			this.ShowBlur();
-			noButton.setText(this.getString(R.string.no));
-			dismissButton.setText(this.getString(R.string.dismiss));
-			yesButton.setText(this.getString(R.string.yes));
 			dismissButton.setVisibility(View.GONE);
 			yesButton.setVisibility(View.VISIBLE);
 			noButton.setVisibility(View.VISIBLE);
-			messages.setText(this.getString(R.string.flash_uefi_question));
 			icons.setVisibility(View.VISIBLE);
 			icons.setImageDrawable(uefi);
+			messages.setText(this.getString(R.string.flash_uefi_question));
+			noButton.setText(this.getString(R.string.no));
+			yesButton.setText(this.getString(R.string.yes));
+			dismissButton.setText(this.getString(R.string.dismiss));
 			yesButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -937,14 +930,14 @@ public class MainActivity extends AppCompatActivity {
 		
 		this.n.cvDbkp.setOnClickListener(v -> {
 			this.ShowBlur();
-			yesButton.setVisibility(View.VISIBLE);
 			noButton.setVisibility(View.VISIBLE);
+			yesButton.setVisibility(View.VISIBLE);
 			dismissButton.setVisibility(View.GONE);
-			yesButton.setText(this.getString(R.string.yes));
-			noButton.setText(this.getString(R.string.no));
-			messages.setText(this.getString(R.string.dbkp_question, this.dbkpmodel));
 			icons.setVisibility(View.VISIBLE);
 			icons.setImageDrawable(uefi);
+			messages.setText(this.getString(R.string.dbkp_question, this.dbkpmodel));
+			noButton.setText(this.getString(R.string.no));
+			yesButton.setText(this.getString(R.string.yes));
 			if (!isNetworkConnected(this)) {
 				noButton.setVisibility(View.GONE);
 				yesButton.setVisibility(View.GONE);
@@ -1020,20 +1013,20 @@ public class MainActivity extends AppCompatActivity {
 							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot bs=16M");
 						}
 						runOnUiThread(()->{
-					if ("guacamole".equals(bedan) || "OnePlus7Pro".equals(bedan) || "OnePlus7Pro4G".equals(bedan) || "hotdog".equals(bedan) || "OnePlus7TPro".equals(bedan) || "OnePlus7TPro4G".equals(bedan)) {
-						messages.setText(getString(R.string.op7));
-					} else if ("cepheus".equals(bedan)) {
-						messages.setText(getString(R.string.cepheus));
-					} 
-						dismissButton.setText(getString(R.string.dismiss));
-						dismissButton.setVisibility(View.VISIBLE);
-						dismissButton.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View v) {
-								MainActivity.this.HideBlur();
-								dialog.dismiss();
-							}
-						});
+						if ("guacamole".equals(bedan) || "OnePlus7Pro".equals(bedan) || "OnePlus7Pro4G".equals(bedan) || "hotdog".equals(bedan) || "OnePlus7TPro".equals(bedan) || "OnePlus7TPro4G".equals(bedan)) {
+							messages.setText(getString(R.string.op7));
+						} else if ("cepheus".equals(bedan)) {
+							messages.setText(getString(R.string.cepheus));
+						} 
+							dismissButton.setText(getString(R.string.dismiss));
+							dismissButton.setVisibility(View.VISIBLE);
+							dismissButton.setOnClickListener(new View.OnClickListener() {
+								@Override
+								public void onClick(View v) {
+									MainActivity.this.HideBlur();
+									dialog.dismiss();
+								}
+							});
 						});
 					}).start();
 				}
@@ -1044,15 +1037,15 @@ public class MainActivity extends AppCompatActivity {
 		
 		this.n.cvSoftware.setOnClickListener(v -> {
 			this.ShowBlur();
+			noButton.setVisibility(View.VISIBLE);
+			yesButton.setVisibility(View.VISIBLE);
+			dismissButton.setVisibility(View.GONE);
+			icons.setVisibility(View.VISIBLE);
+			icons.setImageDrawable(sensors);
+			messages.setText(this.getString(R.string.software_question));
 			noButton.setText(this.getString(R.string.no));
 			yesButton.setText(this.getString(R.string.yes));
 			dismissButton.setText(this.getString(R.string.dismiss));
-			dismissButton.setVisibility(View.GONE);
-			noButton.setVisibility(View.VISIBLE);
-			yesButton.setVisibility(View.VISIBLE);
-			messages.setText(this.getString(R.string.software_question));
-			icons.setVisibility(View.VISIBLE);
-			icons.setImageDrawable(sensors);
 			noButton.setOnClickListener(v5 -> {
 				this.HideBlur();
 				dialog.dismiss();
@@ -1061,11 +1054,12 @@ public class MainActivity extends AppCompatActivity {
 				noButton.setVisibility(View.GONE);
 				yesButton.setVisibility(View.GONE);
 				messages.setText(this.getString(R.string.please_wait));
-				mount();
-				String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + MainActivity.this.win);
 				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/WorksOnWoa.url /sdcard");
 				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/TestedSoftware.url /sdcard");
 				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/ARMSoftware.url /sdcard");
+				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/ARMRepo.url /sdcard");
+				mount();
+				String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + MainActivity.this.win);
 				if (mnt_stat.isEmpty()) {
 					dialog.dismiss();
 					mountfail();
@@ -1074,9 +1068,11 @@ public class MainActivity extends AppCompatActivity {
 					ShellUtils.fastCmd("cp /sdcard/WorksOnWoa.url " + MainActivity.this.winpath + "/Toolbox");
 					ShellUtils.fastCmd("cp /sdcard/TestedSoftware.url " + MainActivity.this.winpath + "/Toolbox");
 					ShellUtils.fastCmd("cp /sdcard/ARMSoftware.url " + MainActivity.this.winpath + "/Toolbox");
+					ShellUtils.fastCmd("cp /sdcard/ARMRepo.url " + MainActivity.this.winpath + "/Toolbox");
 					ShellUtils.fastCmd("rm /sdcard/WorksOnWoa.url");
 					ShellUtils.fastCmd("rm /sdcard/TestedSoftware.url");
 					ShellUtils.fastCmd("rm /sdcard/ARMSoftware.url");
+					ShellUtils.fastCmd("rm /sdcard/ARMRepo.url");
 					messages.setText(this.getString(R.string.done));
 					dismissButton.setVisibility(View.VISIBLE);
 					dismissButton.setOnClickListener(v7 -> {
@@ -1091,15 +1087,15 @@ public class MainActivity extends AppCompatActivity {
 
 		this.n.cvAtlasos.setOnClickListener(v -> {
 			this.ShowBlur();
-			yesButton.setText("AtlasOS");
-			noButton.setText("ReviOS");
-			dismissButton.setText(this.getString(R.string.dismiss));
-			dismissButton.setVisibility(View.VISIBLE);
 			noButton.setVisibility(View.VISIBLE);
 			yesButton.setVisibility(View.VISIBLE);
-			messages.setText(this.getString(R.string.atlasos_question));
+			dismissButton.setVisibility(View.VISIBLE);
 			icons.setVisibility(View.VISIBLE);
 			icons.setImageDrawable(atlasos);
+			messages.setText(this.getString(R.string.atlasos_question));
+			noButton.setText("ReviOS");
+			yesButton.setText("AtlasOS");
+			dismissButton.setText(this.getString(R.string.dismiss));
 			if (!isNetworkConnected(this)) {
 				noButton.setVisibility(View.GONE);
 				yesButton.setVisibility(View.GONE);
@@ -1148,7 +1144,7 @@ public class MainActivity extends AppCompatActivity {
 									if (mnt_stat.isEmpty()) {
 										icons.setVisibility(View.GONE);
 										yesButton.setVisibility(View.VISIBLE);
-										messages.setText(MainActivity.this.getString(R.string.mountfail) + (R.string.internalstorage));
+										messages.setText(MainActivity.this.getString(R.string.mountfail) + "\n" + (R.string.internalstorage));
 									} else {
 										icons.setImageDrawable(atlasos);
 										ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/Toolbox || true ");
@@ -1204,7 +1200,7 @@ public class MainActivity extends AppCompatActivity {
 									if (mnt_stat.isEmpty()) {
 										icons.setVisibility(View.GONE);
 										yesButton.setVisibility(View.VISIBLE);
-										messages.setText(MainActivity.this.getString(R.string.mountfail) + (R.string.internalstorage));
+										messages.setText(MainActivity.this.getString(R.string.mountfail) + "\n" + (R.string.internalstorage));
 									} else {
 										icons.setImageDrawable(atlasos);
 										ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/Toolbox || true ");
@@ -1232,15 +1228,15 @@ public class MainActivity extends AppCompatActivity {
 
 		this.z.cvUsbhost.setOnClickListener(v -> {
 			this.ShowBlur();
+			noButton.setVisibility(View.VISIBLE);
+			yesButton.setVisibility(View.VISIBLE);
+			dismissButton.setVisibility(View.GONE);
+			icons.setVisibility(View.VISIBLE);
+			icons.setImageDrawable(mnt);
+			messages.setText(this.getString(R.string.usbhost_question));
 			noButton.setText(this.getString(R.string.no));
 			yesButton.setText(this.getString(R.string.yes));
 			dismissButton.setText(this.getString(R.string.dismiss));
-			dismissButton.setVisibility(View.GONE);
-			noButton.setVisibility(View.VISIBLE);
-			yesButton.setVisibility(View.VISIBLE);
-			messages.setText(this.getString(R.string.usbhost_question));
-			icons.setVisibility(View.VISIBLE);
-			icons.setImageDrawable(mnt);
 			noButton.setOnClickListener(v10 -> {
 				this.HideBlur();
 				dialog.dismiss();
@@ -1249,9 +1245,9 @@ public class MainActivity extends AppCompatActivity {
 				noButton.setVisibility(View.GONE);
 				yesButton.setVisibility(View.GONE);
 				messages.setText(this.getString(R.string.please_wait));
+				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/usbhostmode.exe /sdcard");
 				mount();
 				String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + MainActivity.this.win);
-				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/usbhostmode.exe /sdcard");
 				if (mnt_stat.isEmpty()) {
 					dialog.dismiss();
 					mountfail();
@@ -1273,15 +1269,15 @@ public class MainActivity extends AppCompatActivity {
 		
 		this.z.cvRotation.setOnClickListener(v -> {
 			this.ShowBlur();
+			noButton.setVisibility(View.VISIBLE);
+			yesButton.setVisibility(View.VISIBLE);
+			dismissButton.setVisibility(View.GONE);
+			icons.setVisibility(View.VISIBLE);
+			icons.setImageDrawable(boot);
+			messages.setText(this.getString(R.string.rotation_question));
 			noButton.setText(this.getString(R.string.no));
 			yesButton.setText(this.getString(R.string.yes));
 			dismissButton.setText(this.getString(R.string.dismiss));
-			dismissButton.setVisibility(View.GONE);
-			noButton.setVisibility(View.VISIBLE);
-			yesButton.setVisibility(View.VISIBLE);
-			messages.setText(this.getString(R.string.rotation_question));
-			icons.setVisibility(View.VISIBLE);
-			icons.setImageDrawable(boot);
 			noButton.setOnClickListener(v13 -> {
 				this.HideBlur();
 				dialog.dismiss();
@@ -1290,10 +1286,10 @@ public class MainActivity extends AppCompatActivity {
 				noButton.setVisibility(View.GONE);
 				yesButton.setVisibility(View.GONE);
 				messages.setText(this.getString(R.string.please_wait));
-				mount();
-				String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + MainActivity.this.win);
 				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/display.exe /sdcard/");
 				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/RotationShortcut.lnk /sdcard/");
+				mount();
+				String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + MainActivity.this.win);
 				if (mnt_stat.isEmpty()) {
 					dialog.dismiss();
 					mountfail();
@@ -1318,15 +1314,15 @@ public class MainActivity extends AppCompatActivity {
 		
 		this.z.cvTablet.setOnClickListener(v -> {
 			this.ShowBlur();
+			noButton.setVisibility(View.VISIBLE);
+			yesButton.setVisibility(View.VISIBLE);
+			dismissButton.setVisibility(View.GONE);
+			icons.setVisibility(View.VISIBLE);
+			icons.setImageDrawable(sensors);
+			messages.setText(this.getString(R.string.tablet_question));
 			noButton.setText(this.getString(R.string.no));
 			yesButton.setText(this.getString(R.string.yes));
 			dismissButton.setText(MainActivity.this.getString(R.string.dismiss));
-			dismissButton.setVisibility(View.GONE);
-			noButton.setVisibility(View.VISIBLE);
-			yesButton.setVisibility(View.VISIBLE);
-			messages.setText(this.getString(R.string.tablet_question));
-			icons.setVisibility(View.VISIBLE);
-			icons.setImageDrawable(sensors);
 			noButton.setOnClickListener(v16 -> {
 				this.HideBlur();
 				dialog.dismiss();
@@ -1335,16 +1331,16 @@ public class MainActivity extends AppCompatActivity {
 				noButton.setVisibility(View.GONE);
 				yesButton.setVisibility(View.GONE);
 				messages.setText(this.getString(R.string.please_wait));
+				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/Optimized_Taskbar_Control_V3.0.exe /sdcard/");
 				mount();
 				String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + MainActivity.this.win);
-				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/tabletmode.vbs /sdcard/");
 				if (mnt_stat.isEmpty()) {
 					dialog.dismiss();
 					mountfail();
 				} else {
 					ShellUtils.fastCmd("mkdir " + this.winpath + "/Toolbox || true ");
-					ShellUtils.fastCmd("cp /sdcard/tabletmode.vbs " + this.winpath + "/Toolbox");
-					ShellUtils.fastCmd("rm /sdcard/tabletmode.vbs");
+					ShellUtils.fastCmd("cp /sdcard/Optimized_Taskbar_Control_V3.0.exe " + this.winpath + "/Toolbox");
+					ShellUtils.fastCmd("rm /sdcard/Optimized_Taskbar_Control_V3.0.exe");
 					messages.setText(this.getString(R.string.done));
 					dismissButton.setVisibility(View.VISIBLE);
 					dismissButton.setOnClickListener(v18 -> {
@@ -1359,15 +1355,15 @@ public class MainActivity extends AppCompatActivity {
 
 		this.z.cvSetup.setOnClickListener(v -> {
 			this.ShowBlur();
+			noButton.setVisibility(View.VISIBLE);
+			yesButton.setVisibility(View.VISIBLE);
+			dismissButton.setVisibility(View.GONE);
+			icons.setVisibility(View.VISIBLE);
+			icons.setImageDrawable(mnt);
+			messages.setText(this.getString(R.string.setup_question));
 			noButton.setText(this.getString(R.string.no));
 			yesButton.setText(this.getString(R.string.yes));
 			dismissButton.setText(this.getString(R.string.dismiss));
-			dismissButton.setVisibility(View.GONE);
-			noButton.setVisibility(View.VISIBLE);
-			yesButton.setVisibility(View.VISIBLE);
-			messages.setText(this.getString(R.string.setup_question));
-			icons.setVisibility(View.VISIBLE);
-			icons.setImageDrawable(mnt);
 			if (!MainActivity.isNetworkConnected(this)) {
 				yesButton.setVisibility(View.GONE);
 				noButton.setText(this.getString(R.string.dismiss));
@@ -1446,7 +1442,7 @@ public class MainActivity extends AppCompatActivity {
 									if (mnt_stat.isEmpty()) {
 										yesButton.setVisibility(View.VISIBLE);
 										icons.setVisibility(View.GONE);
-										messages.setText(MainActivity.this.getString(R.string.mountfail) + (R.string.internalstorage));
+										messages.setText(MainActivity.this.getString(R.string.mountfail) + "\n" + (R.string.internalstorage));
 									} else {
 										icons.setImageDrawable(mnt);
 										ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/Toolbox || true ");
@@ -1473,15 +1469,15 @@ public class MainActivity extends AppCompatActivity {
 
 		this.z.cvDefender.setOnClickListener(v -> {
 			this.ShowBlur();
+			noButton.setVisibility(View.VISIBLE);
+			yesButton.setVisibility(View.VISIBLE);
+			dismissButton.setVisibility(View.GONE);
+			icons.setVisibility(View.VISIBLE);
+			icons.setImageDrawable(edge);
+			messages.setText(this.getString(R.string.defender_question));
 			noButton.setText(this.getString(R.string.no));
 			yesButton.setText(this.getString(R.string.yes));
 			dismissButton.setText(this.getString(R.string.dismiss));
-			dismissButton.setVisibility(View.GONE);
-			noButton.setVisibility(View.VISIBLE);
-			yesButton.setVisibility(View.VISIBLE);
-			messages.setText(this.getString(R.string.defender_question));
-			icons.setVisibility(View.VISIBLE);
-			icons.setImageDrawable(edge);
 			noButton.setOnClickListener(v20 -> {
 				this.HideBlur();
 				dialog.dismiss();
@@ -1490,10 +1486,10 @@ public class MainActivity extends AppCompatActivity {
 				noButton.setVisibility(View.GONE);
 				yesButton.setVisibility(View.GONE);
 				messages.setText(this.getString(R.string.please_wait));
-				mount();
-				String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + this.win);
 				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/DefenderRemover.exe /sdcard");
 				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/RemoveEdge.bat /sdcard");
+				mount();
+				String mnt_stat = ShellUtils.fastCmd("su -c mount | grep " + this.win);
 				if (mnt_stat.isEmpty()) {
 					dialog.dismiss();
 					mountfail();
@@ -1566,6 +1562,7 @@ public class MainActivity extends AppCompatActivity {
 				yesButton.setVisibility(View.VISIBLE);
 				noButton.setVisibility(View.GONE);
 				dismissButton.setVisibility(View.VISIBLE);
+				icons.setVisibility(View.GONE);
 				yesButton.setText(getString(R.string.agree));
 				dismissButton.setText(getString(R.string.cancel));
 				yesButton.setOnClickListener(new View.OnClickListener() {
@@ -1595,6 +1592,7 @@ public class MainActivity extends AppCompatActivity {
 				yesButton.setVisibility(View.VISIBLE);
 				noButton.setVisibility(View.GONE);
 				dismissButton.setVisibility(View.VISIBLE);
+				icons.setVisibility(View.GONE);
 				yesButton.setText(getString(R.string.agree));
 				dismissButton.setText(getString(R.string.cancel));
 				yesButton.setOnClickListener(new View.OnClickListener() {
@@ -1615,25 +1613,44 @@ public class MainActivity extends AppCompatActivity {
 
 		this.x.cvInfo.setOnClickListener(v -> {
 			this.ShowBlur();
-			dismissButton.setText(this.getString(R.string.dismiss));
-			dismissButton.setVisibility(View.GONE);
 			noButton.setVisibility(View.GONE);
 			yesButton.setVisibility(View.GONE);
-			messages.setText(MainActivity.this.getString(R.string.update2) + "\n" + MainActivity.this.getString(R.string.please_wait));
+			dismissButton.setVisibility(View.GONE);
 			icons.setVisibility(View.GONE);
+			messages.setText(this.getString(R.string.please_wait));
+			dismissButton.setText(this.getString(R.string.dismiss));
 			if (!MainActivity.isNetworkConnected(this)) {
 				dismissButton.setVisibility(View.VISIBLE);
 				messages.setText(this.getString(R.string.internet));
 			} else {
-				new Thread(new Runnable() {
-					@Override
-					public void run() {
-						if (!BuildConfig.VERSION_NAME.equals(ShellUtils.fastCmd(getFilesDir()+"/busybox wget -q -O - https://raw.githubusercontent.com/n00b69/woa-helper-update/main/README.md"))){
-							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://raw.githubusercontent.com/n00b69/woa-helper-update/main/woahelper.apk -O " + MainActivity.this.getFilesDir() + "/woahelper.apk");
-							ShellUtils.fastCmd("pm install " + MainActivity.this.getFilesDir() + "/woahelper.apk && rm " + MainActivity.this.getFilesDir() + "/woahelper.apk");
+				String version = ShellUtils.fastCmd(getFilesDir()+"/busybox wget -q -O - https://raw.githubusercontent.com/n00b69/woa-helper-update/main/README.md");
+				if (BuildConfig.VERSION_NAME.equals(version)) {
+					dismissButton.setVisibility(View.VISIBLE);
+					messages.setText(MainActivity.this.getString(R.string.no) + " " + MainActivity.this.getString(R.string.update1));
+				} else {
+					yesButton.setVisibility(View.VISIBLE);
+					noButton.setVisibility(View.VISIBLE);
+					dismissButton.setVisibility(View.GONE);
+					messages.setText(getString(R.string.update1));
+					yesButton.setText(getString(R.string.update));
+					noButton.setText(getString(R.string.later));
+					noButton.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							HideBlur();
+							dialog.dismiss();
 						}
-					}
-				}).start();
+					});
+					yesButton.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							yesButton.setVisibility(View.GONE);
+							noButton.setVisibility(View.GONE);
+							messages.setText(MainActivity.this.getString(R.string.update2) + "\n" + MainActivity.this.getString(R.string.please_wait));
+							update();
+						}
+					});
+				}
 			}
 			dismissButton.setOnClickListener(v23 -> {
 				this.HideBlur();
@@ -1642,7 +1659,7 @@ public class MainActivity extends AppCompatActivity {
 			dialog.setCancelable(false);
 			dialog.show();
 		});
-		
+			
 		this.k.autobackup.setOnCheckedChangeListener((compoundButton, b) -> pref.setAUTO(this, !b));
 		this.k.autobackupA.setOnCheckedChangeListener((compoundButton, b) -> pref.setAUTO_A(this, !b));
 		this.k.confirmation.setOnCheckedChangeListener((compoundButton, b) -> pref.setCONFIRM(this, b));
@@ -1696,51 +1713,29 @@ public class MainActivity extends AppCompatActivity {
 	public void flash(String uefi) {
 		ShellUtils.fastCmd("dd if=" + uefi + " of=/dev/block/bootdevice/by-name/boot$(getprop ro.boot.slot_suffix) bs=16M");
 	}
-
+	
 	public void mount() {
-		String c;
-		if (pref.getMountLocation(this)) {
-			c = String.format("su -mm -c " + pref.getbusybox(this) + this.getString(R.string.mount2), this.win);
-			ShellUtils.fastCmd(this.getString(R.string.mk2));
-			ShellUtils.fastCmd(c);
-		} else {
-			c = String.format("su -mm -c " + pref.getbusybox(this) + this.getString(R.string.mount), this.win);
-			ShellUtils.fastCmd(this.getString(R.string.mk));
-			ShellUtils.fastCmd(c);
-		}
+		ShellUtils.fastCmd("mkdir " + this.winpath + " || true");
+		ShellUtils.fastCmd("su -mm -c " + MainActivity.this.getFilesDir() + "/mount.ntfs " + this.win + " " + this.winpath);
 		this.mounted = this.getString(R.string.unmountt);
 		this.x.tvMnt.setText(String.format(this.getString(R.string.mnt_title), this.mounted));
 	}
 	
 	public void unmount() {
-		if (pref.getMountLocation(this)) {
-			ShellUtils.fastCmd(this.getString(R.string.unmount2));
-			ShellUtils.fastCmd(this.getString(R.string.rm2));
-		} else {
-			ShellUtils.fastCmd(this.getString(R.string.unmount));
-			ShellUtils.fastCmd(this.getString(R.string.rm));
-		}
+		ShellUtils.fastCmd("su -mm -c umount " + this.winpath);
+		ShellUtils.fastCmd("rmdir " + this.winpath);
 		this.mounted = this.getString(R.string.mountt);
 		this.x.tvMnt.setText(String.format(this.getString(R.string.mnt_title), this.mounted));
 	}
 	
 	public void winBackup() {
 		mount();
-		if (pref.getMountLocation(this)) {
-			ShellUtils.fastCmd(this.getString(R.string.backup2));
-		} else {
-			ShellUtils.fastCmd(this.getString(R.string.backup1));
-		}
+		ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/boot$(getprop ro.boot.slot_suffix) of=" + this.winpath + "/boot.img");
 	}
 
 	public void dump() {
-		if (pref.getMountLocation(this)) {
-			ShellUtils.fastCmd(this.getString(R.string.modem12));
-			ShellUtils.fastCmd(this.getString(R.string.modem22));
-		} else {
-			ShellUtils.fastCmd(this.getString(R.string.modem1));
-			ShellUtils.fastCmd(this.getString(R.string.modem2));
-		}
+		ShellUtils.fastCmd("su -c dd bs=8M if=/dev/block/by-name/modemst1 of=$(find " + this.winpath + "/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/bootmodem_fs1 bs=8388608");
+		ShellUtils.fastCmd("su -c dd bs=8M if=/dev/block/by-name/modemst2 of=$(find " + this.winpath + "/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/bootmodem_fs2 bs=8388608");
 	}
 
 	public void checkRoot(){
@@ -1888,16 +1883,23 @@ public class MainActivity extends AppCompatActivity {
 	public void checkwin() {
 		String checkingforwin = ShellUtils.fastCmd("find /dev/block/by-name | grep win");
 		if (checkingforwin.isEmpty()) {
-			final Dialog dialog = new Dialog(this);
-			dialog.setContentView(R.layout.dialog);
-			dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-			TextView messages = dialog.findViewById(R.id.messages);
-			messages.setText(getString(R.string.partition));
-			dialog.show();
-			dialog.setCancelable(false);
-			this.x.cvMnt.setEnabled(false);
-			this.x.cvToolbox.setEnabled(false);
-			this.x.cvQuickBoot.setEnabled(false);
+			String checkingformindows = ShellUtils.fastCmd("find /dev/block/by-name | grep mindows");
+			if (checkingformindows.isEmpty()) {
+				final Dialog dialog = new Dialog(this);
+				dialog.setContentView(R.layout.dialog);
+				dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+				TextView messages = dialog.findViewById(R.id.messages);
+				messages.setText(getString(R.string.partition));
+				dialog.show();
+				dialog.setCancelable(false);
+				this.x.cvMnt.setEnabled(false);
+				this.x.cvToolbox.setEnabled(false);
+				this.x.cvQuickBoot.setEnabled(false);
+			} else {
+				this.x.cvMnt.setEnabled(true);
+				this.x.cvToolbox.setEnabled(true);
+				this.x.cvQuickBoot.setEnabled(true);
+			}
 		} else {
 			this.x.cvMnt.setEnabled(true);
 			this.x.cvToolbox.setEnabled(true);
@@ -1936,87 +1938,22 @@ public class MainActivity extends AppCompatActivity {
 							yesButton.setVisibility(View.GONE);
 							noButton.setVisibility(View.GONE);
 							messages.setText(MainActivity.this.getString(R.string.update2) + "\n" + MainActivity.this.getString(R.string.please_wait));
-							new Thread(new Runnable() {
-								@Override
-								public void run() {
-									ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://raw.githubusercontent.com/n00b69/woa-helper-update/main/woahelper.apk -O " + MainActivity.this.getFilesDir() + "/woahelper.apk");
-									ShellUtils.fastCmd("pm install " + MainActivity.this.getFilesDir() + "/woahelper.apk && rm " + MainActivity.this.getFilesDir() + "/woahelper.apk");
-								}
-							}).start();
+							update();
 						}
 					});
 				}
 			}
 		}	
 	}
-		
-	public void checkntfs() {
-		if (!pref.getAGREENTFS(this)) {
-			String ntfsmodule = ShellUtils.fastCmd("su -mm -c find /data/adb/modules | grep ntfs3g");
-			if (ntfsmodule.isEmpty()) {
-				String findntfs = ShellUtils.fastCmd(this.getString(R.string.ntfsChk));
-				if (findntfs.isEmpty()) {
-					final Dialog dialog = new Dialog(this);
-					dialog.setContentView(R.layout.dialog);
-					dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-					MaterialButton yesButton = dialog.findViewById(R.id.yes);
-					MaterialButton noButton = dialog.findViewById(R.id.no);
-					MaterialButton dismissButton = dialog.findViewById(R.id.dismiss);
-					TextView messages = dialog.findViewById(R.id.messages);
-					yesButton.setVisibility(View.VISIBLE);
-					noButton.setVisibility(View.VISIBLE);
-					dismissButton.setVisibility(View.VISIBLE);
-					messages.setText(getString(R.string.ntfs));
-					yesButton.setText(getString(R.string.yes));
-					dismissButton.setText(getString(R.string.nah));
-					noButton.setText(getString(R.string.later));
-					dialog.show();
-					dialog.setCancelable(false);
-					noButton.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							dialog.dismiss();
-						}
-					});
-					dismissButton.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-				 		   dialog.dismiss();
-				 		   pref.setAGREENTFS(MainActivity.this, true);
-						}
-					});
-		   			yesButton.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							ShellUtils.fastCmd("su -mm -c mkdir /data/adb/modules/ntfs3g || true");
-							ShellUtils.fastCmd("su -mm -c unzip " + MainActivity.this.getFilesDir() + "/ntfs3g.zip -d /data/adb/modules/ntfs3g");
-							ShellUtils.fastCmd("chmod 777 /data/adb/modules/ntfs3g");
-							pref.setAGREENTFS(MainActivity.this, true);
-							messages.setText(MainActivity.this.getString(R.string.done));
-							yesButton.setVisibility(View.VISIBLE);
-							noButton.setVisibility(View.GONE);
-							dismissButton.setVisibility(View.VISIBLE);
-							yesButton.setText(getString(R.string.reboot));
-							dismissButton.setText(getString(R.string.later));
-							dismissButton.setOnClickListener(new View.OnClickListener() {
-								@Override
-								public void onClick(View v) {
-									dialog.dismiss();
-								}
-							});
-							yesButton.setOnClickListener(new View.OnClickListener() {
-								@Override
-								public void onClick(View v) {
-									ShellUtils.fastCmd("su -c svc power reboot");
-									messages.setText(getString(R.string.wrong));
-									dismissButton.setVisibility(View.VISIBLE);
-								}
-							});
-						}
-					});
-				}
+	
+	public void update() {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://raw.githubusercontent.com/n00b69/woa-helper-update/main/woahelper.apk -O " + MainActivity.this.getFilesDir() + "/woahelper.apk");
+				ShellUtils.fastCmd("pm install " + MainActivity.this.getFilesDir() + "/woahelper.apk && rm " + MainActivity.this.getFilesDir() + "/woahelper.apk");
 			}
-		}
+		}).start();
 	}
 	
 	public void mountfail() {

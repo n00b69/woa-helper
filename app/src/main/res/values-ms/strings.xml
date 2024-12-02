@@ -61,7 +61,7 @@
 	<string name="ntfs">Dukungan NTFS tidak terdeteksi. \Instal modul NTFS 3G?</string>
 	<string name="internet">Tidak ditemukan koneksi internet.\nHubungkan ke internet dan coba lagi.</string>
 	<string name="partition">Tidak ada partisi Windows yang terdeteksi.</string>
-	<string name="internalstorage">\nFile diunduh di penyimpanan internal</string>
+	<string name="internalstorage">File diunduh di penyimpanan internal</string>
 	<string name="op7">Gambar boot telah ditambal dan di-flash.\nGambar yang ditambal juga dapat ditemukan di /sdcard/patched-boot.img.\nGunakan slider peringatan Anda untuk beralih antara Windows dan Android.</string>
 	<string name="cepheus">Gambar boot telah ditambal dan di-flash.\nGambar yang ditambal juga dapat ditemukan di /sdcard/patched-boot.img.\nGunakan tombol asisten Anda untuk beralih antara Windows dan Android.</string>
     <string name="reboot">Mulai Ulang</string>

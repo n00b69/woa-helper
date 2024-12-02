@@ -61,7 +61,7 @@
 	<string name="ntfs">Suporte a NTFS não detectado. \nInstalar o módulo NTFS3G?</string>
 	<string name="internet">Nenhuna conexão com a internet encontrada.\nVerifique a conexão e tente novamente.</string>
 	<string name="partition">Nenhuma partição Windows detectada.</string>
-	<string name="internalstorage">\nArquivos baixados no armazenamento interno</string>
+	<string name="internalstorage">Arquivos baixados no armazenamento interno</string>
 	<string name="op7">Imagem de boot foi corrigida e instalada.\nA imagem corrigida também pode ser encontrada em /sdcard/patched-boot.img.\nUse o slider de alerta para alterar entre Windows e Android.</string>
 	<string name="cepheus">A imagem de boot foi corrigida e instalada.\nA imagem corrigida também pode ser encontrada em /sdcard/patched-boot.img.\nUse o botão de assistente para alternar entre Windows e Android.</string>
     <string name="reboot">Reiniciar</string>
