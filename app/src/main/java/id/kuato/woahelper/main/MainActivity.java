@@ -62,7 +62,7 @@ import id.kuato.woahelper.util.RAM;
 public class MainActivity extends AppCompatActivity {
 
 	public final class BuildConfig {
-	public static final String VERSION_NAME = "1.8.4_BETA31";
+	public static final String VERSION_NAME = "1.8.4_BETA32";
 	}
 	static final Object lock = new Object();
 	private static final float SIZE = 12.0F;
@@ -845,7 +845,8 @@ public class MainActivity extends AppCompatActivity {
 								MainActivity.this.dump();
 							} else MainActivity.this.dump();
 							messages.setText(MainActivity.this.getString(R.string.lte));
-							dismissButton.setVisibility(View.VISIBLE);
+							noButton.setVisibility(View.VISIBLE);
+							noButton.setText(getString(R.string.dismiss));
 						}
 					}, 50);
 				}

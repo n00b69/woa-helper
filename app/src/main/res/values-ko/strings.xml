@@ -15,9 +15,9 @@
     <string name="atlasos_title">ATLASOS / REVIOS 파일 복사</string>
     <string name="defender_title">EDGE / DEFENDER 제거</string>
     <string name="script_title">스크립트 도구</string>
-    <string name="setup_title">FRAMEWORK INSTALLERS</string>
-    <string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
-	<string name="tablet_title">TABLET MODE SCRIPT</string>
+    <string name="setup_title">프레임워크 설치</string>
+    <string name="dbkp_title">듀얼부팅 커널 패치</string>
+	<string name="tablet_title">태블릿 모드 스크립트</string>
 
     <string name="backup_boot_subtitle">boot 이미지를 Android 및 Windows로 백업합니다</string>
     <string name="mnt_subtitle">내부 파일을 읽거나 편집하기 위하여 Windows 파티션을 마운트 및 마운트 해제합니다</string>
@@ -35,9 +35,9 @@
     <string name="atlasos_subtitle">AtlasOS 또는 ReviOS 플레이북 및 AME Wizard를 C:\\Toolbox로 복사합니다</string>
     <string name="defender_subtitle">Microsoft Edge / Windows Defender를 제거할 수 있도록 하는 스크립트를 C:\\Toolbox에 추가합니다</string>
     <string name="script_subtitle">다양한 스크립트와 기능을 C:\\Toolbox에 추가합니다</string>
-    <string name="setup_subtitle">Adds installers for several frameworks into C:\\Toolbox</string>
-    <string name="dbkp_subtitle">Patches the kernel for seamless dualbooting</string>
-	<string name="tablet_subtitle">Adds a script to C:\\Toolbox which allows you to toggle tablet mode</string>
+    <string name="setup_subtitle">여러 프레임워크에 대한 설치 프로그램을 C:\\Toolbox에 추가합니다</string>
+    <string name="dbkp_subtitle">심리스 듀얼부팅을 위한 커널을 패치합니다</string>
+	<string name="tablet_subtitle">C:\\Toolbox에 태블릿 모드로 전환할 수 있는 스크립트를 추가합니다</string>
 
     <string name="backup_boot_question">현재 안드로이드 boot 이미지를 백업하시겠습니까?</string>
     <string name="mount_question">%s에 Windows 파티션을 마운트하시겠습니까?</string>
@@ -52,18 +52,18 @@
     <string name="autoflash_question">boot.img 자동 설치 스크립트를 Windows에 설치하시겠습니까?</string>
     <string name="atlasos_question">AtlasOS 또는 ReviOS 플레이북을 다운로드 하고 C:\\Toolbox로 이동하시겠습니까?</string>
     <string name="defender_question">Edge / Defender 제거 스크립트를 C:\\Toolbox로 복사하시겠습니까?</string>
-    <string name="setup_question">Download and move C++ Redistributables and DirectX, OpenGL, OpenAL, PhysX, XNAF installers to C:\\Toolbox?\n(this may take some time)</string>
-    <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
-	<string name="tablet_question">Copy tablet mode script to C:\\Toolbox?</string>
+    <string name="setup_question">C++ 재배포 가능 패키지 및 DirectX, OpenGL, OpenAL, PhysX, XNAF 설치 프로그램을 다운로드하고 C:\\Toolbox로 이동할까요?\n(시간이 걸릴 수 있습니다)</string>
+    <string name="dbkp_question">현재 커널을 패치하고 플래시할까요?\n!!!이 장치가 %s가 아니라면 예를 선택하지 마세요!!!</string>
+	<string name="tablet_question">태블릿 모드 스크립트를 C:\\Toolbox로 복사할까요?</string>
 
     <string name="wrong">문제가 발생했습니다</string>
     <string name="mountfail">문제가 발생했습니다. \nWindows 파티션을 마운트하지 못하였습니다.\n텔레그램 채팅방에서 도움을 받으십시오.</string>
-	<string name="ntfs">NTFS support not detected. \nInstall NTFS3G module?</string>
-	<string name="internet">No internet connection found.\nConnect to the internet and try again.</string>
-	<string name="partition">No Windows partition detected.</string>
-	<string name="internalstorage">Files downloaded in internal storage</string>
-	<string name="op7">Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/patched-boot.img.\nUse your alert slider to switch between Windows and Android.</string>
-	<string name="cepheus">Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/patched-boot.img.\nUse your assistant button to switch between Windows and Android.</string>
+	<string name="ntfs">NTFS가 지원되지 않는 것 같습니다. \nNTFS3G 모듈을 설치할까요?</string>
+	<string name="internet">인터넷 연결이 없습니다.\n인터넷에 연결하고 다시 시도해보세요.</string>
+	<string name="partition">Windows 파티션을 찾을 수 없습니다.</string>
+	<string name="internalstorage">내부 저장소에 파일이 다운로드되었습니다</string>
+	<string name="op7">Boot 이미지가 패치되고 플래시되었습니다.\n패치된 이미지는 /sdcard/patched-boot.img에서도 확인할 수 있습니다.\n경고 슬라이더를 사용하여 Windows와 Android를 전환하세요.</string>
+	<string name="cepheus">Boot 이미지가 패치되고 플래시되었습니다.\n패치된 이미지는 /sdcard/patched-boot.img에서도 확인할 수 있습니다.\n어시스턴트 버튼을 사용하여 Windows와 Android를 전환하세요.</string>
     <string name="reboot">재부팅</string>
     <string name="cancel">취소</string>
     <string name="mounted">Windows 파티션을 마운트했습니다</string>
@@ -82,9 +82,12 @@
     <string name="chat">채팅</string>
     <string name="nah">아니요</string>
     <string name="later">나중에</string>
-    <string name="done">Done!</string>
+    <string name="done">끝!</string>
     <string name="mountt">마운트</string>
     <string name="unmountt">마운트 해제</string>
+	<string name="update">업데이트</string>
+	<string name="update1">업데이트 이용 가능</string>
+	<string name="update2">업데이트 중...</string>
 
     <string name="last">마지막 백업 : %s</string>
     <string name="slot">활성 슬롯 : %s</string>
@@ -102,12 +105,13 @@
 
     <string name="preference1">즉시 부팅을 실행했을 때 boot.img를 강제로 백업합니다 (Windows)</string>
     <string name="preference2">즉시 부팅을 실행했을 때 boot.img를 강제로 백업합니다 (Android)</string>
-    <string name="preference3">아무것도 감지되지 않으면 boot.img를 백업합니다 (Windows)</string>
-    <string name="preference4">아무것도 감지되지 않으면 boot.img를 백업합니다 (Android)</string>
-    <string name="preference5">QS Quickboot 타일에 대한 확인을 요구합니다</string>
+    <string name="preference3">백업이 없으면 boot.img를 백업합니다 (Windows)</string>
+    <string name="preference4">백업이 없으면 boot.img를 백업합니다 (Android)</string>
+    <string name="preference5">빠른 설정창에서 즉시 부팅을 선택할 경우 다시 한 번 확인합니다</string>
     <string name="preference6">언어 선택</string>
     <string name="preference7">부팅 시 자동으로 Windows 파티션 마운트</string>
     <string name="preference8">모뎀 덤프 기능 비활성화</string>
-    <string name="preference9">즉시 부팅을 위하여 잠금 해제된 화면이 필요합니다</string>
-    <string name="preference10">Mount Windows to /mnt instead of /sdcard</string>
+    <string name="preference9">즉시 부팅을 위하여 화면을 잠금 해제해야 합니다</string>
+    <string name="preference10">/sdcard 대신 /mnt에 Windows를 마운트합니다</string>
+	<string name="preference11">앱 업데이트 자동 확인 비활성화</string>
 </resources>
