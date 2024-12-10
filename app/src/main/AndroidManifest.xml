@@ -27,16 +27,6 @@
             </intent-filter>
         </receiver>
 		
-		<provider
-            android:name=".main.FileProvider"
-            android:authorities="$id.kuato.woahelper.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths" />
-        </provider>
-		
         <service
             android:name=".main.quickboot_tile"
             android:exported="true"
@@ -64,7 +54,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
