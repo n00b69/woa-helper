@@ -85,9 +85,9 @@
     <string name="done">Hotovo!</string>
     <string name="mountt">Namontovat</string>
     <string name="unmountt">Odpojit</string>
-	<string name="update">UPDATE</string>
-	<string name="update1">Update available</string>
-	<string name="update2">Updating...</string>
+	<string name="update">AKTUALIZACE</string>
+	<string name="update1">K dispozici je aktualizace</string>
+	<string name="update2">Aktualizace aplikace...</string>
 
     <string name="last">POSLEDNÍ ZÁLOHA : %s</string>
     <string name="slot">SLOT : %s</string>
@@ -113,5 +113,5 @@
     <string name="preference8">Deaktivovat ukládání dat z modemu</string>
     <string name="preference9">Vyžadovat odemčenou obrazovku pro rychlé spuštění (QUICKBOOT)</string>
     <string name="preference10">Připojte Windows do /mnt místo /sdcard</string>
-	<string name="preference11">Disable checking for app updates</string>
+	<string name="preference11">Zakázat kontrolu aktualizací aplikace</string>
 </resources>
