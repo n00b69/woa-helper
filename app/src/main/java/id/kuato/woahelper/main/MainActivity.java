@@ -62,7 +62,7 @@ import id.kuato.woahelper.util.RAM;
 public class MainActivity extends AppCompatActivity {
 
 	public final class BuildConfig {
-	public static final String VERSION_NAME = "1.8.4_BETA32";
+	public static final String VERSION_NAME = "1.8.4_BETA33";
 	}
 	static final Object lock = new Object();
 	private static final float SIZE = 12.0F;
@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		if (Objects.equals(currentVersion, pref.getVersion(this))) {
-			String[] files = {"Optimized_Taskbar_Control_V3.0.exe", "guacamole.fd", "hotdog.fd", "dbkp8150.cfg", "dbkp.hotdog.bin", "dbkp.cepheus.bin", "busybox", "install.bat", "sta.exe", "sdd.exe", "sdd.conf", "Switch to Android.lnk", "usbhostmode.exe", "ARMSoftware.url", "ARMRepo.url", "TestedSoftware.url", "WorksOnWoa.url", "RotationShortcut.lnk", "display.exe", "RemoveEdge.bat", "DefenderRemover.exe"};
+			String[] files = {"boot_img_auto-flasher_V1.0.exe", "Optimized_Taskbar_Control_V3.0.exe", "guacamole.fd", "hotdog.fd", "dbkp8150.cfg", "dbkp.hotdog.bin", "dbkp.cepheus.bin", "busybox", "install.bat", "sta.exe", "sdd.exe", "sdd.conf", "Switch to Android.lnk", "usbhostmode.exe", "ARMSoftware.url", "ARMRepo.url", "TestedSoftware.url", "WorksOnWoa.url", "RotationShortcut.lnk", "display.exe", "RemoveEdge.bat", "DefenderRemover.exe"};
 			int i = 0;
 			while (!files[i].isEmpty()) {
 				if (ShellUtils.fastCmd(String.format("ls %1$s |grep %2$s", getFilesDir(), files[i])).isEmpty()) {
@@ -787,6 +787,7 @@ public class MainActivity extends AppCompatActivity {
 				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sta.exe /sdcard/sta.exe");
 				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.exe /sdcard/sdd.exe");
 				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.conf /sdcard/sdd.conf");
+				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/boot_img_auto-flasher_V1.0.exe /sdcard/boot_img_auto-flasher_V1.0.exe");
 				mount();
 				String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
 				if (mnt_stat.isEmpty()) {
@@ -794,9 +795,12 @@ public class MainActivity extends AppCompatActivity {
 					mountfail();
 				} else {
 					ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/sta || true ");
+					ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/ProgramData/sta || true ");
+					ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sta.exe " + MainActivity.this.winpath + "/ProgramData/sta/sta.exe");
 					ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sta.exe " + MainActivity.this.winpath + "/sta/sta.exe");
 					ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.exe " + MainActivity.this.winpath + "/sta/sdd.exe");
 					ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.conf " + MainActivity.this.winpath + "/sta/sdd.conf");
+					ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/boot_img_auto-flasher_V1.0.exe " + MainActivity.this.winpath + "/sta/boot_img_auto-flasher_V1.0.exe");
 					ShellUtils.fastCmd("cp '" + MainActivity.this.getFilesDir() + "/Switch to Android.lnk' " + MainActivity.this.winpath + "/Users/Public/Desktop");
 					messages.setText(this.getString(R.string.done));
 					dismissButton.setVisibility(View.VISIBLE);
