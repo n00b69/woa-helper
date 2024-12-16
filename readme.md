@@ -59,3 +59,4 @@ This project is in late stages of development. Most features have already been a
 - [Graphael](https://github.com/grphks), [Victoria Freeman](https://github.com/VendDair) & [David42069](https://github.com/david-42069) for the Romanian translation
 - carloss15 for the Spanish translation
 - xayy1 for the Arabic translation
+- rivas for the Persian translation (rivas is not allowed)
