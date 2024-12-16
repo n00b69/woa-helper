@@ -14,7 +14,7 @@ android {
         versionName = "1.8.4_BETA33"
 
         resourceConfigurations += listOf(
-            "ar", "az", "be", "cs", "de", "en", "es", "fa", "fr", "in", "ko", "ms", "nl", "pl", "pt", "ru", "ro", "th", "tr", "uk", "vi", "zh", "zh-rCN", "zh-rHK", "zh-rMO", "zh-rSG", "zh-rTW"
+            "ar", "az", "be", "cs", "de", "en", "es", "fa", "fr", "in", "ka", "ko", "ms", "nl", "pl", "pt", "ru", "ro", "th", "tr", "uk", "vi", "zh", "zh-rCN", "zh-rHK", "zh-rMO", "zh-rSG", "zh-rTW"
         )
     }
 
