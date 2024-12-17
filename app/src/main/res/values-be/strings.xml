@@ -17,7 +17,7 @@
     <string name="script_title">СКРЫПТ TOOLBOX</string>
     <string name="setup_title">ЎСТАНОЎНІКІ ФРЭЙМВОРКАЎ</string>
     <string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
-	<string name="tablet_title">TABLET MODE SCRIPT</string>
+    <string name="tablet_title">СЦЭНАРЫЙ РЭЖЫМУ ПЛАНШЭТА</string>
 
     <string name="backup_boot_subtitle">Захаваць бэкап boot у Android і/ці Windows</string>
     <string name="mnt_subtitle">Вы можаце змантаваць раздзел Windows для прагляду і змены змесціва</string>
@@ -36,8 +36,8 @@
     <string name="defender_subtitle">Дадае скрыпт у C:\\Toolbox для выдалення Microsoft Edge / Windows Defender</string>
     <string name="script_subtitle">Дадае набор скрыптаў і налад у C:\\Toolbox</string>
     <string name="setup_subtitle">Дадае ўстаноўнікі для некалькіх фрэймворкаў у C:\\Toolbox</string>
-    <string name="dbkp_subtitle">Patches the kernel for seamless dualbooting</string>
-	<string name="tablet_subtitle">Adds a script to C:\\Toolbox which allows you to toggle tablet mode</string>
+    <string name="dbkp_subtitle">Патчыць ядро для бесперашкоднага dualboot загрузчыка.</string>
+    <string name="tablet_subtitle">Дадае сцэнарый у C:\Toolbox, які дазваляе пераключаць рэжым планшэта.</string>
 
     <string name="backup_boot_question">Вы хочаце захаваць бягучы вобраз boot?</string>
     <string name="mount_question">Змантаваць Windows у %s?</string>
@@ -53,17 +53,17 @@
     <string name="atlasos_question">Загрузіць і перанесці AtlasOS або ReviOS playbook у C:\\Toolbox?</string>
     <string name="defender_question">Скапіраваць скрыпт для выдалення Edge / Defender у C:\\Toolbox?</string>
     <string name="setup_question">Спампаваць і змясціць C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX і XNA усталёўнікі ў C:\\Toolbox?\n(гэта можа заняць некаторы час)</string>
-    <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
-	<string name="tablet_question">Copy tablet mode script to C:\\Toolbox?</string>
+    <string name="dbkp_question">Патчыць і запісваць ваша цяперашняе ядро?\n!!!НЕ НАЦІСКАЙЦЕ ТАК, КАЛІ ВАШ ПРЫЛАД НЕ ЯВЛЯЕЦЦА %s!!!</string>
+    <string name="tablet_question">Скапіраваць сцэнарый рэжыму планшэта ў C:\Toolbox?</string>
 
     <string name="wrong">Нешта пайшло не так</string>
     <string name="mountfail">Нешта пайшло не так, \nРаздзел Windows не можа быць змантаваны.\nЗвярніцеся па дапамогу ў чат Telegram.</string>
-	<string name="ntfs">NTFS support not detected. \nInstall NTFS3G module?</string>
-	<string name="internet">No internet connection found.\nConnect to the internet and try again.</string>
-	<string name="partition">No Windows partition detected.</string>
-	<string name="internalstorage">Files downloaded in internal storage</string>
-	<string name="op7">Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/patched-boot.img.\nUse your alert slider to switch between Windows and Android.</string>
-	<string name="cepheus">Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/patched-boot.img.\nUse your assistant button to switch between Windows and Android.</string>
+    <string name="ntfs">Падтрымка NTFS не выяўлена. \nУсталяваць модуль NTFS3G?</string>
+    <string name="internet">Злучэнне з інтэрнэтам не знойдзена.\nПадключыцеся да інтэрнэту і паспрабуйце яшчэ раз.</string>
+    <string name="partition">Партыцыя Windows не выяўлена.</string>
+    <string name="internalstorage">Файлы загружаны ў ўнутранае сховішча.</string>
+    <string name="op7">Выява загрузкі была патчана і запісана.\nПатчаную выяву таксама можна знайсці па адрасе /sdcard/patched-boot.img.\nВыкарыстоўвайце слайдэр апавяшчэнняў, каб пераключацца паміж Windows і Android.</string>
+    <string name="cepheus">Выява загрузкі была патчана і запісана.\nПатчаную выяву таксама можна знайсці па адрасе /sdcard/patched-boot.img.\nВыкарыстоўвайце кнопку памочніка, каб пераключацца паміж Windows і Android.</string>
     <string name="reboot">Перазагрузка</string>
     <string name="cancel">Адмена</string>
     <string name="mounted">Windows змантаваны</string>
@@ -85,6 +85,9 @@
     <string name="done">Гатова!</string>
     <string name="mountt">ЗМАНТАВАЦЬ</string>
     <string name="unmountt">РАЗМАНТАВАЦЬ</string>
+    <string name="update">АБНАЎЛЕННЕ</string>
+    <string name="update1">Даступнае абнаўленне.</string>
+    <string name="update2">Абнаўленне...</string>
 
     <string name="last">ДАТА АПОШНЯГА БЭКАПА : %s</string>
     <string name="slot">СЛОТ : %s</string>
@@ -110,4 +113,5 @@
     <string name="preference8">Адключыць функцыю дампа modem</string>
     <string name="preference9">Запытваць разблакаваны экран для хуткай загрузкі ў Windows</string>
     <string name="preference10">Мантаваць Windows у /mnt замест /sdcard</string>
+    <string name="preference11">Адключыць праверку абнаўленняў прыкладання.</string>
 </resources>
