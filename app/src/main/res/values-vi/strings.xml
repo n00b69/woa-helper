@@ -62,8 +62,10 @@
 	<string name="internet">Không có kết nối internet. \nHãy kết nối và thử lại.</string>
 	<string name="partition">Không phát hiện phân vùng Windows</string>
 	<string name="internalstorage">Tệp đã được tải vào bộ nhớ trong.</string>
-	<string name="op7">Đã vá và flash ảnh khởi động\nẢnh khởi động cũng có thể được tìm thấy ở /sdcard/patched-boot.img.\n Sử dụng thanh trượt thông báo để chuyển đổi giữa Windows và Android.</string>
-	<string name="cepheus">Đã vá và flash ảnh khởi động\nẢnh khởi động cũng có thể được tìm thấy ở /sdcard/patched-boot.img.\nSử dụng nút trợ lý để chuyển đổi giữa Windows và Android.</string>
+	<string name="dbkp">Đã vá và flash ảnh khởi động\nẢnh khởi động cũng có thể được tìm thấy ở /sdcard/patched-boot.img.\n Sử dụng %s để chuyển đổi giữa Windows và Android.</string>
+	<string name="op7">thanh trượt thông báo</string>
+	<string name="cepheus">nút trợ lý</string>
+	<string name="nabu">hộp từ tính</string>
 	<string name="reboot">Khởi động lại</string>
 	<string name="cancel">Hủy</string>
 	<string name="mounted">Windows đã hiện</string>

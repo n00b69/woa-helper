@@ -18,6 +18,7 @@ public class automount extends BroadcastReceiver {
 			final String busyBox = pref.getSharedPreference(context).getString(pref.busybox, "");
 			win = ShellUtils.fastCmd("su -mm -c realpath /dev/block/by-name/win");
 			if ("/dev/block/by-name/win".equals(win)) win = ShellUtils.fastCmd("su -mm -c realpath /dev/block/by-name/mindows");
+			if ("/dev/block/by-name/mindows".equals(win)) win = ShellUtils.fastCmd("su -mm -c realpath /dev/block/by-name/windows");
 			if (pref.getSharedPreference(context).getBoolean(pref.mountLocation, false)) {
 				ShellUtils.fastCmd("su -mm -c mkdir /mnt/Windows || true");
 				ShellUtils.fastCmd("cd /data/data/id.kuato.woahelper/files");

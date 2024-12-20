@@ -62,8 +62,10 @@
 	<string name="internet">ინტერნეტი არ არის.\nდაკავშირდით ინტერნეტთან და სცადეთ ხელახლა.</string>
 	<string name="partition">Windows-ის ბლოკები ვერ მოიძებნა</string>
 	<string name="internalstorage">ფაილები ჩამოტვირთულია შიდა მეხსიერებაში</string>
-	<string name="op7">Boot image დაპატჩულია და გაფლაშდა.\nBoot image-ის ასლი ასევე შეგიძლიათ იხილოთ /sdcard/patched-boot.img.\nგამოიყენეთ გაფრთხილების სლაიდერი Windows-სა და Android-ს შორის გადასართავად.</string>
-	<string name="cepheus">Boot image დაპატჩულია და გაფლაშდა.\nBoot image-ის ასლი ასევე შეგიძლიათ იხილოთ /sdcard/patched-boot.img.\nგამოიყენეთ დახმარების ღილაკი Windows-სა და Android-ს შორის გადასართავად.</string>
+	<string name="dbkp">Boot image დაპატჩულია და გაფლაშდა.\nBoot image-ის ასლი ასევე შეგიძლიათ იხილოთ /sdcard/patched-boot.img.\nგამოიყენეთ %s Windows-სა და Android-ს შორის გადასართავად.</string>
+	<string name="op7">გაფრთხილების სლაიდერი</string>
+	<string name="cepheus">დახმარების ღილაკი</string>
+	<string name="nabu">მაგნიტური საფარი</string>
 	<string name="reboot">გადატვირთვა</string>
 	<string name="cancel">გაუქმება</string>
 	<string name="mounted">Windows მიბმულია</string>

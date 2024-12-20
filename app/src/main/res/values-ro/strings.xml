@@ -62,8 +62,10 @@
 	<string name="internet">Conexiunea la internet nu a fost gasită.\nConectează-te la internet și încearcă din nou.</string>
 	<string name="partition">Partitia Windows nu a fost detectată.</string>
 	<string name="internalstorage">Fișierele au fost descărcate în memoria internă</string>
-	<string name="op7">Imaginea de boot a fost modificată și instalată.\nImaginea de boot modificată poate fi gasită la /sdcard/patched-boot.img.\nUtilizați sliderul de alertă pentru a comuta între Windows și Android.</string>
-	<string name="cepheus">Imaginea de boot a fost modificată și instalată.\nImaginea de boot modificată poate fi gasită la /sdcard/patched-boot.img.\nFolosiți butonul de asistent pentru a comuta între Windows și Android.</string>
+	<string name="dbkp">Imaginea de boot a fost modificată și instalată.\nImaginea de boot modificată poate fi gasită la /sdcard/patched-boot.img.\nUtilizați %s pentru a comuta între Windows și Android.</string>
+	<string name="op7">sliderul de alertă</string>
+	<string name="cepheus">butonul de asistent</string>
+	<string name="nabu">carcasa magnetica</string>
 	<string name="reboot">Repornire</string>
 	<string name="cancel">Anulare</string>
 	<string name="mounted">Windows este montat</string>

@@ -105,6 +105,7 @@ public class quickboot_tile extends TileService {
 		finduefi = ShellUtils.fastCmd(getString(R.string.uefiChk));
 		win = ShellUtils.fastCmd("su -mm -c realpath /dev/block/by-name/win");
 		if ("/dev/block/by-name/win".equals(win)) win = ShellUtils.fastCmd("su -mm -c realpath /dev/block/by-name/mindows");
+		if ("/dev/block/by-name/mindows".equals(win)) win = ShellUtils.fastCmd("su -mm -c realpath /dev/block/by-name/windows");
 		winpath = (pref.getMountLocation(this) ? "/mnt/Windows" : "/mnt/sdcard/Windows");
 	}
 

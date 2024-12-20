@@ -62,7 +62,7 @@ import id.kuato.woahelper.util.RAM;
 public class MainActivity extends AppCompatActivity {
 
 	public final class BuildConfig {
-	public static final String VERSION_NAME = "1.8.4_BETA33";
+	public static final String VERSION_NAME = "1.8.4_BETA34";
 	}
 	static final Object lock = new Object();
 	private static final float SIZE = 12.0F;
@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		if (Objects.equals(currentVersion, pref.getVersion(this))) {
-			String[] files = {"boot_img_auto-flasher_V1.0.exe", "Optimized_Taskbar_Control_V3.0.exe", "guacamole.fd", "hotdog.fd", "dbkp8150.cfg", "dbkp.hotdog.bin", "dbkp.cepheus.bin", "busybox", "install.bat", "sta.exe", "sdd.exe", "sdd.conf", "Switch to Android.lnk", "usbhostmode.exe", "ARMSoftware.url", "ARMRepo.url", "TestedSoftware.url", "WorksOnWoa.url", "RotationShortcut.lnk", "display.exe", "RemoveEdge.bat", "DefenderRemover.exe"};
+			String[] files = {"boot_img_auto-flasher_V1.0.exe", "Optimized_Taskbar_Control_V3.0.exe", "guacamole.fd", "hotdog.fd", "dbkp8150.cfg", "dbkp.hotdog.bin", "dbkp.cepheus.bin", "dbkp.nabu.bin", "busybox", "install.bat", "sta.exe", "sdd.exe", "sdd.conf", "Switch to Android.lnk", "usbhostmode.exe", "ARMSoftware.url", "ARMRepo.url", "TestedSoftware.url", "WorksOnWoa.url", "RotationShortcut.lnk", "display.exe", "RemoveEdge.bat", "DefenderRemover.exe"};
 			int i = 0;
 			while (!files[i].isEmpty()) {
 				if (ShellUtils.fastCmd(String.format("ls %1$s |grep %2$s", getFilesDir(), files[i])).isEmpty()) {
@@ -189,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
 		this.checkdbkpmodel();
 		this.win = ShellUtils.fastCmd("realpath /dev/block/by-name/win");
 		if ("/dev/block/by-name/win".equals(this.win)) this.win = ShellUtils.fastCmd("realpath /dev/block/by-name/mindows");
+		if ("/dev/block/by-name/mindows".equals(this.win)) this.win = ShellUtils.fastCmd("realpath /dev/block/by-name/windows");
 		this.winpath = (pref.getMountLocation(this) ? "/mnt/Windows" : "/mnt/sdcard/Windows");
 		String mount_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + this.win);
 		if (mount_stat.isEmpty()) this.mounted = getString(R.string.mountt);
@@ -353,6 +354,8 @@ public class MainActivity extends AppCompatActivity {
 					this.grouplink = "https://t.me/nabuwoa";
 					this.x.NabuImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.nabu, null));
 					this.x.tvPanel.setVisibility(View.VISIBLE);
+					this.n.cvDbkp.setVisibility(View.VISIBLE);
+					this.n.cvFlashUefi.setVisibility(View.GONE);
 				}
 				case "perseus" -> {
 					this.guidelink = "https://github.com/n00b69/woa-perseus";
@@ -956,6 +959,7 @@ public class MainActivity extends AppCompatActivity {
 						ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp8150.cfg /sdcard/dbkp");
 						ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp.hotdog.bin /sdcard/dbkp");
 						ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp.cepheus.bin /sdcard/dbkp");
+						ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp.nabu.bin /sdcard/dbkp");
 						ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woa-op7/releases/download/DBKP/dbkp -O /sdcard/dbkp/dbkp");
 						ShellUtils.fastCmd("cp /sdcard/dbkp/dbkp "+getFilesDir());
 						ShellUtils.fastCmd("chmod 777 " + MainActivity.this.getFilesDir() + "/dbkp");
@@ -998,13 +1002,31 @@ public class MainActivity extends AppCompatActivity {
 							ShellUtils.fastCmd("su -mm -c mv /sdcard/new-boot.img /sdcard/patched-boot.img");
 							ShellUtils.fastCmd("rm -r /sdcard/dbkp");
 							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot bs=16M");
+						} else if ("nabu".equals(bedan)) {
+							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/releases/download/1.0/nabu.fd -O /sdcard/dbkp/nabu.fd");
+							ShellUtils.fastCmd("cd /sdcard/dbkp");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) unpack boot.img\" | su -c sh");
+							ShellUtils.fastCmd("su -mm -c " + MainActivity.this.getFilesDir() + "/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/nabu.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp8150.cfg /sdcard/dbkp/dbkp.nabu.bin");
+							ShellUtils.fastCmd("su -mm -c rm /sdcard/dbkp/kernel");
+							ShellUtils.fastCmd("su -mm -c mv output kernel");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) repack boot.img\" | su -c sh");
+							ShellUtils.fastCmd("su -mm -c cp new-boot.img /sdcard/new-boot.img");
+							ShellUtils.fastCmd("su -mm -c mv /sdcard/new-boot.img /sdcard/patched-boot.img");
+							ShellUtils.fastCmd("rm -r /sdcard/dbkp");
+							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_a bs=16M");
+							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16M");
 						}
 						runOnUiThread(()->{
-						if ("guacamole".equals(bedan) || "OnePlus7Pro".equals(bedan) || "OnePlus7Pro4G".equals(bedan) || "hotdog".equals(bedan) || "OnePlus7TPro".equals(bedan) || "OnePlus7TPro4G".equals(bedan)) {
-							messages.setText(getString(R.string.op7));
-						} else if ("cepheus".equals(bedan)) {
-							messages.setText(getString(R.string.cepheus));
-						} 
+							if ("guacamole".equals(bedan) || "OnePlus7Pro".equals(bedan) || "OnePlus7Pro4G".equals(bedan) || "hotdog".equals(bedan) || "OnePlus7TPro".equals(bedan) || "OnePlus7TPro4G".equals(bedan)) {
+								String op7 = getString(R.string.op7);
+								messages.setText(String.format(getString(R.string.dbkp), op7));
+							} else if ("cepheus".equals(bedan)) {
+								String cepheus = getString(R.string.cepheus);
+								messages.setText(String.format(getString(R.string.dbkp), cepheus));
+							} else if ("nabu".equals(bedan)) {
+								String nabu = getString(R.string.nabu);
+								messages.setText(String.format(getString(R.string.dbkp), nabu));
+							} 
 							dismissButton.setText(getString(R.string.dismiss));
 							dismissButton.setVisibility(View.VISIBLE);
 							dismissButton.setOnClickListener(new View.OnClickListener() {
@@ -1833,6 +1855,8 @@ public class MainActivity extends AppCompatActivity {
 			this.dbkpmodel = "ONEPLUS 7T PRO";
 		} else if ("cepheus".equals(dbkpmodel)) {
 			this.dbkpmodel = "XIAOMI MI 9";
+		} else if ("nabu".equals(dbkpmodel)) {
+			this.dbkpmodel = "XIAOMI PAD 5";
 		} else {
 			this.dbkpmodel = "UNSUPPORTED";
 		}

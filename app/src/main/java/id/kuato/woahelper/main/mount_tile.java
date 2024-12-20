@@ -34,6 +34,7 @@ public class mount_tile extends TileService {
 		if (isSecure() && !pref.getSecure(this)){ tile.setState(0);return;}
 		win = ShellUtils.fastCmd("su -mm -c realpath /dev/block/by-name/win");
 		if ("/dev/block/by-name/win".equals(win)) win = ShellUtils.fastCmd("su -mm -c realpath /dev/block/by-name/mindows");
+		if ("/dev/block/by-name/mindows".equals(win)) win = ShellUtils.fastCmd("su -mm -c realpath /dev/block/by-name/windows");
 		winpath = (pref.getMountLocation(this) ? "/mnt/Windows" : "/mnt/sdcard/Windows");
 		mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + win);
 		if (mnt_stat.isEmpty()) tile.setState(1);
