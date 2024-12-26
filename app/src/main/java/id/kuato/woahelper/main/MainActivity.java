@@ -62,7 +62,7 @@ import id.kuato.woahelper.util.RAM;
 public class MainActivity extends AppCompatActivity {
 
 	public final class BuildConfig {
-	public static final String VERSION_NAME = "1.8.4_BETA34";
+	public static final String VERSION_NAME = "1.8.4_BETA35";
 	}
 	static final Object lock = new Object();
 	private static final float SIZE = 12.0F;
@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		if (Objects.equals(currentVersion, pref.getVersion(this))) {
-			String[] files = {"boot_img_auto-flasher_V1.0.exe", "Optimized_Taskbar_Control_V3.0.exe", "guacamole.fd", "hotdog.fd", "dbkp8150.cfg", "dbkp.hotdog.bin", "dbkp.cepheus.bin", "dbkp.nabu.bin", "busybox", "install.bat", "sta.exe", "sdd.exe", "sdd.conf", "Switch to Android.lnk", "usbhostmode.exe", "ARMSoftware.url", "ARMRepo.url", "TestedSoftware.url", "WorksOnWoa.url", "RotationShortcut.lnk", "display.exe", "RemoveEdge.bat", "DefenderRemover.exe"};
+			String[] files = {"guacamole.fd", "hotdog.fd", "dbkp8150.cfg", "dbkp.hotdog.bin", "dbkp.cepheus.bin", "dbkp.nabu.bin", "busybox", "install.bat", "sta.exe", "sdd.exe", "sdd.conf", "Switch to Android.lnk", "usbhostmode.exe", "ARMSoftware.url", "ARMRepo.url", "TestedSoftware.url", "WorksOnWoa.url", "RotationShortcut.lnk", "display.exe", "RemoveEdge.bat"};
 			int i = 0;
 			while (!files[i].isEmpty()) {
 				if (ShellUtils.fastCmd(String.format("ls %1$s |grep %2$s", getFilesDir(), files[i])).isEmpty()) {
@@ -194,7 +194,6 @@ public class MainActivity extends AppCompatActivity {
 		String mount_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + this.win);
 		if (mount_stat.isEmpty()) this.mounted = getString(R.string.mountt);
 		else this.mounted = getString(R.string.unmountt);
-		if (pref.getMODEM(this)) this.n.cvDumpModem.setVisibility(View.GONE);
 		this.x.tvMnt.setText(String.format(this.getString(R.string.mnt_title), this.mounted));
 		this.x.tvDate.setText(String.format(this.getString(R.string.last), pref.getDATE(this)));
 		MaterialButton yesButton = dialog.findViewById(R.id.yes);
@@ -448,7 +447,6 @@ public class MainActivity extends AppCompatActivity {
 					this.guidelink = "https://project-aloha.github.io/";
 					this.grouplink = "https://t.me/onepluswoachat";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.guacamole, null));
-					this.n.cvDumpModem.setVisibility(View.VISIBLE);
 				}
 				case "sagit" -> {
 					this.guidelink = "https://renegade-project.tech/";
@@ -707,39 +705,37 @@ public class MainActivity extends AppCompatActivity {
 			noButton.setText(this.getString(R.string.no));
 			yesButton.setText(this.getString(R.string.yes));
 			dismissButton.setText(this.getString(R.string.dismiss));
-			yesButton.setOnClickListener(v1 -> {
-				yesButton.setVisibility(View.GONE);
-				noButton.setVisibility(View.GONE);
-				messages.setText(this.getString(R.string.please_wait));
-				new Handler().postDelayed(() -> {
-					try {
-						this.mount();
-						String[] dumped = {"bhima", "cepheus", "guacamole", "guacamoleb", "hotdog", "hotdogb", "OnePlus7", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7T", "OnePlus7TPro", "OnePlus7TPro4G", "raphael", "raphaelin", "raphaels", "vayu"};
-						if (Arrays.asList(dumped).contains(this.device) || !(pref.getMODEM(this))) {
-							this.dump();
+			yesButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					yesButton.setVisibility(View.GONE);
+					noButton.setVisibility(View.GONE);
+					messages.setText(getString(R.string.please_wait));
+					new Handler().postDelayed(new Runnable() {
+						@Override
+						public void run() {
+							MainActivity.this.mount();
+							String found = ShellUtils.fastCmd("ls " + (pref.getMountLocation(MainActivity.this) ? "/mnt/Windows" : "/mnt/sdcard/Windows") + " | grep boot.img");
+							if (pref.getBACKUP(MainActivity.this) || (!pref.getAUTO(MainActivity.this) && found.isEmpty())) {
+								winBackup();
+								SimpleDateFormat sdf = new SimpleDateFormat("dd-MM HH:mm", Locale.US);
+								String currentDateAndTime = sdf.format(new Date());
+								pref.setDATE(MainActivity.this, currentDateAndTime);
+							}
+							found = ShellUtils.fastCmd("find /sdcard | grep boot.img");
+							if (pref.getBACKUP_A(MainActivity.this) || (!pref.getAUTO_A(MainActivity.this) && found.isEmpty())) {
+								ShellUtils.fastCmd(MainActivity.this.getString(R.string.backup));
+								SimpleDateFormat sdf = new SimpleDateFormat("dd-MM HH:mm", Locale.US);
+								String currentDateAndTime = sdf.format(new Date());
+								pref.setDATE(MainActivity.this, currentDateAndTime);
+							}
+							flash(finduefi);
+							ShellUtils.fastCmd("su -c svc power reboot");
+							messages.setText(getString(R.string.wrong));
+							dismissButton.setVisibility(View.VISIBLE);
 						}
-						String found = ShellUtils.fastCmd("ls " + (pref.getMountLocation(this) ? "/mnt/Windows" : "/mnt/sdcard/Windows") + " | grep boot.img");
-						if (pref.getBACKUP(this) || (!pref.getAUTO(this) && found.isEmpty())) {
-							ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/boot$(getprop ro.boot.slot_suffix) of=" + this.winpath + "/boot.img");
-							SimpleDateFormat sdf = new SimpleDateFormat("dd-MM HH:mm", Locale.US);
-							String currentDateAndTime = sdf.format(new Date());
-							pref.setDATE(this, currentDateAndTime);
-						}
-						found = ShellUtils.fastCmd("find /sdcard | grep boot.img");
-						if (pref.getBACKUP_A(this) || (!pref.getAUTO_A(this) && found.isEmpty())) {
-							ShellUtils.fastCmd(MainActivity.this.getString(R.string.backup));
-							SimpleDateFormat sdf = new SimpleDateFormat("dd-MM HH:mm", Locale.US);
-							String currentDateAndTime = sdf.format(new Date());
-							pref.setDATE(this, currentDateAndTime);
-						}
-						this.flash(this.finduefi);
-						ShellUtils.fastCmd("su -c svc power reboot");
-						messages.setText(this.getString(R.string.wrong));
-						dismissButton.setVisibility(View.VISIBLE);
-					} catch (Exception error) {
-						error.printStackTrace();
-					}
-				}, 50);
+					}, 25);
+				}
 			});
 			dismissButton.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -790,7 +786,6 @@ public class MainActivity extends AppCompatActivity {
 				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sta.exe /sdcard/sta.exe");
 				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.exe /sdcard/sdd.exe");
 				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.conf /sdcard/sdd.conf");
-				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/boot_img_auto-flasher_V1.0.exe /sdcard/boot_img_auto-flasher_V1.0.exe");
 				mount();
 				String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
 				if (mnt_stat.isEmpty()) {
@@ -803,7 +798,6 @@ public class MainActivity extends AppCompatActivity {
 					ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sta.exe " + MainActivity.this.winpath + "/sta/sta.exe");
 					ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.exe " + MainActivity.this.winpath + "/sta/sdd.exe");
 					ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.conf " + MainActivity.this.winpath + "/sta/sdd.conf");
-					ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/boot_img_auto-flasher_V1.0.exe " + MainActivity.this.winpath + "/sta/boot_img_auto-flasher_V1.0.exe");
 					ShellUtils.fastCmd("cp '" + MainActivity.this.getFilesDir() + "/Switch to Android.lnk' " + MainActivity.this.winpath + "/Users/Public/Desktop");
 					messages.setText(this.getString(R.string.done));
 					dismissButton.setVisibility(View.VISIBLE);
@@ -1320,47 +1314,6 @@ public class MainActivity extends AppCompatActivity {
 			dialog.setCancelable(false);
 			dialog.show();
 		});
-		
-		this.z.cvTablet.setOnClickListener(v -> {
-			this.ShowBlur();
-			noButton.setVisibility(View.VISIBLE);
-			yesButton.setVisibility(View.VISIBLE);
-			dismissButton.setVisibility(View.GONE);
-			icons.setVisibility(View.VISIBLE);
-			icons.setImageDrawable(sensors);
-			messages.setText(this.getString(R.string.tablet_question));
-			noButton.setText(this.getString(R.string.no));
-			yesButton.setText(this.getString(R.string.yes));
-			dismissButton.setText(MainActivity.this.getString(R.string.dismiss));
-			noButton.setOnClickListener(v16 -> {
-				this.HideBlur();
-				dialog.dismiss();
-			});
-			yesButton.setOnClickListener(v17 -> {
-				noButton.setVisibility(View.GONE);
-				yesButton.setVisibility(View.GONE);
-				messages.setText(this.getString(R.string.please_wait));
-				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/Optimized_Taskbar_Control_V3.0.exe /sdcard/");
-				mount();
-				String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
-				if (mnt_stat.isEmpty()) {
-					dialog.dismiss();
-					mountfail();
-				} else {
-					ShellUtils.fastCmd("mkdir " + this.winpath + "/Toolbox || true ");
-					ShellUtils.fastCmd("cp /sdcard/Optimized_Taskbar_Control_V3.0.exe " + this.winpath + "/Toolbox");
-					ShellUtils.fastCmd("rm /sdcard/Optimized_Taskbar_Control_V3.0.exe");
-					messages.setText(this.getString(R.string.done));
-					dismissButton.setVisibility(View.VISIBLE);
-					dismissButton.setOnClickListener(v18 -> {
-					this.HideBlur();
-					dialog.dismiss();
-					});
-				}
-			});
-			dialog.setCancelable(false);
-			dialog.show();
-		});
 
 		this.z.cvSetup.setOnClickListener(v -> {
 			this.ShowBlur();
@@ -1494,26 +1447,31 @@ public class MainActivity extends AppCompatActivity {
 			yesButton.setOnClickListener(v21 -> {
 				noButton.setVisibility(View.GONE);
 				yesButton.setVisibility(View.GONE);
-				messages.setText(this.getString(R.string.please_wait));
-				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/DefenderRemover.exe /sdcard");
-				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/RemoveEdge.bat /sdcard");
-				mount();
-				String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + this.win);
-				if (mnt_stat.isEmpty()) {
-					dialog.dismiss();
-					mountfail();
-				} else {
-					ShellUtils.fastCmd("mkdir " + this.winpath + "/Toolbox || true ");
-					ShellUtils.fastCmd("cp /sdcard/DefenderRemover.exe " + this.winpath + "/Toolbox");
-					ShellUtils.fastCmd("rm /sdcard/DefenderRemover.exe");
-					ShellUtils.fastCmd("cp /sdcard/RemoveEdge.bat " + this.winpath + "/Toolbox");
-					ShellUtils.fastCmd("rm /sdcard/RemoveEdge.bat");
-					messages.setText(this.getString(R.string.done));
+				if (!MainActivity.isNetworkConnected(this)) {
 					dismissButton.setVisibility(View.VISIBLE);
-					dismissButton.setOnClickListener(v22 -> {
-						this.HideBlur();
+					messages.setText(this.getString(R.string.internet));
+				} else {
+					messages.setText(this.getString(R.string.please_wait));
+					ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/DefenderRemover.exe -O /sdcard/DefenderRemover.exe");
+					ShellUtils.fastCmd("cp " + this.getFilesDir() + "/RemoveEdge.bat /sdcard");
+					mount();
+					String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + this.win);
+					if (mnt_stat.isEmpty()) {
 						dialog.dismiss();
-					});
+						mountfail();
+					} else {
+						ShellUtils.fastCmd("mkdir " + this.winpath + "/Toolbox || true ");
+						ShellUtils.fastCmd("cp /sdcard/DefenderRemover.exe " + this.winpath + "/Toolbox");
+						ShellUtils.fastCmd("rm /sdcard/DefenderRemover.exe");
+						ShellUtils.fastCmd("cp /sdcard/RemoveEdge.bat " + this.winpath + "/Toolbox");
+						ShellUtils.fastCmd("rm /sdcard/RemoveEdge.bat");
+						messages.setText(this.getString(R.string.done));
+						dismissButton.setVisibility(View.VISIBLE);
+						dismissButton.setOnClickListener(v22 -> {
+							this.HideBlur();
+							dialog.dismiss();
+						});
+					}
 				}
 			});
 			dialog.setCancelable(false);
@@ -1528,7 +1486,6 @@ public class MainActivity extends AppCompatActivity {
 		this.x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out));
 		this.setContentView(this.k.getRoot());
 		this.k.settingsPanel.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in));
-		this.k.modemdump.setChecked(pref.getMODEM(this));
 		this.k.backupQB.setChecked(pref.getBACKUP(this));
 		this.k.backupQBA.setChecked(pref.getBACKUP_A(this));
 		this.k.autobackup.setChecked(!pref.getAUTO(this));
@@ -1545,12 +1502,6 @@ public class MainActivity extends AppCompatActivity {
 		this.k.mountLocation.setOnCheckedChangeListener((compoundButton, b) -> {
 			pref.setMountLocation(this, b);
 			this.winpath = (b ? "/mnt/Windows" : "/mnt/sdcard/Windows");
-		});
-		
-		this.k.modemdump.setOnCheckedChangeListener((compoundButton, b) -> {
-			pref.setMODEM(this, b);
-			if (b) this.n.cvDumpModem.setVisibility(View.GONE);
-			else this.n.cvDumpModem.setVisibility(View.VISIBLE);
 		});
 
 		this.d.toolbarlayout.back.setVisibility(View.VISIBLE);
@@ -1745,8 +1696,8 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public void dump() {
-		ShellUtils.fastCmd("su -c dd bs=8M if=/dev/block/by-name/modemst1 of=$(find " + this.winpath + "/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/bootmodem_fs1 bs=8388608");
-		ShellUtils.fastCmd("su -c dd bs=8M if=/dev/block/by-name/modemst2 of=$(find " + this.winpath + "/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/bootmodem_fs2 bs=8388608");
+		ShellUtils.fastCmd("su -c dd if=/dev/block/by-name/modemst1 of=$(find " + this.winpath + "/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/bootmodem_fs1");
+		ShellUtils.fastCmd("su -c dd if=/dev/block/by-name/modemst2 of=$(find " + this.winpath + "/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/bootmodem_fs2");
 	}
 
 	public void checkRoot(){
@@ -1870,19 +1821,10 @@ public class MainActivity extends AppCompatActivity {
 			this.x.tvQuickBoot.setText(getString(R.string.quickboot_title));
 			this.x.cvQuickBoot.setEnabled(true);
 			this.x.tvQuickBoot.setText(getString(R.string.quickboot_title));
+			this.x.tvBootSubtitle.setText(getString(R.string.quickboot_subtitle_nabu));
 			this.n.tvFlashUefi.setText(this.getString(R.string.flash_uefi_title));
 			this.n.tvUefiSubtitle.setText(this.getString(R.string.flash_uefi_subtitle));
 			this.n.cvFlashUefi.setEnabled(true);
-			try {
-				String[] dumpeddevices = {"bhima", "cepheus", "guacamole", "guacamoleb", "hotdog", "hotdogb", "OnePlus7", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7T", "OnePlus7TPro", "OnePlus7TPro4G", "OP7ProNRSpr", "raphael", "raphaelin", "raphaels", "vayu"};
-				if (Arrays.asList(dumpeddevices).contains(device)) {
-					x.tvBootSubtitle.setText(getString(R.string.quickboot_subtitle));
-				} else {
-					x.tvBootSubtitle.setText(getString(R.string.quickboot_subtitle_nabu));
-				}
-			} catch (Exception error) {
-				error.printStackTrace();
-			}
 		} else {
 			this.x.cvQuickBoot.setEnabled(false);
 			this.x.tvQuickBoot.setText(getString(R.string.uefi_not_found));

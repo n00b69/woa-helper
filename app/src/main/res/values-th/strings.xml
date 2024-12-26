@@ -62,10 +62,10 @@
 	<string name="internet">ไม่พบการเชื่อมต่ออินเทอร์เน็ต\nโปรดเชื่อมต่ออินเทอร์เน็ตแล้วลองอีกครั้ง</string>
 	<string name="partition">ไม่พบพาร์ติชัน Windows</string>
 	<string name="internalstorage">ไฟล์ที่ดาวน์โหลดลงในที่เก็บข้อมูลภายใน</string>
-	<string name="dbkp">image การบูตได้รับการแก้ไขและแฟลชแล้ว\nยังสามารถพบ image ที่แก้ไขแล้วได้ที่ /sdcard/patched-boot.img\nUse your %s to switch between Windows and Android.</string>
-	<string name="op7">alert slider</string>
-	<string name="cepheus">assistant button</string>
-	<string name="nabu">magnetic case</string>
+	<string name="dbkp">image การบูตได้รับการแก้ไขและแฟลชแล้ว\nยังสามารถพบ image ที่แก้ไขแล้วได้ที่ /sdcard/patched-boot.img\nใช้ %s ของคุณเพื่อสลับระหว่าง Windows และ Android</string>
+	<string name="op7">แถบเลื่อนการแจ้งเตือน</string>
+	<string name="cepheus">ปุ่มผู้ช่วย</string>
+	<string name="nabu">เคสแม่เหล็ก</string>
 	<string name="reboot">เริ่มใหม่</string>
 	<string name="cancel">ยกเลิก</string>
 	<string name="mounted">การเชื่อมต่อ Windows</string>

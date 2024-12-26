@@ -44,9 +44,6 @@ public class quickboot_tile extends TileService {
 		final Tile tile = getQsTile();
 		if (2 == tile.getState() || !pref.getCONFIRM(this)) {
 			mount();
-			if (!(Objects.equals(device, "nabu") || Objects.equals(device, "mh2lm")) || !(pref.getMODEM(this))) {
-				dump();
-			}
 			String found = ShellUtils.fastCmd("ls " + (pref.getMountLocation(this) ? "/mnt/Windows" : "/mnt/sdcard/Windows") + " | grep boot.img");
 			if (pref.getMountLocation(this)) {
 				if (pref.getBACKUP(this) || (!pref.getAUTO(this) && found.isEmpty())) {
@@ -85,11 +82,6 @@ public class quickboot_tile extends TileService {
 		ShellUtils.fastCmd("mkdir " + winpath + " || true");
 		ShellUtils.fastCmd("cd /data/data/id.kuato.woahelper/files");
 		ShellUtils.fastCmd("su -mm -c ./mount.ntfs " + win + " " + winpath);
-	}
-
-	private void dump() {
-		ShellUtils.fastCmd("su -c dd bs=8M if=/dev/block/by-name/modemst1 of=$(find " + winpath + "/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/bootmodem_fs1 bs=8388608");
-		ShellUtils.fastCmd("su -c dd bs=8M if=/dev/block/by-name/modemst2 of=$(find " + winpath + "/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/bootmodem_fs2 bs=8388608");
 	}
 
 	public void flash() {
