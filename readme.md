@@ -59,6 +59,6 @@ This project is in late stages of development. Most features have already been a
 - [Gosha](https://github.com/Xhdsos) & [Victoria Freeman](https://github.com/VendDair) for the Belarusian translation
 - [Graphael](https://github.com/grphks), [Victoria Freeman](https://github.com/VendDair) & [David42069](https://github.com/david-42069) for the Romanian translation
 - carloss15 for the Spanish translation
-- xayy1 for the Arabic translation
+- [maydoxx1](https://github.com/maydoxx1) for the Arabic Translation
 - Nikka for the Georgian translation
 - rivas for the Persian translation (rivas is not allowed)
