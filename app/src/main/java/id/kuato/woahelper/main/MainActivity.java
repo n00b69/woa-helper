@@ -307,16 +307,6 @@ public class MainActivity extends AppCompatActivity {
 					this.n.cvDumpModem.setVisibility(View.VISIBLE);
 					this.n.cvFlashUefi.setVisibility(View.GONE);
 				}
-				case "cheeseburger" -> {
-					this.guidelink = "https://renegade-project.tech/";
-					this.grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA";
-					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.cheeseburger, null));
-				}
-				case "dumpling" -> {
-					this.guidelink = "https://renegade-project.tech/";
-					this.grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA";
-					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.dumpling, null));
-				}
 				case "chiron" -> {
 					this.guidelink = "https://renegade-project.tech/";
 					this.grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA";
@@ -408,12 +398,22 @@ public class MainActivity extends AppCompatActivity {
 					this.grouplink = "https://t.me/lgedevices";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.unknown, null));
 				}
+				case "OnePlus5", "cheeseburger" -> {
+					this.guidelink = "https://renegade-project.tech/";
+					this.grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.cheeseburger, null));
+				}
+				case "OnePlus5T", "dumpling" -> {
+					this.guidelink = "https://renegade-project.tech/";
+					this.grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.dumpling, null));
+				}
 				case "OnePlus6", "fajita" -> {
 					this.guidelink = "https://github.com/n00b69/woa-op6";
 					this.grouplink = "https://t.me/WinOnOP6";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.fajita, null));
 				}
-				case "OnePlus6T", "enchilada" -> {
+				case "OnePlus6T", "OnePlus6TSingle", "enchilada" -> {
 					this.guidelink = "https://github.com/n00b69/woa-op6";
 					this.grouplink = "https://t.me/WinOnOP6";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.enchilada, null));
@@ -426,7 +426,7 @@ public class MainActivity extends AppCompatActivity {
 					this.n.cvDbkp.setVisibility(View.VISIBLE);
 					this.n.cvFlashUefi.setVisibility(View.GONE);
 				}
-				case "guacamole", "OnePlus7Pro", "OnePlus7Pro4G" -> {
+				case "guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO" -> {
 					this.guidelink = "https://github.com/n00b69/woa-op7";
 					this.grouplink = "https://t.me/onepluswoachat";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.guacamole, null));
@@ -440,12 +440,12 @@ public class MainActivity extends AppCompatActivity {
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.unknown, null));
 					this.n.cvDumpModem.setVisibility(View.VISIBLE);
 				}
-				case "OnePlus7TPro5G", "OnePlus7TProNR" -> {
+				case "OnePlus7TPro5G", "OnePlus7TProNR", "hotdogg" -> {
 					this.guidelink = "https://project-aloha.github.io/";
 					this.grouplink = "https://t.me/onepluswoachat";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.hotdog, null));
 				}
-				case "hotdogg", "OP7ProNRSpr" -> {
+				case "OP7ProNRSpr", "OnePlus7ProNR", "guacamoleg", "guacamoles" -> {
 					this.guidelink = "https://project-aloha.github.io/";
 					this.grouplink = "https://t.me/onepluswoachat";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.guacamole, null));
@@ -785,10 +785,11 @@ public class MainActivity extends AppCompatActivity {
 			yesButton.setOnClickListener(v3 -> {
 				noButton.setVisibility(View.GONE);
 				yesButton.setVisibility(View.GONE);
-				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sta.exe /sdcard/sta.exe");
-				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.exe /sdcard/sdd.exe");
-				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.conf /sdcard/sdd.conf");
-				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/AutoFlash.cmd /sdcard/AutoFlash.cmd");
+				ShellUtils.fastCmd("mkdir /sdcard/sta || true");
+				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sta.exe /sdcard/sta/sta.exe");
+				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.exe /sdcard/sta/sdd.exe");
+				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.conf /sdcard/sta/sdd.conf");
+				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/AutoFlash.cmd /sdcard/sta/AutoFlash.cmd");
 				mount();
 				String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
 				if (mnt_stat.isEmpty()) {
@@ -797,12 +798,10 @@ public class MainActivity extends AppCompatActivity {
 				} else {
 					ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/sta || true ");
 					ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/ProgramData/sta || true ");
-					ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sta.exe " + MainActivity.this.winpath + "/ProgramData/sta/sta.exe");
-					ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sta.exe " + MainActivity.this.winpath + "/sta/sta.exe");
-					ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.exe " + MainActivity.this.winpath + "/sta/sdd.exe");
-					ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.conf " + MainActivity.this.winpath + "/sta/sdd.conf");
-					ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/AutoFlash.cmd " + MainActivity.this.winpath + "/sta/AutoFlash.cmd");
 					ShellUtils.fastCmd("cp '" + MainActivity.this.getFilesDir() + "/Switch to Android.lnk' " + MainActivity.this.winpath + "/Users/Public/Desktop");
+					ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sta.exe " + MainActivity.this.winpath + "/ProgramData/sta/sta.exe");
+					ShellUtils.fastCmd("cp /sdcard/sta/* " + MainActivity.this.winpath + "/sta");
+					ShellUtils.fastCmd("rm -r /sdcard/sta");
 					messages.setText(this.getString(R.string.done));
 					dismissButton.setVisibility(View.VISIBLE);
 					dismissButton.setOnClickListener(v4 -> {
@@ -1744,7 +1743,7 @@ public class MainActivity extends AppCompatActivity {
 		yesButton.setVisibility(View.GONE);
 		noButton.setVisibility(View.GONE);
 		dismissButton.setVisibility(View.GONE);
-		String[] supported = {"a52sxq", "alpha_lao_com", "alphalm_lao_com", "alphaplus_lao_com", "alphalm", "alphaplus", "alioth", "andromeda", "betalm", "beta_lao_com", "betaplus_lao_com", "betalm_lao_com", "beryllium", "bhima", "cepheus", "cheeseburger", "chiron", "curtana2", "curtana", "curtana_india", "curtana_cn", "curtanacn", "cmi", "davinci", "dumpling", "dipper", "durandal", "durandal_india", "dm3q", "dm3", "enchilada", "equuleus", "excalibur", "excalibur_india", "e3q", "flashlmdd", "flash_lao_com", "flashlm", "flashlmdd_lao_com", "fajita", "guacamole", "guacamoleb", "gram", "hotdog", "hotdogb", "hotdogg", "houji", "husky", "joan", "joyeuse", "judyln", "judyp", "judypn", "lisa", "marble", "meizu20pro", "mh2lm", "mh2plus_lao_com", "mh2lm_lao_com", "mh2lm5g", "mh2lm5g_lao_com", "miatoll", "nabu", "OnePlus6", "OnePlus6T", "OnePlus7", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7T", "OnePlus7TPro", "OnePlus7TPro4G", "OnePlus7TPro5G", "OP7ProNRSpr", "OnePlus7TProNR", "pipa", "perseus", "polaris", "Pong", "pong", "q2q", "raphael", "raphaelin", "raphaels", "redfin", "RMX2170", "RMX2061", "sagit", "surya", "t860", "t865", "vayu", "venus", "winner", "winnerx", "xpeng", "G973F", "SM-G973F", "beyond1lte", "beyond1qlte", "G973U", "G973U1", "SM-G973U", "SM-G973U1", "G9730", "SM-G9730", "G973N", "SM-G973N", "G973X", "SM-G973X", "G973C", "SM-G973C", "SCV41", "SM-SC41", "beyond1"};
+		String[] supported = {"a52sxq", "alpha_lao_com", "alphalm_lao_com", "alphaplus_lao_com", "alphalm", "alphaplus", "alioth", "andromeda", "betalm", "beta_lao_com", "betaplus_lao_com", "betalm_lao_com", "beryllium", "bhima", "cepheus", "cheeseburger", "chiron", "curtana2", "curtana", "curtana_india", "curtana_cn", "curtanacn", "cmi", "davinci", "dumpling", "dipper", "durandal", "durandal_india", "dm3q", "dm3", "enchilada", "equuleus", "excalibur", "excalibur_india", "e3q", "flashlmdd", "flash_lao_com", "flashlm", "flashlmdd_lao_com", "fajita", "guacamole", "guacamoleb", "guacamoleg", "guacamoles", "guacamolet", "gram", "hotdog", "hotdogb", "hotdogg", "houji", "husky", "joan", "joyeuse", "judyln", "judyp", "judypn", "lisa", "marble", "meizu20pro", "mh2lm", "mh2plus_lao_com", "mh2lm_lao_com", "mh2lm5g", "mh2lm5g_lao_com", "miatoll", "nabu", "OnePlus5", "OnePlus5T", "OnePlus6", "OnePlus6T", "OnePlus6TSingle", "OnePlus7", "OnePlus7Pro", "OnePlus7ProNR", "OnePlus7ProTMO", "OnePlus7Pro4G", "OnePlus7T", "OnePlus7TPro", "OnePlus7TPro4G", "OnePlus7TPro5G", "OnePlus7TProNR", "OP7ProNRSpr", "pipa", "perseus", "polaris", "Pong", "pong", "q2q", "raphael", "raphaelin", "raphaels", "redfin", "RMX2170", "RMX2061", "sagit", "surya", "t860", "t865", "vayu", "venus", "winner", "winnerx", "xpeng", "G973F", "SM-G973F", "beyond1lte", "beyond1qlte", "G973U", "G973U1", "SM-G973U", "SM-G973U1", "G9730", "SM-G9730", "G973N", "SM-G973N", "G973X", "SM-G973X", "G973C", "SM-G973C", "SCV41", "SM-SC41", "beyond1"};
 		this.device = ShellUtils.fastCmd("getprop ro.product.device ");
 		this.model = ShellUtils.fastCmd("getprop ro.product.model");
 		if (!Arrays.asList(supported).contains(this.device)) {
@@ -1819,7 +1818,7 @@ public class MainActivity extends AppCompatActivity {
 	
 	public void checkdbkpmodel() {
 		String dbkpmodel = ShellUtils.fastCmd("getprop ro.product.device");
-		if ("guacamole".equals(dbkpmodel) || "OnePlus7Pro".equals(dbkpmodel) || "OnePlus7Pro4G".equals(dbkpmodel)) {
+		if ("guacamole".equals(dbkpmodel) || "guacamolet".equals(dbkpmodel) || "OnePlus7Pro".equals(dbkpmodel) || "OnePlus7Pro4G".equals(dbkpmodel) || "OnePlus7ProTMO".equals(dbkpmodel)) {
 			this.dbkpmodel = "ONEPLUS 7 PRO";
 		} else if ("hotdog".equals(dbkpmodel) || "OnePlus7TPro".equals(dbkpmodel) || "OnePlus7TPro4G".equals(dbkpmodel)) {
 			this.dbkpmodel = "ONEPLUS 7T PRO";
