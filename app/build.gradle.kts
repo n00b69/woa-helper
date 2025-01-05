@@ -11,10 +11,10 @@ android {
         minSdk = 25
         targetSdk = 34
         versionCode = 3
-        versionName = "1.8.4_BETA35"
+        versionName = "1.8.4_BETA36"
 
         resourceConfigurations += listOf(
-            "ar", "az", "be", "cs", "de", "en", "es", "fa", "fr", "in", "ka", "ko", "ms", "nl", "pl", "pt", "ru", "ro", "th", "tr", "uk", "vi", "zh", "zh-rCN", "zh-rHK", "zh-rMO", "zh-rSG", "zh-rTW"
+            "ar", "az", "be", "cs", "de", "en", "es", "fa", "fr", "in", "ja", "ka", "ko", "ms", "nl", "pl", "pt", "ru", "ro", "th", "tr", "uk", "vi", "zh", "zh-rCN", "zh-rHK", "zh-rMO", "zh-rSG", "zh-rTW"
         )
     }
 

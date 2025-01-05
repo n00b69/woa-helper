@@ -25,14 +25,14 @@ This project is in late stages of development. Most features have already been a
 - Defender Remover
 - USB host mode toggle
 - Display rotation script ```useful for devices without sensors```
-- Direct links to AtlasOS and ReviOS
+- Direct links to AtlasOS and ReviOS ```modified to remove charging requirement```
 - Direct links to framework installers ```(DirectX, C++ redistributables, XNA framework, OpenAL, OpenGL compatibility pack)```
-- [ ] Android boot auto flasher (currently not working)
+- Android boot auto flasher
 - etc.
 
 ## Requirements
 • Android 8 and up
-• Rooted device with Windows installed
+• Rooted device with Windows installed ```Windows partition must be named **win**, **windows**, or **mindows**```
 • UEFI image
 
 ## Credits
@@ -62,3 +62,4 @@ This project is in late stages of development. Most features have already been a
 - [maydoxx1](https://github.com/maydoxx1) for the Arabic Translation
 - Nikka for the Georgian translation
 - rivas for the Persian translation (rivas is not allowed)
+- Hiroshi Takaoka for the Japanese translation

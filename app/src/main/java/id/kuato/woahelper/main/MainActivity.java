@@ -62,7 +62,7 @@ import id.kuato.woahelper.util.RAM;
 public class MainActivity extends AppCompatActivity {
 
 	public final class BuildConfig {
-	public static final String VERSION_NAME = "1.8.4_BETA35";
+	public static final String VERSION_NAME = "1.8.4_BETA36";
 	}
 	static final Object lock = new Object();
 	private static final float SIZE = 12.0F;
@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		if (Objects.equals(currentVersion, pref.getVersion(this))) {
-			String[] files = {"guacamole.fd", "hotdog.fd", "dbkp8150.cfg", "dbkp.hotdog.bin", "dbkp.cepheus.bin", "dbkp.nabu.bin", "busybox", "install.bat", "sta.exe", "sdd.exe", "sdd.conf", "Switch to Android.lnk", "usbhostmode.exe", "ARMSoftware.url", "ARMRepo.url", "TestedSoftware.url", "WorksOnWoa.url", "RotationShortcut.lnk", "display.exe", "RemoveEdge.bat"};
+			String[] files = {"dbkp8150.cfg", "dbkp.hotdog.bin", "dbkp.cepheus.bin", "dbkp.nabu.bin", "dbkp.pipa.bin", "busybox", "install.bat", "sta.exe", "sdd.exe", "sdd.conf", "Switch to Android.lnk", "AutoFlash.cmd", "usbhostmode.exe", "ARMSoftware.url", "ARMRepo.url", "TestedSoftware.url", "WorksOnWoa.url", "RotationShortcut.lnk", "display.exe", "RemoveEdge.bat"};
 			int i = 0;
 			while (!files[i].isEmpty()) {
 				if (ShellUtils.fastCmd(String.format("ls %1$s |grep %2$s", getFilesDir(), files[i])).isEmpty()) {
@@ -363,9 +363,11 @@ public class MainActivity extends AppCompatActivity {
 				}
 				case "pipa" -> {
 					this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
-					this.grouplink = "https://t.me/pad6_pipa";
+					this.grouplink = "https://t.me/xiaomi_pipa";
 					this.x.NabuImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.pipa, null));
 					this.x.tvPanel.setVisibility(View.VISIBLE);
+					this.n.cvDbkp.setVisibility(View.VISIBLE);
+					this.n.cvFlashUefi.setVisibility(View.GONE);
 				}
 				case "polaris" -> {
 					this.guidelink = "https://github.com/n00b69/woa-polaris";
@@ -379,7 +381,7 @@ public class MainActivity extends AppCompatActivity {
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.pong, null));
 				}
 				case "raphael", "raphaelin", "raphaels" -> {
-					this.guidelink = "https://github.com/woa-raphael/woa-raphael";
+					this.guidelink = "https://github.com/new-WoA-Raphael/woa-raphael";
 					this.grouplink = "https://t.me/woaraphael";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.raphael, null));
 					this.x.tvPanel.setVisibility(View.VISIBLE);
@@ -392,7 +394,7 @@ public class MainActivity extends AppCompatActivity {
 					this.x.tvPanel.setVisibility(View.VISIBLE);
 				}
 				case "a52sxq" -> {
-					this.guidelink = "https://github.com/arminask/Port-Windows-11-Galaxy-A52s-5G";
+					this.guidelink = "https://github.com/n00b69/woa-a52s";
 					this.grouplink = "https://t.me/a52sxq_uefi";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.a52sxq, null));
 				}
@@ -786,6 +788,7 @@ public class MainActivity extends AppCompatActivity {
 				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sta.exe /sdcard/sta.exe");
 				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.exe /sdcard/sdd.exe");
 				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.conf /sdcard/sdd.conf");
+				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/AutoFlash.cmd /sdcard/AutoFlash.cmd");
 				mount();
 				String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
 				if (mnt_stat.isEmpty()) {
@@ -798,6 +801,7 @@ public class MainActivity extends AppCompatActivity {
 					ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sta.exe " + MainActivity.this.winpath + "/sta/sta.exe");
 					ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.exe " + MainActivity.this.winpath + "/sta/sdd.exe");
 					ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.conf " + MainActivity.this.winpath + "/sta/sdd.conf");
+					ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/AutoFlash.cmd " + MainActivity.this.winpath + "/sta/AutoFlash.cmd");
 					ShellUtils.fastCmd("cp '" + MainActivity.this.getFilesDir() + "/Switch to Android.lnk' " + MainActivity.this.winpath + "/Users/Public/Desktop");
 					messages.setText(this.getString(R.string.done));
 					dismissButton.setVisibility(View.VISIBLE);
@@ -951,14 +955,12 @@ public class MainActivity extends AppCompatActivity {
 						ShellUtils.fastCmd("cp /sdcard/boot.img /sdcard/dbkp/boot.img");
 						ShellUtils.fastCmd("su -mm -c mv /sdcard/boot.img /sdcard/original-boot.img");
 						ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp8150.cfg /sdcard/dbkp");
-						ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp.hotdog.bin /sdcard/dbkp");
-						ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp.cepheus.bin /sdcard/dbkp");
-						ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp.nabu.bin /sdcard/dbkp");
 						ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woa-op7/releases/download/DBKP/dbkp -O /sdcard/dbkp/dbkp");
 						ShellUtils.fastCmd("cp /sdcard/dbkp/dbkp "+getFilesDir());
 						ShellUtils.fastCmd("chmod 777 " + MainActivity.this.getFilesDir() + "/dbkp");
 						String bedan = ShellUtils.fastCmd("getprop ro.product.device");
 						if ("guacamole".equals(bedan) || "OnePlus7Pro".equals(bedan) || "OnePlus7Pro4G".equals(bedan)) {
+							ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp.hotdog.bin /sdcard/dbkp");
 							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woa-op7/releases/download/DBKP/guacamole.fd -O /sdcard/dbkp/guacamole.fd");
 							ShellUtils.fastCmd("cd /sdcard/dbkp");
 							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) unpack boot.img\" | su -c sh");
@@ -972,6 +974,7 @@ public class MainActivity extends AppCompatActivity {
 							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_a bs=16M");
 							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16M");
 						} else if ("hotdog".equals(bedan) || "OnePlus7TPro".equals(bedan) || "OnePlus7TPro4G".equals(bedan)) {
+							ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp.hotdog.bin /sdcard/dbkp");
 							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woa-op7/releases/download/DBKP/hotdog.fd -O /sdcard/dbkp/hotdog.fd");
 							ShellUtils.fastCmd("cd /sdcard/dbkp");
 							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) unpack boot.img\" | su -c sh");
@@ -985,6 +988,7 @@ public class MainActivity extends AppCompatActivity {
 							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_a bs=16M");
 							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16M");
 						} else if ("cepheus".equals(bedan)) {
+							ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp.cepheus.bin /sdcard/dbkp");
 							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woa-everything/releases/download/Files/cepheus.fd -O /sdcard/dbkp/cepheus.fd");
 							ShellUtils.fastCmd("cd /sdcard/dbkp");
 							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) unpack boot.img\" | su -c sh");
@@ -997,10 +1001,25 @@ public class MainActivity extends AppCompatActivity {
 							ShellUtils.fastCmd("rm -r /sdcard/dbkp");
 							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot bs=16M");
 						} else if ("nabu".equals(bedan)) {
+							ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp.nabu.bin /sdcard/dbkp");
 							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/releases/download/1.0/nabu.fd -O /sdcard/dbkp/nabu.fd");
 							ShellUtils.fastCmd("cd /sdcard/dbkp");
 							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) unpack boot.img\" | su -c sh");
 							ShellUtils.fastCmd("su -mm -c " + MainActivity.this.getFilesDir() + "/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/nabu.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp8150.cfg /sdcard/dbkp/dbkp.nabu.bin");
+							ShellUtils.fastCmd("su -mm -c rm /sdcard/dbkp/kernel");
+							ShellUtils.fastCmd("su -mm -c mv output kernel");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) repack boot.img\" | su -c sh");
+							ShellUtils.fastCmd("su -mm -c cp new-boot.img /sdcard/new-boot.img");
+							ShellUtils.fastCmd("su -mm -c mv /sdcard/new-boot.img /sdcard/patched-boot.img");
+							ShellUtils.fastCmd("rm -r /sdcard/dbkp");
+							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_a bs=16M");
+							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16M");
+						} else if ("pipa".equals(bedan)) {
+							ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp.pipa.bin /sdcard/dbkp");
+							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woa-everything/releases/download/Files/pipa.fd -O /sdcard/dbkp/pipa.fd");
+							ShellUtils.fastCmd("cd /sdcard/dbkp");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) unpack boot.img\" | su -c sh");
+							ShellUtils.fastCmd("su -mm -c " + MainActivity.this.getFilesDir() + "/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/pipa.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp8150.cfg /sdcard/dbkp/dbkp.pipa.bin");
 							ShellUtils.fastCmd("su -mm -c rm /sdcard/dbkp/kernel");
 							ShellUtils.fastCmd("su -mm -c mv output kernel");
 							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) repack boot.img\" | su -c sh");
@@ -1017,7 +1036,7 @@ public class MainActivity extends AppCompatActivity {
 							} else if ("cepheus".equals(bedan)) {
 								String cepheus = getString(R.string.cepheus);
 								messages.setText(String.format(getString(R.string.dbkp), cepheus));
-							} else if ("nabu".equals(bedan)) {
+							} else if ("nabu".equals(bedan) || "pipa".equals(bedan)) {
 								String nabu = getString(R.string.nabu);
 								messages.setText(String.format(getString(R.string.dbkp), nabu));
 							} 
@@ -1808,6 +1827,8 @@ public class MainActivity extends AppCompatActivity {
 			this.dbkpmodel = "XIAOMI MI 9";
 		} else if ("nabu".equals(dbkpmodel)) {
 			this.dbkpmodel = "XIAOMI PAD 5";
+		} else if ("pipa".equals(dbkpmodel)) {
+			this.dbkpmodel = "XIAOMI PAD 6";
 		} else {
 			this.dbkpmodel = "UNSUPPORTED";
 		}
@@ -1840,20 +1861,27 @@ public class MainActivity extends AppCompatActivity {
 		if (checkingforwin.isEmpty()) {
 			String checkingformindows = ShellUtils.fastCmd("find /dev/block/by-name | grep mindows");
 			if (checkingformindows.isEmpty()) {
-				final Dialog dialog = new Dialog(this);
-				dialog.setContentView(R.layout.dialog);
-				dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-				TextView messages = dialog.findViewById(R.id.messages);
-				messages.setText(getString(R.string.partition));
-				dialog.show();
-				dialog.setCancelable(false);
-				this.x.cvMnt.setEnabled(false);
-				this.x.cvToolbox.setEnabled(false);
-				this.x.cvQuickBoot.setEnabled(false);
+				String checkingforwindows = ShellUtils.fastCmd("find /dev/block/by-name | grep windows");
+				if (checkingforwindows.isEmpty()) {
+					final Dialog dialog = new Dialog(this);
+					dialog.setContentView(R.layout.dialog);
+					dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+					TextView messages = dialog.findViewById(R.id.messages);
+					messages.setText(getString(R.string.partition));
+					dialog.show();
+					dialog.setCancelable(false);
+					this.x.cvMnt.setEnabled(false);
+					this.x.cvToolbox.setEnabled(false);
+					this.x.cvQuickBoot.setEnabled(false);
+				} else {
+					this.x.cvMnt.setEnabled(true);
+					this.x.cvToolbox.setEnabled(true);
+					this.x.cvQuickBoot.setEnabled(true);
+				}
 			} else {
 				this.x.cvMnt.setEnabled(true);
 				this.x.cvToolbox.setEnabled(true);
-				this.x.cvQuickBoot.setEnabled(true);
+				this.x.cvQuickBoot.setEnabled(true); 
 			}
 		} else {
 			this.x.cvMnt.setEnabled(true);
