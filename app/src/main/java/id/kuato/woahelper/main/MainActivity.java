@@ -332,7 +332,7 @@ public class MainActivity extends AppCompatActivity {
 				}
 				case "lisa" -> {
 					this.guidelink = "https://github.com/ETCHDEV/Port-Windows-11-Xiaomi-11-Lite-NE";
-					this.grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA";
+					this.grouplink = "https://t.me/woalisa";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.lisa, null));
 				}
 				case "nabu" -> {
@@ -1912,7 +1912,10 @@ public class MainActivity extends AppCompatActivity {
 			if (!MainActivity.isNetworkConnected(this)) {
 				checkwin();
 			} else {
-				if (!BuildConfig.VERSION_NAME.equals(ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget -q -O https://raw.githubusercontent.com/n00b69/woa-helper-update/main/README.md\" | su -mm -c sh"))){
+				String version = ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget -q -O - https://raw.githubusercontent.com/n00b69/woa-helper-update/main/README.md\" | su -mm -c sh");
+				if (BuildConfig.VERSION_NAME.equals(version)) {
+					checkwin();
+				} else {
 					final Dialog dialog = new Dialog(this);
 					dialog.setContentView(R.layout.dialog);
 					dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
