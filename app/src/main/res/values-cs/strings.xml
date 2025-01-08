@@ -65,7 +65,7 @@
 	<string name="dbkp">Obraz spousteni byl upraven a nahrán. \nUpravený obraz lze také najít na /sdcard/patched-boot.img. \nPoužijte %s pro přepínání mezi Windows a Androidem.</string>
 	<string name="op7">alert slider</string>
 	<string name="cepheus">tlačítko asistenta</string>
-	<string name="nabu">magnetic case</string>
+	<string name="nabu">magnetické pouzdro</string>
 	<string name="reboot">Restartovat</string>
 	<string name="cancel">Zrušit</string>
 	<string name="mounted">Windows namontován</string>
@@ -101,7 +101,7 @@
 	<string name="not_found">Nenalezeno</string>
 
 	<string name="yes">ANO</string>
-	<string name="dismiss">ZAVRHNOUT</string>
+	<string name="dismiss">ZAVŘÍT</string>
 	<string name="no">NE</string>
 	<string name="please_wait">Prosím, čekejte…</string>
 
