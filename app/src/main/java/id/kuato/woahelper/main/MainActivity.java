@@ -1953,7 +1953,7 @@ public class MainActivity extends AppCompatActivity {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://raw.githubusercontent.com/n00b69/woa-helper-update/main/woahelper.apk -O \" | su -mm -c sh" + MainActivity.this.getFilesDir() + "/woahelper.apk");
+				ShellUtils.fastCmd(String.format("echo \"$(su -mm -c find /data/adb -name busybox) wget https://raw.githubusercontent.com/n00b69/woa-helper-update/main/woahelper.apk -O %s\" | su -mm -c sh", MainActivity.this.getFilesDir() + "/woahelper.apk"));
 				ShellUtils.fastCmd("pm install " + MainActivity.this.getFilesDir() + "/woahelper.apk && rm " + MainActivity.this.getFilesDir() + "/woahelper.apk");
 			}
 		}).start();
