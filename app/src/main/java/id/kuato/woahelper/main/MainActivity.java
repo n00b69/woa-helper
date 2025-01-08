@@ -570,7 +570,7 @@ public class MainActivity extends AppCompatActivity {
 			public void run() {
 				checkupdate();
 			}
-		}, 25);
+		}, 10);
 		
 		this.x.cvBackup.setOnClickListener(v -> {
 			this.ShowBlur();
@@ -1172,9 +1172,8 @@ public class MainActivity extends AppCompatActivity {
 									MainActivity.this.mount();
 									String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
 									if (mnt_stat.isEmpty()) {
-										icons.setVisibility(View.GONE);
-										yesButton.setVisibility(View.VISIBLE);
-										messages.setText(MainActivity.this.getString(R.string.mountfail) + "\n" + (R.string.internalstorage));
+										dialog.dismiss();
+										mountfail();
 									} else {
 										icons.setImageDrawable(atlasos);
 										ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/Toolbox || true ");
@@ -1228,9 +1227,8 @@ public class MainActivity extends AppCompatActivity {
 									MainActivity.this.mount();
 									String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
 									if (mnt_stat.isEmpty()) {
-										icons.setVisibility(View.GONE);
-										yesButton.setVisibility(View.VISIBLE);
-										messages.setText(MainActivity.this.getString(R.string.mountfail) + "\n" + (R.string.internalstorage));
+										dialog.dismiss();
+										mountfail();
 									} else {
 										icons.setImageDrawable(atlasos);
 										ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/Toolbox || true ");
@@ -1429,9 +1427,8 @@ public class MainActivity extends AppCompatActivity {
 									String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + win);
 									Log.d("path", mnt_stat);
 									if (mnt_stat.isEmpty()) {
-										yesButton.setVisibility(View.VISIBLE);
-										icons.setVisibility(View.GONE);
-										messages.setText(MainActivity.this.getString(R.string.mountfail) + "\n" + (R.string.internalstorage));
+										dialog.dismiss();
+										mountfail();
 									} else {
 										icons.setImageDrawable(mnt);
 										ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/Toolbox || true ");
@@ -1872,7 +1869,7 @@ public class MainActivity extends AppCompatActivity {
 			this.n.cvFlashUefi.setEnabled(false);
 		}
 	}
-
+	
 	public void checkwin() {
 		String checkingforwin = ShellUtils.fastCmd("find /dev/block/by-name | grep win");
 		if (checkingforwin.isEmpty()) {
@@ -1893,17 +1890,14 @@ public class MainActivity extends AppCompatActivity {
 				} else {
 					this.x.cvMnt.setEnabled(true);
 					this.x.cvToolbox.setEnabled(true);
-					this.x.cvQuickBoot.setEnabled(true);
 				}
 			} else {
 				this.x.cvMnt.setEnabled(true);
 				this.x.cvToolbox.setEnabled(true);
-				this.x.cvQuickBoot.setEnabled(true); 
 			}
 		} else {
 			this.x.cvMnt.setEnabled(true);
 			this.x.cvToolbox.setEnabled(true);
-			this.x.cvQuickBoot.setEnabled(true); 
 		}
 	}
 	
@@ -1971,7 +1965,7 @@ public class MainActivity extends AppCompatActivity {
 		yesButton.setText(MainActivity.this.getString(R.string.chat));
 		dismissButton.setText(MainActivity.this.getString(R.string.cancel));
 		MainActivity.this.ShowBlur();
-		messages.setText(getString(R.string.mountfail));
+		messages.setText(getString(R.string.mountfail) + "\n" + (R.string.internalstorage));
 		dismissButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
