@@ -62,7 +62,7 @@ import id.kuato.woahelper.util.RAM;
 public class MainActivity extends AppCompatActivity {
 
 	public final class BuildConfig {
-	public static final String VERSION_NAME = "1.8.4_BETA36";
+	public static final String VERSION_NAME = "1.8.4_BETA37";
 	}
 	static final Object lock = new Object();
 	private static final float SIZE = 12.0F;
@@ -131,11 +131,9 @@ public class MainActivity extends AppCompatActivity {
 			} catch (IOException ignored) {
 			}
 		}
-		ShellUtils.fastCmd("chmod 777 " + this.getFilesDir() + "/busybox");
 		ShellUtils.fastCmd("chmod 777 " + this.getFilesDir() + "/mount.ntfs");
 		ShellUtils.fastCmd("chmod 777 " + this.getFilesDir() + "/libfuse-lite.so");
 		ShellUtils.fastCmd("chmod 777 " + this.getFilesDir() + "/libntfs-3g.so");
-		pref.setbusybox(this, this.getFilesDir() + "/busybox ");
 	}
 
 	private void copyFile(InputStream in, OutputStream out) throws IOException {
@@ -149,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		if (Objects.equals(currentVersion, pref.getVersion(this))) {
-			String[] files = {"dbkp8150.cfg", "dbkp.hotdog.bin", "dbkp.cepheus.bin", "dbkp.nabu.bin", "dbkp.pipa.bin", "busybox", "install.bat", "sta.exe", "sdd.exe", "sdd.conf", "Switch to Android.lnk", "AutoFlash.cmd", "usbhostmode.exe", "ARMSoftware.url", "ARMRepo.url", "TestedSoftware.url", "WorksOnWoa.url", "RotationShortcut.lnk", "display.exe", "RemoveEdge.bat"};
+			String[] files = {"dbkp8150.cfg", "dbkp.hotdog.bin", "dbkp.cepheus.bin", "dbkp.nabu.bin", "dbkp.pipa.bin", "install.bat", "sta.exe", "sdd.exe", "sdd.conf", "Switch to Android.lnk", "AutoFlash.cmd", "usbhostmode.exe", "ARMSoftware.url", "ARMRepo.url", "TestedSoftware.url", "WorksOnWoa.url", "RotationShortcut.lnk", "display.exe", "RemoveEdge.bat"};
 			int i = 0;
 			while (!files[i].isEmpty()) {
 				if (ShellUtils.fastCmd(String.format("ls %1$s |grep %2$s", getFilesDir(), files[i])).isEmpty()) {
@@ -184,7 +182,6 @@ public class MainActivity extends AppCompatActivity {
 		this.x.toolbarlayout.toolbar.setNavigationIcon(iconToolbar);
 		this.checkdevice();
 		this.checkuefi();
-		this.checkupdate();
 		this.checkRoot();
 		this.checkdbkpmodel();
 		this.win = ShellUtils.fastCmd("realpath /dev/block/by-name/win");
@@ -239,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
 		myTextView6.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
 		TextView myTextView7 = this.findViewById(R.id.tv_slot);
 		myTextView7.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
-		if (Objects.equals(this.device, "nabu") || Objects.equals(this.device, "pipa") || Objects.equals(this.device, "winner") || Objects.equals(this.device, "winnerx") || Objects.equals(this.device, "q2q") || Objects.equals(this.device, "t860") || Objects.equals(this.device, "t865")) {
+		if (Objects.equals(this.device, "nabu") || Objects.equals(this.device, "pipa") || Objects.equals(this.device, "winner") || Objects.equals(this.device, "winnerx") || Objects.equals(this.device, "q2q") || Objects.equals(this.device, "gts6l") || Objects.equals(this.device, "gts6lwifi")) {
 			this.x.NabuImage.setVisibility(View.VISIBLE);
 			this.x.DeviceImage.setVisibility(View.GONE);
 			int orientation = this.getResources().getConfiguration().orientation;
@@ -323,7 +320,7 @@ public class MainActivity extends AppCompatActivity {
 					this.grouplink = "https://t.me/woadipper";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.dipper, null));
 				}
-				case "equuleus" -> {
+				case "equuleus", "ursa" -> {
 					this.guidelink = "https://github.com/n00b69/woa-equuleus";
 					this.grouplink = "https://t.me/woaequuleus";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.equuleus, null));
@@ -455,10 +452,10 @@ public class MainActivity extends AppCompatActivity {
 					this.grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.unknown, null));
 				}
-				case "t860", "t865" -> {
+				case "gts6l", "gts6lwifi" -> {
 					this.guidelink = "https://project-aloha.github.io/";
 					this.grouplink = "https://t.me/project_aloha_issues";
-					this.x.NabuImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.unknown, null));
+					this.x.NabuImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.gts6l, null));
 				}
 				case "q2q" -> {
 					this.guidelink = "https://project-aloha.github.io/";
@@ -477,12 +474,12 @@ public class MainActivity extends AppCompatActivity {
 				}
 				case "venus" -> {
 					this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
-					this.grouplink = "https://t.me/woahelperchat";
+					this.grouplink = "https://discord.gg/Dx2QgMx7Sv";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.venus, null));
 				}
 				case "alioth" -> {
 					this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
-					this.grouplink = "https://t.me/woahelperchat";
+					this.grouplink = "https://discord.gg/Dx2QgMx7Sv";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.alioth, null));
 				}
 				case "davinci" -> {
@@ -540,6 +537,11 @@ public class MainActivity extends AppCompatActivity {
 					this.grouplink = "https://t.me/dumanthecat";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.dm3q, null));
 				}
+				case "vili", "lavender", "star2qlte", "star2qltechn", "r3q" -> {
+					this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
+					this.grouplink = "https://discord.gg/Dx2QgMx7Sv";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.unknown, null));
+				}
 				default -> {
 					this.guidelink = "https://renegade-project.tech/";
 					this.grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA";
@@ -548,7 +550,7 @@ public class MainActivity extends AppCompatActivity {
 					this.n.cvDumpModem.setVisibility(View.VISIBLE);
 				}
 			}
-			
+		
 		this.x.tvRamvalue.setText(String.format(this.getString(R.string.ramvalue), this.ramvalue));
 		this.x.tvPanel.setText(String.format(this.getString(R.string.paneltype), this.panel));
 		this.x.cvGuide.setOnClickListener(v -> {
@@ -562,6 +564,13 @@ public class MainActivity extends AppCompatActivity {
 			i.setData(Uri.parse(grouplink));
 			this.startActivity(i);
 		});
+		
+		new Handler().postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				checkupdate();
+			}
+		}, 25);
 		
 		this.x.cvBackup.setOnClickListener(v -> {
 			this.ShowBlur();
@@ -954,13 +963,13 @@ public class MainActivity extends AppCompatActivity {
 						ShellUtils.fastCmd("cp /sdcard/boot.img /sdcard/dbkp/boot.img");
 						ShellUtils.fastCmd("su -mm -c mv /sdcard/boot.img /sdcard/original-boot.img");
 						ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp8150.cfg /sdcard/dbkp");
-						ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woa-op7/releases/download/DBKP/dbkp -O /sdcard/dbkp/dbkp");
+						ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/DBKP/dbkp -O /sdcard/dbkp/dbkp\" | su -mm -c sh");
 						ShellUtils.fastCmd("cp /sdcard/dbkp/dbkp "+getFilesDir());
 						ShellUtils.fastCmd("chmod 777 " + MainActivity.this.getFilesDir() + "/dbkp");
 						String bedan = ShellUtils.fastCmd("getprop ro.product.device");
 						if ("guacamole".equals(bedan) || "OnePlus7Pro".equals(bedan) || "OnePlus7Pro4G".equals(bedan)) {
 							ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp.hotdog.bin /sdcard/dbkp");
-							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woa-op7/releases/download/DBKP/guacamole.fd -O /sdcard/dbkp/guacamole.fd");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/DBKP/guacamole.fd -O /sdcard/dbkp/guacamole.fd\" | su -mm -c sh");
 							ShellUtils.fastCmd("cd /sdcard/dbkp");
 							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) unpack boot.img\" | su -c sh");
 							ShellUtils.fastCmd("su -mm -c " + MainActivity.this.getFilesDir() + "/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/guacamole.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp8150.cfg /sdcard/dbkp/dbkp.hotdog.bin");
@@ -974,7 +983,7 @@ public class MainActivity extends AppCompatActivity {
 							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16M");
 						} else if ("hotdog".equals(bedan) || "OnePlus7TPro".equals(bedan) || "OnePlus7TPro4G".equals(bedan)) {
 							ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp.hotdog.bin /sdcard/dbkp");
-							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woa-op7/releases/download/DBKP/hotdog.fd -O /sdcard/dbkp/hotdog.fd");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/DBKP/hotdog.fd -O /sdcard/dbkp/hotdog.fd\" | su -mm -c sh");
 							ShellUtils.fastCmd("cd /sdcard/dbkp");
 							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) unpack boot.img\" | su -c sh");
 							ShellUtils.fastCmd("su -mm -c " + MainActivity.this.getFilesDir() + "/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/hotdog.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp8150.cfg /sdcard/dbkp/dbkp.hotdog.bin");
@@ -988,7 +997,7 @@ public class MainActivity extends AppCompatActivity {
 							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16M");
 						} else if ("cepheus".equals(bedan)) {
 							ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp.cepheus.bin /sdcard/dbkp");
-							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woa-everything/releases/download/Files/cepheus.fd -O /sdcard/dbkp/cepheus.fd");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-everything/releases/download/Files/cepheus.fd -O /sdcard/dbkp/cepheus.fd\" | su -mm -c sh");
 							ShellUtils.fastCmd("cd /sdcard/dbkp");
 							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) unpack boot.img\" | su -c sh");
 							ShellUtils.fastCmd("su -mm -c " + MainActivity.this.getFilesDir() + "/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/cepheus.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp8150.cfg /sdcard/dbkp/dbkp.cepheus.bin");
@@ -1001,7 +1010,7 @@ public class MainActivity extends AppCompatActivity {
 							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot bs=16M");
 						} else if ("nabu".equals(bedan)) {
 							ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp.nabu.bin /sdcard/dbkp");
-							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/releases/download/1.0/nabu.fd -O /sdcard/dbkp/nabu.fd");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/releases/download/1.0/nabu.fd -O /sdcard/dbkp/nabu.fd\" | su -mm -c sh");
 							ShellUtils.fastCmd("cd /sdcard/dbkp");
 							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) unpack boot.img\" | su -c sh");
 							ShellUtils.fastCmd("su -mm -c " + MainActivity.this.getFilesDir() + "/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/nabu.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp8150.cfg /sdcard/dbkp/dbkp.nabu.bin");
@@ -1015,7 +1024,7 @@ public class MainActivity extends AppCompatActivity {
 							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16M");
 						} else if ("pipa".equals(bedan)) {
 							ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp.pipa.bin /sdcard/dbkp");
-							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woa-everything/releases/download/Files/pipa.fd -O /sdcard/dbkp/pipa.fd");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-everything/releases/download/Files/pipa.fd -O /sdcard/dbkp/pipa.fd\" | su -mm -c sh");
 							ShellUtils.fastCmd("cd /sdcard/dbkp");
 							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) unpack boot.img\" | su -c sh");
 							ShellUtils.fastCmd("su -mm -c " + MainActivity.this.getFilesDir() + "/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/pipa.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp8150.cfg /sdcard/dbkp/dbkp.pipa.bin");
@@ -1153,9 +1162,9 @@ public class MainActivity extends AppCompatActivity {
 								throw new RuntimeException(e);
 							}
 							bar.setProgress((int) (bar.getMax() * 0.00), true);
-							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/modified-playbooks/releases/download/ReviOS/ReviPlaybook.apbx -O /sdcard/ReviPlaybook.apbx");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/ReviOS/ReviPlaybook.apbx -O /sdcard/ReviPlaybook.apbx\" | su -mm -c sh");
 							bar.setProgress((int) (bar.getMax() * 0.5), true);
-							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://download.ameliorated.io/AME%20Wizard%20Beta.zip -O /sdcard/AMEWizardBeta.zip");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://download.ameliorated.io/AME%20Wizard%20Beta.zip -O /sdcard/AMEWizardBeta.zip\" | su -mm -c sh");
 							bar.setProgress((int) (bar.getMax() * 0.8), true);
 							MainActivity.this.runOnUiThread(new Runnable() {
 								@Override
@@ -1209,9 +1218,9 @@ public class MainActivity extends AppCompatActivity {
 								throw new RuntimeException(e);
 							}
 							bar.setProgress((int) (bar.getMax() * 0.00), true);
-							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook.apbx -O /sdcard/AtlasPlaybook.apbx");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook.apbx -O /sdcard/AtlasPlaybook.apbx\" | su -mm -c sh");
 							bar.setProgress((int) (bar.getMax() * 0.5), true);
-							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://download.ameliorated.io/AME%20Wizard%20Beta.zip -O /sdcard/AMEWizardBeta.zip");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://download.ameliorated.io/AME%20Wizard%20Beta.zip -O /sdcard/AMEWizardBeta.zip\" | su -mm -c sh");
 							bar.setProgress((int) (bar.getMax() * 0.8), true);
 							MainActivity.this.runOnUiThread(new Runnable() {
 								@Override
@@ -1377,41 +1386,41 @@ public class MainActivity extends AppCompatActivity {
 							ShellUtils.fastCmd("mkdir /sdcard/Frameworks || true");
 							ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/install.bat /sdcard/Frameworks/install.bat");
 							bar.setProgress((int) (bar.getMax() * 0.00), true);
-							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/PhysX-9.13.0604-SystemSoftware-Legacy.msi -O /sdcard/Frameworks/PhysX-9.13.0604-SystemSoftware-Legacy.msi");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/PhysX-9.13.0604-SystemSoftware-Legacy.msi -O /sdcard/Frameworks/PhysX-9.13.0604-SystemSoftware-Legacy.msi\" | su -mm -c sh");
 							bar.setProgress((int) (bar.getMax() * 0.1), true);
-							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/PhysX_9.23.1019_SystemSoftware.exe -O /sdcard/Frameworks/PhysX_9.23.1019_SystemSoftware.exe");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/PhysX_9.23.1019_SystemSoftware.exe -O /sdcard/Frameworks/PhysX_9.23.1019_SystemSoftware.exe\" | su -mm -c sh");
 							bar.setProgress((int) (bar.getMax() * 0.2), true);
-							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/xnafx40_redist.msi -O /sdcard/Frameworks/xnafx40_redist.msi");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/xnafx40_redist.msi -O /sdcard/Frameworks/xnafx40_redist.msi\" | su -mm -c sh");
 							bar.setProgress((int) (bar.getMax() * 0.25), true);
-							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2005vcredist_x64.EXE -O /sdcard/Frameworks/2005vcredist_x64.EXE");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2005vcredist_x64.EXE -O /sdcard/Frameworks/2005vcredist_x64.EXE\" | su -mm -c sh");
 							bar.setProgress((int) (bar.getMax() * 0.3), true);
-							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2005vcredist_x86.EXE -O /sdcard/Frameworks/2005vcredist_x86.EXE");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2005vcredist_x86.EXE -O /sdcard/Frameworks/2005vcredist_x86.EXE\" | su -mm -c sh");
 							bar.setProgress((int) (bar.getMax() * 0.35), true);
-							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2008vcredist_x64.exe -O /sdcard/Frameworks/2008vcredist_x64.exe");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2008vcredist_x64.exe -O /sdcard/Frameworks/2008vcredist_x64.exe\" | su -mm -c sh");
 							bar.setProgress((int) (bar.getMax() * 0.4), true);
-							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2008vcredist_x86.exe -O /sdcard/Frameworks/2008vcredist_x86.exe");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2008vcredist_x86.exe -O /sdcard/Frameworks/2008vcredist_x86.exe\" | su -mm -c sh");
 							bar.setProgress((int) (bar.getMax() * 0.45), true);
-							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2010vcredist_x64.exe -O /sdcard/Frameworks/2010vcredist_x64.exe");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2010vcredist_x64.exe -O /sdcard/Frameworks/2010vcredist_x64.exe\" | su -mm -c sh");
 							bar.setProgress((int) (bar.getMax() * 0.5), true);
-							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2010vcredist_x86.exe -O /sdcard/Frameworks/2010vcredist_x86.exe");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2010vcredist_x86.exe -O /sdcard/Frameworks/2010vcredist_x86.exe\" | su -mm -c sh");
 							bar.setProgress((int) (bar.getMax() * 0.55), true);
-							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2012vcredist_x64.exe -O /sdcard/Frameworks/2012vcredist_x64.exe");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2012vcredist_x64.exe -O /sdcard/Frameworks/2012vcredist_x64.exe\" | su -mm -c sh");
 							bar.setProgress((int) (bar.getMax() * 0.6), true);
-							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2012vcredist_x86.exe -O /sdcard/Frameworks/2012vcredist_x86.exe");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2012vcredist_x86.exe -O /sdcard/Frameworks/2012vcredist_x86.exe\" | su -mm -c sh");
 							bar.setProgress((int) (bar.getMax() * 0.65), true);
-							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2013vcredist_x64.exe -O /sdcard/Frameworks/2013vcredist_x64.exe");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2013vcredist_x64.exe -O /sdcard/Frameworks/2013vcredist_x64.exe\" | su -mm -c sh");
 							bar.setProgress((int) (bar.getMax() * 0.7), true);
-							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2013vcredist_x86.exe -O /sdcard/Frameworks/2013vcredist_x86.exe");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2013vcredist_x86.exe -O /sdcard/Frameworks/2013vcredist_x86.exe\" | su -mm -c sh");
 							bar.setProgress((int) (bar.getMax() * 0.75), true);
-							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2015VC_redist.x64.exe -O /sdcard/Frameworks/2015VC_redist.x64.exe");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2015VC_redist.x64.exe -O /sdcard/Frameworks/2015VC_redist.x64.exe\" | su -mm -c sh");
 							bar.setProgress((int) (bar.getMax() * 0.8), true);
-							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2015VC_redist.x86.exe -O /sdcard/Frameworks/2015VC_redist.x86.exe");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2015VC_redist.x86.exe -O /sdcard/Frameworks/2015VC_redist.x86.exe\" | su -mm -c sh");
 							bar.setProgress((int) (bar.getMax() * 0.85), true);
-							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/2022VC_redist.arm64.exe -O /sdcard/Frameworks/2022VC_redist.arm64.exe");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2022VC_redist.arm64.exe -O /sdcard/Frameworks/2022VC_redist.arm64.exe\" | su -mm -c sh");
 							bar.setProgress((int) (bar.getMax() * 0.9), true);
-							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/dxwebsetup.exe -O /sdcard/Frameworks/dxwebsetup.exe");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/dxwebsetup.exe -O /sdcard/Frameworks/dxwebsetup.exe\" | su -mm -c sh");
 							bar.setProgress((int) (bar.getMax() * 0.95), true);
-							ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/oalinst.exe -O /sdcard/Frameworks/oalinst.exe");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/oalinst.exe -O /sdcard/Frameworks/oalinst.exe\" | su -mm -c sh");
 							bar.setProgress((int) (bar.getMax() * 1.00), true);
 							MainActivity.this.runOnUiThread(new Runnable() {
 								@Override
@@ -1470,7 +1479,7 @@ public class MainActivity extends AppCompatActivity {
 					messages.setText(this.getString(R.string.internet));
 				} else {
 					messages.setText(this.getString(R.string.please_wait));
-					ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://github.com/n00b69/woasetup/releases/download/Installers/DefenderRemover.exe -O /sdcard/DefenderRemover.exe");
+					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/DefenderRemover.exe -O /sdcard/DefenderRemover.exe\" | su -mm -c sh");
 					ShellUtils.fastCmd("cp " + this.getFilesDir() + "/RemoveEdge.bat /sdcard");
 					mount();
 					String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + this.win);
@@ -1602,7 +1611,7 @@ public class MainActivity extends AppCompatActivity {
 				dismissButton.setVisibility(View.VISIBLE);
 				messages.setText(this.getString(R.string.internet));
 			} else {
-				String version = ShellUtils.fastCmd(getFilesDir()+"/busybox wget -q -O - https://raw.githubusercontent.com/n00b69/woa-helper-update/main/README.md");
+				String version = ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget -q -O - https://raw.githubusercontent.com/n00b69/woa-helper-update/main/README.md\" | su -mm -c sh");
 				if (BuildConfig.VERSION_NAME.equals(version)) {
 					dismissButton.setVisibility(View.VISIBLE);
 					messages.setText(MainActivity.this.getString(R.string.no) + " " + MainActivity.this.getString(R.string.update1));
@@ -1743,7 +1752,7 @@ public class MainActivity extends AppCompatActivity {
 		yesButton.setVisibility(View.GONE);
 		noButton.setVisibility(View.GONE);
 		dismissButton.setVisibility(View.GONE);
-		String[] supported = {"a52sxq", "alpha_lao_com", "alphalm_lao_com", "alphaplus_lao_com", "alphalm", "alphaplus", "alioth", "andromeda", "betalm", "beta_lao_com", "betaplus_lao_com", "betalm_lao_com", "beryllium", "bhima", "cepheus", "cheeseburger", "chiron", "curtana2", "curtana", "curtana_india", "curtana_cn", "curtanacn", "cmi", "davinci", "dumpling", "dipper", "durandal", "durandal_india", "dm3q", "dm3", "enchilada", "equuleus", "excalibur", "excalibur_india", "e3q", "flashlmdd", "flash_lao_com", "flashlm", "flashlmdd_lao_com", "fajita", "guacamole", "guacamoleb", "guacamoleg", "guacamoles", "guacamolet", "gram", "hotdog", "hotdogb", "hotdogg", "houji", "husky", "joan", "joyeuse", "judyln", "judyp", "judypn", "lisa", "marble", "meizu20pro", "mh2lm", "mh2plus_lao_com", "mh2lm_lao_com", "mh2lm5g", "mh2lm5g_lao_com", "miatoll", "nabu", "OnePlus5", "OnePlus5T", "OnePlus6", "OnePlus6T", "OnePlus6TSingle", "OnePlus7", "OnePlus7Pro", "OnePlus7ProNR", "OnePlus7ProTMO", "OnePlus7Pro4G", "OnePlus7T", "OnePlus7TPro", "OnePlus7TPro4G", "OnePlus7TPro5G", "OnePlus7TProNR", "OP7ProNRSpr", "pipa", "perseus", "polaris", "Pong", "pong", "q2q", "raphael", "raphaelin", "raphaels", "redfin", "RMX2170", "RMX2061", "sagit", "surya", "t860", "t865", "vayu", "venus", "winner", "winnerx", "xpeng", "G973F", "SM-G973F", "beyond1lte", "beyond1qlte", "G973U", "G973U1", "SM-G973U", "SM-G973U1", "G9730", "SM-G9730", "G973N", "SM-G973N", "G973X", "SM-G973X", "G973C", "SM-G973C", "SCV41", "SM-SC41", "beyond1"};
+		String[] supported = {"a52sxq", "alpha_lao_com", "alphalm_lao_com", "alphaplus_lao_com", "alphalm", "alphaplus", "alioth", "andromeda", "betalm", "beta_lao_com", "betaplus_lao_com", "betalm_lao_com", "beryllium", "bhima", "cepheus", "cheeseburger", "chiron", "curtana2", "curtana", "curtana_india", "curtana_cn", "curtanacn", "cmi", "davinci", "dumpling", "dipper", "durandal", "durandal_india", "dm3q", "dm3", "enchilada", "equuleus", "excalibur", "excalibur_india", "e3q", "flashlmdd", "flash_lao_com", "flashlm", "flashlmdd_lao_com", "fajita", "guacamole", "guacamoleb", "guacamoleg", "guacamoles", "guacamolet", "gram", "gts6l", "gts6lwifi", "hotdog", "hotdogb", "hotdogg", "houji", "husky", "ursa", "joan", "joyeuse", "judyln", "judyp", "judypn", "lisa", "marble", "meizu20pro", "mh2lm", "mh2plus_lao_com", "mh2lm_lao_com", "mh2lm5g", "mh2lm5g_lao_com", "miatoll", "nabu", "OnePlus5", "OnePlus5T", "OnePlus6", "OnePlus6T", "OnePlus6TSingle", "OnePlus7", "OnePlus7Pro", "OnePlus7ProNR", "OnePlus7ProTMO", "OnePlus7Pro4G", "OnePlus7T", "OnePlus7TPro", "OnePlus7TPro4G", "OnePlus7TPro5G", "OnePlus7TProNR", "OP7ProNRSpr", "pipa", "perseus", "polaris", "Pong", "pong", "q2q", "raphael", "raphaelin", "raphaels", "redfin", "RMX2170", "RMX2061", "sagit", "surya", "vayu", "venus", "winner", "winnerx", "xpeng", "G973F", "SM-G973F", "beyond1lte", "beyond1qlte", "G973U", "G973U1", "SM-G973U", "SM-G973U1", "G9730", "SM-G9730", "G973N", "SM-G973N", "G973X", "SM-G973X", "G973C", "SM-G973C", "SCV41", "SM-SC41", "beyond1", "vili", "lavender", "star2qlte", "star2qltechn", "r3q"};
 		this.device = ShellUtils.fastCmd("getprop ro.product.device ");
 		this.model = ShellUtils.fastCmd("getprop ro.product.model");
 		if (!Arrays.asList(supported).contains(this.device)) {
@@ -1776,43 +1785,52 @@ public class MainActivity extends AppCompatActivity {
 				panel = "Huaxing";
 			} else if (run.contains("j20s_36") || run.contains("k82_36") || run.contains("36_02_0a")) {
 				panel = "Tianma";
-			} else {
-				panel = ShellUtils.fastCmd("su -c cat /proc/cmdline | tr ' :=' '\n'|grep dsi|tr ' _' '\n'|tail -3|head -1 ");
-				if (!panel.isEmpty()) if ((!(Objects.equals(panel, "f1mp") || Objects.equals(panel, "f1p2") || Objects.equals(panel, "global") || pref.getAGREE(this))) && ("raphael".equals(this.device) || "raphaelin".equals(this.device) || "raphaels".equals(this.device) || "cepheus".equals(this.device))) {
-					dialog.show();
-					messages.setText(getString(R.string.upanel));
-					yesButton.setText(getString(R.string.chat));
-					dismissButton.setText(getString(R.string.nah));
-					noButton.setText(getString(R.string.later));
-					yesButton.setVisibility(View.VISIBLE);
-					noButton.setVisibility(View.VISIBLE);
-					dismissButton.setVisibility(View.VISIBLE);
-					yesButton.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							Intent i = new Intent(Intent.ACTION_VIEW);
-							i.setData(Uri.parse(grouplink));
-							startActivity(i);
-							dialog.dismiss();
-							pref.setAGREE(MainActivity.this, true);
-						}
-					});
-					noButton.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							dialog.dismiss();
-						}
-					});
-					dismissButton.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							dialog.dismiss();
-							pref.setAGREE(MainActivity.this, true);
-						}
-					});
-				}
+			} else if (run.contains("fhd_ea8076_global")) {
+				panel = "global";
+			} else if (run.contains("fhd_ea8076_f1mp_cmd")) {
+				panel = "f1mp";
+			} else if (run.contains("fhd_ea8076_f1p2_cmd")) {
+				panel = "f1p2";
+			} else if (run.contains("fhd_ea8076_f1p2_2")) {
+				panel = "f1p2_2";
+			} else if (run.contains("fhd_ea8076_f1_cmd")) {
+				panel = "f1";
+			} else if (run.contains("fhd_ea8076_cmd")) {
+				panel = "ea8076_cmd";
 			}
-			if (Objects.equals(panel, "2")) panel = "f1p2_2";
+		}
+		if (((Objects.equals(panel, "f1p2_2") || Objects.equals(panel, "f1") || Objects.equals(panel, "ea8076_cmd") || pref.getAGREE(this))) && ("raphael".equals(this.device) || "raphaelin".equals(this.device) || "raphaels".equals(this.device) || "cepheus".equals(this.device))) {
+			dialog.show();
+			messages.setText(getString(R.string.upanel));
+			yesButton.setText(getString(R.string.chat));
+			dismissButton.setText(getString(R.string.nah));
+			noButton.setText(getString(R.string.later));
+			yesButton.setVisibility(View.VISIBLE);
+			noButton.setVisibility(View.VISIBLE);
+			dismissButton.setVisibility(View.VISIBLE);
+			yesButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent i = new Intent(Intent.ACTION_VIEW);
+					i.setData(Uri.parse(grouplink));
+					startActivity(i);
+					dialog.dismiss();
+					pref.setAGREE(MainActivity.this, true);
+				}
+			});
+			noButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					dialog.dismiss();
+				}
+			});
+			dismissButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					dialog.dismiss();
+					pref.setAGREE(MainActivity.this, true);
+				}
+			});
 		}
 	}
 	
@@ -1894,7 +1912,7 @@ public class MainActivity extends AppCompatActivity {
 			if (!MainActivity.isNetworkConnected(this)) {
 				checkwin();
 			} else {
-				if (!BuildConfig.VERSION_NAME.equals(ShellUtils.fastCmd(getFilesDir()+"/busybox wget -q -O - https://raw.githubusercontent.com/n00b69/woa-helper-update/main/README.md"))){
+				if (!BuildConfig.VERSION_NAME.equals(ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget -q -O https://raw.githubusercontent.com/n00b69/woa-helper-update/main/README.md\" | su -mm -c sh"))){
 					final Dialog dialog = new Dialog(this);
 					dialog.setContentView(R.layout.dialog);
 					dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -1932,7 +1950,7 @@ public class MainActivity extends AppCompatActivity {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				ShellUtils.fastCmd(MainActivity.this.getFilesDir() + "/busybox wget https://raw.githubusercontent.com/n00b69/woa-helper-update/main/woahelper.apk -O " + MainActivity.this.getFilesDir() + "/woahelper.apk");
+				ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://raw.githubusercontent.com/n00b69/woa-helper-update/main/woahelper.apk -O \" | su -mm -c sh" + MainActivity.this.getFilesDir() + "/woahelper.apk");
 				ShellUtils.fastCmd("pm install " + MainActivity.this.getFilesDir() + "/woahelper.apk && rm " + MainActivity.this.getFilesDir() + "/woahelper.apk");
 			}
 		}).start();
@@ -1981,7 +1999,7 @@ public class MainActivity extends AppCompatActivity {
 		TextView myTextView6 = this.findViewById(R.id.group_text);
 		TextView myTextView7 = this.findViewById(R.id.tv_slot);
 		TextView myTextView8 = this.findViewById(R.id.tv_date);
-		if (Configuration.ORIENTATION_LANDSCAPE != newConfig.orientation && Objects.equals(this.device, "nabu") || Objects.equals(this.device, "pipa") || Objects.equals(this.device, "winner") || Objects.equals(this.device, "winnerx") || Objects.equals(this.device, "q2q") || Objects.equals(this.device, "t860") || Objects.equals(this.device, "t865")) {
+		if (Configuration.ORIENTATION_LANDSCAPE != newConfig.orientation && Objects.equals(this.device, "nabu") || Objects.equals(this.device, "pipa") || Objects.equals(this.device, "winner") || Objects.equals(this.device, "winnerx") || Objects.equals(this.device, "q2q") || Objects.equals(this.device, "gts6l") || Objects.equals(this.device, "gts6lwifi")) {
 			this.x.app.setOrientation(LinearLayout.VERTICAL);
 			this.x.top.setOrientation(LinearLayout.HORIZONTAL);
 			myTextView1.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE2);
@@ -1992,7 +2010,7 @@ public class MainActivity extends AppCompatActivity {
 			myTextView6.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
 			myTextView7.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
 			myTextView8.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
-		} else if (Configuration.ORIENTATION_PORTRAIT != newConfig.orientation && Objects.equals(this.device, "nabu") || Objects.equals(this.device, "pipa") || Objects.equals(this.device, "winner") || Objects.equals(this.device, "winnerx") || Objects.equals(this.device, "q2q") || Objects.equals(this.device, "t860") || Objects.equals(this.device, "t865")) {
+		} else if (Configuration.ORIENTATION_PORTRAIT != newConfig.orientation && Objects.equals(this.device, "nabu") || Objects.equals(this.device, "pipa") || Objects.equals(this.device, "winner") || Objects.equals(this.device, "winnerx") || Objects.equals(this.device, "q2q") || Objects.equals(this.device, "gts6l") || Objects.equals(this.device, "gts6lwifi")) {
 			this.x.app.setOrientation(LinearLayout.HORIZONTAL);
 			this.x.top.setOrientation(LinearLayout.VERTICAL);
 			myTextView1.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);

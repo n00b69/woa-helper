@@ -1,7 +1,7 @@
 <resources>
 	<string name="app_name" translatable="false">WOA Helper</string>
 	<string name="app_subtitle" translatable="false">v1.8.4"</string>
-	<string name="creator" translatable="false">the sog, M2K, Marius586, halal-beef &amp; KuatoDev @2024</string>
+	<string name="creator" translatable="false">the sog, M2K, Marius586, halal-beef &amp; KuatoDev @2025</string>
 
 	<string name="error_title">An unexpected error occurred.\nSorry for the inconvenience.</string>
 	<string name="backup_boot_title">BACK UP BOOT IMAGE</string>
