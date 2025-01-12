@@ -1,7 +1,7 @@
 <resources>
 	<string name="app_name" translatable="false">WOA Helper</string>
 	<string name="app_subtitle" translatable="false">v1.8.4"</string>
-	<string name="creator" translatable="false">the sog, M2K, Marius586, halal-beef &amp; KuatoDev @2025</string>
+	<string name="creator" translatable="false">the sog, M2K, Marius586, halal-beef &amp; KuatoDev ©️2025</string>
 
 	<string name="error_title">An unexpected error occurred.\nSorry for the inconvenience.</string>
 	<string name="backup_boot_title">BACK UP BOOT IMAGE</string>
@@ -120,10 +120,11 @@
 	<string name="preference9">Require unlocked screen for quickboot</string>
 	<string name="preference10">Mount Windows to /mnt instead of /sdcard</string>
 	<string name="preference11">Disable checking for app updates</string>
-
-	<string name="uefiChk" translatable="false">su -c find /mnt/sdcard/UEFI/ -type f  | grep ".img" | head -n 1 </string>
-	<string name="backup" translatable="false">dd bs=8M if=/dev/block/by-name/boot$(getprop ro.boot.slot_suffix) of=/sdcard/boot.img</string>
 	
+	<string name="backup" translatable="false">dd bs=8M if=/dev/block/by-name/boot$(getprop ro.boot.slot_suffix) of=/sdcard/boot.img</string>
+	<string name="uefiChk" translatable="false">su -c find /mnt/sdcard/UEFI/ -type f  | grep ".img" | head -n 1 </string>
+	
+	<!-- Not used, but might be useful to keep  -->
 	<string name="ntfsChk" translatable="false">su -c find /system/bin -name mount.ntfs</string>
 	<string name="backup1" translatable="false">dd bs=8M if=/dev/block/by-name/boot$(getprop ro.boot.slot_suffix) of=/mnt/sdcard/Windows/boot.img</string>
 	<string name="backup2" translatable="false">dd bs=8M if=/dev/block/by-name/boot$(getprop ro.boot.slot_suffix) of=/mnt/Windows/boot.img</string>
