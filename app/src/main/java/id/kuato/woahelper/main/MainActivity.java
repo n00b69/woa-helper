@@ -1812,7 +1812,7 @@ public class MainActivity extends AppCompatActivity {
 				panel = ShellUtils.fastCmd("su -c cat /proc/cmdline | tr ' :=' '\n'|grep dsi|tr ' _' '\n'|tail -3|head -1 ");
 			}
 		}
-		if (!pref.getAGREE(this)) if ((Objects.equals(panel, "f1p2_2") || Objects.equals(panel, "f1") || Objects.equals(panel, "ea8076_cmd"))) {
+		if (!pref.getAGREE(this)) if ((Objects.equals(panel, "f1p2_2") || Objects.equals(panel, "f1"))) {
 			dialog.show();
 			messages.setText(getString(R.string.upanel));
 			yesButton.setText(getString(R.string.chat));
