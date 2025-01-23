@@ -32,8 +32,11 @@ This project is in late stages of development. Most features have already been a
 
 ## Requirements
 • Android 8 and up
+
 • Rooted device (official Magisk 28.1+ recommended. Some features might not work on older Magisk versions or other root methods)
+
 • Windows partition must be named **win**, **windows**, or **mindows**
+
 • UEFI image
 
 ## Credits
