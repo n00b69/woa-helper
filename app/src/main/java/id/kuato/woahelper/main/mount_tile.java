@@ -11,6 +11,7 @@ import id.kuato.woahelper.preference.pref;
 public class mount_tile extends TileService {
 
 	String win;
+	String findwin;
 	String mnt_stat;
 	String winpath;
 
@@ -32,9 +33,13 @@ public class mount_tile extends TileService {
 	private void update() {
 		final Tile tile = getQsTile();
 		if (isSecure() && !pref.getSecure(this)){ tile.setState(0);return;}
-		win = ShellUtils.fastCmd("su -mm -c realpath /dev/block/by-name/win");
-		if ("/dev/block/by-name/win".equals(win)) win = ShellUtils.fastCmd("su -mm -c realpath /dev/block/by-name/mindows");
-		if ("/dev/block/by-name/mindows".equals(win)) win = ShellUtils.fastCmd("su -mm -c realpath /dev/block/by-name/windows");
+		findwin = ShellUtils.fastCmd("find /dev/block | grep win");
+		if (findwin.isEmpty()) findwin = ShellUtils.fastCmd("find /dev/block | grep mindows");
+		if (findwin.isEmpty()) findwin = ShellUtils.fastCmd("find /dev/block | grep windows");
+		if (findwin.isEmpty()) findwin = ShellUtils.fastCmd("find /dev/block | grep Win");
+		if (findwin.isEmpty()) findwin = ShellUtils.fastCmd("find /dev/block | grep Mindows");
+		if (findwin.isEmpty()) findwin = ShellUtils.fastCmd("find /dev/block | grep Windows");
+		win = ShellUtils.fastCmd("realpath " + findwin);
 		winpath = (pref.getMountLocation(this) ? "/mnt/Windows" : "/mnt/sdcard/Windows");
 		mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + win);
 		if (mnt_stat.isEmpty()) tile.setState(1);

@@ -19,7 +19,10 @@ public class quickboot_tile extends TileService {
 	String finduefi;
 	String device;
 	String win;
+	String findwin;
 	String winpath;
+	String findboot;
+	String boot;
 
 	// Called when your app can update your tile.
 	@Override
@@ -47,14 +50,14 @@ public class quickboot_tile extends TileService {
 			String found = ShellUtils.fastCmd("ls " + (pref.getMountLocation(this) ? "/mnt/Windows" : "/mnt/sdcard/Windows") + " | grep boot.img");
 			if (pref.getMountLocation(this)) {
 				if (pref.getBACKUP(this) || (!pref.getAUTO(this) && found.isEmpty())) {
-					ShellUtils.fastCmd(getString(R.string.backup2));
+					ShellUtils.fastCmd("dd bs=8m if=" + boot + " of=/mnt/Windows/boot.img");
 					final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM HH:mm", Locale.US);
 					final String currentDateAndTime = sdf.format(new Date());
 					pref.setDATE(this, currentDateAndTime);
 				}
 			} else {
 				if (pref.getBACKUP(this) || (!pref.getAUTO(this) && found.isEmpty())) {
-					ShellUtils.fastCmd(getString(R.string.backup1));
+					ShellUtils.fastCmd("dd bs=8m if=" + boot + " of=/mnt/sdcard/Windows/boot.img");
 					final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM HH:mm", Locale.US);
 					final String currentDateAndTime = sdf.format(new Date());
 					pref.setDATE(this, currentDateAndTime);
@@ -62,7 +65,7 @@ public class quickboot_tile extends TileService {
 			}
 			found = ShellUtils.fastCmd("find /sdcard | grep boot.img");
 			if (pref.getBACKUP_A(this) || (!pref.getAUTO_A(this) && found.isEmpty())) {
-				ShellUtils.fastCmd(getString(R.string.backup));
+				ShellUtils.fastCmd("dd bs=8m if=" + boot + " of=/sdcard/boot.img");
 				final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM HH:mm", Locale.US);
 				final String currentDateAndTime = sdf.format(new Date());
 				pref.setDATE(this, currentDateAndTime);
@@ -85,7 +88,7 @@ public class quickboot_tile extends TileService {
 	}
 
 	public void flash() {
-		ShellUtils.fastCmd("su -c dd if=" + finduefi + " of=/dev/block/bootdevice/by-name/boot$(getprop ro.boot.slot_suffix) bs=16M");
+		ShellUtils.fastCmd("su -c dd if=" + finduefi + " of=/dev/block/bootdevice/by-name/boot$(getprop ro.boot.slot_suffix) bs=16m");
 	}
 
 	public void checkdevice() {
@@ -95,10 +98,17 @@ public class quickboot_tile extends TileService {
 	public void checkuefi() {
 		checkdevice();
 		finduefi = ShellUtils.fastCmd(getString(R.string.uefiChk));
-		win = ShellUtils.fastCmd("su -mm -c realpath /dev/block/by-name/win");
-		if ("/dev/block/by-name/win".equals(win)) win = ShellUtils.fastCmd("su -mm -c realpath /dev/block/by-name/mindows");
-		if ("/dev/block/by-name/mindows".equals(win)) win = ShellUtils.fastCmd("su -mm -c realpath /dev/block/by-name/windows");
+		findwin = ShellUtils.fastCmd("find /dev/block | grep win");
+		if (findwin.isEmpty()) findwin = ShellUtils.fastCmd("find /dev/block | grep mindows");
+		if (findwin.isEmpty()) findwin = ShellUtils.fastCmd("find /dev/block | grep windows");
+		if (findwin.isEmpty()) findwin = ShellUtils.fastCmd("find /dev/block | grep Win");
+		if (findwin.isEmpty()) findwin = ShellUtils.fastCmd("find /dev/block | grep Mindows");
+		if (findwin.isEmpty()) findwin = ShellUtils.fastCmd("find /dev/block | grep Windows");
+		win = ShellUtils.fastCmd("realpath " + findwin);
 		winpath = (pref.getMountLocation(this) ? "/mnt/Windows" : "/mnt/sdcard/Windows");
+		findboot = ShellUtils.fastCmd("find /dev/block | grep boot$(getprop ro.boot.slot_suffix)");
+		if (findboot.isEmpty()) findboot = ShellUtils.fastCmd("find /dev/block | grep BOOT$(getprop ro.boot.slot_suffix)");
+		boot = ShellUtils.fastCmd("realpath " + findboot);
 	}
 
 }

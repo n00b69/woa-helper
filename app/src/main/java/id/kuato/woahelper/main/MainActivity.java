@@ -52,7 +52,7 @@ import java.util.concurrent.Executors;
 import id.kuato.woahelper.R;
 import id.kuato.woahelper.databinding.ActivityMainBinding;
 import id.kuato.woahelper.databinding.DevicesBinding;
-import id.kuato.woahelper.databinding.LangaugesBinding;
+//import id.kuato.woahelper.databinding.LangaugesBinding;
 import id.kuato.woahelper.databinding.ScriptsBinding;
 import id.kuato.woahelper.databinding.SetPanelBinding;
 import id.kuato.woahelper.databinding.ToolboxBinding;
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 	public final class BuildConfig {
 	public static final String VERSION_NAME = "1.8.4_BETA37";
 	}
-	static final Object lock = new Object();
+//	static final Object lock = new Object();
 	private static final float SIZE = 12.0F;
 	private static final float SIZE1 = 15.0F;
 	private static final float SIZE2 = 30.0F;
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 	public SetPanelBinding k;
 	public ToolboxBinding n;
 	public ScriptsBinding z;
-	public LangaugesBinding l;
+//	public LangaugesBinding l;
 	public String winpath;
 	public int backable;
 	String panel;
@@ -84,6 +84,9 @@ public class MainActivity extends AppCompatActivity {
 	String model;
 	String dbkpmodel;
 	String win;
+	String findwin;
+	String findboot;
+	String boot;
 	String grouplink = "https://t.me/woahelperchat";
 	String guidelink = "https://github.com/n00b69";
 	String currentVersion = BuildConfig.VERSION_NAME;
@@ -182,12 +185,16 @@ public class MainActivity extends AppCompatActivity {
 		this.x.toolbarlayout.toolbar.setNavigationIcon(iconToolbar);
 		this.checkdevice();
 		this.checkuefi();
-		this.win = ShellUtils.fastCmd("realpath /dev/block/by-name/win");
-		if ("/dev/block/by-name/win".equals(this.win)) this.win = ShellUtils.fastCmd("realpath /dev/block/by-name/mindows");
-		if ("/dev/block/by-name/mindows".equals(this.win)) this.win = ShellUtils.fastCmd("realpath /dev/block/by-name/windows");
-		if ("/dev/block/by-name/windows".equals(this.win)) this.win = ShellUtils.fastCmd("realpath /dev/block/by-name/Win");
-		if ("/dev/block/by-name/Win".equals(this.win)) this.win = ShellUtils.fastCmd("realpath /dev/block/by-name/Mindows");
-		if ("/dev/block/by-name/Mindows".equals(this.win)) this.win = ShellUtils.fastCmd("realpath /dev/block/by-name/Windows");
+		this.findwin = ShellUtils.fastCmd("find /dev/block | grep win");
+		if (this.findwin.isEmpty()) this.findwin = ShellUtils.fastCmd("find /dev/block | grep mindows");
+		if (this.findwin.isEmpty()) this.findwin = ShellUtils.fastCmd("find /dev/block | grep windows");
+		if (this.findwin.isEmpty()) this.findwin = ShellUtils.fastCmd("find /dev/block | grep Win");
+		if (this.findwin.isEmpty()) this.findwin = ShellUtils.fastCmd("find /dev/block | grep Mindows");
+		if (this.findwin.isEmpty()) this.findwin = ShellUtils.fastCmd("find /dev/block | grep Windows");
+		this.win = ShellUtils.fastCmd("realpath " + this.findwin);
+		this.findboot = ShellUtils.fastCmd("find /dev/block | grep boot$(getprop ro.boot.slot_suffix)");
+		if (this.findboot.isEmpty()) this.findboot = ShellUtils.fastCmd("find /dev/block | grep BOOT$(getprop ro.boot.slot_suffix)");
+		this.boot = ShellUtils.fastCmd("realpath " + this.findboot);
 		this.winpath = (pref.getMountLocation(this) ? "/mnt/Windows" : "/mnt/sdcard/Windows");
 		String mount_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + this.win);
 		if (mount_stat.isEmpty()) this.mounted = getString(R.string.mountt);
@@ -200,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
 		TextView messages = dialog.findViewById(R.id.messages);
 		ImageView icons = dialog.findViewById(R.id.icon);
 		ProgressBar bar = dialog.findViewById(R.id.progress);
-		DisplayMetrics metrics = this.getResources().getDisplayMetrics();
+//		DisplayMetrics metrics = this.getResources().getDisplayMetrics();
 		Drawable android = ResourcesCompat.getDrawable(this.getResources(), R.drawable.android, null);
 		Drawable atlasos = ResourcesCompat.getDrawable(this.getResources(), R.drawable.atlasos2, null);
 		Drawable boot = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_disk, null);
@@ -554,7 +561,7 @@ public class MainActivity extends AppCompatActivity {
 					this.grouplink = "https://t.me/dumanthecat";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.husky, null));
 				}
-				case "redfin" -> {
+				case "redfin", "herolte" -> {
 					this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
 					this.grouplink = "https://t.me/dumanthecat";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.redfin, null));
@@ -598,8 +605,8 @@ public class MainActivity extends AppCompatActivity {
 			noButton.setVisibility(View.VISIBLE);
 			yesButton.setVisibility(View.VISIBLE);
 			dismissButton.setVisibility(View.VISIBLE);
-			noButton.setText("Android");
-			yesButton.setText("Windows");
+			noButton.setText(this.getString(R.string.android));
+			yesButton.setText(this.getString(R.string.windows));
 			dismissButton.setText(this.getString(R.string.no));
 			icons.setVisibility(View.VISIBLE);
 			icons.setImageDrawable(boot);
@@ -618,7 +625,6 @@ public class MainActivity extends AppCompatActivity {
 							String currentDateAndTime = sdf.format(new Date());
 							pref.setDATE(MainActivity.this, currentDateAndTime);
 							MainActivity.this.x.tvDate.setText(String.format(MainActivity.this.getString(R.string.last), pref.getDATE(MainActivity.this)));
-							String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
 							MainActivity.this.winBackup();
 							messages.setText(MainActivity.this.getString(R.string.backuped));
 							dismissButton.setText(R.string.dismiss);
@@ -648,7 +654,7 @@ public class MainActivity extends AppCompatActivity {
 							String currentDateAndTime = sdf.format(new Date());
 							pref.setDATE(MainActivity.this, currentDateAndTime);
 							MainActivity.this.x.tvDate.setText(String.format(MainActivity.this.getString(R.string.last), pref.getDATE(MainActivity.this)));
-							ShellUtils.fastCmd(MainActivity.this.getString(R.string.backup));
+							MainActivity.this.androidBackup();
 							messages.setText(MainActivity.this.getString(R.string.backuped));
 							dismissButton.setText(R.string.dismiss);
 							dismissButton.setVisibility(View.VISIBLE);
@@ -689,8 +695,33 @@ public class MainActivity extends AppCompatActivity {
 									MainActivity.this.mount();
 									mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
 									if (mnt_stat.isEmpty()) {
-										dialog.dismiss();
-										mountfail();
+										noButton.setVisibility(View.GONE);
+                                        yesButton.setText(MainActivity.this.getString(R.string.chat));
+                                        dismissButton.setText(MainActivity.this.getString(R.string.cancel));
+                                        yesButton.setVisibility(View.VISIBLE);
+                                        dismissButton.setVisibility(View.VISIBLE);
+                                        icons.setVisibility(View.GONE);
+                                        MainActivity.this.ShowBlur();
+                                        messages.setText(getString(R.string.mountfail));
+                                        dismissButton.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                MainActivity.this.HideBlur();
+                                                dialog.dismiss();
+                                                icons.setVisibility(View.VISIBLE);
+                                            }
+                                        });
+                                        yesButton.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                Intent i = new Intent(Intent.ACTION_VIEW);
+                                                i.setData(Uri.parse("https://t.me/woahelperchat"));
+                                                MainActivity.this.startActivity(i);
+                                            }
+                                        });
+
+                                        dialog.setCancelable(false);
+                                        dialog.show();
 									} else {
 										Log.d("debug", pref.getMountLocation(MainActivity.this) ? "/mnt/Windows" : "/mnt/sdcard/Windows");
 										messages.setText(MainActivity.this.getString(R.string.mounted) + "\n" + MainActivity.this.winpath);
@@ -756,7 +787,7 @@ public class MainActivity extends AppCompatActivity {
 							}
 							found = ShellUtils.fastCmd("find /sdcard | grep boot.img");
 							if (pref.getBACKUP_A(MainActivity.this) || (!pref.getAUTO_A(MainActivity.this) && found.isEmpty())) {
-								ShellUtils.fastCmd(MainActivity.this.getString(R.string.backup));
+								MainActivity.this.androidBackup();
 								SimpleDateFormat sdf = new SimpleDateFormat("dd-MM HH:mm", Locale.US);
 								String currentDateAndTime = sdf.format(new Date());
 								pref.setDATE(MainActivity.this, currentDateAndTime);
@@ -979,7 +1010,7 @@ public class MainActivity extends AppCompatActivity {
 					icons.setVisibility(View.VISIBLE);
 					new Thread(()->{
 						ShellUtils.fastCmd("mkdir /sdcard/dbkp || true");
-						ShellUtils.fastCmd(MainActivity.this.getString(R.string.backup));
+						MainActivity.this.androidBackup();
 						ShellUtils.fastCmd("rm /sdcard/original-boot.img || true");
 						ShellUtils.fastCmd("cp /sdcard/boot.img /sdcard/dbkp/boot.img");
 						ShellUtils.fastCmd("su -mm -c mv /sdcard/boot.img /sdcard/original-boot.img");
@@ -1144,8 +1175,8 @@ public class MainActivity extends AppCompatActivity {
 			icons.setVisibility(View.VISIBLE);
 			icons.setImageDrawable(atlasos);
 			messages.setText(this.getString(R.string.atlasos_question));
-			noButton.setText("ReviOS");
-			yesButton.setText("AtlasOS");
+			noButton.setText(this.getString(R.string.revios));
+			yesButton.setText(this.getString(R.string.atlasos));
 			dismissButton.setText(this.getString(R.string.dismiss));
 			if (!isNetworkConnected(this)) {
 				noButton.setVisibility(View.GONE);
@@ -1719,7 +1750,7 @@ public class MainActivity extends AppCompatActivity {
 	}
 	
 	public void flash(String uefi) {
-		ShellUtils.fastCmd("dd if=" + uefi + " of=/dev/block/bootdevice/by-name/boot$(getprop ro.boot.slot_suffix) bs=16M");
+		ShellUtils.fastCmd("dd if=" + uefi + " of=/dev/block/bootdevice/by-name/boot$(getprop ro.boot.slot_suffix) bs=16m");
 	}
 	
 	public void mount() {
@@ -1739,12 +1770,16 @@ public class MainActivity extends AppCompatActivity {
 	
 	public void winBackup() {
 		mount();
-		ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/boot$(getprop ro.boot.slot_suffix) of=" + this.winpath + "/boot.img");
+		ShellUtils.fastCmd("su -mm -c dd bs=8m if=" + this.boot + " of=" + this.winpath + "/boot.img");
+	}
+	
+	public void androidBackup() {
+		ShellUtils.fastCmd("su -mm -c dd bs=8m if=" + this.boot + " of=/sdcard/boot.img");
 	}
 
 	public void dump() {
-		ShellUtils.fastCmd("su -c dd if=/dev/block/by-name/modemst1 of=$(find " + this.winpath + "/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/bootmodem_fs1");
-		ShellUtils.fastCmd("su -c dd if=/dev/block/by-name/modemst2 of=$(find " + this.winpath + "/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/bootmodem_fs2");
+		ShellUtils.fastCmd("su -mm -c dd if=/dev/block/by-name/modemst1 of=$(find " + this.winpath + "/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/bootmodem_fs1");
+		ShellUtils.fastCmd("su -mm -c dd if=/dev/block/by-name/modemst2 of=$(find " + this.winpath + "/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/bootmodem_fs2");
 	}
 
 	public void checkRoot(){
@@ -1768,7 +1803,7 @@ public class MainActivity extends AppCompatActivity {
 		yesButton.setVisibility(View.GONE);
 		noButton.setVisibility(View.GONE);
 		dismissButton.setVisibility(View.GONE);
-		String[] supported = {"a52sxq", "alpha_lao_com", "alphalm_lao_com", "alphaplus_lao_com", "alphalm", "alphaplus", "alioth", "andromeda", "betalm", "beta_lao_com", "betaplus_lao_com", "betalm_lao_com", "beryllium", "bhima", "cepheus", "cheeseburger", "chiron", "curtana2", "curtana", "curtana_india", "curtana_cn", "curtanacn", "cmi", "davinci", "dumpling", "dipper", "durandal", "durandal_india", "dm3q", "dm3", "enchilada", "equuleus", "excalibur", "excalibur_india", "e3q", "flashlmdd", "flash_lao_com", "flashlm", "flashlmdd_lao_com", "fajita", "guacamole", "guacamoleb", "guacamoleg", "guacamoles", "guacamolet", "gram", "gts6l", "gts6lwifi", "hotdog", "hotdogb", "hotdogg", "houji", "husky", "ursa", "joan", "joyeuse", "judyln", "judyp", "judypn", "lisa", "marble", "meizu20pro", "meizu20Pro", "mh2lm", "mh2plus_lao_com", "mh2lm_lao_com", "mh2lm5g", "mh2lm5g_lao_com", "miatoll", "nabu", "OnePlus5", "OnePlus5T", "OnePlus6", "OnePlus6T", "OnePlus6TSingle", "OnePlus7", "OnePlus7Pro", "OnePlus7ProNR", "OnePlus7ProTMO", "OnePlus7Pro4G", "OnePlus7T", "OnePlus7TPro", "OnePlus7TPro4G", "OnePlus7TPro5G", "OnePlus7TProNR", "OP7ProNRSpr", "pipa", "perseus", "polaris", "Pong", "pong", "q2q", "raphael", "raphaelin", "raphaels", "redfin", "RMX2170", "RMX2061", "sagit", "surya", "vayu", "venus", "winner", "winnerx", "xpeng", "beyond1lte", "beyond1qlte", "beyond1", "ingres", "vili", "lavender", "star2qlte", "star2qltechn", "r3q"};
+		String[] supported = {"a52sxq", "alpha_lao_com", "alphalm_lao_com", "alphaplus_lao_com", "alphalm", "alphaplus", "alioth", "andromeda", "betalm", "beta_lao_com", "betaplus_lao_com", "betalm_lao_com", "beryllium", "bhima", "cepheus", "cheeseburger", "chiron", "curtana2", "curtana", "curtana_india", "curtana_cn", "curtanacn", "cmi", "davinci", "dumpling", "dipper", "durandal", "durandal_india", "dm3q", "dm3", "enchilada", "equuleus", "excalibur", "excalibur_india", "e3q", "flashlmdd", "flash_lao_com", "flashlm", "flashlmdd_lao_com", "fajita", "guacamole", "guacamoleb", "guacamoleg", "guacamoles", "guacamolet", "gram", "gts6l", "gts6lwifi", "hotdog", "hotdogb", "hotdogg", "houji", "husky", "ursa", "joan", "joyeuse", "judyln", "judyp", "judypn", "lisa", "marble", "meizu20pro", "meizu20Pro", "mh2lm", "mh2plus_lao_com", "mh2lm_lao_com", "mh2lm5g", "mh2lm5g_lao_com", "miatoll", "nabu", "OnePlus5", "OnePlus5T", "OnePlus6", "OnePlus6T", "OnePlus6TSingle", "OnePlus7", "OnePlus7Pro", "OnePlus7ProNR", "OnePlus7ProTMO", "OnePlus7Pro4G", "OnePlus7T", "OnePlus7TPro", "OnePlus7TPro4G", "OnePlus7TPro5G", "OnePlus7TProNR", "OP7ProNRSpr", "pipa", "perseus", "polaris", "Pong", "pong", "q2q", "raphael", "raphaelin", "raphaels", "redfin", "RMX2170", "RMX2061", "sagit", "surya", "vayu", "venus", "winner", "winnerx", "xpeng", "herolte", "beyond1lte", "beyond1qlte", "beyond1", "ingres", "vili", "lavender", "star2qlte", "star2qltechn", "r3q"};
 		this.device = ShellUtils.fastCmd("getprop ro.product.device ");
 		this.model = ShellUtils.fastCmd("getprop ro.product.model");
 		if (!Arrays.asList(supported).contains(this.device)) {
@@ -1891,17 +1926,17 @@ public class MainActivity extends AppCompatActivity {
 	}
 	
 	public void checkwin() {
-		String checkingforwin = ShellUtils.fastCmd("find /dev/block/by-name | grep win");
+		String checkingforwin = ShellUtils.fastCmd("find /dev/block | grep win");
 		if (checkingforwin.isEmpty()) {
-			String checkingformindows = ShellUtils.fastCmd("find /dev/block/by-name | grep mindows");
+			String checkingformindows = ShellUtils.fastCmd("find /dev/block | grep mindows");
 			if (checkingformindows.isEmpty()) {
-				String checkingforwindows = ShellUtils.fastCmd("find /dev/block/by-name | grep windows");
+				String checkingforwindows = ShellUtils.fastCmd("find /dev/block | grep windows");
 				if (checkingforwindows.isEmpty()) {
-					String checkingforWin = ShellUtils.fastCmd("find /dev/block/by-name | grep Win");
+					String checkingforWin = ShellUtils.fastCmd("find /dev/block | grep Win");
 					if (checkingforWin.isEmpty()) {
-						String checkingforMindows = ShellUtils.fastCmd("find /dev/block/by-name | grep Mindows");
+						String checkingforMindows = ShellUtils.fastCmd("find /dev/block | grep Mindows");
 						if (checkingforMindows.isEmpty()) {
-							String checkingforWindows = ShellUtils.fastCmd("find /dev/block/by-name | grep Windows");
+							String checkingforWindows = ShellUtils.fastCmd("find /dev/block | grep Windows");
 							if (checkingforWindows.isEmpty()) {
 								final Dialog dialog = new Dialog(this);
 								dialog.setContentView(R.layout.dialog);
@@ -1986,7 +2021,7 @@ public class MainActivity extends AppCompatActivity {
 		yesButton.setText(MainActivity.this.getString(R.string.chat));
 		dismissButton.setText(MainActivity.this.getString(R.string.cancel));
 		MainActivity.this.ShowBlur();
-		messages.setText(getString(R.string.mountfail) + "\n" + (R.string.internalstorage));
+		messages.setText(MainActivity.this.getString(R.string.mountfail) + "\n" + (R.string.internalstorage));
 		dismissButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

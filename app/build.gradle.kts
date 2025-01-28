@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "id.kuato.woahelper"
-        minSdk = 25
+        minSdk = 24
         targetSdk = 34
         versionCode = 3
         versionName = "1.8.4_BETA37"
