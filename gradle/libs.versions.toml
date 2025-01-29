@@ -1,5 +1,5 @@
 [versions]
-agp = "8.7.0"
+agp = "8.7.2"
 work = "2.9.1"
 lifecycle = "2.8.6"
 material = "1.12.0"
