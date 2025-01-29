@@ -43,7 +43,7 @@ public class BlurLayout extends CardView {
     private static final int DEFAULT_FPS = 60;
     private float mDownscaleFactor;
     private int mBlurRadius;
-    private int mFPS;
+    int mFPS;
     private WeakReference<View> mActivityView;
 
     public BlurLayout(final Context context) {
@@ -69,7 +69,7 @@ public class BlurLayout extends CardView {
                 @Override
                 public void doFrame(final long frameTimeNanos) {
                     invalidate();
-                    Choreographer.getInstance().postFrameCallbackDelayed(this, 1000 / mFPS);
+                    Choreographer.getInstance().postFrameCallbackDelayed(this, (long) (1000 / mFPS));
                 }
             };
             Choreographer.getInstance().postFrameCallback(invalidationLoop);

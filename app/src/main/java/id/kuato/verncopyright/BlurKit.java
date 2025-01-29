@@ -23,6 +23,7 @@ import android.renderscript.Allocation;
 import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
+import android.renderscript.Type;
 import android.view.View;
 
 public class BlurKit {
@@ -32,16 +33,16 @@ public class BlurKit {
     private RenderScript rs;
 
     public static void init(final Context context) {
-        if (null != BlurKit.instance) {
+        if (null != instance) {
             return;
         }
 
-        BlurKit.instance = new BlurKit();
-        BlurKit.instance.rs = RenderScript.create(context);
+        instance = new BlurKit();
+        instance.rs = RenderScript.create(context);
     }
 
     public static BlurKit getInstance() {
-        if (null == BlurKit.instance) {
+        if (null == instance) {
             throw new RuntimeException("BlurKit not initialized!");
         }
 
@@ -49,27 +50,27 @@ public class BlurKit {
     }
 
     public Bitmap blur(final Bitmap src, final int radius) {
-        Allocation input = Allocation.createFromBitmap(this.rs, src);
-        Allocation output = Allocation.createTyped(this.rs, input.getType());
+        Allocation input = Allocation.createFromBitmap(rs, src);
+        Type type = input.getType();
+        Allocation output = Allocation.createTyped(rs, type);
         ScriptIntrinsicBlur script;
-        if (android.os.Build.VERSION_CODES.JELLY_BEAN_MR1 <= android.os.Build.VERSION.SDK_INT) {
-            script = ScriptIntrinsicBlur.create(this.rs, Element.U8_4(this.rs));
-            script.setRadius(radius);
-            script.setInput(input);
-            script.forEach(output);
-        }
+        Element e = Element.U8_4(rs);
+        script = ScriptIntrinsicBlur.create(rs, e);
+        script.setRadius(radius);
+        script.setInput(input);
+        script.forEach(output);
         output.copyTo(src);
         return src;
     }
 
     public Bitmap blur(final View src, final int radius) {
-        final Bitmap bitmap = this.getBitmapForView(src, 1.0f);
-        return this.blur(bitmap, radius);
+        final Bitmap bitmap = getBitmapForView(src, 1.0f);
+        return blur(bitmap, radius);
     }
 
     public Bitmap fastBlur(final View src, final int radius, final float downscaleFactor) {
-        final Bitmap bitmap = this.getBitmapForView(src, downscaleFactor);
-        return this.blur(bitmap, radius);
+        final Bitmap bitmap = getBitmapForView(src, downscaleFactor);
+        return blur(bitmap, radius);
     }
 
     private Bitmap getBitmapForView(final View src, final float downscaleFactor) {

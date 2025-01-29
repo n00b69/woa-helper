@@ -13,15 +13,15 @@ This project is in late stages of development. Most features have already been a
 
 ## Features
 
-| Feature                         | Notes                                                                              | Status |
-|---------------------------------|------------------------------------------------------------------------------------|--------|
-| Backup Android Boot             | Will be stored in internal storage and/or in Windows                               | ✅    |
-| Mount/Unmount Windows partition | Needed to view/modify Windows files from Android                                   | ✅    |
-| Automount Windows partition     | Optionally automatically mounts Windows when the device starts                     | ✅    |
-| Quick Boot to Windows           | To use the Quick Boot feature, you need to place the UEFI image to /sdcard/UEFI    | ✅    |
-| StA Creator                     | Creates dualboot files                                                             | ✅    |
-| Provisioning Modem              | Only for devices that may need it for LTE to work                                  | ✅    |
-| DBKP (Dualboot Kernel Patcher)  | Only for supported devices: Oneplus 7(T) Pro 4G, Xiaomi Mi 9 & Xiaomi Pad 5        | ✅    |
+| Feature                         | Notes                                                                           | Status |
+|---------------------------------|---------------------------------------------------------------------------------|--------|
+| Backup Android Boot             | Will be stored in internal storage and/or in Windows                            | ✅      |
+| Mount/Unmount Windows partition | Needed to view/modify Windows files from Android                                | ✅      |
+| Automount Windows partition     | Optionally automatically mounts Windows when the device starts                  | ✅      |
+| Quick Boot to Windows           | To use the Quick Boot feature, you need to place the UEFI image to /sdcard/UEFI | ✅      |
+| StA Creator                     | Creates dualboot files                                                          | ✅      |
+| Provisioning Modem              | Only for devices that may need it for LTE to work                               | ✅      |
+| DBKP (Dualboot Kernel Patcher)  | Only for supported devices: Oneplus 7(T) Pro 4G, Xiaomi Mi 9 & Xiaomi Pad 5     | ✅      |
 
 - Edge Remover
 - Defender Remover
