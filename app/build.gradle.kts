@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace = "id.kuato.woahelper"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "id.kuato.woahelper"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 3
         versionName = "1.8.4_BETA37"
 
