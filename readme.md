@@ -12,15 +12,17 @@
 This project is in late stages of development. Most features have already been added, while some others are still in development. The code may also be refined in the future, to make everything more seamless.
 
 ## Features
-- [x] Backup Android Boot ```will be stored in internal storage and/or in Windows```
-- [x] Mount/Unmount Windows partition ```to internal storage or /mnt to view/modify Windows files from Android```
-- [x] Automount Windows ```Optionally automatically mounts Windows when the device starts```
-- [x] Flash UEFI / QuickBoot to Windows ```to use the UEFI flashing feature, you need to place the UEFI image in /sdcard/UEFI```
 
-- [x] WOA Toolbox ```containing various script and tools used in Windows, such as;```
-- StA Creator ```creates dualboot files```
-- Provisioning Modem ```on devices that may need it for LTE to work```
-- DBKP (Dualboot Kernel Patcher) ```for supported devices (Oneplus 7(T) Pro 4G, Xiaomi Mi 9 & Xiaomi Pad 5)```
+| Feature                         | Notes                                                                              | Status |
+|---------------------------------|------------------------------------------------------------------------------------|--------|
+| Backup Android Boot             | Will be stored in internal storage and/or in Windows                               | ✅    |
+| Mount/Unmount Windows partition | Needed to view/modify Windows files from Android                                   | ✅    |
+| Automount Windows partition     | Optionally automatically mounts Windows when the device starts                     | ✅    |
+| Quick Boot to Windows           | To use the Quick Boot feature, you need to place the UEFI image to /sdcard/UEFI    | ✅    |
+| StA Creator                     | Creates dualboot files                                                             | ✅    |
+| Provisioning Modem              | Only for devices that may need it for LTE to work                                  | ✅    |
+| DBKP (Dualboot Kernel Patcher)  | Only for supported devices: Oneplus 7(T) Pro 4G, Xiaomi Mi 9 & Xiaomi Pad 5        | ✅    |
+
 - Edge Remover
 - Defender Remover
 - USB host mode toggle
@@ -31,9 +33,9 @@ This project is in late stages of development. Most features have already been a
 - etc.
 
 ## Requirements
-• Android 7 and up
-• Rooted device with Windows installed ```Windows partition must be named **win**, **windows**, or **mindows**```
-• UEFI image
+- Android 7 and up
+- Rooted device with Windows installed ```Windows partition must be named **win**, **windows**, or **mindows**```
+- UEFI image
 
 ## Credits
 - [KuatoDev](https://github.com/KuatoDev) for making the original app
