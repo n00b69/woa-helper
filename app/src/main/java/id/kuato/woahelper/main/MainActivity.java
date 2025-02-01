@@ -2030,7 +2030,7 @@ public class MainActivity extends AppCompatActivity {
 		yesButton.setText(MainActivity.this.getString(R.string.chat));
 		dismissButton.setText(MainActivity.this.getString(R.string.cancel));
 		MainActivity.this.ShowBlur();
-		messages.setText(MainActivity.this.getString(R.string.mountfail) + "\n" + (R.string.internalstorage));
+		messages.setText(MainActivity.this.getString(R.string.mountfail) + "\n" + MainActivity.this.getString(R.string.internalstorage));
 		dismissButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
