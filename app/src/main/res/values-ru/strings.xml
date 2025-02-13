@@ -28,16 +28,16 @@
 	<string name="quickboot_subtitle">Дамп modem, прошивка UEFI и перезагрузка в Windows в один клик</string>
 	<string name="quickboot_subtitle_nabu">Прошить UEFI и перезагрузиться в Windows одним кликом!</string>
 	<string name="sta_subtitle">Добавляет приложение "Switch to Android" в Windows</string>
-	<string name="usbhost_subtitle">Добавляет скрипт в C:\\Toolbox для переключения режима USB</string>
-	<string name="software_subtitle">Добавляет ярлык на сайт с программами для ARM в C:\\Toolbox</string>
-	<string name="rotation_subtitle">Добавляет скрипт в C:\\Toolbox для переключения ориентации экрана с помощью ярлыка\n (Полезно для устройств без работающих сенсоров)</string>
+	<string name="usbhost_subtitle">Добавляет скрипт в C:⧹Toolbox для переключения режима USB</string>
+	<string name="software_subtitle">Добавляет ярлык на сайт с программами для ARM в C:⧹Toolbox</string>
+	<string name="rotation_subtitle">Добавляет скрипт в C:⧹Toolbox для переключения ориентации экрана с помощью ярлыка\n (Полезно для устройств без работающих сенсоров)</string>
 	<string name="autoflash_subtitle">Добавляет скрипт в Windows для автоматической прошивки Android boot.img при загрузке Windows</string>
-	<string name="atlasos_subtitle">Копирует AtlasOS or ReviOS playbook и AME Wizard в C:\\Toolbox</string>
-	<string name="defender_subtitle">Добавляет скрипт в C:\\Toolbox для удаления Microsoft Edge / Windows Defender</string>
-	<string name="script_subtitle">Добавляет набор скриптов и настроек в C:\\Toolbox</string>
-	<string name="setup_subtitle">Добавляет установщики для нескольких фреймворков в C:\\Toolbox</string>
+	<string name="atlasos_subtitle">Копирует AtlasOS or ReviOS playbook и AME Wizard в C:⧹Toolbox</string>
+	<string name="defender_subtitle">Добавляет скрипт в C:⧹Toolbox для удаления Microsoft Edge / Windows Defender</string>
+	<string name="script_subtitle">Добавляет набор скриптов и настроек в C:⧹Toolbox</string>
+	<string name="setup_subtitle">Добавляет установщики для нескольких фреймворков в C:⧹Toolbox</string>
 	<string name="dbkp_subtitle">Патчинг ядра для бесперебойной двойной загрузки</string>
-	<string name="tablet_subtitle">Добавляет скрипт в C:\\Toolbox который позволяет вам переключать режим "планшета"</string>
+	<string name="tablet_subtitle">Добавляет скрипт в C:⧹Toolbox который позволяет вам переключать режим "планшета"</string>
 
 	<string name="backup_boot_question">Вы хотите сохранить текущий образ boot?</string>
 	<string name="mount_question">Смонтировать Windows в %s?</string>
@@ -46,15 +46,15 @@
 	<string name="flash_uefi_question">Прошить UEFI? \nЕсли да, то следующий запуск будет в Windows</string>
 	<string name="quickboot_question">Перезагрузиться в Windows</string>
 	<string name="sta_question">Создать приложение "Switch to Android" в C:\\sta?</string>
-	<string name="usbhost_question">Скопировать скрипт для переключения режимов USB в C:\\Toolbox?</string>
-	<string name="software_question">Скопировать ярлык на сайт в C:\\Toolbox?</string>
-	<string name="rotation_question">Скопировать ярлык для переключения ориентации экрана в C:\\Toolbox?</string>
+	<string name="usbhost_question">Скопировать скрипт для переключения режимов USB в C:⧹Toolbox?</string>
+	<string name="software_question">Скопировать ярлык на сайт в C:⧹Toolbox?</string>
+	<string name="rotation_question">Скопировать ярлык для переключения ориентации экрана в C:⧹Toolbox?</string>
 	<string name="autoflash_question">Установить скрипт автоматической прошивки boot.img в Windows?</string>
-	<string name="atlasos_question">Загрузить и переместить AtlasOS / ReviOS playbook в C:\\Toolbox?</string>
-	<string name="defender_question">Скопировать скрипт для удаления Edge / Defender в C:\\Toolbox?</string>
-	<string name="setup_question">Скачать и переместить установщики C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, и XNA в C:\\Toolbox?\n(это может занять немного времени)</string>
+	<string name="atlasos_question">Загрузить и переместить AtlasOS / ReviOS playbook в C:⧹Toolbox?</string>
+	<string name="defender_question">Скопировать скрипт для удаления Edge / Defender в C:⧹Toolbox?</string>
+	<string name="setup_question">Скачать и переместить установщики C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, и XNA в C:⧹Toolbox?\n(это может занять немного времени)</string>
 	<string name="dbkp_question">Пропатчить и перепрошить ваше текущее ядро?\n!!!НЕ НАЖИМАЙТЕ КНОПКУ "ДА", ЕСЛИ ВАШЕ УСТРОЙСТВО НЕ ПОДКЛЮЧЕНО К %s!!!</string>
-	<string name="tablet_question">Копировать скрипт для режима "планшета" в C:\\Toolbox?</string>
+	<string name="tablet_question">Копировать скрипт для режима "планшета" в C:⧹Toolbox?</string>
 
 	<string name="wrong">Что-то пошло не так</string>
 	<string name="mountfail">Что-то пошло не так, \nРаздел Windows не может быть смонтирован.\nОбратитесь за помощью в чат Telegram.</string>

@@ -28,16 +28,16 @@
 	<string name="quickboot_subtitle">დაადუმპე მოდემი, გააფლაშე UEFI და გადატვირთე Windows-ზე ერთი დაჭერით</string>
 	<string name="quickboot_subtitle_nabu">გააფლაშე UEFI და გადატვირთე Windows-ზე ერთი დაჭერით</string>
 	<string name="sta_subtitle">ამატებს გადამრთველს Android აპში Windows-ზე</string>
-	<string name="usbhost_subtitle">ამატებს სკრიპტს C:\\Toolbox -ში, რომელიც საშუალებას გაძლევთ გადართოთ USB ჰოსტის რეჟიმი</string>
-	<string name="software_subtitle">ამატებს ბრაუზერის მალსახმობებს, რომლებიც შეიცავს ARM პროგრამულ უზრუნველყოფას C:\\Toolbox -ში</string>
-	<string name="rotation_subtitle">ამატებს სკრიპტს C:\\Toolbox-ში, რომელიც საშუალებას გაძლევთ დაატრიალოთ ეკრანი მალსახმობის საშუალებით\n(გამოსადეგია მოწყობილობებისთვის სამუშაო სენსორების გარეშე)</string>
+	<string name="usbhost_subtitle">ამატებს სკრიპტს C:⧹Toolbox -ში, რომელიც საშუალებას გაძლევთ გადართოთ USB ჰოსტის რეჟიმი</string>
+	<string name="software_subtitle">ამატებს ბრაუზერის მალსახმობებს, რომლებიც შეიცავს ARM პროგრამულ უზრუნველყოფას C:⧹Toolbox -ში</string>
+	<string name="rotation_subtitle">ამატებს სკრიპტს C:⧹Toolbox-ში, რომელიც საშუალებას გაძლევთ დაატრიალოთ ეკრანი მალსახმობის საშუალებით\n(გამოსადეგია მოწყობილობებისთვის სამუშაო სენსორების გარეშე)</string>
 	<string name="autoflash_subtitle">ამატებს სკრიპტს Windows-ში, რომელიც ავტომატურად აფლაშებს Android boot.img-ს, როდესაც Windows ჩაიტვირთება</string>
-	<string name="atlasos_subtitle">აკოპირებს AtlasOS ან ReviOS სათამაშო წიგნს და AME Wizard-ს C:\\Toolbox -ში</string>
-	<string name="defender_subtitle">ამატებს სკრიპტს C:\\Toolbox -ში, რომელიც საშუალებას გაძლევთ წაშალოთ Microsoft Edge \/ Windows Defender</string>
-	<string name="script_subtitle">ამატებს სკრიპტების ასორტიმენტს და შესწორებებს C:\\Toolbox -ში</string>
-	<string name="setup_subtitle">ამატებს ინსტალერებს რამდენიმე ფრეიმიკისთვის C:\\Toolbox -ში</string>
+	<string name="atlasos_subtitle">აკოპირებს AtlasOS ან ReviOS სათამაშო წიგნს და AME Wizard-ს C:⧹Toolbox -ში</string>
+	<string name="defender_subtitle">ამატებს სკრიპტს C:⧹Toolbox -ში, რომელიც საშუალებას გაძლევთ წაშალოთ Microsoft Edge \/ Windows Defender</string>
+	<string name="script_subtitle">ამატებს სკრიპტების ასორტიმენტს და შესწორებებს C:⧹Toolbox -ში</string>
+	<string name="setup_subtitle">ამატებს ინსტალერებს რამდენიმე ფრეიმიკისთვის C:⧹Toolbox -ში</string>
 	<string name="dbkp_subtitle">პატჩავს კერნელს უწყვეტი ორმაგი ჩატვირთვისთვის</string>
-	<string name="tablet_subtitle">ამატებს სკრიპტს C:\\Toolbox -ში, რომელიც საშუალებას იძლევა გადართოთ ტაბლეტის რეჟიმში</string>
+	<string name="tablet_subtitle">ამატებს სკრიპტს C:⧹Toolbox -ში, რომელიც საშუალებას იძლევა გადართოთ ტაბლეტის რეჟიმში</string>
 
 	<string name="backup_boot_question">გსურთ Android-ის ჩატვირთვის ამჟამინდელი სურათის სარეზერვო ასლის შექმნა?</string>
 	<string name="mount_question">მიებას ვინდოუსი %s -ზე?</string>
@@ -46,15 +46,15 @@
 	<string name="flash_uefi_question">გაფლაშდეს UEFI? \nთუ ხო მაშინ შემდეგი ჩატვირთვა მოხდება Windows-ში</string>
 	<string name="quickboot_question">სწრაფად ჩაიტვიროს Windows?</string>
 	<string name="sta_question">გსურთ Android-ზე გადართვის აპის შექმნა C:\\sta -ში?</string>
-	<string name="usbhost_question">დაკოპირდეს USB Host Mode სკრიპტი C:\\Toolbox -ში?</string>
-	<string name="software_question">დაკოპირდეს ბრაუზერის მალსახმობები C:\\Toolbox -ში?</string>
-	<string name="rotation_question">დაკოპირდეს ბრუნვის მალსახმობი C:\\Toolbox -ში?</string>
+	<string name="usbhost_question">დაკოპირდეს USB Host Mode სკრიპტი C:⧹Toolbox -ში?</string>
+	<string name="software_question">დაკოპირდეს ბრაუზერის მალსახმობები C:⧹Toolbox -ში?</string>
+	<string name="rotation_question">დაკოპირდეს ბრუნვის მალსახმობი C:⧹Toolbox -ში?</string>
 	<string name="autoflash_question">დააინსტალირდეს boot.img autoflasher სკრიპტი Windows-ში?</string>
-	<string name="atlasos_question">ჩამოიტვირთოს AtlasOS ან ReviOS სათამაშო წიგნი C:\\Toolbox -ში?</string>
-	<string name="defender_question">დაკოპირეს Edge \/ Defender Remover სკრიპტები C:\\Toolbox -ში?</string>
-	<string name="setup_question">ჩამოიტვირთოს C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX და XNA Framework ინსტალერები C:\\Toolbox-ში?\n(ამას შეიძლება გარკვეული დრო დასჭირდეს)</string>
+	<string name="atlasos_question">ჩამოიტვირთოს AtlasOS ან ReviOS სათამაშო წიგნი C:⧹Toolbox -ში?</string>
+	<string name="defender_question">დაკოპირეს Edge \/ Defender Remover სკრიპტები C:⧹Toolbox -ში?</string>
+	<string name="setup_question">ჩამოიტვირთოს C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX და XNA Framework ინსტალერები C:⧹Toolbox-ში?\n(ამას შეიძლება გარკვეული დრო დასჭირდეს)</string>
 	<string name="dbkp_question">დააყენეთ და გაანათეთ თქვენი ამჟამინდელი ბირთვი?\n!!!არ დააჭიროთ დიახს, თუ თქვენი მოწყობილობა არ არის %s!!!</string>
-	<string name="tablet_question">დააკოპირეს ტაბლეტის რეჟიმის სკრიპტი C:\\Toolbox -ში?</string>
+	<string name="tablet_question">დააკოპირეს ტაბლეტის რეჟიმის სკრიპტი C:⧹Toolbox -ში?</string>
 
 	<string name="wrong">რაღაც შეფერხდა</string>
 	<string name="mountfail">შეფერხება მოხდა, \nWindows-ის მიბმა ვერ მოხერხდა.\nითხოვეთ დახმარება Telegram-ის ჩატში.</string>

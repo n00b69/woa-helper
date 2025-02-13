@@ -33,13 +33,13 @@ public class mount_tile extends TileService {
 	private void update() {
 		final Tile tile = getQsTile();
 		if (isSecure() && !pref.getSecure(this)){ tile.setState(0);return;}
-		findwin = ShellUtils.fastCmd("find /dev/block | grep win");
-		if (findwin.isEmpty()) findwin = ShellUtils.fastCmd("find /dev/block | grep mindows");
-		if (findwin.isEmpty()) findwin = ShellUtils.fastCmd("find /dev/block | grep windows");
-		if (findwin.isEmpty()) findwin = ShellUtils.fastCmd("find /dev/block | grep Win");
-		if (findwin.isEmpty()) findwin = ShellUtils.fastCmd("find /dev/block | grep Mindows");
-		if (findwin.isEmpty()) findwin = ShellUtils.fastCmd("find /dev/block | grep Windows");
-		win = ShellUtils.fastCmd("realpath " + findwin);
+		findwin = ShellUtils.fastCmd("su -mm -c find /dev/block | grep win");
+		if (findwin.isEmpty()) findwin = ShellUtils.fastCmd("su -mm -c find /dev/block | grep mindows");
+		if (findwin.isEmpty()) findwin = ShellUtils.fastCmd("su -mm -c find /dev/block | grep windows");
+		if (findwin.isEmpty()) findwin = ShellUtils.fastCmd("su -mm -c find /dev/block | grep Win");
+		if (findwin.isEmpty()) findwin = ShellUtils.fastCmd("su -mm -c find /dev/block | grep Mindows");
+		if (findwin.isEmpty()) findwin = ShellUtils.fastCmd("su -mm -c find /dev/block | grep Windows");
+		win = ShellUtils.fastCmd("su -mm -c realpath " + findwin);
 		winpath = (pref.getMountLocation(this) ? "/mnt/Windows" : "/mnt/sdcard/Windows");
 		mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + win);
 		if (mnt_stat.isEmpty()) tile.setState(1);
@@ -48,6 +48,7 @@ public class mount_tile extends TileService {
 	}
 
 	private void mount() {
+		ShellUtils.fastCmd("su -mm -c mkdir " + winpath + " || true");
 		ShellUtils.fastCmd("cd /data/data/id.kuato.woahelper/files");
 		ShellUtils.fastCmd("su -mm -c ./mount.ntfs " + win + " " + winpath);
 	}

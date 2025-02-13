@@ -32,12 +32,12 @@
 	<string name="software_subtitle">Dodaje skróty przeglądarki zawierające oprogramowanie ARM do C:\Toolbox</string>
 	<string name="rotation_subtitle">Dodaje skrypt do C:\Toolbox, który pozwala na obracanie ekranu za pomocą skrótun\(przydatne dla urządzeń bez działających czujników)</string>
 	<string name="autoflash_subtitle">Dodaje skrypt do systemu Windows, który automatycznie wgrywa plik boot.img systemu Android przy każdym uruchomieniu systemu Windows</string>
-	<string name="atlasos_subtitle">Kopiuje playbook AtlasOS lub ReviOS i kreatora AME do C:\\Toolbox</string>
-	<string name="defender_subtitle">Dodaje skrypt do C:\\Toolbox, który pozwala usunąć Microsoft Edge / Windows Defender</string>
-	<string name="script_subtitle">Dodaje zestaw skryptów i poprawek do C:\\Toolbox</string>
-	<string name="setup_subtitle">Dodaje instalatory dla kilku frameworków do C:\\Toolbox</string>
+	<string name="atlasos_subtitle">Kopiuje playbook AtlasOS lub ReviOS i kreatora AME do C:⧹Toolbox</string>
+	<string name="defender_subtitle">Dodaje skrypt do C:⧹Toolbox, który pozwala usunąć Microsoft Edge / Windows Defender</string>
+	<string name="script_subtitle">Dodaje zestaw skryptów i poprawek do C:⧹Toolbox</string>
+	<string name="setup_subtitle">Dodaje instalatory dla kilku frameworków do C:⧹Toolbox</string>
 	<string name="dbkp_subtitle">Modyfikuje jądro (kernel) w celu bezproblemowego dualbootingu</string>
-	<string name="tablet_subtitle">Dodaje skrypt do C:\\Toolbox, który pozwala włączyć tryb tabletu</string>
+	<string name="tablet_subtitle">Dodaje skrypt do C:⧹Toolbox, który pozwala włączyć tryb tabletu</string>
 
 	<string name="backup_boot_question">Zapisać aktualny obraz rozruchu systemu Android?</string>
 	<string name="mount_question">Zamontować Windows na %s?</string>
@@ -46,15 +46,15 @@
 	<string name="flash_uefi_question">Wgrać UEFI? \nJeśli tak, następne uruchomienie będzie w systemie Windows</string>
 	<string name="quickboot_question">Szybki restart do Windows?</string>
 	<string name="sta_question">Utwórz aplikację Przełącz na Androida w C:\\sta?</string>
-	<string name="usbhost_question">Skopiować skrypt trybu hosta USB do C:\\Toolbox?</string>
-	<string name="software_question">Skopiować skróty przeglądarki do C:\\Toolbox?</string>
-	<string name="rotation_question">Skopiować skrót do obracania do C:\\Toolbox?</string>
+	<string name="usbhost_question">Skopiować skrypt trybu hosta USB do C:⧹Toolbox?</string>
+	<string name="software_question">Skopiować skróty przeglądarki do C:⧹Toolbox?</string>
+	<string name="rotation_question">Skopiować skrót do obracania do C:⧹Toolbox?</string>
 	<string name="autoflash_question">Zainstalować skrypt autoflashera boot.img w systemie Windows?</string>
-	<string name="atlasos_question">Pobrać i przenieść playbook AtlasOS lub ReviOS do C:\\Toolbox?</string>
-	<string name="defender_question">Skopiuj skrypt usuwania Edge / Defendera do C:\\Toolbox?</string>
-	<string name="setup_question">Pobierz i przenieś pakiety redystrybucyjne C++ oraz instalatory DirectX, OpenGL, OpenAL, PhysX, XNA framework do C:\\Toolbox?\n(może to zająć trochę czasu)</string>
+	<string name="atlasos_question">Pobrać i przenieść playbook AtlasOS lub ReviOS do C:⧹Toolbox?</string>
+	<string name="defender_question">Skopiuj skrypt usuwania Edge / Defendera do C:⧹Toolbox?</string>
+	<string name="setup_question">Pobierz i przenieś pakiety redystrybucyjne C++ oraz instalatory DirectX, OpenGL, OpenAL, PhysX, XNA framework do C:⧹Toolbox?\n(może to zająć trochę czasu)</string>
 	<string name="dbkp_question">Zmodyfikować i wgrać Twoje obecne jądro (kernel)?\n!!!NIE KLIKAJ TAK, CHYBA ŻE KORZYSTASZ Z %s!!!</string>
-	<string name="tablet_question">Skopiować skrypt trybu tebletu do C:\\Toolbox?</string>
+	<string name="tablet_question">Skopiować skrypt trybu tebletu do C:⧹Toolbox?</string>
 
 	<string name="wrong">Coś poszło nie tak</string>
 	<string name="mountfail">Coś poszło nie tak, \nWindows nie mogł zostać zamontowany.\nPoproś o pomoc na czacie Telegram.</string>

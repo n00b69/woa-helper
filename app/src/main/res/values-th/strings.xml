@@ -28,16 +28,16 @@
 	<string name="quickboot_subtitle">แฟลช UEFI ได้ในคลิกเดียวและสำรองข้อมูลเบสแบนด์ในขณะที่บูตเข้าสู่ Windows</string>
 	<string name="quickboot_subtitle_nabu">แฟลช UEFI และบูตเข้าสู่ Windows ได้ในคลิกเดียว</string>
 	<string name="sta_subtitle">เพิ่มแอป Switch to Android ให้กับ Windows</string>
-	<string name="usbhost_subtitle">เพิ่มสคริปต์ไปที่ C:\\Toolbox ซึ่งช่วยให้คุณสามารถสลับโหมดโฮสต์ USB ได้</string>
-	<string name="software_subtitle">เพิ่มทางลัดเบราว์เซอร์ที่มีซอฟต์แวร์ ARM ไปที่ C:\\Toolbox</string>
-	<string name="rotation_subtitle">เพิ่มสคริปต์ไปที่ C:\\Toolbox ที่ให้คุณหมุนหน้าจอด้วยทางลัด\n(มีประโยชน์สำหรับอุปกรณ์ที่ไม่มีเซ็นเซอร์ทำงาน)</string>
+	<string name="usbhost_subtitle">เพิ่มสคริปต์ไปที่ C:⧹Toolbox ซึ่งช่วยให้คุณสามารถสลับโหมดโฮสต์ USB ได้</string>
+	<string name="software_subtitle">เพิ่มทางลัดเบราว์เซอร์ที่มีซอฟต์แวร์ ARM ไปที่ C:⧹Toolbox</string>
+	<string name="rotation_subtitle">เพิ่มสคริปต์ไปที่ C:⧹Toolbox ที่ให้คุณหมุนหน้าจอด้วยทางลัด\n(มีประโยชน์สำหรับอุปกรณ์ที่ไม่มีเซ็นเซอร์ทำงาน)</string>
 	<string name="autoflash_subtitle">เพิ่มสคริปต์ลงใน Windows ซึ่งจะ flash boot.img ของ Android โดยอัตโนมัติทุกครั้งที่ Windows บูท</string>
-	<string name="atlasos_subtitle">คัดลอก AtlasOS หรือ ReviOS playbook และ AME ไปยัง C:\\Toolbox</string>
-	<string name="defender_subtitle">เพิ่มสคริปต์ที่ C:\\Toolbox ซึ่งช่วยให้คุณสามารถลบ Microsoft Edge / Windows Defender ได้</string>
-	<string name="script_subtitle">เพิ่มสคริปต์และการปรับแต่งต่างๆ ที่ C:\\Toolbox</string>
-	<string name="setup_subtitle">เพิ่มตัวติดตั้งสำหรับเฟรมเวิร์กต่างๆ ลงใน C:\\Toolbox</string>
+	<string name="atlasos_subtitle">คัดลอก AtlasOS หรือ ReviOS playbook และ AME ไปยัง C:⧹Toolbox</string>
+	<string name="defender_subtitle">เพิ่มสคริปต์ที่ C:⧹Toolbox ซึ่งช่วยให้คุณสามารถลบ Microsoft Edge / Windows Defender ได้</string>
+	<string name="script_subtitle">เพิ่มสคริปต์และการปรับแต่งต่างๆ ที่ C:⧹Toolbox</string>
+	<string name="setup_subtitle">เพิ่มตัวติดตั้งสำหรับเฟรมเวิร์กต่างๆ ลงใน C:⧹Toolbox</string>
 	<string name="dbkp_subtitle">แก้ไขเคอร์เนลเพื่อการบูตคู่แบบราบรื่น</string>
-	<string name="tablet_subtitle">เพิ่มสคริปต์ไปที่ C:\\Toolbox ซึ่งช่วยให้คุณสามารถสลับโหมดแท็บเล็ตได้</string>
+	<string name="tablet_subtitle">เพิ่มสคริปต์ไปที่ C:⧹Toolbox ซึ่งช่วยให้คุณสามารถสลับโหมดแท็บเล็ตได้</string>
 
 	<string name="backup_boot_question">สำรองข้อมูลการบูตเข้าสู่ Android ปัจจุบัน?</string>
 	<string name="mount_question">ทำการเชื่อมต่อ Windows ไปที่ %s?</string>
@@ -46,15 +46,15 @@
 	<string name="flash_uefi_question">คุณต้องการ แฟลช UEFI?\nหากคุณ แฟลช คุณจะบูตเข้าสู่ Windows</string>
 	<string name="quickboot_question">บูตเข้าสู่ Windows อย่างรวดเร็ว?</string>
 	<string name="sta_question">สร้างแอป Switch to Android ใน C:\\sta?</string>
-	<string name="usbhost_question">คัดลอกสคริปต์โหมดโฮสต์ USB ไปที่ C:\\Toolbox?</string>
-	<string name="software_question">คัดลอกทางลัดของเบราว์เซอร์ไปที่ C:\\Toolbox?</string>
-	<string name="rotation_question">คัดลอกทางลัดการหมุนไปที่ C:\\Toolbox?</string>
+	<string name="usbhost_question">คัดลอกสคริปต์โหมดโฮสต์ USB ไปที่ C:⧹Toolbox?</string>
+	<string name="software_question">คัดลอกทางลัดของเบราว์เซอร์ไปที่ C:⧹Toolbox?</string>
+	<string name="rotation_question">คัดลอกทางลัดการหมุนไปที่ C:⧹Toolbox?</string>
 	<string name="autoflash_question">ติดตั้งสคริปต์แฟลชอัตโนมัติ boot.img ลงใน Windows หรือไม่</string>
-	<string name="atlasos_question">ดาวน์โหลดและย้าย AtlasOS หรือ ReviOS playbook ไปที่ C:\\Toolbox?</string>
-	<string name="defender_question">คัดลอกสคริปต์ลบ Edge / Defender ไปที่ C:\\Toolbox?</string>
-	<string name="setup_question">ดาวน์โหลดและย้ายตัวติดตั้ง C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX และ XNA ไปที่ C:\\Toolbox?\n(อาจใช้เวลาสักครู่)</string>
+	<string name="atlasos_question">ดาวน์โหลดและย้าย AtlasOS หรือ ReviOS playbook ไปที่ C:⧹Toolbox?</string>
+	<string name="defender_question">คัดลอกสคริปต์ลบ Edge / Defender ไปที่ C:⧹Toolbox?</string>
+	<string name="setup_question">ดาวน์โหลดและย้ายตัวติดตั้ง C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX และ XNA ไปที่ C:⧹Toolbox?\n(อาจใช้เวลาสักครู่)</string>
 	<string name="dbkp_question">แก้ไขและแฟลชเคอร์เนลปัจจุบันของคุณใช่ไหม\n!!!อย่ากด "ใช่" ยกเว้นว่าอุปกรณ์ของคุณคือ %s!!!</string>
-	<string name="tablet_question">คัดลอกสคริปต์โหมดแท็บเล็ตไปที่ C:\\Toolbox?</string>
+	<string name="tablet_question">คัดลอกสคริปต์โหมดแท็บเล็ตไปที่ C:⧹Toolbox?</string>
 
 	<string name="wrong">ข้อผิดพลาด</string>
 	<string name="mountfail">เกิดข้อผิดพลาด \nไม่สามาทำการเชื่อมต่อ Windows ได้\nขอความช่วยเหลือในการแชททาง Telegram.</string>

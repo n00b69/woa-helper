@@ -28,13 +28,13 @@
 	<string name="quickboot_subtitle">دامپ مودم ، فلش زدن بوت ویندوز و رفتن به ویندوز</string>
 	<string name="quickboot_subtitle_nabu">رفتن سریع به ویندوز</string>
 	<string name="sta_subtitle">افزودن فایل اجرایی رفتن به اندروید در ویندوز</string>
-	<string name="usbhost_subtitle">افزودن کد اجرایی USB Host به C:\\Toolbox</string>
-	<string name="software_subtitle">اضافه کردن لینک دسترسی به برنامه های ویندوز در C:\\Toolbox</string>
+	<string name="usbhost_subtitle">افزودن کد اجرایی USB Host به C:⧹Toolbox</string>
+	<string name="software_subtitle">اضافه کردن لینک دسترسی به برنامه های ویندوز در C:⧹Toolbox</string>
 	<string name="rotation_subtitle">اضافه کردن کد اجرایی برای چرخش صفحه(مخصوص دستگاه های بدون دسترسی سنسور)</string>
 	<string name="autoflash_subtitle">اضافه کردن کد اجرایی برای فلش خودکار بوت اندروید بعد از روشن شدن ویندوز</string>
 	<string name="atlasos_subtitle">کپی کردن ReviOS playbook یا AtlasOS</string>
 	<string name="defender_subtitle">اضافه کردن کد اجرایی برای پاکسازی Microsoft Edge / Windows Defender</string>
-	<string name="script_subtitle">اضافه کردن کد های اجرایی کارآمد در C:\\Toolbox</string>
+	<string name="script_subtitle">اضافه کردن کد های اجرایی کارآمد در C:⧹Toolbox</string>
 	<string name="setup_subtitle">افزودن نصب کننده framework</string>
 	<string name="dbkp_subtitle">پچ کردن کرنل برای بوت دوگانه همزمان</string>
 	<string name="tablet_subtitle">اضافه کردن کد اجرایی برای فعال سازی حالت تبلت</string>
@@ -52,15 +52,15 @@
 	<string name="rotation_question">کپی کردن حالت چرخش خودکار به ویندوز؟ </string>
 	<string name="autoflash_question">نصب کردن کد اجرایی فلش خودکار  در ویندوز</string>
 	<string name="atlasos_question">"دانلود کردن ReviOS playbook یا AtlasOS و قرار دادن در مسیر:
-C:\\Toolbox?"</string>
+C:⧹Toolbox?"</string>
 	<string name="defender_question">کپی کردن کد اجرایی Defender و پاک کردن Edge؟</string>
 	<string name="setup_question">"دانلود و انتقال فایل های پیش‌نیاز ویندوز
 (C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, XNA framework)
 به مسیر:
-C:\\Toolbox?"</string>
+C:⧹Toolbox?"</string>
 	<string name="dbkp_question">"آیا کرنل پچ و فلش زده شود؟ 
 به هیچ‌وجه روی بله کلیک نکنید اگر گوشی شما %s نیست!!!"</string>
-	<string name="tablet_question">کپی کردن کد اجرایی حالت تبلت به C:\\Toolbox؟</string>
+	<string name="tablet_question">کپی کردن کد اجرایی حالت تبلت به C:⧹Toolbox؟</string>
 
 	<string name="wrong">خطایی رخ داد</string>
 	<string name="mountfail">خطایی رخ داد، سوار سازی ویندوز با مشکل روبرو شد، در گروه تلگرام درخواست کمک کنید</string>

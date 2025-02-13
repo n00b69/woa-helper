@@ -28,16 +28,16 @@
 	<string name="quickboot_subtitle">أصلح المودم، فلّش الـ UEFI، وأعد التشغيل بضغطة واحدة</string>
 	<string name="quickboot_subtitle_nabu">فلّش الـ UEFI وأعد التشغيل بضغطة واحدة</string>
 	<string name="sta_subtitle">يضيف تطبيق التبديل لنظام أندرويد إلى ويندوز</string>
-	<string name="usbhost_subtitle">يضيف برنامج إلى C:\\Toolbox للتحكم في وضع مضيف الـ USB</string>
-	<string name="software_subtitle">يضيف اختصار متصفح إلى C:\\Toolbox لبرامج ARM</string>
+	<string name="usbhost_subtitle">يضيف برنامج إلى C:⧹Toolbox للتحكم في وضع مضيف الـ USB</string>
+	<string name="software_subtitle">يضيف اختصار متصفح إلى C:⧹Toolbox لبرامج ARM</string>
 	<string name="rotation_subtitle">يضيف برنامج تنفيذي للتحكم في دوران الشاشة\n(مفيد للأجهزة بدون حساسات شغالة)</string>
 	<string name="autoflash_subtitle">يضيف برنامج نصي لتفليش Boot.img الخاص بالأندرويد عند كل إقلاع لويندوز</string>
-	<string name="atlasos_subtitle">ينسخ AtlasOS أو ReviOS وبرنامج AME Wizard إلى C:\\Toolbox</string>
-	<string name="defender_subtitle">يضيف برنامج نصي إلى C:\\Toolbox لإزالة Microsoft Edge / Windows Defender</string>
-	<string name="script_subtitle">يضيف مجموعة من البرامج النصية إلى C:\\Toolbox</string>
-	<string name="setup_subtitle">يضيف مثبتات لإطارات متعددة إلى C:\\Toolbox</string>
+	<string name="atlasos_subtitle">ينسخ AtlasOS أو ReviOS وبرنامج AME Wizard إلى C:⧹Toolbox</string>
+	<string name="defender_subtitle">يضيف برنامج نصي إلى C:⧹Toolbox لإزالة Microsoft Edge / Windows Defender</string>
+	<string name="script_subtitle">يضيف مجموعة من البرامج النصية إلى C:⧹Toolbox</string>
+	<string name="setup_subtitle">يضيف مثبتات لإطارات متعددة إلى C:⧹Toolbox</string>
 	<string name="dbkp_subtitle">يعدل النواة لتسهيل الإقلاع المزدوج</string>
-	<string name="tablet_subtitle">يضيف برنامج إلى C:\\Toolbox يسمح بتفعيل وضع التابلت</string>
+	<string name="tablet_subtitle">يضيف برنامج إلى C:⧹Toolbox يسمح بتفعيل وضع التابلت</string>
 
 	<string name="backup_boot_question">هل ترغب بأخذ نسخة احتياطية للـ Boot الحالي؟</string>
 	<string name="mount_question">هل تريد ماونت ويندوز في المسار %s؟</string>
@@ -46,15 +46,15 @@
 	<string name="flash_uefi_question">فلّش الـ UEFI؟ \nحتى يُقلع ويندوز عند إعادة التشغيل القادمة.</string>
 	<string name="quickboot_question">الإقلاع السريع إلى ويندوز؟</string>
 	<string name="sta_question">إنشاء تطبيق التبديل لنظام أندرويد في C:\\sta؟</string>
-	<string name="usbhost_question">نسخ برنامج التحكم في وضع مضيف USB إلى C:\\Toolbox؟</string>
-	<string name="software_question">نسخ اختصارات المتصفح إلى C:\\Toolbox؟</string>
-	<string name="rotation_question">نسخ اختصار التحكم بدوران الشاشة إلى C:\\Toolbox؟</string>
+	<string name="usbhost_question">نسخ برنامج التحكم في وضع مضيف USB إلى C:⧹Toolbox؟</string>
+	<string name="software_question">نسخ اختصارات المتصفح إلى C:⧹Toolbox؟</string>
+	<string name="rotation_question">نسخ اختصار التحكم بدوران الشاشة إلى C:⧹Toolbox؟</string>
 	<string name="autoflash_question">تثبيت برنامج تفليش Boot.img التلقائي لويندوز؟</string>
-	<string name="atlasos_question">تنزيل ونقل AtlasOS أو ReviOS إلى C:\\Toolbox؟</string>
-	<string name="defender_question">نسخ مزيل Edge / Windows Defender إلى C:\\Toolbox؟</string>
-	<string name="setup_question">تنزيل وتثبيت C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, مثبت XNA إلى C:\\Toolbox؟\n(قد يستغرق هذا وقتاً)</string>
+	<string name="atlasos_question">تنزيل ونقل AtlasOS أو ReviOS إلى C:⧹Toolbox؟</string>
+	<string name="defender_question">نسخ مزيل Edge / Windows Defender إلى C:⧹Toolbox؟</string>
+	<string name="setup_question">تنزيل وتثبيت C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, مثبت XNA إلى C:⧹Toolbox؟\n(قد يستغرق هذا وقتاً)</string>
 	<string name="dbkp_question">هل ترغب في تعديل وتفليش النواة الحالية؟\n!!!لا تضغط نعم إلا إذا كان جهازك %s!!!</string>
-	<string name="tablet_question">نسخ برنامج وضع التابلت إلى C:\\Toolbox؟</string>
+	<string name="tablet_question">نسخ برنامج وضع التابلت إلى C:⧹Toolbox؟</string>
 
 	<string name="wrong">حدث خطأ ما</string>
 	<string name="mountfail">حدث خطأ ما\nفشل في عمل Mount لويندوز، \nيرجى طلب المساعدة من خلال دردشة التيليجرام</string>

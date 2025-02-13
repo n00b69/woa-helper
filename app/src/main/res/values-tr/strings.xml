@@ -28,16 +28,16 @@
 	<string name="quickboot_subtitle">Tek tıkla modemi dumpla, UEFI\’yi flashla ve Windows\'a reboot et</string>
 	<string name="quickboot_subtitle_nabu">Bir tıkla UEFI flashla ve Windows\’a reboot et</string>
 	<string name="sta_subtitle">Switch to Android uygulamasını Windows\’a ekler</string>
-	<string name="usbhost_subtitle">USB Host Modunu geçiş yapmanızı sağlayan bir scripti C:\\Toolbox içine ekler</string>
-	<string name="software_subtitle">ARM yazılımı içeren tarayıcı kısayollarını C:\\Toolbox içine ekler</string>
-	<string name="rotation_subtitle">Kısayol ile ekranı döndürmenizi sağlayan bir scripti C:\\Toolbox içine ekler\n(çalışmayan sensörlü cihazlar için kullanışlıdır)</string>
+	<string name="usbhost_subtitle">USB Host Modunu geçiş yapmanızı sağlayan bir scripti C:⧹Toolbox içine ekler</string>
+	<string name="software_subtitle">ARM yazılımı içeren tarayıcı kısayollarını C:⧹Toolbox içine ekler</string>
+	<string name="rotation_subtitle">Kısayol ile ekranı döndürmenizi sağlayan bir scripti C:⧹Toolbox içine ekler\n(çalışmayan sensörlü cihazlar için kullanışlıdır)</string>
 	<string name="autoflash_subtitle">Windows her başlatıldığında Android boot.img dosyasını otomatik olarak flaşlayan bir scripti Windows\’a ekler</string>
-	<string name="atlasos_subtitle">AtlasOS veya ReviOS kitapçığını ve AME Wizard\’ı C:\\Toolbox içine kopyalar</string>
-	<string name="defender_subtitle">Microsoft Edge / Windows Defender\’ı kaldırmanızı sağlayan bir scripti C:\\Toolbox içine ekler</string>
-	<string name="script_subtitle">Çeşitli scriptler ve tweaks\’i C:\\Toolbox içine ekler</string>
-	<string name="setup_subtitle">Adds installers for several frameworks into C:\\Toolbox</string>
+	<string name="atlasos_subtitle">AtlasOS veya ReviOS kitapçığını ve AME Wizard\’ı C:⧹Toolbox içine kopyalar</string>
+	<string name="defender_subtitle">Microsoft Edge / Windows Defender\’ı kaldırmanızı sağlayan bir scripti C:⧹Toolbox içine ekler</string>
+	<string name="script_subtitle">Çeşitli scriptler ve tweaks\’i C:⧹Toolbox içine ekler</string>
+	<string name="setup_subtitle">Adds installers for several frameworks into C:⧹Toolbox</string>
 	<string name="dbkp_subtitle">Patches the kernel for seamless dualbooting</string>
-	<string name="tablet_subtitle">Adds a script to C:\\Toolbox which allows you to toggle tablet mode</string>
+	<string name="tablet_subtitle">Adds a script to C:⧹Toolbox which allows you to toggle tablet mode</string>
 
 	<string name="backup_boot_question">Mevcut Android boot imajı yedeklensin mi?</string>
 	<string name="mount_question">Windows %s\’a mount edilsin mi?</string>
@@ -46,15 +46,15 @@
 	<string name="flash_uefi_question">UEFI flashlansın mı? \nÖyleyse, bir sonraki boot Windows\’a olacaktır</string>
 	<string name="quickboot_question">Windows\’a quickboot edilsin mi?</string>
 	<string name="sta_question">C:\\sta içine Switch to Android uygulamasını oluşturalım mu?</string>
-	<string name="usbhost_question">USB Host Modu scriptini C:\\Toolbox içine kopyalalım mı?</string>
-	<string name="software_question">Tarayıcı kısayollarını C:\\Toolbox içine kopyalalım mı?</string>
-	<string name="rotation_question">Dönüş kısayolunu C:\\Toolbox içine kopyalalım mı?</string>
+	<string name="usbhost_question">USB Host Modu scriptini C:⧹Toolbox içine kopyalalım mı?</string>
+	<string name="software_question">Tarayıcı kısayollarını C:⧹Toolbox içine kopyalalım mı?</string>
+	<string name="rotation_question">Dönüş kısayolunu C:⧹Toolbox içine kopyalalım mı?</string>
 	<string name="autoflash_question">Windows içine boot.img otomatik flaşlayıcı scripti yükleyelim mi?</string>
-	<string name="atlasos_question">AtlasOS veya ReviOS kitapçığını C:\\Toolbox içine indirip taşıyalim mı?</string>
-	<string name="defender_question">Edge / Defender kaldırıcı scripti C:\\Toolbox içine kopyalalım mı?</string>
-	<string name="setup_question">Download and move C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, and XNA framework installers to C:\\Toolbox?\n(this may take some time)</string>
+	<string name="atlasos_question">AtlasOS veya ReviOS kitapçığını C:⧹Toolbox içine indirip taşıyalim mı?</string>
+	<string name="defender_question">Edge / Defender kaldırıcı scripti C:⧹Toolbox içine kopyalalım mı?</string>
+	<string name="setup_question">Download and move C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, and XNA framework installers to C:⧹Toolbox?\n(this may take some time)</string>
 	<string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
-	<string name="tablet_question">Copy tablet mode script to C:\\Toolbox?</string>
+	<string name="tablet_question">Copy tablet mode script to C:⧹Toolbox?</string>
 
 	<string name="wrong">Bir şeyler ters gitti</string>
 	<string name="mountfail">Bir şeyler ters gitti, \nWindows mount edilemedi.\nTelegram grubundan yardım isteyebilirsiniz</string>

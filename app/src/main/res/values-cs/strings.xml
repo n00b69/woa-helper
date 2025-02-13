@@ -28,16 +28,16 @@
 	<string name="quickboot_subtitle">Uložte modem, flash UEFI a restartujte Windows jedním kliknutím</string>
 	<string name="quickboot_subtitle_nabu">Flash UEFI a restartování Windows jedním kliknutím</string>
 	<string name="sta_subtitle">Přidát aplikaci Přepnout na Android do Windows</string>
-	<string name="usbhost_subtitle">Přidát skript do C:\\Toolbox, který vám umožní přepínat režim USB host mode</string>
-	<string name="software_subtitle">Přidát zástupce prohlížeče obsahující software ARM do C:\\Toolbox</string>
-	<string name="rotation_subtitle">Přidát skript do C:\\Toolbox, který vám umožní otočit obrazovku pomocí zkratky\n(Užitečné pro zařízení bez funkčních senzorů)</string>
+	<string name="usbhost_subtitle">Přidát skript do C:⧹Toolbox, který vám umožní přepínat režim USB host mode</string>
+	<string name="software_subtitle">Přidát zástupce prohlížeče obsahující software ARM do C:⧹Toolbox</string>
+	<string name="rotation_subtitle">Přidát skript do C:⧹Toolbox, který vám umožní otočit obrazovku pomocí zkratky\n(Užitečné pro zařízení bez funkčních senzorů)</string>
 	<string name="autoflash_subtitle">Přidát skript do systému Windows, který automaticky zobrazí soubor Android boot.img při každém spuštění systému Windows</string>
-	<string name="atlasos_subtitle">Zkopírovat AtlasOS nebo ReviOS playbook a AME Wizard do C:\\Toolbox</string>
-	<string name="defender_subtitle">Přidá skript do C:\\Toolbox, který vám umožní odebrat Microsoft Edge / Windows Defender</string>
-	<string name="script_subtitle">Přidává sortiment skriptů a vylepšení do C:\\Toolbox</string>
-	<string name="setup_subtitle">Přidá instalátory pro několik frameworku do C:\\Toolbox</string>
+	<string name="atlasos_subtitle">Zkopírovat AtlasOS nebo ReviOS playbook a AME Wizard do C:⧹Toolbox</string>
+	<string name="defender_subtitle">Přidá skript do C:⧹Toolbox, který vám umožní odebrat Microsoft Edge / Windows Defender</string>
+	<string name="script_subtitle">Přidává sortiment skriptů a vylepšení do C:⧹Toolbox</string>
+	<string name="setup_subtitle">Přidá instalátory pro několik frameworku do C:⧹Toolbox</string>
 	<string name="dbkp_subtitle">Provádí úpravu kernelu pro bezproblémové dualbootování</string>
-	<string name="tablet_subtitle">Přidává skript do C:\\Toolbox, který umožňuje přepínat tabletový režim</string>
+	<string name="tablet_subtitle">Přidává skript do C:⧹Toolbox, který umožňuje přepínat tabletový režim</string>
 
 	<string name="backup_boot_question">Zálohovat aktuální spouštěcí obraz Androidu?</string>
 	<string name="mount_question">Připojit Windows na %s?</string>
@@ -46,13 +46,13 @@
 	<string name="flash_uefi_question">Flash UEFI? \nPokud ano, další spuštění bude ve Windows</string>
 	<string name="quickboot_question">Quickboot to Windows?</string>
 	<string name="sta_question">Vytvořte aplikaci Switch to Android v C:\\sta?</string>
-	<string name="usbhost_question">Zkopírovat skript USB host mode do C:\\Toolbox?</string>
-	<string name="software_question">Zkopírovat zástupce prohlížeče do C:\\Toolbox?</string>
-	<string name="rotation_question">Zkopírovat zástupce otáčení do C:\\Toolbox?</string>
+	<string name="usbhost_question">Zkopírovat skript USB host mode do C:⧹Toolbox?</string>
+	<string name="software_question">Zkopírovat zástupce prohlížeče do C:⧹Toolbox?</string>
+	<string name="rotation_question">Zkopírovat zástupce otáčení do C:⧹Toolbox?</string>
 	<string name="autoflash_question">Nainstalovat skript boot.img autoflasher do Windows?</string>
-	<string name="atlasos_question">Stáhnout a přesunout AtlasOS nebo ReviOS playbook do C:\\Toolbox?</string>
-	<string name="defender_question">Zkopírovat skript pro odstranění Microsoft Edge / Defenderu do C:\\Toolbox?</string>
-	<string name="setup_question">Stáhnout a přesunout C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, a XNA framework do C:\\Toolbox?\n(může to chvíli trvat)</string>
+	<string name="atlasos_question">Stáhnout a přesunout AtlasOS nebo ReviOS playbook do C:⧹Toolbox?</string>
+	<string name="defender_question">Zkopírovat skript pro odstranění Microsoft Edge / Defenderu do C:⧹Toolbox?</string>
+	<string name="setup_question">Stáhnout a přesunout C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, a XNA framework do C:⧹Toolbox?\n(může to chvíli trvat)</string>
 	<string name="dbkp_question">Přidat kód pro dualboot do boot.img? \n!!!NEKLIKEJTE NA ANO, POKUD VAŠE ZAŘÍZENÍ NENÍ %s!!!</string>
 	<string name="tablet_question">Zkopírovat skript pro tabletový režim do C:\Toolbox?</string>
 

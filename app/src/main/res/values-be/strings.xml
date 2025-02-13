@@ -28,16 +28,16 @@
 	<string name="quickboot_subtitle">Дамп modem, прашыўка UEFI і перазагрузка ў Windows адным клікам</string>
 	<string name="quickboot_subtitle_nabu">Прашыць UEFI і перазагрузіцца ў Windows адным клікам!</string>
 	<string name="sta_subtitle">Дадае прыкладанне Switch to Android у Windows</string>
-	<string name="usbhost_subtitle">Дадае скрыпт у C:\\Toolbox для пераключэння рэжыму USB</string>
-	<string name="software_subtitle">Дадае спасылку на сайт з праграмамі для ARM у C:\\Toolbox</string>
-	<string name="rotation_subtitle">Дадае скрыпт у C:\\Toolbox для пераключэння арыентацыі экрана праз ярлык\n (Карысна для прылад без працуючых сенсараў)</string>
+	<string name="usbhost_subtitle">Дадае скрыпт у C:⧹Toolbox для пераключэння рэжыму USB</string>
+	<string name="software_subtitle">Дадае спасылку на сайт з праграмамі для ARM у C:⧹Toolbox</string>
+	<string name="rotation_subtitle">Дадае скрыпт у C:⧹Toolbox для пераключэння арыентацыі экрана праз ярлык\n (Карысна для прылад без працуючых сенсараў)</string>
 	<string name="autoflash_subtitle">Дадае скрыпт у Windows для аўтаматычнай прашыўкі Android boot.img пры запуску Windows</string>
-	<string name="atlasos_subtitle">Капіруе AtlasOS або ReviOS playbook і AME Wizard у C:\\Toolbox</string>
-	<string name="defender_subtitle">Дадае скрыпт у C:\\Toolbox для выдалення Microsoft Edge / Windows Defender</string>
-	<string name="script_subtitle">Дадае набор скрыптаў і налад у C:\\Toolbox</string>
-	<string name="setup_subtitle">Дадае ўстаноўнікі для некалькіх фрэймворкаў у C:\\Toolbox</string>
+	<string name="atlasos_subtitle">Капіруе AtlasOS або ReviOS playbook і AME Wizard у C:⧹Toolbox</string>
+	<string name="defender_subtitle">Дадае скрыпт у C:⧹Toolbox для выдалення Microsoft Edge / Windows Defender</string>
+	<string name="script_subtitle">Дадае набор скрыптаў і налад у C:⧹Toolbox</string>
+	<string name="setup_subtitle">Дадае ўстаноўнікі для некалькіх фрэймворкаў у C:⧹Toolbox</string>
 	<string name="dbkp_subtitle">Патчыць ядро для бесперашкоднага dualboot загрузчыка.</string>
-	<string name="tablet_subtitle">Дадае сцэнарый у C:\\Toolbox, які дазваляе пераключаць рэжым планшэта.</string>
+	<string name="tablet_subtitle">Дадае сцэнарый у C:⧹Toolbox, які дазваляе пераключаць рэжым планшэта.</string>
 
 	<string name="backup_boot_question">Вы хочаце захаваць бягучы вобраз boot?</string>
 	<string name="mount_question">Змантаваць Windows у %s?</string>
@@ -46,13 +46,13 @@
 	<string name="flash_uefi_question">Прашыць UEFI? \nКалі так, наступны запуск будзе ў Windows</string>
 	<string name="quickboot_question">Перазагрузіцца ў Windows?</string>
 	<string name="sta_question">Стварыць прыкладанне Switch to Android у C:\\sta?</string>
-	<string name="usbhost_question">Скапіраваць скрыпт для пераключэння рэжымаў USB у C:\\Toolbox?</string>
-	<string name="software_question">Скапіраваць спасылку на сайт у C:\\Toolbox?</string>
-	<string name="rotation_question">Скапіраваць спасылку для пераключэння арыентацыі экрана ў C:\\Toolbox?</string>
+	<string name="usbhost_question">Скапіраваць скрыпт для пераключэння рэжымаў USB у C:⧹Toolbox?</string>
+	<string name="software_question">Скапіраваць спасылку на сайт у C:⧹Toolbox?</string>
+	<string name="rotation_question">Скапіраваць спасылку для пераключэння арыентацыі экрана ў C:⧹Toolbox?</string>
 	<string name="autoflash_question">Усталяваць скрыпт аўтаматычнай прашыўкі boot.img у Windows?</string>
-	<string name="atlasos_question">Загрузіць і перанесці AtlasOS або ReviOS playbook у C:\\Toolbox?</string>
-	<string name="defender_question">Скапіраваць скрыпт для выдалення Edge / Defender у C:\\Toolbox?</string>
-	<string name="setup_question">Спампаваць і змясціць C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX і XNA усталёўнікі ў C:\\Toolbox?\n(гэта можа заняць некаторы час)</string>
+	<string name="atlasos_question">Загрузіць і перанесці AtlasOS або ReviOS playbook у C:⧹Toolbox?</string>
+	<string name="defender_question">Скапіраваць скрыпт для выдалення Edge / Defender у C:⧹Toolbox?</string>
+	<string name="setup_question">Спампаваць і змясціць C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX і XNA усталёўнікі ў C:⧹Toolbox?\n(гэта можа заняць некаторы час)</string>
 	<string name="dbkp_question">Патчыць і запісваць ваша цяперашняе ядро?\n!!!НЕ НАЦІСКАЙЦЕ ТАК, КАЛІ ВАШ ПРЫЛАД НЕ ЯВЛЯЕЦЦА %s!!!</string>
 	<string name="tablet_question">Скапіраваць сцэнарый рэжыму планшэта ў C:\Toolbox?</string>
 

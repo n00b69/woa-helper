@@ -28,16 +28,16 @@
 	<string name="quickboot_subtitle">Salvează modemul, instalați UEFI, și reporniți în Windows cu un singur click</string>
 	<string name="quickboot_subtitle_nabu">Instalați UEFI și reporniți în Windows cu un singur click</string>
 	<string name="sta_subtitle">Va adăuga aplicația Treceți la Android în Windows</string>
-	<string name="usbhost_subtitle">Va adăuga un script la C:\\Toolbox care îți va permite să schimbi Modul Host USB</string>
-	<string name="software_subtitle">Va adăuga comenzi rapide pentru browser conținănd software ARM în C:\\Toolbox</string>
-	<string name="rotation_subtitle">Va adăuga un script la C:\\Toolbox care îți va permite sa rotești ecranul cu o comandă rapidă\n(folositor pentru dispozitivele cu senzori nefuncționali)</string>
+	<string name="usbhost_subtitle">Va adăuga un script la C:⧹Toolbox care îți va permite să schimbi Modul Host USB</string>
+	<string name="software_subtitle">Va adăuga comenzi rapide pentru browser conținănd software ARM în C:⧹Toolbox</string>
+	<string name="rotation_subtitle">Va adăuga un script la C:⧹Toolbox care îți va permite sa rotești ecranul cu o comandă rapidă\n(folositor pentru dispozitivele cu senzori nefuncționali)</string>
 	<string name="autoflash_subtitle">Va adăuga un script în Windows care va instala automat imagine de pornire Android oricând veți porni Windows</string>
-	<string name="atlasos_subtitle">Copiază playbook-urile AtlasOS sau ReviOS și AME Wizard la C:\\Toolbox</string>
-	<string name="defender_subtitle">Va adăuga un script la C:\\Toolbox care îți va permite să ștergi Microsoft Edge / Windows Defender</string>
-	<string name="script_subtitle">Va adăuga un sortiment de scripturi și modificări la C:\\Toolbox</string>
-	<string name="setup_subtitle">Adaugă fișiere de instalare pentru mai multe framework-uri în C:\\Toolbox</string>
+	<string name="atlasos_subtitle">Copiază playbook-urile AtlasOS sau ReviOS și AME Wizard la C:⧹Toolbox</string>
+	<string name="defender_subtitle">Va adăuga un script la C:⧹Toolbox care îți va permite să ștergi Microsoft Edge / Windows Defender</string>
+	<string name="script_subtitle">Va adăuga un sortiment de scripturi și modificări la C:⧹Toolbox</string>
+	<string name="setup_subtitle">Adaugă fișiere de instalare pentru mai multe framework-uri în C:⧹Toolbox</string>
 	<string name="dbkp_subtitle">Modifică kernelul pentru dualboot mai ușor</string>
-	<string name="tablet_subtitle">Adaugă un script în C:\\Toolbox care permite să activezi modul tabletă</string>
+	<string name="tablet_subtitle">Adaugă un script în C:⧹Toolbox care permite să activezi modul tabletă</string>
 
 	<string name="backup_boot_question">Salvați imagine curentă de pornire Android?</string>
 	<string name="mount_question">Montați Windows la %s?</string>
@@ -46,15 +46,15 @@
 	<string name="flash_uefi_question">Instalați UEFI? \nDacă da, următoarea repornire va fi în Windows.</string>
 	<string name="quickboot_question">Pornire rapidă în Windows?</string>
 	<string name="sta_question">Creați Treceți to Android in C:\\sta?</string>
-	<string name="usbhost_question">Copiază scriptul USB Host Mode în C:\\Toolbox?</string>
-	<string name="software_question">Copiază browser shortcut-uri în C:\\Toolbox?</string>
-	<string name="rotation_question">Copiază shortcut-ul de rotire în C:\\Toolbox?</string>
+	<string name="usbhost_question">Copiază scriptul USB Host Mode în C:⧹Toolbox?</string>
+	<string name="software_question">Copiază browser shortcut-uri în C:⧹Toolbox?</string>
+	<string name="rotation_question">Copiază shortcut-ul de rotire în C:⧹Toolbox?</string>
 	<string name="autoflash_question">Adaugă boot.img autoflasher script în Windows?</string>
-	<string name="atlasos_question">Descarcă și mută AtlasOS sau ReviOS playbook în C:\\Toolbox?</string>
-	<string name="defender_question">Copiază Edge / Defender remover script în C:\\Toolbox?</string>
-	<string name="setup_question">Descarcă și mută fișierele de instalare pentru C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, și XNA framework în C:\\Toolbox?\n(poate să ea ceva timp)</string>
+	<string name="atlasos_question">Descarcă și mută AtlasOS sau ReviOS playbook în C:⧹Toolbox?</string>
+	<string name="defender_question">Copiază Edge / Defender remover script în C:⧹Toolbox?</string>
+	<string name="setup_question">Descarcă și mută fișierele de instalare pentru C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, și XNA framework în C:⧹Toolbox?\n(poate să ea ceva timp)</string>
 	<string name="dbkp_question">Modifică și instalează kernelul actual?\n!!!APASĂ DA DOAR DACA DISPOZITIVUL TĂU ESTE %s!!!</string>
-	<string name="tablet_question">Copiază scriptul pentru modul tabletă în C:\\Toolbox?</string>
+	<string name="tablet_question">Copiază scriptul pentru modul tabletă în C:⧹Toolbox?</string>
 
 	<string name="wrong">Ceva a mers prost</string>
 	<string name="mountfail">Ceva a mers prost, \nWindows nu poate fi montat.\nCere ajutor în grupul de Telegram.</string>

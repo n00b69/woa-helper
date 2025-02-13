@@ -28,16 +28,16 @@
 	<string name="quickboot_subtitle">Dumpear el módem, flashear UEFI y reiniciar a Windows con un solo click</string>
 	<string name="quickboot_subtitle_nabu">Flashear UEFI y reiniciar a Windows con un solo click</string>
 	<string name="sta_subtitle">Agrega la aplicación Cambiar a Android a Windows</string>
-	<string name="usbhost_subtitle">Agrega un script a C:\\Toolbox que le permite alternar el modo del host USB</string>
-	<string name="software_subtitle">Agrega accesos directos del navegador que contienen software ARM a C:\\Toolbox</string>
-	<string name="rotation_subtitle">Agrega un script a C:\\Toolbox que te permite rotar la pantalla con un acceso directo\n(útil para dispositivos a los que no les funcionen los sensores)</string>
+	<string name="usbhost_subtitle">Agrega un script a C:⧹Toolbox que le permite alternar el modo del host USB</string>
+	<string name="software_subtitle">Agrega accesos directos del navegador que contienen software ARM a C:⧹Toolbox</string>
+	<string name="rotation_subtitle">Agrega un script a C:⧹Toolbox que te permite rotar la pantalla con un acceso directo\n(útil para dispositivos a los que no les funcionen los sensores)</string>
 	<string name="autoflash_subtitle">Agrega un script a Windows que muestra automáticamente el archivo boot.img de Android cada vez que se inicia Windows</string>
-	<string name="atlasos_subtitle">Copia el playbook de ReviOS o AtlasOS y AME Wizard a C:\\Toolbox</string>
-	<string name="defender_subtitle">Añade un script a C:\\Toolbox que te permite eliminar Microsoft Edge / Windows Defender</string>
-	<string name="script_subtitle">Añade un conjunto de scripts y modificaciones a C:\\Toolbox</string>
-	<string name="setup_subtitle">Añade instaladores de diversos frameworks a C:\\Toolbox</string>
+	<string name="atlasos_subtitle">Copia el playbook de ReviOS o AtlasOS y AME Wizard a C:⧹Toolbox</string>
+	<string name="defender_subtitle">Añade un script a C:⧹Toolbox que te permite eliminar Microsoft Edge / Windows Defender</string>
+	<string name="script_subtitle">Añade un conjunto de scripts y modificaciones a C:⧹Toolbox</string>
+	<string name="setup_subtitle">Añade instaladores de diversos frameworks a C:⧹Toolbox</string>
 	<string name="dbkp_subtitle">Parchea el kernel para hacer dualboot</string>
-	<string name="tablet_subtitle">Añade un script a C:\\Toolbox que te permita habilitar el modo tablet</string>
+	<string name="tablet_subtitle">Añade un script a C:⧹Toolbox que te permita habilitar el modo tablet</string>
 
 	<string name="backup_boot_question">¿Respaldar la imagen de arranque actual de Android?</string>
 	<string name="mount_question">¿Montar Windows en %s?</string>
@@ -46,15 +46,15 @@
 	<string name="flash_uefi_question">¿Flashear UEFI? \nSi es así, el próximo arranque será en Windows</string>
 	<string name="quickboot_question">¿Arranque rápido a Windows?</string>
 	<string name="sta_question">¿Crear app para cambiar a Android en C:\\sta?</string>
-	<string name="usbhost_question">¿Copiar el script de USB en modo host a C:\\Toolbox?</string>
-	<string name="software_question">¿Copiar los accesos directos de los navegadores web a  C:\\Toolbox?</string>
-	<string name="rotation_question">¿Copiar acceso directo de rotación a C:\\Toolbox?</string>
+	<string name="usbhost_question">¿Copiar el script de USB en modo host a C:⧹Toolbox?</string>
+	<string name="software_question">¿Copiar los accesos directos de los navegadores web a  C:⧹Toolbox?</string>
+	<string name="rotation_question">¿Copiar acceso directo de rotación a C:⧹Toolbox?</string>
 	<string name="autoflash_question">¿Instalar el script para flashear automaticamente boot.img en Windows?</string>
-	<string name="atlasos_question">¿Descargar y mover el playbook de ReviOS o AtlasOS a C:\\Toolbox?</string>
-	<string name="defender_question">¿Copiar script para eliminar Microsoft Edge / Windows Defender a C:\\Toolbox?</string>
-	<string name="setup_question">¿Descargar y mover los instaladores de: C++ Redistributables y DirectX, OpenGL, OpenAL, PhysX, XNAF a C:\\Toolbox?\n(puede tardar un tiempo)</string>
+	<string name="atlasos_question">¿Descargar y mover el playbook de ReviOS o AtlasOS a C:⧹Toolbox?</string>
+	<string name="defender_question">¿Copiar script para eliminar Microsoft Edge / Windows Defender a C:⧹Toolbox?</string>
+	<string name="setup_question">¿Descargar y mover los instaladores de: C++ Redistributables y DirectX, OpenGL, OpenAL, PhysX, XNAF a C:⧹Toolbox?\n(puede tardar un tiempo)</string>
 	<string name="dbkp_question">¿Parchear y flashear el kernel actual?\n!!!NO LO PRESIONES A MENOS QUE TU DISPOSITIVO SEA %s!!!</string>
-	<string name="tablet_question">¿Copiar el script del modo tablet a C:\\Toolbox?</string>
+	<string name="tablet_question">¿Copiar el script del modo tablet a C:⧹Toolbox?</string>
 
 	<string name="wrong">Algo salió mal</string>
 	<string name="mountfail">Algo salió mal, \nWindows no se pudo montar.\nSolicita ayuda en el grupo de Telegram.</string>

@@ -28,16 +28,16 @@
 	<string name="quickboot_subtitle">一鍵刷入 UEFI 並提取基帶同時啓動到 Windows</string>
 	<string name="quickboot_subtitle_nabu">一鍵刷入 UEFI 並啓動到 Windows</string>
 	<string name="sta_subtitle">將“切換到安卓”工具添加到 Windows</string>
-	<string name="usbhost_subtitle">將切換 USB 主機模式的腳本添加到 C:\\Toolbox</string>
-	<string name="software_subtitle">將 ARM 軟件的網頁鏈接添加到 C:\\Toolbox</string>
-	<string name="rotation_subtitle">將旋轉屏幕的腳本添加到 C:\\Toolbox\n（用於重力傳感器不能工作的設備）</string>
+	<string name="usbhost_subtitle">將切換 USB 主機模式的腳本添加到 C:⧹Toolbox</string>
+	<string name="software_subtitle">將 ARM 軟件的網頁鏈接添加到 C:⧹Toolbox</string>
+	<string name="rotation_subtitle">將旋轉屏幕的腳本添加到 C:⧹Toolbox\n（用於重力傳感器不能工作的設備）</string>
 	<string name="autoflash_subtitle">向 Windows 添加一個腳本，每當 Windows 啓動時，該腳本會自動刷入安卓 boot 鏡像</string>
-	<string name="atlasos_subtitle">將 AtlasOS / ReviOS playbook 和 AME Wizard 添加到 C:\\Toolbox</string>
-	<string name="defender_subtitle">將卸載 Microsoft Edge / Windows Defender 的腳本添加到 C:\\Toolbox</string>
-	<string name="script_subtitle">將一系列優化腳本添加到 C:\\Toolbox</string>
-	<string name="setup_subtitle">將一些運行庫的安裝包添加到 C:\\Toolbox</string>
+	<string name="atlasos_subtitle">將 AtlasOS / ReviOS playbook 和 AME Wizard 添加到 C:⧹Toolbox</string>
+	<string name="defender_subtitle">將卸載 Microsoft Edge / Windows Defender 的腳本添加到 C:⧹Toolbox</string>
+	<string name="script_subtitle">將一系列優化腳本添加到 C:⧹Toolbox</string>
+	<string name="setup_subtitle">將一些運行庫的安裝包添加到 C:⧹Toolbox</string>
 	<string name="dbkp_subtitle">修補內核以更快捷地切換雙系統</string>
-	<string name="tablet_subtitle">將快捷切換平板模式的腳本添加到 C:\\Toolbox</string>
+	<string name="tablet_subtitle">將快捷切換平板模式的腳本添加到 C:⧹Toolbox</string>
 
 	<string name="backup_boot_question">確認備份當前 Android 的 boot 鏡像?</string>
 	<string name="mount_question">確認掛載 Windows 到 %s?</string>
@@ -46,15 +46,15 @@
 	<string name="flash_uefi_question">確認刷入 UEFI? \n刷入後，下次開機將啓動到 Windows。</string>
 	<string name="quickboot_question">確認快速啓動到 Windows?</string>
 	<string name="sta_question">是否在 C:\\sta 中安裝“切換到安卓”工具?</string>
-	<string name="usbhost_question">是否在 C:\\Toolbox 中安裝 USB 主機模式切換腳本?</string>
-	<string name="software_question">是否在 to C:\\Toolbox 中添加這些網頁鏈接?</string>
-	<string name="rotation_question">是否在 C:\\Toolbox 中安裝旋轉屏幕腳本?</string>
+	<string name="usbhost_question">是否在 C:⧹Toolbox 中安裝 USB 主機模式切換腳本?</string>
+	<string name="software_question">是否在 to C:⧹Toolbox 中添加這些網頁鏈接?</string>
+	<string name="rotation_question">是否在 C:⧹Toolbox 中安裝旋轉屏幕腳本?</string>
 	<string name="autoflash_question">是否將 boot.img 自動刷入腳本安裝到 Windows?</string>
-	<string name="atlasos_question">是否要在 C:\\Toolbox 中下載 AtlasOS / ReviOS playbook?</string>
-	<string name="defender_question">是否在 C:\\Toolbox 中安裝 Edge / Defender 卸載器?</string>
-	<string name="setup_question">是否下載 MSVC 運行庫, DirectX, OpenGL, OpenAL, PhysX, 和 XNA 運行庫的安裝程序，並置於 C:\\Toolbox?\n(可能會花費很長時間)</string>
+	<string name="atlasos_question">是否要在 C:⧹Toolbox 中下載 AtlasOS / ReviOS playbook?</string>
+	<string name="defender_question">是否在 C:⧹Toolbox 中安裝 Edge / Defender 卸載器?</string>
+	<string name="setup_question">是否下載 MSVC 運行庫, DirectX, OpenGL, OpenAL, PhysX, 和 XNA 運行庫的安裝程序，並置於 C:⧹Toolbox?\n(可能會花費很長時間)</string>
 	<string name="dbkp_question">是否修補並重新刷入當前內核?\n!!!請不要點擊「是」，除非你的設備是 %s!!!</string>
-	<string name="tablet_question">是否在 C:\\Toolbox 中添加平板模式切換腳本?</string>
+	<string name="tablet_question">是否在 C:⧹Toolbox 中添加平板模式切換腳本?</string>
 
 	<string name="wrong">錯誤</string>
 	<string name="mountfail">出錯, \nWindows 不能被掛載。\n請在 Telegram 羣聊中尋求幫助。</string>

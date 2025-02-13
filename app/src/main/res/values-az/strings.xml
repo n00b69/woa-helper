@@ -28,16 +28,16 @@
 	<string name="quickboot_subtitle">Bir kliklə Modemin “dump”-i, UEFI-in yüklənməsi və Windows-a reboot</string>
 	<string name="quickboot_subtitle_nabu">Bir kliklə UEFI-in yüklənməsi və Windows-a reboot</string>
 	<string name="sta_subtitle">Adds the Switch to Android app to Windows</string>
-	<string name="usbhost_subtitle">Adds a script to C:\\Toolbox which allows you to toggle USB Host Mode</string>
-	<string name="software_subtitle">Adds browser shortcuts containing ARM software to C:\\Toolbox</string>
-	<string name="rotation_subtitle">Adds a script to C:\\Toolbox that lets you rotate the screen with a shortcut\n(useful for devices without working sensors)</string>
+	<string name="usbhost_subtitle">Adds a script to C:⧹Toolbox which allows you to toggle USB Host Mode</string>
+	<string name="software_subtitle">Adds browser shortcuts containing ARM software to C:⧹Toolbox</string>
+	<string name="rotation_subtitle">Adds a script to C:⧹Toolbox that lets you rotate the screen with a shortcut\n(useful for devices without working sensors)</string>
 	<string name="autoflash_subtitle">Adds a script to Windows which automatically flashes the Android boot.img whenever Windows boots</string>
-	<string name="atlasos_subtitle">Copies the AtlasOS or ReviOS playbook and AME Wizard to C:\\Toolbox</string>
-	<string name="defender_subtitle">Adds a script to C:\\Toolbox which allows you to remove Microsoft Edge / Windows Defender</string>
-	<string name="script_subtitle">Adds an assortment of scripts and tweaks to C:\\Toolbox</string>
-	<string name="setup_subtitle">Adds installers for several frameworks into C:\\Toolbox</string>
+	<string name="atlasos_subtitle">Copies the AtlasOS or ReviOS playbook and AME Wizard to C:⧹Toolbox</string>
+	<string name="defender_subtitle">Adds a script to C:⧹Toolbox which allows you to remove Microsoft Edge / Windows Defender</string>
+	<string name="script_subtitle">Adds an assortment of scripts and tweaks to C:⧹Toolbox</string>
+	<string name="setup_subtitle">Adds installers for several frameworks into C:⧹Toolbox</string>
 	<string name="dbkp_subtitle">Patches the kernel for seamless dualbooting</string>
-	<string name="tablet_subtitle">Adds a script to C:\\Toolbox which allows you to toggle tablet mode</string>
+	<string name="tablet_subtitle">Adds a script to C:⧹Toolbox which allows you to toggle tablet mode</string>
 
 	<string name="backup_boot_question">Cari Android sistemi “image” ehtiyat nüsxəsini yaradılsın?</string>
 	<string name="mount_question">Windows-u %s qoşum?</string>
@@ -46,15 +46,15 @@
 	<string name="flash_uefi_question">Flash UEFI? \nƏgər belədirsə, növbəti yükləmə Windows-da olacaq</string>
 	<string name="quickboot_question">Windows-a “Quickboot” (sürətli yükləmə) keçirilsin?</string>
 	<string name="sta_question">Create Switch to Android app in C:\\sta?</string>
-	<string name="usbhost_question">Copy USB Host Mode script to C:\\Toolbox?</string>
-	<string name="software_question">Copy browser shortcuts to C:\\Toolbox?</string>
-	<string name="rotation_question">Copy rotation shortcut to C:\\Toolbox?</string>
+	<string name="usbhost_question">Copy USB Host Mode script to C:⧹Toolbox?</string>
+	<string name="software_question">Copy browser shortcuts to C:⧹Toolbox?</string>
+	<string name="rotation_question">Copy rotation shortcut to C:⧹Toolbox?</string>
 	<string name="autoflash_question">Install boot.img autoflasher script into Windows?</string>
-	<string name="atlasos_question">Download and move AtlasOS or ReviOS playbook to C:\\Toolbox?</string>
-	<string name="defender_question">Copy Edge / Defender remover scripts to C:\\Toolbox?</string>
-	<string name="setup_question">Download and move C++ Redistributables and DirectX, OpenGL, OpenAL, PhysX, XNA framework installers to C:\\Toolbox?\n(this may take some time)</string>
+	<string name="atlasos_question">Download and move AtlasOS or ReviOS playbook to C:⧹Toolbox?</string>
+	<string name="defender_question">Copy Edge / Defender remover scripts to C:⧹Toolbox?</string>
+	<string name="setup_question">Download and move C++ Redistributables and DirectX, OpenGL, OpenAL, PhysX, XNA framework installers to C:⧹Toolbox?\n(this may take some time)</string>
 	<string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
-	<string name="tablet_question">Copy tablet mode script to C:\\Toolbox?</string>
+	<string name="tablet_question">Copy tablet mode script to C:⧹Toolbox?</string>
 
 	<string name="wrong">Xəta baş verdi</string>
 	<string name="mountfail">Xəta baş verdi, \nWindows-u qöşa bilmirəm.\nTelegram çatda kömək almaq</string>

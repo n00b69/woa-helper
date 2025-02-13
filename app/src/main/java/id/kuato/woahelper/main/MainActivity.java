@@ -31,8 +31,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.BlendModeColorFilterCompat;
 import androidx.core.graphics.BlendModeCompat;
-import androidx.core.view.WindowCompat;
-import androidx.core.view.WindowInsetsControllerCompat;
 
 import com.google.android.material.button.MaterialButton;
 import com.topjohnwu.superuser.Shell;
@@ -64,10 +62,9 @@ import id.kuato.woahelper.util.RAM;
 public class MainActivity extends AppCompatActivity {
 
 	public final class BuildConfig {
-		public static final String VERSION_NAME = "1.8.4_BETA37";
+	public static final String VERSION_NAME = "1.8.4_BETA38";
 	}
-
-	//	static final Object lock = new Object();
+//	static final Object lock = new Object();
 	private static final float SIZE = 12.0F;
 	private static final float SIZE1 = 15.0F;
 	private static final float SIZE2 = 30.0F;
@@ -77,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 	public SetPanelBinding k;
 	public ToolboxBinding n;
 	public ScriptsBinding z;
-	//	public LangaugesBinding l;
+//	public LangaugesBinding l;
 	public String winpath;
 	public int backable;
 	String panel;
@@ -95,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 	String currentVersion = BuildConfig.VERSION_NAME;
 	private ExecutorService executorService = Executors.newFixedThreadPool(4);
 	private double ramvalue;
-
+	
 	public static String extractNumberFromString(String source) {
 		StringBuilder result = new StringBuilder(100);
 		for (char ch : source.toCharArray()) {
@@ -153,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		if (Objects.equals(currentVersion, pref.getVersion(this))) {
-			String[] files = {"dbkp8150.cfg", "dbkp.hotdog.bin", "dbkp.cepheus.bin", "dbkp.nabu.bin", "dbkp.pipa.bin", "install.bat", "sta.exe", "sdd.exe", "sdd.conf", "Switch to Android.lnk", "AutoFlash.cmd", "usbhostmode.exe", "ARMSoftware.url", "ARMRepo.url", "TestedSoftware.url", "WorksOnWoa.url", "RotationShortcut.lnk", "display.exe", "RemoveEdge.bat"};
+			String[] files = {"dbkp8150.cfg", "dbkp.hotdog.bin", "dbkp.cepheus.bin", "dbkp.nabu.bin", "dbkp.pipa.bin", "install.bat", "sta.exe", "sdd.exe", "sdd.conf", "Switch to Android.lnk", "AutoFlash.cmd", "usbhostmode.exe", "ARMSoftware.url", "ARMRepo.url", "TestedSoftware.url", "WorksOnWoa.url", "RotationShortcut.lnk", "RotationShortcutReverseLandscape.lnk", "display.exe", "RemoveEdge.bat"};
 			int i = 0;
 			while (!files[i].isEmpty()) {
 				if (ShellUtils.fastCmd(String.format("ls %1$s |grep %2$s", getFilesDir(), files[i])).isEmpty()) {
@@ -167,12 +164,6 @@ public class MainActivity extends AppCompatActivity {
 			pref.setVersion(this, currentVersion);
 		}
 		super.onCreate(savedInstanceState);
-		WindowInsetsControllerCompat windowInsetsController =
-				WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView());
-		if ((getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_NO)
-			windowInsetsController.setAppearanceLightStatusBars(true);
-		else
-			windowInsetsController.setAppearanceLightStatusBars(false);
 		final Dialog dialog = new Dialog(this);
 		final Dialog languages = new Dialog(this);
 		dialog.setContentView(R.layout.dialog);
@@ -237,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
 		String slot = ShellUtils.fastCmd("getprop ro.boot.slot_suffix");
 		if (slot.isEmpty()) this.x.tvSlot.setVisibility(View.GONE);
 		else this.x.tvSlot.setText(String.format(this.getString(R.string.slot), slot.substring(1, 2).toUpperCase()));
-
+		
 		TextView myTextView00 = this.findViewById(R.id.tv_date);
 		myTextView00.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
 		this.x.deviceName.setText(this.model + " (" + this.device + ")");
@@ -269,321 +260,320 @@ public class MainActivity extends AppCompatActivity {
 			TextView myTextView1 = this.findViewById(R.id.text);
 			myTextView1.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE1);
 		}
-		switch (this.device) {
-			// LG
-			case "alphalm", "alphaplus", "alpha_lao_com", "alphalm_lao_com", "alphaplus_lao_com" -> {
-				this.guidelink = "https://github.com/n00b69/woa-alphaplus";
-				this.grouplink = "https://t.me/woahelperchat";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.alphaplus, null));
+			switch (this.device) {
+				// LG
+				case "alphalm", "alphaplus", "alpha_lao_com", "alphalm_lao_com", "alphaplus_lao_com" -> {
+					this.guidelink = "https://github.com/n00b69/woa-alphaplus";
+					this.grouplink = "https://t.me/woahelperchat";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.alphaplus, null));
+				}
+				case "betaplus", "betalm", "beta_lao_com", "betaplus_lao_com", "betalm_lao_com" -> {
+					this.guidelink = "https://github.com/n00b69/woa-betalm";
+					this.grouplink = "https://t.me/woahelperchat";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.betalm, null));
+				}
+				case "flashlmdd", "flash_lao_com", "flashlm", "flashlmdd_lao_com" -> {
+					this.guidelink = "https://github.com/n00b69/woa-flashlmdd";
+					this.grouplink = "https://t.me/woahelperchat";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.flashlmdd, null));
+				}
+				case "mh2lm", "mh2plus", "mh2plus_lao_com", "mh2lm_lao_com" -> {
+					this.guidelink = "https://github.com/n00b69/woa-mh2lm";
+					this.grouplink = "https://t.me/woahelperchat";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.mh2lm, null));
+				}
+				case "mh2lm5g", "mh2lm5g_lao_com" -> {
+					this.guidelink = "https://github.com/n00b69/woa-mh2lm5g";
+					this.grouplink = "https://t.me/woahelperchat";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.mh2lm, null));
+				}
+				case "judyln", "judyp", "judypn" -> {
+					this.guidelink = "https://github.com/n00b69/woa-everything";
+					this.grouplink = "https://t.me/lgedevices";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.unknown, null));
+				}
+				case "joan" -> {
+					this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
+					this.grouplink = "https://t.me/lgedevices";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.unknown, null));
+				}
+				// Xiaomi
+				case "andromeda" -> {
+					this.guidelink = "https://project-aloha.github.io/";
+					this.grouplink = "https://t.me/project_aloha_issues";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.unknown, null));
+				}
+				case "beryllium" -> {
+					this.guidelink = "https://github.com/n00b69/woa-beryllium";
+					this.grouplink = "https://t.me/WinOnF1";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.beryllium, null));
+					this.x.tvPanel.setVisibility(View.VISIBLE);
+				}
+				case "bhima", "vayu" -> {
+					this.guidelink = "https://github.com/woa-vayu/POCOX3Pro-Guides";
+					this.grouplink = "https://t.me/winonvayualt";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.vayu, null));
+					this.x.tvPanel.setVisibility(View.VISIBLE);
+				}
+				case "cepheus" -> {
+					this.guidelink = "https://github.com/ivnvrvnn/Port-Windows-XiaoMI-9";
+					this.grouplink = "http://t.me/woacepheus";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.cepheus, null));
+					this.x.tvPanel.setVisibility(View.VISIBLE);
+					this.n.cvDbkp.setVisibility(View.VISIBLE);
+					this.n.cvDumpModem.setVisibility(View.VISIBLE);
+					this.n.cvFlashUefi.setVisibility(View.GONE);
+				}
+				case "chiron" -> {
+					this.guidelink = "https://renegade-project.tech/";
+					this.grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.chiron, null));
+				}
+				case "curtana", "curtana2", "curtana_india", "curtana_cn", "curtanacn", "durandal", "durandal_india", "excalibur", "excalibur2", "excalibur_india", "gram", "joyeuse", "miatoll" -> {
+					this.guidelink = "https://github.com/woa-miatoll/Port-Windows-11-Redmi-Note-9-Pro";
+					this.grouplink = "http://t.me/woamiatoll";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.miatoll, null));
+					this.x.tvPanel.setVisibility(View.VISIBLE);
+				}
+				case "dipper" -> {
+					this.guidelink = "https://github.com/n00b69/woa-dipper";
+					this.grouplink = "https://t.me/woadipper";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.dipper, null));
+				}
+				case "equuleus", "ursa" -> {
+					this.guidelink = "https://github.com/n00b69/woa-equuleus";
+					this.grouplink = "https://t.me/woaequuleus";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.equuleus, null));
+				}
+				case "lisa" -> {
+					this.guidelink = "https://github.com/n00b69/woa-lisa";
+					this.grouplink = "https://t.me/woalisa";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.lisa, null));
+				}
+				case "nabu" -> {
+					this.guidelink = "https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5";
+					this.grouplink = "https://t.me/nabuwoa";
+					this.x.NabuImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.nabu, null));
+					this.x.tvPanel.setVisibility(View.VISIBLE);
+					this.n.cvDbkp.setVisibility(View.VISIBLE);
+					this.n.cvFlashUefi.setVisibility(View.GONE);
+				}
+				case "perseus" -> {
+					this.guidelink = "https://github.com/n00b69/woa-perseus";
+					this.grouplink = "https://t.me/woaperseus";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.perseus, null));
+				}
+				case "pipa" -> {
+					this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
+					this.grouplink = "https://t.me/xiaomi_pipa";
+					this.x.NabuImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.pipa, null));
+					this.x.tvPanel.setVisibility(View.VISIBLE);
+					this.n.cvDbkp.setVisibility(View.VISIBLE);
+					this.n.cvFlashUefi.setVisibility(View.GONE);
+				}
+				case "polaris" -> {
+					this.guidelink = "https://github.com/n00b69/woa-polaris";
+					this.grouplink = "https://t.me/WinOnMIX2S";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.polaris, null));
+					this.x.tvPanel.setVisibility(View.VISIBLE);
+				}
+				case "raphael", "raphaelin", "raphaels" -> {
+					this.guidelink = "https://github.com/new-WoA-Raphael/woa-raphael";
+					this.grouplink = "https://t.me/woaraphael";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.raphael, null));
+					this.x.tvPanel.setVisibility(View.VISIBLE);
+					this.n.cvDumpModem.setVisibility(View.VISIBLE);
+				}
+				case "surya" -> {
+					this.guidelink = "https://github.com/woa-surya/POCOX3NFC-Guides";
+					this.grouplink = "https://t.me/windows_on_pocox3_nfc";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.vayu, null));
+					this.x.tvPanel.setVisibility(View.VISIBLE);
+				}
+				case "sagit" -> {
+					this.guidelink = "https://renegade-project.tech/";
+					this.grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.unknown, null));
+				}
+				case "ingres" -> {
+					this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
+					this.grouplink = "https://discord.gg/Dx2QgMx7Sv";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.ingres, null));
+				}
+				case "vili", "lavender" -> {
+					this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
+					this.grouplink = "https://discord.gg/Dx2QgMx7Sv";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.unknown, null));
+				}
+				// OnePlus
+				case "OnePlus5", "cheeseburger" -> {
+					this.guidelink = "https://renegade-project.tech/";
+					this.grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.cheeseburger, null));
+				}
+				case "OnePlus5T", "dumpling" -> {
+					this.guidelink = "https://renegade-project.tech/";
+					this.grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.dumpling, null));
+				}
+				case "OnePlus6", "fajita" -> {
+					this.guidelink = "https://github.com/n00b69/woa-op6";
+					this.grouplink = "https://t.me/WinOnOP6";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.fajita, null));
+				}
+				case "OnePlus6T", "OnePlus6TSingle", "enchilada" -> {
+					this.guidelink = "https://github.com/n00b69/woa-op6";
+					this.grouplink = "https://t.me/WinOnOP6";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.enchilada, null));
+				}
+				case "hotdog", "OnePlus7TPro", "OnePlus7TPro4G" -> {
+					this.guidelink = "https://github.com/n00b69/woa-op7";
+					this.grouplink = "https://t.me/onepluswoachat";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.hotdog, null));
+					this.n.cvDumpModem.setVisibility(View.VISIBLE);
+					this.n.cvDbkp.setVisibility(View.VISIBLE);
+					this.n.cvFlashUefi.setVisibility(View.GONE);
+				}
+				case "guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO" -> {
+					this.guidelink = "https://github.com/n00b69/woa-op7";
+					this.grouplink = "https://t.me/onepluswoachat";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.guacamole, null));
+					this.n.cvDumpModem.setVisibility(View.VISIBLE);
+					this.n.cvDbkp.setVisibility(View.VISIBLE);
+					this.n.cvFlashUefi.setVisibility(View.GONE);
+				}
+				case "guacamoleb", "hotdogb", "OnePlus7T", "OnePlus7" -> {
+					this.guidelink = "https://project-aloha.github.io/";
+					this.grouplink = "https://t.me/onepluswoachat";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.unknown, null));
+					this.n.cvDumpModem.setVisibility(View.VISIBLE);
+				}
+				case "OnePlus7TPro5G", "OnePlus7TProNR", "hotdogg" -> {
+					this.guidelink = "https://project-aloha.github.io/";
+					this.grouplink = "https://t.me/onepluswoachat";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.hotdog, null));
+				}
+				case "OP7ProNRSpr", "OnePlus7ProNR", "guacamoleg", "guacamoles" -> {
+					this.guidelink = "https://project-aloha.github.io/";
+					this.grouplink = "https://t.me/onepluswoachat";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.guacamole, null));
+				}
+				// Samsung
+				case "a52sxq" -> {
+					this.guidelink = "https://github.com/n00b69/woa-a52s";
+					this.grouplink = "https://t.me/a52sxq_uefi";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.a52sxq, null));
+				}
+				case "beyond1lte", "beyond1qlte", "beyond1" -> {
+					this.guidelink = "https://github.com/sonic011gamer/Mu-Samsung";
+					this.grouplink = "https://t.me/woahelperchat";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.beyond1, null));
+				}
+				case "dm3q", "dm3" -> {
+					this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
+					this.grouplink = "https://t.me/dumanthecat";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.dm3q, null));
+				}
+				case "e3q" -> {
+					this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
+					this.grouplink = "https://t.me/biskupmuf";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.e3q, null));
+				}
+				case "gts6l", "gts6lwifi" -> {
+					this.guidelink = "https://project-aloha.github.io/";
+					this.grouplink = "https://t.me/project_aloha_issues";
+					this.x.NabuImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.gts6l, null));
+				}
+				case "q2q" -> {
+					this.guidelink = "https://project-aloha.github.io/";
+					this.grouplink = "https://t.me/project_aloha_issues";
+					this.x.NabuImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.q2q, null));
+				}
+				case "star2qlte", "star2qltechn", "r3q" -> {
+					this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
+					this.grouplink = "https://discord.gg/Dx2QgMx7Sv";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.unknown, null));
+				}
+				case "winnerx", "winner" -> {
+					this.guidelink = "https://github.com/n00b69/woa-winner";
+					this.grouplink = "https://t.me/project_aloha_issues";
+					this.x.NabuImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.winner, null));
+				}
+				// Meme devices / devices with cat pictures / devices which will never have proper support lmao
+				case "venus" -> {
+					this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
+					this.grouplink = "https://discord.gg/Dx2QgMx7Sv";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.venus, null));
+				}
+				case "alioth" -> {
+					this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
+					this.grouplink = "https://discord.gg/Dx2QgMx7Sv";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.alioth, null));
+				}
+				case "davinci" -> {
+					this.guidelink = "https://github.com/zxcwsurx/woa-davinci";
+					this.grouplink = "https://t.me/woa_davinci";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.raphael, null));
+				}
+				case "marble" -> {
+					this.guidelink = "https://github.com/Xhdsos/woa-marble";
+					this.grouplink = "https://t.me/woa_marble";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.marble, null));
+				}
+				case "Pong", "pong" -> {
+					this.guidelink = "https://github.com/index986/woa-pong";
+					this.grouplink = "https://t.me/WoA_spacewar_pong";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.pong, null));
+				}
+				case "xpeng" -> {
+					this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
+					this.grouplink = "https://t.me/woahelperchat";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.xpeng, null));
+				}
+				case "RMX2061" -> {
+					this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
+					this.grouplink = "https://t.me/realme6PROwindowsARM64";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.rmx2061, null));
+				}
+				case "RMX2170" -> {
+					this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
+					this.grouplink = "https://t.me/realme6PROwindowsARM64";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.rmx2170, null));
+				}
+				case "cmi" -> {
+					this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
+					this.grouplink = "https://t.me/dumanthecat";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.cmi, null));
+				}
+				case "houji" -> {
+					this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
+					this.grouplink = "https://t.me/dumanthecat";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.houji, null));
+				}
+				case "meizu20pro", "meizu20Pro" -> {
+					this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
+					this.grouplink = "https://t.me/dumanthecat";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.meizu20pro, null));
+				}
+				case "husky" -> {
+					this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
+					this.grouplink = "https://t.me/dumanthecat";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.husky, null));
+				}
+				case "redfin", "herolte" -> {
+					this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
+					this.grouplink = "https://t.me/dumanthecat";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.redfin, null));
+				}
+				default -> {
+					this.guidelink = "https://renegade-project.tech/";
+					this.grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.unknown, null));
+					this.x.deviceName.setText(this.device);
+					this.n.cvDumpModem.setVisibility(View.VISIBLE);
+				}
 			}
-			case "betaplus", "betalm", "beta_lao_com", "betaplus_lao_com", "betalm_lao_com" -> {
-				this.guidelink = "https://github.com/n00b69/woa-betalm";
-				this.grouplink = "https://t.me/woahelperchat";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.betalm, null));
-			}
-			case "flashlmdd", "flash_lao_com", "flashlm", "flashlmdd_lao_com" -> {
-				this.guidelink = "https://github.com/n00b69/woa-flashlmdd";
-				this.grouplink = "https://t.me/woahelperchat";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.flashlmdd, null));
-			}
-			case "mh2lm", "mh2plus", "mh2plus_lao_com", "mh2lm_lao_com" -> {
-				this.guidelink = "https://github.com/n00b69/woa-mh2lm";
-				this.grouplink = "https://t.me/woahelperchat";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.mh2lm, null));
-			}
-			case "mh2lm5g", "mh2lm5g_lao_com" -> {
-				this.guidelink = "https://github.com/n00b69/woa-mh2lm5g";
-				this.grouplink = "https://t.me/woahelperchat";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.mh2lm, null));
-			}
-			case "judyln", "judyp", "judypn" -> {
-				this.guidelink = "https://github.com/n00b69/woa-everything";
-				this.grouplink = "https://t.me/lgedevices";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.unknown, null));
-			}
-			case "joan" -> {
-				this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
-				this.grouplink = "https://t.me/lgedevices";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.unknown, null));
-			}
-			// Xiaomi
-			case "andromeda" -> {
-				this.guidelink = "https://project-aloha.github.io/";
-				this.grouplink = "https://t.me/project_aloha_issues";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.unknown, null));
-			}
-			case "beryllium" -> {
-				this.guidelink = "https://github.com/n00b69/woa-beryllium";
-				this.grouplink = "https://t.me/WinOnF1";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.beryllium, null));
-				this.x.tvPanel.setVisibility(View.VISIBLE);
-			}
-			case "bhima", "vayu" -> {
-				this.guidelink = "https://github.com/woa-vayu/POCOX3Pro-Guides";
-				this.grouplink = "https://t.me/winonvayualt";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.vayu, null));
-				this.x.tvPanel.setVisibility(View.VISIBLE);
-				this.n.cvDumpModem.setVisibility(View.VISIBLE);
-			}
-			case "cepheus" -> {
-				this.guidelink = "https://github.com/ivnvrvnn/Port-Windows-XiaoMI-9";
-				this.grouplink = "http://t.me/woacepheus";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.cepheus, null));
-				this.x.tvPanel.setVisibility(View.VISIBLE);
-				this.n.cvDbkp.setVisibility(View.VISIBLE);
-				this.n.cvDumpModem.setVisibility(View.VISIBLE);
-				this.n.cvFlashUefi.setVisibility(View.GONE);
-			}
-			case "chiron" -> {
-				this.guidelink = "https://renegade-project.tech/";
-				this.grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.chiron, null));
-			}
-			case "curtana", "curtana2", "curtana_india", "curtana_cn", "curtanacn", "durandal", "durandal_india", "excalibur", "excalibur2", "excalibur_india", "gram", "joyeuse", "miatoll" -> {
-				this.guidelink = "https://github.com/woa-miatoll/Port-Windows-11-Redmi-Note-9-Pro";
-				this.grouplink = "http://t.me/woamiatoll";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.miatoll, null));
-				this.x.tvPanel.setVisibility(View.VISIBLE);
-			}
-			case "dipper" -> {
-				this.guidelink = "https://github.com/n00b69/woa-dipper";
-				this.grouplink = "https://t.me/woadipper";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.dipper, null));
-			}
-			case "equuleus", "ursa" -> {
-				this.guidelink = "https://github.com/n00b69/woa-equuleus";
-				this.grouplink = "https://t.me/woaequuleus";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.equuleus, null));
-			}
-			case "lisa" -> {
-				this.guidelink = "https://github.com/n00b69/woa-lisa";
-				this.grouplink = "https://t.me/woalisa";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.lisa, null));
-			}
-			case "nabu" -> {
-				this.guidelink = "https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5";
-				this.grouplink = "https://t.me/nabuwoa";
-				this.x.NabuImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.nabu, null));
-				this.x.tvPanel.setVisibility(View.VISIBLE);
-				this.n.cvDbkp.setVisibility(View.VISIBLE);
-				this.n.cvFlashUefi.setVisibility(View.GONE);
-			}
-			case "perseus" -> {
-				this.guidelink = "https://github.com/n00b69/woa-perseus";
-				this.grouplink = "https://t.me/woaperseus";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.perseus, null));
-			}
-			case "pipa" -> {
-				this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
-				this.grouplink = "https://t.me/xiaomi_pipa";
-				this.x.NabuImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.pipa, null));
-				this.x.tvPanel.setVisibility(View.VISIBLE);
-				this.n.cvDbkp.setVisibility(View.VISIBLE);
-				this.n.cvFlashUefi.setVisibility(View.GONE);
-			}
-			case "polaris" -> {
-				this.guidelink = "https://github.com/n00b69/woa-polaris";
-				this.grouplink = "https://t.me/WinOnMIX2S";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.polaris, null));
-				this.x.tvPanel.setVisibility(View.VISIBLE);
-			}
-			case "raphael", "raphaelin", "raphaels" -> {
-				this.guidelink = "https://github.com/new-WoA-Raphael/woa-raphael";
-				this.grouplink = "https://t.me/woaraphael";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.raphael, null));
-				this.x.tvPanel.setVisibility(View.VISIBLE);
-				this.n.cvDumpModem.setVisibility(View.VISIBLE);
-			}
-			case "surya" -> {
-				this.guidelink = "https://github.com/woa-surya/POCOX3NFC-Guides";
-				this.grouplink = "https://t.me/windows_on_pocox3_nfc";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.vayu, null));
-				this.x.tvPanel.setVisibility(View.VISIBLE);
-			}
-			case "sagit" -> {
-				this.guidelink = "https://renegade-project.tech/";
-				this.grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.unknown, null));
-			}
-			case "ingres" -> {
-				this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
-				this.grouplink = "https://discord.gg/Dx2QgMx7Sv";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.ingres, null));
-			}
-			case "vili", "lavender" -> {
-				this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
-				this.grouplink = "https://discord.gg/Dx2QgMx7Sv";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.unknown, null));
-			}
-			// OnePlus
-			case "OnePlus5", "cheeseburger" -> {
-				this.guidelink = "https://renegade-project.tech/";
-				this.grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.cheeseburger, null));
-			}
-			case "OnePlus5T", "dumpling" -> {
-				this.guidelink = "https://renegade-project.tech/";
-				this.grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.dumpling, null));
-			}
-			case "OnePlus6", "fajita" -> {
-				this.guidelink = "https://github.com/n00b69/woa-op6";
-				this.grouplink = "https://t.me/WinOnOP6";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.fajita, null));
-			}
-			case "OnePlus6T", "OnePlus6TSingle", "enchilada" -> {
-				this.guidelink = "https://github.com/n00b69/woa-op6";
-				this.grouplink = "https://t.me/WinOnOP6";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.enchilada, null));
-			}
-			case "hotdog", "OnePlus7TPro", "OnePlus7TPro4G" -> {
-				this.guidelink = "https://github.com/n00b69/woa-op7";
-				this.grouplink = "https://t.me/onepluswoachat";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.hotdog, null));
-				this.n.cvDumpModem.setVisibility(View.VISIBLE);
-				this.n.cvDbkp.setVisibility(View.VISIBLE);
-				this.n.cvFlashUefi.setVisibility(View.GONE);
-			}
-			case "guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO" -> {
-				this.guidelink = "https://github.com/n00b69/woa-op7";
-				this.grouplink = "https://t.me/onepluswoachat";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.guacamole, null));
-				this.n.cvDumpModem.setVisibility(View.VISIBLE);
-				this.n.cvDbkp.setVisibility(View.VISIBLE);
-				this.n.cvFlashUefi.setVisibility(View.GONE);
-			}
-			case "guacamoleb", "hotdogb", "OnePlus7T", "OnePlus7" -> {
-				this.guidelink = "https://project-aloha.github.io/";
-				this.grouplink = "https://t.me/onepluswoachat";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.unknown, null));
-				this.n.cvDumpModem.setVisibility(View.VISIBLE);
-			}
-			case "OnePlus7TPro5G", "OnePlus7TProNR", "hotdogg" -> {
-				this.guidelink = "https://project-aloha.github.io/";
-				this.grouplink = "https://t.me/onepluswoachat";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.hotdog, null));
-			}
-			case "OP7ProNRSpr", "OnePlus7ProNR", "guacamoleg", "guacamoles" -> {
-				this.guidelink = "https://project-aloha.github.io/";
-				this.grouplink = "https://t.me/onepluswoachat";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.guacamole, null));
-			}
-			// Samsung
-			case "a52sxq" -> {
-				this.guidelink = "https://github.com/n00b69/woa-a52s";
-				this.grouplink = "https://t.me/a52sxq_uefi";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.a52sxq, null));
-			}
-			case "beyond1lte", "beyond1qlte", "beyond1" -> {
-				this.guidelink = "https://github.com/sonic011gamer/Mu-Samsung";
-				this.grouplink = "https://t.me/woahelperchat";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.beyond1, null));
-			}
-			case "dm3q", "dm3" -> {
-				this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
-				this.grouplink = "https://t.me/dumanthecat";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.dm3q, null));
-			}
-			case "e3q" -> {
-				this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
-				this.grouplink = "https://t.me/biskupmuf";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.e3q, null));
-			}
-			case "gts6l", "gts6lwifi" -> {
-				this.guidelink = "https://project-aloha.github.io/";
-				this.grouplink = "https://t.me/project_aloha_issues";
-				this.x.NabuImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.gts6l, null));
-			}
-			case "q2q" -> {
-				this.guidelink = "https://project-aloha.github.io/";
-				this.grouplink = "https://t.me/project_aloha_issues";
-				this.x.NabuImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.q2q, null));
-			}
-			case "star2qlte", "star2qltechn", "r3q" -> {
-				this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
-				this.grouplink = "https://discord.gg/Dx2QgMx7Sv";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.unknown, null));
-			}
-			case "winnerx", "winner" -> {
-				this.guidelink = "https://github.com/n00b69/woa-winner";
-				this.grouplink = "https://t.me/project_aloha_issues";
-				this.x.NabuImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.winner, null));
-			}
-			// Meme devices / devices with cat pictures / devices which will never have proper support lmao
-			case "venus" -> {
-				this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
-				this.grouplink = "https://discord.gg/Dx2QgMx7Sv";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.venus, null));
-			}
-			case "alioth" -> {
-				this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
-				this.grouplink = "https://discord.gg/Dx2QgMx7Sv";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.alioth, null));
-			}
-			case "davinci" -> {
-				this.guidelink = "https://github.com/zxcwsurx/woa-davinci";
-				this.grouplink = "https://t.me/woa_davinci";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.raphael, null));
-			}
-			case "marble" -> {
-				this.guidelink = "https://github.com/Xhdsos/woa-marble";
-				this.grouplink = "https://t.me/woa_marble";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.marble, null));
-			}
-			case "Pong", "pong" -> {
-				this.guidelink = "https://github.com/index986/woa-pong";
-				this.grouplink = "https://t.me/WoA_spacewar_pong";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.pong, null));
-			}
-			case "xpeng" -> {
-				this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
-				this.grouplink = "https://t.me/woahelperchat";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.xpeng, null));
-			}
-			case "RMX2061" -> {
-				this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
-				this.grouplink = "https://t.me/realme6PROwindowsARM64";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.rmx2061, null));
-			}
-			case "RMX2170" -> {
-				this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
-				this.grouplink = "https://t.me/realme6PROwindowsARM64";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.rmx2170, null));
-			}
-			case "cmi" -> {
-				this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
-				this.grouplink = "https://t.me/dumanthecat";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.cmi, null));
-			}
-			case "houji" -> {
-				this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
-				this.grouplink = "https://t.me/dumanthecat";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.houji, null));
-			}
-			case "meizu20pro", "meizu20Pro" -> {
-				this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
-				this.grouplink = "https://t.me/dumanthecat";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.meizu20pro, null));
-			}
-			case "husky" -> {
-				this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
-				this.grouplink = "https://t.me/dumanthecat";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.husky, null));
-			}
-			case "redfin", "herolte" -> {
-				this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
-				this.grouplink = "https://t.me/dumanthecat";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.redfin, null));
-			}
-			default -> {
-				this.guidelink = "https://renegade-project.tech/";
-				this.grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA";
-				this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.unknown, null));
-				this.x.deviceName.setText(this.device);
-				this.n.cvDumpModem.setVisibility(View.VISIBLE);
-			}
-		}
-
+		
 		this.x.tvRamvalue.setText(String.format(this.getString(R.string.ramvalue), this.ramvalue));
 		this.x.tvPanel.setText(String.format(this.getString(R.string.paneltype), this.panel));
 		this.x.cvGuide.setOnClickListener(v -> {
@@ -597,7 +587,7 @@ public class MainActivity extends AppCompatActivity {
 			i.setData(Uri.parse(grouplink));
 			this.startActivity(i);
 		});
-
+		
 		new Handler().postDelayed(new Runnable() {
 			@Override
 			public void run() {
@@ -608,7 +598,7 @@ public class MainActivity extends AppCompatActivity {
 				}
 			}
 		}, 5);
-
+		
 		this.x.cvBackup.setOnClickListener(v -> {
 			this.ShowBlur();
 			noButton.setVisibility(View.VISIBLE);
@@ -674,7 +664,7 @@ public class MainActivity extends AppCompatActivity {
 			dialog.setCancelable(false);
 			dialog.show();
 		});
-
+		
 		this.x.cvMnt.setOnClickListener(v -> {
 			this.ShowBlur();
 			noButton.setVisibility(View.VISIBLE);
@@ -705,32 +695,31 @@ public class MainActivity extends AppCompatActivity {
 									mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
 									if (mnt_stat.isEmpty()) {
 										noButton.setVisibility(View.GONE);
-                                        yesButton.setText(MainActivity.this.getString(R.string.chat));
-                                        dismissButton.setText(MainActivity.this.getString(R.string.cancel));
-                                        yesButton.setVisibility(View.VISIBLE);
-                                        dismissButton.setVisibility(View.VISIBLE);
-                                        icons.setVisibility(View.GONE);
-                                        MainActivity.this.ShowBlur();
-                                        messages.setText(getString(R.string.mountfail));
-                                        dismissButton.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                MainActivity.this.HideBlur();
-                                                dialog.dismiss();
-                                                icons.setVisibility(View.VISIBLE);
-                                            }
-                                        });
-                                        yesButton.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                Intent i = new Intent(Intent.ACTION_VIEW);
-                                                i.setData(Uri.parse("https://t.me/woahelperchat"));
-                                                MainActivity.this.startActivity(i);
-                                            }
-                                        });
-
-                                        dialog.setCancelable(false);
-                                        dialog.show();
+										yesButton.setText(MainActivity.this.getString(R.string.chat));
+										dismissButton.setText(MainActivity.this.getString(R.string.cancel));
+										yesButton.setVisibility(View.VISIBLE);
+										dismissButton.setVisibility(View.VISIBLE);
+										icons.setVisibility(View.GONE);
+										MainActivity.this.ShowBlur();
+										messages.setText(getString(R.string.mountfail));
+										dismissButton.setOnClickListener(new View.OnClickListener() {
+											@Override
+											public void onClick(View v) {
+												MainActivity.this.HideBlur();
+												dialog.dismiss();
+												icons.setVisibility(View.VISIBLE);
+											}
+										});
+										yesButton.setOnClickListener(new View.OnClickListener() {
+											@Override
+											public void onClick(View v) {
+												Intent i = new Intent(Intent.ACTION_VIEW);
+												i.setData(Uri.parse("https://t.me/woahelperchat"));
+												MainActivity.this.startActivity(i);
+											}
+										});
+										dialog.setCancelable(false);
+										dialog.show();
 									} else {
 										Log.d("debug", pref.getMountLocation(MainActivity.this) ? "/mnt/Windows" : "/mnt/sdcard/Windows");
 										messages.setText(MainActivity.this.getString(R.string.mounted) + "\n" + MainActivity.this.winpath);
@@ -883,7 +872,7 @@ public class MainActivity extends AppCompatActivity {
 			dialog.setCancelable(false);
 			dialog.show();
 		});
-
+		
 		this.n.cvScripts.setOnClickListener(v -> {
 			this.n.toolboxtab.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out));
 			this.setContentView(this.z.getRoot());
@@ -893,7 +882,7 @@ public class MainActivity extends AppCompatActivity {
 			this.z.toolbarlayout.toolbar.setTitle(this.getString(R.string.script_title));
 			this.z.toolbarlayout.toolbar.setNavigationIcon(iconToolbar);
 		});
-
+		
 		this.n.cvDumpModem.setOnClickListener(v -> {
 			this.ShowBlur();
 			noButton.setVisibility(View.VISIBLE);
@@ -935,7 +924,7 @@ public class MainActivity extends AppCompatActivity {
 			dialog.setCancelable(false);
 			dialog.show();
 		});
-
+		
 		this.n.cvFlashUefi.setOnClickListener(v -> {
 			this.ShowBlur();
 			dismissButton.setVisibility(View.GONE);
@@ -984,7 +973,7 @@ public class MainActivity extends AppCompatActivity {
 			dialog.setCancelable(false);
 			dialog.show();
 		});
-
+		
 		this.n.cvDbkp.setOnClickListener(v -> {
 			this.ShowBlur();
 			noButton.setVisibility(View.VISIBLE);
@@ -1017,7 +1006,7 @@ public class MainActivity extends AppCompatActivity {
 					dismissButton.setVisibility(View.GONE);
 					messages.setText(MainActivity.this.getString(R.string.please_wait));
 					icons.setVisibility(View.VISIBLE);
-					new Thread(() -> {
+					new Thread(()->{
 						ShellUtils.fastCmd("mkdir /sdcard/dbkp || true");
 						MainActivity.this.androidBackup();
 						ShellUtils.fastCmd("rm /sdcard/original-boot.img || true");
@@ -1025,7 +1014,7 @@ public class MainActivity extends AppCompatActivity {
 						ShellUtils.fastCmd("su -mm -c mv /sdcard/boot.img /sdcard/original-boot.img");
 						ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp8150.cfg /sdcard/dbkp");
 						ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/DBKP/dbkp -O /sdcard/dbkp/dbkp\" | su -mm -c sh");
-						ShellUtils.fastCmd("cp /sdcard/dbkp/dbkp " + getFilesDir());
+						ShellUtils.fastCmd("cp /sdcard/dbkp/dbkp "+getFilesDir());
 						ShellUtils.fastCmd("chmod 777 " + MainActivity.this.getFilesDir() + "/dbkp");
 						String bedan = ShellUtils.fastCmd("getprop ro.product.device");
 						if ("guacamole".equals(bedan) || "OnePlus7Pro".equals(bedan) || "OnePlus7Pro4G".equals(bedan)) {
@@ -1040,8 +1029,8 @@ public class MainActivity extends AppCompatActivity {
 							ShellUtils.fastCmd("su -mm -c cp new-boot.img /sdcard/new-boot.img");
 							ShellUtils.fastCmd("su -mm -c mv /sdcard/new-boot.img /sdcard/patched-boot.img");
 							ShellUtils.fastCmd("rm -r /sdcard/dbkp");
-							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_a bs=16M");
-							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16M");
+							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_a bs=16m");
+							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16m");
 						} else if ("hotdog".equals(bedan) || "OnePlus7TPro".equals(bedan) || "OnePlus7TPro4G".equals(bedan)) {
 							ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp.hotdog.bin /sdcard/dbkp");
 							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/DBKP/hotdog.fd -O /sdcard/dbkp/hotdog.fd\" | su -mm -c sh");
@@ -1054,8 +1043,8 @@ public class MainActivity extends AppCompatActivity {
 							ShellUtils.fastCmd("su -mm -c cp new-boot.img /sdcard/new-boot.img");
 							ShellUtils.fastCmd("su -mm -c mv /sdcard/new-boot.img /sdcard/patched-boot.img");
 							ShellUtils.fastCmd("rm -r /sdcard/dbkp");
-							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_a bs=16M");
-							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16M");
+							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_a bs=16m");
+							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16m");
 						} else if ("cepheus".equals(bedan)) {
 							ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp.cepheus.bin /sdcard/dbkp");
 							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-everything/releases/download/Files/cepheus.fd -O /sdcard/dbkp/cepheus.fd\" | su -mm -c sh");
@@ -1068,7 +1057,7 @@ public class MainActivity extends AppCompatActivity {
 							ShellUtils.fastCmd("su -mm -c cp new-boot.img /sdcard/new-boot.img");
 							ShellUtils.fastCmd("su -mm -c mv /sdcard/new-boot.img /sdcard/patched-boot.img");
 							ShellUtils.fastCmd("rm -r /sdcard/dbkp");
-							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot bs=16M");
+							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot bs=16m");
 						} else if ("nabu".equals(bedan)) {
 							ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp.nabu.bin /sdcard/dbkp");
 							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/releases/download/1.0/nabu.fd -O /sdcard/dbkp/nabu.fd\" | su -mm -c sh");
@@ -1081,8 +1070,8 @@ public class MainActivity extends AppCompatActivity {
 							ShellUtils.fastCmd("su -mm -c cp new-boot.img /sdcard/new-boot.img");
 							ShellUtils.fastCmd("su -mm -c mv /sdcard/new-boot.img /sdcard/patched-boot.img");
 							ShellUtils.fastCmd("rm -r /sdcard/dbkp");
-							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_a bs=16M");
-							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16M");
+							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_a bs=16m");
+							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16m");
 						} else if ("pipa".equals(bedan)) {
 							ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp.pipa.bin /sdcard/dbkp");
 							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-everything/releases/download/Files/pipa.fd -O /sdcard/dbkp/pipa.fd\" | su -mm -c sh");
@@ -1095,10 +1084,10 @@ public class MainActivity extends AppCompatActivity {
 							ShellUtils.fastCmd("su -mm -c cp new-boot.img /sdcard/new-boot.img");
 							ShellUtils.fastCmd("su -mm -c mv /sdcard/new-boot.img /sdcard/patched-boot.img");
 							ShellUtils.fastCmd("rm -r /sdcard/dbkp");
-							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_a bs=16M");
-							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16M");
+							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_a bs=16m");
+							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16m");
 						}
-						runOnUiThread(() -> {
+						runOnUiThread(()->{
 							if ("guacamole".equals(bedan) || "OnePlus7Pro".equals(bedan) || "OnePlus7Pro4G".equals(bedan) || "hotdog".equals(bedan) || "OnePlus7TPro".equals(bedan) || "OnePlus7TPro4G".equals(bedan)) {
 								String op7 = getString(R.string.op7);
 								messages.setText(String.format(getString(R.string.dbkp), op7));
@@ -1108,7 +1097,7 @@ public class MainActivity extends AppCompatActivity {
 							} else if ("nabu".equals(bedan) || "pipa".equals(bedan)) {
 								String nabu = getString(R.string.nabu);
 								messages.setText(String.format(getString(R.string.dbkp), nabu));
-							}
+							} 
 							dismissButton.setText(getString(R.string.dismiss));
 							dismissButton.setVisibility(View.VISIBLE);
 							dismissButton.setOnClickListener(new View.OnClickListener() {
@@ -1125,7 +1114,7 @@ public class MainActivity extends AppCompatActivity {
 			dialog.setCancelable(false);
 			dialog.show();
 		});
-
+		
 		this.n.cvSoftware.setOnClickListener(v -> {
 			this.ShowBlur();
 			noButton.setVisibility(View.VISIBLE);
@@ -1355,7 +1344,7 @@ public class MainActivity extends AppCompatActivity {
 			dialog.setCancelable(false);
 			dialog.show();
 		});
-
+		
 		this.z.cvRotation.setOnClickListener(v -> {
 			this.ShowBlur();
 			noButton.setVisibility(View.VISIBLE);
@@ -1377,6 +1366,7 @@ public class MainActivity extends AppCompatActivity {
 				messages.setText(this.getString(R.string.please_wait));
 				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/display.exe /sdcard/");
 				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/RotationShortcut.lnk /sdcard/");
+				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/RotationShortcutReverseLandscape.lnk /sdcard/");
 				mount();
 				String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
 				if (mnt_stat.isEmpty()) {
@@ -1387,13 +1377,16 @@ public class MainActivity extends AppCompatActivity {
 					ShellUtils.fastCmd("mkdir " + this.winpath + "/Toolbox/Rotation || true ");
 					ShellUtils.fastCmd("cp /sdcard/display.exe " + this.winpath + "/Toolbox/Rotation");
 					ShellUtils.fastCmd("cp /sdcard/RotationShortcut.lnk " + this.winpath + "/Toolbox/Rotation");
+					ShellUtils.fastCmd("cp /sdcard/RotationShortcutReverseLandscape.lnk " + this.winpath + "/Toolbox/Rotation");
+					ShellUtils.fastCmd("cp '" + MainActivity.this.getFilesDir() + "/RotationShortcut.lnk' " + MainActivity.this.winpath + "/Users/Public/Desktop");
+					ShellUtils.fastCmd("cp '" + MainActivity.this.getFilesDir() + "/RotationShortcutReverseLandscape.lnk' " + MainActivity.this.winpath + "/Users/Public/Desktop");
 					ShellUtils.fastCmd("rm /sdcard/display.exe");
 					ShellUtils.fastCmd("rm /sdcard/RotationShortcut.lnk");
 					messages.setText(this.getString(R.string.done));
 					dismissButton.setVisibility(View.VISIBLE);
 					dismissButton.setOnClickListener(v14 -> {
-						this.HideBlur();
-						dialog.dismiss();
+					this.HideBlur();
+					dialog.dismiss();
 					});
 				}
 			});
@@ -1564,26 +1557,26 @@ public class MainActivity extends AppCompatActivity {
 			dialog.setCancelable(false);
 			dialog.show();
 		});
-
+		
 		this.k.toolbarlayout.toolbar.setTitle(this.getString(R.string.preferences));
 		this.k.toolbarlayout.toolbar.setNavigationIcon(iconToolbar);
 		//MainActivity.this.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 		this.x.toolbarlayout.settings.setOnClickListener(v -> {
-			this.backable = 1;
-			this.x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out));
-			this.setContentView(this.k.getRoot());
-			this.k.settingsPanel.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in));
-			this.k.backupQB.setChecked(pref.getBACKUP(this));
-			this.k.backupQBA.setChecked(pref.getBACKUP_A(this));
-			this.k.autobackup.setChecked(!pref.getAUTO(this));
-			this.k.autobackupA.setChecked(!pref.getAUTO(this));
-			this.k.confirmation.setChecked(pref.getCONFIRM(this));
-			this.k.automount.setChecked(pref.getAutoMount(this));
-			this.k.securelock.setChecked(!pref.getSecure(this));
-			this.k.mountLocation.setChecked(pref.getMountLocation(this));
-			this.k.appUpdate.setChecked(pref.getAppUpdate(this));
-			this.k.toolbarlayout.settings.setVisibility(View.GONE);
-			//k.language.setText(R.string.language);
+		this.backable = 1;
+		this.x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out));
+		this.setContentView(this.k.getRoot());
+		this.k.settingsPanel.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in));
+		this.k.backupQB.setChecked(pref.getBACKUP(this));
+		this.k.backupQBA.setChecked(pref.getBACKUP_A(this));
+		this.k.autobackup.setChecked(!pref.getAUTO(this));
+		this.k.autobackupA.setChecked(!pref.getAUTO(this));
+		this.k.confirmation.setChecked(pref.getCONFIRM(this));
+		this.k.automount.setChecked(pref.getAutoMount(this));
+		this.k.securelock.setChecked(!pref.getSecure(this));
+		this.k.mountLocation.setChecked(pref.getMountLocation(this));
+		this.k.appUpdate.setChecked(pref.getAppUpdate(this));
+		this.k.toolbarlayout.settings.setVisibility(View.GONE);
+		//k.language.setText(R.string.language);
 		});
 
 		this.k.mountLocation.setOnCheckedChangeListener((compoundButton, b) -> {
@@ -1593,12 +1586,12 @@ public class MainActivity extends AppCompatActivity {
 
 		this.d.toolbarlayout.back.setVisibility(View.VISIBLE);
 		this.d.toolbarlayout.back.setOnClickListener(v -> {
-			this.getWindow().getCurrentFocus().startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out));
-			this.setContentView(this.x.getRoot());
-			this.x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in));
-			this.backable = 0;
+		this.getWindow().getCurrentFocus().startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out));
+		this.setContentView(this.x.getRoot());
+		this.x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in));
+		this.backable = 0;
 		});
-
+		
 		this.k.backupQB.setOnCheckedChangeListener((compoundButton, b) -> {
 			if (pref.getBACKUP(this)) {
 				pref.setBACKUP(this, false);
@@ -1707,7 +1700,7 @@ public class MainActivity extends AppCompatActivity {
 			dialog.setCancelable(false);
 			dialog.show();
 		});
-
+			
 		this.k.autobackup.setOnCheckedChangeListener((compoundButton, b) -> pref.setAUTO(this, !b));
 		this.k.autobackupA.setOnCheckedChangeListener((compoundButton, b) -> pref.setAUTO_A(this, !b));
 		this.k.confirmation.setOnCheckedChangeListener((compoundButton, b) -> pref.setCONFIRM(this, b));
@@ -1715,10 +1708,10 @@ public class MainActivity extends AppCompatActivity {
 		this.k.automount.setOnCheckedChangeListener((compoundButton, b) -> pref.setAutoMount(this, b));
 		this.k.appUpdate.setOnCheckedChangeListener((compoundButton, b) -> pref.setAppUpdate(this, b));
 		this.k.button.setOnClickListener(v -> {
-			this.k.settingsPanel.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_out));
-			this.setContentView(this.x.getRoot());
-			this.x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_in));
-			this.backable = 0;
+		this.k.settingsPanel.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_out));
+		this.setContentView(this.x.getRoot());
+		this.x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_in));
+		this.backable = 0;
 		});
 	}
 
@@ -1757,31 +1750,41 @@ public class MainActivity extends AppCompatActivity {
 				break;
 		}
 	}
-
+	
 	public void flash(String uefi) {
 		ShellUtils.fastCmd("dd if=" + uefi + " of=/dev/block/bootdevice/by-name/boot$(getprop ro.boot.slot_suffix) bs=16m");
 	}
-
+	
 	public void mount() {
 		ShellUtils.fastCmd("mkdir " + this.winpath + " || true");
-		ShellUtils.fastCmd("cd /data/data/id.kuato.woahelper/files");
+		// ShellUtils.fastCmd("cd /data/data/id.kuato.woahelper/files");
+		ShellUtils.fastCmd("cd " + MainActivity.this.getFilesDir());
 		ShellUtils.fastCmd("su -mm -c ./mount.ntfs " + this.win + " " + this.winpath);
-		this.mounted = this.getString(R.string.unmountt);
-		this.x.tvMnt.setText(String.format(this.getString(R.string.mnt_title), this.mounted));
+		String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + this.win);
+		if (mnt_stat.isEmpty()) this.k.mountLocation.setChecked(!pref.getMountLocation(this));
+			ShellUtils.fastCmd("mkdir " + this.winpath + " || true");
+			// ShellUtils.fastCmd("cd /data/data/id.kuato.woahelper/files");
+			ShellUtils.fastCmd("cd " + MainActivity.this.getFilesDir());
+			ShellUtils.fastCmd("su -mm -c ./mount.ntfs " + this.win + " " + this.winpath);
+			String mnt_stat2 = ShellUtils.fastCmd("su -mm -c mount | grep " + this.win);
+			if (!mnt_stat2.isEmpty()) {
+				this.mounted = this.getString(R.string.unmountt);
+				this.x.tvMnt.setText(String.format(this.getString(R.string.mnt_title), this.mounted));
+			}
 	}
-
+	
 	public void unmount() {
 		ShellUtils.fastCmd("su -mm -c umount " + this.winpath);
 		ShellUtils.fastCmd("rmdir " + this.winpath);
 		this.mounted = this.getString(R.string.mountt);
 		this.x.tvMnt.setText(String.format(this.getString(R.string.mnt_title), this.mounted));
 	}
-
+	
 	public void winBackup() {
 		mount();
 		ShellUtils.fastCmd("su -mm -c dd bs=8m if=" + this.boot + " of=" + this.winpath + "/boot.img");
 	}
-
+	
 	public void androidBackup() {
 		ShellUtils.fastCmd("su -mm -c dd bs=8m if=" + this.boot + " of=/sdcard/boot.img");
 	}
@@ -1791,7 +1794,7 @@ public class MainActivity extends AppCompatActivity {
 		ShellUtils.fastCmd("su -mm -c dd if=/dev/block/by-name/modemst2 of=$(find " + this.winpath + "/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/bootmodem_fs2");
 	}
 
-	public void checkRoot() {
+	public void checkRoot(){
 		final Dialog dialog = new Dialog(this);
 		dialog.setContentView(R.layout.dialog);
 		dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -1829,7 +1832,7 @@ public class MainActivity extends AppCompatActivity {
 						pref.setAGREE(MainActivity.this, true);
 					}
 				});
-			}
+			}	
 		}
 		String stram = MainActivity.extractNumberFromString(new RAM().getMemory(this.getApplicationContext()));
 		this.ramvalue = Double.parseDouble(stram) / 100;
@@ -1892,7 +1895,7 @@ public class MainActivity extends AppCompatActivity {
 			});
 		}
 	}
-
+	
 	public void checkdbkpmodel() {
 		String dbkpmodel = ShellUtils.fastCmd("getprop ro.product.device");
 		if ("guacamole".equals(dbkpmodel) || "guacamolet".equals(dbkpmodel) || "OnePlus7Pro".equals(dbkpmodel) || "OnePlus7Pro4G".equals(dbkpmodel) || "OnePlus7ProTMO".equals(dbkpmodel)) {
@@ -1912,7 +1915,7 @@ public class MainActivity extends AppCompatActivity {
 
 	public void checkuefi() {
 		ShellUtils.fastCmd("su -c mkdir /sdcard/UEFI");
-		this.finduefi = "\"" + ShellUtils.fastCmd(this.getString(R.string.uefiChk)) + "\"";
+		this.finduefi = "\""+ShellUtils.fastCmd(this.getString(R.string.uefiChk))+"\"";
 		this.device = ShellUtils.fastCmd("getprop ro.product.device ");
 		if (finduefi.contains("img")) {
 			this.x.tvQuickBoot.setText(getString(R.string.quickboot_title));
@@ -1922,7 +1925,7 @@ public class MainActivity extends AppCompatActivity {
 			this.n.tvFlashUefi.setText(this.getString(R.string.flash_uefi_title));
 			this.n.tvUefiSubtitle.setText(this.getString(R.string.flash_uefi_subtitle));
 			this.n.cvFlashUefi.setEnabled(true);
-			//checkwin();
+			checkwin();
 		} else {
 			this.x.cvQuickBoot.setEnabled(false);
 			this.x.tvQuickBoot.setText(getString(R.string.uefi_not_found));
@@ -1930,10 +1933,10 @@ public class MainActivity extends AppCompatActivity {
 			this.n.tvFlashUefi.setText(this.getString(R.string.uefi_not_found));
 			this.n.tvUefiSubtitle.setText(this.getString(R.string.uefi_not_found_subtitle, this.device));
 			this.n.cvFlashUefi.setEnabled(false);
-			//checkwin();
+			checkwin();
 		}
 	}
-
+	
 	public void checkwin() {
 		String checkingforwin = ShellUtils.fastCmd("find /dev/block | grep win");
 		if (checkingforwin.isEmpty()) {
@@ -1965,7 +1968,7 @@ public class MainActivity extends AppCompatActivity {
 			}
 		}
 	}
-
+	
 	public void checkupdate() {
 		if (!pref.getAppUpdate(this)) {
 			if (!MainActivity.isNetworkConnected(this)) {
@@ -2005,9 +2008,9 @@ public class MainActivity extends AppCompatActivity {
 					});
 				}
 			}
-		}
+		}	
 	}
-
+	
 	public void update() {
 		new Thread(new Runnable() {
 			@Override
@@ -2017,7 +2020,7 @@ public class MainActivity extends AppCompatActivity {
 			}
 		}).start();
 	}
-
+	
 	public void mountfail() {
 		final Dialog dialog = new Dialog(this);
 		dialog.setContentView(R.layout.dialog);
@@ -2030,7 +2033,7 @@ public class MainActivity extends AppCompatActivity {
 		yesButton.setText(MainActivity.this.getString(R.string.chat));
 		dismissButton.setText(MainActivity.this.getString(R.string.cancel));
 		MainActivity.this.ShowBlur();
-		messages.setText(MainActivity.this.getString(R.string.mountfail) + "\n" + MainActivity.this.getString(R.string.internalstorage));
+		messages.setText(MainActivity.this.getString(R.string.mountfail) + "\n" + (R.string.internalstorage));
 		dismissButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -2049,7 +2052,7 @@ public class MainActivity extends AppCompatActivity {
 		dialog.setCancelable(false);
 		dialog.show();
 	}
-
+	
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);

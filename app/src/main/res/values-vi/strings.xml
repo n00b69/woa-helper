@@ -28,16 +28,16 @@
 	<string name="quickboot_subtitle">1 Nhấp rã modem, cài UEFI và khởi động Windows</string>
 	<string name="quickboot_subtitle_nabu">Cài UEFI và khởi động lại Windows chỉ bằng một cú nhấp chuột</string>
 	<string name="sta_subtitle">Thêm ứng dụng Chuyển sang Android vào Windows</string>
-	<string name="usbhost_subtitle">Thêm tập lệnh vào C:\\Toolbox cho phép bạn chuyển đổi Chế độ máy chủ USB</string>
-	<string name="software_subtitle">Thêm lối tắt trình duyệt chứa phần mềm ARM vào C:\\Toolbox</string>
-	<string name="rotation_subtitle">Thêm tập lệnh vào C:\\Toolbox cho phép bạn xoay màn hình bằng phím tắt\n(hữu ích cho các thiết bị không có cảm biến hoạt động)</string>
+	<string name="usbhost_subtitle">Thêm tập lệnh vào C:⧹Toolbox cho phép bạn chuyển đổi Chế độ máy chủ USB</string>
+	<string name="software_subtitle">Thêm lối tắt trình duyệt chứa phần mềm ARM vào C:⧹Toolbox</string>
+	<string name="rotation_subtitle">Thêm tập lệnh vào C:⧹Toolbox cho phép bạn xoay màn hình bằng phím tắt\n(hữu ích cho các thiết bị không có cảm biến hoạt động)</string>
 	<string name="autoflash_subtitle">Thêm tập lệnh vào Windows để tự động flash boot.img Android bất cứ khi nào Windows khởi động</string>
-	<string name="atlasos_subtitle">Sao chép AtlasOS hoặc ReviOS playbook và Trình hướng dẫn AME vào C:\\Toolbox</string>
-	<string name="defender_subtitle">Thêm tập lệnh vào C:\\Toolbox cho phép bạn xóa Microsoft Edge / Windows Defender</string>
-	<string name="script_subtitle">Thêm nhiều loại tập lệnh và tweaks vào C:\\Toolbox</string>
-	<string name="setup_subtitle">Thêm trình cài đặt cho một số framework vào C:\\Toolbox</string>
+	<string name="atlasos_subtitle">Sao chép AtlasOS hoặc ReviOS playbook và Trình hướng dẫn AME vào C:⧹Toolbox</string>
+	<string name="defender_subtitle">Thêm tập lệnh vào C:⧹Toolbox cho phép bạn xóa Microsoft Edge / Windows Defender</string>
+	<string name="script_subtitle">Thêm nhiều loại tập lệnh và tweaks vào C:⧹Toolbox</string>
+	<string name="setup_subtitle">Thêm trình cài đặt cho một số framework vào C:⧹Toolbox</string>
 	<string name="dbkp_subtitle">Vá nhân để dualboot một cách dễ dàng</string>
-	<string name="tablet_subtitle">Adds a script to C:\\Toolbox which allows you to toggle tablet mode</string>
+	<string name="tablet_subtitle">Adds a script to C:⧹Toolbox which allows you to toggle tablet mode</string>
 
 	<string name="backup_boot_question">Sao lưu boot.img?</string>
 	<string name="mount_question">Hiện file Windows vào %s?</string>
@@ -46,15 +46,15 @@
 	<string name="flash_uefi_question">Cài UEFI? \nNếu vậy thì lần khởi động tiếp theo sẽ là trong Windows</string>
 	<string name="quickboot_question">Khởi động nhanh vào Windows?</string>
 	<string name="sta_question">Tạo ứng dụng Chuyển sang Android trong C:\\sta?</string>
-	<string name="usbhost_question">Sao chép tập lệnh Chế độ máy chủ USB vào C:\\Toolbox?</string>
-	<string name="software_question">Sao chép phím tắt trình duyệt vào C:\\Toolbox?</string>
-	<string name="rotation_question">Sao chép phím tắt xoay sang C:\\Toolbox?</string>
+	<string name="usbhost_question">Sao chép tập lệnh Chế độ máy chủ USB vào C:⧹Toolbox?</string>
+	<string name="software_question">Sao chép phím tắt trình duyệt vào C:⧹Toolbox?</string>
+	<string name="rotation_question">Sao chép phím tắt xoay sang C:⧹Toolbox?</string>
 	<string name="autoflash_question">Cài đặt tập lệnh tự động cài boot.img vào Windows?</string>
-	<string name="atlasos_question">Tải xuống và di chuyển AtlasOS hoặc ReviOS playbook sang C:\\Toolbox?</string>
-	<string name="defender_question">Sao chép tập lệnh gỡ bỏ Edge / Defender vào C:\\Toolbox?</string>
-	<string name="setup_question">Tải xuống và di chuyển trình cài đặt C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX và XNA vào C:\\Toolbox?\n(có thể mất một thời gian)</string>
+	<string name="atlasos_question">Tải xuống và di chuyển AtlasOS hoặc ReviOS playbook sang C:⧹Toolbox?</string>
+	<string name="defender_question">Sao chép tập lệnh gỡ bỏ Edge / Defender vào C:⧹Toolbox?</string>
+	<string name="setup_question">Tải xuống và di chuyển trình cài đặt C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX và XNA vào C:⧹Toolbox?\n(có thể mất một thời gian)</string>
 	<string name="dbkp_question">Vá và flash nhân hiện tại của bạn? \n!!!CẤM TIẾP TỤC TRỪ KHI MÁY BẠN LÀ %s!!!</string>
-	<string name="tablet_question">Sao chép script chế độ máy tính bảng vào C:\\Toolbox?</string>
+	<string name="tablet_question">Sao chép script chế độ máy tính bảng vào C:⧹Toolbox?</string>
 
 	<string name="wrong">Lỗi ở đâu ý</string>
 	<string name="mountfail">Lỗi rồi, \nWindows không hiện file được.\nYêu cầu được trợ giúp trên Telegram.</string>

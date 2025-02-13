@@ -28,16 +28,16 @@
 	<string name="quickboot_subtitle">Dump modem, flash UEFI, dan reboot ke Windows dalam satu klik</string>
 	<string name="quickboot_subtitle_nabu">Flash UEFI dan reboot ke Windows dalam satu klik</string>
 	<string name="sta_subtitle">Menambahkan aplikasi Switch to Android ke dalam Windows</string>
-	<string name="usbhost_subtitle">Menambahkan script ke dalam C:\\Toolbox yang memungkinkan mengaktifkan Mode Host USB</string>
-	<string name="software_subtitle">Menambahkan shortcut browser yang berisi software ARM ke C:\\Toolbox</string>
-	<string name="rotation_subtitle">Menambahkan script ke dalam C:\\Toolbox yang memungkinkan rotasi layar dengan shortcut\n(berguna untuk perangkat dengan sensor yang tidak berfungsi)</string>
+	<string name="usbhost_subtitle">Menambahkan script ke dalam C:⧹Toolbox yang memungkinkan mengaktifkan Mode Host USB</string>
+	<string name="software_subtitle">Menambahkan shortcut browser yang berisi software ARM ke C:⧹Toolbox</string>
+	<string name="rotation_subtitle">Menambahkan script ke dalam C:⧹Toolbox yang memungkinkan rotasi layar dengan shortcut\n(berguna untuk perangkat dengan sensor yang tidak berfungsi)</string>
 	<string name="autoflash_subtitle">Menambahkan script ke Windows yang secara otomatis mem-flash boot.img Android setiap kali Windows melakukan booting</string>
-	<string name="atlasos_subtitle">Menyalin playbook AtlasOS atau ReviOS dan AME Wizard ke dalam C:\\Toolbox</string>
-	<string name="defender_subtitle">Menambahkan script ke dalam C:\\Toolbox yang memungkinkan menghapus Microsoft Edge / Windows Defender</string>
-	<string name="script_subtitle">Menambahkan berbagai script dan tweak ke dalam C:\\Toolbox</string>
-	<string name="setup_subtitle">Menambahkan penginstal untuk beberapa framework ke dalam C:\\Toolbox</string>
+	<string name="atlasos_subtitle">Menyalin playbook AtlasOS atau ReviOS dan AME Wizard ke dalam C:⧹Toolbox</string>
+	<string name="defender_subtitle">Menambahkan script ke dalam C:⧹Toolbox yang memungkinkan menghapus Microsoft Edge / Windows Defender</string>
+	<string name="script_subtitle">Menambahkan berbagai script dan tweak ke dalam C:⧹Toolbox</string>
+	<string name="setup_subtitle">Menambahkan penginstal untuk beberapa framework ke dalam C:⧹Toolbox</string>
 	<string name="dbkp_subtitle">Patch kernel untuk dualbooting secara seamless</string>
-	<string name="tablet_subtitle">Menambahkan script ke dalam C:\\Toolbox yang memungkinkan untuk beralih mode tablet</string>
+	<string name="tablet_subtitle">Menambahkan script ke dalam C:⧹Toolbox yang memungkinkan untuk beralih mode tablet</string>
 
 	<string name="quickboot_question">Quick boot ke Windows?</string>
 	<string name="backup_boot_question">Cadangkan image boot Android saat ini?</string>
@@ -46,15 +46,15 @@
 	<string name="flash_uefi_question">Flash UEFI? \nJika ya, boot berikutnya akan menggunakan Windows</string>
 	<string name="dump_modem_question">Dump modem1st dan modem2st ke dalam partisi Windows?</string>
 	<string name="sta_question">Buat aplikasi Switch to Android di C:\\sta?</string>
-	<string name="usbhost_question">Salin script Mode Host USB ke C:\\Toolbox?</string>
-	<string name="software_question">Salin shortcut browser ke C:\\Toolbox?</string>
-	<string name="rotation_question">Salin shortcut rotasi ke C:\\Toolbox?</string>
+	<string name="usbhost_question">Salin script Mode Host USB ke C:⧹Toolbox?</string>
+	<string name="software_question">Salin shortcut browser ke C:⧹Toolbox?</string>
+	<string name="rotation_question">Salin shortcut rotasi ke C:⧹Toolbox?</string>
 	<string name="autoflash_question">Instal script autoflasher boot.img ke Windows?</string>
-	<string name="atlasos_question">Unduh dan pindahkan playbook AtlasOS atau ReviOS ke C:\\Toolbox?</string>
-	<string name="defender_question">Salin script penghapus Edge / Defender ke C:\\Toolbox?</string>
-	<string name="setup_question">Unduh dan pindahkan C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, dan XNA framework installer ke dalam C:\\Toolbox?\n(ini mungkin memerlukan waktu)</string>
+	<string name="atlasos_question">Unduh dan pindahkan playbook AtlasOS atau ReviOS ke C:⧹Toolbox?</string>
+	<string name="defender_question">Salin script penghapus Edge / Defender ke C:⧹Toolbox?</string>
+	<string name="setup_question">Unduh dan pindahkan C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, dan XNA framework installer ke dalam C:⧹Toolbox?\n(ini mungkin memerlukan waktu)</string>
 	<string name="dbkp_question">Patch dan flash kernel saat ini?\n!!!JANGAN TEKAN YA KECUALI PERANGKAT ANDA ADALAH %s!!!</string>
-	<string name="tablet_question">Salin script mode tablet ke C:\\Toolbox?</string>
+	<string name="tablet_question">Salin script mode tablet ke C:⧹Toolbox?</string>
 
 	<string name="wrong">Ada yang tidak beres</string>
 	<string name="mountfail">Ada yang tidak beres, \nWindows tidak dapat di-mount.\nMinta bantuan di chat Telegram.</string>

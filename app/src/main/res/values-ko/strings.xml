@@ -28,16 +28,16 @@
 	<string name="quickboot_subtitle">modem 파티션 덤프, UEFI 플래시 및 Windows 부팅을 즉시 진행합니다</string>
 	<string name="quickboot_subtitle_nabu">UEFI 플래시 및 Windows 부팅을 즉시 진행합니다</string>
 	<string name="sta_subtitle">Windows에 Switch to Android 앱을 추가합니다</string>
-	<string name="usbhost_subtitle">USB 호스트 모드를 전환할 수 있는 스크립트를 C:\\Toolbox에 추가합니다</string>
-	<string name="software_subtitle">ARM 소프트웨어가 포함된 브라우저 바로 가기를 C:\\Toolbox에 추가합니다</string>
-	<string name="rotation_subtitle">바로가기로 화면을 회전할 수 있는 스크립트를 C:\\Toolbox에 추가합니다\n(센서가 작동하지 않는 장치에 유용합니다)</string>
+	<string name="usbhost_subtitle">USB 호스트 모드를 전환할 수 있는 스크립트를 C:⧹Toolbox에 추가합니다</string>
+	<string name="software_subtitle">ARM 소프트웨어가 포함된 브라우저 바로 가기를 C:⧹Toolbox에 추가합니다</string>
+	<string name="rotation_subtitle">바로가기로 화면을 회전할 수 있는 스크립트를 C:⧹Toolbox에 추가합니다\n(센서가 작동하지 않는 장치에 유용합니다)</string>
 	<string name="autoflash_subtitle">Windows가 부팅될 때마다 Android boot.img를 자동으로 설치하는 스크립트를 Windows에 추가합니다</string>
-	<string name="atlasos_subtitle">AtlasOS 또는 ReviOS 플레이북 및 AME Wizard를 C:\\Toolbox로 복사합니다</string>
-	<string name="defender_subtitle">Microsoft Edge / Windows Defender를 제거할 수 있도록 하는 스크립트를 C:\\Toolbox에 추가합니다</string>
-	<string name="script_subtitle">다양한 스크립트와 기능을 C:\\Toolbox에 추가합니다</string>
-	<string name="setup_subtitle">여러 프레임워크에 대한 설치 프로그램을 C:\\Toolbox에 추가합니다</string>
+	<string name="atlasos_subtitle">AtlasOS 또는 ReviOS 플레이북 및 AME Wizard를 C:⧹Toolbox로 복사합니다</string>
+	<string name="defender_subtitle">Microsoft Edge / Windows Defender를 제거할 수 있도록 하는 스크립트를 C:⧹Toolbox에 추가합니다</string>
+	<string name="script_subtitle">다양한 스크립트와 기능을 C:⧹Toolbox에 추가합니다</string>
+	<string name="setup_subtitle">여러 프레임워크에 대한 설치 프로그램을 C:⧹Toolbox에 추가합니다</string>
 	<string name="dbkp_subtitle">심리스 듀얼부팅을 위한 커널을 패치합니다</string>
-	<string name="tablet_subtitle">C:\\Toolbox에 태블릿 모드로 전환할 수 있는 스크립트를 추가합니다</string>
+	<string name="tablet_subtitle">C:⧹Toolbox에 태블릿 모드로 전환할 수 있는 스크립트를 추가합니다</string>
 
 	<string name="backup_boot_question">현재 안드로이드 boot 이미지를 백업하시겠습니까?</string>
 	<string name="mount_question">%s에 Windows 파티션을 마운트하시겠습니까?</string>
@@ -46,15 +46,15 @@
 	<string name="flash_uefi_question">UEFI를 플래시하시겠습니까?? \n그렇게 하면, 다음에 부팅할 때 윈도우로 부팅됩니다</string>
 	<string name="quickboot_question">Windows로 즉시 부팅하시겠습니까?</string>
 	<string name="sta_question">C:\\sta에 Switch to Android 앱을 생성하시겠습니까?</string>
-	<string name="usbhost_question">USB 호스트 모드 스크립트를 C:\\Toolbox에 복사하시겠습니까?</string>
-	<string name="software_question">브라우저 바로가기를 C:\\Toolbox에 복사하시겠습니까?</string>
-	<string name="rotation_question">회전 바로가기를 C:\\Toolbox에 복사하시겠습니까?</string>
+	<string name="usbhost_question">USB 호스트 모드 스크립트를 C:⧹Toolbox에 복사하시겠습니까?</string>
+	<string name="software_question">브라우저 바로가기를 C:⧹Toolbox에 복사하시겠습니까?</string>
+	<string name="rotation_question">회전 바로가기를 C:⧹Toolbox에 복사하시겠습니까?</string>
 	<string name="autoflash_question">boot.img 자동 설치 스크립트를 Windows에 설치하시겠습니까?</string>
-	<string name="atlasos_question">AtlasOS 또는 ReviOS 플레이북을 다운로드 하고 C:\\Toolbox로 이동하시겠습니까?</string>
-	<string name="defender_question">Edge / Defender 제거 스크립트를 C:\\Toolbox로 복사하시겠습니까?</string>
-	<string name="setup_question">C++ 재배포 가능 패키지 및 DirectX, OpenGL, OpenAL, PhysX, XNAF 설치 프로그램을 다운로드하고 C:\\Toolbox로 이동할까요?\n(시간이 걸릴 수 있습니다)</string>
+	<string name="atlasos_question">AtlasOS 또는 ReviOS 플레이북을 다운로드 하고 C:⧹Toolbox로 이동하시겠습니까?</string>
+	<string name="defender_question">Edge / Defender 제거 스크립트를 C:⧹Toolbox로 복사하시겠습니까?</string>
+	<string name="setup_question">C++ 재배포 가능 패키지 및 DirectX, OpenGL, OpenAL, PhysX, XNAF 설치 프로그램을 다운로드하고 C:⧹Toolbox로 이동할까요?\n(시간이 걸릴 수 있습니다)</string>
 	<string name="dbkp_question">현재 커널을 패치하고 플래시할까요?\n!!!이 장치가 %s가 아니라면 예를 선택하지 마세요!!!</string>
-	<string name="tablet_question">태블릿 모드 스크립트를 C:\\Toolbox로 복사할까요?</string>
+	<string name="tablet_question">태블릿 모드 스크립트를 C:⧹Toolbox로 복사할까요?</string>
 
 	<string name="wrong">문제가 발생했습니다</string>
 	<string name="mountfail">문제가 발생했습니다. \nWindows 파티션을 마운트하지 못하였습니다.\n텔레그램 채팅방에서 도움을 받으십시오.</string>

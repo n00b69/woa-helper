@@ -28,16 +28,16 @@
 	<string name="quickboot_subtitle">モデムをダンプし、UEFIをフラッシュし、ワンクリックでWindowsに再起動</string>
 	<string name="quickboot_subtitle_nabu">UEFIをフラッシュし、ワンクリックでWindowsに再起動</string>
 	<string name="sta_subtitle">Switch to Android アプリをWindowsに追加</string>
-	<string name="usbhost_subtitle">USBホストモードを切り替えるスクリプトをC:\\Toolbo に追加</string>
-	<string name="software_subtitle">ARMソフトウェアを含むブラウザショートカットをC:\\Toolboxに追加</string>
-	<string name="rotation_subtitle">ショートカットで画面を回転させるスクリプトをC:\\Toolboxに追加\n(センサーが動作しないデバイスに便利です)</string>
+	<string name="usbhost_subtitle">USBホストモードを切り替えるスクリプトをC:⧹Toolbox に追加</string>
+	<string name="software_subtitle">ARMソフトウェアを含むブラウザショートカットをC:⧹Toolboxに追加</string>
+	<string name="rotation_subtitle">ショートカットで画面を回転させるスクリプトをC:⧹Toolboxに追加\n(センサーが動作しないデバイスに便利です)</string>
 	<string name="autoflash_subtitle">Windows が起動するたびに Android の boot.img を自動的にフラッシュするスクリプトを追加</string>
-	<string name="atlasos_subtitle">AtlasOSまたはReviOSのプレイブックとAMEウィザードをC:\\Toolboxにコピー</string>
-	<string name="defender_subtitle">Microsoft Edge / Windows Defenderを削除するスクリプトをC:\\Toolboxに追加</string>
-	<string name="script_subtitle">さまざまなスクリプトと調整をC:\\Toolboxに追加</string>
-	<string name="setup_subtitle">いくつかのフレームワークのインストーラーをC:\\Toolboxに追加</string>
+	<string name="atlasos_subtitle">AtlasOSまたはReviOSのプレイブックとAMEウィザードをC:⧹Toolboxにコピー</string>
+	<string name="defender_subtitle">Microsoft Edge / Windows Defenderを削除するスクリプトをC:⧹Toolboxに追加</string>
+	<string name="script_subtitle">さまざまなスクリプトと調整をC:⧹Toolboxに追加</string>
+	<string name="setup_subtitle">いくつかのフレームワークのインストーラーをC:⧹Toolboxに追加</string>
 	<string name="dbkp_subtitle">シームレスなデュアルブートのためにカーネルをパッチ</string>
-	<string name="tablet_subtitle">タブレットモードを切り替えるスクリプトをC:\\Toolboxに追加</string>
+	<string name="tablet_subtitle">タブレットモードを切り替えるスクリプトをC:⧹Toolboxに追加</string>
 
 	<string name="backup_boot_question">現在のAndroidブートイメージをバックアップしますか？</string>
 	<string name="mount_question">Windowsを %s にマウントしますか？</string>
@@ -46,15 +46,15 @@
 	<string name="flash_uefi_question">UEFIをフラッシュしますか？\nそうすると、次の起動はWindowsになります</string>
 	<string name="quickboot_question">Windowsをクイックブートしますか？</string>
 	<string name="sta_question">C:\\staにSwitch to Androidアプリを作成しますか？</string>
-	<string name="usbhost_question">USBホストモードスクリプトをC:\\Toolboxにコピーしますか？</string>
-	<string name="software_question">ブラウザショートカットをC:\\Toolboxにコピーしますか？</string>
-	<string name="rotation_question">画面回転ショートカットをC:\\Toolboxにコピーしますか？</string>
+	<string name="usbhost_question">USBホストモードスクリプトをC:⧹Toolboxにコピーしますか？</string>
+	<string name="software_question">ブラウザショートカットをC:⧹Toolboxにコピーしますか？</string>
+	<string name="rotation_question">画面回転ショートカットをC:⧹Toolboxにコピーしますか？</string>
 	<string name="autoflash_question">boot.img 自動フラッシャースクリプトをWindowsにインストールしますか？</string>
-	<string name="atlasos_question">AtlasOSまたはReviOSのプレイブックをC:\\Toolboxにダウンロードして移動しますか？</string>
-	<string name="defender_question">Edge / Defender削除スクリプトをC:\\Toolboxにコピーしますか？</string>
-	<string name="setup_question">C++ 再頒布可能パッケージ、DirectX、OpenGL、OpenAL、PhysX、およびXNAフレームワークインストーラーをC:\\Toolboxにダウンロードして移動しますか？\n(これには時間がかかる場合があります)</string>
+	<string name="atlasos_question">AtlasOSまたはReviOSのプレイブックをC:⧹Toolboxにダウンロードして移動しますか？</string>
+	<string name="defender_question">Edge / Defender削除スクリプトをC:⧹Toolboxにコピーしますか？</string>
+	<string name="setup_question">C++ 再頒布可能パッケージ、DirectX、OpenGL、OpenAL、PhysX、およびXNAフレームワークインストーラーをC:⧹Toolboxにダウンロードして移動しますか？\n(これには時間がかかる場合があります)</string>
 	<string name="dbkp_question">現在のカーネルをパッチしてフラッシュしますか？\n!!!デバイスが %s でない限り、はいを押さないでください!!!</string>
-	<string name="tablet_question">タブレットモードスクリプトをC:\\Toolboxにコピーしますか？</string>
+	<string name="tablet_question">タブレットモードスクリプトをC:⧹Toolboxにコピーしますか？</string>
 
 	<string name="wrong">問題が発生しました</string>
 	<string name="mountfail">問題が発生しました。\nWindowsをマウントできませんでした。\nTelegramチャットで助けを求めてください。</string>
