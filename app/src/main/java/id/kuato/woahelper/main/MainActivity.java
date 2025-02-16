@@ -262,22 +262,22 @@ public class MainActivity extends AppCompatActivity {
 		}
 			switch (this.device) {
 				// LG
-				case "alphalm", "alphaplus", "alpha_lao_com", "alphalm_lao_com", "alphaplus_lao_com" -> {
+				case "alphalm", "alphaplus", "alphalm_lao_com", "alphaplus_lao_com" -> {
 					this.guidelink = "https://github.com/n00b69/woa-alphaplus";
 					this.grouplink = "https://t.me/woahelperchat";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.alphaplus, null));
 				}
-				case "betaplus", "betalm", "beta_lao_com", "betaplus_lao_com", "betalm_lao_com" -> {
+				case "betalm", "betalm_lao_com" -> {
 					this.guidelink = "https://github.com/n00b69/woa-betalm";
 					this.grouplink = "https://t.me/woahelperchat";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.betalm, null));
 				}
-				case "flashlmdd", "flash_lao_com", "flashlm", "flashlmdd_lao_com" -> {
+				case "flashlmdd", "flashlm", "flashlm_lao_com", "flashlmdd_lao_com" -> {
 					this.guidelink = "https://github.com/n00b69/woa-flashlmdd";
 					this.grouplink = "https://t.me/woahelperchat";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.flashlmdd, null));
 				}
-				case "mh2lm", "mh2plus", "mh2plus_lao_com", "mh2lm_lao_com" -> {
+				case "mh2lm", "mh2lm_lao_com" -> {
 					this.guidelink = "https://github.com/n00b69/woa-mh2lm";
 					this.grouplink = "https://t.me/woahelperchat";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.mh2lm, null));
@@ -1815,7 +1815,7 @@ public class MainActivity extends AppCompatActivity {
 		yesButton.setVisibility(View.GONE);
 		noButton.setVisibility(View.GONE);
 		dismissButton.setVisibility(View.GONE);
-		String[] supported = {"a52sxq", "alpha_lao_com", "alphalm_lao_com", "alphaplus_lao_com", "alphalm", "alphaplus", "alioth", "andromeda", "betalm", "beta_lao_com", "betaplus_lao_com", "betalm_lao_com", "beryllium", "bhima", "cepheus", "cheeseburger", "chiron", "curtana2", "curtana", "curtana_india", "curtana_cn", "curtanacn", "cmi", "davinci", "dumpling", "dipper", "durandal", "durandal_india", "dm3q", "dm3", "enchilada", "equuleus", "excalibur", "excalibur_india", "e3q", "flashlmdd", "flash_lao_com", "flashlm", "flashlmdd_lao_com", "fajita", "guacamole", "guacamoleb", "guacamoleg", "guacamoles", "guacamolet", "gram", "gts6l", "gts6lwifi", "hotdog", "hotdogb", "hotdogg", "houji", "husky", "ursa", "joan", "joyeuse", "judyln", "judyp", "judypn", "lisa", "marble", "meizu20pro", "meizu20Pro", "mh2lm", "mh2plus_lao_com", "mh2lm_lao_com", "mh2lm5g", "mh2lm5g_lao_com", "miatoll", "nabu", "OnePlus5", "OnePlus5T", "OnePlus6", "OnePlus6T", "OnePlus6TSingle", "OnePlus7", "OnePlus7Pro", "OnePlus7ProNR", "OnePlus7ProTMO", "OnePlus7Pro4G", "OnePlus7T", "OnePlus7TPro", "OnePlus7TPro4G", "OnePlus7TPro5G", "OnePlus7TProNR", "OP7ProNRSpr", "pipa", "perseus", "polaris", "Pong", "pong", "q2q", "raphael", "raphaelin", "raphaels", "redfin", "RMX2170", "RMX2061", "sagit", "surya", "vayu", "venus", "winner", "winnerx", "xpeng", "herolte", "beyond1lte", "beyond1qlte", "beyond1", "ingres", "vili", "lavender", "star2qlte", "star2qltechn", "r3q"};
+		String[] supported = {"a52sxq", "alphalm_lao_com", "alphaplus_lao_com", "alphalm", "alphaplus", "alioth", "andromeda", "betalm", "betalm_lao_com", "beryllium", "bhima", "cepheus", "cheeseburger", "chiron", "curtana2", "curtana", "curtana_india", "curtana_cn", "curtanacn", "cmi", "davinci", "dumpling", "dipper", "durandal", "durandal_india", "dm3q", "dm3", "enchilada", "equuleus", "excalibur", "excalibur_india", "e3q", "flashlmdd", "flashlm", "flashlm_lao_com", "flashlmdd_lao_com", "fajita", "guacamole", "guacamoleb", "guacamoleg", "guacamoles", "guacamolet", "gram", "gts6l", "gts6lwifi", "hotdog", "hotdogb", "hotdogg", "houji", "husky", "ursa", "joan", "joyeuse", "judyln", "judyp", "judypn", "lisa", "marble", "meizu20pro", "meizu20Pro", "mh2lm", "mh2lm_lao_com", "mh2lm5g", "mh2lm5g_lao_com", "miatoll", "nabu", "OnePlus5", "OnePlus5T", "OnePlus6", "OnePlus6T", "OnePlus6TSingle", "OnePlus7", "OnePlus7Pro", "OnePlus7ProNR", "OnePlus7ProTMO", "OnePlus7Pro4G", "OnePlus7T", "OnePlus7TPro", "OnePlus7TPro4G", "OnePlus7TPro5G", "OnePlus7TProNR", "OP7ProNRSpr", "pipa", "perseus", "polaris", "Pong", "pong", "q2q", "raphael", "raphaelin", "raphaels", "redfin", "RMX2170", "RMX2061", "sagit", "surya", "vayu", "venus", "winner", "winnerx", "xpeng", "herolte", "beyond1lte", "beyond1qlte", "beyond1", "ingres", "vili", "lavender", "star2qlte", "star2qltechn", "r3q"};
 		this.device = ShellUtils.fastCmd("getprop ro.product.device ");
 		this.model = ShellUtils.fastCmd("getprop ro.product.model");
 		if (!Arrays.asList(supported).contains(this.device)) {
