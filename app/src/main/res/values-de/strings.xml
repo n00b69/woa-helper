@@ -78,7 +78,7 @@
 	<string name="bwarn">!!WARNING!!\n UFS kann durch diese Funktion schneller verschleißen, verwenden Sie es nur wenn Sie regelmäßige OTA-Updates erhalten </string>
 	<string name="agree">OK</string>
 	<string name="nonroot">Root nicht detektiert</string>
-	<string name="unsupported">!!WARNUNG!!\nGerät nicht unterstüzt\nBenutzung auf eigener Gefahr</string>
+	<string name="unsupported">!!WARNUNG!!\nGerät nicht unterstützt\nBenutzung auf eigener Gefahr</string>
 	<string name="sure">OK, lass mich einfach die App nutzen</string>
 	<string name="upanel">Dein Display würde nicht als funktionsfähig bestätigt. Bitte schicken Sie Feedback über ihre Windows-Erfahrungen im Telegram-Chat</string>
 	<string name="chat">Chat</string>

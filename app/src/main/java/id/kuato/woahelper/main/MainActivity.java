@@ -62,7 +62,7 @@ import id.kuato.woahelper.util.RAM;
 public class MainActivity extends AppCompatActivity {
 
 	public final class BuildConfig {
-	public static final String VERSION_NAME = "1.8.4_BETA38";
+	public static final String VERSION_NAME = "1.8.4_BETA39";
 	}
 //	static final Object lock = new Object();
 	private static final float SIZE = 12.0F;
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		if (Objects.equals(currentVersion, pref.getVersion(this))) {
-			String[] files = {"dbkp8150.cfg", "dbkp.hotdog.bin", "dbkp.cepheus.bin", "dbkp.nabu.bin", "dbkp.pipa.bin", "install.bat", "sta.exe", "sdd.exe", "sdd.conf", "Switch to Android.lnk", "AutoFlash.cmd", "usbhostmode.exe", "ARMSoftware.url", "ARMRepo.url", "TestedSoftware.url", "WorksOnWoa.url", "RotationShortcut.lnk", "RotationShortcutReverseLandscape.lnk", "display.exe", "RemoveEdge.bat"};
+			String[] files = {"dbkp8150.cfg", "dbkp.hotdog.bin", "dbkp.cepheus.bin", "dbkp.nabu.bin", "dbkp.pipa.bin", "install.bat", "sta.exe", "sdd.exe", "sdd.conf", "Switch to Android.lnk", "boot_img_auto-flasher_V1.1.exe", "Optimized_Taskbar_Control_V3.0.exe", "usbhostmode.exe", "USB Host Mode.lnk", "ARMSoftware.url", "ARMRepo.url", "TestedSoftware.url", "WorksOnWoa.url", "RotationShortcut.lnk", "RotationShortcutReverseLandscape.lnk", "display.exe", "RemoveEdge.bat"};
 			int i = 0;
 			while (!files[i].isEmpty()) {
 				if (ShellUtils.fastCmd(String.format("ls %1$s |grep %2$s", getFilesDir(), files[i])).isEmpty()) {
@@ -262,29 +262,29 @@ public class MainActivity extends AppCompatActivity {
 		}
 			switch (this.device) {
 				// LG
-				case "alphalm", "alphaplus", "alphalm_lao_com", "alphaplus_lao_com" -> {
+				case "alphalm", "alphaplus", "alpha_lao_com", "alphalm_lao_com", "alphaplus_lao_com" -> {
 					this.guidelink = "https://github.com/n00b69/woa-alphaplus";
-					this.grouplink = "https://t.me/woahelperchat";
+					this.grouplink = "https://t.me/lgedevices";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.alphaplus, null));
 				}
 				case "betalm", "betalm_lao_com" -> {
 					this.guidelink = "https://github.com/n00b69/woa-betalm";
-					this.grouplink = "https://t.me/woahelperchat";
+					this.grouplink = "https://t.me/lgedevices";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.betalm, null));
 				}
-				case "flashlmdd", "flashlm", "flashlm_lao_com", "flashlmdd_lao_com" -> {
+				case "flashlmdd", "flash_lao_com", "flashlm", "flashlmdd_lao_com" -> {
 					this.guidelink = "https://github.com/n00b69/woa-flashlmdd";
-					this.grouplink = "https://t.me/woahelperchat";
+					this.grouplink = "https://t.me/lgedevices";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.flashlmdd, null));
 				}
 				case "mh2lm", "mh2lm_lao_com" -> {
 					this.guidelink = "https://github.com/n00b69/woa-mh2lm";
-					this.grouplink = "https://t.me/woahelperchat";
+					this.grouplink = "https://t.me/lgedevices";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.mh2lm, null));
 				}
 				case "mh2lm5g", "mh2lm5g_lao_com" -> {
 					this.guidelink = "https://github.com/n00b69/woa-mh2lm5g";
-					this.grouplink = "https://t.me/woahelperchat";
+					this.grouplink = "https://t.me/lgedevices";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.mh2lm, null));
 				}
 				case "judyln", "judyp", "judypn" -> {
@@ -311,7 +311,7 @@ public class MainActivity extends AppCompatActivity {
 				}
 				case "bhima", "vayu" -> {
 					this.guidelink = "https://github.com/woa-vayu/POCOX3Pro-Guides";
-					this.grouplink = "https://t.me/winonvayualt";
+					this.grouplink = "https://t.me/windowsonvayu";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.vayu, null));
 					this.x.tvPanel.setVisibility(View.VISIBLE);
 				}
@@ -384,7 +384,7 @@ public class MainActivity extends AppCompatActivity {
 					this.x.tvPanel.setVisibility(View.VISIBLE);
 					this.n.cvDumpModem.setVisibility(View.VISIBLE);
 				}
-				case "surya" -> {
+				case "surya", "karna" -> {
 					this.guidelink = "https://github.com/woa-surya/POCOX3NFC-Guides";
 					this.grouplink = "https://t.me/windows_on_pocox3_nfc";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.vayu, null));
@@ -564,6 +564,11 @@ public class MainActivity extends AppCompatActivity {
 					this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
 					this.grouplink = "https://t.me/dumanthecat";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.redfin, null));
+				}
+				case "nx729j", "NX729J" -> {
+					this.guidelink = "https://github.com/Project-Silicium/Mu-Silicium";
+					this.grouplink = "https://t.me/woahelperchat";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.nx729j, null));
 				}
 				default -> {
 					this.guidelink = "https://renegade-project.tech/";
@@ -848,7 +853,7 @@ public class MainActivity extends AppCompatActivity {
 				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sta.exe /sdcard/sta/sta.exe");
 				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.exe /sdcard/sta/sdd.exe");
 				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.conf /sdcard/sta/sdd.conf");
-				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/AutoFlash.cmd /sdcard/sta/AutoFlash.cmd");
+				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/boot_img_auto-flasher_V1.1.exe /sdcard/sta/boot_img_auto-flasher_V1.1.exe");
 				mount();
 				String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
 				if (mnt_stat.isEmpty()) {
@@ -1324,6 +1329,7 @@ public class MainActivity extends AppCompatActivity {
 				yesButton.setVisibility(View.GONE);
 				messages.setText(this.getString(R.string.please_wait));
 				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/usbhostmode.exe /sdcard");
+				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/USB Host Mode.lnk /sdcard");
 				mount();
 				String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
 				if (mnt_stat.isEmpty()) {
@@ -1332,6 +1338,7 @@ public class MainActivity extends AppCompatActivity {
 				} else {
 					ShellUtils.fastCmd("mkdir " + this.winpath + "/Toolbox || true ");
 					ShellUtils.fastCmd("cp /sdcard/usbhostmode.exe " + this.winpath + "/Toolbox");
+					ShellUtils.fastCmd("cp '" + MainActivity.this.getFilesDir() + "/USB Host Mode.lnk' " + MainActivity.this.winpath + "/Users/Public/Desktop");
 					ShellUtils.fastCmd("rm /sdcard/usbhostmode.exe");
 					messages.setText(this.getString(R.string.done));
 					dismissButton.setVisibility(View.VISIBLE);
@@ -1385,6 +1392,47 @@ public class MainActivity extends AppCompatActivity {
 					messages.setText(this.getString(R.string.done));
 					dismissButton.setVisibility(View.VISIBLE);
 					dismissButton.setOnClickListener(v14 -> {
+					this.HideBlur();
+					dialog.dismiss();
+					});
+				}
+			});
+			dialog.setCancelable(false);
+			dialog.show();
+		});
+		
+		this.z.cvTablet.setOnClickListener(v -> {
+			this.ShowBlur();
+			noButton.setVisibility(View.VISIBLE);
+			yesButton.setVisibility(View.VISIBLE);
+			dismissButton.setVisibility(View.GONE);
+			icons.setVisibility(View.VISIBLE);
+			icons.setImageDrawable(sensors);
+			messages.setText(this.getString(R.string.tablet_question));
+			noButton.setText(this.getString(R.string.no));
+			yesButton.setText(this.getString(R.string.yes));
+			dismissButton.setText(MainActivity.this.getString(R.string.dismiss));
+			noButton.setOnClickListener(v16 -> {
+				this.HideBlur();
+				dialog.dismiss();
+			});
+			yesButton.setOnClickListener(v17 -> {
+				noButton.setVisibility(View.GONE);
+				yesButton.setVisibility(View.GONE);
+				messages.setText(this.getString(R.string.please_wait));
+				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/Optimized_Taskbar_Control_V3.0.exe /sdcard/");
+				mount();
+				String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
+				if (mnt_stat.isEmpty()) {
+					dialog.dismiss();
+					mountfail();
+				} else {
+					ShellUtils.fastCmd("mkdir " + this.winpath + "/Toolbox || true ");
+					ShellUtils.fastCmd("cp /sdcard/Optimized_Taskbar_Control_V3.0.exe " + this.winpath + "/Toolbox");
+					ShellUtils.fastCmd("rm /sdcard/Optimized_Taskbar_Control_V3.0.exe");
+					messages.setText(this.getString(R.string.done));
+					dismissButton.setVisibility(View.VISIBLE);
+					dismissButton.setOnClickListener(v18 -> {
 					this.HideBlur();
 					dialog.dismiss();
 					});
@@ -1815,7 +1863,7 @@ public class MainActivity extends AppCompatActivity {
 		yesButton.setVisibility(View.GONE);
 		noButton.setVisibility(View.GONE);
 		dismissButton.setVisibility(View.GONE);
-		String[] supported = {"a52sxq", "alphalm_lao_com", "alphaplus_lao_com", "alphalm", "alphaplus", "alioth", "andromeda", "betalm", "betalm_lao_com", "beryllium", "bhima", "cepheus", "cheeseburger", "chiron", "curtana2", "curtana", "curtana_india", "curtana_cn", "curtanacn", "cmi", "davinci", "dumpling", "dipper", "durandal", "durandal_india", "dm3q", "dm3", "enchilada", "equuleus", "excalibur", "excalibur_india", "e3q", "flashlmdd", "flashlm", "flashlm_lao_com", "flashlmdd_lao_com", "fajita", "guacamole", "guacamoleb", "guacamoleg", "guacamoles", "guacamolet", "gram", "gts6l", "gts6lwifi", "hotdog", "hotdogb", "hotdogg", "houji", "husky", "ursa", "joan", "joyeuse", "judyln", "judyp", "judypn", "lisa", "marble", "meizu20pro", "meizu20Pro", "mh2lm", "mh2lm_lao_com", "mh2lm5g", "mh2lm5g_lao_com", "miatoll", "nabu", "OnePlus5", "OnePlus5T", "OnePlus6", "OnePlus6T", "OnePlus6TSingle", "OnePlus7", "OnePlus7Pro", "OnePlus7ProNR", "OnePlus7ProTMO", "OnePlus7Pro4G", "OnePlus7T", "OnePlus7TPro", "OnePlus7TPro4G", "OnePlus7TPro5G", "OnePlus7TProNR", "OP7ProNRSpr", "pipa", "perseus", "polaris", "Pong", "pong", "q2q", "raphael", "raphaelin", "raphaels", "redfin", "RMX2170", "RMX2061", "sagit", "surya", "vayu", "venus", "winner", "winnerx", "xpeng", "herolte", "beyond1lte", "beyond1qlte", "beyond1", "ingres", "vili", "lavender", "star2qlte", "star2qltechn", "r3q"};
+		String[] supported = {"a52sxq", "alpha_lao_com", "alphalm_lao_com", "alphaplus_lao_com", "alphalm", "alphaplus", "alioth", "andromeda", "betalm", "betalm_lao_com", "beryllium", "bhima", "cepheus", "cheeseburger", "chiron", "curtana2", "curtana", "curtana_india", "curtana_cn", "curtanacn", "cmi", "davinci", "dumpling", "dipper", "durandal", "durandal_india", "dm3q", "dm3", "enchilada", "equuleus", "excalibur", "excalibur_india", "e3q", "flashlmdd", "flash_lao_com", "flashlm", "flashlmdd_lao_com", "fajita", "guacamole", "guacamoleb", "guacamoleg", "guacamoles", "guacamolet", "gram", "gts6l", "gts6lwifi", "hotdog", "hotdogb", "hotdogg", "houji", "husky", "ursa", "joan", "joyeuse", "judyln", "judyp", "judypn", "karna", "lisa", "marble", "meizu20pro", "meizu20Pro", "mh2lm", "mh2lm_lao_com", "mh2lm5g", "mh2lm5g_lao_com", "miatoll", "nabu", "nx729j", "NX729J", "OnePlus5", "OnePlus5T", "OnePlus6", "OnePlus6T", "OnePlus6TSingle", "OnePlus7", "OnePlus7Pro", "OnePlus7ProNR", "OnePlus7ProTMO", "OnePlus7Pro4G", "OnePlus7T", "OnePlus7TPro", "OnePlus7TPro4G", "OnePlus7TPro5G", "OnePlus7TProNR", "OP7ProNRSpr", "pipa", "perseus", "polaris", "Pong", "pong", "q2q", "raphael", "raphaelin", "raphaels", "redfin", "RMX2170", "RMX2061", "sagit", "surya", "vayu", "venus", "winner", "winnerx", "xpeng", "herolte", "beyond1lte", "beyond1qlte", "beyond1", "ingres", "vili", "lavender", "star2qlte", "star2qltechn", "r3q"};
 		this.device = ShellUtils.fastCmd("getprop ro.product.device ");
 		this.model = ShellUtils.fastCmd("getprop ro.product.model");
 		if (!Arrays.asList(supported).contains(this.device)) {

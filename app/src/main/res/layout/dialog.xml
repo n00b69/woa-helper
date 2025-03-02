@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_margin="4dp"
     android:animateLayoutChanges="true"
-    android:background="?attr/colorSurface"
+    android:background="?attr/colorOnSurfaceInverse"
     android:clickable="false"
     android:foreground="?android:attr/selectableItemBackground"
     android:stateListAnimator="@animator/state_list_anim"
@@ -14,14 +14,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="4dp"
-        android:background="@android:color/transparent"
+        android:layout_marginHorizontal="0dp"
+        android:background="?attr/colorOnSurfaceInverse"
         android:gravity="center"
         android:orientation="vertical">
 
         <android.widget.ImageView
             android:id="@+id/icon"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

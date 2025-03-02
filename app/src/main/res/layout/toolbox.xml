@@ -11,6 +11,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+		android:background="@android:color/transparent"
         android:orientation="vertical">
 
         <include
@@ -22,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+			android:background="@android:color/transparent"
             android:foregroundGravity="center"
             android:gravity="center"
             android:orientation="vertical"
@@ -61,6 +63,7 @@
                     android:foreground="?android:attr/selectableItemBackground"
                     android:padding="@dimen/parentMargin"
                     android:stateListAnimator="@animator/state_list_anim"
+					app:cardBackgroundColor="?attr/colorOnSurfaceInverse"
                     app:cardCornerRadius="@dimen/cardCornerRadius"
                     app:cardMaxElevation="0dp">
 
@@ -121,6 +124,7 @@
                     android:foreground="?android:attr/selectableItemBackground"
                     android:padding="@dimen/parentMargin"
                     android:stateListAnimator="@animator/state_list_anim"
+					app:cardBackgroundColor="?attr/colorOnSurfaceInverse"
                     app:cardCornerRadius="@dimen/cardCornerRadius"
                     app:cardMaxElevation="0dp">
 
@@ -182,6 +186,7 @@
                     android:foreground="?android:attr/selectableItemBackground"
                     android:padding="@dimen/parentMargin"
                     android:stateListAnimator="@animator/state_list_anim"
+					app:cardBackgroundColor="?attr/colorOnSurfaceInverse"
                     app:cardCornerRadius="@dimen/cardCornerRadius"
                     app:cardMaxElevation="0dp">
 
@@ -243,6 +248,7 @@
                     android:padding="@dimen/parentMargin"
                     android:stateListAnimator="@animator/state_list_anim"
 					android:visibility="gone"
+					app:cardBackgroundColor="?attr/colorOnSurfaceInverse"
 					app:cardCornerRadius="@dimen/cardCornerRadius"
 					app:cardMaxElevation="0dp">
 
@@ -304,6 +310,7 @@
                     android:padding="@dimen/parentMargin"
                     android:stateListAnimator="@animator/state_list_anim"
 					android:visibility="gone"
+					app:cardBackgroundColor="?attr/colorOnSurfaceInverse"
                     app:cardCornerRadius="@dimen/cardCornerRadius"
                     app:cardMaxElevation="0dp">
 
@@ -363,6 +370,7 @@
                     android:foreground="?android:attr/selectableItemBackground"
                     android:padding="@dimen/parentMargin"
                     android:stateListAnimator="@animator/state_list_anim"
+					app:cardBackgroundColor="?attr/colorOnSurfaceInverse"
                     app:cardCornerRadius="@dimen/cardCornerRadius"
                     app:cardMaxElevation="0dp">
 
@@ -423,6 +431,7 @@
                     android:foreground="?android:attr/selectableItemBackground"
                     android:padding="@dimen/parentMargin"
                     android:stateListAnimator="@animator/state_list_anim"
+					app:cardBackgroundColor="?attr/colorOnSurfaceInverse"
                     app:cardCornerRadius="@dimen/cardCornerRadius"
                     app:cardMaxElevation="0dp">
 
