@@ -1329,7 +1329,7 @@ public class MainActivity extends AppCompatActivity {
 				yesButton.setVisibility(View.GONE);
 				messages.setText(this.getString(R.string.please_wait));
 				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/usbhostmode.exe /sdcard");
-				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/USB Host Mode.lnk /sdcard");
+				ShellUtils.fastCmd("cp '" + this.getFilesDir() + "/USB Host Mode.lnk' /sdcard");
 				mount();
 				String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
 				if (mnt_stat.isEmpty()) {
