@@ -38,5 +38,5 @@ jobs:
       run: mv app/build/outputs/apk/release/app-release-unsigned-signed.apk woahelper.apk
     - uses: actions/upload-artifact@v4
       with:
-        name: woahelper.apk
+        name: woahelper
         path: woahelper.apk

@@ -24,7 +24,7 @@
             android:layout_marginTop="30dp"
             android:gravity="center_vertical|center|center_horizontal"
             android:text="@string/error_title"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/md_theme_primary"
             android:textSize="24sp" />
 
         <LinearLayout

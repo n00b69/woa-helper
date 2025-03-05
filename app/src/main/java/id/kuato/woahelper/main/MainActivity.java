@@ -51,7 +51,6 @@ import java.util.concurrent.Executors;
 
 import id.kuato.woahelper.R;
 import id.kuato.woahelper.databinding.ActivityMainBinding;
-import id.kuato.woahelper.databinding.DevicesBinding;
 //import id.kuato.woahelper.databinding.LangaugesBinding;
 import id.kuato.woahelper.databinding.ScriptsBinding;
 import id.kuato.woahelper.databinding.SetPanelBinding;
@@ -70,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
 	private static final float SIZE2 = 30.0F;
 	private static final float SIZE3 = 18.0F;
 	public ActivityMainBinding x;
-	public DevicesBinding d;
 	public SetPanelBinding k;
 	public ToolboxBinding n;
 	public ScriptsBinding z;
@@ -173,7 +171,6 @@ public class MainActivity extends AppCompatActivity {
 		this.x = ActivityMainBinding.inflate(this.getLayoutInflater());
 		this.setContentView(this.x.getRoot());
 		this.backable = 0;
-		this.d = DevicesBinding.inflate(this.getLayoutInflater());
 		this.x.toolbarlayout.settings.setVisibility(View.VISIBLE);
 		this.k = SetPanelBinding.inflate(this.getLayoutInflater());
 		this.n = ToolboxBinding.inflate(this.getLayoutInflater());
@@ -219,10 +216,9 @@ public class MainActivity extends AppCompatActivity {
 		Drawable sensors = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_sensor, null);
 		Drawable settings = ResourcesCompat.getDrawable(this.getResources(), R.drawable.settings, null);
 		Drawable uefi = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_uefi, null);
-		settings.setColorFilter(BlendModeColorFilterCompat.createBlendModeColorFilterCompat(this.getColor(R.color.colorPrimary), BlendModeCompat.SRC_IN));
+		settings.setColorFilter(BlendModeColorFilterCompat.createBlendModeColorFilterCompat(this.getColor(R.color.md_theme_primary), BlendModeCompat.SRC_IN));
 		Drawable back = ResourcesCompat.getDrawable(this.getResources(), R.drawable.back_arrow, null);
-		back.setColorFilter(BlendModeColorFilterCompat.createBlendModeColorFilterCompat(this.getColor(R.color.colorPrimary), BlendModeCompat.SRC_IN));
-		this.d.toolbarlayout.back.setImageDrawable(back);
+		back.setColorFilter(BlendModeColorFilterCompat.createBlendModeColorFilterCompat(this.getColor(R.color.md_theme_primary), BlendModeCompat.SRC_IN));
 		this.x.toolbarlayout.settings.setImageDrawable(settings);
 
 		String slot = ShellUtils.fastCmd("getprop ro.boot.slot_suffix");
@@ -1630,14 +1626,6 @@ public class MainActivity extends AppCompatActivity {
 		this.k.mountLocation.setOnCheckedChangeListener((compoundButton, b) -> {
 			pref.setMountLocation(this, b);
 			this.winpath = (b ? "/mnt/Windows" : "/mnt/sdcard/Windows");
-		});
-
-		this.d.toolbarlayout.back.setVisibility(View.VISIBLE);
-		this.d.toolbarlayout.back.setOnClickListener(v -> {
-		this.getWindow().getCurrentFocus().startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out));
-		this.setContentView(this.x.getRoot());
-		this.x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in));
-		this.backable = 0;
 		});
 		
 		this.k.backupQB.setOnCheckedChangeListener((compoundButton, b) -> {

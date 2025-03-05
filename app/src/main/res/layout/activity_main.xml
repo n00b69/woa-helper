@@ -161,7 +161,7 @@
                                     android:gravity="center"
                                     android:padding="@dimen/parentMargin"
                                     android:stateListAnimator="@animator/state_list_anim"
-                                    app:cardBackgroundColor="@color/colorOnPrimary"
+                                    app:cardBackgroundColor="@color/md_theme_onPrimary"
                                     app:cardCornerRadius="@dimen/cardCornerRadius"
                                     app:cardMaxElevation="0dp">
 
@@ -191,7 +191,7 @@
                                     android:gravity="center"
                                     android:padding="@dimen/parentMargin"
                                     android:stateListAnimator="@animator/state_list_anim"
-                                    app:cardBackgroundColor="@color/colorOnPrimary"
+                                    app:cardBackgroundColor="@color/md_theme_onPrimary"
                                     app:cardCornerRadius="@dimen/cardCornerRadius"
                                     app:cardMaxElevation="0dp">
 
