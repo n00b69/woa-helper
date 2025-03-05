@@ -6,7 +6,7 @@
     android:viewportHeight="400">
 
     <path
-        android:fillColor="@color/firebase_navy"
+        android:fillColor="@color/md_theme_onPrimaryContainer"
         android:fillType="evenOdd"
         android:pathData="M193.997 82.582c-0.07 0.072 -1.701 0.256 -3.625 0.407 -3.678 0.29 -8.143 0.83
 -10.247 1.238-0.687 0.133 -2.15 0.416 -3.25 0.627 -3.12 0.601 -4.077 0.82 -6.625
