@@ -2034,22 +2034,17 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public void checkupdate(boolean auto) {
-		if (!pref.getAppUpdate(this)) {
-			if (!MainActivity.isNetworkConnected(this)) {
-				checkdbkpmodel();
-			} else {
-				String version = ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget -q -O - https://raw.githubusercontent.com/n00b69/woa-helper-update/main/README.md\" | su -mm -c sh");
-				if (BuildConfig.VERSION_NAME.equals(version)) {
-					checkdbkpmodel();
-				} else {
-					if(auto) {
-						findViewById(R.id.update).setVisibility(View.VISIBLE);
-					}
-					else
-						updatePopup();
-				}
-			}
-		}	
+		if (pref.getAppUpdate(this)) return;
+		if (!MainActivity.isNetworkConnected(this)) return;
+
+		String version = ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget -q -O - https://raw.githubusercontent.com/n00b69/woa-helper-update/main/README.md\" | su -mm -c sh");
+
+		if (BuildConfig.VERSION_NAME.equals(version)) return;
+
+		if(auto)
+			findViewById(R.id.update).setVisibility(View.VISIBLE);
+		else
+			updatePopup();
 	}
 	
 	public void update() {
