@@ -216,9 +216,6 @@ public class MainActivity extends AppCompatActivity {
 		Drawable sensors = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_sensor, null);
 		Drawable settings = ResourcesCompat.getDrawable(this.getResources(), R.drawable.settings, null);
 		Drawable uefi = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_uefi, null);
-		settings.setColorFilter(BlendModeColorFilterCompat.createBlendModeColorFilterCompat(this.getColor(R.color.md_theme_primary), BlendModeCompat.SRC_IN));
-		Drawable back = ResourcesCompat.getDrawable(this.getResources(), R.drawable.back_arrow, null);
-		back.setColorFilter(BlendModeColorFilterCompat.createBlendModeColorFilterCompat(this.getColor(R.color.md_theme_primary), BlendModeCompat.SRC_IN));
 		this.x.toolbarlayout.settings.setImageDrawable(settings);
 
 		String slot = ShellUtils.fastCmd("getprop ro.boot.slot_suffix");
@@ -593,9 +590,9 @@ public class MainActivity extends AppCompatActivity {
 			@Override
 			public void run() {
 				if (Boolean.FALSE.equals(Shell.isAppGrantedRoot())) {
-					checkRoot();
+					noRoot();
 				} else {
-					checkupdate();
+					checkupdate(true);
 				}
 			}
 		}, 5);
@@ -1830,7 +1827,7 @@ public class MainActivity extends AppCompatActivity {
 		ShellUtils.fastCmd("su -mm -c dd if=/dev/block/by-name/modemst2 of=$(find " + this.winpath + "/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/bootmodem_fs2");
 	}
 
-	public void checkRoot(){
+	public void noRoot(){
 		final Dialog dialog = new Dialog(this);
 		dialog.setContentView(R.layout.dialog);
 		dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -2004,8 +2001,39 @@ public class MainActivity extends AppCompatActivity {
 			}
 		}
 	}
-	
-	public void checkupdate() {
+
+	private void updatePopup(){
+		final Dialog dialog = new Dialog(this);
+		dialog.setContentView(R.layout.dialog);
+		dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+		MaterialButton yesButton = dialog.findViewById(R.id.yes);
+		MaterialButton noButton = dialog.findViewById(R.id.no);
+		TextView messages = dialog.findViewById(R.id.messages);
+		yesButton.setVisibility(View.VISIBLE);
+		noButton.setVisibility(View.VISIBLE);
+		messages.setText(getString(R.string.update1));
+		yesButton.setText(getString(R.string.update));
+		noButton.setText(getString(R.string.later));
+		dialog.show();
+		dialog.setCancelable(false);
+		noButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dialog.dismiss();
+			}
+		});
+		yesButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				yesButton.setVisibility(View.GONE);
+				noButton.setVisibility(View.GONE);
+				messages.setText(MainActivity.this.getString(R.string.update2) + "\n" + MainActivity.this.getString(R.string.please_wait));
+				update();
+			}
+		});
+	}
+
+	public void checkupdate(boolean auto) {
 		if (!pref.getAppUpdate(this)) {
 			if (!MainActivity.isNetworkConnected(this)) {
 				checkdbkpmodel();
@@ -2014,34 +2042,11 @@ public class MainActivity extends AppCompatActivity {
 				if (BuildConfig.VERSION_NAME.equals(version)) {
 					checkdbkpmodel();
 				} else {
-					final Dialog dialog = new Dialog(this);
-					dialog.setContentView(R.layout.dialog);
-					dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-					MaterialButton yesButton = dialog.findViewById(R.id.yes);
-					MaterialButton noButton = dialog.findViewById(R.id.no);
-					TextView messages = dialog.findViewById(R.id.messages);
-					yesButton.setVisibility(View.VISIBLE);
-					noButton.setVisibility(View.VISIBLE);
-					messages.setText(getString(R.string.update1));
-					yesButton.setText(getString(R.string.update));
-					noButton.setText(getString(R.string.later));
-					dialog.show();
-					dialog.setCancelable(false);
-					noButton.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							dialog.dismiss();
-						}
-					});
-					yesButton.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							yesButton.setVisibility(View.GONE);
-							noButton.setVisibility(View.GONE);
-							messages.setText(MainActivity.this.getString(R.string.update2) + "\n" + MainActivity.this.getString(R.string.please_wait));
-							update();
-						}
-					});
+					if(auto) {
+						findViewById(R.id.update).setVisibility(View.VISIBLE);
+					}
+					else
+						updatePopup();
 				}
 			}
 		}	
@@ -2100,6 +2105,7 @@ public class MainActivity extends AppCompatActivity {
 		TextView myTextView6 = this.findViewById(R.id.group_text);
 		TextView myTextView7 = this.findViewById(R.id.tv_slot);
 		TextView myTextView8 = this.findViewById(R.id.tv_date);
+		TextView myTextView9 = this.findViewById(R.id.update);
 		if (Configuration.ORIENTATION_LANDSCAPE != newConfig.orientation && Objects.equals(this.device, "nabu") || Objects.equals(this.device, "pipa") || Objects.equals(this.device, "winner") || Objects.equals(this.device, "winnerx") || Objects.equals(this.device, "q2q") || Objects.equals(this.device, "gts6l") || Objects.equals(this.device, "gts6lwifi")) {
 			this.x.app.setOrientation(LinearLayout.VERTICAL);
 			this.x.top.setOrientation(LinearLayout.HORIZONTAL);
@@ -2111,6 +2117,7 @@ public class MainActivity extends AppCompatActivity {
 			myTextView6.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
 			myTextView7.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
 			myTextView8.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
+			myTextView9.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
 		} else if (Configuration.ORIENTATION_PORTRAIT != newConfig.orientation && Objects.equals(this.device, "nabu") || Objects.equals(this.device, "pipa") || Objects.equals(this.device, "winner") || Objects.equals(this.device, "winnerx") || Objects.equals(this.device, "q2q") || Objects.equals(this.device, "gts6l") || Objects.equals(this.device, "gts6lwifi")) {
 			this.x.app.setOrientation(LinearLayout.HORIZONTAL);
 			this.x.top.setOrientation(LinearLayout.VERTICAL);
@@ -2122,6 +2129,7 @@ public class MainActivity extends AppCompatActivity {
 			myTextView6.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
 			myTextView7.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
 			myTextView8.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
+			myTextView9.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
 		}
 	}
 
