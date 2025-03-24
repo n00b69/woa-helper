@@ -22,6 +22,7 @@ This project is in late stages of development. Most features have already been a
 | StA Creator                     | Creates dualboot files                                                          | ✅      |
 | Provisioning Modem              | Only for devices that may need it for LTE to work                               | ✅      |
 | DBKP (Dualboot Kernel Patcher)  | Only for supported devices: Oneplus 7(T) Pro 4G, Xiaomi Mi 9 & Xiaomi Pad 5     | ✅      |
+| Devcfg flasher                  | Only for Oneplus 7(T) Pro 4G, needed on OOS12 to boot Windows                   | ✅      |
 
 - Edge Remover
 - Defender Remover

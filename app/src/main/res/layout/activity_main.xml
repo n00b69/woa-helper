@@ -139,15 +139,6 @@
                                 android:gravity="left"
                                 android:textSize="@dimen/_10sdp" />
 
-                            <TextView
-                                android:id="@+id/update"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="left"
-                                android:textSize="@dimen/_10sdp"
-                                android:text="@string/update1"
-                                android:visibility="gone"/>
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"

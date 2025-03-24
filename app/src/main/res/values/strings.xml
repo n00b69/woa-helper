@@ -26,6 +26,7 @@
 	<string name="setup_title">FRAMEWORK INSTALLERS</string>
 	<string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
 	<string name="tablet_title">TABLET MODE SCRIPT</string>
+	<string name="devcfg_title">DEVCFG FLASHER</string>
 
 	<string name="backup_boot_subtitle">Back up boot image to Android and/or Windows</string>
 	<string name="mnt_subtitle">Toggle mounting Windows partition in order to view or edit content inside</string>
@@ -46,6 +47,7 @@
 	<string name="setup_subtitle">Adds installers for several frameworks into C:⧹Toolbox</string>
 	<string name="dbkp_subtitle">Patches the kernel for seamless dualbooting</string>
 	<string name="tablet_subtitle">Adds a script to C:⧹Toolbox which allows you to toggle tablet mode</string>
+	<string name="devcfg_subtitle">Flashes OOS11 devcfg so that Windows can boot on OOS12 devices</string>
 
 	<string name="backup_boot_question">Back up current Android boot image?</string>
 	<string name="mount_question">Mount Windows to %s?</string>
@@ -63,6 +65,7 @@
 	<string name="setup_question">Download and move C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, and XNA framework installers to C:⧹Toolbox?\n(this may take some time)</string>
 	<string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
 	<string name="tablet_question">Copy tablet mode script to C:⧹Toolbox?</string>
+	<string name="devcfg_question">Flash OOS11 devcfg?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
 
 	<string name="wrong">Something went wrong</string>
 	<string name="mountfail">Something went wrong, \nWindows could not be mounted.\nRequest help in the Telegram chat.</string>
@@ -71,6 +74,7 @@
 	<string name="partition">No Windows partition detected.</string>
 	<string name="internalstorage">Files downloaded in internal storage</string>
 	<string name="dbkp">Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/patched-boot.img.\nUse your %s to switch between Windows and Android.</string>
+	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/devcfg.img.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
 	<string name="op7">alert slider</string>
 	<string name="cepheus">assistant button</string>
 	<string name="nabu">magnetic case</string>

@@ -61,7 +61,7 @@ import id.kuato.woahelper.util.RAM;
 public class MainActivity extends AppCompatActivity {
 
 	public final class BuildConfig {
-	public static final String VERSION_NAME = "1.8.4_BETA39";
+	public static final String VERSION_NAME = "1.8.4_BETA40";
 	}
 //	static final Object lock = new Object();
 	private static final float SIZE = 12.0F;
@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
 		ProgressBar bar = dialog.findViewById(R.id.progress);
 //		DisplayMetrics metrics = this.getResources().getDisplayMetrics();
 		Drawable android = ResourcesCompat.getDrawable(this.getResources(), R.drawable.android, null);
-		Drawable atlasos = ResourcesCompat.getDrawable(this.getResources(), R.drawable.atlasos2, null);
+		Drawable atlasrevi = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_ar_mainactivity, null);
 		Drawable boot = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_disk, null);
 		Drawable download = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_download, null);
 		Drawable edge = ResourcesCompat.getDrawable(this.getResources(), R.drawable.edge2, null);
@@ -216,6 +216,9 @@ public class MainActivity extends AppCompatActivity {
 		Drawable sensors = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_sensor, null);
 		Drawable settings = ResourcesCompat.getDrawable(this.getResources(), R.drawable.settings, null);
 		Drawable uefi = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_uefi, null);
+		settings.setColorFilter(BlendModeColorFilterCompat.createBlendModeColorFilterCompat(this.getColor(R.color.md_theme_primary), BlendModeCompat.SRC_IN));
+		Drawable back = ResourcesCompat.getDrawable(this.getResources(), R.drawable.back_arrow, null);
+		back.setColorFilter(BlendModeColorFilterCompat.createBlendModeColorFilterCompat(this.getColor(R.color.md_theme_primary), BlendModeCompat.SRC_IN));
 		this.x.toolbarlayout.settings.setImageDrawable(settings);
 
 		String slot = ShellUtils.fastCmd("getprop ro.boot.slot_suffix");
@@ -425,6 +428,7 @@ public class MainActivity extends AppCompatActivity {
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.hotdog, null));
 					this.n.cvDumpModem.setVisibility(View.VISIBLE);
 					this.n.cvDbkp.setVisibility(View.VISIBLE);
+					this.n.cvDevcfg.setVisibility(View.VISIBLE);
 					this.n.cvFlashUefi.setVisibility(View.GONE);
 				}
 				case "guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO" -> {
@@ -433,6 +437,7 @@ public class MainActivity extends AppCompatActivity {
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.guacamole, null));
 					this.n.cvDumpModem.setVisibility(View.VISIBLE);
 					this.n.cvDbkp.setVisibility(View.VISIBLE);
+					this.n.cvDevcfg.setVisibility(View.VISIBLE);
 					this.n.cvFlashUefi.setVisibility(View.GONE);
 				}
 				case "guacamoleb", "hotdogb", "OnePlus7T", "OnePlus7" -> {
@@ -558,6 +563,16 @@ public class MainActivity extends AppCompatActivity {
 					this.grouplink = "https://t.me/dumanthecat";
 					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.redfin, null));
 				}
+				case "haotian" -> {
+					this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
+					this.grouplink = "https://t.me/dumanthecat";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.haotian, null));
+				}
+				case "Nord", "nord" -> {
+					this.guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
+					this.grouplink = "https://t.me/dikeckaan";
+					this.x.DeviceImage.setImageDrawable(ResourcesCompat.getDrawable(this.getResources(), R.drawable.nord, null));
+				}
 				case "nx729j", "NX729J" -> {
 					this.guidelink = "https://github.com/Project-Silicium/Mu-Silicium";
 					this.grouplink = "https://t.me/woahelperchat";
@@ -590,9 +605,9 @@ public class MainActivity extends AppCompatActivity {
 			@Override
 			public void run() {
 				if (Boolean.FALSE.equals(Shell.isAppGrantedRoot())) {
-					noRoot();
+					checkRoot();
 				} else {
-					checkupdate(true);
+					checkupdate();
 				}
 			}
 		}, 5);
@@ -1113,6 +1128,70 @@ public class MainActivity extends AppCompatActivity {
 			dialog.show();
 		});
 		
+		this.n.cvDevcfg.setOnClickListener(v -> {
+			this.ShowBlur();
+			noButton.setVisibility(View.VISIBLE);
+			yesButton.setVisibility(View.VISIBLE);
+			dismissButton.setVisibility(View.GONE);
+			icons.setVisibility(View.VISIBLE);
+			icons.setImageDrawable(uefi);
+			messages.setText(this.getString(R.string.devcfg_question, this.dbkpmodel));
+			noButton.setText(this.getString(R.string.no));
+			yesButton.setText(this.getString(R.string.yes));
+			if (!isNetworkConnected(this)) {
+				noButton.setVisibility(View.GONE);
+				yesButton.setVisibility(View.GONE);
+				dismissButton.setVisibility(View.VISIBLE);
+				dismissButton.setText(this.getString(R.string.dismiss));
+				messages.setText(this.getString(R.string.internet));
+			}
+			noButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					MainActivity.this.HideBlur();
+					dialog.dismiss();
+				}
+			});
+			yesButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					noButton.setVisibility(View.GONE);
+					yesButton.setVisibility(View.GONE);
+					dismissButton.setVisibility(View.GONE);
+					messages.setText(MainActivity.this.getString(R.string.please_wait));
+					icons.setVisibility(View.VISIBLE);
+					new Thread(()->{
+						ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=/sdcard/original-devcfg.img");
+						ShellUtils.fastCmd("cp /sdcard/boot.img /sdcard/dbkp/boot.img");
+						String bedan = ShellUtils.fastCmd("getprop ro.product.device");
+						if ("guacamole".equals(bedan) || "OnePlus7Pro".equals(bedan) || "OnePlus7Pro4G".equals(bedan)) {
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_guacamole.img -O /sdcard/OOS11_devcfg_guacamole.img\" | su -mm -c sh");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_guacamole.img -O /sdcard/Download/OOS12_devcfg_guacamole.img\" | su -mm -c sh");
+							ShellUtils.fastCmd("dd bs=8M if=/sdcard/OOS11_devcfg_guacamole.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)");
+						} else if ("hotdog".equals(bedan) || "OnePlus7TPro".equals(bedan) || "OnePlus7TPro4G".equals(bedan)) {
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_hotdog.img -O /sdcard/OOS11_devcfg_hotdog.img\" | su -mm -c sh");
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_hotdog.img -O /sdcard/Download/OOS12_devcfg_hotdog.img\" | su -mm -c sh");
+							ShellUtils.fastCmd("dd bs=8M if=/sdcard/OOS11_devcfg_hotdog.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)");
+						}
+						runOnUiThread(()->{
+							messages.setText(getString(R.string.devcfg));
+							dismissButton.setText(getString(R.string.dismiss));
+							dismissButton.setVisibility(View.VISIBLE);
+							dismissButton.setOnClickListener(new View.OnClickListener() {
+								@Override
+								public void onClick(View v) {
+									MainActivity.this.HideBlur();
+									dialog.dismiss();
+								}
+							});
+						});
+					}).start();
+				}
+			});
+			dialog.setCancelable(false);
+			dialog.show();
+		});
+		
 		this.n.cvSoftware.setOnClickListener(v -> {
 			this.ShowBlur();
 			noButton.setVisibility(View.VISIBLE);
@@ -1169,7 +1248,7 @@ public class MainActivity extends AppCompatActivity {
 			yesButton.setVisibility(View.VISIBLE);
 			dismissButton.setVisibility(View.VISIBLE);
 			icons.setVisibility(View.VISIBLE);
-			icons.setImageDrawable(atlasos);
+			icons.setImageDrawable(atlasrevi);
 			messages.setText(this.getString(R.string.atlasos_question));
 			noButton.setText(this.getString(R.string.revios));
 			yesButton.setText(this.getString(R.string.atlasos));
@@ -1223,7 +1302,7 @@ public class MainActivity extends AppCompatActivity {
 										dialog.dismiss();
 										mountfail();
 									} else {
-										icons.setImageDrawable(atlasos);
+										icons.setImageDrawable(atlasrevi);
 										ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/Toolbox || true ");
 										ShellUtils.fastCmd("cp /sdcard/ReviPlaybook.apbx " + MainActivity.this.winpath + "/Toolbox/ReviPlaybook.apbx");
 										ShellUtils.fastCmd("cp /sdcard/AMEWizardBeta.zip " + MainActivity.this.winpath + "/Toolbox");
@@ -1265,8 +1344,10 @@ public class MainActivity extends AppCompatActivity {
 								throw new RuntimeException(e);
 							}
 							bar.setProgress((int) (bar.getMax() * 0.00), true);
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook.apbx -O /sdcard/AtlasPlaybook.apbx\" | su -mm -c sh");
-							bar.setProgress((int) (bar.getMax() * 0.5), true);
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook.apbx -O /sdcard/AtlasPlaybook_v0.4.1.apbx\" | su -mm -c sh");
+							bar.setProgress((int) (bar.getMax() * 0.35), true);
+							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook_v0.4.0_23H2Only.apbx -O /sdcard/AtlasPlaybook_v0.4.0_23H2Only.apbx\" | su -mm -c sh");
+							bar.setProgress((int) (bar.getMax() * 0.6), true);
 							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://download.ameliorated.io/AME%20Wizard%20Beta.zip -O /sdcard/AMEWizardBeta.zip\" | su -mm -c sh");
 							bar.setProgress((int) (bar.getMax() * 0.8), true);
 							MainActivity.this.runOnUiThread(new Runnable() {
@@ -1278,11 +1359,13 @@ public class MainActivity extends AppCompatActivity {
 										dialog.dismiss();
 										mountfail();
 									} else {
-										icons.setImageDrawable(atlasos);
+										icons.setImageDrawable(atlasrevi);
 										ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/Toolbox || true ");
-										ShellUtils.fastCmd("cp /sdcard/AtlasPlaybook.apbx " + MainActivity.this.winpath + "/Toolbox/AtlasPlaybook.apbx");
+										ShellUtils.fastCmd("cp /sdcard/AtlasPlaybook.apbx " + MainActivity.this.winpath + "/Toolbox/AtlasPlaybook_v0.4.1.apbx");
+										ShellUtils.fastCmd("cp /sdcard/AtlasPlaybook.apbx " + MainActivity.this.winpath + "/Toolbox/AtlasPlaybook_v0.4.0_23H2Only.apbx");
 										ShellUtils.fastCmd("cp /sdcard/AMEWizardBeta.zip " + MainActivity.this.winpath + "/Toolbox");
-										ShellUtils.fastCmd("su -mm -c rm /sdcard/AtlasPlaybook.apbx");
+										ShellUtils.fastCmd("su -mm -c rm /sdcard/AtlasPlaybook_v0.4.1.apbx");
+										ShellUtils.fastCmd("su -mm -c rm /sdcard/AtlasPlaybook_v0.4.0_23H2Only.apbx");
 										ShellUtils.fastCmd("su -mm -c rm /sdcard/AMEWizardBeta.zip");
 										bar.setVisibility(View.GONE);
 										messages.setText(getString(R.string.done));
@@ -1827,7 +1910,7 @@ public class MainActivity extends AppCompatActivity {
 		ShellUtils.fastCmd("su -mm -c dd if=/dev/block/by-name/modemst2 of=$(find " + this.winpath + "/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/bootmodem_fs2");
 	}
 
-	public void noRoot(){
+	public void checkRoot(){
 		final Dialog dialog = new Dialog(this);
 		dialog.setContentView(R.layout.dialog);
 		dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -1848,7 +1931,7 @@ public class MainActivity extends AppCompatActivity {
 		yesButton.setVisibility(View.GONE);
 		noButton.setVisibility(View.GONE);
 		dismissButton.setVisibility(View.GONE);
-		String[] supported = {"a52sxq", "alpha_lao_com", "alphalm_lao_com", "alphaplus_lao_com", "alphalm", "alphaplus", "alioth", "andromeda", "betalm", "betalm_lao_com", "beryllium", "bhima", "cepheus", "cheeseburger", "chiron", "curtana2", "curtana", "curtana_india", "curtana_cn", "curtanacn", "cmi", "davinci", "dumpling", "dipper", "durandal", "durandal_india", "dm3q", "dm3", "enchilada", "equuleus", "excalibur", "excalibur_india", "e3q", "flashlmdd", "flash_lao_com", "flashlm", "flashlmdd_lao_com", "fajita", "guacamole", "guacamoleb", "guacamoleg", "guacamoles", "guacamolet", "gram", "gts6l", "gts6lwifi", "hotdog", "hotdogb", "hotdogg", "houji", "husky", "ursa", "joan", "joyeuse", "judyln", "judyp", "judypn", "karna", "lisa", "marble", "meizu20pro", "meizu20Pro", "mh2lm", "mh2lm_lao_com", "mh2lm5g", "mh2lm5g_lao_com", "miatoll", "nabu", "nx729j", "NX729J", "OnePlus5", "OnePlus5T", "OnePlus6", "OnePlus6T", "OnePlus6TSingle", "OnePlus7", "OnePlus7Pro", "OnePlus7ProNR", "OnePlus7ProTMO", "OnePlus7Pro4G", "OnePlus7T", "OnePlus7TPro", "OnePlus7TPro4G", "OnePlus7TPro5G", "OnePlus7TProNR", "OP7ProNRSpr", "pipa", "perseus", "polaris", "Pong", "pong", "q2q", "raphael", "raphaelin", "raphaels", "redfin", "RMX2170", "RMX2061", "sagit", "surya", "vayu", "venus", "winner", "winnerx", "xpeng", "herolte", "beyond1lte", "beyond1qlte", "beyond1", "ingres", "vili", "lavender", "star2qlte", "star2qltechn", "r3q"};
+		String[] supported = {"a52sxq", "alpha_lao_com", "alphalm_lao_com", "alphaplus_lao_com", "alphalm", "alphaplus", "alioth", "andromeda", "betalm", "betalm_lao_com", "beryllium", "bhima", "cepheus", "cheeseburger", "chiron", "curtana2", "curtana", "curtana_india", "curtana_cn", "curtanacn", "cmi", "davinci", "dumpling", "dipper", "durandal", "durandal_india", "dm3q", "dm3", "enchilada", "equuleus", "excalibur", "excalibur_india", "e3q", "flashlmdd", "flash_lao_com", "flashlm", "flashlmdd_lao_com", "fajita", "guacamole", "guacamoleb", "guacamoleg", "guacamoles", "guacamolet", "gram", "gts6l", "gts6lwifi", "hotdog", "hotdogb", "hotdogg", "houji", "husky", "ursa", "joan", "joyeuse", "judyln", "judyp", "judypn", "karna", "lisa", "marble", "meizu20pro", "meizu20Pro", "mh2lm", "mh2lm_lao_com", "mh2lm5g", "mh2lm5g_lao_com", "miatoll", "nabu", "nx729j", "NX729J", "OnePlus5", "OnePlus5T", "OnePlus6", "OnePlus6T", "OnePlus6TSingle", "OnePlus7", "OnePlus7Pro", "OnePlus7ProNR", "OnePlus7ProTMO", "OnePlus7Pro4G", "OnePlus7T", "OnePlus7TPro", "OnePlus7TPro4G", "OnePlus7TPro5G", "OnePlus7TProNR", "OP7ProNRSpr", "pipa", "perseus", "polaris", "Pong", "pong", "q2q", "raphael", "raphaelin", "raphaels", "redfin", "RMX2170", "RMX2061", "sagit", "surya", "vayu", "venus", "winner", "winnerx", "xpeng", "herolte", "beyond1lte", "beyond1qlte", "beyond1", "ingres", "vili", "lavender", "star2qlte", "star2qltechn", "r3q", "haotian", "Nord", "nord"};
 		this.device = ShellUtils.fastCmd("getprop ro.product.device ");
 		this.model = ShellUtils.fastCmd("getprop ro.product.model");
 		if (!Arrays.asList(supported).contains(this.device)) {
@@ -2001,50 +2084,48 @@ public class MainActivity extends AppCompatActivity {
 			}
 		}
 	}
-
-	private void updatePopup(){
-		final Dialog dialog = new Dialog(this);
-		dialog.setContentView(R.layout.dialog);
-		dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-		MaterialButton yesButton = dialog.findViewById(R.id.yes);
-		MaterialButton noButton = dialog.findViewById(R.id.no);
-		TextView messages = dialog.findViewById(R.id.messages);
-		yesButton.setVisibility(View.VISIBLE);
-		noButton.setVisibility(View.VISIBLE);
-		messages.setText(getString(R.string.update1));
-		yesButton.setText(getString(R.string.update));
-		noButton.setText(getString(R.string.later));
-		dialog.show();
-		dialog.setCancelable(false);
-		noButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dialog.dismiss();
+	
+	public void checkupdate() {
+		if (!pref.getAppUpdate(this)) {
+			if (!MainActivity.isNetworkConnected(this)) {
+				checkdbkpmodel();
+			} else {
+				String version = ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget -q -O - https://raw.githubusercontent.com/n00b69/woa-helper-update/main/README.md\" | su -mm -c sh");
+				if (BuildConfig.VERSION_NAME.equals(version)) {
+					checkdbkpmodel();
+				} else {
+					checkdbkpmodel();
+					final Dialog dialog = new Dialog(this);
+					dialog.setContentView(R.layout.dialog);
+					dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+					MaterialButton yesButton = dialog.findViewById(R.id.yes);
+					MaterialButton noButton = dialog.findViewById(R.id.no);
+					TextView messages = dialog.findViewById(R.id.messages);
+					yesButton.setVisibility(View.VISIBLE);
+					noButton.setVisibility(View.VISIBLE);
+					messages.setText(getString(R.string.update1));
+					yesButton.setText(getString(R.string.update));
+					noButton.setText(getString(R.string.later));
+					dialog.show();
+					dialog.setCancelable(false);
+					noButton.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							dialog.dismiss();
+						}
+					});
+					yesButton.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							yesButton.setVisibility(View.GONE);
+							noButton.setVisibility(View.GONE);
+							messages.setText(MainActivity.this.getString(R.string.update2) + "\n" + MainActivity.this.getString(R.string.please_wait));
+							update();
+						}
+					});
+				}
 			}
-		});
-		yesButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				yesButton.setVisibility(View.GONE);
-				noButton.setVisibility(View.GONE);
-				messages.setText(MainActivity.this.getString(R.string.update2) + "\n" + MainActivity.this.getString(R.string.please_wait));
-				update();
-			}
-		});
-	}
-
-	public void checkupdate(boolean auto) {
-		if (pref.getAppUpdate(this)) return;
-		if (!MainActivity.isNetworkConnected(this)) return;
-
-		String version = ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget -q -O - https://raw.githubusercontent.com/n00b69/woa-helper-update/main/README.md\" | su -mm -c sh");
-
-		if (BuildConfig.VERSION_NAME.equals(version)) return;
-
-		if(auto)
-			findViewById(R.id.update).setVisibility(View.VISIBLE);
-		else
-			updatePopup();
+		}	
 	}
 	
 	public void update() {
@@ -2100,7 +2181,6 @@ public class MainActivity extends AppCompatActivity {
 		TextView myTextView6 = this.findViewById(R.id.group_text);
 		TextView myTextView7 = this.findViewById(R.id.tv_slot);
 		TextView myTextView8 = this.findViewById(R.id.tv_date);
-		TextView myTextView9 = this.findViewById(R.id.update);
 		if (Configuration.ORIENTATION_LANDSCAPE != newConfig.orientation && Objects.equals(this.device, "nabu") || Objects.equals(this.device, "pipa") || Objects.equals(this.device, "winner") || Objects.equals(this.device, "winnerx") || Objects.equals(this.device, "q2q") || Objects.equals(this.device, "gts6l") || Objects.equals(this.device, "gts6lwifi")) {
 			this.x.app.setOrientation(LinearLayout.VERTICAL);
 			this.x.top.setOrientation(LinearLayout.HORIZONTAL);
@@ -2112,7 +2192,6 @@ public class MainActivity extends AppCompatActivity {
 			myTextView6.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
 			myTextView7.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
 			myTextView8.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
-			myTextView9.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
 		} else if (Configuration.ORIENTATION_PORTRAIT != newConfig.orientation && Objects.equals(this.device, "nabu") || Objects.equals(this.device, "pipa") || Objects.equals(this.device, "winner") || Objects.equals(this.device, "winnerx") || Objects.equals(this.device, "q2q") || Objects.equals(this.device, "gts6l") || Objects.equals(this.device, "gts6lwifi")) {
 			this.x.app.setOrientation(LinearLayout.HORIZONTAL);
 			this.x.top.setOrientation(LinearLayout.VERTICAL);
@@ -2124,7 +2203,6 @@ public class MainActivity extends AppCompatActivity {
 			myTextView6.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
 			myTextView7.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
 			myTextView8.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
-			myTextView9.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
 		}
 	}
 
