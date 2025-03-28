@@ -1162,7 +1162,6 @@ public class MainActivity extends AppCompatActivity {
 					icons.setVisibility(View.VISIBLE);
 					new Thread(()->{
 						ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=/sdcard/original-devcfg.img");
-						ShellUtils.fastCmd("cp /sdcard/boot.img /sdcard/dbkp/boot.img");
 						String bedan = ShellUtils.fastCmd("getprop ro.product.device");
 						if ("guacamole".equals(bedan) || "OnePlus7Pro".equals(bedan) || "OnePlus7Pro4G".equals(bedan)) {
 							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_guacamole.img -O /sdcard/OOS11_devcfg_guacamole.img\" | su -mm -c sh");
