@@ -2167,8 +2167,12 @@ public class MainActivity extends AppCompatActivity {
 		String dbkpmodel = ShellUtils.fastCmd("getprop ro.product.device");
 		if ("guacamole".equals(dbkpmodel) || "guacamolet".equals(dbkpmodel) || "OnePlus7Pro".equals(dbkpmodel) || "OnePlus7Pro4G".equals(dbkpmodel) || "OnePlus7ProTMO".equals(dbkpmodel)) {
 			this.dbkpmodel = "ONEPLUS 7 PRO";
+			if(!pref.getDevcfg1(this))
+				this.k.devcfg2.setVisibility(View.GONE);
 		} else if ("hotdog".equals(dbkpmodel) || "OnePlus7TPro".equals(dbkpmodel) || "OnePlus7TPro4G".equals(dbkpmodel)) {
 			this.dbkpmodel = "ONEPLUS 7T PRO";
+			if(!pref.getDevcfg1(this))
+				this.k.devcfg2.setVisibility(View.GONE);
 		} else if ("cepheus".equals(dbkpmodel)) {
 			this.dbkpmodel = "XIAOMI MI 9";
 			this.k.devcfg1.setVisibility(View.GONE);
