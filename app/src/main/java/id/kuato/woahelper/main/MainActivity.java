@@ -1915,7 +1915,7 @@ public class MainActivity extends AppCompatActivity {
 			}
 		});
 		
-		this.k.devcfg1.setOnCheckedChangeListener((compoundButton, b) -> {pref.setDevcfg1(this, b);k.devcfg2.setVisibility(b?View.GONE:View.VISIBLE);});
+
 
 		this.x.cvInfo.setOnClickListener(v -> {
 			this.ShowBlur();
@@ -1972,7 +1972,7 @@ public class MainActivity extends AppCompatActivity {
 		this.k.securelock.setOnCheckedChangeListener((compoundButton, b) -> pref.setSecure(this, !b));
 		this.k.automount.setOnCheckedChangeListener((compoundButton, b) -> pref.setAutoMount(this, b));
 		this.k.appUpdate.setOnCheckedChangeListener((compoundButton, b) -> pref.setAppUpdate(this, b));
-		this.k.devcfg1.setOnCheckedChangeListener((compoundButton, b) -> pref.setDevcfg1(this, b));
+		this.k.devcfg1.setOnCheckedChangeListener((compoundButton, b) -> {pref.setDevcfg1(this, b);if(b)k.devcfg2.setVisibility(View.VISIBLE); else k.devcfg2.setVisibility(View.GONE);pref.setDevcfg2(this, false);});
 		this.k.devcfg2.setOnCheckedChangeListener((compoundButton, b) -> pref.setDevcfg2(this, b));
 		this.k.button.setOnClickListener(v -> {
 		this.k.settingsPanel.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_out));
