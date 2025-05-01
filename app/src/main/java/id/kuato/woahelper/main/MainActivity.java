@@ -1844,7 +1844,7 @@ public class MainActivity extends AppCompatActivity {
 		this.k.securelock.setChecked(!pref.getSecure(this));
 		this.k.mountLocation.setChecked(pref.getMountLocation(this));
 		this.k.appUpdate.setChecked(pref.getAppUpdate(this));
-		this.k.devcfg1.setChecked(pref.getDevcfg1(this));
+		this.k.devcfg1.setChecked(pref.getDevcfg1(this)&&this.k.devcfg1.getVisibility()==View.VISIBLE);
 		this.k.devcfg2.setChecked(pref.getDevcfg2(this));
 		this.k.toolbarlayout.settings.setVisibility(View.GONE);
 		//k.language.setText(R.string.language);
