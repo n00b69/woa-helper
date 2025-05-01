@@ -9,13 +9,13 @@ public enum pref {
     ;
 
     public static final String modem = "woa unsupported modem";
-    public static final String backup_quick = "woa backup when quickboot";
+    public static final String backup_quick = "woa backup when quickboot windows";
     public static final String backup_quick_A = "woa backup when quickboot android";
     public static final String backup_date = "woa last backup date";
     public static final String agreed = "woa unsupported";
 	public static final String agreedntfs = "ntfs unsupported";
-    public static final String autobackup = "woa autobackup";
-    public static final String autobackup_A = "woa autobackup android";
+    public static final String autobackup = "woa force autobackup windows";
+    public static final String autobackup_A = "woa force autobackup android";
     public static final String confirmation = "woa quickboot confirmation";
     public static final String autoMount = "woa auto mount preference";
     public static final String secure = "woa secure tile";
@@ -24,6 +24,8 @@ public enum pref {
     public static final String version = "woa last app version";
     public static final String mountLocation = "woa mount location";
 	public static final String appUpdate = "woa app update";
+	public static final String devcfg1 = "devcfg flasher";
+	public static final String devcfg2 = "devcfg flasher & check for sdd.exe etc.";
 
     public static SharedPreferences getSharedPreference(final Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context);
@@ -189,5 +191,26 @@ public enum pref {
     public static boolean getAppUpdate(final Context context) {
         return pref.getSharedPreference(context).getBoolean(pref.appUpdate, false);
     }
+	
+	public static boolean getDevcfg1(final Context context) {
+        return pref.getSharedPreference(context).getBoolean(pref.devcfg1, false);
+    }
+	
+	public static boolean getDevcfg2(final Context context) {
+        return pref.getSharedPreference(context).getBoolean(pref.devcfg2, false);
+    }
+	
+	public static void setDevcfg1(final Context context, final boolean value) {
+        final SharedPreferences.Editor editor = pref.getSharedPreference(context).edit();
+        editor.putBoolean(pref.devcfg1, value);
+        editor.apply();
+    }
+	
+	public static void setDevcfg2(final Context context, final boolean value) {
+        final SharedPreferences.Editor editor = pref.getSharedPreference(context).edit();
+        editor.putBoolean(pref.devcfg2, value);
+        editor.apply();
+    }
+	
 }
 

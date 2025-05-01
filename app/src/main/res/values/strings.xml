@@ -78,6 +78,7 @@
 	<string name="op7">alert slider</string>
 	<string name="cepheus">assistant button</string>
 	<string name="nabu">magnetic case</string>
+	<string name="nabu2">volume buttons</string>
 	<string name="reboot">Reboot</string>
 	<string name="cancel">Cancel</string>
 	<string name="mounted">Windows mounted</string>
@@ -128,6 +129,8 @@
 	<string name="preference9">Require unlocked screen for quickboot</string>
 	<string name="preference10">Mount Windows to /mnt instead of /sdcard</string>
 	<string name="preference11">Disable checking for app updates</string>
+	<string name="preference12">Flash OOS11 devcfg when quickbooting</string>
+	<string name="preference13">Check for required files when flashing devcfg</string>
 	
 	<string name="uefiChk" translatable="false">su -c find /mnt/sdcard/UEFI/ -type f  | grep ".img" | head -n 1 </string>
 	
