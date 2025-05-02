@@ -98,7 +98,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/_5sdp"
-            android:text="@string/preference13" />
+            android:text="@string/preference13"
+            android:visibility="gone"			/>
 			
         <Button
             android:id="@+id/button"

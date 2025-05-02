@@ -61,7 +61,7 @@ import id.kuato.woahelper.util.RAM;
 public class MainActivity extends AppCompatActivity {
 
 	public final class BuildConfig {
-	public static final String VERSION_NAME = "DO NOT DISTRIBUTE 3";
+	public static final String VERSION_NAME = "1.8.4_BETA41";
 	}
 //	static final Object lock = new Object();
 	private static final float SIZE = 12.0F;
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	private void copyAssets() {
-		ShellUtils.fastCmd(String.format("rm %s/*", this.getFilesDir()));
+		//ShellUtils.fastCmd(String.format("rm %s/*", this.getFilesDir()));
 		AssetManager assetManager = this.getAssets();
 		String[] files = null;
 		try {
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		if (Objects.equals(currentVersion, pref.getVersion(this))) {
-			String[] files = {"dbkp8150.cfg", "dbkp.hotdog.bin", "dbkp.cepheus.bin", "dbkp.nabu.bin", "dbkp.nabu.bin", "dbkp.pipa.bin", "install.bat", "sta.exe", "sdd.exe", "sdd.conf", "devcfg-sdd.conf", "Flash Devcfg.lnk", "Switch to Android.lnk", "boot_img_auto-flasher_V1.1.exe", "Optimized_Taskbar_Control_V3.0.exe", "usbhostmode.exe", "USB Host Mode.lnk", "ARMSoftware.url", "ARMRepo.url", "TestedSoftware.url", "WorksOnWoa.url", "RemoveEdge.bat"};
+			String[] files = {"ARMRepo.url", "ARMSoftware.url", "boot_img_auto-flasher_V1.1.exe", "dbkp.cepheus.bin", "dbkp.hotdog.bin", "dbkp.nabu.bin", "dbkp.nabu2.bin", "dbkp8150.cfg", "devcfg-sdd.conf", "devcfg-boot-sdd.conf", "Flash Devcfg.lnk", "install.bat", "Optimized_Taskbar_Control_V3.1.exe", "QuickRotate_V3.0.exe", "RemoveEdge.bat", "sdd.conf", "sdd.exe", "sta.exe", "Switch to Android.lnk", "TestedSoftware.url", "USB Host Mode.lnk", "usbhostmode.exe", "WorksOnWoa.url"};
 			int i = 0;
 			while (!files[i].isEmpty()) {
 				if (ShellUtils.fastCmd(String.format("ls %1$s |grep %2$s", getFilesDir(), files[i])).isEmpty()) {
@@ -779,82 +779,98 @@ public class MainActivity extends AppCompatActivity {
 			noButton.setText(this.getString(R.string.no));
 			yesButton.setText(this.getString(R.string.yes));
 			dismissButton.setText(this.getString(R.string.dismiss));
-			yesButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					yesButton.setVisibility(View.GONE);
-					noButton.setVisibility(View.GONE);
-					messages.setText(getString(R.string.please_wait));
-					new Handler().postDelayed(new Runnable() {
-						@Override
-						public void run() {
-							MainActivity.this.mount();
-							String found = ShellUtils.fastCmd("ls " + (pref.getMountLocation(MainActivity.this) ? "/mnt/Windows" : "/mnt/sdcard/Windows") + " | grep boot.img");
-							if (pref.getBACKUP(MainActivity.this) || (!pref.getAUTO(MainActivity.this) && found.isEmpty())) {
-								winBackup();
-								SimpleDateFormat sdf = new SimpleDateFormat("dd-MM HH:mm", Locale.US);
-								String currentDateAndTime = sdf.format(new Date());
-								pref.setDATE(MainActivity.this, currentDateAndTime);
-							}
-							found = ShellUtils.fastCmd("find /sdcard | grep boot.img");
-							if (pref.getBACKUP_A(MainActivity.this) || (!pref.getAUTO_A(MainActivity.this) && found.isEmpty())) {
-								MainActivity.this.androidBackup();
-								SimpleDateFormat sdf = new SimpleDateFormat("dd-MM HH:mm", Locale.US);
-								String currentDateAndTime = sdf.format(new Date());
-								pref.setDATE(MainActivity.this, currentDateAndTime);
-							}
-							if (pref.getDevcfg1(MainActivity.this)) {
-								String findoos11devcfg = ShellUtils.fastCmd("find /sdcard/ -name OOS11_devcfg_*");
-								if (findoos11devcfg.isEmpty()) {
-									new Thread(()->{
-										ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=/sdcard/original-devcfg.img");
-										String bedan = ShellUtils.fastCmd("getprop ro.product.device");
-										if ("guacamole".equals(bedan) || "OnePlus7Pro".equals(bedan) || "OnePlus7Pro4G".equals(bedan)) {
-											ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_guacamole.img -O /sdcard/OOS11_devcfg_guacamole.img\" | su -mm -c sh");
-											ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_guacamole.img -O /sdcard/Download/OOS12_devcfg_guacamole.img\" | su -mm -c sh");
-											ShellUtils.fastCmd("dd bs=8M if=/sdcard/OOS11_devcfg_guacamole.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)");
-										} else if ("hotdog".equals(bedan) || "OnePlus7TPro".equals(bedan) || "OnePlus7TPro4G".equals(bedan)) {
-											ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_hotdog.img -O /sdcard/OOS11_devcfg_hotdog.img\" | su -mm -c sh");
-											ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_hotdog.img -O /sdcard/Download/OOS12_devcfg_hotdog.img\" | su -mm -c sh");
-											ShellUtils.fastCmd("dd bs=8M if=/sdcard/OOS11_devcfg_hotdog.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)");
-										}
-									}).start();
-								} else {
-									ShellUtils.fastCmd("dd bs=8M if=" + findoos11devcfg + " of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)");
+			if (pref.getDevcfg1(MainActivity.this) && (!isNetworkConnected(MainActivity.this))) {
+				String findoos11devcfg = ShellUtils.fastCmd("find " + MainActivity.this.getFilesDir() + " -maxdepth 1 -name OOS11_devcfg_*");
+				if (findoos11devcfg.isEmpty()) {
+					dialog.dismiss();
+					nointernet();
+				}
+			} else {
+				yesButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						yesButton.setVisibility(View.GONE);
+						noButton.setVisibility(View.GONE);
+						messages.setText(getString(R.string.please_wait));
+						new Handler().postDelayed(new Runnable() {
+							@Override
+							public void run() {
+								MainActivity.this.mount();
+								String found = ShellUtils.fastCmd("ls " + (pref.getMountLocation(MainActivity.this) ? "/mnt/Windows" : "/mnt/sdcard/Windows") + " | grep boot.img");
+								if (pref.getBACKUP(MainActivity.this) || (!pref.getAUTO(MainActivity.this) && found.isEmpty())) {
+									winBackup();
+									SimpleDateFormat sdf = new SimpleDateFormat("dd-MM HH:mm", Locale.US);
+									String currentDateAndTime = sdf.format(new Date());
+									pref.setDATE(MainActivity.this, currentDateAndTime);
 								}
+								found = ShellUtils.fastCmd("find /sdcard | grep boot.img");
+								if (pref.getBACKUP_A(MainActivity.this) || (!pref.getAUTO_A(MainActivity.this) && found.isEmpty())) {
+									MainActivity.this.androidBackup();
+									SimpleDateFormat sdf = new SimpleDateFormat("dd-MM HH:mm", Locale.US);
+									String currentDateAndTime = sdf.format(new Date());
+									pref.setDATE(MainActivity.this, currentDateAndTime);
+								}
+								if (pref.getDevcfg1(MainActivity.this)) {
+									String findoos11devcfg = ShellUtils.fastCmd("find " + MainActivity.this.getFilesDir() + " -maxdepth 1 -name OOS11_devcfg_*");
+									if (findoos11devcfg.isEmpty()) {
+										String findoriginaldevcfg = ShellUtils.fastCmd("find " + MainActivity.this.getFilesDir() + " -maxdepth 1 -name original-devcfg.img");
+										if (findoriginaldevcfg.isEmpty()) {
+											ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=" + MainActivity.this.getFilesDir() + "/original-devcfg.img");
+										}
+										ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/original-devcfg.img /sdcard");
+										new Thread(()->{
+											String bedan = ShellUtils.fastCmd("getprop ro.product.device");
+											if ("guacamole".equals(bedan) || "OnePlus7Pro".equals(bedan) || "OnePlus7Pro4G".equals(bedan)) {
+												ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_guacamole.img -O /sdcard/OOS11_devcfg_guacamole.img\" | su -mm -c sh");
+												ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_guacamole.img -O /sdcard/Download/OOS12_devcfg_guacamole.img\" | su -mm -c sh");
+												ShellUtils.fastCmd("cp /sdcard/OOS11_devcfg_guacamole.img " + MainActivity.this.getFilesDir());
+												ShellUtils.fastCmd("cp /sdcard/OOS12_devcfg_guacamole.img " + MainActivity.this.getFilesDir());
+												ShellUtils.fastCmd("dd bs=8M if=" + MainActivity.this.getFilesDir() + "/OOS11_devcfg_guacamole.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)");
+											} else if ("hotdog".equals(bedan) || "OnePlus7TPro".equals(bedan) || "OnePlus7TPro4G".equals(bedan)) {
+												ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_hotdog.img -O /sdcard/OOS11_devcfg_hotdog.img\" | su -mm -c sh");
+												ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_hotdog.img -O /sdcard/Download/OOS12_devcfg_hotdog.img\" | su -mm -c sh");
+												ShellUtils.fastCmd("cp /sdcard/OOS11_devcfg_hotdog.img " + MainActivity.this.getFilesDir());
+												ShellUtils.fastCmd("cp /sdcard/OOS12_devcfg_hotdog.img " + MainActivity.this.getFilesDir());
+												ShellUtils.fastCmd("dd bs=8M if=" + MainActivity.this.getFilesDir() + "/OOS11_devcfg_hotdog.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)");
+											}
+										}).start();
+									} else {
+										ShellUtils.fastCmd("dd bs=8M if=" + findoos11devcfg + " of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)");
+									}
+								}
+								if (pref.getDevcfg2(MainActivity.this) && (pref.getDevcfg1(MainActivity.this))) {
+									mount();
+									ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/sta || true ");
+									ShellUtils.fastCmd("cp '" + MainActivity.this.getFilesDir() + "/Flash Devcfg.lnk' " + MainActivity.this.winpath + "/Users/Public/Desktop");
+									ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.exe " + MainActivity.this.winpath + "/sta/sdd.exe");
+									ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/devcfg-boot-sdd.conf " + MainActivity.this.winpath + "/sta/sdd.conf");
+									ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/original-devcfg.img " + MainActivity.this.winpath + "/original-devcfg.img");
+								}
+								flash(finduefi);
+								ShellUtils.fastCmd("su -c svc power reboot");
+								messages.setText(getString(R.string.wrong));
+								dismissButton.setVisibility(View.VISIBLE);
 							}
-							if (pref.getDevcfg2(MainActivity.this)) {
-								mount();
-								ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/sta || true ");
-								ShellUtils.fastCmd("cp '" + MainActivity.this.getFilesDir() + "/Flash Devcfg.lnk' " + MainActivity.this.winpath + "/Users/Public/Desktop");
-								ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.exe " + MainActivity.this.winpath + "/sta/sdd.exe");
-								ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/devcfg-sdd.conf " + MainActivity.this.winpath + "/sta/sdd.conf");
-								ShellUtils.fastCmd("cp /sdcard/original-devcfg.img " + MainActivity.this.winpath + "/original-devcfg.img");
-							}
-							flash(finduefi);
-							ShellUtils.fastCmd("su -c svc power reboot");
-							messages.setText(getString(R.string.wrong));
-							dismissButton.setVisibility(View.VISIBLE);
-						}
-					}, 25);
-				}
-			});
-			dismissButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					MainActivity.this.HideBlur();
-					dialog.dismiss();
-				}
-			});
-			noButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					MainActivity.this.HideBlur();
-					dialog.dismiss();
-				}
-			});
-			dialog.setCancelable(false);
-			dialog.show();
+						}, 25);
+					}
+				});
+				dismissButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						MainActivity.this.HideBlur();
+						dialog.dismiss();
+					}
+				});
+				noButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						MainActivity.this.HideBlur();
+						dialog.dismiss();
+					}
+				});
+				dialog.setCancelable(false);
+				dialog.show();
+			}
 		});
 
 		this.x.cvToolbox.setOnClickListener(v -> {
@@ -1016,128 +1032,127 @@ public class MainActivity extends AppCompatActivity {
 		});
 		
 		this.n.cvDbkp.setOnClickListener(v -> {
-			String bedan = ShellUtils.fastCmd("getprop ro.product.device");
-			if ("nabu".equals(bedan)) {
-				this.ShowBlur();
-				noButton.setVisibility(View.VISIBLE);
-				yesButton.setVisibility(View.VISIBLE);
-				dismissButton.setVisibility(View.VISIBLE);
-				icons.setVisibility(View.VISIBLE);
-				icons.setImageDrawable(uefi);
-				messages.setText(this.getString(R.string.dbkp_question, "MI PAD 5"));
-				noButton.setText(this.getString(R.string.no));
-				yesButton.setText(this.getString(R.string.nabu));
-				dismissButton.setText(this.getString(R.string.nabu2));
-				if (!isNetworkConnected(this)) {
-					noButton.setVisibility(View.GONE);
-					yesButton.setVisibility(View.GONE);
-					dismissButton.setVisibility(View.VISIBLE);
-					dismissButton.setText(this.getString(R.string.dismiss));
-					messages.setText(this.getString(R.string.internet));
-				}
-				noButton.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						MainActivity.this.HideBlur();
-						dialog.dismiss();
-					}
-				});
-				yesButton.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						noButton.setVisibility(View.GONE);
-						yesButton.setVisibility(View.GONE);
-						dismissButton.setVisibility(View.GONE);
-						messages.setText(MainActivity.this.getString(R.string.please_wait));
-						icons.setVisibility(View.VISIBLE);
-						new Thread(()->{
-							ShellUtils.fastCmd("mkdir /sdcard/dbkp || true");
-							MainActivity.this.androidBackup();
-							ShellUtils.fastCmd("rm /sdcard/original-boot.img || true");
-							ShellUtils.fastCmd("cp /sdcard/boot.img /sdcard/dbkp/boot.img");
-							ShellUtils.fastCmd("su -mm -c mv /sdcard/boot.img /sdcard/original-boot.img");
-							ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp8150.cfg /sdcard/dbkp");
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/DBKP/dbkp -O /sdcard/dbkp/dbkp\" | su -mm -c sh");
-							ShellUtils.fastCmd("cp /sdcard/dbkp/dbkp "+getFilesDir());
-							ShellUtils.fastCmd("chmod 777 " + MainActivity.this.getFilesDir() + "/dbkp");
-							ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp.nabu.bin /sdcard/dbkp");
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/releases/download/1.0/nabu.fd -O /sdcard/dbkp/nabu.fd\" | su -mm -c sh");
-							ShellUtils.fastCmd("cd /sdcard/dbkp");
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) unpack boot.img\" | su -c sh");
-							ShellUtils.fastCmd("su -mm -c " + MainActivity.this.getFilesDir() + "/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/nabu.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp8150.cfg /sdcard/dbkp/dbkp.nabu.bin");
-							ShellUtils.fastCmd("su -mm -c rm /sdcard/dbkp/kernel");
-							ShellUtils.fastCmd("su -mm -c mv output kernel");
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) repack boot.img\" | su -c sh");
-							ShellUtils.fastCmd("su -mm -c cp new-boot.img /sdcard/new-boot.img");
-							ShellUtils.fastCmd("su -mm -c mv /sdcard/new-boot.img /sdcard/patched-boot.img");
-							ShellUtils.fastCmd("rm -r /sdcard/dbkp");
-							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_a bs=16m");
-							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16m");
-							runOnUiThread(()->{
-								String nabu = getString(R.string.nabu);
-								messages.setText(String.format(getString(R.string.dbkp), nabu));
-								dismissButton.setText(getString(R.string.dismiss));
-								dismissButton.setVisibility(View.VISIBLE);
-								dismissButton.setOnClickListener(new View.OnClickListener() {
-									@Override
-									public void onClick(View v) {
-										MainActivity.this.HideBlur();
-										dialog.dismiss();
-									}
+			if (!isNetworkConnected(this)) {
+				dialog.dismiss();
+				nointernet();
+			} else {
+				String bedan = ShellUtils.fastCmd("getprop ro.product.device");
+				if ("nabu".equals(bedan)) {
+					this.ShowBlur();
+					noButton.setVisibility(View.VISIBLE);
+					yesButton.setVisibility(View.VISIBLE);
+					//dismissButton.setVisibility(View.VISIBLE);
+					dismissButton.setVisibility(View.GONE);
+					icons.setVisibility(View.VISIBLE);
+					icons.setImageDrawable(uefi);
+					messages.setText(this.getString(R.string.dbkp_question, "MI PAD 5"));
+					noButton.setText(this.getString(R.string.no));
+					yesButton.setText(this.getString(R.string.yes));
+					//yesButton.setText(this.getString(R.string.nabu));
+					//dismissButton.setText(this.getString(R.string.nabu2));
+					noButton.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							MainActivity.this.HideBlur();
+							dialog.dismiss();
+						}
+					});
+					yesButton.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							noButton.setVisibility(View.GONE);
+							yesButton.setVisibility(View.GONE);
+							dismissButton.setVisibility(View.GONE);
+							messages.setText(MainActivity.this.getString(R.string.please_wait));
+							icons.setVisibility(View.VISIBLE);
+							new Thread(()->{
+								ShellUtils.fastCmd("mkdir /sdcard/dbkp || true");
+								MainActivity.this.androidBackup();
+								ShellUtils.fastCmd("rm /sdcard/original-boot.img || true");
+								ShellUtils.fastCmd("cp /sdcard/boot.img /sdcard/dbkp/boot.img");
+								ShellUtils.fastCmd("su -mm -c mv /sdcard/boot.img /sdcard/original-boot.img");
+								ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp8150.cfg /sdcard/dbkp");
+								ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/DBKP/dbkp -O /sdcard/dbkp/dbkp\" | su -mm -c sh");
+								ShellUtils.fastCmd("cp /sdcard/dbkp/dbkp "+getFilesDir());
+								ShellUtils.fastCmd("chmod 777 " + MainActivity.this.getFilesDir() + "/dbkp");
+								ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp.nabu.bin /sdcard/dbkp");
+								ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/releases/download/1.0/nabu.fd -O /sdcard/dbkp/nabu.fd\" | su -mm -c sh");
+								ShellUtils.fastCmd("cd /sdcard/dbkp");
+								ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) unpack boot.img\" | su -c sh");
+								ShellUtils.fastCmd("su -mm -c " + MainActivity.this.getFilesDir() + "/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/nabu.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp8150.cfg /sdcard/dbkp/dbkp.nabu.bin");
+								ShellUtils.fastCmd("su -mm -c rm /sdcard/dbkp/kernel");
+								ShellUtils.fastCmd("su -mm -c mv output kernel");
+								ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) repack boot.img\" | su -c sh");
+								ShellUtils.fastCmd("su -mm -c cp new-boot.img /sdcard/new-boot.img");
+								ShellUtils.fastCmd("su -mm -c mv /sdcard/new-boot.img /sdcard/patched-boot.img");
+								ShellUtils.fastCmd("rm -r /sdcard/dbkp");
+								ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_a bs=16m");
+								ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16m");
+								runOnUiThread(()->{
+									String nabu = getString(R.string.nabu);
+									messages.setText(String.format(getString(R.string.dbkp), nabu));
+									dismissButton.setText(getString(R.string.dismiss));
+									dismissButton.setVisibility(View.VISIBLE);
+									dismissButton.setOnClickListener(new View.OnClickListener() {
+										@Override
+										public void onClick(View v) {
+											MainActivity.this.HideBlur();
+											dialog.dismiss();
+										}
+									});
 								});
-							});
-						}).start();
-					}
-				});
-				dismissButton.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						noButton.setVisibility(View.GONE);
-						yesButton.setVisibility(View.GONE);
-						dismissButton.setVisibility(View.GONE);
-						messages.setText(MainActivity.this.getString(R.string.please_wait));
-						icons.setVisibility(View.VISIBLE);
-						new Thread(()->{
-							ShellUtils.fastCmd("mkdir /sdcard/dbkp || true");
-							MainActivity.this.androidBackup();
-							ShellUtils.fastCmd("rm /sdcard/original-boot.img || true");
-							ShellUtils.fastCmd("cp /sdcard/boot.img /sdcard/dbkp/boot.img");
-							ShellUtils.fastCmd("su -mm -c mv /sdcard/boot.img /sdcard/original-boot.img");
-							ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp8150.cfg /sdcard/dbkp");
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/DBKP/dbkp -O /sdcard/dbkp/dbkp\" | su -mm -c sh");
-							ShellUtils.fastCmd("cp /sdcard/dbkp/dbkp "+getFilesDir());
-							ShellUtils.fastCmd("chmod 777 " + MainActivity.this.getFilesDir() + "/dbkp");
-							ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp.nabu2.bin /sdcard/dbkp");
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/releases/download/1.0/nabu.fd -O /sdcard/dbkp/nabu.fd\" | su -mm -c sh");
-							ShellUtils.fastCmd("cd /sdcard/dbkp");
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) unpack boot.img\" | su -c sh");
-							ShellUtils.fastCmd("su -mm -c " + MainActivity.this.getFilesDir() + "/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/nabu.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp8150.cfg /sdcard/dbkp/dbkp.nabu2.bin");
-							ShellUtils.fastCmd("su -mm -c rm /sdcard/dbkp/kernel");
-							ShellUtils.fastCmd("su -mm -c mv output kernel");
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) repack boot.img\" | su -c sh");
-							ShellUtils.fastCmd("su -mm -c cp new-boot.img /sdcard/new-boot.img");
-							ShellUtils.fastCmd("su -mm -c mv /sdcard/new-boot.img /sdcard/patched-boot.img");
-							ShellUtils.fastCmd("rm -r /sdcard/dbkp");
-							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_a bs=16m");
-							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16m");
-							runOnUiThread(()->{
-								String nabu2 = getString(R.string.nabu2);
-								messages.setText(String.format(getString(R.string.dbkp), nabu2));
-								dismissButton.setText(getString(R.string.dismiss));
-								dismissButton.setVisibility(View.VISIBLE);
-								dismissButton.setOnClickListener(new View.OnClickListener() {
-									@Override
-									public void onClick(View v) {
-										MainActivity.this.HideBlur();
-										dialog.dismiss();
-									}
-								});
-							});
-						}).start();
-					}
-				});
-				dialog.setCancelable(false);
-				dialog.show();
+							}).start();
+						}
+					});
+			//	dismissButton.setOnClickListener(new View.OnClickListener() {
+			//		@Override
+			//		public void onClick(View v) {
+			//			noButton.setVisibility(View.GONE);
+			//			yesButton.setVisibility(View.GONE);
+			//			dismissButton.setVisibility(View.GONE);
+			//			messages.setText(MainActivity.this.getString(R.string.please_wait));
+			//			icons.setVisibility(View.VISIBLE);
+			//			new Thread(()->{
+			//				ShellUtils.fastCmd("mkdir /sdcard/dbkp || true");
+			//				MainActivity.this.androidBackup();
+			//				ShellUtils.fastCmd("rm /sdcard/original-boot.img || true");
+			//				ShellUtils.fastCmd("cp /sdcard/boot.img /sdcard/dbkp/boot.img");
+			//				ShellUtils.fastCmd("su -mm -c mv /sdcard/boot.img /sdcard/original-boot.img");
+			//				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp8150.cfg /sdcard/dbkp");
+			//				ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/DBKP/dbkp -O /sdcard/dbkp/dbkp\" | su -mm -c sh");
+			//				ShellUtils.fastCmd("cp /sdcard/dbkp/dbkp "+getFilesDir());
+			//				ShellUtils.fastCmd("chmod 777 " + MainActivity.this.getFilesDir() + "/dbkp");
+			//				ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/dbkp.nabu2.bin /sdcard/dbkp");
+			//				ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/releases/download/1.0/nabu.fd -O /sdcard/dbkp/nabu.fd\" | su -mm -c sh");
+			//				ShellUtils.fastCmd("cd /sdcard/dbkp");
+			//				ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) unpack boot.img\" | su -c sh");
+			//				ShellUtils.fastCmd("su -mm -c " + MainActivity.this.getFilesDir() + "/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/nabu.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp8150.cfg /sdcard/dbkp/dbkp.nabu2.bin");
+			//				ShellUtils.fastCmd("su -mm -c rm /sdcard/dbkp/kernel");
+			//				ShellUtils.fastCmd("su -mm -c mv output kernel");
+			//				ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) repack boot.img\" | su -c sh");
+			//				ShellUtils.fastCmd("su -mm -c cp new-boot.img /sdcard/new-boot.img");
+			//				ShellUtils.fastCmd("su -mm -c mv /sdcard/new-boot.img /sdcard/patched-boot.img");
+			//				ShellUtils.fastCmd("rm -r /sdcard/dbkp");
+			//				ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_a bs=16m");
+			//				ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16m");
+			//				runOnUiThread(()->{
+			//					String nabu2 = getString(R.string.nabu2);
+			//					messages.setText(String.format(getString(R.string.dbkp), nabu2));
+			//					dismissButton.setText(getString(R.string.dismiss));
+			//					dismissButton.setVisibility(View.VISIBLE);
+			//					dismissButton.setOnClickListener(new View.OnClickListener() {
+			//						@Override
+			//						public void onClick(View v) {
+			//							MainActivity.this.HideBlur();
+			//							dialog.dismiss();
+			//						}
+			//					});
+			//				});
+			//			}).start();
+			//		}
+			//	});
+					dialog.setCancelable(false);
+					dialog.show();
 			} else {
 				this.ShowBlur();
 				noButton.setVisibility(View.VISIBLE);
@@ -1148,13 +1163,6 @@ public class MainActivity extends AppCompatActivity {
 				messages.setText(this.getString(R.string.dbkp_question, this.dbkpmodel));
 				noButton.setText(this.getString(R.string.no));
 				yesButton.setText(this.getString(R.string.yes));
-				if (!isNetworkConnected(this)) {
-					noButton.setVisibility(View.GONE);
-					yesButton.setVisibility(View.GONE);
-					dismissButton.setVisibility(View.VISIBLE);
-					dismissButton.setText(this.getString(R.string.dismiss));
-					messages.setText(this.getString(R.string.internet));
-				}
 				noButton.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -1264,84 +1272,106 @@ public class MainActivity extends AppCompatActivity {
 				dialog.setCancelable(false);
 				dialog.show();
 			}
+			}
 		});
 		
 		this.n.cvDevcfg.setOnClickListener(v -> {
-			this.ShowBlur();
-			noButton.setVisibility(View.VISIBLE);
-			yesButton.setVisibility(View.VISIBLE);
-			dismissButton.setVisibility(View.GONE);
-			icons.setVisibility(View.VISIBLE);
-			icons.setImageDrawable(uefi);
-			checkdbkpmodel();
-			messages.setText(this.getString(R.string.devcfg_question, this.dbkpmodel));
-			noButton.setText(this.getString(R.string.no));
-			yesButton.setText(this.getString(R.string.yes));
 			if (!isNetworkConnected(this)) {
-				noButton.setVisibility(View.GONE);
-				yesButton.setVisibility(View.GONE);
-				dismissButton.setVisibility(View.VISIBLE);
-				dismissButton.setText(this.getString(R.string.dismiss));
-				messages.setText(this.getString(R.string.internet));
-			}
-			noButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					MainActivity.this.HideBlur();
-					dialog.dismiss();
-				}
-			});
-			yesButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					noButton.setVisibility(View.GONE);
-					yesButton.setVisibility(View.GONE);
-					dismissButton.setVisibility(View.GONE);
-					messages.setText(MainActivity.this.getString(R.string.please_wait));
-					icons.setVisibility(View.VISIBLE);
-					new Thread(()->{
-						ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=/sdcard/original-devcfg.img");
-						String bedan = ShellUtils.fastCmd("getprop ro.product.device");
-						if ("guacamole".equals(bedan) || "OnePlus7Pro".equals(bedan) || "OnePlus7Pro4G".equals(bedan)) {
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_guacamole.img -O /sdcard/OOS11_devcfg_guacamole.img\" | su -mm -c sh");
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_guacamole.img -O /sdcard/Download/OOS12_devcfg_guacamole.img\" | su -mm -c sh");
-							ShellUtils.fastCmd("dd bs=8M if=/sdcard/OOS11_devcfg_guacamole.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)");
-						} else if ("hotdog".equals(bedan) || "OnePlus7TPro".equals(bedan) || "OnePlus7TPro4G".equals(bedan)) {
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_hotdog.img -O /sdcard/OOS11_devcfg_hotdog.img\" | su -mm -c sh");
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_hotdog.img -O /sdcard/Download/OOS12_devcfg_hotdog.img\" | su -mm -c sh");
-							ShellUtils.fastCmd("dd bs=8M if=/sdcard/OOS11_devcfg_hotdog.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)");
-						}
-						runOnUiThread(()->{
-							mount();
-							String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
-							if (mnt_stat.isEmpty()) {
-								ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.exe /sdcard/sdd.exe");
-								ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/devcfg-sdd.conf /sdcard/sdd.conf");
-								dialog.dismiss();
-								mountfail();
-							} else {
-								ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/sta || true ");
-								ShellUtils.fastCmd("cp '" + MainActivity.this.getFilesDir() + "/Flash Devcfg.lnk' " + MainActivity.this.winpath + "/Users/Public/Desktop");
-								ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.exe " + MainActivity.this.winpath + "/sta/sdd.exe");
-								ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/devcfg-sdd.conf " + MainActivity.this.winpath + "/sta/sdd.conf");
-								ShellUtils.fastCmd("cp /sdcard/original-devcfg.img " + MainActivity.this.winpath + "/original-devcfg.img");
+				dialog.dismiss();
+				nointernet();
+			} else {
+				this.ShowBlur();
+				noButton.setVisibility(View.VISIBLE);
+				yesButton.setVisibility(View.VISIBLE);
+				dismissButton.setVisibility(View.GONE);
+				icons.setVisibility(View.VISIBLE);
+				icons.setImageDrawable(uefi);
+				checkdbkpmodel();
+				messages.setText(this.getString(R.string.devcfg_question, this.dbkpmodel));
+				noButton.setText(this.getString(R.string.no));
+				yesButton.setText(this.getString(R.string.yes));
+				noButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						MainActivity.this.HideBlur();
+						dialog.dismiss();
+					}
+				});
+				yesButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						noButton.setVisibility(View.GONE);
+						yesButton.setVisibility(View.GONE);
+						dismissButton.setVisibility(View.GONE);
+						messages.setText(MainActivity.this.getString(R.string.please_wait));
+						icons.setVisibility(View.VISIBLE);
+						new Thread(()->{
+							String findoriginaldevcfg = ShellUtils.fastCmd("find " + MainActivity.this.getFilesDir() + " -maxdepth 1 -name original-devcfg.img");
+							if (findoriginaldevcfg.isEmpty()) {
+								ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=" + MainActivity.this.getFilesDir() + "/original-devcfg.img");
 							}
-							messages.setText(getString(R.string.devcfg));
-							dismissButton.setText(getString(R.string.dismiss));
-							dismissButton.setVisibility(View.VISIBLE);
-							dismissButton.setOnClickListener(new View.OnClickListener() {
-								@Override
-								public void onClick(View v) {
-									MainActivity.this.HideBlur();
+							ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/original-devcfg.img /sdcard");
+							if (!isNetworkConnected(MainActivity.this)) {
+								String finddevcfg = ShellUtils.fastCmd("find " + MainActivity.this.getFilesDir() + " -maxdepth 1 -name OOS11_devcfg_*");
+								if (!finddevcfg.isEmpty()) {
 									dialog.dismiss();
+									nointernet();
+								} else {
+									String bedan = ShellUtils.fastCmd("getprop ro.product.device");
+									if ("guacamole".equals(bedan) || "OnePlus7Pro".equals(bedan) || "OnePlus7Pro4G".equals(bedan)) {
+										ShellUtils.fastCmd("dd bs=8M if=" + MainActivity.this.getFilesDir() + "/OOS11_devcfg_guacamole.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)");
+									} else if ("hotdog".equals(bedan) || "OnePlus7TPro".equals(bedan) || "OnePlus7TPro4G".equals(bedan)) {
+										ShellUtils.fastCmd("dd bs=8M if=" + MainActivity.this.getFilesDir() + "/OOS11_devcfg_hotdog.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)");
+									}
 								}
+							} else {
+								String bedan = ShellUtils.fastCmd("getprop ro.product.device");
+								if ("guacamole".equals(bedan) || "OnePlus7Pro".equals(bedan) || "OnePlus7Pro4G".equals(bedan)) {
+									ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_guacamole.img -O /sdcard/OOS11_devcfg_guacamole.img\" | su -mm -c sh");
+									ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_guacamole.img -O /sdcard/OOS12_devcfg_guacamole.img\" | su -mm -c sh");
+									ShellUtils.fastCmd("cp /sdcard/OOS11_devcfg_guacamole.img " + MainActivity.this.getFilesDir());
+									ShellUtils.fastCmd("cp /sdcard/OOS12_devcfg_guacamole.img " + MainActivity.this.getFilesDir());
+									ShellUtils.fastCmd("dd bs=8M if=" + MainActivity.this.getFilesDir() + "/OOS11_devcfg_guacamole.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)");
+								} else if ("hotdog".equals(bedan) || "OnePlus7TPro".equals(bedan) || "OnePlus7TPro4G".equals(bedan)) {
+									ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_hotdog.img -O /sdcard/OOS11_devcfg_hotdog.img\" | su -mm -c sh");
+									ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_hotdog.img -O /sdcard/OOS12_devcfg_hotdog.img\" | su -mm -c sh");
+									ShellUtils.fastCmd("cp /sdcard/OOS11_devcfg_hotdog.img " + MainActivity.this.getFilesDir());
+									ShellUtils.fastCmd("cp /sdcard/OOS12_devcfg_hotdog.img " + MainActivity.this.getFilesDir());
+									ShellUtils.fastCmd("dd bs=8M if=" + MainActivity.this.getFilesDir() + "/OOS11_devcfg_hotdog.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)");
+								}
+							}
+							runOnUiThread(()->{
+								mount();
+								String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
+								if (mnt_stat.isEmpty()) {
+									ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.exe /sdcard/sdd.exe");
+									ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/devcfg-sdd.conf /sdcard/sdd.conf");
+									dialog.dismiss();
+									mountfail();
+								} else {
+									ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/sta || true ");
+									ShellUtils.fastCmd("cp '" + MainActivity.this.getFilesDir() + "/Flash Devcfg.lnk' " + MainActivity.this.winpath + "/Users/Public/Desktop");
+									ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/sdd.exe " + MainActivity.this.winpath + "/sta/sdd.exe");
+									ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/devcfg-sdd.conf " + MainActivity.this.winpath + "/sta/sdd.conf");
+									ShellUtils.fastCmd("cp /sdcard/original-devcfg.img " + MainActivity.this.winpath + "/original-devcfg.img");
+								}
+								messages.setText(getString(R.string.devcfg));
+								dismissButton.setText(getString(R.string.dismiss));
+								dismissButton.setVisibility(View.VISIBLE);
+								dismissButton.setOnClickListener(new View.OnClickListener() {
+									@Override
+									public void onClick(View v) {
+										MainActivity.this.HideBlur();
+										dialog.dismiss();
+									}
+								});
 							});
-						});
-					}).start();
-				}
-			});
-			dialog.setCancelable(false);
-			dialog.show();
+						}).start();
+					}
+				});
+				dialog.setCancelable(false);
+				dialog.show();
+			}
 		});
 		
 		this.n.cvSoftware.setOnClickListener(v -> {
@@ -1395,146 +1425,144 @@ public class MainActivity extends AppCompatActivity {
 		});
 
 		this.n.cvAtlasos.setOnClickListener(v -> {
-			this.ShowBlur();
-			noButton.setVisibility(View.VISIBLE);
-			yesButton.setVisibility(View.VISIBLE);
-			dismissButton.setVisibility(View.VISIBLE);
-			icons.setVisibility(View.VISIBLE);
-			icons.setImageDrawable(atlasrevi);
-			messages.setText(this.getString(R.string.atlasos_question));
-			noButton.setText(this.getString(R.string.revios));
-			yesButton.setText(this.getString(R.string.atlasos));
-			dismissButton.setText(this.getString(R.string.dismiss));
 			if (!isNetworkConnected(this)) {
-				noButton.setVisibility(View.GONE);
-				yesButton.setVisibility(View.GONE);
+				dialog.dismiss();
+				nointernet();
+			} else {
+				this.ShowBlur();
+				noButton.setVisibility(View.VISIBLE);
+				yesButton.setVisibility(View.VISIBLE);
 				dismissButton.setVisibility(View.VISIBLE);
+				icons.setVisibility(View.VISIBLE);
+				icons.setImageDrawable(atlasrevi);
+				messages.setText(this.getString(R.string.atlasos_question));
+				noButton.setText(this.getString(R.string.revios));
+				yesButton.setText(this.getString(R.string.atlasos));
 				dismissButton.setText(this.getString(R.string.dismiss));
-				messages.setText(this.getString(R.string.internet));
+				dismissButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						MainActivity.this.HideBlur();
+						dialog.dismiss();
+					}
+				});
+				noButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						noButton.setVisibility(View.GONE);
+						yesButton.setVisibility(View.GONE);
+						dismissButton.setVisibility(View.GONE);
+						bar.setVisibility(View.VISIBLE);
+						bar.setProgress(0);
+						icons.setVisibility(View.VISIBLE);
+						icons.setImageDrawable(download);
+						messages.setText(MainActivity.this.getString(R.string.please_wait));
+						new Thread(new Runnable() {
+							@Override
+							public void run() {
+								icons.setVisibility(View.VISIBLE);
+								icons.setImageDrawable(download);
+								try {
+									Thread.sleep(100);
+								} catch (InterruptedException e) {
+									throw new RuntimeException(e);
+								}
+								bar.setProgress((int) (bar.getMax() * 0.00), true);
+								ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/ReviOS/ReviPlaybook.apbx -O /sdcard/ReviPlaybook.apbx\" | su -mm -c sh");
+								bar.setProgress((int) (bar.getMax() * 0.5), true);
+								ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://download.ameliorated.io/AME%20Wizard%20Beta.zip -O /sdcard/AMEWizardBeta.zip\" | su -mm -c sh");
+								bar.setProgress((int) (bar.getMax() * 0.8), true);
+								MainActivity.this.runOnUiThread(new Runnable() {
+									@Override
+									public void run() {
+										MainActivity.this.mount();
+										String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
+										if (mnt_stat.isEmpty()) {
+											dialog.dismiss();
+											mountfail();
+										} else {
+											icons.setImageDrawable(atlasrevi);
+											ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/Toolbox || true ");
+											ShellUtils.fastCmd("cp /sdcard/ReviPlaybook.apbx " + MainActivity.this.winpath + "/Toolbox/ReviPlaybook.apbx");
+											ShellUtils.fastCmd("cp /sdcard/AMEWizardBeta.zip " + MainActivity.this.winpath + "/Toolbox");
+											ShellUtils.fastCmd("su -mm -c rm /sdcard/ReviPlaybook.apbx");
+											ShellUtils.fastCmd("su -mm -c rm /sdcard/AMEWizardBeta.zip");
+											bar.setVisibility(View.GONE);
+											messages.setText(getString(R.string.done));
+											dismissButton.setVisibility(View.VISIBLE);
+											dismissButton.setOnClickListener(v7 -> {
+												HideBlur();
+												dialog.dismiss();
+											});
+										}
+									}
+								});
+							}
+						}).start();
+					}
+				});
+				yesButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						noButton.setVisibility(View.GONE);
+						yesButton.setVisibility(View.GONE);
+						dismissButton.setVisibility(View.GONE);
+						bar.setVisibility(View.VISIBLE);
+						bar.setProgress(0);
+						icons.setVisibility(View.VISIBLE);
+						icons.setImageDrawable(download);
+						messages.setText(MainActivity.this.getString(R.string.please_wait));
+						new Thread(new Runnable() {
+							@Override
+							public void run() {
+								icons.setVisibility(View.VISIBLE);
+								icons.setImageDrawable(download);
+								try {
+									Thread.sleep(100);
+								} catch (InterruptedException e) {
+									throw new RuntimeException(e);
+								}
+								bar.setProgress((int) (bar.getMax() * 0.00), true);
+								ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook.apbx -O /sdcard/AtlasPlaybook_v0.4.1.apbx\" | su -mm -c sh");
+								bar.setProgress((int) (bar.getMax() * 0.35), true);
+								ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook_v0.4.0_23H2Only.apbx -O /sdcard/AtlasPlaybook_v0.4.0_23H2Only.apbx\" | su -mm -c sh");
+								bar.setProgress((int) (bar.getMax() * 0.6), true);
+								ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://download.ameliorated.io/AME%20Wizard%20Beta.zip -O /sdcard/AMEWizardBeta.zip\" | su -mm -c sh");
+								bar.setProgress((int) (bar.getMax() * 0.8), true);
+								MainActivity.this.runOnUiThread(new Runnable() {
+									@Override
+									public void run() {
+										MainActivity.this.mount();
+										String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
+										if (mnt_stat.isEmpty()) {
+											dialog.dismiss();
+											mountfail();
+										} else {
+											icons.setImageDrawable(atlasrevi);
+											ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/Toolbox || true ");
+											ShellUtils.fastCmd("cp /sdcard/AtlasPlaybook.apbx " + MainActivity.this.winpath + "/Toolbox/AtlasPlaybook_v0.4.1.apbx");
+											ShellUtils.fastCmd("cp /sdcard/AtlasPlaybook.apbx " + MainActivity.this.winpath + "/Toolbox/AtlasPlaybook_v0.4.0_23H2Only.apbx");
+											ShellUtils.fastCmd("cp /sdcard/AMEWizardBeta.zip " + MainActivity.this.winpath + "/Toolbox");
+											ShellUtils.fastCmd("su -mm -c rm /sdcard/AtlasPlaybook_v0.4.1.apbx");
+											ShellUtils.fastCmd("su -mm -c rm /sdcard/AtlasPlaybook_v0.4.0_23H2Only.apbx");
+											ShellUtils.fastCmd("su -mm -c rm /sdcard/AMEWizardBeta.zip");
+											bar.setVisibility(View.GONE);
+											messages.setText(getString(R.string.done));
+											dismissButton.setVisibility(View.VISIBLE);
+											dismissButton.setOnClickListener(v8 -> {
+												HideBlur();
+												dialog.dismiss();
+											});
+										}
+									}
+								});
+							}
+						}).start();
+					}
+				});
+				dialog.setCancelable(false);
+				dialog.show();
 			}
-			dismissButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					MainActivity.this.HideBlur();
-					dialog.dismiss();
-				}
-			});
-			noButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					noButton.setVisibility(View.GONE);
-					yesButton.setVisibility(View.GONE);
-					dismissButton.setVisibility(View.GONE);
-					bar.setVisibility(View.VISIBLE);
-					bar.setProgress(0);
-					icons.setVisibility(View.VISIBLE);
-					icons.setImageDrawable(download);
-					messages.setText(MainActivity.this.getString(R.string.please_wait));
-					new Thread(new Runnable() {
-						@Override
-						public void run() {
-							icons.setVisibility(View.VISIBLE);
-							icons.setImageDrawable(download);
-							try {
-								Thread.sleep(100);
-							} catch (InterruptedException e) {
-								throw new RuntimeException(e);
-							}
-							bar.setProgress((int) (bar.getMax() * 0.00), true);
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/ReviOS/ReviPlaybook.apbx -O /sdcard/ReviPlaybook.apbx\" | su -mm -c sh");
-							bar.setProgress((int) (bar.getMax() * 0.5), true);
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://download.ameliorated.io/AME%20Wizard%20Beta.zip -O /sdcard/AMEWizardBeta.zip\" | su -mm -c sh");
-							bar.setProgress((int) (bar.getMax() * 0.8), true);
-							MainActivity.this.runOnUiThread(new Runnable() {
-								@Override
-								public void run() {
-									MainActivity.this.mount();
-									String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
-									if (mnt_stat.isEmpty()) {
-										dialog.dismiss();
-										mountfail();
-									} else {
-										icons.setImageDrawable(atlasrevi);
-										ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/Toolbox || true ");
-										ShellUtils.fastCmd("cp /sdcard/ReviPlaybook.apbx " + MainActivity.this.winpath + "/Toolbox/ReviPlaybook.apbx");
-										ShellUtils.fastCmd("cp /sdcard/AMEWizardBeta.zip " + MainActivity.this.winpath + "/Toolbox");
-										ShellUtils.fastCmd("su -mm -c rm /sdcard/ReviPlaybook.apbx");
-										ShellUtils.fastCmd("su -mm -c rm /sdcard/AMEWizardBeta.zip");
-										bar.setVisibility(View.GONE);
-										messages.setText(getString(R.string.done));
-										dismissButton.setVisibility(View.VISIBLE);
-										dismissButton.setOnClickListener(v7 -> {
-											HideBlur();
-											dialog.dismiss();
-										});
-									}
-								}
-							});
-						}
-					}).start();
-				}
-			});
-			yesButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					noButton.setVisibility(View.GONE);
-					yesButton.setVisibility(View.GONE);
-					dismissButton.setVisibility(View.GONE);
-					bar.setVisibility(View.VISIBLE);
-					bar.setProgress(0);
-					icons.setVisibility(View.VISIBLE);
-					icons.setImageDrawable(download);
-					messages.setText(MainActivity.this.getString(R.string.please_wait));
-					new Thread(new Runnable() {
-						@Override
-						public void run() {
-							icons.setVisibility(View.VISIBLE);
-							icons.setImageDrawable(download);
-							try {
-								Thread.sleep(100);
-							} catch (InterruptedException e) {
-								throw new RuntimeException(e);
-							}
-							bar.setProgress((int) (bar.getMax() * 0.00), true);
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook.apbx -O /sdcard/AtlasPlaybook_v0.4.1.apbx\" | su -mm -c sh");
-							bar.setProgress((int) (bar.getMax() * 0.35), true);
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook_v0.4.0_23H2Only.apbx -O /sdcard/AtlasPlaybook_v0.4.0_23H2Only.apbx\" | su -mm -c sh");
-							bar.setProgress((int) (bar.getMax() * 0.6), true);
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://download.ameliorated.io/AME%20Wizard%20Beta.zip -O /sdcard/AMEWizardBeta.zip\" | su -mm -c sh");
-							bar.setProgress((int) (bar.getMax() * 0.8), true);
-							MainActivity.this.runOnUiThread(new Runnable() {
-								@Override
-								public void run() {
-									MainActivity.this.mount();
-									String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
-									if (mnt_stat.isEmpty()) {
-										dialog.dismiss();
-										mountfail();
-									} else {
-										icons.setImageDrawable(atlasrevi);
-										ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/Toolbox || true ");
-										ShellUtils.fastCmd("cp /sdcard/AtlasPlaybook.apbx " + MainActivity.this.winpath + "/Toolbox/AtlasPlaybook_v0.4.1.apbx");
-										ShellUtils.fastCmd("cp /sdcard/AtlasPlaybook.apbx " + MainActivity.this.winpath + "/Toolbox/AtlasPlaybook_v0.4.0_23H2Only.apbx");
-										ShellUtils.fastCmd("cp /sdcard/AMEWizardBeta.zip " + MainActivity.this.winpath + "/Toolbox");
-										ShellUtils.fastCmd("su -mm -c rm /sdcard/AtlasPlaybook_v0.4.1.apbx");
-										ShellUtils.fastCmd("su -mm -c rm /sdcard/AtlasPlaybook_v0.4.0_23H2Only.apbx");
-										ShellUtils.fastCmd("su -mm -c rm /sdcard/AMEWizardBeta.zip");
-										bar.setVisibility(View.GONE);
-										messages.setText(getString(R.string.done));
-										dismissButton.setVisibility(View.VISIBLE);
-										dismissButton.setOnClickListener(v8 -> {
-											HideBlur();
-											dialog.dismiss();
-										});
-									}
-								}
-							});
-						}
-					}).start();
-				}
-			});
-			dialog.setCancelable(false);
-			dialog.show();
 		});
 
 		this.z.cvUsbhost.setOnClickListener(v -> {
@@ -1641,7 +1669,7 @@ public class MainActivity extends AppCompatActivity {
 				noButton.setVisibility(View.GONE);
 				yesButton.setVisibility(View.GONE);
 				messages.setText(this.getString(R.string.please_wait));
-				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/Optimized_Taskbar_Control_V3.0.exe /sdcard/");
+				ShellUtils.fastCmd("cp " + this.getFilesDir() + "/Optimized_Taskbar_Control_V3.1.exe /sdcard/");
 				mount();
 				String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
 				if (mnt_stat.isEmpty()) {
@@ -1649,8 +1677,8 @@ public class MainActivity extends AppCompatActivity {
 					mountfail();
 				} else {
 					ShellUtils.fastCmd("mkdir " + this.winpath + "/Toolbox || true ");
-					ShellUtils.fastCmd("cp /sdcard/Optimized_Taskbar_Control_V3.0.exe " + this.winpath + "/Toolbox");
-					ShellUtils.fastCmd("rm /sdcard/Optimized_Taskbar_Control_V3.0.exe");
+					ShellUtils.fastCmd("cp /sdcard/Optimized_Taskbar_Control_V3.1.exe " + this.winpath + "/Toolbox");
+					ShellUtils.fastCmd("rm /sdcard/Optimized_Taskbar_Control_V3.1.exe");
 					messages.setText(this.getString(R.string.done));
 					dismissButton.setVisibility(View.VISIBLE);
 					dismissButton.setOnClickListener(v18 -> {
@@ -1664,118 +1692,118 @@ public class MainActivity extends AppCompatActivity {
 		});
 
 		this.z.cvSetup.setOnClickListener(v -> {
-			this.ShowBlur();
-			noButton.setVisibility(View.VISIBLE);
-			yesButton.setVisibility(View.VISIBLE);
-			dismissButton.setVisibility(View.GONE);
-			icons.setVisibility(View.VISIBLE);
-			icons.setImageDrawable(mnt);
-			messages.setText(this.getString(R.string.setup_question));
-			noButton.setText(this.getString(R.string.no));
-			yesButton.setText(this.getString(R.string.yes));
-			dismissButton.setText(this.getString(R.string.dismiss));
-			if (!MainActivity.isNetworkConnected(this)) {
-				yesButton.setVisibility(View.GONE);
-				noButton.setText(this.getString(R.string.dismiss));
-				messages.setText(this.getString(R.string.internet));
-			}
-			noButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					MainActivity.this.HideBlur();
-					dialog.dismiss();
-				}
-			});
-			yesButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					noButton.setVisibility(View.GONE);
-					yesButton.setVisibility(View.GONE);
-					messages.setText(getString(R.string.please_wait));
-					bar.setVisibility(View.VISIBLE);
-					bar.setProgress(0);
-					new Thread(new Runnable() {
-						@Override
-						public void run() {
-							icons.setVisibility(View.VISIBLE);
-							icons.setImageDrawable(download);
-							try {
-								Thread.sleep(100);
-							} catch (InterruptedException e) {
-								throw new RuntimeException(e);
-							}
-							ShellUtils.fastCmd("mkdir /sdcard/Frameworks || true");
-							ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/install.bat /sdcard/Frameworks/install.bat");
-							bar.setProgress((int) (bar.getMax() * 0.00), true);
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/PhysX-9.13.0604-SystemSoftware-Legacy.msi -O /sdcard/Frameworks/PhysX-9.13.0604-SystemSoftware-Legacy.msi\" | su -mm -c sh");
-							bar.setProgress((int) (bar.getMax() * 0.1), true);
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/PhysX_9.23.1019_SystemSoftware.exe -O /sdcard/Frameworks/PhysX_9.23.1019_SystemSoftware.exe\" | su -mm -c sh");
-							bar.setProgress((int) (bar.getMax() * 0.2), true);
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/xnafx40_redist.msi -O /sdcard/Frameworks/xnafx40_redist.msi\" | su -mm -c sh");
-							bar.setProgress((int) (bar.getMax() * 0.2), true);
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/opengl.appx -O /sdcard/Frameworks/opengl.1.2409.2.0.appx\" | su -mm -c sh");
-							bar.setProgress((int) (bar.getMax() * 0.3), true);
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2005vcredist_x64.EXE -O /sdcard/Frameworks/2005vcredist_x64.EXE\" | su -mm -c sh");
-							bar.setProgress((int) (bar.getMax() * 0.35), true);
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2005vcredist_x86.EXE -O /sdcard/Frameworks/2005vcredist_x86.EXE\" | su -mm -c sh");
-							bar.setProgress((int) (bar.getMax() * 0.4), true);
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2008vcredist_x64.exe -O /sdcard/Frameworks/2008vcredist_x64.exe\" | su -mm -c sh");
-							bar.setProgress((int) (bar.getMax() * 0.4), true);
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2008vcredist_x86.exe -O /sdcard/Frameworks/2008vcredist_x86.exe\" | su -mm -c sh");
-							bar.setProgress((int) (bar.getMax() * 0.45), true);
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2010vcredist_x64.exe -O /sdcard/Frameworks/2010vcredist_x64.exe\" | su -mm -c sh");
-							bar.setProgress((int) (bar.getMax() * 0.5), true);
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2010vcredist_x86.exe -O /sdcard/Frameworks/2010vcredist_x86.exe\" | su -mm -c sh");
-							bar.setProgress((int) (bar.getMax() * 0.55), true);
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2012vcredist_x64.exe -O /sdcard/Frameworks/2012vcredist_x64.exe\" | su -mm -c sh");
-							bar.setProgress((int) (bar.getMax() * 0.6), true);
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2012vcredist_x86.exe -O /sdcard/Frameworks/2012vcredist_x86.exe\" | su -mm -c sh");
-							bar.setProgress((int) (bar.getMax() * 0.65), true);
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2013vcredist_x64.exe -O /sdcard/Frameworks/2013vcredist_x64.exe\" | su -mm -c sh");
-							bar.setProgress((int) (bar.getMax() * 0.7), true);
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2013vcredist_x86.exe -O /sdcard/Frameworks/2013vcredist_x86.exe\" | su -mm -c sh");
-							bar.setProgress((int) (bar.getMax() * 0.75), true);
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2015VC_redist.x64.exe -O /sdcard/Frameworks/2015VC_redist.x64.exe\" | su -mm -c sh");
-							bar.setProgress((int) (bar.getMax() * 0.8), true);
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2015VC_redist.x86.exe -O /sdcard/Frameworks/2015VC_redist.x86.exe\" | su -mm -c sh");
-							bar.setProgress((int) (bar.getMax() * 0.85), true);
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2022VC_redist.arm64.exe -O /sdcard/Frameworks/2022VC_redist.arm64.exe\" | su -mm -c sh");
-							bar.setProgress((int) (bar.getMax() * 0.9), true);
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/dxwebsetup.exe -O /sdcard/Frameworks/dxwebsetup.exe\" | su -mm -c sh");
-							bar.setProgress((int) (bar.getMax() * 0.95), true);
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/oalinst.exe -O /sdcard/Frameworks/oalinst.exe\" | su -mm -c sh");
-							bar.setProgress((int) (bar.getMax() * 1.00), true);
-							MainActivity.this.runOnUiThread(new Runnable() {
-								@Override
-								public void run() {
-									MainActivity.this.mount();
-									String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + win);
-									Log.d("path", mnt_stat);
-									if (mnt_stat.isEmpty()) {
-										dialog.dismiss();
-										mountfail();
-									} else {
-										icons.setImageDrawable(mnt);
-										ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/Toolbox || true ");
-										ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/Toolbox/Frameworks || true ");
-										ShellUtils.fastCmd("cp /sdcard/Frameworks/* " + MainActivity.this.winpath + "/Toolbox/Frameworks");
-										ShellUtils.fastCmd("rm -r /sdcard/Frameworks");
-										bar.setVisibility(View.GONE);
-										messages.setText(getString(R.string.done));
-										dismissButton.setVisibility(View.VISIBLE);
-										dismissButton.setOnClickListener(v15 -> {
-											HideBlur();
-											dialog.dismiss();
-										});
-									}
+			if (!isNetworkConnected(this)) {
+				dialog.dismiss();
+				nointernet();
+			} else {
+				this.ShowBlur();
+				noButton.setVisibility(View.VISIBLE);
+				yesButton.setVisibility(View.VISIBLE);
+				dismissButton.setVisibility(View.GONE);
+				icons.setVisibility(View.VISIBLE);
+				icons.setImageDrawable(mnt);
+				messages.setText(this.getString(R.string.setup_question));
+				noButton.setText(this.getString(R.string.no));
+				yesButton.setText(this.getString(R.string.yes));
+				dismissButton.setText(this.getString(R.string.dismiss));
+				noButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						MainActivity.this.HideBlur();
+						dialog.dismiss();
+					}
+				});
+				yesButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						noButton.setVisibility(View.GONE);
+						yesButton.setVisibility(View.GONE);
+						messages.setText(getString(R.string.please_wait));
+						bar.setVisibility(View.VISIBLE);
+						bar.setProgress(0);
+						new Thread(new Runnable() {
+							@Override
+							public void run() {
+								icons.setVisibility(View.VISIBLE);
+								icons.setImageDrawable(download);
+								try {
+									Thread.sleep(100);
+								} catch (InterruptedException e) {
+									throw new RuntimeException(e);
 								}
-							});
-						}
-					}).start();
-				}
-			});
-			dialog.setCancelable(false);
-			dialog.show();
+								ShellUtils.fastCmd("mkdir /sdcard/Frameworks || true");
+								ShellUtils.fastCmd("cp " + MainActivity.this.getFilesDir() + "/install.bat /sdcard/Frameworks/install.bat");
+								bar.setProgress((int) (bar.getMax() * 0.00), true);
+								ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/PhysX-9.13.0604-SystemSoftware-Legacy.msi -O /sdcard/Frameworks/PhysX-9.13.0604-SystemSoftware-Legacy.msi\" | su -mm -c sh");
+								bar.setProgress((int) (bar.getMax() * 0.1), true);
+								ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/PhysX_9.23.1019_SystemSoftware.exe -O /sdcard/Frameworks/PhysX_9.23.1019_SystemSoftware.exe\" | su -mm -c sh");
+								bar.setProgress((int) (bar.getMax() * 0.2), true);
+								ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/xnafx40_redist.msi -O /sdcard/Frameworks/xnafx40_redist.msi\" | su -mm -c sh");
+								bar.setProgress((int) (bar.getMax() * 0.2), true);
+								ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/opengl.appx -O /sdcard/Frameworks/opengl.1.2409.2.0.appx\" | su -mm -c sh");
+								bar.setProgress((int) (bar.getMax() * 0.3), true);
+								ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2005vcredist_x64.EXE -O /sdcard/Frameworks/2005vcredist_x64.EXE\" | su -mm -c sh");
+								bar.setProgress((int) (bar.getMax() * 0.35), true);
+								ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2005vcredist_x86.EXE -O /sdcard/Frameworks/2005vcredist_x86.EXE\" | su -mm -c sh");
+								bar.setProgress((int) (bar.getMax() * 0.4), true);
+								ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2008vcredist_x64.exe -O /sdcard/Frameworks/2008vcredist_x64.exe\" | su -mm -c sh");
+								bar.setProgress((int) (bar.getMax() * 0.4), true);
+								ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2008vcredist_x86.exe -O /sdcard/Frameworks/2008vcredist_x86.exe\" | su -mm -c sh");
+								bar.setProgress((int) (bar.getMax() * 0.45), true);
+								ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2010vcredist_x64.exe -O /sdcard/Frameworks/2010vcredist_x64.exe\" | su -mm -c sh");
+								bar.setProgress((int) (bar.getMax() * 0.5), true);
+								ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2010vcredist_x86.exe -O /sdcard/Frameworks/2010vcredist_x86.exe\" | su -mm -c sh");
+								bar.setProgress((int) (bar.getMax() * 0.55), true);
+								ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2012vcredist_x64.exe -O /sdcard/Frameworks/2012vcredist_x64.exe\" | su -mm -c sh");
+								bar.setProgress((int) (bar.getMax() * 0.6), true);
+								ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2012vcredist_x86.exe -O /sdcard/Frameworks/2012vcredist_x86.exe\" | su -mm -c sh");
+								bar.setProgress((int) (bar.getMax() * 0.65), true);
+								ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2013vcredist_x64.exe -O /sdcard/Frameworks/2013vcredist_x64.exe\" | su -mm -c sh");
+								bar.setProgress((int) (bar.getMax() * 0.7), true);
+								ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2013vcredist_x86.exe -O /sdcard/Frameworks/2013vcredist_x86.exe\" | su -mm -c sh");
+								bar.setProgress((int) (bar.getMax() * 0.75), true);
+								ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2015VC_redist.x64.exe -O /sdcard/Frameworks/2015VC_redist.x64.exe\" | su -mm -c sh");
+								bar.setProgress((int) (bar.getMax() * 0.8), true);
+								ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2015VC_redist.x86.exe -O /sdcard/Frameworks/2015VC_redist.x86.exe\" | su -mm -c sh");
+								bar.setProgress((int) (bar.getMax() * 0.85), true);
+								ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2022VC_redist.arm64.exe -O /sdcard/Frameworks/2022VC_redist.arm64.exe\" | su -mm -c sh");
+								bar.setProgress((int) (bar.getMax() * 0.9), true);
+								ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/dxwebsetup.exe -O /sdcard/Frameworks/dxwebsetup.exe\" | su -mm -c sh");
+								bar.setProgress((int) (bar.getMax() * 0.95), true);
+								ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/oalinst.exe -O /sdcard/Frameworks/oalinst.exe\" | su -mm -c sh");
+								bar.setProgress((int) (bar.getMax() * 1.00), true);
+								MainActivity.this.runOnUiThread(new Runnable() {
+									@Override
+									public void run() {
+										MainActivity.this.mount();
+										String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + win);
+										Log.d("path", mnt_stat);
+										if (mnt_stat.isEmpty()) {
+											dialog.dismiss();
+											mountfail();
+										} else {
+											icons.setImageDrawable(mnt);
+											ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/Toolbox || true ");
+											ShellUtils.fastCmd("mkdir " + MainActivity.this.winpath + "/Toolbox/Frameworks || true ");
+											ShellUtils.fastCmd("cp /sdcard/Frameworks/* " + MainActivity.this.winpath + "/Toolbox/Frameworks");
+											ShellUtils.fastCmd("rm -r /sdcard/Frameworks");
+											bar.setVisibility(View.GONE);
+											messages.setText(getString(R.string.done));
+											dismissButton.setVisibility(View.VISIBLE);
+											dismissButton.setOnClickListener(v15 -> {
+												HideBlur();
+												dialog.dismiss();
+											});
+										}
+									}
+								});
+							}
+						}).start();
+					}
+				});
+				dialog.setCancelable(false);
+				dialog.show();
+			}
 		});
 
 		this.z.cvDefender.setOnClickListener(v -> {
@@ -1796,13 +1824,38 @@ public class MainActivity extends AppCompatActivity {
 			yesButton.setOnClickListener(v17 -> {
 				noButton.setVisibility(View.GONE);
 				yesButton.setVisibility(View.GONE);
-				if (!MainActivity.isNetworkConnected(this)) {
-					dismissButton.setVisibility(View.VISIBLE);
-					messages.setText(this.getString(R.string.internet));
+				messages.setText(this.getString(R.string.please_wait));
+				String finddefenderremover = ShellUtils.fastCmd("find " + this.getFilesDir() + " -maxdepth 1 -name DefenderRemover.exe");
+				if (finddefenderremover.isEmpty()) {
+					if (!isNetworkConnected(MainActivity.this)) {
+						dialog.dismiss();
+						nointernet();
+					} else {
+						ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/DefenderRemover.exe -O /sdcard/DefenderRemover.exe\" | su -mm -c sh");
+						ShellUtils.fastCmd("cp /sdcard/DefenderRemover.exe " + this.getFilesDir());
+						ShellUtils.fastCmd("cp " + this.getFilesDir() + "/RemoveEdge.bat /sdcard");
+						mount();
+						String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
+						if (mnt_stat.isEmpty()) {
+							dialog.dismiss();
+							mountfail();
+						} else {
+							ShellUtils.fastCmd("mkdir " + this.winpath + "/Toolbox || true ");
+							ShellUtils.fastCmd("cp " + this.getFilesDir() + "/DefenderRemover.exe " + this.winpath + "/Toolbox");
+							ShellUtils.fastCmd("rm /sdcard/DefenderRemover.exe");
+							ShellUtils.fastCmd("cp /sdcard/RemoveEdge.bat " + this.winpath + "/Toolbox");
+							ShellUtils.fastCmd("rm /sdcard/RemoveEdge.bat");
+							messages.setText(this.getString(R.string.done));
+							dismissButton.setVisibility(View.VISIBLE);
+							dismissButton.setOnClickListener(v18 -> {
+								this.HideBlur();
+								dialog.dismiss();
+							});
+						}
+					}
 				} else {
-					messages.setText(this.getString(R.string.please_wait));
-					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/DefenderRemover.exe -O /sdcard/DefenderRemover.exe\" | su -mm -c sh");
 					ShellUtils.fastCmd("cp " + this.getFilesDir() + "/RemoveEdge.bat /sdcard");
+					ShellUtils.fastCmd("cp " + this.getFilesDir() + "/DefenderRemover.exe /sdcard");
 					mount();
 					String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + MainActivity.this.win);
 					if (mnt_stat.isEmpty()) {
@@ -1810,13 +1863,13 @@ public class MainActivity extends AppCompatActivity {
 						mountfail();
 					} else {
 						ShellUtils.fastCmd("mkdir " + this.winpath + "/Toolbox || true ");
-						ShellUtils.fastCmd("cp /sdcard/DefenderRemover.exe " + this.winpath + "/Toolbox");
+						ShellUtils.fastCmd("cp " + this.getFilesDir() + "/DefenderRemover.exe " + this.winpath + "/Toolbox");
+						ShellUtils.fastCmd("cp " + this.getFilesDir() + "/RemoveEdge.bat " + this.winpath + "/Toolbox");
 						ShellUtils.fastCmd("rm /sdcard/DefenderRemover.exe");
-						ShellUtils.fastCmd("cp /sdcard/RemoveEdge.bat " + this.winpath + "/Toolbox");
 						ShellUtils.fastCmd("rm /sdcard/RemoveEdge.bat");
 						messages.setText(this.getString(R.string.done));
 						dismissButton.setVisibility(View.VISIBLE);
-						dismissButton.setOnClickListener(v18 -> {
+						dismissButton.setOnClickListener(v19 -> {
 							this.HideBlur();
 							dialog.dismiss();
 						});
@@ -1918,17 +1971,17 @@ public class MainActivity extends AppCompatActivity {
 
 
 		this.x.cvInfo.setOnClickListener(v -> {
-			this.ShowBlur();
-			noButton.setVisibility(View.GONE);
-			yesButton.setVisibility(View.GONE);
-			dismissButton.setVisibility(View.GONE);
-			icons.setVisibility(View.GONE);
-			messages.setText(this.getString(R.string.please_wait));
-			dismissButton.setText(this.getString(R.string.dismiss));
-			if (!MainActivity.isNetworkConnected(this)) {
-				dismissButton.setVisibility(View.VISIBLE);
-				messages.setText(this.getString(R.string.internet));
+			if (!isNetworkConnected(this)) {
+				dialog.dismiss();
+				nointernet();
 			} else {
+				this.ShowBlur();
+				noButton.setVisibility(View.GONE);
+				yesButton.setVisibility(View.GONE);
+				dismissButton.setVisibility(View.GONE);
+				icons.setVisibility(View.GONE);
+				messages.setText(this.getString(R.string.please_wait));
+				dismissButton.setText(this.getString(R.string.dismiss));
 				String version = ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget -q -O - https://raw.githubusercontent.com/n00b69/woa-helper-update/main/README.md\" | su -mm -c sh");
 				if (BuildConfig.VERSION_NAME.equals(version)) {
 					dismissButton.setVisibility(View.VISIBLE);
@@ -1957,13 +2010,13 @@ public class MainActivity extends AppCompatActivity {
 						}
 					});
 				}
+				dismissButton.setOnClickListener(v20 -> {
+					this.HideBlur();
+					dialog.dismiss();
+				});
+				dialog.setCancelable(false);
+				dialog.show();
 			}
-			dismissButton.setOnClickListener(v19 -> {
-				this.HideBlur();
-				dialog.dismiss();
-			});
-			dialog.setCancelable(false);
-			dialog.show();
 		});
 			
 		this.k.autobackup.setOnCheckedChangeListener((compoundButton, b) -> pref.setAUTO(this, !b));
@@ -1972,13 +2025,21 @@ public class MainActivity extends AppCompatActivity {
 		this.k.securelock.setOnCheckedChangeListener((compoundButton, b) -> pref.setSecure(this, !b));
 		this.k.automount.setOnCheckedChangeListener((compoundButton, b) -> pref.setAutoMount(this, b));
 		this.k.appUpdate.setOnCheckedChangeListener((compoundButton, b) -> pref.setAppUpdate(this, b));
-		this.k.devcfg1.setOnCheckedChangeListener((compoundButton, b) -> {pref.setDevcfg1(this, b);if(b)k.devcfg2.setVisibility(View.VISIBLE); else k.devcfg2.setVisibility(View.GONE);pref.setDevcfg2(this, false);});
-		this.k.devcfg2.setOnCheckedChangeListener((compoundButton, b) -> pref.setDevcfg2(this, b));
+		String op7funny = ShellUtils.fastCmd("getprop ro.product.device");
+		if ("guacamole".equals(op7funny) || "guacamolet".equals(op7funny) || "OnePlus7Pro".equals(op7funny) || "OnePlus7Pro4G".equals(op7funny) || "OnePlus7ProTMO".equals(op7funny) || "hotdog".equals(op7funny) || "OnePlus7TPro".equals(op7funny) || "OnePlus7TPro4G".equals(op7funny)) {
+			this.k.devcfg1.setOnCheckedChangeListener((compoundButton, b) -> {pref.setDevcfg1(this, b);if(b)k.devcfg2.setVisibility(View.VISIBLE); else k.devcfg2.setVisibility(View.GONE);pref.setDevcfg2(this, false);});
+			this.k.devcfg2.setOnCheckedChangeListener((compoundButton, b) -> pref.setDevcfg2(this, b));
+		} else {
+			this.k.devcfg1.setVisibility(View.GONE);
+			this.k.devcfg2.setVisibility(View.GONE);
+			pref.setDevcfg1(this, false);
+			pref.setDevcfg2(this, false);
+		}
 		this.k.button.setOnClickListener(v -> {
-		this.k.settingsPanel.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_out));
-		this.setContentView(this.x.getRoot());
-		this.x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_in));
-		this.backable = 0;
+			this.k.settingsPanel.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_out));
+			this.setContentView(this.x.getRoot());
+			this.x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_in));
+			this.backable = 0;
 		});
 	}
 
@@ -2024,13 +2085,11 @@ public class MainActivity extends AppCompatActivity {
 	
 	public void mount() {
 		ShellUtils.fastCmd("mkdir " + this.winpath + " || true");
-		// ShellUtils.fastCmd("cd /data/data/id.kuato.woahelper/files");
 		ShellUtils.fastCmd("cd " + MainActivity.this.getFilesDir());
 		ShellUtils.fastCmd("su -mm -c ./mount.ntfs " + this.win + " " + this.winpath);
 		String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + this.win);
 		if (mnt_stat.isEmpty()) this.k.mountLocation.setChecked(!pref.getMountLocation(this));
 			ShellUtils.fastCmd("mkdir " + this.winpath + " || true");
-			// ShellUtils.fastCmd("cd /data/data/id.kuato.woahelper/files");
 			ShellUtils.fastCmd("cd " + MainActivity.this.getFilesDir());
 			ShellUtils.fastCmd("su -mm -c ./mount.ntfs " + this.win + " " + this.winpath);
 			String mnt_stat2 = ShellUtils.fastCmd("su -mm -c mount | grep " + this.win);
@@ -2106,9 +2165,9 @@ public class MainActivity extends AppCompatActivity {
 		String run = ShellUtils.fastCmd(" su -c cat /proc/cmdline ");
 		if (run.isEmpty()) panel = "Unknown";
 		else {
-			if (run.contains("j20s_42_02_0b") || run.contains("k82_42") || run.contains("ft8756_huaxing")) {
+			if (run.contains("j20s_42_02_0b") || run.contains("k82_42") || run.contains("ft8756_huaxing") || run.contains("huaxing")) {
 				panel = "Huaxing";
-			} else if (run.contains("j20s_36_02_0a") || run.contains("k82_36") || run.contains("nt36675_tianma") || run.contains("tianma_fhd_nt36672a")) {
+			} else if (run.contains("j20s_36_02_0a") || run.contains("k82_36") || run.contains("nt36675_tianma") || run.contains("tianma_fhd_nt36672a") || run.contains("tianma")) {
 				panel = "Tianma";
 			} else if (run.contains("ebbg_fhd_ft8719")) {
 				panel = "EBBG";
@@ -2167,12 +2226,8 @@ public class MainActivity extends AppCompatActivity {
 		String dbkpmodel = ShellUtils.fastCmd("getprop ro.product.device");
 		if ("guacamole".equals(dbkpmodel) || "guacamolet".equals(dbkpmodel) || "OnePlus7Pro".equals(dbkpmodel) || "OnePlus7Pro4G".equals(dbkpmodel) || "OnePlus7ProTMO".equals(dbkpmodel)) {
 			this.dbkpmodel = "ONEPLUS 7 PRO";
-			if(!pref.getDevcfg1(this))
-				this.k.devcfg2.setVisibility(View.GONE);
 		} else if ("hotdog".equals(dbkpmodel) || "OnePlus7TPro".equals(dbkpmodel) || "OnePlus7TPro4G".equals(dbkpmodel)) {
 			this.dbkpmodel = "ONEPLUS 7T PRO";
-			if(!pref.getDevcfg1(this))
-				this.k.devcfg2.setVisibility(View.GONE);
 		} else if ("cepheus".equals(dbkpmodel)) {
 			this.dbkpmodel = "XIAOMI MI 9";
 			this.k.devcfg1.setVisibility(View.GONE);
@@ -2329,6 +2384,27 @@ public class MainActivity extends AppCompatActivity {
 				Intent i = new Intent(Intent.ACTION_VIEW);
 				i.setData(Uri.parse("https://t.me/woahelperchat"));
 				MainActivity.this.startActivity(i);
+			}
+		});
+		dialog.setCancelable(false);
+		dialog.show();
+	}
+	
+	public void nointernet() {
+		final Dialog dialog = new Dialog(this);
+		dialog.setContentView(R.layout.dialog);
+		dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+		MaterialButton dismissButton = dialog.findViewById(R.id.dismiss);
+		TextView messages = dialog.findViewById(R.id.messages);
+		dismissButton.setVisibility(View.VISIBLE);
+		dismissButton.setText(MainActivity.this.getString(R.string.dismiss));
+		MainActivity.this.ShowBlur();
+		messages.setText(MainActivity.this.getString(R.string.internet));
+		dismissButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				MainActivity.this.HideBlur();
+				dialog.dismiss();
 			}
 		});
 		dialog.setCancelable(false);
