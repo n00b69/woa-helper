@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <SeekBar
+        android:id="@+id/opacity_seek_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="255"
+        android:progress="255" />
+
+    <TextView
+        android:id="@+id/opacity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Opacity: 100%" />
+
+    <Button
+        android:id="@+id/confirm_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save" />
+
+    <RadioButton
+        android:id="@+id/quickboot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="Quickboot" />
+
+    <RadioButton
+        android:id="@+id/mount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mount" />
+
+</LinearLayout>

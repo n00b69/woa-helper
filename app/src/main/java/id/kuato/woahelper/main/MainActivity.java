@@ -2246,7 +2246,6 @@ public class MainActivity extends AppCompatActivity {
 			this.k.devcfg2.setVisibility(View.GONE);
 		}
 	}
-
 	public void checkuefi() {
 		ShellUtils.fastCmd("su -c mkdir /sdcard/UEFI");
 		this.finduefi = "\""+ShellUtils.fastCmd(this.getString(R.string.uefiChk))+"\"";
@@ -2259,7 +2258,6 @@ public class MainActivity extends AppCompatActivity {
 			this.n.tvFlashUefi.setText(this.getString(R.string.flash_uefi_title));
 			this.n.tvUefiSubtitle.setText(this.getString(R.string.flash_uefi_subtitle));
 			this.n.cvFlashUefi.setEnabled(true);
-			checkwin();
 		} else {
 			this.x.cvQuickBoot.setEnabled(false);
 			this.x.tvQuickBoot.setText(getString(R.string.uefi_not_found));
@@ -2267,8 +2265,8 @@ public class MainActivity extends AppCompatActivity {
 			this.n.tvFlashUefi.setText(this.getString(R.string.uefi_not_found));
 			this.n.tvUefiSubtitle.setText(this.getString(R.string.uefi_not_found_subtitle, this.device));
 			this.n.cvFlashUefi.setEnabled(false);
-			checkwin();
 		}
+		checkwin();
 	}
 	
 	public void checkwin() {
