@@ -15,7 +15,16 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="tiramisu">
-
+        <receiver android:name=".widgets.WidgetProvider" android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="id.kuato.woahelper.ACTION_SET"/>
+                <action android:name="id.kuato.woahelper.ACTION_CLICK"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info" />
+        </receiver>
         <receiver
             android:name=".main.automount"
             android:enabled="true"
@@ -48,6 +57,18 @@
             </intent-filter>
         </service>
 
+        <activity
+            android:name=".widgets.WidgetActivity"
+            android:theme="@style/Theme.AppCompat.Dialog.Alert"
+            android:exported="true"
+            android:taskAffinity=""
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:launchMode="singleInstance" />
+        <activity
+            android:name=".main.WidgetConfigActivity"
+            android:exported="true">
+        </activity>
         <activity
             android:name=".main.MainActivity"
             android:configChanges="orientation|screenSize"
