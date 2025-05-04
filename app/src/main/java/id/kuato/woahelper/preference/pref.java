@@ -24,11 +24,22 @@ public enum pref {
     public static final String version = "woa last app version";
     public static final String mountLocation = "woa mount location";
 	public static final String appUpdate = "woa app update";
+    public static final String widgetOpacity = "widget opacity";
 	public static final String devcfg1 = "devcfg flasher";
 	public static final String devcfg2 = "devcfg flasher & check for sdd.exe etc.";
 
     public static SharedPreferences getSharedPreference(final Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context);
+    }
+
+
+    public static void setWidgetOpacity(final Context context, final int value) {
+        final SharedPreferences.Editor editor = pref.getSharedPreference(context).edit();
+        editor.putInt(pref.widgetOpacity, value);
+        editor.apply();
+    }
+    public static int getWidgetOpacity(final Context context) {
+        return pref.getSharedPreference(context).getInt(pref.widgetOpacity, 255);
     }
 
     public static void setlocale(final Context context, final String value) {
@@ -191,26 +202,26 @@ public enum pref {
     public static boolean getAppUpdate(final Context context) {
         return pref.getSharedPreference(context).getBoolean(pref.appUpdate, false);
     }
-	
+
 	public static boolean getDevcfg1(final Context context) {
         return pref.getSharedPreference(context).getBoolean(pref.devcfg1, false);
     }
-	
+
 	public static boolean getDevcfg2(final Context context) {
         return pref.getSharedPreference(context).getBoolean(pref.devcfg2, false);
     }
-	
+
 	public static void setDevcfg1(final Context context, final boolean value) {
         final SharedPreferences.Editor editor = pref.getSharedPreference(context).edit();
         editor.putBoolean(pref.devcfg1, value);
         editor.apply();
     }
-	
+
 	public static void setDevcfg2(final Context context, final boolean value) {
         final SharedPreferences.Editor editor = pref.getSharedPreference(context).edit();
         editor.putBoolean(pref.devcfg2, value);
         editor.apply();
     }
-	
+
 }
 
