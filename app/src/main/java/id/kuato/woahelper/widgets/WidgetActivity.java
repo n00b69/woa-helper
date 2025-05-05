@@ -50,32 +50,16 @@ public class WidgetActivity extends AppCompatActivity {
                         });
         }
         else if (Objects.equals(widget_type, "mount")) {
-            String checkingforwin = ShellUtils.fastCmd("find /dev/block | grep win");
+            String checkingforwin = ShellUtils.fastCmd("find /dev/block | grep -i -E \"win|mindows|windows\" | head -1");
             if (checkingforwin.isEmpty()) {
-                checkingforwin = ShellUtils.fastCmd("find /dev/block | grep mindows");
-                if (checkingforwin.isEmpty()) {
-                    checkingforwin = ShellUtils.fastCmd("find /dev/block | grep windows");
-                    if (checkingforwin.isEmpty()) {
-                        checkingforwin = ShellUtils.fastCmd("find /dev/block | grep Win");
-                        if (checkingforwin.isEmpty()) {
-                            checkingforwin = ShellUtils.fastCmd("find /dev/block | grep Mindows");
-                            if (checkingforwin.isEmpty()) {
-                                checkingforwin = ShellUtils.fastCmd("find /dev/block | grep Windows");
-                                if (checkingforwin.isEmpty()) {
-                                    alertDialog
-                                            .setTitle(getString(R.string.partition))
-                                            .setPositiveButton(getString(R.string.dismiss), (dialog, which) -> {
-                                                dialog.dismiss();
-                                                finish();
-                                            });
-                                }
-                            }
-                        }
-                    }
-                }
+                alertDialog
+                        .setTitle(getString(R.string.partition))
+                        .setPositiveButton(getString(R.string.dismiss), (dialog, which) -> {
+                            dialog.dismiss();
+                            finish();
+                        });
             }
 
-            Log.d("INFO", checkingforwin);
             if (!checkingforwin.isEmpty()) {
                 String win = ShellUtils.fastCmd("realpath " + checkingforwin);
                 String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + win);
@@ -107,20 +91,5 @@ public class WidgetActivity extends AppCompatActivity {
             finish();
         });
         alertDialog.show();
-/*                .setTitle("Confirm")
-                .setMessage("Are you sure you want to do this?" + widget_type)
-                .setPositiveButton("Yes", (dialog, which) -> {
-                    // Handle Yes
-                    finish();
-                })
-                .setNegativeButton("No", (dialog, which) -> {
-                    dialog.dismiss();
-                    finish();
-                })
-                .setOnCancelListener((dialog) -> {
-                    dialog.dismiss();
-                    finish();
-                })
-                .show();*/
     }
 }
