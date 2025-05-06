@@ -2412,37 +2412,40 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
-		TextView myTextView1 = this.findViewById(R.id.text);
-		TextView myTextView2 = this.findViewById(R.id.deviceName);
-		TextView myTextView3 = this.findViewById(R.id.tv_panel);
-		TextView myTextView4 = this.findViewById(R.id.tv_ramvalue);
-		TextView myTextView5 = this.findViewById(R.id.guide_text);
-		TextView myTextView6 = this.findViewById(R.id.group_text);
-		TextView myTextView7 = this.findViewById(R.id.tv_slot);
-		TextView myTextView8 = this.findViewById(R.id.tv_date);
-		if (Configuration.ORIENTATION_LANDSCAPE != newConfig.orientation && Objects.equals(this.device, "nabu") || Objects.equals(this.device, "pipa") || Objects.equals(this.device, "winner") || Objects.equals(this.device, "winnerx") || Objects.equals(this.device, "q2q") || Objects.equals(this.device, "gts6l") || Objects.equals(this.device, "gts6lwifi")) {
-			this.x.app.setOrientation(LinearLayout.VERTICAL);
-			this.x.top.setOrientation(LinearLayout.HORIZONTAL);
-			myTextView1.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE2);
-			myTextView2.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
-			myTextView3.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
-			myTextView4.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
-			myTextView5.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
-			myTextView6.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
-			myTextView7.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
-			myTextView8.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
-		} else if (Configuration.ORIENTATION_PORTRAIT != newConfig.orientation && Objects.equals(this.device, "nabu") || Objects.equals(this.device, "pipa") || Objects.equals(this.device, "winner") || Objects.equals(this.device, "winnerx") || Objects.equals(this.device, "q2q") || Objects.equals(this.device, "gts6l") || Objects.equals(this.device, "gts6lwifi")) {
-			this.x.app.setOrientation(LinearLayout.HORIZONTAL);
-			this.x.top.setOrientation(LinearLayout.VERTICAL);
-			myTextView1.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
-			myTextView2.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
-			myTextView3.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
-			myTextView4.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
-			myTextView5.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
-			myTextView6.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
-			myTextView7.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
-			myTextView8.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
-		}
+		try {
+			TextView myTextView1 = this.findViewById(R.id.text);
+			TextView myTextView2 = this.findViewById(R.id.deviceName);
+			TextView myTextView3 = this.findViewById(R.id.tv_panel);
+			TextView myTextView4 = this.findViewById(R.id.tv_ramvalue);
+			TextView myTextView5 = this.findViewById(R.id.guide_text);
+			TextView myTextView6 = this.findViewById(R.id.group_text);
+			TextView myTextView7 = this.findViewById(R.id.tv_slot);
+			TextView myTextView8 = this.findViewById(R.id.tv_date);
+			if (Configuration.ORIENTATION_LANDSCAPE != newConfig.orientation && Objects.equals(this.device, "nabu") || Objects.equals(this.device, "pipa") || Objects.equals(this.device, "winner") || Objects.equals(this.device, "winnerx") || Objects.equals(this.device, "q2q") || Objects.equals(this.device, "gts6l") || Objects.equals(this.device, "gts6lwifi")) {
+				this.x.app.setOrientation(LinearLayout.VERTICAL);
+				this.x.top.setOrientation(LinearLayout.HORIZONTAL);
+				myTextView1.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE2);
+				myTextView2.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
+				myTextView3.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
+				myTextView4.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
+				myTextView5.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
+				myTextView6.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
+				myTextView7.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
+				myTextView8.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
+			} else if (Configuration.ORIENTATION_PORTRAIT != newConfig.orientation && Objects.equals(this.device, "nabu") || Objects.equals(this.device, "pipa") || Objects.equals(this.device, "winner") || Objects.equals(this.device, "winnerx") || Objects.equals(this.device, "q2q") || Objects.equals(this.device, "gts6l") || Objects.equals(this.device, "gts6lwifi")) {
+				this.x.app.setOrientation(LinearLayout.HORIZONTAL);
+				this.x.top.setOrientation(LinearLayout.VERTICAL);
+				myTextView1.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE3);
+				myTextView2.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
+				myTextView3.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
+				myTextView4.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
+				myTextView5.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
+				myTextView6.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
+				myTextView7.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
+				myTextView8.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.SIZE);
+			}
+		} catch (Exception e) { e.printStackTrace(); }
+
 	}
 
 	public void ShowBlur() {
