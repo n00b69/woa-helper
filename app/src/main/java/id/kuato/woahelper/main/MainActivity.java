@@ -2412,6 +2412,9 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
+		final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
+		if (viewGroup.getId() != R.id.mainlayout)
+			return;
 		TextView myTextView1 = this.findViewById(R.id.text);
 		TextView myTextView2 = this.findViewById(R.id.deviceName);
 		TextView myTextView3 = this.findViewById(R.id.tv_panel);
