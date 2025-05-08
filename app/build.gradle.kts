@@ -61,4 +61,5 @@ dependencies {
     implementation(libs.com.github.topjohnwu.libsu.core)
     implementation(libs.com.github.topjohnwu.libsu.service)
     implementation(libs.com.github.topjohnwu.libsu.nio)
+    implementation(libs.blurry)
 }

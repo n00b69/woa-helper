@@ -57,6 +57,7 @@ import id.kuato.woahelper.databinding.SetPanelBinding;
 import id.kuato.woahelper.databinding.ToolboxBinding;
 import id.kuato.woahelper.preference.pref;
 import id.kuato.woahelper.util.RAM;
+import jp.wasabeef.blurry.Blurry;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -88,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
 	String grouplink = "https://t.me/woahelperchat";
 	String guidelink = "https://github.com/n00b69";
 	String currentVersion = BuildConfig.VERSION_NAME;
+	boolean blur = false;
 	private ExecutorService executorService = Executors.newFixedThreadPool(4);
 	private double ramvalue;
 	
@@ -2412,8 +2414,7 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
-		final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
-		if (viewGroup.getId() != R.id.mainlayout)
+		if (getTargetViewGroup().getId() != R.id.mainlayout)
 			return;
 		TextView myTextView1 = this.findViewById(R.id.text);
 		TextView myTextView2 = this.findViewById(R.id.deviceName);
@@ -2449,12 +2450,23 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public void ShowBlur() {
-		this.x.blur.setVisibility(View.VISIBLE);
+		Log.d("INFO", String.valueOf(blur));
+		if (blur) return;
+		blur = true;
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+		Blurry.with(this).radius(10).sampling(1).onto(getTargetViewGroup());
 	}
 
 	public void HideBlur() {
-		this.x.blur.setVisibility(View.GONE);
+		Blurry.delete(getTargetViewGroup());
+		blur = false;
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
 	}
+
+	ViewGroup getTargetViewGroup() {
+		return (ViewGroup) ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
+	}
+
 
 	@SuppressLint("AppBundleLocaleChanges")
 	private void setApplicationLocale(String locale) {
