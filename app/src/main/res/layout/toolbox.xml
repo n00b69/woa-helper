@@ -4,6 +4,7 @@
     android:id="@+id/toolboxtab"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorOnSurfaceInverse"
     android:screenOrientation="portrait"
     tools:context=".main.MainActivity">
 
@@ -23,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-			android:background="@android:color/transparent"
+            android:background="@color/md_theme_background"
             android:foregroundGravity="center"
             android:gravity="center"
             android:orientation="vertical"
@@ -540,6 +541,13 @@
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
         </LinearLayout>
-
     </LinearLayout>
+
+    <com.github.mmin18.widget.RealtimeBlurView
+        android:id="@+id/blur"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:realtimeBlurRadius="10dp"
+        android:visibility="gone"
+        app:realtimeOverlayColor="#80000000" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -21,7 +21,6 @@ public enum pref {
     public static final String secure = "woa secure tile";
     public static final String busybox = "woa busybox location";
     public static final String locale = "woa active language locale";
-    public static final String version = "woa last app version";
     public static final String mountLocation = "woa mount location";
 	public static final String appUpdate = "woa app update";
     public static final String widgetOpacity = "widget opacity";
@@ -171,16 +170,6 @@ public enum pref {
 
     public static boolean getSecure(final Context context) {
         return pref.getSharedPreference(context).getBoolean(pref.secure, false);
-    }
-
-    public static void setVersion(final Context context, final String value) {
-        final SharedPreferences.Editor editor = pref.getSharedPreference(context).edit();
-        editor.putString(pref.version, value);
-        editor.apply();
-    }
-
-    public static String getVersion(final Context context) {
-        return pref.getSharedPreference(context).getString(pref.version, "");
     }
 
     public static void setMountLocation(final Context context, final boolean value) {

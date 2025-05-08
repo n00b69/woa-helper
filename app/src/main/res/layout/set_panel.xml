@@ -1,113 +1,130 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/settingsPanel"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
+    android:background="?attr/colorOnSurfaceInverse"
     android:orientation="vertical">
 
 
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/_7sdp"
         android:orientation="vertical">
 
         <include
             android:id="@+id/toolbarlayout"
             layout="@layout/toolbar" />
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/modemdump"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/_5sdp"
-            android:text="Disable modem dump option"
-            android:visibility="gone" />
+            android:layout_height="match_parent"
+            android:background="@color/md_theme_background"
+            android:orientation="vertical">
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/backupQB"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/_5sdp"
-            android:text="@string/preference1" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/modemdump"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp"
+                android:text="Disable modem dump option"
+                android:visibility="gone" />
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/backupQB_A"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/_5sdp"
-            android:text="@string/preference2" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/backupQB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/preference1" />
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/autobackup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/_5sdp"
-            android:text="@string/preference3" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/backupQB_A"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/preference2" />
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/autobackup_a"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/_5sdp"
-            android:text="@string/preference4" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/autobackup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/preference3" />
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/confirmation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/_5sdp"
-            android:text="@string/preference5" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/autobackup_a"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/preference4" />
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/automount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/_5sdp"
-            android:text="@string/preference7" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/confirmation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/preference5" />
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/securelock"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/_5sdp"
-            android:text="@string/preference9" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/automount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/preference7" />
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/mountLocation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/_5sdp"
-            android:text="@string/preference10" />
-			
-		<com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/appUpdate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/_5sdp"
-            android:text="@string/preference11" />
-			
-		<com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/devcfg1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/_5sdp"
-            android:text="@string/preference12" />
-			
-		<com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/devcfg2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/_5sdp"
-            android:text="@string/preference13"
-            android:visibility="gone"			/>
-			
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Save" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/securelock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/preference9" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/mountLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/preference10" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/appUpdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/preference11" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/devcfg1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/preference12" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/devcfg2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/preference13"
+                android:visibility="gone"			/>
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_7sdp"
+                android:text="Save" />
+        </LinearLayout>
 
     </LinearLayout>
+
+    <com.github.mmin18.widget.RealtimeBlurView
+        android:id="@+id/blur"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:realtimeBlurRadius="10dp"
+        android:visibility="gone"
+        app:realtimeOverlayColor="#80000000" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
