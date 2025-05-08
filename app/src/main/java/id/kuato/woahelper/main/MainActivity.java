@@ -1886,23 +1886,22 @@ public class MainActivity extends AppCompatActivity {
 		this.k.toolbarlayout.toolbar.setNavigationIcon(iconToolbar);
 		//MainActivity.this.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 		this.x.toolbarlayout.settings.setOnClickListener(v -> {
-		this.backable = 1;
-		this.x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out));
-		this.setContentView(this.k.getRoot());
-		this.k.settingsPanel.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in));
-		this.k.backupQB.setChecked(pref.getBACKUP(this));
-		this.k.backupQBA.setChecked(pref.getBACKUP_A(this));
-		this.k.autobackup.setChecked(!pref.getAUTO(this));
-		this.k.autobackupA.setChecked(!pref.getAUTO(this));
-		this.k.confirmation.setChecked(pref.getCONFIRM(this));
-		this.k.automount.setChecked(pref.getAutoMount(this));
-		this.k.securelock.setChecked(!pref.getSecure(this));
-		this.k.mountLocation.setChecked(pref.getMountLocation(this));
-		this.k.appUpdate.setChecked(pref.getAppUpdate(this));
-		this.k.devcfg1.setChecked(pref.getDevcfg1(this)&&this.k.devcfg1.getVisibility()==View.VISIBLE);
-		this.k.devcfg2.setChecked(pref.getDevcfg2(this));
-		this.k.toolbarlayout.settings.setVisibility(View.GONE);
-		//k.language.setText(R.string.language);
+			this.backable = 1;
+			this.x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out));
+			this.setContentView(this.k.getRoot());
+			this.k.settingsPanel.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in));
+			this.k.backupQB.setChecked(pref.getBACKUP(this));
+			this.k.backupQBA.setChecked(pref.getBACKUP_A(this));
+			this.k.autobackup.setChecked(!pref.getAUTO(this));
+			this.k.autobackupA.setChecked(!pref.getAUTO(this));
+			this.k.confirmation.setChecked(pref.getCONFIRM(this));
+			this.k.automount.setChecked(pref.getAutoMount(this));
+			this.k.securelock.setChecked(!pref.getSecure(this));
+			this.k.mountLocation.setChecked(pref.getMountLocation(this));
+			this.k.appUpdate.setChecked(pref.getAppUpdate(this));
+			this.k.devcfg1.setChecked(pref.getDevcfg1(this)&&this.k.devcfg1.getVisibility()==View.VISIBLE);
+			this.k.devcfg2.setChecked(pref.getDevcfg2(this));
+			this.k.toolbarlayout.settings.setVisibility(View.GONE);
 		});
 		
 		this.k.mountLocation.setOnCheckedChangeListener((compoundButton, b) -> {
@@ -1915,6 +1914,7 @@ public class MainActivity extends AppCompatActivity {
 				pref.setBACKUP(this, false);
 				k.autobackup.setVisibility(View.VISIBLE);
 			} else {
+				ShowBlur();
 				dialog.show();
 				dialog.setCancelable(false);
 				messages.setText(getString(R.string.bwarn));
@@ -1929,12 +1929,14 @@ public class MainActivity extends AppCompatActivity {
 						pref.setBACKUP(MainActivity.this, true);
 						k.autobackup.setVisibility(View.GONE);
 						dialog.dismiss();
+						HideBlur();
 					}
 				});
 				dismissButton.setOnClickListener(new View.OnClickListener() {
 					public void onClick(View v) {
 						k.backupQB.setChecked(false);
 						dialog.dismiss();
+						HideBlur();
 					}
 				});
 			}
@@ -1945,6 +1947,7 @@ public class MainActivity extends AppCompatActivity {
 				pref.setBACKUP_A(this, false);
 				k.autobackupA.setVisibility(View.VISIBLE);
 			} else {
+				ShowBlur();
 				dialog.show();
 				dialog.setCancelable(false);
 				messages.setText(getString(R.string.bwarn));
@@ -1959,12 +1962,14 @@ public class MainActivity extends AppCompatActivity {
 						pref.setBACKUP_A(MainActivity.this, true);
 						k.autobackupA.setVisibility(View.GONE);
 						dialog.dismiss();
+						HideBlur();
 					}
 				});
 				dismissButton.setOnClickListener(new View.OnClickListener() {
 					public void onClick(View v) {
 						k.backupQBA.setChecked(false);
 						dialog.dismiss();
+						HideBlur();
 					}
 				});
 			}
