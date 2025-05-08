@@ -50,13 +50,8 @@ android {
 
 dependencies {
     implementation(libs.androidx.appcompat.appcompat)
-    implementation(libs.androidx.constraintlayout.constraintlayout)
     implementation(libs.material)
-    implementation(libs.androidx.databinding.viewbinding)
     implementation(libs.androidx.preference.preference)
-    implementation(libs.androidx.palette.palette)
-    implementation(libs.androidx.work.work.runtime)
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.com.intuit.sdp.sdp.android)
     implementation(libs.com.github.topjohnwu.libsu.core)
     implementation(libs.com.github.topjohnwu.libsu.service)
