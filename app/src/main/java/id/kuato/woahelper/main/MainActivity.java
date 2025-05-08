@@ -57,6 +57,7 @@ import id.kuato.woahelper.databinding.SetPanelBinding;
 import id.kuato.woahelper.databinding.ToolboxBinding;
 import id.kuato.woahelper.preference.pref;
 import id.kuato.woahelper.util.RAM;
+import jp.wasabeef.blurry.Blurry;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -88,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
 	String grouplink = "https://t.me/woahelperchat";
 	String guidelink = "https://github.com/n00b69";
 	String currentVersion = BuildConfig.VERSION_NAME;
+	boolean blur = false;
 	private ExecutorService executorService = Executors.newFixedThreadPool(4);
 	private double ramvalue;
 	
@@ -1884,23 +1886,22 @@ public class MainActivity extends AppCompatActivity {
 		this.k.toolbarlayout.toolbar.setNavigationIcon(iconToolbar);
 		//MainActivity.this.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 		this.x.toolbarlayout.settings.setOnClickListener(v -> {
-		this.backable = 1;
-		this.x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out));
-		this.setContentView(this.k.getRoot());
-		this.k.settingsPanel.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in));
-		this.k.backupQB.setChecked(pref.getBACKUP(this));
-		this.k.backupQBA.setChecked(pref.getBACKUP_A(this));
-		this.k.autobackup.setChecked(!pref.getAUTO(this));
-		this.k.autobackupA.setChecked(!pref.getAUTO(this));
-		this.k.confirmation.setChecked(pref.getCONFIRM(this));
-		this.k.automount.setChecked(pref.getAutoMount(this));
-		this.k.securelock.setChecked(!pref.getSecure(this));
-		this.k.mountLocation.setChecked(pref.getMountLocation(this));
-		this.k.appUpdate.setChecked(pref.getAppUpdate(this));
-		this.k.devcfg1.setChecked(pref.getDevcfg1(this)&&this.k.devcfg1.getVisibility()==View.VISIBLE);
-		this.k.devcfg2.setChecked(pref.getDevcfg2(this));
-		this.k.toolbarlayout.settings.setVisibility(View.GONE);
-		//k.language.setText(R.string.language);
+			this.backable = 1;
+			this.x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out));
+			this.setContentView(this.k.getRoot());
+			this.k.settingsPanel.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in));
+			this.k.backupQB.setChecked(pref.getBACKUP(this));
+			this.k.backupQBA.setChecked(pref.getBACKUP_A(this));
+			this.k.autobackup.setChecked(!pref.getAUTO(this));
+			this.k.autobackupA.setChecked(!pref.getAUTO(this));
+			this.k.confirmation.setChecked(pref.getCONFIRM(this));
+			this.k.automount.setChecked(pref.getAutoMount(this));
+			this.k.securelock.setChecked(!pref.getSecure(this));
+			this.k.mountLocation.setChecked(pref.getMountLocation(this));
+			this.k.appUpdate.setChecked(pref.getAppUpdate(this));
+			this.k.devcfg1.setChecked(pref.getDevcfg1(this)&&this.k.devcfg1.getVisibility()==View.VISIBLE);
+			this.k.devcfg2.setChecked(pref.getDevcfg2(this));
+			this.k.toolbarlayout.settings.setVisibility(View.GONE);
 		});
 		
 		this.k.mountLocation.setOnCheckedChangeListener((compoundButton, b) -> {
@@ -1913,6 +1914,7 @@ public class MainActivity extends AppCompatActivity {
 				pref.setBACKUP(this, false);
 				k.autobackup.setVisibility(View.VISIBLE);
 			} else {
+				ShowBlur();
 				dialog.show();
 				dialog.setCancelable(false);
 				messages.setText(getString(R.string.bwarn));
@@ -1927,12 +1929,14 @@ public class MainActivity extends AppCompatActivity {
 						pref.setBACKUP(MainActivity.this, true);
 						k.autobackup.setVisibility(View.GONE);
 						dialog.dismiss();
+						HideBlur();
 					}
 				});
 				dismissButton.setOnClickListener(new View.OnClickListener() {
 					public void onClick(View v) {
 						k.backupQB.setChecked(false);
 						dialog.dismiss();
+						HideBlur();
 					}
 				});
 			}
@@ -1943,6 +1947,7 @@ public class MainActivity extends AppCompatActivity {
 				pref.setBACKUP_A(this, false);
 				k.autobackupA.setVisibility(View.VISIBLE);
 			} else {
+				ShowBlur();
 				dialog.show();
 				dialog.setCancelable(false);
 				messages.setText(getString(R.string.bwarn));
@@ -1957,12 +1962,14 @@ public class MainActivity extends AppCompatActivity {
 						pref.setBACKUP_A(MainActivity.this, true);
 						k.autobackupA.setVisibility(View.GONE);
 						dialog.dismiss();
+						HideBlur();
 					}
 				});
 				dismissButton.setOnClickListener(new View.OnClickListener() {
 					public void onClick(View v) {
 						k.backupQBA.setChecked(false);
 						dialog.dismiss();
+						HideBlur();
 					}
 				});
 			}
@@ -2414,8 +2421,7 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
-		final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
-		if (viewGroup.getId() != R.id.mainlayout)
+		if (getTargetViewGroup().getId() != R.id.mainlayout)
 			return;
 		TextView myTextView1 = this.findViewById(R.id.text);
 		TextView myTextView2 = this.findViewById(R.id.deviceName);
@@ -2451,12 +2457,23 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public void ShowBlur() {
-		this.x.blur.setVisibility(View.VISIBLE);
+		Log.d("INFO", String.valueOf(blur));
+		if (blur) return;
+		blur = true;
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+		Blurry.with(this).radius(10).sampling(1).onto(getTargetViewGroup());
 	}
 
 	public void HideBlur() {
-		this.x.blur.setVisibility(View.GONE);
+		Blurry.delete(getTargetViewGroup());
+		blur = false;
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
 	}
+
+	ViewGroup getTargetViewGroup() {
+		return (ViewGroup) ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
+	}
+
 
 	@SuppressLint("AppBundleLocaleChanges")
 	private void setApplicationLocale(String locale) {
