@@ -606,7 +606,7 @@ public class MainActivity extends AppCompatActivity {
 			public void run() {
 				if (Boolean.FALSE.equals(Shell.isAppGrantedRoot())) {
 					checkRoot();
-				} else {
+				} else if (id.kuato.woahelper.BuildConfig.BUILD_TYPE=="release"){
 					checkupdate();
 				}
 			}
@@ -1971,6 +1971,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 		this.x.cvInfo.setOnClickListener(v -> {
+			if (id.kuato.woahelper.BuildConfig.BUILD_TYPE!="release")
+				return;
 			if (!isNetworkConnected(this)) {
 				dialog.dismiss();
 				nointernet();
