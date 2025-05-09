@@ -540,6 +540,13 @@
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
         </LinearLayout>
-
     </LinearLayout>
+
+    <com.github.mmin18.widget.RealtimeBlurView
+        android:id="@+id/blur"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:realtimeBlurRadius="10dp"
+        android:visibility="gone"
+        app:realtimeOverlayColor="#80000000" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

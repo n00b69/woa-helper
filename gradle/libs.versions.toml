@@ -1,10 +1,9 @@
 [versions]
 agp = "8.7.2"
 blurry = "4.0.1"
-work = "2.9.1"
-lifecycle = "2.8.6"
 material = "1.12.0"
 libsu = "6.0.0"
+realtimeblurview = "f54dc3c34d"
 
 [plugins]
 agp-app = { id = "com.android.application", version.ref = "agp" }
@@ -22,3 +21,4 @@ com-github-topjohnwu-libsu-nio = { group = "com.github.topjohnwu.libsu", name = 
 com-intuit-sdp-sdp-android = { group = "com.intuit.sdp", name = "sdp-android", version = "1.1.1" }
 
 material = { module = "com.google.android.material:material", version.ref = "material" }
+realtimeblurview = { module = "com.github.mmin18:realtimeblurview", version.ref = "realtimeblurview" }

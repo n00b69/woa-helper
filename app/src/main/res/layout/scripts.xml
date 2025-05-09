@@ -98,14 +98,6 @@
                                 android:textSize="@dimen/_11sdp"
                                 android:textStyle="bold" />
 
-                            <id.kuato.verncopyright.BlurLayout
-                                android:id="@+id/blur"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center"
-                                android:clipToOutline="true"
-                                tools:targetApi="s" />
-
                             <TextView
                                 android:id="@+id/tv_usbhost_subtitle"
                                 android:layout_width="wrap_content"
@@ -365,5 +357,13 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <com.github.mmin18.widget.RealtimeBlurView
+        android:id="@+id/blur"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:realtimeBlurRadius="10dp"
+        android:visibility="gone"
+        app:realtimeOverlayColor="#80000000" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
