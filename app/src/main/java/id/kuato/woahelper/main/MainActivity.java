@@ -19,6 +19,8 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -27,7 +29,10 @@ import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.core.graphics.Insets;
+import androidx.core.os.LocaleListCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
@@ -41,6 +46,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -129,7 +135,22 @@ public class MainActivity extends AppCompatActivity {
 			return insets;
 		});
 
-
+		List<String> languages = new ArrayList<>();
+		List<String> locales = new ArrayList<>();
+		locales.add("und");
+		languages.add("System Default");
+		for (String i : BuildConfig.LOCALES) {
+			locales.add(i.toLowerCase());
+			Locale l=LocaleListCompat.forLanguageTags(i).get(0);
+            String country =l.getDisplayCountry(l);
+			boolean c = !country.isEmpty();
+			String lang = l.getDisplayLanguage(l)+ (c?" (":"")+country+ (c?")":"");
+			languages.add(lang);
+		}
+		ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+				android.R.layout.simple_spinner_dropdown_item,
+				languages
+		);
 		setSupportActionBar(x.toolbarlayout.toolbar);
 		x.toolbarlayout.toolbar.setTitle(R.string.app_name);
 		x.toolbarlayout.toolbar.setSubtitle("v" + BuildConfig.VERSION_NAME);
@@ -1254,6 +1275,26 @@ public class MainActivity extends AppCompatActivity {
 			k.devcfg1.setChecked(pref.getDevcfg1(this)&&k.devcfg1.getVisibility()==View.VISIBLE);
 			k.devcfg2.setChecked(pref.getDevcfg2(this));
 			k.toolbarlayout.settings.setVisibility(View.GONE);
+			AppCompatSpinner langSpinner = findViewById(R.id.languages);
+			langSpinner.setAdapter(adapter);
+			Locale l=AppCompatDelegate.getApplicationLocales().get(0);
+			if(l!=null) {
+				l=new Locale(l.toLanguageTag());
+				int index = locales.indexOf(l.toString());
+				langSpinner.setSelection(index);
+			}
+			langSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+				@Override
+				public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+					if(languages.get(position)=="System Default")
+						AppCompatDelegate.setApplicationLocales(LocaleListCompat.getEmptyLocaleList());
+					else
+						AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(locales.get(position)));
+
+				}
+				@Override
+				public void onNothingSelected(AdapterView<?> parent) {}
+			});
 		});
 		
 		k.mountLocation.setOnCheckedChangeListener((compoundButton, b) -> {
