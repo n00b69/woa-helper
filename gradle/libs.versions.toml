@@ -1,6 +1,5 @@
 [versions]
 agp = "8.7.2"
-blurry = "4.0.1"
 material = "1.12.0"
 libsu = "6.0.0"
 realtimeblurview = "f54dc3c34d"
@@ -13,7 +12,6 @@ agp-lib = { id = "com.android.library", version.ref = "agp" }
 androidx-appcompat-appcompat = { group = "androidx.appcompat", name = "appcompat", version = "1.7.0" }
 androidx-preference-preference = { group = "androidx.preference", name = "preference", version = "1.2.1" }
 
-blurry = { module = "jp.wasabeef:blurry", version.ref = "blurry" }
 com-github-topjohnwu-libsu-core = { group = "com.github.topjohnwu.libsu", name = "core", version.ref = "libsu" }
 com-github-topjohnwu-libsu-service = { group = "com.github.topjohnwu.libsu", name = "service", version.ref = "libsu" }
 com-github-topjohnwu-libsu-nio = { group = "com.github.topjohnwu.libsu", name = "nio", version.ref = "libsu" }

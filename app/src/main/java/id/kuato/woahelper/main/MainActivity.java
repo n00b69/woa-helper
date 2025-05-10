@@ -141,10 +141,10 @@ public class MainActivity extends AppCompatActivity {
 		languages.add("System Default");
 		for (String i : BuildConfig.LOCALES) {
 			locales.add(i.toLowerCase());
-			Locale l=LocaleListCompat.forLanguageTags(i).get(0);
-            String country =l.getDisplayCountry(l);
+			Locale locale = LocaleListCompat.forLanguageTags(i).get(0);
+            String country = locale.getDisplayCountry(locale);
 			boolean c = !country.isEmpty();
-			String lang = l.getDisplayLanguage(l)+ (c?" (":"")+country+ (c?")":"");
+			String lang = locale.getDisplayLanguage(locale)+ (c?" (":"")+country+ (c?")":"");
 			languages.add(lang);
 		}
 		ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
