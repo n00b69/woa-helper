@@ -56,60 +56,9 @@
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:windowContentTransitions">true</item>
     </style>
-
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">22sp</item>
         <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="TopCutCardView" parent="@style/Widget.Material3.CardView.Filled">
-        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MaterialCardView.CutTop
-        </item>
-        <item name="android:clipToOutline" tools:targetApi="s">true</item>
-    </style>
-
-    <style name="BottomCutCardView" parent="@style/Widget.Material3.CardView.Filled">
-        <item name="android:clipToOutline" tools:targetApi="s">true</item>
-        <item name="shapeAppearanceOverlay">
-            @style/ShapeAppearanceOverlay.MaterialCardView.CutBottom
-        </item>
-    </style>
-
-    <style name="ShapeAppearanceOverlay.MaterialCardView.CutTop" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeTopRight">@dimen/cardCornerRadius</item>
-        <item name="cornerSizeTopLeft">@dimen/cardCornerRadius</item>
-        <item name="cornerSizeBottomRight">0dp</item>
-        <item name="cornerSizeBottomLeft">0dp</item>
-    </style>
-
-    <style name="ShapeAppearanceOverlay.MaterialCardView.CutBottom" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeBottomRight">@dimen/cardCornerRadius</item>
-        <item name="cornerSizeBottomLeft">@dimen/cardCornerRadius</item>
-        <item name="cornerSizeTopRight">0dp</item>
-        <item name="cornerSizeTopLeft">0dp</item>
-    </style>
-
-    <style name="PreferenceFragment.Material">
-        <item name="android:divider">@color/transparent</item>
-    </style>
-
-    <style name="MyThemeOverlay.MaterialComponents.MaterialAlertDialog" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
-        <item name="android:backgroundDimAmount">0.7</item>
-        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MyApp.Dialog.Rounded
-        </item>
-    </style>
-
-    <style name="ShapeAppearanceOverlay.MyApp.Dialog.Rounded" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">12dp</item>
-    </style>
-
-    <style name="AlertDialogCustom" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
-        <item name="android:backgroundDimAmount">0.7</item>
-        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MyApp.Dialog.Rounded
-        </item>
     </style>
 
 </resources>

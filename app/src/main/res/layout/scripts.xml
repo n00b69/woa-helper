@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:screenOrientation="portrait"
     tools:context=".main.MainActivity"
-	android:background="?attr/colorSurface"
-    android:foreground="?android:attr/selectableItemBackground">
+    android:background="?attr/colorOnSurfaceInverse" >
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -25,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-			android:background="@android:color/transparent"
+            android:background="@color/md_theme_background"
             android:foregroundGravity="center"
             android:gravity="center"
             android:orientation="vertical"
