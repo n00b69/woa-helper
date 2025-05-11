@@ -171,7 +171,6 @@ public class MainActivity extends AppCompatActivity {
 		else x.tvSlot.setText(getString(R.string.slot, slot.substring(1, 2)).toUpperCase());
 
 		x.deviceName.setText(String.format("%s (%s)", model, device));
-		onConfigurationChanged(getResources().getConfiguration());
 		switch (device) {
 			// LG
 			case "alphalm", "alphaplus", "alpha_lao_com", "alphalm_lao_com", "alphaplus_lao_com" -> {
@@ -508,6 +507,7 @@ public class MainActivity extends AppCompatActivity {
 				unsupported = true;
 			}
 		}
+		onConfigurationChanged(getResources().getConfiguration());
 		if (tablet) {
 			x.NabuImage.setVisibility(View.VISIBLE);
 			x.DeviceImage.setVisibility(View.GONE);
@@ -1289,7 +1289,7 @@ public class MainActivity extends AppCompatActivity {
 				Dlg.close();
 			});
 			Dlg.setYes(R.string.agree, () -> {
-				pref.setBACKUP(MainActivity.this, true);
+				pref.setBACKUP(this, true);
 				k.autobackup.setVisibility(View.GONE);
 				Dlg.close();
 			});
@@ -1550,7 +1550,6 @@ public class MainActivity extends AppCompatActivity {
 		k.blur.setVisibility(View.VISIBLE);
 		n.blur.setVisibility(View.VISIBLE);
 		z.blur.setVisibility(View.VISIBLE);
-		Log.d("INFO", String.valueOf(blur));
 	}
 	static void hideBlur(boolean check) {
 		if (!check) blur = 1;
