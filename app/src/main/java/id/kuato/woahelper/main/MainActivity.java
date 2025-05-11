@@ -580,7 +580,7 @@ public class MainActivity extends AppCompatActivity {
 					androidBackup();
 					Dlg.setText(R.string.backuped);
 					Dlg.dismissButton();
-				}, 25);
+				}, 50);
 			});
 			Dlg.setYes(R.string.windows, () -> {
 				Dlg.dialogLoading();
@@ -703,8 +703,7 @@ public class MainActivity extends AppCompatActivity {
 				ShellUtils.fastCmd("mkdir " + winpath + "/ProgramData/sta || true ");
 				ShellUtils.fastCmd("cp '" + getFilesDir() + "/Switch to Android.lnk' " + winpath + "/Users/Public/Desktop");
 				ShellUtils.fastCmd("cp " + getFilesDir() + "/sta.exe " + winpath + "/ProgramData/sta/sta.exe");
-				ShellUtils.fastCmd("cp /sdcard/sta/* " + winpath + "/sta");
-				ShellUtils.fastCmd("rm -r /sdcard/sta");
+				ShellUtils.fastCmd("mv /sdcard/sta " + winpath );
 
 				Dlg.clearButtons();
 				Dlg.setText(R.string.done);
@@ -761,35 +760,10 @@ public class MainActivity extends AppCompatActivity {
 				Dlg.show(this, getString(R.string.dbkp_question, "MI PAD 5"), R.drawable.ic_uefi);
 				Dlg.setNo(R.string.no, Dlg::close);
 				Dlg.setYes(R.string.nabu, () -> {
+					ShellUtils.fastCmd("cp " + getFilesDir() + "/dbkp.nabu.bin /sdcard/dbkp/dbkp.bin");
+					ShellUtils.fastCmd("cp " + getFilesDir() + "/dbkp8150.cfg /sdcard/dbkp/dbkp.cfg");
 					Dlg.dialogLoading();
-					new Thread(() -> {
-						ShellUtils.fastCmd("mkdir /sdcard/dbkp || true");
-						androidBackup();
-						ShellUtils.fastCmd("rm /sdcard/original-boot.img || true");
-						ShellUtils.fastCmd("cp /sdcard/boot.img /sdcard/dbkp/boot.img");
-						ShellUtils.fastCmd("su -mm -c mv /sdcard/boot.img /sdcard/original-boot.img");
-						ShellUtils.fastCmd("cp " + getFilesDir() + "/dbkp8150.cfg /sdcard/dbkp");
-						ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/DBKP/dbkp -O /sdcard/dbkp/dbkp\" | su -mm -c sh");
-						ShellUtils.fastCmd("cp /sdcard/dbkp/dbkp " + getFilesDir());
-						ShellUtils.fastCmd("chmod 777 " + getFilesDir() + "/dbkp");
-						ShellUtils.fastCmd("cp " + getFilesDir() + "/dbkp.nabu.bin /sdcard/dbkp");
-						ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/releases/download/1.0/nabu.fd -O /sdcard/dbkp/nabu.fd\" | su -mm -c sh");
-						ShellUtils.fastCmd("cd /sdcard/dbkp");
-						ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) unpack boot.img\" | su -c sh");
-						ShellUtils.fastCmd("su -mm -c " + getFilesDir() + "/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/nabu.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp8150.cfg /sdcard/dbkp/dbkp.nabu.bin");
-						ShellUtils.fastCmd("su -mm -c rm /sdcard/dbkp/kernel");
-						ShellUtils.fastCmd("su -mm -c mv output kernel");
-						ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) repack boot.img\" | su -c sh");
-						ShellUtils.fastCmd("su -mm -c cp new-boot.img /sdcard/new-boot.img");
-						ShellUtils.fastCmd("su -mm -c mv /sdcard/new-boot.img /sdcard/patched-boot.img");
-						ShellUtils.fastCmd("rm -r /sdcard/dbkp");
-						ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_a bs=16m");
-						ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16m");
-						runOnUiThread(()->{
-							Dlg.setText(getString(R.string.dbkp, getString(R.string.nabu)));
-							Dlg.dismissButton();
-						});
-					}).start();
+					kernelPatch(getString(R.string.nabu),"https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/releases/download/1.0/nabu.fd");
 				});
 				Dlg.setDismiss(R.string.nabu2, () -> {
 					Dlg.dialogLoading();
@@ -1624,5 +1598,42 @@ public class MainActivity extends AppCompatActivity {
 		Intent i = new Intent(Intent.ACTION_VIEW);
 		i.setData(Uri.parse(link));
 		startActivity(i);
+	}
+
+	void kernelPatch(String message,String link) {
+		new Thread(new Runnable() {
+			private String message;
+			private String link;
+			public Runnable init(String parameter, String parameter2) {
+				this.message = parameter;
+				this.link = parameter2;
+				return this;
+			}
+
+			@Override
+			public void run() {
+				ShellUtils.fastCmd("mkdir /sdcard/dbkp || true");
+				androidBackup();
+				ShellUtils.fastCmd("cp /sdcard/boot.img /sdcard/dbkp/boot.img");
+				ShellUtils.fastCmd("mv /sdcard/boot.img /sdcard/original-boot.img");
+				ShellUtils.fastCmd("$(find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/DBKP/dbkp -O /sdcard/dbkp/dbkp");
+				ShellUtils.fastCmd("cp /sdcard/dbkp/dbkp " + getFilesDir());
+				ShellUtils.fastCmd("chmod 777 " + getFilesDir() + "/dbkp");
+				ShellUtils.fastCmd("$(find /data/adb -name busybox) wget "+link+" -O /sdcard/dbkp/file.fd");
+				ShellUtils.fastCmd("cd /sdcard/dbkp");
+				ShellUtils.fastCmd("$(find /data/adb -name magiskboot) unpack boot.img");
+				ShellUtils.fastCmd(getFilesDir() + "/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/file.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp.cfg /sdcard/dbkp/dbkp.bin");
+				ShellUtils.fastCmd("mv output kernel");
+				ShellUtils.fastCmd("$(su -c find /data/adb -name magiskboot) repack boot.img");
+				ShellUtils.fastCmd("cp new-boot.img /sdcard/patched-boot.img");
+				ShellUtils.fastCmd("rm -r /sdcard/dbkp");
+				ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_a bs=16m");
+				ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16m");
+				runOnUiThread(() -> {
+					Dlg.setText(getString(R.string.dbkp, message));
+					Dlg.dismissButton();
+				});
+			}
+		}.init(message,link)).start();
 	}
 }
