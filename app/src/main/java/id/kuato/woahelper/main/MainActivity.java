@@ -544,26 +544,27 @@ public class MainActivity extends AppCompatActivity {
 		if (panel == null) {
 			panel = ShellUtils.fastCmd("su -c cat /proc/cmdline | tr ' :=' '\n'|grep dsi|tr ' _' '\n'|tail -3|head -1 ");
 		}
-		if (!pref.getAGREE(this) || (Objects.equals(panel, "f1p2_2") || Objects.equals(panel, "f1"))) {
-			Dlg.show(this, R.string.upanel);
-			Dlg.setYes(R.string.chat, () -> {
-				openLink(grouplink);
-				pref.setAGREE(this, true);
-				Dlg.close();
-			});
-			Dlg.setDismiss(R.string.nah, () -> {
-				pref.setAGREE(this, true);
-				Dlg.close();
-			});
-			Dlg.setNo(R.string.later, Dlg::close);
-		}
+		if (!pref.getAGREE(this))
+			if (Objects.equals(panel, "f1p2_2") || Objects.equals(panel, "f1")) {
+				Dlg.show(this, R.string.upanel);
+				Dlg.setYes(R.string.chat, () -> {
+					openLink(grouplink);
+					pref.setAGREE(this, true);
+					Dlg.close();
+				});
+				Dlg.setDismiss(R.string.nah, () -> {
+					pref.setAGREE(this, true);
+					Dlg.close();
+				});
+				Dlg.setNo(R.string.later, Dlg::close);
+			}
 
 		x.tvRamvalue.setText(getString(R.string.ramvalue, Double.parseDouble(new RAM().getMemory(this))));
 		x.tvPanel.setText(getString(R.string.paneltype, panel));
 		x.cvGuide.setOnClickListener(v -> openLink(guidelink));
 		x.cvGroup.setOnClickListener(v -> openLink(grouplink));
 
-		if (Shell.isAppGrantedRoot() != true) {
+		if (!Shell.isAppGrantedRoot()) {
 			Dlg.show(this, R.string.nonroot);
 		} else if (!BuildConfig.DEBUG) {
 			checkdbkpmodel();
