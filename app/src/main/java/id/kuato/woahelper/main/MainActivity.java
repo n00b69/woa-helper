@@ -1,13 +1,11 @@
 package id.kuato.woahelper.main;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.AssetManager;
 import android.content.res.Configuration;
-import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
@@ -15,16 +13,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
@@ -36,7 +30,6 @@ import androidx.core.os.LocaleListCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.android.material.button.MaterialButton;
 import com.topjohnwu.superuser.Shell;
 import com.topjohnwu.superuser.ShellUtils;
 
@@ -65,7 +58,6 @@ import id.kuato.woahelper.util.RAM;
 
 public class MainActivity extends AppCompatActivity {
 
-	private static final float SIZE = 12.0F;
 	public static ActivityMainBinding x;
 	public static SetPanelBinding k;
 	public static ToolboxBinding n;
@@ -76,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
 	boolean unsupported = false;
 	boolean tablet = false;
 	static int blur = 0;
+	List<View> views = new ArrayList<>();
 
 	public static boolean isNetworkConnected(Context context) {
 		ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -124,10 +117,16 @@ public class MainActivity extends AppCompatActivity {
 
 		setContentView(x.getRoot());
 
+		views.clear();
+		views.add(x.getRoot());
+
 		ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content), (v, insets) -> {
 			Insets sysInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars());
 			x.tvAppCreator.setPadding(0, 0, 0, sysInsets.bottom);
 			x.app.setPadding(0, 0, 0, sysInsets.bottom);
+			n.app.setPadding(0, 0, 0, sysInsets.bottom);
+			k.app.setPadding(0, 0, 0, sysInsets.bottom);
+			z.app.setPadding(0, 0, 0, sysInsets.bottom);
 			x.linearLayout.setPadding(sysInsets.left, sysInsets.top, sysInsets.right, 0);
 			n.linearLayout.setPadding(sysInsets.left, sysInsets.top, sysInsets.right, 0);
 			k.linearLayout.setPadding(sysInsets.left, sysInsets.top, sysInsets.right, 0);
@@ -155,8 +154,10 @@ public class MainActivity extends AppCompatActivity {
 		x.toolbarlayout.toolbar.setTitle(R.string.app_name);
 		x.toolbarlayout.toolbar.setSubtitle("v" + BuildConfig.VERSION_NAME);
 		x.toolbarlayout.toolbar.setNavigationIcon(R.drawable.ic_launcher_foreground);
-		x.toolbarlayout.settings.setImageResource(R.drawable.settings);
 		x.toolbarlayout.settings.setColorFilter(R.color.md_theme_primary);
+		k.toolbarlayout.settings.setColorFilter(R.color.md_theme_primary);
+		n.toolbarlayout.settings.setColorFilter(R.color.md_theme_primary);
+		z.toolbarlayout.settings.setColorFilter(R.color.md_theme_primary);
 
 		device = ShellUtils.fastCmd("getprop ro.product.device");
 		model = ShellUtils.fastCmd("getprop ro.product.model");
@@ -171,7 +172,6 @@ public class MainActivity extends AppCompatActivity {
 		else x.tvSlot.setText(getString(R.string.slot, slot.substring(1, 2)).toUpperCase());
 
 		x.deviceName.setText(String.format("%s (%s)", model, device));
-		onConfigurationChanged(getResources().getConfiguration());
 		switch (device) {
 			// LG
 			case "alphalm", "alphaplus", "alpha_lao_com", "alphalm_lao_com", "alphaplus_lao_com" -> {
@@ -508,6 +508,7 @@ public class MainActivity extends AppCompatActivity {
 				unsupported = true;
 			}
 		}
+		onConfigurationChanged(getResources().getConfiguration());
 		if (tablet) {
 			x.NabuImage.setVisibility(View.VISIBLE);
 			x.DeviceImage.setVisibility(View.GONE);
@@ -544,28 +545,27 @@ public class MainActivity extends AppCompatActivity {
 		if (panel == null) {
 			panel = ShellUtils.fastCmd("su -c cat /proc/cmdline | tr ' :=' '\n'|grep dsi|tr ' _' '\n'|tail -3|head -1 ");
 		}
-		if (!pref.getAGREE(this) || (Objects.equals(panel, "f1p2_2") || Objects.equals(panel, "f1"))) {
-			Dlg.show(this, R.string.upanel);
-			Dlg.setYes(R.string.chat, () -> {
-				openLink(grouplink);
-				pref.setAGREE(this, true);
-				Dlg.close();
-			});
-			Dlg.setDismiss(R.string.nah, () -> {
-				pref.setAGREE(this, true);
-				Dlg.close();
-			});
-			Dlg.setNo(R.string.later, Dlg::close);
-		}
+		if (!pref.getAGREE(this))
+			if (Objects.equals(panel, "f1p2_2") || Objects.equals(panel, "f1")) {
+				Dlg.show(this, R.string.upanel);
+				Dlg.setYes(R.string.chat, () -> {
+					openLink(grouplink);
+					pref.setAGREE(this, true);
+					Dlg.close();
+				});
+				Dlg.setDismiss(R.string.nah, () -> {
+					pref.setAGREE(this, true);
+					Dlg.close();
+				});
+				Dlg.setNo(R.string.later, Dlg::close);
+			}
 
 		x.tvRamvalue.setText(getString(R.string.ramvalue, Double.parseDouble(new RAM().getMemory(this))));
 		x.tvPanel.setText(getString(R.string.paneltype, panel));
 		x.cvGuide.setOnClickListener(v -> openLink(guidelink));
 		x.cvGroup.setOnClickListener(v -> openLink(grouplink));
 
-		if (Shell.isAppGrantedRoot() != true) {
-			Dlg.show(this, R.string.nonroot);
-		} else if (!BuildConfig.DEBUG) {
+		 if (!BuildConfig.DEBUG) {
 			checkdbkpmodel();
 			checkupdate();
 		}
@@ -575,21 +575,25 @@ public class MainActivity extends AppCompatActivity {
 			Dlg.setDismiss(R.string.no, Dlg::close);
 			Dlg.setNo(R.string.android, () -> {
 				Dlg.dialogLoading();
-				new Handler().postDelayed(() -> {
-					updateLastBackupDate();
+				updateLastBackupDate();
+				new Thread(() -> {
 					androidBackup();
-					Dlg.setText(R.string.backuped);
-					Dlg.dismissButton();
-				}, 50);
+					runOnUiThread(()->{
+						Dlg.setText(R.string.backuped);
+						Dlg.dismissButton();
+					});
+				}).start();
 			});
 			Dlg.setYes(R.string.windows, () -> {
 				Dlg.dialogLoading();
-				new Handler().postDelayed(() -> {
-					updateLastBackupDate();
+				updateLastBackupDate();
+				new Thread(() -> {
 					winBackup();
-					Dlg.setText(R.string.backuped);
-					Dlg.dismissButton();
-				}, 50);
+					runOnUiThread(()->{
+						Dlg.setText(R.string.backuped);
+						Dlg.dismissButton();
+					});
+				}).start();
 			});
 		});
 		
@@ -613,7 +617,6 @@ public class MainActivity extends AppCompatActivity {
 						Dlg.dismissButton();
 						return;
 					}
-
 					Dlg.hideIcon();
 					Dlg.setText(R.string.mountfail);
 					Dlg.setYes(R.string.chat, () -> openLink("https://t.me/woahelperchat"));
@@ -676,10 +679,10 @@ public class MainActivity extends AppCompatActivity {
 		});
 
 		x.cvToolbox.setOnClickListener(v -> {
+			views.add(n.getRoot());
 			x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out));
 			setContentView(n.getRoot());
 			n.toolboxtab.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in));
-			n.toolbarlayout.settings.setVisibility(View.GONE);
 			n.toolbarlayout.toolbar.setTitle(getString(R.string.toolbox_title));
 			n.toolbarlayout.toolbar.setNavigationIcon(getDrawable(R.drawable.ic_launcher_foreground));
 		});
@@ -712,10 +715,10 @@ public class MainActivity extends AppCompatActivity {
 		});
 		
 		n.cvScripts.setOnClickListener(v -> {
+			views.add(z.getRoot());
 			n.toolboxtab.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out));
 			setContentView(z.getRoot());
 			z.scriptstab.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in));
-			z.toolbarlayout.settings.setVisibility(View.GONE);
 			z.toolbarlayout.toolbar.setTitle(R.string.script_title);
 			z.toolbarlayout.toolbar.setNavigationIcon(R.drawable.ic_launcher_foreground);
 		});
@@ -725,12 +728,14 @@ public class MainActivity extends AppCompatActivity {
 			Dlg.setNo(R.string.no, Dlg::close);
 			Dlg.setYes(R.string.yes, () -> {
 				Dlg.dialogLoading();
-				new Handler().postDelayed(() -> {
-					if (!isMounted()) mount();
+				if (!isMounted()) mount();
+				new Thread(() -> {
 					dump();
-					Dlg.setText(R.string.lte);
-					Dlg.dismissButton();
-				}, 50);
+					runOnUiThread(()-> {
+						Dlg.setText(R.string.lte);
+						Dlg.dismissButton();
+					});
+				}).start();
 			});
 		});
 		
@@ -739,15 +744,17 @@ public class MainActivity extends AppCompatActivity {
 			Dlg.setNo(R.string.no, Dlg::close);
 			Dlg.setYes(R.string.yes,  () -> {
 				Dlg.dialogLoading();
-				new Handler().postDelayed(() -> {
+				new Thread(() -> {
 					try {
 						flash(finduefi);
-						Dlg.setText(R.string.flash);
-						Dlg.dismissButton();
+						runOnUiThread(()->{
+							Dlg.setText(R.string.flash);
+							Dlg.dismissButton();
+						});
 					} catch (Exception error) {
 						error.printStackTrace();
 					}
-				}, 50);
+				});
 			});
 		});
 		
@@ -1085,7 +1092,6 @@ public class MainActivity extends AppCompatActivity {
 				ShellUtils.fastCmd("cp /sdcard/QuickRotate_V3.0.exe " + winpath + "/Toolbox");
 				ShellUtils.fastCmd("cp /sdcard/QuickRotate_V3.0.exe " + winpath + "/Users/Public/Desktop");
 				ShellUtils.fastCmd("rm /sdcard/QuickRotate_V3.0.exe");
-
 				Dlg.setText(R.string.done);
 				Dlg.dismissButton();
 			});
@@ -1169,12 +1175,12 @@ public class MainActivity extends AppCompatActivity {
 							mountfail();
 							return;
 						}
-						Dlg.setIcon(R.drawable.ic_mnt);
-						Dlg.hideBar();
 						ShellUtils.fastCmd("mkdir " + winpath + "/Toolbox || true ");
 						ShellUtils.fastCmd("mkdir " + winpath + "/Toolbox/Frameworks || true ");
 						ShellUtils.fastCmd("cp /sdcard/Frameworks/* " + winpath + "/Toolbox/Frameworks");
 						ShellUtils.fastCmd("rm -r /sdcard/Frameworks");
+						Dlg.setIcon(R.drawable.ic_mnt);
+						Dlg.hideBar();
 						Dlg.setText(R.string.done);
 						Dlg.dismissButton();
 					});
@@ -1233,10 +1239,11 @@ public class MainActivity extends AppCompatActivity {
 		
 		k.toolbarlayout.toolbar.setTitle(R.string.preferences);
 		k.toolbarlayout.toolbar.setNavigationIcon(R.drawable.ic_launcher_foreground);
-		x.toolbarlayout.settings.setOnClickListener(v -> {
-			x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out));
+		View.OnClickListener settingsIconClick = v -> {
+			views.add(k.getRoot());
+			views.get(views.size() - 2).startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out));
 			setContentView(k.getRoot());
-			k.settingsPanel.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in));
+			views.get(views.size() - 1).startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in));
 			k.backupQB.setChecked(pref.getBACKUP(this));
 			k.backupQBA.setChecked(pref.getBACKUP_A(this));
 			k.autobackup.setChecked(!pref.getAUTO(this));
@@ -1269,7 +1276,10 @@ public class MainActivity extends AppCompatActivity {
 				@Override
 				public void onNothingSelected(AdapterView<?> parent) {}
 			});
-		});
+		};
+		x.toolbarlayout.settings.setOnClickListener(settingsIconClick);
+		n.toolbarlayout.settings.setOnClickListener(settingsIconClick);
+		z.toolbarlayout.settings.setOnClickListener(settingsIconClick);
 		
 		k.mountLocation.setOnCheckedChangeListener((compoundButton, b) -> {
 			pref.setMountLocation(this, b);
@@ -1283,12 +1293,13 @@ public class MainActivity extends AppCompatActivity {
 				return;
 			}
 			Dlg.show(this, R.string.bwarn);
+			Dlg.onCancel(() -> k.backupQB.setChecked(false));
 			Dlg.setDismiss(R.string.cancel, () -> {
 				k.backupQB.setChecked(false);
 				Dlg.close();
 			});
 			Dlg.setYes(R.string.agree, () -> {
-				pref.setBACKUP(MainActivity.this, true);
+				pref.setBACKUP(this, true);
 				k.autobackup.setVisibility(View.GONE);
 				Dlg.close();
 			});
@@ -1301,6 +1312,7 @@ public class MainActivity extends AppCompatActivity {
 				return;
 			}
 			Dlg.show(this, R.string.bwarn);
+			Dlg.onCancel(() -> k.backupQBA.setChecked(false));
 			Dlg.setDismiss(R.string.cancel, () -> {
 				k.backupQBA.setChecked(false);
 				Dlg.close();
@@ -1353,9 +1365,7 @@ public class MainActivity extends AppCompatActivity {
 			pref.setDevcfg2(this, false);
 		}
 		k.button.setOnClickListener(v -> {
-			k.settingsPanel.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_out));
-			setContentView(x.getRoot());
-			x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_in));
+			onBackPressed();
 		});
 	}
 
@@ -1364,35 +1374,18 @@ public class MainActivity extends AppCompatActivity {
 		super.onResume();
 		checkwin();
 		checkuefi();
+		if (!Shell.isAppGrantedRoot()) {
+			Dlg.show(this, R.string.nonroot);
+			Dlg.setCancelable(false);
+		}
 	}
 
 	@Override
 	public void onBackPressed() {
-		final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
-		switch (viewGroup.getId()) {
-			case R.id.scriptstab:
-				z.scriptstab.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_out));
-				setContentView(n.getRoot());
-				n.toolboxtab.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_in));
-				break;
-			case R.id.toolboxtab:
-				n.toolboxtab.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_out));
-				setContentView(x.getRoot());
-				x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_in));
-				break;
-			case R.id.settingsPanel:
-				k.settingsPanel.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_out));
-				setContentView(x.getRoot());
-				x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_in));
-				break;
-			case R.id.mainlayout:
-				finish();
-				break;
-			default:
-				x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in));
-				setContentView(x.getRoot());
-				break;
-		}
+		views.get(views.size() - 1).startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_out));
+		views.remove(views.size() - 1);
+		setContentView(views.get(views.size() - 1));
+		views.get(views.size() - 1).startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_in));
 	}
 
 	public void flash(String uefi) {
@@ -1404,7 +1397,9 @@ public class MainActivity extends AppCompatActivity {
 		ShellUtils.fastCmd("cd " + getFilesDir());
 		ShellUtils.fastCmd("su -mm -c ./mount.ntfs " + win + " " + winpath);
 		String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + win);
-		if (mnt_stat.isEmpty()) k.mountLocation.setChecked(!pref.getMountLocation(this));
+		if (mnt_stat.isEmpty()) {
+			pref.setMountLocation(this,true);
+			updateWinPath();
 			ShellUtils.fastCmd("mkdir " + winpath + " || true");
 			ShellUtils.fastCmd("cd " + getFilesDir());
 			ShellUtils.fastCmd("su -mm -c ./mount.ntfs " + win + " " + winpath);
@@ -1413,6 +1408,7 @@ public class MainActivity extends AppCompatActivity {
 				mounted = getString(R.string.unmountt);
 				x.tvMnt.setText(getString(R.string.mnt_title, mounted));
 			}
+		}
 	}
 	
 	public void unmount() {
@@ -1549,7 +1545,6 @@ public class MainActivity extends AppCompatActivity {
 		k.blur.setVisibility(View.VISIBLE);
 		n.blur.setVisibility(View.VISIBLE);
 		z.blur.setVisibility(View.VISIBLE);
-		Log.d("INFO", String.valueOf(blur));
 	}
 	static void hideBlur(boolean check) {
 		if (!check) blur = 1;
