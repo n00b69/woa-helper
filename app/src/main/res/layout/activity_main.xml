@@ -99,7 +99,7 @@
                                 android:layout_marginVertical="4dp"
                                 android:gravity="center"
                                 android:text="WINDOWS ON ARM"
-                                android:textSize="@dimen/_10sdp"
+                                android:textSize="@dimen/_12sdp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -108,21 +108,21 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
                                 android:text="POCO X3 PRO (VAYU)"
-                                android:textSize="@dimen/_12sdp" />
+                                android:textSize="@dimen/_11sdp" />
 
                             <TextView
                                 android:id="@+id/tv_ramvalue"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
-                                android:textSize="@dimen/_12sdp" />
+                                android:textSize="@dimen/_11sdp" />
 
                             <TextView
                                 android:id="@+id/tv_panel"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
-                                android:textSize="@dimen/_12sdp"
+                                android:textSize="@dimen/_11sdp"
                                 android:visibility="gone" />
 
                             <TextView
@@ -130,14 +130,14 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
-                                android:textSize="@dimen/_12sdp" />
+                                android:textSize="@dimen/_11sdp" />
 
                             <TextView
                                 android:id="@+id/tv_slot"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
-                                android:textSize="@dimen/_10sdp" />
+                                android:textSize="@dimen/_11sdp" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"

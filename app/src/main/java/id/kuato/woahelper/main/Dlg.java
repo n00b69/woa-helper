@@ -48,6 +48,7 @@ public class Dlg {
             dismissButton();
         }*/
     public static void show(Context context, String text) {
+        if (dialog != null && dialog.isShowing()) { dialog.dismiss(); }
         ctx = context;
         dialog = new Dialog(context);
         dialog.setContentView(R.layout.dialog);
