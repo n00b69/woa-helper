@@ -574,8 +574,8 @@ public class MainActivity extends AppCompatActivity {
 			Dlg.setDismiss(R.string.no, Dlg::close);
 			Dlg.setNo(R.string.android, () -> {
 				Dlg.dialogLoading();
+				updateLastBackupDate();
 				new Thread(() -> {
-					updateLastBackupDate();
 					androidBackup();
 					runOnUiThread(()->{
 						Dlg.setText(R.string.backuped);
@@ -585,8 +585,8 @@ public class MainActivity extends AppCompatActivity {
 			});
 			Dlg.setYes(R.string.windows, () -> {
 				Dlg.dialogLoading();
+				updateLastBackupDate();
 				new Thread(() -> {
-					updateLastBackupDate();
 					winBackup();
 					runOnUiThread(()->{
 						Dlg.setText(R.string.backuped);
