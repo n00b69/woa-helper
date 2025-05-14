@@ -30,23 +30,11 @@ public class Dlg {
     }
 
     public static void dialogLoading() {
+        setCancelable(false);
         clearButtons();
         setText(ctx.getString(R.string.please_wait));
     }
-    /*
-        public static void dialogError(String description) {
-            clearButtons();
-            setText("ERROR!");
-            setCancelable(true);
-            dismissButton();
-        }
 
-        public static void dialogSuccess() {
-            clearButtons();
-            setText("Success!");
-            setCancelable(true);
-            dismissButton();
-        }*/
     public static void show(Context context, String text) {
         if (dialog != null && dialog.isShowing()) { dialog.dismiss(); }
         ctx = context;
@@ -61,10 +49,8 @@ public class Dlg {
         bar = dialog.findViewById(R.id.progress);
 
         setText(text);
-        setCancelable(false);
 
         MainActivity.showBlur();
-
         dialog.setOnDismissListener(v -> {
             MainActivity.hideBlur(true);
         });
@@ -131,6 +117,12 @@ public class Dlg {
     }
     public static void hideBar() {
         bar.setVisibility(View.GONE);
+    }
+    public static void onCancel(OnButtonClick event) {
+        dialog.setOnCancelListener(v -> {
+            event.execute();
+            close();
+        });
     }
 
 }

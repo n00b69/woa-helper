@@ -579,6 +579,7 @@ public class MainActivity extends AppCompatActivity {
 				new Handler().postDelayed(() -> {
 					updateLastBackupDate();
 					androidBackup();
+					Dlg.setCancelable(true);
 					Dlg.setText(R.string.backuped);
 					Dlg.dismissButton();
 				}, 50);
@@ -588,6 +589,7 @@ public class MainActivity extends AppCompatActivity {
 				new Handler().postDelayed(() -> {
 					updateLastBackupDate();
 					winBackup();
+					Dlg.setCancelable(true);
 					Dlg.setText(R.string.backuped);
 					Dlg.dismissButton();
 				}, 50);
@@ -604,17 +606,19 @@ public class MainActivity extends AppCompatActivity {
 					Log.d("debug", winpath);
 					if (isMounted()) {
 						unmount();
+						Dlg.setCancelable(true);
 						Dlg.setText(R.string.unmounted);
 						Dlg.dismissButton();
 						return;
 					}
 					mount();
 					if (isMounted()) {
+						Dlg.setCancelable(true);
 						Dlg.setText(String.format("%s\n%s", getString(R.string.mounted), winpath));
 						Dlg.dismissButton();
 						return;
 					}
-
+					Dlg.setCancelable(true);
 					Dlg.hideIcon();
 					Dlg.setText(R.string.mountfail);
 					Dlg.setYes(R.string.chat, () -> openLink("https://t.me/woahelperchat"));
@@ -670,6 +674,7 @@ public class MainActivity extends AppCompatActivity {
 					}
 					flash(finduefi);
 					ShellUtils.fastCmd("su -c svc power reboot");
+					Dlg.setCancelable(true);
 					Dlg.setText(R.string.wrong);
 					Dlg.dismissButton();
 				}, 25);
@@ -706,6 +711,7 @@ public class MainActivity extends AppCompatActivity {
 				ShellUtils.fastCmd("cp " + getFilesDir() + "/sta.exe " + winpath + "/ProgramData/sta/sta.exe");
 				ShellUtils.fastCmd("mv /sdcard/sta " + winpath );
 
+				Dlg.setCancelable(true);
 				Dlg.clearButtons();
 				Dlg.setText(R.string.done);
 				Dlg.dismissButton();
@@ -729,6 +735,8 @@ public class MainActivity extends AppCompatActivity {
 				new Handler().postDelayed(() -> {
 					if (!isMounted()) mount();
 					dump();
+
+					Dlg.setCancelable(true);
 					Dlg.setText(R.string.lte);
 					Dlg.dismissButton();
 				}, 50);
@@ -743,6 +751,7 @@ public class MainActivity extends AppCompatActivity {
 				new Handler().postDelayed(() -> {
 					try {
 						flash(finduefi);
+						Dlg.setCancelable(true);
 						Dlg.setText(R.string.flash);
 						Dlg.dismissButton();
 					} catch (Exception error) {
@@ -792,6 +801,7 @@ public class MainActivity extends AppCompatActivity {
 						ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_a bs=16m");
 						ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16m");
 						runOnUiThread(()->{
+							Dlg.setCancelable(true);
 							Dlg.setText(getString(R.string.dbkp, getString(R.string.nabu2)));
 							Dlg.dismissButton();
 						});
@@ -869,6 +879,7 @@ public class MainActivity extends AppCompatActivity {
 							//		ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16m");
 						}
 						runOnUiThread(()->{
+							Dlg.setCancelable(true);
 							if ("guacamole".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device) || "hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) {
 								Dlg.setText(getString(R.string.dbkp, getString(R.string.op7)));
 							} else if ("cepheus".equals(device)) {
@@ -941,6 +952,7 @@ public class MainActivity extends AppCompatActivity {
 							ShellUtils.fastCmd("cp " + getFilesDir() + "/devcfg-sdd.conf " + winpath + "/sta/sdd.conf");
 							ShellUtils.fastCmd("cp /sdcard/original-devcfg.img " + winpath + "/original-devcfg.img");
 						}
+						Dlg.setCancelable(true);
 						Dlg.setText(R.string.devcfg);
 						Dlg.dismissButton();
 					});
@@ -972,6 +984,7 @@ public class MainActivity extends AppCompatActivity {
 				ShellUtils.fastCmd("rm /sdcard/TestedSoftware.url");
 				ShellUtils.fastCmd("rm /sdcard/ARMSoftware.url");
 				ShellUtils.fastCmd("rm /sdcard/ARMRepo.url");
+				Dlg.setCancelable(true);
 				Dlg.setText(R.string.done);
 				Dlg.dismissButton();
 			});
@@ -1008,6 +1021,7 @@ public class MainActivity extends AppCompatActivity {
 						ShellUtils.fastCmd("cp /sdcard/AMEWizardBeta.zip " + winpath + "/Toolbox");
 						ShellUtils.fastCmd("su -mm -c rm /sdcard/ReviPlaybook.apbx");
 						ShellUtils.fastCmd("su -mm -c rm /sdcard/AMEWizardBeta.zip");
+						Dlg.setCancelable(true);
 						Dlg.setText(R.string.done);
 						Dlg.dismissButton();
 					});
@@ -1041,6 +1055,7 @@ public class MainActivity extends AppCompatActivity {
 						ShellUtils.fastCmd("su -mm -c rm /sdcard/AtlasPlaybook_v0.4.1.apbx");
 						ShellUtils.fastCmd("su -mm -c rm /sdcard/AtlasPlaybook_v0.4.0_23H2Only.apbx");
 						ShellUtils.fastCmd("su -mm -c rm /sdcard/AMEWizardBeta.zip");
+						Dlg.setCancelable(true);
 						Dlg.setText(R.string.done);
 						Dlg.dismissButton();
 					});
@@ -1065,6 +1080,7 @@ public class MainActivity extends AppCompatActivity {
 				ShellUtils.fastCmd("cp /sdcard/usbhostmode.exe " + winpath + "/Toolbox");
 				ShellUtils.fastCmd("cp '" + getFilesDir() + "/USB Host Mode.lnk' " + winpath + "/Users/Public/Desktop");
 				ShellUtils.fastCmd("rm /sdcard/usbhostmode.exe");
+				Dlg.setCancelable(true);
 				Dlg.setText(R.string.done);
 				Dlg.dismissButton();
 			});
@@ -1086,7 +1102,7 @@ public class MainActivity extends AppCompatActivity {
 				ShellUtils.fastCmd("cp /sdcard/QuickRotate_V3.0.exe " + winpath + "/Toolbox");
 				ShellUtils.fastCmd("cp /sdcard/QuickRotate_V3.0.exe " + winpath + "/Users/Public/Desktop");
 				ShellUtils.fastCmd("rm /sdcard/QuickRotate_V3.0.exe");
-
+				Dlg.setCancelable(true);
 				Dlg.setText(R.string.done);
 				Dlg.dismissButton();
 			});
@@ -1108,6 +1124,7 @@ public class MainActivity extends AppCompatActivity {
 				ShellUtils.fastCmd("mkdir " + winpath + "/Toolbox || true ");
 				ShellUtils.fastCmd("cp /sdcard/Optimized_Taskbar_Control_V3.1.exe " + winpath + "/Toolbox");
 				ShellUtils.fastCmd("rm /sdcard/Optimized_Taskbar_Control_V3.1.exe");
+				Dlg.setCancelable(true);
 				Dlg.setText(R.string.done);
 				Dlg.dismissButton();
 			});
@@ -1170,12 +1187,13 @@ public class MainActivity extends AppCompatActivity {
 							mountfail();
 							return;
 						}
-						Dlg.setIcon(R.drawable.ic_mnt);
-						Dlg.hideBar();
 						ShellUtils.fastCmd("mkdir " + winpath + "/Toolbox || true ");
 						ShellUtils.fastCmd("mkdir " + winpath + "/Toolbox/Frameworks || true ");
 						ShellUtils.fastCmd("cp /sdcard/Frameworks/* " + winpath + "/Toolbox/Frameworks");
 						ShellUtils.fastCmd("rm -r /sdcard/Frameworks");
+						Dlg.setCancelable(true);
+						Dlg.setIcon(R.drawable.ic_mnt);
+						Dlg.hideBar();
 						Dlg.setText(R.string.done);
 						Dlg.dismissButton();
 					});
@@ -1226,6 +1244,7 @@ public class MainActivity extends AppCompatActivity {
 					ShellUtils.fastCmd("cp " + getFilesDir() + "/RemoveEdge.bat " + winpath + "/Toolbox");
 					ShellUtils.fastCmd("rm /sdcard/DefenderRemover.exe");
 					ShellUtils.fastCmd("rm /sdcard/RemoveEdge.bat");
+					Dlg.setCancelable(true);
 					Dlg.setText(R.string.done);
 					Dlg.dismissButton();
 				}
@@ -1284,6 +1303,7 @@ public class MainActivity extends AppCompatActivity {
 				return;
 			}
 			Dlg.show(this, R.string.bwarn);
+			Dlg.onCancel(() -> k.backupQB.setChecked(false));
 			Dlg.setDismiss(R.string.cancel, () -> {
 				k.backupQB.setChecked(false);
 				Dlg.close();
@@ -1302,6 +1322,7 @@ public class MainActivity extends AppCompatActivity {
 				return;
 			}
 			Dlg.show(this, R.string.bwarn);
+			Dlg.onCancel(() -> k.backupQBA.setChecked(false));
 			Dlg.setDismiss(R.string.cancel, () -> {
 				k.backupQBA.setChecked(false);
 				Dlg.close();
@@ -1519,12 +1540,14 @@ public class MainActivity extends AppCompatActivity {
 	}
 	
 	public void mountfail() {
+		Dlg.setCancelable(true);
 		Dlg.show(this, getString(R.string.mountfail) + "\n" + getString(R.string.internalstorage));
 		Dlg.setDismiss(R.string.cancel, Dlg::close);
 		Dlg.setYes(R.string.chat, () -> openLink("https://t.me/woahelperchat"));
 	}
 	
 	public void nointernet() {
+		Dlg.setCancelable(true);
 		Dlg.show(this, R.string.internet);
 		Dlg.dismissButton();
 	}
@@ -1630,6 +1653,7 @@ public class MainActivity extends AppCompatActivity {
 				ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_a bs=16m");
 				ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16m");
 				runOnUiThread(() -> {
+					Dlg.setCancelable(true);
 					Dlg.setText(getString(R.string.dbkp, message));
 					Dlg.dismissButton();
 				});
