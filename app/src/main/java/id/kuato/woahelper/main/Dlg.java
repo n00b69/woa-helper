@@ -49,7 +49,7 @@ public class Dlg {
         bar = dialog.findViewById(R.id.progress);
 
         setText(text);
-
+        setCancelable(true);
         MainActivity.showBlur();
         dialog.setOnDismissListener(v -> {
             MainActivity.hideBlur(true);
@@ -79,7 +79,7 @@ public class Dlg {
 
     public static void setCancelable(Boolean state) { dialog.setCancelable(state); }
 
-    public static void dismissButton() { setDismiss(R.string.dismiss, Dlg::close); }
+    public static void dismissButton() { setDismiss(R.string.dismiss, Dlg::close); setCancelable(true);}
     public static void setDismiss(@StringRes int stringId, OnButtonClick onButtonClick) {
         setButton(dismiss, ctx.getString(stringId), onButtonClick);
     }

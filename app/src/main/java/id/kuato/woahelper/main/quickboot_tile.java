@@ -31,7 +31,8 @@ public class quickboot_tile extends TileService {
 		final Tile tile = getQsTile();
 		checkdevice();
 		checkuefi();
-		if (finduefi.isEmpty() || (isSecure() && !pref.getSecure(this))) tile.setState(0);
+		findwin = ShellUtils.fastCmd("find /dev/block | grep -i -E \"win|mindows|windows\" | head -1");
+		if (finduefi.isEmpty() || (isSecure() && !pref.getSecure(this))||findwin.isEmpty()) tile.setState(0);
 		else tile.setState(1);
 		if (Build.VERSION_CODES.Q <= Build.VERSION.SDK_INT) {
 			tile.setSubtitle("");
@@ -83,12 +84,11 @@ public class quickboot_tile extends TileService {
 
 	private void mount() {
 		ShellUtils.fastCmd("mkdir " + winpath + " || true");
-		ShellUtils.fastCmd("cd /data/data/id.kuato.woahelper/files");
-		ShellUtils.fastCmd("su -mm -c ./mount.ntfs " + win + " " + winpath);
+		ShellUtils.fastCmd("su -mm -c /data/data/id.kuato.woahelper/files/mount.ntfs " + win + " " + winpath);
 	}
 
 	public void flash() {
-		ShellUtils.fastCmd("su -c dd if=" + finduefi + " of=/dev/block/bootdevice/by-name/boot$(getprop ro.boot.slot_suffix) bs=16m");
+		ShellUtils.fastCmd("dd if=" + finduefi + " of=/dev/block/bootdevice/by-name/boot$(getprop ro.boot.slot_suffix) bs=16m");
 	}
 
 	public void checkdevice() {
@@ -98,12 +98,7 @@ public class quickboot_tile extends TileService {
 	public void checkuefi() {
 		checkdevice();
 		finduefi = ShellUtils.fastCmd(getString(R.string.uefiChk));
-		findwin = ShellUtils.fastCmd("find /dev/block | grep win");
-		if (findwin.isEmpty()) findwin = ShellUtils.fastCmd("find /dev/block | grep mindows");
-		if (findwin.isEmpty()) findwin = ShellUtils.fastCmd("find /dev/block | grep windows");
-		if (findwin.isEmpty()) findwin = ShellUtils.fastCmd("find /dev/block | grep Win");
-		if (findwin.isEmpty()) findwin = ShellUtils.fastCmd("find /dev/block | grep Mindows");
-		if (findwin.isEmpty()) findwin = ShellUtils.fastCmd("find /dev/block | grep Windows");
+		findwin = ShellUtils.fastCmd("find /dev/block | grep -i -E \"win|mindows|windows\" | head -1");
 		win = ShellUtils.fastCmd("realpath " + findwin);
 		winpath = (pref.getMountLocation(this) ? "/mnt/Windows" : "/mnt/sdcard/Windows");
 		findboot = ShellUtils.fastCmd("find /dev/block | grep boot$(getprop ro.boot.slot_suffix)");
