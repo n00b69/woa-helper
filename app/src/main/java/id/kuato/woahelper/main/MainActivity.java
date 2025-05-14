@@ -1,13 +1,11 @@
 package id.kuato.woahelper.main;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.AssetManager;
 import android.content.res.Configuration;
-import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
@@ -15,16 +13,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
@@ -36,7 +30,6 @@ import androidx.core.os.LocaleListCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.android.material.button.MaterialButton;
 import com.topjohnwu.superuser.Shell;
 import com.topjohnwu.superuser.ShellUtils;
 
@@ -65,7 +58,6 @@ import id.kuato.woahelper.util.RAM;
 
 public class MainActivity extends AppCompatActivity {
 
-	private static final float SIZE = 12.0F;
 	public static ActivityMainBinding x;
 	public static SetPanelBinding k;
 	public static ToolboxBinding n;
@@ -76,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
 	boolean unsupported = false;
 	boolean tablet = false;
 	static int blur = 0;
+	List<View> views = new ArrayList<>();
 
 	public static boolean isNetworkConnected(Context context) {
 		ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -124,10 +117,16 @@ public class MainActivity extends AppCompatActivity {
 
 		setContentView(x.getRoot());
 
+		views.clear();
+		views.add(x.getRoot());
+
 		ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content), (v, insets) -> {
 			Insets sysInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars());
 			x.tvAppCreator.setPadding(0, 0, 0, sysInsets.bottom);
 			x.app.setPadding(0, 0, 0, sysInsets.bottom);
+			n.app.setPadding(0, 0, 0, sysInsets.bottom);
+			k.app.setPadding(0, 0, 0, sysInsets.bottom);
+			z.app.setPadding(0, 0, 0, sysInsets.bottom);
 			x.linearLayout.setPadding(sysInsets.left, sysInsets.top, sysInsets.right, 0);
 			n.linearLayout.setPadding(sysInsets.left, sysInsets.top, sysInsets.right, 0);
 			k.linearLayout.setPadding(sysInsets.left, sysInsets.top, sysInsets.right, 0);
@@ -155,8 +154,10 @@ public class MainActivity extends AppCompatActivity {
 		x.toolbarlayout.toolbar.setTitle(R.string.app_name);
 		x.toolbarlayout.toolbar.setSubtitle("v" + BuildConfig.VERSION_NAME);
 		x.toolbarlayout.toolbar.setNavigationIcon(R.drawable.ic_launcher_foreground);
-		x.toolbarlayout.settings.setImageResource(R.drawable.settings);
 		x.toolbarlayout.settings.setColorFilter(R.color.md_theme_primary);
+		k.toolbarlayout.settings.setColorFilter(R.color.md_theme_primary);
+		n.toolbarlayout.settings.setColorFilter(R.color.md_theme_primary);
+		z.toolbarlayout.settings.setColorFilter(R.color.md_theme_primary);
 
 		device = ShellUtils.fastCmd("getprop ro.product.device");
 		model = ShellUtils.fastCmd("getprop ro.product.model");
@@ -678,10 +679,10 @@ public class MainActivity extends AppCompatActivity {
 		});
 
 		x.cvToolbox.setOnClickListener(v -> {
+			views.add(n.getRoot());
 			x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out));
 			setContentView(n.getRoot());
 			n.toolboxtab.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in));
-			n.toolbarlayout.settings.setVisibility(View.GONE);
 			n.toolbarlayout.toolbar.setTitle(getString(R.string.toolbox_title));
 			n.toolbarlayout.toolbar.setNavigationIcon(getDrawable(R.drawable.ic_launcher_foreground));
 		});
@@ -714,10 +715,10 @@ public class MainActivity extends AppCompatActivity {
 		});
 		
 		n.cvScripts.setOnClickListener(v -> {
+			views.add(z.getRoot());
 			n.toolboxtab.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out));
 			setContentView(z.getRoot());
 			z.scriptstab.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in));
-			z.toolbarlayout.settings.setVisibility(View.GONE);
 			z.toolbarlayout.toolbar.setTitle(R.string.script_title);
 			z.toolbarlayout.toolbar.setNavigationIcon(R.drawable.ic_launcher_foreground);
 		});
@@ -1238,10 +1239,11 @@ public class MainActivity extends AppCompatActivity {
 		
 		k.toolbarlayout.toolbar.setTitle(R.string.preferences);
 		k.toolbarlayout.toolbar.setNavigationIcon(R.drawable.ic_launcher_foreground);
-		x.toolbarlayout.settings.setOnClickListener(v -> {
-			x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out));
+		View.OnClickListener settingsIconClick = v -> {
+			views.add(k.getRoot());
+			views.get(views.size() - 2).startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out));
 			setContentView(k.getRoot());
-			k.settingsPanel.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in));
+			views.get(views.size() - 1).startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in));
 			k.backupQB.setChecked(pref.getBACKUP(this));
 			k.backupQBA.setChecked(pref.getBACKUP_A(this));
 			k.autobackup.setChecked(!pref.getAUTO(this));
@@ -1274,7 +1276,10 @@ public class MainActivity extends AppCompatActivity {
 				@Override
 				public void onNothingSelected(AdapterView<?> parent) {}
 			});
-		});
+		};
+		x.toolbarlayout.settings.setOnClickListener(settingsIconClick);
+		n.toolbarlayout.settings.setOnClickListener(settingsIconClick);
+		z.toolbarlayout.settings.setOnClickListener(settingsIconClick);
 		
 		k.mountLocation.setOnCheckedChangeListener((compoundButton, b) -> {
 			pref.setMountLocation(this, b);
@@ -1360,9 +1365,7 @@ public class MainActivity extends AppCompatActivity {
 			pref.setDevcfg2(this, false);
 		}
 		k.button.setOnClickListener(v -> {
-			k.settingsPanel.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_out));
-			setContentView(x.getRoot());
-			x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_in));
+			onBackPressed();
 		});
 	}
 
@@ -1379,31 +1382,10 @@ public class MainActivity extends AppCompatActivity {
 
 	@Override
 	public void onBackPressed() {
-		final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
-		switch (viewGroup.getId()) {
-			case R.id.scriptstab:
-				z.scriptstab.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_out));
-				setContentView(n.getRoot());
-				n.toolboxtab.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_in));
-				break;
-			case R.id.toolboxtab:
-				n.toolboxtab.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_out));
-				setContentView(x.getRoot());
-				x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_in));
-				break;
-			case R.id.settingsPanel:
-				k.settingsPanel.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_out));
-				setContentView(x.getRoot());
-				x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_in));
-				break;
-			case R.id.mainlayout:
-				finish();
-				break;
-			default:
-				x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in));
-				setContentView(x.getRoot());
-				break;
-		}
+		views.get(views.size() - 1).startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_out));
+		views.remove(views.size() - 1);
+		setContentView(views.get(views.size() - 1));
+		views.get(views.size() - 1).startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_in));
 	}
 
 	public void flash(String uefi) {
