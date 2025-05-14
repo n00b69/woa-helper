@@ -222,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
 				x.tvPanel.setVisibility(View.VISIBLE);
 			}
 			case "bhima", "vayu" -> {
-				guidelink = "https://github.com/woa-vayu/POCOX3Pro-Guides";
+				guidelink = "https://github.com/WaLoVayu/POCOX3Pro-Windows-Guides";
 				grouplink = "https://t.me/windowsonvayu";
 				x.DeviceImage.setImageResource(R.drawable.vayu);
 				x.tvPanel.setVisibility(View.VISIBLE);
@@ -259,7 +259,7 @@ public class MainActivity extends AppCompatActivity {
 			}
 			case "lisa" -> {
 				guidelink = "https://github.com/n00b69/woa-lisa";
-				grouplink = "https://t.me/woalisa";
+				grouplink = "https://t.me/lisawoa";
 				x.DeviceImage.setImageResource(R.drawable.lisa);
 			}
 			case "nabu" -> {
