@@ -346,7 +346,6 @@ public class MainActivity extends AppCompatActivity {
 				x.DeviceImage.setImageResource(R.drawable.hotdog);
 				n.cvDumpModem.setVisibility(View.VISIBLE);
 				n.cvDbkp.setVisibility(View.VISIBLE);
-				n.cvDevcfg.setVisibility(View.VISIBLE);
 				n.cvFlashUefi.setVisibility(View.GONE);
 			}
 			case "guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO" -> {
@@ -355,7 +354,6 @@ public class MainActivity extends AppCompatActivity {
 				x.DeviceImage.setImageResource(R.drawable.guacamole);
 				n.cvDumpModem.setVisibility(View.VISIBLE);
 				n.cvDbkp.setVisibility(View.VISIBLE);
-				n.cvDevcfg.setVisibility(View.VISIBLE);
 				n.cvFlashUefi.setVisibility(View.GONE);
 			}
 			case "guacamoleb", "hotdogb", "OnePlus7T", "OnePlus7" -> {
@@ -649,8 +647,8 @@ public class MainActivity extends AppCompatActivity {
 						}
 						find = ShellUtils.fastCmd("find " + getFilesDir() + " -maxdepth 1 -name original-devcfg.img");
 						if (find.isEmpty()) {
-							ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=" + getFilesDir() + "/original-devcfg.img");
-							ShellUtils.fastCmd("cp " + getFilesDir() + "/original-devcfg.img /sdcard");
+							ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=/sdcard/original-devcfg.img");
+							ShellUtils.fastCmd("cp /sdcard/original-devcfg.img " + getFilesDir() + "/original-devcfg.img");
 						}
 						new Thread(()->{
 							String devcfgDevice = "";
@@ -902,9 +900,9 @@ public class MainActivity extends AppCompatActivity {
 				new Thread(()->{
 					String findoriginaldevcfg = ShellUtils.fastCmd("find " + getFilesDir() + " -maxdepth 1 -name original-devcfg.img");
 					if (findoriginaldevcfg.isEmpty()) {
-						ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=" + getFilesDir() + "/original-devcfg.img");
+						ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=/sdcard/original-devcfg.img");
+						ShellUtils.fastCmd("cp /sdcard/original-devcfg.img " + getFilesDir() + "/original-devcfg.img");
 					}
-					ShellUtils.fastCmd("cp " + getFilesDir() + "/original-devcfg.img /sdcard");
 					if (!isNetworkConnected(MainActivity.this)) {
 						String finddevcfg = ShellUtils.fastCmd("find " + getFilesDir() + " -maxdepth 1 -name OOS11_devcfg_*");
 						if (!finddevcfg.isEmpty()) {
@@ -921,14 +919,14 @@ public class MainActivity extends AppCompatActivity {
 						if ("guacamole".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device)) {
 							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_guacamole.img -O /sdcard/OOS11_devcfg_guacamole.img\" | su -mm -c sh");
 							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_guacamole.img -O /sdcard/OOS12_devcfg_guacamole.img\" | su -mm -c sh");
-							ShellUtils.fastCmd("cp /sdcard/OOS11_devcfg_guacamole.img " + getFilesDir());
-							ShellUtils.fastCmd("cp /sdcard/OOS12_devcfg_guacamole.img " + getFilesDir());
+							ShellUtils.fastCmd("cp /sdcard/OOS11_devcfg_guacamole.img " + getFilesDir() + "/OOS11_devcfg_guacamole.img");
+							ShellUtils.fastCmd("cp /sdcard/OOS12_devcfg_guacamole.img " + getFilesDir() + "/OOS12_devcfg_guacamole.img");
 							ShellUtils.fastCmd("dd bs=8M if=" + getFilesDir() + "/OOS11_devcfg_guacamole.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)");
 						} else if ("hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) {
 							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_hotdog.img -O /sdcard/OOS11_devcfg_hotdog.img\" | su -mm -c sh");
 							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_hotdog.img -O /sdcard/OOS12_devcfg_hotdog.img\" | su -mm -c sh");
-							ShellUtils.fastCmd("cp /sdcard/OOS11_devcfg_hotdog.img " + getFilesDir());
-							ShellUtils.fastCmd("cp /sdcard/OOS12_devcfg_hotdog.img " + getFilesDir());
+							ShellUtils.fastCmd("cp /sdcard/OOS11_devcfg_hotdog.img " + getFilesDir() + "/OOS11_devcfg_hotdog.img");
+							ShellUtils.fastCmd("cp /sdcard/OOS12_devcfg_hotdog.img " + getFilesDir() + "/OOS12_devcfg_hotdog.img");
 							ShellUtils.fastCmd("dd bs=8M if=" + getFilesDir() + "/OOS11_devcfg_hotdog.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)");
 						}
 					}
@@ -1355,9 +1353,12 @@ public class MainActivity extends AppCompatActivity {
 		k.automount.setOnCheckedChangeListener((compoundButton, b) -> pref.setAutoMount(this, b));
 		k.appUpdate.setOnCheckedChangeListener((compoundButton, b) -> pref.setAppUpdate(this, b));
 		String op7funny = ShellUtils.fastCmd("getprop ro.product.device");
-		if ("guacamole".equals(op7funny) || "guacamolet".equals(op7funny) || "OnePlus7Pro".equals(op7funny) || "OnePlus7Pro4G".equals(op7funny) || "OnePlus7ProTMO".equals(op7funny) || "hotdog".equals(op7funny) || "OnePlus7TPro".equals(op7funny) || "OnePlus7TPro4G".equals(op7funny)) {
+		String op7funny2 = ShellUtils.fastCmd("getprop persist.camera.privapp.list");
+		//String op7funny2 = ShellUtils.fastCmd("getprop ro.boot.vendor.lge.model.name");
+		if (("guacamole".equals(op7funny) || "guacamolet".equals(op7funny) || "OnePlus7Pro".equals(op7funny) || "OnePlus7Pro4G".equals(op7funny) || "OnePlus7ProTMO".equals(op7funny) || "hotdog".equals(op7funny) || "OnePlus7TPro".equals(op7funny) || "OnePlus7TPro4G".equals(op7funny)) && (op7funny2.contains("oppo") || op7funny2.contains("OPPO"))) {
 			k.devcfg1.setOnCheckedChangeListener((compoundButton, b) -> {pref.setDevcfg1(this, b);if(b)k.devcfg2.setVisibility(View.VISIBLE); else k.devcfg2.setVisibility(View.GONE);pref.setDevcfg2(this, false);});
 			k.devcfg2.setOnCheckedChangeListener((compoundButton, b) -> pref.setDevcfg2(this, b));
+			n.cvDevcfg.setVisibility(View.VISIBLE);
 		} else {
 			k.devcfg1.setVisibility(View.GONE);
 			k.devcfg2.setVisibility(View.GONE);
