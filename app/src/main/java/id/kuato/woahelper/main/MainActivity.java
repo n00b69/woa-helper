@@ -650,7 +650,7 @@ public class MainActivity extends AppCompatActivity {
 							ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=/sdcard/original-devcfg.img");
 							ShellUtils.fastCmd("cp /sdcard/original-devcfg.img " + getFilesDir() + "/original-devcfg.img");
 						}
-						new Thread(()->{
+						//new Thread(()->{
 							String devcfgDevice = "";
 							if ("guacamole".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device)) devcfgDevice = "guacamole";
 							else if ("hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) devcfgDevice = "hotdog";
@@ -658,8 +658,8 @@ public class MainActivity extends AppCompatActivity {
 							ShellUtils.fastCmd(String.format("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_%s.img -O /sdcard/OOS12_devcfg_%s.img\" | su -mm -c sh", devcfgDevice, devcfgDevice));
 							ShellUtils.fastCmd(String.format("cp /sdcard/OOS11_devcfg_%s.img %s", devcfgDevice, getFilesDir()));
 							ShellUtils.fastCmd(String.format("cp /sdcard/OOS12_devcfg_%s.img %s", devcfgDevice, getFilesDir()));
-							ShellUtils.fastCmd(String.format("dd bs=8M if=%s/OOS11_devcfg_%s.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)", getFilesDir(), devcfgDevice));
-						}).start();
+							//ShellUtils.fastCmd(String.format("dd bs=8M if=%s/OOS11_devcfg_%s.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)", getFilesDir(), devcfgDevice));
+						//}).start();
 					}
 					if (pref.getDevcfg2(this) && pref.getDevcfg1(this)) {
 						ShellUtils.fastCmd("mkdir " + winpath + "/sta || true ");
@@ -668,8 +668,8 @@ public class MainActivity extends AppCompatActivity {
 						ShellUtils.fastCmd("cp " + getFilesDir() + "/devcfg-boot-sdd.conf " + winpath + "/sta/sdd.conf");
 						ShellUtils.fastCmd("cp " + getFilesDir() + "/original-devcfg.img " + winpath + "/original-devcfg.img");
 					}
-					flash(finduefi);
-					ShellUtils.fastCmd("su -c svc power reboot");
+					//flash(finduefi);
+					//ShellUtils.fastCmd("su -c svc power reboot");
 					Dlg.setText(R.string.wrong);
 					Dlg.dismissButton();
 				}, 25);
@@ -890,45 +890,34 @@ public class MainActivity extends AppCompatActivity {
 		
 		n.cvDevcfg.setOnClickListener(a -> {
 			if (!isNetworkConnected(this)) {
-				nointernet();
-				return;
+				String finddevcfg = ShellUtils.fastCmd("find " + getFilesDir() + " -maxdepth 1 -name OOS11_devcfg_*");
+				if (finddevcfg.isEmpty()) {
+					nointernet();
+					return;
+				}
 			}
 			Dlg.show(this, getString(R.string.devcfg_question, dbkpmodel), R.drawable.ic_uefi);
 			Dlg.setNo(R.string.no, Dlg::close);
 			Dlg.setYes(R.string.yes, () -> {
 				Dlg.dialogLoading();
 				new Thread(()->{
+					String devcfgDevice = "";
+					if ("guacamole".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device)) devcfgDevice = "guacamole";
+					else if ("hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) devcfgDevice = "hotdog";
 					String findoriginaldevcfg = ShellUtils.fastCmd("find " + getFilesDir() + " -maxdepth 1 -name original-devcfg.img");
 					if (findoriginaldevcfg.isEmpty()) {
 						ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=/sdcard/original-devcfg.img");
 						ShellUtils.fastCmd("cp /sdcard/original-devcfg.img " + getFilesDir() + "/original-devcfg.img");
 					}
-					if (!isNetworkConnected(MainActivity.this)) {
-						String finddevcfg = ShellUtils.fastCmd("find " + getFilesDir() + " -maxdepth 1 -name OOS11_devcfg_*");
-						if (!finddevcfg.isEmpty()) {
-							Dlg.close();
-							nointernet();
-						} else {
-							if ("guacamole".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device)) {
-								ShellUtils.fastCmd("dd bs=8M if=" + getFilesDir() + "/OOS11_devcfg_guacamole.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)");
-							} else if ("hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) {
-								ShellUtils.fastCmd("dd bs=8M if=" + getFilesDir() + "/OOS11_devcfg_hotdog.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)");
-							}
-						}
+					String finddevcfg = ShellUtils.fastCmd("find " + getFilesDir() + " -maxdepth 1 -name OOS11_devcfg_*");
+					if (finddevcfg.isEmpty()) {
+						ShellUtils.fastCmd(String.format("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_%s.img -O /sdcard/OOS11_devcfg_%s.img\" | su -mm -c sh", devcfgDevice, devcfgDevice));
+						ShellUtils.fastCmd(String.format("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_%s.img -O /sdcard/OOS12_devcfg_%s.img\" | su -mm -c sh", devcfgDevice, devcfgDevice));
+						ShellUtils.fastCmd(String.format("cp /sdcard/OOS11_devcfg_%s.img %s", devcfgDevice, getFilesDir()));
+						ShellUtils.fastCmd(String.format("cp /sdcard/OOS12_devcfg_%s.img %s", devcfgDevice, getFilesDir()));
+						ShellUtils.fastCmd(String.format("dd bs=8M if=%s/OOS11_devcfg_%s.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)", getFilesDir(), devcfgDevice));
 					} else {
-						if ("guacamole".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device)) {
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_guacamole.img -O /sdcard/OOS11_devcfg_guacamole.img\" | su -mm -c sh");
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_guacamole.img -O /sdcard/OOS12_devcfg_guacamole.img\" | su -mm -c sh");
-							ShellUtils.fastCmd("cp /sdcard/OOS11_devcfg_guacamole.img " + getFilesDir() + "/OOS11_devcfg_guacamole.img");
-							ShellUtils.fastCmd("cp /sdcard/OOS12_devcfg_guacamole.img " + getFilesDir() + "/OOS12_devcfg_guacamole.img");
-							ShellUtils.fastCmd("dd bs=8M if=" + getFilesDir() + "/OOS11_devcfg_guacamole.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)");
-						} else if ("hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) {
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_hotdog.img -O /sdcard/OOS11_devcfg_hotdog.img\" | su -mm -c sh");
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_hotdog.img -O /sdcard/OOS12_devcfg_hotdog.img\" | su -mm -c sh");
-							ShellUtils.fastCmd("cp /sdcard/OOS11_devcfg_hotdog.img " + getFilesDir() + "/OOS11_devcfg_hotdog.img");
-							ShellUtils.fastCmd("cp /sdcard/OOS12_devcfg_hotdog.img " + getFilesDir() + "/OOS12_devcfg_hotdog.img");
-							ShellUtils.fastCmd("dd bs=8M if=" + getFilesDir() + "/OOS11_devcfg_hotdog.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)");
-						}
+						ShellUtils.fastCmd(String.format("dd bs=8M if=%s/OOS11_devcfg_%s.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)", getFilesDir(), devcfgDevice));
 					}
 					runOnUiThread(()->{
 						mount();
@@ -1352,10 +1341,10 @@ public class MainActivity extends AppCompatActivity {
 		k.securelock.setOnCheckedChangeListener((compoundButton, b) -> pref.setSecure(this, !b));
 		k.automount.setOnCheckedChangeListener((compoundButton, b) -> pref.setAutoMount(this, b));
 		k.appUpdate.setOnCheckedChangeListener((compoundButton, b) -> pref.setAppUpdate(this, b));
-		String op7funny = ShellUtils.fastCmd("getprop ro.product.device");
-		String op7funny2 = ShellUtils.fastCmd("getprop persist.camera.privapp.list");
-		//String op7funny2 = ShellUtils.fastCmd("getprop ro.boot.vendor.lge.model.name");
-		if (("guacamole".equals(op7funny) || "guacamolet".equals(op7funny) || "OnePlus7Pro".equals(op7funny) || "OnePlus7Pro4G".equals(op7funny) || "OnePlus7ProTMO".equals(op7funny) || "hotdog".equals(op7funny) || "OnePlus7TPro".equals(op7funny) || "OnePlus7TPro4G".equals(op7funny)) && (op7funny2.contains("oppo") || op7funny2.contains("OPPO"))) {
+		String op7funny = ShellUtils.fastCmd("getprop persist.camera.privapp.list");
+		//String op7funny = ShellUtils.fastCmd("getprop ro.boot.vendor.lge.model.name");
+		//if (("guacamole".equals(device) || "guacamolet".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device) || "OnePlus7ProTMO".equals(device) || "hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) && (op7funny.contains("LM") || op7funny.contains("OPPO"))) {
+		if (("guacamole".equals(device) || "guacamolet".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device) || "OnePlus7ProTMO".equals(device) || "hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) && (op7funny.contains("oppo") || op7funny.contains("OPPO"))) {
 			k.devcfg1.setOnCheckedChangeListener((compoundButton, b) -> {pref.setDevcfg1(this, b);if(b)k.devcfg2.setVisibility(View.VISIBLE); else k.devcfg2.setVisibility(View.GONE);pref.setDevcfg2(this, false);});
 			k.devcfg2.setOnCheckedChangeListener((compoundButton, b) -> pref.setDevcfg2(this, b));
 			n.cvDevcfg.setVisibility(View.VISIBLE);
