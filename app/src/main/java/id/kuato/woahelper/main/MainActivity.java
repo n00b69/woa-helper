@@ -600,7 +600,6 @@ public class MainActivity extends AppCompatActivity {
 			Dlg.setNo(R.string.no, Dlg::close);
 			Dlg.setYes(R.string.yes, () -> {
 				Dlg.dialogLoading();
-
 				new Handler().postDelayed(() -> {
 					Log.d("debug", winpath);
 					if (isMounted()) {
@@ -640,27 +639,32 @@ public class MainActivity extends AppCompatActivity {
 						updateLastBackupDate();
 					}
 					if (pref.getDevcfg1(this)) {
-						String find = ShellUtils.fastCmd(String.format("find %s -maxdepth 1 -name OOS11_devcfg_*", getFilesDir()));
-						if (!find.isEmpty()) {
-							ShellUtils.fastCmd("dd bs=8M if=" + find + " of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)");
-							return;
+						if (!isNetworkConnected(this)) {
+							String finddevcfg = ShellUtils.fastCmd("find " + getFilesDir() + " -maxdepth 1 -name OOS11_devcfg_*");
+							if (finddevcfg.isEmpty()) {
+								nointernet();
+								return;
+							}
 						}
-						find = ShellUtils.fastCmd("find " + getFilesDir() + " -maxdepth 1 -name original-devcfg.img");
-						if (find.isEmpty()) {
+						String devcfgDevice = "";
+						if ("guacamole".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device)) devcfgDevice = "guacamole";
+						else if ("hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) devcfgDevice = "hotdog";
+						String findoriginaldevcfg = ShellUtils.fastCmd("find " + getFilesDir() + " -maxdepth 1 -name original-devcfg.img");
+						if (findoriginaldevcfg.isEmpty()) {
 							ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=/sdcard/original-devcfg.img");
 							ShellUtils.fastCmd("cp /sdcard/original-devcfg.img " + getFilesDir() + "/original-devcfg.img");
 						}
-						//new Thread(()->{
-							String devcfgDevice = "";
-							if ("guacamole".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device)) devcfgDevice = "guacamole";
-							else if ("hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) devcfgDevice = "hotdog";
+						String finddevcfg = ShellUtils.fastCmd("find " + getFilesDir() + " -maxdepth 1 -name OOS11_devcfg_*");
+						if (finddevcfg.isEmpty()) {
 							ShellUtils.fastCmd(String.format("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_%s.img -O /sdcard/OOS11_devcfg_%s.img\" | su -mm -c sh", devcfgDevice, devcfgDevice));
 							ShellUtils.fastCmd(String.format("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_%s.img -O /sdcard/OOS12_devcfg_%s.img\" | su -mm -c sh", devcfgDevice, devcfgDevice));
 							ShellUtils.fastCmd(String.format("cp /sdcard/OOS11_devcfg_%s.img %s", devcfgDevice, getFilesDir()));
 							ShellUtils.fastCmd(String.format("cp /sdcard/OOS12_devcfg_%s.img %s", devcfgDevice, getFilesDir()));
-							//ShellUtils.fastCmd(String.format("dd bs=8M if=%s/OOS11_devcfg_%s.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)", getFilesDir(), devcfgDevice));
-						//}).start();
-					}
+							ShellUtils.fastCmd(String.format("dd bs=8M if=%s/OOS11_devcfg_%s.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)", getFilesDir(), devcfgDevice));
+						} else {
+							ShellUtils.fastCmd(String.format("dd bs=8M if=%s/OOS11_devcfg_%s.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)", getFilesDir(), devcfgDevice));
+						}
+					}	
 					if (pref.getDevcfg2(this) && pref.getDevcfg1(this)) {
 						ShellUtils.fastCmd("mkdir " + winpath + "/sta || true ");
 						ShellUtils.fastCmd("cp '" + getFilesDir() + "/Flash Devcfg.lnk' " + winpath + "/Users/Public/Desktop");
@@ -668,8 +672,8 @@ public class MainActivity extends AppCompatActivity {
 						ShellUtils.fastCmd("cp " + getFilesDir() + "/devcfg-boot-sdd.conf " + winpath + "/sta/sdd.conf");
 						ShellUtils.fastCmd("cp " + getFilesDir() + "/original-devcfg.img " + winpath + "/original-devcfg.img");
 					}
-					//flash(finduefi);
-					//ShellUtils.fastCmd("su -c svc power reboot");
+					flash(finduefi);
+					ShellUtils.fastCmd("su -c svc power reboot");
 					Dlg.setText(R.string.wrong);
 					Dlg.dismissButton();
 				}, 25);
@@ -752,7 +756,7 @@ public class MainActivity extends AppCompatActivity {
 					} catch (Exception error) {
 						error.printStackTrace();
 					}
-				});
+				}).start();
 			});
 		});
 		
@@ -981,7 +985,6 @@ public class MainActivity extends AppCompatActivity {
 				Dlg.dialogLoading();
 				Dlg.setBar(0);
 				Dlg.setIcon(R.drawable.ic_download);
-
 				new Thread(() -> {
 					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/ReviOS/ReviPlaybook.apbx -O /sdcard/ReviPlaybook.apbx\" | su -mm -c sh");
 					Dlg.setBar(50);
@@ -1010,7 +1013,6 @@ public class MainActivity extends AppCompatActivity {
 				Dlg.dialogLoading();
 				Dlg.setBar(0);
 				Dlg.setIcon(R.drawable.ic_download);
-
 				new Thread(() -> {
 					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook.apbx -O /sdcard/AtlasPlaybook_v0.4.1.apbx\" | su -mm -c sh");
 					Dlg.setBar(35);
@@ -1089,7 +1091,6 @@ public class MainActivity extends AppCompatActivity {
 			Dlg.setNo(R.string.no, Dlg::close);
 			Dlg.setYes(R.string.yes, () -> {
 				Dlg.dialogLoading();
-
 				ShellUtils.fastCmd("cp " + getFilesDir() + "/Optimized_Taskbar_Control_V3.1.exe /sdcard/");
 				mount();
 				if (!isMounted()) {
@@ -1180,7 +1181,6 @@ public class MainActivity extends AppCompatActivity {
 			Dlg.setNo(R.string.no, Dlg::close);
 			Dlg.setYes(R.string.yes, () -> {
 				Dlg.dialogLoading();
-
 				String finddefenderremover = ShellUtils.fastCmd("find " + getFilesDir() + " -maxdepth 1 -name DefenderRemover.exe");
 				if (finddefenderremover.isEmpty()) {
 					if (!isNetworkConnected(this)) {
