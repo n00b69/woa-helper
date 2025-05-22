@@ -756,7 +756,7 @@ public class MainActivity extends AppCompatActivity {
 					} catch (Exception error) {
 						error.printStackTrace();
 					}
-				});
+				}).start();
 			});
 		});
 		
