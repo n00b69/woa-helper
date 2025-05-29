@@ -266,7 +266,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="30dp"
                                 android:text="@string/backup_boot_title"
-                                android:textSize="@dimen/_11sdp"
+                                android:textSize="@dimen/_12sdp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -276,7 +276,7 @@
 								android:gravity="left"
                                 android:text="@string/backup_boot_subtitle"
 								android:paddingRight="@dimen/_15sdp"
-                                android:textSize="@dimen/_9sdp"
+                                android:textSize="@dimen/_10sdp"
                                 android:textStyle="italic" />
                         </LinearLayout>
                     </LinearLayout>
@@ -326,7 +326,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/mnt_title"
-                                android:textSize="@dimen/_11sdp"
+                                android:textSize="@dimen/_12sdp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -336,7 +336,7 @@
 								android:gravity="left"
                                 android:text="@string/mnt_subtitle"
 								android:paddingRight="@dimen/_15sdp"
-                                android:textSize="@dimen/_9sdp"
+                                android:textSize="@dimen/_10sdp"
                                 android:textStyle="italic" />
                         </LinearLayout>
                     </LinearLayout>
@@ -387,7 +387,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="30dp"
                                 android:text="@string/toolbox_title"
-                                android:textSize="@dimen/_11sdp"
+                                android:textSize="@dimen/_12sdp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -397,7 +397,7 @@
 								android:gravity="left"
                                 android:text="@string/toolbox_subtitle"
 								android:paddingRight="@dimen/_15sdp"
-                                android:textSize="@dimen/_9sdp"
+                                android:textSize="@dimen/_10sdp"
                                 android:textStyle="italic" />
                         </LinearLayout>
                     </LinearLayout>
@@ -449,7 +449,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="30dp"
                                 android:text="@string/quickboot_question"
-                                android:textSize="@dimen/_11sdp"
+                                android:textSize="@dimen/_12sdp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -458,7 +458,7 @@
                                 android:layout_height="wrap_content"
 								android:gravity="left"
                                 android:paddingRight="@dimen/_15sdp"
-                                android:textSize="@dimen/_9sdp"
+                                android:textSize="@dimen/_10sdp"
                                 android:textStyle="italic" />
                         </LinearLayout>
                     </LinearLayout>
@@ -471,9 +471,12 @@
 
     <TextView
         android:id="@+id/tvAppCreator"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
+        android:gravity="end"
+        android:maxLines="1"
+        android:textSize="@dimen/_9sdp"
         android:layout_margin="4dp"
         android:text="@string/creator" />
 

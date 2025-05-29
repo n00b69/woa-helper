@@ -49,7 +49,8 @@ public class mount_tile extends TileService {
 
 	private void mount() {
 		ShellUtils.fastCmd("mkdir " + winpath + " || true");
-		ShellUtils.fastCmd("su -mm -c /data/data/id.kuato.woahelper/files/mount.ntfs " + win + " " + winpath);
+		ShellUtils.fastCmd("cd " + getFilesDir());
+		ShellUtils.fastCmd("su -mm -c ./mount.ntfs " + win + " " + winpath);
 	}
 	
 	public void unmount() {

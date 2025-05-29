@@ -228,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
 				x.tvPanel.setVisibility(View.VISIBLE);
 			}
 			case "cepheus" -> {
-				guidelink = "https://github.com/ivnvrvnn/Port-Windows-XiaoMI-9";
+				guidelink = "https://github.com/fbernkastel228/Port-Windows-XiaoMI-9";
 				grouplink = "http://t.me/woacepheus";
 				x.DeviceImage.setImageResource(R.drawable.cepheus);
 				x.tvPanel.setVisibility(View.VISIBLE);
@@ -496,6 +496,11 @@ public class MainActivity extends AppCompatActivity {
 				guidelink = "https://github.com/Project-Silicium/Mu-Silicium";
 				grouplink = "https://t.me/woahelperchat";
 				x.DeviceImage.setImageResource(R.drawable.nx729j);
+			}
+			case "brepdugl" -> {
+				guidelink = "https://github.com/Project-Silicium/Mu-Silicium";
+				grouplink = "https://discord.gg/Dx2QgMx7Sv";
+				x.DeviceImage.setImageResource(R.drawable.unknown);
 			}
 			default -> {
 				guidelink = "https://renegade-project.tech/";
@@ -1425,29 +1430,12 @@ public class MainActivity extends AppCompatActivity {
 	public void checkdbkpmodel() {
 		dbkpmodel = ShellUtils.fastCmd("getprop ro.product.device");
         switch (dbkpmodel) {
-            case "guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO" ->
-                    dbkpmodel = "ONEPLUS 7 PRO";
+            case "guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO" -> dbkpmodel = "ONEPLUS 7 PRO";
             case "hotdog", "OnePlus7TPro", "OnePlus7TPro4G" -> dbkpmodel = "ONEPLUS 7T PRO";
-            case "cepheus" -> {
-                dbkpmodel = "XIAOMI MI 9";
-                k.devcfg1.setVisibility(View.GONE);
-                k.devcfg2.setVisibility(View.GONE);
-            }
-            case "nabu" -> {
-                dbkpmodel = "XIAOMI PAD 5";
-                k.devcfg1.setVisibility(View.GONE);
-                k.devcfg2.setVisibility(View.GONE);
-            }
-            case "pipa" -> {
-                dbkpmodel = "XIAOMI PAD 6";
-                k.devcfg1.setVisibility(View.GONE);
-                k.devcfg2.setVisibility(View.GONE);
-            }
-            default -> {
-                dbkpmodel = "UNSUPPORTED";
-                k.devcfg1.setVisibility(View.GONE);
-                k.devcfg2.setVisibility(View.GONE);
-            }
+            case "cepheus" -> dbkpmodel = "XIAOMI MI 9";
+            case "nabu" -> dbkpmodel = "XIAOMI PAD 5";
+        //    case "pipa" -> dbkpmodel = "XIAOMI PAD 6";
+            default -> dbkpmodel = "UNSUPPORTED";
         }
 	}
 	public void checkuefi() {
