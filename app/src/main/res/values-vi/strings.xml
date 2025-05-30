@@ -18,6 +18,7 @@
 	<string name="setup_title">BỘ CÀI FRAMEWORK</string>
 	<string name="dbkp_title">BỘ VÁ NHÂN DUALBOOT</string>
 	<string name="tablet_title">SCRIPT CHẾ ĐỘ MÁY TÍNH BẢNG</string>
+	<string name="devcfg_title">DEVCFG FLASHER</string>
 
 	<string name="backup_boot_subtitle">Sao lưu boot.img vào Android và/hoặc Windows</string>
 	<string name="mnt_subtitle">Chuyển đổi gắn phân vùng Windows để xem hoặc chỉnh sửa nội dung bên trong</string>
@@ -38,6 +39,7 @@
 	<string name="setup_subtitle">Thêm trình cài đặt cho một số framework vào C:⧹Toolbox</string>
 	<string name="dbkp_subtitle">Vá nhân để dualboot một cách dễ dàng</string>
 	<string name="tablet_subtitle">Adds a script to C:⧹Toolbox which allows you to toggle tablet mode</string>
+	<string name="devcfg_subtitle">Flashes OOS11 devcfg so that Windows can boot on OOS12 devices</string>
 
 	<string name="backup_boot_question">Sao lưu boot.img?</string>
 	<string name="mount_question">Hiện file Windows vào %s?</string>
@@ -55,6 +57,7 @@
 	<string name="setup_question">Tải xuống và di chuyển trình cài đặt C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX và XNA vào C:⧹Toolbox?\n(có thể mất một thời gian)</string>
 	<string name="dbkp_question">Vá và flash nhân hiện tại của bạn? \n!!!CẤM TIẾP TỤC TRỪ KHI MÁY BẠN LÀ %s!!!</string>
 	<string name="tablet_question">Sao chép script chế độ máy tính bảng vào C:⧹Toolbox?</string>
+	<string name="devcfg_question">Flash OOS11 devcfg?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
 
 	<string name="wrong">Lỗi ở đâu ý</string>
 	<string name="mountfail">Lỗi rồi, \nWindows không hiện file được.\nYêu cầu được trợ giúp trên Telegram.</string>
@@ -63,9 +66,11 @@
 	<string name="partition">Không phát hiện phân vùng Windows</string>
 	<string name="internalstorage">Tệp đã được tải vào bộ nhớ trong.</string>
 	<string name="dbkp">Đã vá và flash ảnh khởi động\nẢnh khởi động cũng có thể được tìm thấy ở /sdcard/patched-boot.img.\n Sử dụng %s để chuyển đổi giữa Windows và Android.</string>
+	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/devcfg.img.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
 	<string name="op7">thanh trượt thông báo</string>
 	<string name="cepheus">nút trợ lý</string>
 	<string name="nabu">hộp từ tính</string>
+	<string name="nabu2">volume buttons</string>
 	<string name="reboot">Khởi động lại</string>
 	<string name="cancel">Hủy</string>
 	<string name="mounted">Windows đã hiện</string>
@@ -90,6 +95,8 @@
 	<string name="update">CẬP NHẬT</string>
 	<string name="update1">Một phiên bản mới khả dụng</string>
 	<string name="update2">Đang cập nhật...</string>
+	<string name="qspressagain">Press again</string>
+	<string name="qsinternet">Internet required</string>
 
 	<string name="last">SAO LƯU GẦN NHẤT : %s</string>
 	<string name="slot">VÙNG : %s</string>
@@ -116,4 +123,6 @@
 	<string name="preference9">Yêu cầu màn hình mở khóa để khởi động nhanh</string>
 	<string name="preference10">Gắn Windows vào /mnt thay vì /sdcard</string>
 	<string name="preference11">Tắt kiểm tra cập nhật ứng dụng</string>
+	<string name="preference12">Flash OOS11 devcfg when quickbooting</string>
+	<string name="preference13">Check for required files when flashing devcfg</string>
 </resources>

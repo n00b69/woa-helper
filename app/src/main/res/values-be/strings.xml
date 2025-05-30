@@ -18,6 +18,7 @@
 	<string name="setup_title">ЎСТАНОЎНІКІ ФРЭЙМВОРКАЎ</string>
 	<string name="dbkp_title">DUALBOOT ПАТЧАР ДЛЯ ЯДРА</string>
 	<string name="tablet_title">СЦЭНАРЫЙ РЭЖЫМУ ПЛАНШЭТА</string>
+	<string name="devcfg_title">DEVCFG FLASHER</string>
 
 	<string name="backup_boot_subtitle">Захаваць бэкап boot у Android і/ці Windows</string>
 	<string name="mnt_subtitle">Вы можаце змантаваць раздзел Windows для прагляду і змены змесціва</string>
@@ -38,6 +39,7 @@
 	<string name="setup_subtitle">Дадае ўстаноўнікі для некалькіх фрэймворкаў у C:⧹Toolbox</string>
 	<string name="dbkp_subtitle">Патчыць ядро для бесперашкоднага dualboot загрузчыка.</string>
 	<string name="tablet_subtitle">Дадае сцэнарый у C:⧹Toolbox, які дазваляе пераключаць рэжым планшэта.</string>
+	<string name="devcfg_subtitle">Flashes OOS11 devcfg so that Windows can boot on OOS12 devices</string>
 
 	<string name="backup_boot_question">Вы хочаце захаваць бягучы вобраз boot?</string>
 	<string name="mount_question">Змантаваць Windows у %s?</string>
@@ -55,6 +57,7 @@
 	<string name="setup_question">Спампаваць і змясціць C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX і XNA усталёўнікі ў C:⧹Toolbox?\n(гэта можа заняць некаторы час)</string>
 	<string name="dbkp_question">Патчыць і запісваць ваша цяперашняе ядро?\n!!!НЕ НАЦІСКАЙЦЕ ТАК, КАЛІ ВАШ ПРЫЛАД НЕ ЯВЛЯЕЦЦА %s!!!</string>
 	<string name="tablet_question">Скапіраваць сцэнарый рэжыму планшэта ў C:\Toolbox?</string>
+	<string name="devcfg_question">Flash OOS11 devcfg?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
 
 	<string name="wrong">Нешта пайшло не так</string>
 	<string name="mountfail">Нешта пайшло не так, \nРаздзел Windows не можа быць змантаваны.\nЗвярніцеся па дапамогу ў чат Telegram.</string>
@@ -63,9 +66,11 @@
 	<string name="partition">Партыцыя Windows не выяўлена.</string>
 	<string name="internalstorage">Файлы загружаны ў ўнутранае сховішча.</string>
 	<string name="dbkp">Выява загрузкі была патчана і запісана.\nПатчаную выяву таксама можна знайсці па адрасе /sdcard/patched-boot.img.\nВыкарыстоўвайце %s, каб пераключацца паміж Windows і Android.</string>
+	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/devcfg.img.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
 	<string name="op7">слайдэр апавяшчэнняў</string>
 	<string name="cepheus">кнопку памочніка</string>
 	<string name="nabu">magnetic case</string>
+	<string name="nabu2">volume buttons</string>
 	<string name="reboot">Перазагрузка</string>
 	<string name="cancel">Адмена</string>
 	<string name="mounted">Windows змантаваны</string>
@@ -90,6 +95,8 @@
 	<string name="update">АБНАЎЛЕННЕ</string>
 	<string name="update1">Даступнае абнаўленне.</string>
 	<string name="update2">Абнаўленне...</string>
+	<string name="qspressagain">Press again</string>
+	<string name="qsinternet">Internet required</string>
 
 	<string name="last">ДАТА АПОШНЯГА БЭКАПА : %s</string>
 	<string name="slot">СЛОТ : %s</string>
@@ -116,4 +123,6 @@
 	<string name="preference9">Запытваць разблакаваны экран для хуткай загрузкі ў Windows</string>
 	<string name="preference10">Мантаваць Windows у /mnt замест /sdcard</string>
 	<string name="preference11">Адключыць праверку абнаўленняў прыкладання.</string>
+	<string name="preference12">Flash OOS11 devcfg when quickbooting</string>
+	<string name="preference13">Check for required files when flashing devcfg</string>
 </resources>

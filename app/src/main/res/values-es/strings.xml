@@ -18,6 +18,7 @@
 	<string name="setup_title">INSTALAR FRAMEWORKS</string>
 	<string name="dbkp_title">PARCHEAR KERNEL PARA DUALBOOT</string>
 	<string name="tablet_title">SCRIPT MODO TABLET</string>
+	<string name="devcfg_title">DEVCFG FLASHER</string>
 
 	<string name="backup_boot_subtitle">Respaldar la imagen de arranque en Android y/o Windows</string>
 	<string name="mnt_subtitle">Activar/desactivar el montaje de la partición de Windows para ver o editar el contenido dentro</string>
@@ -38,6 +39,7 @@
 	<string name="setup_subtitle">Añade instaladores de diversos frameworks a C:⧹Toolbox</string>
 	<string name="dbkp_subtitle">Parchea el kernel para hacer dualboot</string>
 	<string name="tablet_subtitle">Añade un script a C:⧹Toolbox que te permita habilitar el modo tablet</string>
+	<string name="devcfg_subtitle">Flashes OOS11 devcfg so that Windows can boot on OOS12 devices</string>
 
 	<string name="backup_boot_question">¿Respaldar la imagen de arranque actual de Android?</string>
 	<string name="mount_question">¿Montar Windows en %s?</string>
@@ -55,6 +57,7 @@
 	<string name="setup_question">¿Descargar y mover los instaladores de: C++ Redistributables y DirectX, OpenGL, OpenAL, PhysX, XNAF a C:⧹Toolbox?\n(puede tardar un tiempo)</string>
 	<string name="dbkp_question">¿Parchear y flashear el kernel actual?\n!!!NO LO PRESIONES A MENOS QUE TU DISPOSITIVO SEA %s!!!</string>
 	<string name="tablet_question">¿Copiar el script del modo tablet a C:⧹Toolbox?</string>
+	<string name="devcfg_question">Flash OOS11 devcfg?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
 
 	<string name="wrong">Algo salió mal</string>
 	<string name="mountfail">Algo salió mal, \nWindows no se pudo montar.\nSolicita ayuda en el grupo de Telegram.</string>
@@ -63,9 +66,11 @@
 	<string name="partition">No se ha detectado ninguna partición con Windows.</string>
 	<string name="internalstorage">Archivos descargados en el almacenamiento interno</string>
 	<string name="dbkp">La imagen "boot" ha sido parcheada y flasheada.\nLa imagen parcheada puede ser encontrada en: /sdcard/patched-boot.img.\nUsa tu %s para cambiar entre Windows y Android.</string>
+	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/devcfg.img.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
 	<string name="op7">alert slider</string>
 	<string name="cepheus">assistant button</string>
 	<string name="nabu">magnetic case</string>
+	<string name="nabu2">volume buttons</string>
 	<string name="reboot">Reiniciar</string>
 	<string name="cancel">Cancelar</string>
 	<string name="mounted">Windows montado</string>
@@ -90,6 +95,8 @@
 	<string name="update">ACTUALIZAR</string>
 	<string name="update1">ACTUALIZACIÓN DISPONIBLE</string>
 	<string name="update2">Actualizando...</string>
+	<string name="qspressagain">Press again</string>
+	<string name="qsinternet">Internet required</string>
 
 	<string name="last">ÚLTIMA COPIA DE SEGURIDAD : %s</string>
 	<string name="slot">RANURA : %s</string>
@@ -116,4 +123,6 @@
 	<string name="preference9">Requerir pantalla desbloqueada para el arranque rápido</string>
 	<string name="preference10">Inicializar la partición de Windows en /mnt en lugar de /sdcard</string>
 	<string name="preference11">Dejar de comprobar nuevas actualizaciones de la app</string>
+	<string name="preference12">Flash OOS11 devcfg when quickbooting</string>
+	<string name="preference13">Check for required files when flashing devcfg</string>
 </resources>

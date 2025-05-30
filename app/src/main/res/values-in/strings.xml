@@ -18,6 +18,7 @@
 	<string name="setup_title">PENGINSTAL FRAMEWORK</string>
 	<string name="dbkp_title">PATCHER KERNEL DUALBOOT</string>
 	<string name="tablet_title">SCRIPT MODE TABLET</string>
+	<string name="devcfg_title">DEVCFG FLASHER</string>
 
 	<string name="backup_boot_subtitle">Cadangkan image booting ke Android dan/atau Windows</string>
 	<string name="mnt_subtitle">Mount/unmount partisi Windows untuk melihat atau mengedit konten di dalamnya</string>
@@ -38,6 +39,7 @@
 	<string name="setup_subtitle">Menambahkan penginstal untuk beberapa framework ke dalam C:⧹Toolbox</string>
 	<string name="dbkp_subtitle">Patch kernel untuk dualbooting secara seamless</string>
 	<string name="tablet_subtitle">Menambahkan script ke dalam C:⧹Toolbox yang memungkinkan untuk beralih mode tablet</string>
+	<string name="devcfg_subtitle">Flashes OOS11 devcfg so that Windows can boot on OOS12 devices</string>
 
 	<string name="quickboot_question">Quick boot ke Windows?</string>
 	<string name="backup_boot_question">Cadangkan image boot Android saat ini?</string>
@@ -55,6 +57,7 @@
 	<string name="setup_question">Unduh dan pindahkan C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, dan XNA framework installer ke dalam C:⧹Toolbox?\n(ini mungkin memerlukan waktu)</string>
 	<string name="dbkp_question">Patch dan flash kernel saat ini?\n!!!JANGAN TEKAN YA KECUALI PERANGKAT ANDA ADALAH %s!!!</string>
 	<string name="tablet_question">Salin script mode tablet ke C:⧹Toolbox?</string>
+	<string name="devcfg_question">Flash OOS11 devcfg?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
 
 	<string name="wrong">Ada yang tidak beres</string>
 	<string name="mountfail">Ada yang tidak beres, \nWindows tidak dapat di-mount.\nMinta bantuan di chat Telegram.</string>
@@ -63,9 +66,11 @@
 	<string name="partition">Tidak ada partisi Windows yang terdeteksi.</string>
 	<string name="internalstorage">File diunduh pada penyimpanan internal</string>
 	<string name="dbkp">Image boot telah di-patch dan di-flash.\Image yang di-patch juga dapat ditemukan pada /sdcard/patched-boot.img.\nGunakan %s untuk beralih antara Windows dan Android.</string>
+	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/devcfg.img.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
 	<string name="op7">slider peringatan</string>
 	<string name="cepheus">tombol asisten</string>
 	<string name="nabu">magnetic case</string>
+	<string name="nabu2">volume buttons</string>
 	<string name="reboot">Reboot</string>
 	<string name="cancel">Batal</string>
 	<string name="mounted">Windows di-mount</string>
@@ -90,6 +95,8 @@
 	<string name="update">UPDATE</string>
 	<string name="update1">Update Tersedia</string>
 	<string name="update2">Meng-ipdate...</string>
+	<string name="qspressagain">Press again</string>
+	<string name="qsinternet">Internet required</string>
 
 	<string name="last">BACKUP TERAKHIR : %s</string>
 	<string name="slot">SLOT : %s</string>
@@ -116,4 +123,6 @@
 	<string name="preference9">Memerlukan layar tidak terkunci untuk quickboot</string>
 	<string name="preference10">Mount Windows ke dalam /mnt daripada ke dalam /sdcard</string>
 	<string name="preference11">Nonaktifkan Pemeriksaan Pembaruan Aplikasi</string>
+	<string name="preference12">Flash OOS11 devcfg when quickbooting</string>
+	<string name="preference13">Check for required files when flashing devcfg</string>
 </resources>

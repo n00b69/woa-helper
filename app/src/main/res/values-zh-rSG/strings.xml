@@ -18,6 +18,7 @@
 	<string name="setup_title">安装运行库</string>
 	<string name="dbkp_title">双系统内核修补工具</string>
 	<string name="tablet_title">平板模式切换</string>
+	<string name="devcfg_title">DEVCFG FLASHER</string>
 
 	<string name="backup_boot_subtitle">备份 boot 分区到 Windows 和 Android</string>
 	<string name="mnt_subtitle">挂载安装 Windows 的分区以查看或编辑其中的内容</string>
@@ -38,6 +39,7 @@
 	<string name="setup_subtitle">将一些运行库的安装包添加到 C:⧹Toolbox</string>
 	<string name="dbkp_subtitle">修补内核以更快捷地切换双系统</string>
 	<string name="tablet_subtitle">将快捷切换平板模式的脚本添加到 C:⧹Toolbox</string>
+	<string name="devcfg_subtitle">Flashes OOS11 devcfg so that Windows can boot on OOS12 devices</string>
 
 	<string name="backup_boot_question">确认备份当前 Android 的 boot 镜像?</string>
 	<string name="mount_question">确认挂载 Windows 到 %s?</string>
@@ -55,6 +57,7 @@
 	<string name="setup_question">是否下载 MSVC 运行库, DirectX, OpenGL, OpenAL, PhysX, 和 XNA 运行库的安装程序，并置于 C:⧹Toolbox?\n(可能会花费很长时间)</string>
 	<string name="dbkp_question">是否修补并重新刷入当前内核?\n!!!请不要点击「是」，除非你的设备是 %s!!!</string>
 	<string name="tablet_question">是否在 C:⧹Toolbox 中添加平板模式切换脚本?</string>
+	<string name="devcfg_question">Flash OOS11 devcfg?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
 
 	<string name="wrong">错误</string>
 	<string name="mountfail">出错, \nWindows 不能被挂载。\n请在 Telegram 群聊中寻求帮助。</string>
@@ -63,9 +66,11 @@
 	<string name="partition">未检测到 Windows 分区。</string>
 	<string name="internalstorage">文件已下载到内部存储。</string>
 	<string name="dbkp">已修补并刷入 Boot 分区镜像。\n你也可以在 /sdcard/patched-boot.img 找到修补后的镜像。\n使用 %s 在 Windows 和 Android 之间切换。</string>
+	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/devcfg.img.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
 	<string name="op7">警报滑块</string>
 	<string name="cepheus">AI按钮</string>
 	<string name="nabu">磁性外壳</string>
+	<string name="nabu2">volume buttons</string>
 	<string name="reboot">重启</string>
 	<string name="cancel">取消</string>
 	<string name="mounted">已挂载 Windows</string>
@@ -90,6 +95,8 @@
 	<string name="update">更新</string>
 	<string name="update1">有可用的更新</string>
 	<string name="update2">正在更新...</string>
+	<string name="qspressagain">Press again</string>
+	<string name="qsinternet">Internet required</string>
 
 	<string name="last">最后一次备份 : %s</string>
 	<string name="slot">插槽 : %s</string>
@@ -116,4 +123,6 @@
 	<string name="preference9">从操作中心快速启动到 Windows 需要先解锁屏幕</string>
 	<string name="preference10">把 Windows 分区挂载到 /mnt 而不是 /sdcard</string>
 	<string name="preference11">禁用应用更新检查</string>
+	<string name="preference12">Flash OOS11 devcfg when quickbooting</string>
+	<string name="preference13">Check for required files when flashing devcfg</string>
 </resources>

@@ -18,6 +18,7 @@
 	<string name="setup_title">ფრეიმვორკის ინსტალატორები</string>
 	<string name="dbkp_title">DUALBOOT კერნელის პატჩერი</string>
 	<string name="tablet_title">ტაბლეტის რეჟიმის სკრიპტი</string>
+	<string name="devcfg_title">DEVCFG FLASHER</string>
 
 	<string name="backup_boot_subtitle">Boot img-ს სარეზერვო ასლის შექმნა Android-ზე და/ან Windows-ზე</string>
 	<string name="mnt_subtitle">გადართეთ Windows ბლოკის მიბმა, რათა ნახოთ ან შეცვალოთ შინაარსი შიგნით</string>
@@ -38,6 +39,7 @@
 	<string name="setup_subtitle">ამატებს ინსტალერებს რამდენიმე ფრეიმიკისთვის C:⧹Toolbox -ში</string>
 	<string name="dbkp_subtitle">პატჩავს კერნელს უწყვეტი ორმაგი ჩატვირთვისთვის</string>
 	<string name="tablet_subtitle">ამატებს სკრიპტს C:⧹Toolbox -ში, რომელიც საშუალებას იძლევა გადართოთ ტაბლეტის რეჟიმში</string>
+	<string name="devcfg_subtitle">Flashes OOS11 devcfg so that Windows can boot on OOS12 devices</string>
 
 	<string name="backup_boot_question">გსურთ Android-ის ჩატვირთვის ამჟამინდელი სურათის სარეზერვო ასლის შექმნა?</string>
 	<string name="mount_question">მიებას ვინდოუსი %s -ზე?</string>
@@ -55,6 +57,7 @@
 	<string name="setup_question">ჩამოიტვირთოს C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX და XNA Framework ინსტალერები C:⧹Toolbox-ში?\n(ამას შეიძლება გარკვეული დრო დასჭირდეს)</string>
 	<string name="dbkp_question">დააყენეთ და გაანათეთ თქვენი ამჟამინდელი ბირთვი?\n!!!არ დააჭიროთ დიახს, თუ თქვენი მოწყობილობა არ არის %s!!!</string>
 	<string name="tablet_question">დააკოპირეს ტაბლეტის რეჟიმის სკრიპტი C:⧹Toolbox -ში?</string>
+	<string name="devcfg_question">Flash OOS11 devcfg?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
 
 	<string name="wrong">რაღაც შეფერხდა</string>
 	<string name="mountfail">შეფერხება მოხდა, \nWindows-ის მიბმა ვერ მოხერხდა.\nითხოვეთ დახმარება Telegram-ის ჩატში.</string>
@@ -63,9 +66,11 @@
 	<string name="partition">Windows-ის ბლოკები ვერ მოიძებნა</string>
 	<string name="internalstorage">ფაილები ჩამოტვირთულია შიდა მეხსიერებაში</string>
 	<string name="dbkp">Boot image დაპატჩულია და გაფლაშდა.\nBoot image-ის ასლი ასევე შეგიძლიათ იხილოთ /sdcard/patched-boot.img.\nგამოიყენეთ %s Windows-სა და Android-ს შორის გადასართავად.</string>
+	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/devcfg.img.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
 	<string name="op7">გაფრთხილების სლაიდერი</string>
 	<string name="cepheus">დახმარების ღილაკი</string>
 	<string name="nabu">მაგნიტური საფარი</string>
+	<string name="nabu2">volume buttons</string>
 	<string name="reboot">გადატვირთვა</string>
 	<string name="cancel">გაუქმება</string>
 	<string name="mounted">Windows მიბმულია</string>
@@ -90,6 +95,8 @@
 	<string name="update">განახლება</string>
 	<string name="update1">განახლება ხელმისაწვდომია</string>
 	<string name="update2">მიმდინარეობს განახლება...</string>
+	<string name="qspressagain">Press again</string>
+	<string name="qsinternet">Internet required</string>
 
 	<string name="last">ბოლო სარეზერვო ასლი: %s</string>
 	<string name="slot">სლოტი : %s</string>
@@ -116,4 +123,6 @@
 	<string name="preference9">სწრაფი ჩატვირთვისთვის საჭიროა განბლოკილი ეკრანი</string>
 	<string name="preference10">მიაბი Windows /mnt-ზე /sdcard-ის ნაცვლად</string>
 	<string name="preference11">გამორთეთ აპის განახლებების შემოწმება</string>
+	<string name="preference12">Flash OOS11 devcfg when quickbooting</string>
+	<string name="preference13">Check for required files when flashing devcfg</string>
 </resources>

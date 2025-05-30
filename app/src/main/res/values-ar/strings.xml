@@ -18,6 +18,7 @@
 	<string name="setup_title">مثبتات الإطارات (FRAMEWORKS)</string>
 	<string name="dbkp_title">باتشر نواة التشغيل المزدوج</string>
 	<string name="tablet_title">برنامج وضع التابلت</string>
+	<string name="devcfg_title">DEVCFG FLASHER</string>
 
 	<string name="backup_boot_subtitle">خذ نسخة احتياطية للـ Boot لنظام أندرويد أو/و ويندوز</string>
 	<string name="mnt_subtitle">تبديل حالة الربط أو الماونت لويندوز لتعديل محتوياته</string>
@@ -38,6 +39,7 @@
 	<string name="setup_subtitle">يضيف مثبتات لإطارات متعددة إلى C:⧹Toolbox</string>
 	<string name="dbkp_subtitle">يعدل النواة لتسهيل الإقلاع المزدوج</string>
 	<string name="tablet_subtitle">يضيف برنامج إلى C:⧹Toolbox يسمح بتفعيل وضع التابلت</string>
+	<string name="devcfg_subtitle">Flashes OOS11 devcfg so that Windows can boot on OOS12 devices</string>
 
 	<string name="backup_boot_question">هل ترغب بأخذ نسخة احتياطية للـ Boot الحالي؟</string>
 	<string name="mount_question">هل تريد ماونت ويندوز في المسار %s؟</string>
@@ -55,6 +57,7 @@
 	<string name="setup_question">تنزيل وتثبيت C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, مثبت XNA إلى C:⧹Toolbox؟\n(قد يستغرق هذا وقتاً)</string>
 	<string name="dbkp_question">هل ترغب في تعديل وتفليش النواة الحالية؟\n!!!لا تضغط نعم إلا إذا كان جهازك %s!!!</string>
 	<string name="tablet_question">نسخ برنامج وضع التابلت إلى C:⧹Toolbox؟</string>
+	<string name="devcfg_question">Flash OOS11 devcfg?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
 
 	<string name="wrong">حدث خطأ ما</string>
 	<string name="mountfail">حدث خطأ ما\nفشل في عمل Mount لويندوز، \nيرجى طلب المساعدة من خلال دردشة التيليجرام</string>
@@ -63,9 +66,11 @@
 	<string name="partition">لم يتم اكتشاف قسم لنظام ويندوز.</string>
 	<string name="internalstorage">تم تنزيل الملفات إلى الذاكرة الداخلية</string>
 	<string name="dbkp">صورة البوت تستشعر بين السحب عند الوميض.\nيمكن أيضًا العثور على الصورة المصححة في /sdcard/patched-boot.img.\nاستخدم %s للتبديل بين Windows وAndroid.</string>
+	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/devcfg.img.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
 	<string name="op7">شريط التنبيهات</string>
 	<string name="cepheus">مساعد بوتوn</string>
 	<string name="nabu">حالة مغناطيسية</string>
+	<string name="nabu2">volume buttons</string>
 	<string name="reboot">إعادة تشغيل</string>
 	<string name="cancel">إلغاء</string>
 	<string name="mounted">تم الماونت لويندوز</string>
@@ -90,6 +95,8 @@
 	<string name="update">تحديث</string>
 	<string name="update1">تحديث متوفر</string>
 	<string name="update2">جاري التحديث...</string>
+	<string name="qspressagain">Press again</string>
+	<string name="qsinternet">Internet required</string>
 	
 	<string name="last">آخر نسخة احتياطية: %s</string>
 	<string name="slot">الفتحة: %s</string>
@@ -116,4 +123,6 @@
 	<string name="preference9">فرض فتح قفل الشاشة لتفعيل الإقلاع السريع</string>
 	<string name="preference10">Mount لويندوز إلى /mnt بدلاً من /sdcard</string>
 	<string name="preference11">تعطيل التحقق من تحديثات التطبيق</string>
+	<string name="preference12">Flash OOS11 devcfg when quickbooting</string>
+	<string name="preference13">Check for required files when flashing devcfg</string>
 </resources>

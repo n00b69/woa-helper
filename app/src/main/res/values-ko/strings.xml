@@ -18,6 +18,7 @@
 	<string name="setup_title">프레임워크 설치</string>
 	<string name="dbkp_title">듀얼부팅 커널 패치</string>
 	<string name="tablet_title">태블릿 모드 스크립트</string>
+	<string name="devcfg_title">DEVCFG FLASHER</string>
 
 	<string name="backup_boot_subtitle">boot 이미지를 Android 및 Windows로 백업합니다</string>
 	<string name="mnt_subtitle">내부 파일을 읽거나 편집하기 위하여 Windows 파티션을 마운트 및 마운트 해제합니다</string>
@@ -38,6 +39,7 @@
 	<string name="setup_subtitle">여러 프레임워크에 대한 설치 프로그램을 C:⧹Toolbox에 추가합니다</string>
 	<string name="dbkp_subtitle">심리스 듀얼부팅을 위한 커널을 패치합니다</string>
 	<string name="tablet_subtitle">C:⧹Toolbox에 태블릿 모드로 전환할 수 있는 스크립트를 추가합니다</string>
+	<string name="devcfg_subtitle">Flashes OOS11 devcfg so that Windows can boot on OOS12 devices</string>
 
 	<string name="backup_boot_question">현재 안드로이드 boot 이미지를 백업하시겠습니까?</string>
 	<string name="mount_question">%s에 Windows 파티션을 마운트하시겠습니까?</string>
@@ -55,6 +57,7 @@
 	<string name="setup_question">C++ 재배포 가능 패키지 및 DirectX, OpenGL, OpenAL, PhysX, XNAF 설치 프로그램을 다운로드하고 C:⧹Toolbox로 이동할까요?\n(시간이 걸릴 수 있습니다)</string>
 	<string name="dbkp_question">현재 커널을 패치하고 플래시할까요?\n!!!이 장치가 %s가 아니라면 예를 선택하지 마세요!!!</string>
 	<string name="tablet_question">태블릿 모드 스크립트를 C:⧹Toolbox로 복사할까요?</string>
+	<string name="devcfg_question">Flash OOS11 devcfg?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
 
 	<string name="wrong">문제가 발생했습니다</string>
 	<string name="mountfail">문제가 발생했습니다. \nWindows 파티션을 마운트하지 못하였습니다.\n텔레그램 채팅방에서 도움을 받으십시오.</string>
@@ -63,9 +66,11 @@
 	<string name="partition">Windows 파티션을 찾을 수 없습니다.</string>
 	<string name="internalstorage">내부 저장소에 파일이 다운로드되었습니다</string>
 	<string name="dbkp">Boot 이미지가 패치되고 플래시되었습니다.\n패치된 이미지는 /sdcard/patched-boot.img에서도 확인할 수 있습니다.\n%s 사용하여 Windows와 Android를 전환하세요.</string>
+	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/devcfg.img.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
 	<string name="op7">경고 슬라이더를</string>
 	<string name="cepheus">어시스턴트 버튼을</string>
 	<string name="nabu">자석 케이스</string>
+	<string name="nabu2">volume buttons</string>
 	<string name="reboot">재부팅</string>
 	<string name="cancel">취소</string>
 	<string name="mounted">Windows 파티션을 마운트했습니다</string>
@@ -90,6 +95,8 @@
 	<string name="update">업데이트</string>
 	<string name="update1">업데이트 이용 가능</string>
 	<string name="update2">업데이트 중...</string>
+	<string name="qspressagain">Press again</string>
+	<string name="qsinternet">Internet required</string>
 
 	<string name="last">마지막 백업 : %s</string>
 	<string name="slot">활성 슬롯 : %s</string>
@@ -116,4 +123,6 @@
 	<string name="preference9">즉시 부팅을 위하여 화면을 잠금 해제해야 합니다</string>
 	<string name="preference10">/sdcard 대신 /mnt에 Windows를 마운트합니다</string>
 	<string name="preference11">앱 업데이트 자동 확인 비활성화</string>
+	<string name="preference12">Flash OOS11 devcfg when quickbooting</string>
+	<string name="preference13">Check for required files when flashing devcfg</string>
 </resources>

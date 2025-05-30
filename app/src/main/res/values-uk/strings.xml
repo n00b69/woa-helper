@@ -18,6 +18,7 @@
 	<string name="setup_title">ВСТАНОВЛЮВАЧІ FRAMEWORK</string>
 	<string name="dbkp_title">ПАТЧЕР ЯДРА DUALBOOT</string>
 	<string name="tablet_title">СЦЕНАРІЙ РЕЖИМУ ПЛАНШЕТА</string>
+	<string name="devcfg_title">DEVCFG FLASHER</string>
 
 	<string name="backup_boot_subtitle">Резервне копіювання Boot образу на Android та/або Windows</string>
 	<string name="mnt_subtitle">Перемкніть монтований розділ Windows, щоб переглядати або редагувати вміст усередині</string>
@@ -38,6 +39,7 @@
 	<string name="setup_subtitle">Додає встановлювачі фреймворків в C:⧹Toolbox</string>
 	<string name="dbkp_subtitle">Виправляє ядро ​​для безпроблемного подвійного завантаження</string>
 	<string name="tablet_subtitle">Додає сценарій до C:⧹Toolbox, який дозволяє вмикати режим планшета</string>
+	<string name="devcfg_subtitle">Flashes OOS11 devcfg so that Windows can boot on OOS12 devices</string>
 
 	<string name="backup_boot_question">Зробити резервне копіювання поточного Boot образу Android?</string>
 	<string name="mount_question">Змонтувати Windows в %s?</string>
@@ -55,6 +57,7 @@
 	<string name="setup_question">Завантажити і перемістити у C:⧹Toolbox встановлювачі C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX і XNA?\n(це може заняти деякий час)</string>
 	<string name="dbkp_question">Виправити та прошити поточне ядро?\n!!!НЕ НАТИСКАЙТЕ ТАК, ЯКЩО ВАШ ПРИСТРІЙ НЕ ПОТРЕБУЄ ЦЬОГО %s!!!!</string>
 	<string name="tablet_question">Копіювати сценарій ввімкнення/вимкнення режиму планшета до C:⧹Toolbox?</string>
+	<string name="devcfg_question">Flash OOS11 devcfg?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
 
 	<string name="wrong">Щось пішло не так</string>
 	<string name="mountfail">Щось пішло не так, \nне вдалося змонтувати Windows.\nЗверніться за допомогою в Telegram-чат.</string>
@@ -63,9 +66,11 @@
 	<string name="partition">Не знайдено розділ із Windows.</string>
 	<string name="internalstorage">Файли завантажено у внутрішнє сховище.</string>
 	<string name="dbkp">Завантажувальний образ було виправлено та прошито.\nВиправлений образ також можна знайти у /sdcard/patched-boot.img.\nВикористовуйте , щоб перемикатися між Windows та Android.</string>
+	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/devcfg.img.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
 	<string name="op7">повзунок</string>
 	<string name="cepheus">кнопку помічника</string>
 	<string name="nabu">магнітний футляр</string>
+	<string name="nabu2">volume buttons</string>
 	<string name="reboot">Перезавантаження</string>
 	<string name="cancel">Відмінити</string>
 	<string name="mounted">Windows змонтований</string>
@@ -90,6 +95,8 @@
 	<string name="update">ОНОВЛЕННЯ</string>
 	<string name="update1">Доступно оновлення</string>
 	<string name="update2">Оновлення...</string>
+	<string name="qspressagain">Press again</string>
+	<string name="qsinternet">Internet required</string>
 
 	<string name="last">ОСТАННЯ РЕЗЕРВНА КОПІЯ : %s</string>
 	<string name="slot">СЛОТ : %s</string>
@@ -116,4 +123,6 @@
 	<string name="preference9">Для швидкого завантаження потрібен розблокований екран</string>
 	<string name="preference10">Змонтувати Windows в /mnt замість /sdcard</string>
 	<string name="preference11">Вимкнути перевірку оновлень додатка</string>
+	<string name="preference12">Flash OOS11 devcfg when quickbooting</string>
+	<string name="preference13">Check for required files when flashing devcfg</string>
 </resources>

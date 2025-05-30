@@ -18,6 +18,7 @@
 	<string name="setup_title">ติดตั้งเฟรมเวิร์ก</string>
 	<string name="dbkp_title">โปรแกรมแก้ไขเคอร์เนล DUALBOOT</string>
 	<string name="tablet_title">สคริปต์โหมดแท็บเล็ต</string>
+	<string name="devcfg_title">DEVCFG FLASHER</string>
 
 	<string name="backup_boot_subtitle">สำรองข้อมูลพาร์ติชั่นสำหรับบูตเข้าสู่ Windows และ Android</string>
 	<string name="mnt_subtitle">สลับพาร์ติชันที่ติดตั้ง Windows เพื่อให้คุณสามารถแก้ไขเนื้อหาได้</string>
@@ -38,6 +39,7 @@
 	<string name="setup_subtitle">เพิ่มตัวติดตั้งสำหรับเฟรมเวิร์กต่างๆ ลงใน C:⧹Toolbox</string>
 	<string name="dbkp_subtitle">แก้ไขเคอร์เนลเพื่อการบูตคู่แบบราบรื่น</string>
 	<string name="tablet_subtitle">เพิ่มสคริปต์ไปที่ C:⧹Toolbox ซึ่งช่วยให้คุณสามารถสลับโหมดแท็บเล็ตได้</string>
+	<string name="devcfg_subtitle">Flashes OOS11 devcfg so that Windows can boot on OOS12 devices</string>
 
 	<string name="backup_boot_question">สำรองข้อมูลการบูตเข้าสู่ Android ปัจจุบัน?</string>
 	<string name="mount_question">ทำการเชื่อมต่อ Windows ไปที่ %s?</string>
@@ -55,6 +57,7 @@
 	<string name="setup_question">ดาวน์โหลดและย้ายตัวติดตั้ง C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX และ XNA ไปที่ C:⧹Toolbox?\n(อาจใช้เวลาสักครู่)</string>
 	<string name="dbkp_question">แก้ไขและแฟลชเคอร์เนลปัจจุบันของคุณใช่ไหม\n!!!อย่ากด "ใช่" ยกเว้นว่าอุปกรณ์ของคุณคือ %s!!!</string>
 	<string name="tablet_question">คัดลอกสคริปต์โหมดแท็บเล็ตไปที่ C:⧹Toolbox?</string>
+	<string name="devcfg_question">Flash OOS11 devcfg?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
 
 	<string name="wrong">ข้อผิดพลาด</string>
 	<string name="mountfail">เกิดข้อผิดพลาด \nไม่สามาทำการเชื่อมต่อ Windows ได้\nขอความช่วยเหลือในการแชททาง Telegram.</string>
@@ -63,9 +66,11 @@
 	<string name="partition">ไม่พบพาร์ติชัน Windows</string>
 	<string name="internalstorage">ไฟล์ที่ดาวน์โหลดลงในที่เก็บข้อมูลภายใน</string>
 	<string name="dbkp">image การบูตได้รับการแก้ไขและแฟลชแล้ว\nยังสามารถพบ image ที่แก้ไขแล้วได้ที่ /sdcard/patched-boot.img\nใช้ %s ของคุณเพื่อสลับระหว่าง Windows และ Android</string>
+	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/devcfg.img.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
 	<string name="op7">แถบเลื่อนการแจ้งเตือน</string>
 	<string name="cepheus">ปุ่มผู้ช่วย</string>
 	<string name="nabu">เคสแม่เหล็ก</string>
+	<string name="nabu2">volume buttons</string>
 	<string name="reboot">เริ่มใหม่</string>
 	<string name="cancel">ยกเลิก</string>
 	<string name="mounted">การเชื่อมต่อ Windows</string>
@@ -90,6 +95,8 @@
 	<string name="update">อัปเดต</string>
 	<string name="update1">อัปเดตพร้อมใช้งานแล้ว</string>
 	<string name="update2">กำลังอัปเดต...</string>
+	<string name="qspressagain">Press again</string>
+	<string name="qsinternet">Internet required</string>
 
 	<string name="last">การสำรองข้อมูลครั้งล่าสุด : %s</string>
 	<string name="slot">ช่อง : %s</string>
@@ -116,4 +123,6 @@
 	<string name="preference9">ต้องใช้หน้าจอที่ปลดล็อคสำหรับการบูตอย่างรวดเร็ว</string>
 	<string name="preference10">เชื่อมต่อ Windows ไปที่ /mnt แทน /sdcard</string>
 	<string name="preference11">ปิดการตรวจสอบการอัปเดตแอป</string>
+	<string name="preference12">Flash OOS11 devcfg when quickbooting</string>
+	<string name="preference13">Check for required files when flashing devcfg</string>
 </resources>

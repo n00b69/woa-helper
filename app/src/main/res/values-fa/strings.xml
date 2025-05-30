@@ -18,6 +18,7 @@
 	<string name="setup_title">FRAMEWORK نصب کننده</string>
 	<string name="dbkp_title">پچ کردن کرنل دوگانه</string>
 	<string name="tablet_title">فعال سازی حالت تبلت</string>
+	<string name="devcfg_title">DEVCFG FLASHER</string>
 
 	<string name="backup_boot_subtitle">پشتیبان گیری از فایل بوت در اندروید یا ویندوز</string>
 	<string name="mnt_subtitle">دسترسی به فایل های ویندوز در اندروید</string>
@@ -38,6 +39,7 @@
 	<string name="setup_subtitle">افزودن نصب کننده framework</string>
 	<string name="dbkp_subtitle">پچ کردن کرنل برای بوت دوگانه همزمان</string>
 	<string name="tablet_subtitle">اضافه کردن کد اجرایی برای فعال سازی حالت تبلت</string>
+	<string name="devcfg_subtitle">Flashes OOS11 devcfg so that Windows can boot on OOS12 devices</string>
 
 	<string name="backup_boot_question">پشتیبان گیری از فایل بوت اندروید؟</string>
 	<string name="mount_question">"دسترسی به فایل های ویندوز در مسیر
@@ -61,6 +63,7 @@ C:⧹Toolbox?"</string>
 	<string name="dbkp_question">"آیا کرنل پچ و فلش زده شود؟ 
 به هیچ‌وجه روی بله کلیک نکنید اگر گوشی شما %s نیست!!!"</string>
 	<string name="tablet_question">کپی کردن کد اجرایی حالت تبلت به C:⧹Toolbox؟</string>
+	<string name="devcfg_question">Flash OOS11 devcfg?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
 
 	<string name="wrong">خطایی رخ داد</string>
 	<string name="mountfail">خطایی رخ داد، سوار سازی ویندوز با مشکل روبرو شد، در گروه تلگرام درخواست کمک کنید</string>
@@ -70,9 +73,11 @@ C:⧹Toolbox?"</string>
 	<string name="partition">درایو ویندوز پیدا نشد</string>
 	<string name="internalstorage">فایل ها در حافظه‌ی داخلی دانلود شدند</string>
 	<string name="dbkp">فایل بوت پچ و فلش زده شده.\n می‌تونید فایل پچ شده را در حافظه داخلی پیدا کنید .\n از  %s استفاده کنید تا از بین ویندوز و اندروید انتخاب کنید.</string>
+	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/devcfg.img.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
 	<string name="op7">کشاننده هشدار </string>
 	<string name="cepheus">دکمه دستیار کمک</string>
 	<string name="nabu">قاب آهنربایی</string>
+	<string name="nabu2">volume buttons</string>
 	<string name="reboot">راه‌اندازی مجدد</string>
 	<string name="cancel">بازگشت</string>
 	<string name="mounted">ویندوز سوار شد</string>
@@ -99,6 +104,8 @@ C:⧹Toolbox?"</string>
 	<string name="update">آپدیت</string>
 	<string name="update1">آپدیت جدیدی در دسترس است</string>
 	<string name="update2">در حال آپدیت کردن...</string>
+	<string name="qspressagain">Press again</string>
+	<string name="qsinternet">Internet required</string>
 
 	<string name="last">آخرین پشتیبان گیری: %s</string>
 	<string name="slot">جایگاه: %s</string>
@@ -125,4 +132,6 @@ C:⧹Toolbox?"</string>
 	<string name="preference9">نیاز به بازبودن قفل صفحه برای استفاده از رفتن سریع به ویندوز</string>
 	<string name="preference10">دسترسی به فایل های ویندوز در مسیر mnt/ به جای sdcard/</string>
 	<string name="preference11">غیر فعال کردن بروزرسانی های نرم‌افزار</string>
+	<string name="preference12">Flash OOS11 devcfg when quickbooting</string>
+	<string name="preference13">Check for required files when flashing devcfg</string>
 </resources>

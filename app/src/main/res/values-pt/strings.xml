@@ -18,6 +18,7 @@
 	<string name="setup_title">INSTALADORES DE FRAMEWORK</string>
 	<string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
 	<string name="tablet_title">TABLET MODE SCRIPT</string>
+	<string name="devcfg_title">DEVCFG FLASHER</string>
 
 	<string name="backup_boot_subtitle">Criar backup da imagem de boot pro Android e/ou Windows</string>
 	<string name="mnt_subtitle">Alternar a montagem da partição do Windows para vizualizar ou editar o seu conteúdo</string>
@@ -38,6 +39,7 @@
 	<string name="setup_subtitle">Adiciona instaladores de vários frameworks para C:⧹Toolbox</string>
 	<string name="dbkp_subtitle">Corrige o kernel para um dualboot fluído</string>
 	<string name="tablet_subtitle">Adiciona um script para C:⧹Toolbox que permite alterar o Modo Tablet</string>
+	<string name="devcfg_subtitle">Flashes OOS11 devcfg so that Windows can boot on OOS12 devices</string>
 
 	<string name="backup_boot_question">Criar backup da imagem de boot atual do Android?</string>
 	<string name="mount_question">Montar Windows em %s?</string>
@@ -55,6 +57,7 @@
 	<string name="setup_question">Baixar e mover os instaladores do C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, e XNA para C:⧹Toolbox?\n(isso pode demorar um pouco)</string>
 	<string name="dbkp_question">Corrigir e instalar o kernel atual?\n!!!NÃO PRESSIONE SIM A MENOS QUE SEU DISPOSITIVO SEJA %s!!!</string>
 	<string name="tablet_question">Copiar o script do Modo Tablet para C:⧹Toolbox?</string>
+	<string name="devcfg_question">Flash OOS11 devcfg?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
 
 	<string name="wrong">Algo deu errado</string>
 	<string name="mountfail">Algo deu errado, \nWindows não pôde ser montado.\nObtenha ajuda no grupo do Telegram.</string>
@@ -63,9 +66,11 @@
 	<string name="partition">Nenhuma partição Windows detectada.</string>
 	<string name="internalstorage">Arquivos baixados no armazenamento interno</string>
 	<string name="dbkp">Imagem de boot foi corrigida e instalada.\nA imagem corrigida também pode ser encontrada em /sdcard/patched-boot.img.\nUse o %s para alterar entre Windows e Android.</string>
+	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/devcfg.img.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
 	<string name="op7">slider de alerta</string>
 	<string name="cepheus">botão de assistente</string>
 	<string name="nabu">caixa magnética</string>
+	<string name="nabu2">volume buttons</string>
 	<string name="reboot">Reiniciar</string>
 	<string name="cancel">Cancelar</string>
 	<string name="mounted">Windows montado</string>
@@ -90,6 +95,8 @@
 	<string name="update">ATUALIZAR</string>
 	<string name="update1">Atualização disponível</string>
 	<string name="update2">Atualizando...</string>
+	<string name="qspressagain">Press again</string>
+	<string name="qsinternet">Internet required</string>
 
 	<string name="last">ÚLTIMO BACKUP : %s</string>
 	<string name="slot">SLOT : %s</string>
@@ -116,4 +123,6 @@
 	<string name="preference9">Requer tela sem bloqueio para reinício rápido</string>
 	<string name="preference10">Montar Windows em /mnt ao invés de /sdcard</string>
 	<string name="preference11">Desativar verificação de atualizações do app</string>
+	<string name="preference12">Flash OOS11 devcfg when quickbooting</string>
+	<string name="preference13">Check for required files when flashing devcfg</string>
 </resources>

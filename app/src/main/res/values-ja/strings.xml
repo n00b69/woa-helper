@@ -18,6 +18,7 @@
 	<string name="setup_title">フレームワークインストーラー</string>
 	<string name="dbkp_title">デュアルブートカーネルパッチャー</string>
 	<string name="tablet_title">タブレットモードスクリプト</string>
+	<string name="devcfg_title">DEVCFG FLASHER</string>
 
 	<string name="backup_boot_subtitle">ブートイメージをAndroidおよび/またはWindowsにバックアップ</string>
 	<string name="mnt_subtitle">Windowsパーティションのマウントを切り替えて、内部のコンテンツを表示または編集</string>
@@ -38,6 +39,7 @@
 	<string name="setup_subtitle">いくつかのフレームワークのインストーラーをC:⧹Toolboxに追加</string>
 	<string name="dbkp_subtitle">シームレスなデュアルブートのためにカーネルをパッチ</string>
 	<string name="tablet_subtitle">タブレットモードを切り替えるスクリプトをC:⧹Toolboxに追加</string>
+	<string name="devcfg_subtitle">Flashes OOS11 devcfg so that Windows can boot on OOS12 devices</string>
 
 	<string name="backup_boot_question">現在のAndroidブートイメージをバックアップしますか？</string>
 	<string name="mount_question">Windowsを %s にマウントしますか？</string>
@@ -55,6 +57,7 @@
 	<string name="setup_question">C++ 再頒布可能パッケージ、DirectX、OpenGL、OpenAL、PhysX、およびXNAフレームワークインストーラーをC:⧹Toolboxにダウンロードして移動しますか？\n(これには時間がかかる場合があります)</string>
 	<string name="dbkp_question">現在のカーネルをパッチしてフラッシュしますか？\n!!!デバイスが %s でない限り、はいを押さないでください!!!</string>
 	<string name="tablet_question">タブレットモードスクリプトをC:⧹Toolboxにコピーしますか？</string>
+	<string name="devcfg_question">Flash OOS11 devcfg?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
 
 	<string name="wrong">問題が発生しました</string>
 	<string name="mountfail">問題が発生しました。\nWindowsをマウントできませんでした。\nTelegramチャットで助けを求めてください。</string>
@@ -63,9 +66,11 @@
 	<string name="partition">Windows パーティションが検出されません。</string>
 	<string name="internalstorage">ファイルが内部ストレージにダウンロードされました</string>
 	<string name="dbkp">ブートイメージがパッチされ、フラッシュされました。\nパッチされたイメージは /sdcard/patched-boot.img にもあります。\n%s を使用して Windows と Android を切り替えます。</string>
+	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/devcfg.img.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
 	<string name="op7">アラートスライダー</string>
 	<string name="cepheus">アシスタントボタン</string>
 	<string name="nabu">マグネティックケース</string>
+	<string name="nabu2">volume buttons</string>
 	<string name="reboot">再起動</string>
 	<string name="cancel">キャンセル</string>
 	<string name="mounted">Windowsがマウントされました</string>
@@ -90,6 +95,8 @@
 	<string name="update">更新</string>
 	<string name="update1">更新が利用可能です</string>
 	<string name="update2">更新中...</string>
+	<string name="qspressagain">Press again</string>
+	<string name="qsinternet">Internet required</string>
 
 	<string name="last">最終バックアップ : %s</string>
 	<string name="slot">スロット : %s</string>
@@ -116,4 +123,6 @@
 	<string name="preference9">クイックブートにはロック解除された画面が必要</string>
 	<string name="preference10">Windows を /mnt にマウントする代わりに /sdcard にマウント</string>
 	<string name="preference11">アプリの更新チェックを無効にする</string>
+	<string name="preference12">Flash OOS11 devcfg when quickbooting</string>
+	<string name="preference13">Check for required files when flashing devcfg</string>
 </resources>
