@@ -46,10 +46,10 @@ public class WidgetConfigActivity extends AppCompatActivity {
 		RadioButton devcfg = findViewById(R.id.devcfg);
 		
 		String device = ShellUtils.fastCmd("getprop ro.product.device");
-		String op7funny = ShellUtils.fastCmd("getprop ro.boot.vendor.lge.model.name");
-		if (("guacamole".equals(device) || "guacamolet".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device) || "OnePlus7ProTMO".equals(device) || "hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) && (op7funny.contains("LM") || op7funny.contains("OPPO"))) {
-		//String op7funny = ShellUtils.fastCmd("getprop persist.camera.privapp.list");
-		//if (("guacamole".equals(device) || "guacamolet".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device) || "OnePlus7ProTMO".equals(device) || "hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) && (op7funny.contains("oppo") || op7funny.contains("OPPO"))) {
+		//String op7funny = ShellUtils.fastCmd("getprop ro.boot.vendor.lge.model.name");
+		//if (("guacamole".equals(device) || "guacamolet".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device) || "OnePlus7ProTMO".equals(device) || "hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) && (op7funny.contains("LM") || op7funny.contains("OPPO"))) {
+		String op7funny = ShellUtils.fastCmd("getprop persist.camera.privapp.list");
+		if (("guacamole".equals(device) || "guacamolet".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device) || "OnePlus7ProTMO".equals(device) || "hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) && (op7funny.contains("oppo") || op7funny.contains("OPPO"))) {
 			devcfg.setVisibility(View.VISIBLE);
 		} else {
 			devcfg.setVisibility(View.GONE);
