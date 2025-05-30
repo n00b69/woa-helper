@@ -5,11 +5,14 @@ import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import com.topjohnwu.superuser.ShellUtils;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -40,7 +43,18 @@ public class WidgetConfigActivity extends AppCompatActivity {
         Button confirmButton = findViewById(R.id.confirm_button);
         RadioButton quickboot = findViewById(R.id.quickboot);
         RadioButton mount = findViewById(R.id.mount);
-
+		RadioButton devcfg = findViewById(R.id.devcfg);
+		
+		String device = ShellUtils.fastCmd("getprop ro.product.device");
+		//String op7funny = ShellUtils.fastCmd("getprop ro.boot.vendor.lge.model.name");
+		//if (("guacamole".equals(device) || "guacamolet".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device) || "OnePlus7ProTMO".equals(device) || "hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) && (op7funny.contains("LM") || op7funny.contains("OPPO"))) {
+		String op7funny = ShellUtils.fastCmd("getprop persist.camera.privapp.list");
+		if (("guacamole".equals(device) || "guacamolet".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device) || "OnePlus7ProTMO".equals(device) || "hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) && (op7funny.contains("oppo") || op7funny.contains("OPPO"))) {
+			devcfg.setVisibility(View.VISIBLE);
+		} else {
+			devcfg.setVisibility(View.GONE);
+		}
+		
         seekBar.setProgress(pref.getWidgetOpacity(this));
         opacity.setText("Opacity: " + pref.getWidgetOpacity(this));
 
@@ -72,6 +86,12 @@ public class WidgetConfigActivity extends AppCompatActivity {
                 quickboot.setChecked(!b);
             }
         });
+		devcfg.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+				devcfg.setChecked(!b);
+            }
+        });
 
         confirmButton.setOnClickListener(v -> {
             pref.setWidgetOpacity(WidgetConfigActivity.this, seekBar.getProgress());
@@ -80,10 +100,11 @@ public class WidgetConfigActivity extends AppCompatActivity {
                 widgetType = "quickboot";
             if (mount.isChecked())
                 widgetType = "mount";
+			if (devcfg.isChecked())
+                widgetType = "devcfg";
 
             SharedPreferences preferences = pref.getSharedPreference(this);
             preferences.edit().putString("widget_type_" + widgetId, widgetType).apply();
-
 
             Intent resultValue = new Intent();
             resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);

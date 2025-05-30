@@ -63,6 +63,10 @@ public class WidgetProvider extends AppWidgetProvider {
 		//			views.setTextViewText(R.id.text, context.getString(R.string.unmountt));
 		//		}
 			}
+			if (widgetType.equals("devcfg")) {
+				views.setTextViewText(R.id.text, context.getString(R.string.devcfg_title));
+				views.setImageViewResource(R.id.image, R.drawable.ic_uefi);
+			}
 			appWidgetManager.updateAppWidget(appWidgetId, views);
 		}
 	}

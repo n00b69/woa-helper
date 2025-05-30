@@ -125,5 +125,4 @@
 	<string name="preference11">Zakázat kontrolu aktualizací aplikace</string>
 	<string name="preference12">Nahrát OOS11 devcfg při rychlém spuštění ( Quickboot )</string>
 	<string name="preference13">Zkontrolovat požadované soubory při nahrávání devcfg</string>
-
 </resources>
