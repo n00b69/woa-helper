@@ -1346,9 +1346,9 @@ public class MainActivity extends AppCompatActivity {
 		k.securelock.setOnCheckedChangeListener((compoundButton, b) -> pref.setSecure(this, !b));
 		k.automount.setOnCheckedChangeListener((compoundButton, b) -> pref.setAutoMount(this, b));
 		k.appUpdate.setOnCheckedChangeListener((compoundButton, b) -> pref.setAppUpdate(this, b));
-		String op7funny = ShellUtils.fastCmd("getprop persist.camera.privapp.list");
 		//String op7funny = ShellUtils.fastCmd("getprop ro.boot.vendor.lge.model.name");
 		//if (("guacamole".equals(device) || "guacamolet".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device) || "OnePlus7ProTMO".equals(device) || "hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) && (op7funny.contains("LM") || op7funny.contains("OPPO"))) {
+		String op7funny = ShellUtils.fastCmd("getprop persist.camera.privapp.list");
 		if (("guacamole".equals(device) || "guacamolet".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device) || "OnePlus7ProTMO".equals(device) || "hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) && (op7funny.contains("oppo") || op7funny.contains("OPPO"))) {
 			k.devcfg1.setOnCheckedChangeListener((compoundButton, b) -> {pref.setDevcfg1(this, b);if(b)k.devcfg2.setVisibility(View.VISIBLE); else k.devcfg2.setVisibility(View.GONE);pref.setDevcfg2(this, false);});
 			k.devcfg2.setOnCheckedChangeListener((compoundButton, b) -> pref.setDevcfg2(this, b));
@@ -1381,7 +1381,7 @@ public class MainActivity extends AppCompatActivity {
 		views.remove(views.size() - 1);
 		if (views.size() == 0) {
 			super.onBackPressed();
-			return;
+			finish();
 		};
 		setContentView(views.get(views.size() - 1));
 		views.get(views.size() - 1).startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_in));
