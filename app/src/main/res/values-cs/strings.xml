@@ -39,7 +39,7 @@
 	<string name="setup_subtitle">Přidá instalátory pro několik frameworku do C:⧹Toolbox</string>
 	<string name="dbkp_subtitle">Provádí úpravu kernelu pro bezproblémové dualbootování</string>
 	<string name="tablet_subtitle">Přidává skript do C:⧹Toolbox, který umožňuje přepínat tabletový režim</string>
-	<string name="devcfg_subtitle">Flashes OOS11 devcfg so that Windows can boot on OOS12 devices</string>
+	<string name="devcfg_subtitle">Flasheje OOS11 devcfg, aby se Windows mohly spustit na zařízeních s OOS12.</string>
 
 	<string name="backup_boot_question">Zálohovat aktuální spouštěcí obraz Androidu?</string>
 	<string name="mount_question">Připojit Windows na %s?</string>
@@ -57,7 +57,7 @@
 	<string name="setup_question">Stáhnout a přesunout C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, a XNA framework do C:⧹Toolbox?\n(může to chvíli trvat)</string>
 	<string name="dbkp_question">Přidat kód pro dualboot do boot.img? \n!!!NEKLIKEJTE NA ANO, POKUD VAŠE ZAŘÍZENÍ NENÍ %s!!!</string>
 	<string name="tablet_question">Zkopírovat skript pro tabletový režim do C:\Toolbox?</string>
-	<string name="devcfg_question">Flash OOS11 devcfg?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
+	<string name="devcfg_question">Flashovat OOS11 devcfg?\n!!!NEKLIKEJTE NA ANO, POKUD VAŠE ZAŘÍZENÍ NENÍ %s!!!</string>
 
 	<string name="wrong">Něco se pokazilo</string>
 	<string name="mountfail">Něco se pokazilo, \nWindows se nepodařilo připojit.\nPožádejte o pomoc v Telegram chatu.</string>
@@ -66,11 +66,11 @@
 	<string name="partition">Nebyl detekován oddíl Windows.</string>
 	<string name="internalstorage">Soubory staženy do interního úložiště.</string>
 	<string name="dbkp">Obraz spousteni byl upraven a nahrán. \nUpravený obraz lze také najít na /sdcard/patched-boot.img. \nPoužijte %s pro přepínání mezi Windows a Androidem.</string>
-	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/devcfg.img.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
+	<string name="devcfg">OOS11 devcfg byl nahrán.\nPůvodní devcfg najdete v /sdcard/devcfg.img.\nPoužijte sdd.exe v STA Creator k nahrání OOS12 devcfg při návratu na Android.</string>
 	<string name="op7">alert slider</string>
 	<string name="cepheus">tlačítko asistenta</string>
 	<string name="nabu">magnetické pouzdro</string>
-	<string name="nabu2">volume buttons</string>
+	<string name="nabu2">tlačítka hlasitosti</string>
 	<string name="reboot">Restartovat</string>
 	<string name="cancel">Zrušit</string>
 	<string name="mounted">Windows namontován</string>
@@ -95,8 +95,8 @@
 	<string name="update">AKTUALIZACE</string>
 	<string name="update1">K dispozici je aktualizace</string>
 	<string name="update2">Aktualizace aplikace...</string>
-	<string name="qspressagain">Press again</string>
-	<string name="qsinternet">Internet required</string>
+	<string name="qspressagain">Stiskněte znovu</string>
+	<string name="qsinternet">Je potřeba internet</string>
 
 	<string name="last">POSLEDNÍ ZÁLOHA : %s</string>
 	<string name="slot">SLOT : %s</string>
@@ -123,6 +123,7 @@
 	<string name="preference9">Vyžadovat odemčenou obrazovku pro rychlé spuštění (QUICKBOOT)</string>
 	<string name="preference10">Připojte Windows do /mnt místo /sdcard</string>
 	<string name="preference11">Zakázat kontrolu aktualizací aplikace</string>
-	<string name="preference12">Flash OOS11 devcfg when quickbooting</string>
-	<string name="preference13">Check for required files when flashing devcfg</string>
+	<string name="preference12">Nahrát OOS11 devcfg při rychlém spuštění ( Quickboot )</string>
+	<string name="preference13">Zkontrolovat požadované soubory při nahrávání devcfg</string>
+
 </resources>
