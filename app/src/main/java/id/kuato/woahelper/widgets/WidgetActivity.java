@@ -192,63 +192,70 @@ public class WidgetActivity extends AppCompatActivity {
 						finish();
 					});
 				}
-			}
-			alertDialog
-				.setTitle(getString(R.string.devcfg_question))
-				.setPositiveButton(getString(R.string.yes), (dialog, which) -> {
-					String devcfgDevice = "";
-					if ("guacamole".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device)) devcfgDevice = "guacamole";
-					else if ("hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) devcfgDevice = "hotdog";
-					String findoriginaldevcfg = ShellUtils.fastCmd("find " + getFilesDir() + " -maxdepth 1 -name original-devcfg.img");
-					if (findoriginaldevcfg.isEmpty()) {
-						ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=/sdcard/original-devcfg.img");
-						ShellUtils.fastCmd("cp /sdcard/original-devcfg.img " + getFilesDir() + "/original-devcfg.img");
-					}
-					String finddevcfg = ShellUtils.fastCmd("find " + getFilesDir() + " -maxdepth 1 -name OOS11_devcfg_*");
-					if (finddevcfg.isEmpty()) {
-						ShellUtils.fastCmd(String.format("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_%s.img -O /sdcard/OOS11_devcfg_%s.img\" | su -mm -c sh", devcfgDevice, devcfgDevice));
-						ShellUtils.fastCmd(String.format("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_%s.img -O /sdcard/OOS12_devcfg_%s.img\" | su -mm -c sh", devcfgDevice, devcfgDevice));
-						ShellUtils.fastCmd(String.format("cp /sdcard/OOS11_devcfg_%s.img %s", devcfgDevice, getFilesDir()));
-						ShellUtils.fastCmd(String.format("cp /sdcard/OOS12_devcfg_%s.img %s", devcfgDevice, getFilesDir()));
-						ShellUtils.fastCmd(String.format("dd bs=8M if=%s/OOS11_devcfg_%s.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)", getFilesDir(), devcfgDevice));
-					} else {
-						ShellUtils.fastCmd(String.format("dd bs=8M if=%s/OOS11_devcfg_%s.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)", getFilesDir(), devcfgDevice));
-					}
-					mount();
-					String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + win);
-					if (mnt_stat.isEmpty()) {
-						ShellUtils.fastCmd("cp " + getFilesDir() + "/sdd.exe /sdcard/sdd.exe");
-						ShellUtils.fastCmd("cp " + getFilesDir() + "/devcfg-sdd.conf /sdcard/sdd.conf");
-						alertDialog
+			} else {
+				alertDialog
+					.setTitle(getString(R.string.devcfg_question))
+					.setPositiveButton(getString(R.string.yes), (dialog, which) -> {
+						String devcfgDevice = "";
+						if ("guacamole".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device)) devcfgDevice = "guacamole";
+						else if ("hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) devcfgDevice = "hotdog";
+						String findoriginaldevcfg = ShellUtils.fastCmd("find " + getFilesDir() + " -maxdepth 1 -name original-devcfg.img");
+						if (findoriginaldevcfg.isEmpty()) {
+							ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=/sdcard/original-devcfg.img");
+							ShellUtils.fastCmd("cp /sdcard/original-devcfg.img " + getFilesDir() + "/original-devcfg.img");
+						}
+						String finddevcfg = ShellUtils.fastCmd("find " + getFilesDir() + " -maxdepth 1 -name OOS11_devcfg_*");
+						if (finddevcfg.isEmpty()) {
+							ShellUtils.fastCmd(String.format("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_%s.img -O /sdcard/OOS11_devcfg_%s.img\" | su -mm -c sh", devcfgDevice, devcfgDevice));
+							ShellUtils.fastCmd(String.format("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_%s.img -O /sdcard/OOS12_devcfg_%s.img\" | su -mm -c sh", devcfgDevice, devcfgDevice));
+							ShellUtils.fastCmd(String.format("cp /sdcard/OOS11_devcfg_%s.img %s", devcfgDevice, getFilesDir()));
+							ShellUtils.fastCmd(String.format("cp /sdcard/OOS12_devcfg_%s.img %s", devcfgDevice, getFilesDir()));
+							ShellUtils.fastCmd(String.format("dd bs=8M if=%s/OOS11_devcfg_%s.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)", getFilesDir(), devcfgDevice));
+						} else {
+							ShellUtils.fastCmd(String.format("dd bs=8M if=%s/OOS11_devcfg_%s.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)", getFilesDir(), devcfgDevice));
+						}
+						mount();
+						String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + win);
+						if (mnt_stat.isEmpty()) {
+							ShellUtils.fastCmd("cp " + getFilesDir() + "/sdd.exe /sdcard/sdd.exe");
+							ShellUtils.fastCmd("cp " + getFilesDir() + "/devcfg-sdd.conf /sdcard/sdd.conf");
+							alertDialog
 							.setTitle(getString(R.string.mountfail));
+							//	Can't have a dialog button here for some reason
+							//	.setNegativeButton(getString(R.string.dismiss), (dialog, which) -> {
+							//		dialog.dismiss();
+							//		finish()
+							//	});		
+						} else {
+							findwin = ShellUtils.fastCmd("find /dev/block | grep -i -E \"win|mindows|windows\" | head -1");
+							win = ShellUtils.fastCmd("realpath " + findwin);
+							winpath = (pref.getMountLocation(this) ? "/mnt/Windows" : "/mnt/sdcard/Windows");
+							ShellUtils.fastCmd("mkdir " + winpath + "/sta || true ");
+							ShellUtils.fastCmd("cp '" + getFilesDir() + "/Flash Devcfg.lnk' " + winpath + "/Users/Public/Desktop");
+							ShellUtils.fastCmd("cp " + getFilesDir() + "/sdd.exe " + winpath + "/sta/sdd.exe");
+							ShellUtils.fastCmd("cp " + getFilesDir() + "/devcfg-sdd.conf " + winpath + "/sta/sdd.conf");
+							ShellUtils.fastCmd("cp /sdcard/original-devcfg.img " + winpath + "/original-devcfg.img");
+						}
+						alertDialog
+							.setTitle(getString(R.string.devcfg));
 						//	Can't have a dialog button here for some reason
 						//	.setNegativeButton(getString(R.string.dismiss), (dialog, which) -> {
 						//		dialog.dismiss();
 						//		finish()
-						//	});		
-					} else {
-						findwin = ShellUtils.fastCmd("find /dev/block | grep -i -E \"win|mindows|windows\" | head -1");
-						win = ShellUtils.fastCmd("realpath " + findwin);
-						winpath = (pref.getMountLocation(this) ? "/mnt/Windows" : "/mnt/sdcard/Windows");
-						ShellUtils.fastCmd("mkdir " + winpath + "/sta || true ");
-						ShellUtils.fastCmd("cp '" + getFilesDir() + "/Flash Devcfg.lnk' " + winpath + "/Users/Public/Desktop");
-						ShellUtils.fastCmd("cp " + getFilesDir() + "/sdd.exe " + winpath + "/sta/sdd.exe");
-						ShellUtils.fastCmd("cp " + getFilesDir() + "/devcfg-sdd.conf " + winpath + "/sta/sdd.conf");
-						ShellUtils.fastCmd("cp /sdcard/original-devcfg.img " + winpath + "/original-devcfg.img");
-					}
-					alertDialog
-						.setTitle(getString(R.string.devcfg));
-					//	Can't have a dialog button here for some reason
-					//	.setNegativeButton(getString(R.string.dismiss), (dialog, which) -> {
-					//		dialog.dismiss();
-					//		finish()
-					//	});
-				})
-				.setNegativeButton(getString(R.string.no), (dialog, which) -> {
-					dialog.dismiss();
-					finish();
-				});
-		}	
+						//	});
+					})
+					.setNegativeButton(getString(R.string.no), (dialog, which) -> {
+						dialog.dismiss();
+						finish();
+					});
+				}
+		}
+
+		alertDialog.setOnCancelListener((dialog) -> {
+			dialog.dismiss();
+			finish();
+		});
+		alertDialog.show();
 	}
 	
 	private void mount() {
@@ -259,7 +266,7 @@ public class WidgetActivity extends AppCompatActivity {
 			ShellUtils.fastCmd("su -mm -c ./mount.ntfs " + win + " " + winpath);
 		}
 	}
-	
+
 	public void flash() {
 		ShellUtils.fastCmd("dd if=" + finduefi + " of=/dev/block/bootdevice/by-name/boot$(getprop ro.boot.slot_suffix) bs=16m");
 	}

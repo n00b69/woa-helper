@@ -31,7 +31,6 @@ public enum pref {
         return PreferenceManager.getDefaultSharedPreferences(context);
     }
 
-
     public static void setWidgetOpacity(final Context context, final int value) {
         final SharedPreferences.Editor editor = pref.getSharedPreference(context).edit();
         editor.putInt(pref.widgetOpacity, value);
