@@ -477,7 +477,7 @@ public class MainActivity extends AppCompatActivity {
 				grouplink = "https://t.me/dumanthecat";
 				x.DeviceImage.setImageResource(R.drawable.husky);
 			}
-			case "redfin", "herolte" -> {
+			case "redfin", "herolte", "crownlte" -> {
 				guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
 				grouplink = "https://t.me/dumanthecat";
 				x.DeviceImage.setImageResource(R.drawable.redfin);

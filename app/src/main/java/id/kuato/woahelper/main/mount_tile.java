@@ -48,9 +48,12 @@ public class mount_tile extends TileService {
 	}
 
 	private void mount() {
-		ShellUtils.fastCmd("mkdir " + winpath + " || true");
-		ShellUtils.fastCmd("cd " + getFilesDir());
-		ShellUtils.fastCmd("su -mm -c ./mount.ntfs " + win + " " + winpath);
+		String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + win);
+		if (mnt_stat.isEmpty()) {
+			ShellUtils.fastCmd("mkdir " + winpath + " || true");
+			ShellUtils.fastCmd("cd " + getFilesDir());
+			ShellUtils.fastCmd("su -mm -c ./mount.ntfs " + win + " " + winpath);
+		}
 	}
 	
 	public void unmount() {
