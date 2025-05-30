@@ -63,11 +63,25 @@ public class WidgetActivity extends AppCompatActivity {
             if (!checkingforwin.isEmpty()) {
                 String win = ShellUtils.fastCmd("realpath " + checkingforwin);
                 String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + win);
+				String winpath = pref.getMountLocation(this) ? "/mnt/Windows" : "/mnt/sdcard/Windows";
                 if (mnt_stat.isEmpty())
                     alertDialog
                             .setTitle(getString(R.string.mount_question, pref.getMountLocation(this) ? "/mnt/Windows" : "/mnt/sdcard/Windows"))
                             .setPositiveButton(getString(R.string.yes), (dialog, which) -> {
                                 // SOG ADD MOUNTING!!
+								// Added
+								ShellUtils.fastCmd("mkdir " + winpath + " || true");
+								ShellUtils.fastCmd("cd " + getFilesDir());
+								ShellUtils.fastCmd("su -mm -c ./mount.ntfs " + win + " " + winpath);
+								String mnt_stat2 = ShellUtils.fastCmd("su -mm -c mount | grep " + win);
+								if (mnt_stat2.isEmpty()) {
+									pref.setMountLocation(this,true);
+									// I need some help here because idk how to use this in the widget
+							//		updateWinPath();
+									ShellUtils.fastCmd("mkdir " + winpath + " || true");
+									ShellUtils.fastCmd("cd " + getFilesDir());
+									ShellUtils.fastCmd("su -mm -c ./mount.ntfs " + win + " " + winpath);
+								}
                                 finish();
                             });
 
@@ -76,6 +90,9 @@ public class WidgetActivity extends AppCompatActivity {
                             .setTitle(getString(R.string.unmount_question))
                             .setPositiveButton(getString(R.string.yes), (dialog, which) -> {
                                 // SOG ADD UNMOUNTING!!
+								// Added
+								ShellUtils.fastCmd("su -mm -c umount " + winpath);
+								ShellUtils.fastCmd("rmdir " + winpath);
                                 finish();
                             });
 
