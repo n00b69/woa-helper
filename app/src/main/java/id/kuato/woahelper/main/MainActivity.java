@@ -1379,6 +1379,10 @@ public class MainActivity extends AppCompatActivity {
 	public void onBackPressed() {
 		views.get(views.size() - 1).startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_out));
 		views.remove(views.size() - 1);
+		if (views.size() == 0) {
+			super.onBackPressed();
+			return;
+		};
 		setContentView(views.get(views.size() - 1));
 		views.get(views.size() - 1).startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_in));
 	}
