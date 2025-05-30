@@ -35,7 +35,7 @@ This project is in late stages of development. Most features have already been a
 
 ## Requirements
 - Android 7 and up
-- Rooted device with Windows installed ```Windows partition must be named **win**, **windows**, or **mindows**```
+- Rooted device with Windows installed. Windows partition must be named **win**, **windows**, **mindows**, **Win**, **Windows**, or **Mindows**.
 - UEFI image
 
 ## Credits
@@ -43,6 +43,7 @@ This project is in late stages of development. Most features have already been a
 - [Halal Beef](https://github.com/halal-beef) for updating the original app
 - [Bibarub](https://github.com/bibarub) for being involved in the original app and making the USB host mode script and StA
 - [Marius586](https://github.com/Marius586) for updating the original app, adding lots of features and refactoring code when needed
+- [Victoria Freeman](https://github.com/Victoria-Freeman) for adding lots of features and refactoring code when needed & for the Romanian and Belarusian translation
 - [M2K](https://github.com/remtrik) for updating the app and refactoring the entire code
 - [the sog](https://github.com/n00b69) for updating Marius' fork and adding lots of features
 
@@ -59,10 +60,11 @@ This project is in late stages of development. Most features have already been a
 - sercancamli & [ErdilS](https://github.com/erdilS) & [Kaan Dikeç](https://github.com/dikeckaan) for the Turkish translation
 - [Ost268](https://github.com/Ost268) and [Ilya114](https://github.com/Ilya114) for the Ukrainian translation
 - HieusayHi and bobert10 for the Vietnamese translation
-- [Gosha](https://github.com/Xhdsos) & [Victoria Freeman](https://github.com/VendDair) for the Belarusian translation
-- [Graphael](https://github.com/grphks), [Victoria Freeman](https://github.com/VendDair) & [David42069](https://github.com/david-42069) for the Romanian translation
+- [Gosha](https://github.com/Xhdsos) & [Victoria Freeman](https://github.com/Victoria-Freeman) for the Belarusian translation
+- [Graphael](https://github.com/grphks), [Victoria Freeman](https://github.com/Victoria-Freeman) & [David42069](https://github.com/david-42069) for the Romanian translation
 - carloss15 for the Spanish translation
 - [maydoxx1](https://github.com/maydoxx1) for the Arabic Translation
 - Nikka for the Georgian translation
 - rivas for the Persian translation (rivas is not allowed)
 - Hiroshi Takaoka for the Japanese translation
+- [Misha_803](https://github.com/Misha-803) for testing the app
