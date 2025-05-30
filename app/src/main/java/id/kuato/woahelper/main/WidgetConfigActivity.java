@@ -77,19 +77,28 @@ public class WidgetConfigActivity extends AppCompatActivity {
         quickboot.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                mount.setChecked(!b);
+                if (b) {
+                    mount.setChecked(false);
+                    devcfg.setChecked(false);
+                }
             }
         });
         mount.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                quickboot.setChecked(!b);
+                if (b) {
+                    quickboot.setChecked(false);
+                    devcfg.setChecked(false);
+                }
             }
         });
 		devcfg.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-				devcfg.setChecked(!b);
+                if (b) {
+                    quickboot.setChecked(false);
+                    mount.setChecked(false);
+                }
             }
         });
 
