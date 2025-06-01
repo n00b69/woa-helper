@@ -9,20 +9,21 @@ import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
 
 import java.util.Objects;
 
 import id.kuato.woahelper.R;
+import id.kuato.woahelper.widgets.WidgetActivity;
 
 public class Dlg {
-    static Dialog dialog;
+    public static Dialog dialog;
     static MaterialButton yes, no, dismiss;
     static ImageView icon;
     static ProgressBar bar;
     static TextView text;
-
     private static Context ctx;
 
     public interface OnButtonClick {
@@ -53,6 +54,7 @@ public class Dlg {
         MainActivity.showBlur();
         dialog.setOnDismissListener(v -> {
             MainActivity.hideBlur(true);
+            if (WidgetActivity.active) ((AppCompatActivity) MainActivity.context).finish();
         });
 
         dialog.show();

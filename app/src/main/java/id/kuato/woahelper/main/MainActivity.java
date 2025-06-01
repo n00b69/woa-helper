@@ -1,6 +1,8 @@
 package id.kuato.woahelper.main;
 
 import android.annotation.SuppressLint;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -55,6 +57,7 @@ import id.kuato.woahelper.databinding.SetPanelBinding;
 import id.kuato.woahelper.databinding.ToolboxBinding;
 import id.kuato.woahelper.preference.pref;
 import id.kuato.woahelper.util.RAM;
+import id.kuato.woahelper.widgets.MountWidget;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -62,7 +65,9 @@ public class MainActivity extends AppCompatActivity {
 	public static SetPanelBinding k;
 	public static ToolboxBinding n;
 	public static ScriptsBinding z;
-	String winpath, panel, mounted, finduefi, device, model, dbkpmodel, win, boot;
+	public static Context context;
+    String panel, finduefi, device, model, dbkpmodel, boot;
+    static String mounted, win, winpath;
 	String grouplink = "https://t.me/woahelperchat";
 	String guidelink = "https://github.com/n00b69";
 	boolean unsupported = false;
@@ -114,6 +119,8 @@ public class MainActivity extends AppCompatActivity {
 		k = SetPanelBinding.inflate(getLayoutInflater());
 		n = ToolboxBinding.inflate(getLayoutInflater());
 		z = ScriptsBinding.inflate(getLayoutInflater());
+
+		context = this;
 
 		setContentView(x.getRoot());
 
@@ -600,31 +607,7 @@ public class MainActivity extends AppCompatActivity {
 			});
 		});
 		
-		x.cvMnt.setOnClickListener(a -> {
-			Dlg.show(this, isMounted() ?  getString(R.string.unmount_question) : getString(R.string.mount_question, winpath), R.drawable.ic_mnt);
-			Dlg.setNo(R.string.no, Dlg::close);
-			Dlg.setYes(R.string.yes, () -> {
-				Dlg.dialogLoading();
-				new Handler().postDelayed(() -> {
-					Log.d("debug", winpath);
-					if (isMounted()) {
-						unmount();
-						Dlg.setText(R.string.unmounted);
-						Dlg.dismissButton();
-						return;
-					}
-					mount();
-					if (isMounted()) {
-						Dlg.setText(String.format("%s\n%s", getString(R.string.mounted), winpath));
-						Dlg.dismissButton();
-						return;
-					}
-					Dlg.hideIcon();
-					Dlg.setText(R.string.mountfail);
-					Dlg.setYes(R.string.chat, () -> openLink("https://t.me/woahelperchat"));
-				}, 25);
-			});
-		});
+		x.cvMnt.setOnClickListener(a -> { mountUI(); });
 
 		x.cvQuickBoot.setOnClickListener(a -> {
 			Dlg.show(this, R.string.quickboot_question, R.drawable.ic_launcher_foreground);
@@ -1373,16 +1356,20 @@ public class MainActivity extends AppCompatActivity {
 			Dlg.show(this, R.string.nonroot);
 			Dlg.setCancelable(false);
 		}
+		AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+		int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, MountWidget.class));
+		new MountWidget().onUpdate(this, appWidgetManager, appWidgetIds);
 	}
 
 	@Override
 	public void onBackPressed() {
-		views.get(views.size() - 1).startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_out));
-		views.remove(views.size() - 1);
-		if (views.size() == 0) {
+		if (views.size() - 1 == 0) {
 			super.onBackPressed();
 			finish();
-		};
+			return;
+		}
+		views.get(views.size() - 1).startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_out));
+		views.remove(views.size() - 1);
 		setContentView(views.get(views.size() - 1));
 		views.get(views.size() - 1).startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_in));
 	}
@@ -1390,31 +1377,55 @@ public class MainActivity extends AppCompatActivity {
 	public void flash(String uefi) {
 		ShellUtils.fastCmd("dd if=" + uefi + " of=/dev/block/bootdevice/by-name/boot$(getprop ro.boot.slot_suffix) bs=16m");
 	}
+
+	public static void mountUI() {
+		if (winpath == null) updateWinPath();
+		Dlg.show(context, isMounted() ?  context.getString(R.string.unmount_question) : context.getString(R.string.mount_question, winpath), R.drawable.ic_mnt);
+		Dlg.setNo(R.string.no, Dlg::close);
+		Dlg.setYes(R.string.yes, () -> {
+			Dlg.dialogLoading();
+			new Handler().postDelayed(() -> {
+				Log.d("debug", winpath);
+				if (isMounted()) {
+					unmount();
+					Dlg.setText(R.string.unmounted);
+					Dlg.dismissButton();
+					return;
+				}
+				mount();
+				if (isMounted()) {
+					Dlg.setText(String.format("%s\n%s", context.getString(R.string.mounted), winpath));
+					MountWidget.updateText(context, context.getString(R.string.mnt_title, context.getString(R.string.unmountt)));
+					Dlg.dismissButton();
+					return;
+				}
+				Dlg.hideIcon();
+				Dlg.setText(R.string.mountfail);
+				Dlg.setYes(R.string.chat, () -> openLink("https://t.me/woahelperchat"));
+			}, 25);
+		});
+	}
 	
-	public void mount() {
+	public static void mount() {
+		if (win == null) win = getWin();
 		ShellUtils.fastCmd("mkdir " + winpath + " || true");
-		ShellUtils.fastCmd("cd " + getFilesDir());
+		ShellUtils.fastCmd("cd " + context.getFilesDir());
 		ShellUtils.fastCmd("su -mm -c ./mount.ntfs " + win + " " + winpath);
 		String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + win);
 		if (mnt_stat.isEmpty()) {
-			pref.setMountLocation(this,true);
+			pref.setMountLocation(context,true);
 			updateWinPath();
 			ShellUtils.fastCmd("mkdir " + winpath + " || true");
-			ShellUtils.fastCmd("cd " + getFilesDir());
+			ShellUtils.fastCmd("cd " + context.getFilesDir());
 			ShellUtils.fastCmd("su -mm -c ./mount.ntfs " + win + " " + winpath);
-			String mnt_stat2 = ShellUtils.fastCmd("su -mm -c mount | grep " + win);
-			if (!mnt_stat2.isEmpty()) {
-				mounted = getString(R.string.unmountt);
-				x.tvMnt.setText(getString(R.string.mnt_title, mounted));
-			}
 		}
+		updateMountText();
 	}
 	
-	public void unmount() {
+	public static void unmount() {
 		ShellUtils.fastCmd("su -mm -c umount " + winpath);
 		ShellUtils.fastCmd("rmdir " + winpath);
-		mounted = getString(R.string.mountt);
-		x.tvMnt.setText(getString(R.string.mnt_title, mounted));
+		updateMountText();
 	}
 	
 	public void winBackup() {
@@ -1523,19 +1534,23 @@ public class MainActivity extends AppCompatActivity {
 
 	static void showBlur() {
 		blur++;
-		x.blur.setVisibility(View.VISIBLE);
-		k.blur.setVisibility(View.VISIBLE);
-		n.blur.setVisibility(View.VISIBLE);
-		z.blur.setVisibility(View.VISIBLE);
+		try {
+			x.blur.setVisibility(View.VISIBLE);
+			k.blur.setVisibility(View.VISIBLE);
+			n.blur.setVisibility(View.VISIBLE);
+			z.blur.setVisibility(View.VISIBLE);
+		} catch (Exception ignored) {};
 	}
 	static void hideBlur(boolean check) {
 		if (!check) blur = 1;
 		blur--;
 		if (blur > 0) return;
-		x.blur.setVisibility(View.GONE);
-		k.blur.setVisibility(View.GONE);
-		n.blur.setVisibility(View.GONE);
-		z.blur.setVisibility(View.GONE);
+		try {
+			x.blur.setVisibility(View.GONE);
+			k.blur.setVisibility(View.GONE);
+			n.blur.setVisibility(View.GONE);
+			z.blur.setVisibility(View.GONE);
+		} catch (Exception ignored) {};
 	}
 
 	ViewGroup getTargetViewGroup() {
@@ -1549,17 +1564,18 @@ public class MainActivity extends AppCompatActivity {
 		x.tvDate.setText(getString(R.string.last, pref.getDATE(this)));
 	}
 
-	void updateMountText() {
-		if (isMounted()) mounted = getString(R.string.unmountt);
-		else mounted = getString(R.string.mountt);
-		x.tvMnt.setText(String.format(getString(R.string.mnt_title), mounted));
+	public static void updateMountText() {
+		if (isMounted()) mounted = context.getString(R.string.unmountt);
+		else mounted = context.getString(R.string.mountt);
+		if (x != null) x.tvMnt.setText(String.format(context.getString(R.string.mnt_title), mounted));
+		MountWidget.updateText(context, String.format(context.getString(R.string.mnt_title), mounted));
 	}
 	public static String getWin() {
 		String partition = ShellUtils.fastCmd("find /dev/block | grep -i -E \"win|mindows|windows\" | head -1");
 		return ShellUtils.fastCmd("realpath " + partition);
 	}
-	String updateWinPath() {
-		winpath = pref.getMountLocation(this) ? "/mnt/Windows" : "/mnt/sdcard/Windows";
+	public static String updateWinPath() {
+		winpath = pref.getMountLocation(context) ? "/mnt/Windows" : "/mnt/sdcard/Windows";
 		return winpath;
 	}
 
@@ -1571,10 +1587,10 @@ public class MainActivity extends AppCompatActivity {
 	public static Boolean isMounted() {
 		return !ShellUtils.fastCmd("su -mm -c mount | grep " + getWin()).isEmpty();
 	}
-	void openLink(String link) {
+	static void openLink(String link) {
 		Intent i = new Intent(Intent.ACTION_VIEW);
 		i.setData(Uri.parse(link));
-		startActivity(i);
+		context.startActivity(i);
 	}
 
 	void kernelPatch(String message,String link) {

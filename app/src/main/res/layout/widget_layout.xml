@@ -10,8 +10,9 @@
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="fitXY"
         android:contentDescription="image"
         android:src="@drawable/ic_launcher_foreground"
         tools:ignore="HardcodedText" />
@@ -24,6 +25,6 @@
         android:text="@string/quickboot_question"
         android:textColor="@color/textColor"
         android:textStyle="bold"
-        android:textSize="11sp"
+        android:textSize="10sp"
         tools:ignore="HardcodedText" />
 </LinearLayout>
