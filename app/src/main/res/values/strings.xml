@@ -1,7 +1,7 @@
 <resources>
 	<string name="app_name" translatable="false">WOA Helper</string>
 	<string name="app_subtitle" translatable="false">v1.8.4"</string>
-	<string name="creator" translatable="false">Victoria Freeman, the sog, Remtrik, Marius586, halal-beef &amp; KuatoDev ©️2025</string>
+	<string name="creator" translatable="false">Victoria Freeman, the sog, remtrik, Marius586, halal-beef &amp; KuatoDev ©️2025</string>
 	<string name="android" translatable="false">Android</string>
 	<string name="windows" translatable="false">Windows</string>
 	<string name="revios" translatable="false">ReviOS</string>
