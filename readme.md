@@ -17,7 +17,7 @@ This project is in late stages of development. Most features have already been a
 | Backup Android Boot             | Will be stored in internal storage and/or in Windows                            | ✅     |
 | Mount/Unmount Windows partition | Needed to view/modify Windows files from Android                                | ✅     |
 | Mount Quick Settings toggle     |                                                                                 | ✅     |
-| Mount widget                    | To be added in the future                                                       | ❌     |
+| Mount widget                    |                                                                                 | ✅     |
 | Automount Windows partition     | Optionally automatically mounts Windows when the device starts                  | ✅     |
 | Quickboot to Windows            | To use the Quick Boot feature, you need to place the UEFI image in /sdcard/UEFI | ✅     |
 | Quickboot Quick Settings toggle |                                                                                 | ✅     |

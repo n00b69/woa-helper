@@ -789,7 +789,10 @@ public class MainActivity extends AppCompatActivity {
 						ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16m");
 						runOnUiThread(()->{
 							Dlg.setText(getString(R.string.dbkp, getString(R.string.nabu2)));
-							Dlg.dismissButton();
+							Dlg.setDismiss(R.string.dismiss, Dlg::close);
+							Dlg.setNo(R.string.reboot, () -> {
+								ShellUtils.fastCmd("su -c svc power reboot");
+							});
 						});
 					}).start();
 				});
@@ -849,31 +852,17 @@ public class MainActivity extends AppCompatActivity {
 							ShellUtils.fastCmd("su -mm -c mv /sdcard/new-boot.img /sdcard/patched-boot.img");
 							ShellUtils.fastCmd("rm -r /sdcard/dbkp");
 							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot bs=16m");
-							//	} else if ("pipa".equals(device)) {
-							//		ShellUtils.fastCmd("cp " + getFilesDir() + "/dbkp.pipa.bin /sdcard/dbkp");
-							//		ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-everything/releases/download/Files/pipa.fd -O /sdcard/dbkp/pipa.fd\" | su -mm -c sh");
-							//		ShellUtils.fastCmd("cd /sdcard/dbkp");
-							//		ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) unpack boot.img\" | su -c sh");
-							//		ShellUtils.fastCmd("su -mm -c " + getFilesDir() + "/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/pipa.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp8150.cfg /sdcard/dbkp/dbkp.pipa.bin");
-							//		ShellUtils.fastCmd("su -mm -c rm /sdcard/dbkp/kernel");
-							//		ShellUtils.fastCmd("su -mm -c mv output kernel");
-							//		ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) repack boot.img\" | su -c sh");
-							//		ShellUtils.fastCmd("su -mm -c cp new-boot.img /sdcard/new-boot.img");
-							//		ShellUtils.fastCmd("su -mm -c mv /sdcard/new-boot.img /sdcard/patched-boot.img");
-							//		ShellUtils.fastCmd("rm -r /sdcard/dbkp");
-							//		ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_a bs=16m");
-							//		ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16m");
 						}
 						runOnUiThread(()->{
 							if ("guacamole".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device) || "hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) {
 								Dlg.setText(getString(R.string.dbkp, getString(R.string.op7)));
 							} else if ("cepheus".equals(device)) {
 								Dlg.setText(getString(R.string.dbkp, getString(R.string.cepheus)));
-								//		} else if ("pipa".equals(device)) {
-								//			String nabu = getString(R.string.nabu);
-								//			messages.setText(String.format(getString(R.string.dbkp), nabu));
 							}
-							Dlg.dismissButton();
+							Dlg.setDismiss(R.string.dismiss, Dlg::close);
+							Dlg.setNo(R.string.reboot, () -> {
+								ShellUtils.fastCmd("su -c svc power reboot");
+							});
 						});
 					}).start();
 				});
@@ -927,7 +916,10 @@ public class MainActivity extends AppCompatActivity {
 							ShellUtils.fastCmd("cp /sdcard/original-devcfg.img " + winpath + "/original-devcfg.img");
 						}
 						Dlg.setText(R.string.devcfg);
-						Dlg.dismissButton();
+						Dlg.setDismiss(R.string.dismiss, Dlg::close);
+						Dlg.setYes(R.string.reboot, () -> {
+							ShellUtils.fastCmd("su -c svc power reboot");
+						});
 					});
 				}).start();
 			});
@@ -1329,10 +1321,10 @@ public class MainActivity extends AppCompatActivity {
 		k.securelock.setOnCheckedChangeListener((compoundButton, b) -> pref.setSecure(this, !b));
 		k.automount.setOnCheckedChangeListener((compoundButton, b) -> pref.setAutoMount(this, b));
 		k.appUpdate.setOnCheckedChangeListener((compoundButton, b) -> pref.setAppUpdate(this, b));
-		//String op7funny = ShellUtils.fastCmd("getprop ro.boot.vendor.lge.model.name");
-		//if (("guacamole".equals(device) || "guacamolet".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device) || "OnePlus7ProTMO".equals(device) || "hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) && (op7funny.contains("LM") || op7funny.contains("OPPO"))) {
-		String op7funny = ShellUtils.fastCmd("getprop persist.camera.privapp.list");
-		if (("guacamole".equals(device) || "guacamolet".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device) || "OnePlus7ProTMO".equals(device) || "hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) && (op7funny.contains("oppo") || op7funny.contains("OPPO"))) {
+		String op7funny = ShellUtils.fastCmd("getprop ro.boot.vendor.lge.model.name");
+		if (("guacamole".equals(device) || "guacamolet".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device) || "OnePlus7ProTMO".equals(device) || "hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) && (op7funny.contains("LM") || op7funny.contains("OPPO"))) {
+		//String op7funny = ShellUtils.fastCmd("getprop persist.camera.privapp.list");
+		//if (("guacamole".equals(device) || "guacamolet".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device) || "OnePlus7ProTMO".equals(device) || "hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) && (op7funny.contains("oppo") || op7funny.contains("OPPO"))) {
 			k.devcfg1.setOnCheckedChangeListener((compoundButton, b) -> {pref.setDevcfg1(this, b);if(b)k.devcfg2.setVisibility(View.VISIBLE); else k.devcfg2.setVisibility(View.GONE);pref.setDevcfg2(this, false);});
 			k.devcfg2.setOnCheckedChangeListener((compoundButton, b) -> pref.setDevcfg2(this, b));
 			n.cvDevcfg.setVisibility(View.VISIBLE);
@@ -1624,7 +1616,10 @@ public class MainActivity extends AppCompatActivity {
 				ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16m");
 				runOnUiThread(() -> {
 					Dlg.setText(getString(R.string.dbkp, message));
-					Dlg.dismissButton();
+					Dlg.setDismiss(R.string.dismiss, Dlg::close);
+					Dlg.setNo(R.string.reboot, () -> {
+						ShellUtils.fastCmd("su -c svc power reboot");
+					});
 				});
 			}
 		}.init(message,link)).start();
