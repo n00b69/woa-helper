@@ -239,9 +239,9 @@ public class MainActivity extends AppCompatActivity {
 				grouplink = "http://t.me/woacepheus";
 				x.DeviceImage.setImageResource(R.drawable.cepheus);
 				x.tvPanel.setVisibility(View.VISIBLE);
-				n.cvDbkp.setVisibility(View.VISIBLE);
-				n.cvDumpModem.setVisibility(View.VISIBLE);
-				n.cvFlashUefi.setVisibility(View.GONE);
+				n.dbkp.setVisibility(View.VISIBLE);
+				n.dumpModem.setVisibility(View.VISIBLE);
+				n.flashUefi.setVisibility(View.GONE);
 			}
 			case "chiron" -> {
 				guidelink = "https://renegade-project.tech/";
@@ -272,10 +272,10 @@ public class MainActivity extends AppCompatActivity {
 			case "nabu" -> {
 				guidelink = "https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5";
 				grouplink = "https://t.me/nabuwoa";
-				x.NabuImage.setImageResource(R.drawable.nabu);
+				x.DeviceImage.setImageResource(R.drawable.nabu);
 				x.tvPanel.setVisibility(View.VISIBLE);
-				n.cvDbkp.setVisibility(View.VISIBLE);
-				n.cvFlashUefi.setVisibility(View.GONE);
+				n.dbkp.setVisibility(View.VISIBLE);
+				n.flashUefi.setVisibility(View.GONE);
 				tablet = true;
 			}
 			case "perseus" -> {
@@ -286,10 +286,10 @@ public class MainActivity extends AppCompatActivity {
 			case "pipa" -> {
 				guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
 				grouplink = "https://t.me/xiaomi_pipa";
-				x.NabuImage.setImageResource(R.drawable.pipa);
+				x.DeviceImage.setImageResource(R.drawable.pipa);
 				x.tvPanel.setVisibility(View.VISIBLE);
-				n.cvDbkp.setVisibility(View.VISIBLE);
-				n.cvFlashUefi.setVisibility(View.GONE);
+				n.dbkp.setVisibility(View.VISIBLE);
+				n.flashUefi.setVisibility(View.GONE);
 				tablet = true;
 			}
 			case "polaris" -> {
@@ -303,7 +303,7 @@ public class MainActivity extends AppCompatActivity {
 				grouplink = "https://t.me/woaraphael";
 				x.DeviceImage.setImageResource(R.drawable.raphael);
 				x.tvPanel.setVisibility(View.VISIBLE);
-				n.cvDumpModem.setVisibility(View.VISIBLE);
+				n.dumpModem.setVisibility(View.VISIBLE);
 			}
 			case "surya", "karna" -> {
 				guidelink = "https://github.com/woa-surya/POCOX3NFC-Guides";
@@ -351,23 +351,23 @@ public class MainActivity extends AppCompatActivity {
 				guidelink = "https://github.com/n00b69/woa-op7";
 				grouplink = "https://t.me/onepluswoachat";
 				x.DeviceImage.setImageResource(R.drawable.hotdog);
-				n.cvDumpModem.setVisibility(View.VISIBLE);
-				n.cvDbkp.setVisibility(View.VISIBLE);
-				n.cvFlashUefi.setVisibility(View.GONE);
+				n.dumpModem.setVisibility(View.VISIBLE);
+				n.dbkp.setVisibility(View.VISIBLE);
+				n.flashUefi.setVisibility(View.GONE);
 			}
 			case "guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO" -> {
 				guidelink = "https://github.com/n00b69/woa-op7";
 				grouplink = "https://t.me/onepluswoachat";
 				x.DeviceImage.setImageResource(R.drawable.guacamole);
-				n.cvDumpModem.setVisibility(View.VISIBLE);
-				n.cvDbkp.setVisibility(View.VISIBLE);
-				n.cvFlashUefi.setVisibility(View.GONE);
+				n.dumpModem.setVisibility(View.VISIBLE);
+				n.dbkp.setVisibility(View.VISIBLE);
+				n.flashUefi.setVisibility(View.GONE);
 			}
 			case "guacamoleb", "hotdogb", "OnePlus7T", "OnePlus7" -> {
 				guidelink = "https://project-aloha.github.io/";
 				grouplink = "https://t.me/onepluswoachat";
 				x.DeviceImage.setImageResource(R.drawable.unknown);
-				n.cvDumpModem.setVisibility(View.VISIBLE);
+				n.dumpModem.setVisibility(View.VISIBLE);
 			}
 			case "OnePlus7TPro5G", "OnePlus7TProNR", "hotdogg" -> {
 				guidelink = "https://project-aloha.github.io/";
@@ -403,13 +403,13 @@ public class MainActivity extends AppCompatActivity {
 			case "gts6l", "gts6lwifi" -> {
 				guidelink = "https://project-aloha.github.io/";
 				grouplink = "https://t.me/project_aloha_issues";
-				x.NabuImage.setImageResource(R.drawable.gts6l);
+				x.DeviceImage.setImageResource(R.drawable.gts6l);
 				tablet = true;
 			}
 			case "q2q" -> {
 				guidelink = "https://project-aloha.github.io/";
 				grouplink = "https://t.me/project_aloha_issues";
-				x.NabuImage.setImageResource(R.drawable.q2q);
+				x.DeviceImage.setImageResource(R.drawable.q2q);
 				tablet = true;
 			}
 			case "star2qlte", "star2qltechn", "r3q" -> {
@@ -420,7 +420,7 @@ public class MainActivity extends AppCompatActivity {
 			case "winnerx", "winner" -> {
 				guidelink = "https://github.com/n00b69/woa-winner";
 				grouplink = "https://t.me/project_aloha_issues";
-				x.NabuImage.setImageResource(R.drawable.winner);
+				x.DeviceImage.setImageResource(R.drawable.winner);
 				tablet = true;
 			}
 			// Meme devices / devices with cat pictures / devices which will never have proper support lmao
@@ -514,15 +514,13 @@ public class MainActivity extends AppCompatActivity {
 				grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA";
 				x.DeviceImage.setImageResource(R.drawable.unknown);
 				x.deviceName.setText(device);
-				n.cvDumpModem.setVisibility(View.VISIBLE);
+				n.dumpModem.setVisibility(View.VISIBLE);
 				unsupported = true;
 			}
 		}
 		onConfigurationChanged(getResources().getConfiguration());
-		if (tablet) {
-			x.NabuImage.setVisibility(View.VISIBLE);
-			x.DeviceImage.setVisibility(View.GONE);
-		} else setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		if (tablet)
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		if (unsupported && !pref.getAGREE(this)) {
 			Dlg.show(this, R.string.unsupported);
 			Dlg.setYes(R.string.sure, () -> {
@@ -572,15 +570,15 @@ public class MainActivity extends AppCompatActivity {
 
 		x.tvRamvalue.setText(getString(R.string.ramvalue, Double.parseDouble(new RAM().getMemory(this))));
 		x.tvPanel.setText(getString(R.string.paneltype, panel));
-		x.cvGuide.setOnClickListener(v -> openLink(guidelink));
-		x.cvGroup.setOnClickListener(v -> openLink(grouplink));
+		x.guide.setOnClickListener(v -> openLink(guidelink));
+		x.group.setOnClickListener(v -> openLink(grouplink));
 
 		 if (!BuildConfig.DEBUG) {
 			checkdbkpmodel();
 			checkupdate();
 		}
 
-		x.cvBackup.setOnClickListener(a -> {
+		x.backup.setOnClickListener(a -> {
 			Dlg.show(this, R.string.backup_boot_question, R.drawable.ic_disk);
 			Dlg.setDismiss(R.string.no, Dlg::close);
 			Dlg.setNo(R.string.android, () -> {
@@ -607,9 +605,9 @@ public class MainActivity extends AppCompatActivity {
 			});
 		});
 		
-		x.cvMnt.setOnClickListener(a -> { mountUI(); });
+		x.mnt.setOnClickListener(a -> { mountUI(); });
 
-		x.cvQuickBoot.setOnClickListener(a -> {
+		x.quickBoot.setOnClickListener(a -> {
 			Dlg.show(this, R.string.quickboot_question, R.drawable.ic_launcher_foreground);
 			Dlg.setNo(R.string.no, Dlg::close);
 			Dlg.setYes(R.string.yes, () -> {
@@ -668,7 +666,7 @@ public class MainActivity extends AppCompatActivity {
 			});
 		});
 
-		x.cvToolbox.setOnClickListener(v -> {
+		x.toolbox.setOnClickListener(v -> {
 			views.add(n.getRoot());
 			x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out));
 			setContentView(n.getRoot());
@@ -677,7 +675,7 @@ public class MainActivity extends AppCompatActivity {
 			n.toolbarlayout.toolbar.setNavigationIcon(getDrawable(R.drawable.ic_launcher_foreground));
 		});
 
-		n.cvSta.setOnClickListener(a -> {
+		n.sta.setOnClickListener(a -> {
 			Dlg.show(this, R.string.sta_question, R.drawable.android);
 			Dlg.setNo(R.string.no, Dlg::close);
 			Dlg.setYes(R.string.yes, () -> {
@@ -704,16 +702,7 @@ public class MainActivity extends AppCompatActivity {
 			});
 		});
 		
-		n.cvScripts.setOnClickListener(v -> {
-			views.add(z.getRoot());
-			n.toolboxtab.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out));
-			setContentView(z.getRoot());
-			z.scriptstab.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in));
-			z.toolbarlayout.toolbar.setTitle(R.string.script_title);
-			z.toolbarlayout.toolbar.setNavigationIcon(R.drawable.ic_launcher_foreground);
-		});
-		
-		n.cvDumpModem.setOnClickListener(a -> {
+		n.dumpModem.setOnClickListener(a -> {
 			Dlg.show(this, R.string.dump_modem_question, R.drawable.ic_modem);
 			Dlg.setNo(R.string.no, Dlg::close);
 			Dlg.setYes(R.string.yes, () -> {
@@ -729,7 +718,7 @@ public class MainActivity extends AppCompatActivity {
 			});
 		});
 		
-		n.cvFlashUefi.setOnClickListener(a -> {
+		n.flashUefi.setOnClickListener(a -> {
 			Dlg.show(this, R.string.flash_uefi_question, R.drawable.ic_uefi);
 			Dlg.setNo(R.string.no, Dlg::close);
 			Dlg.setYes(R.string.yes,  () -> {
@@ -748,7 +737,7 @@ public class MainActivity extends AppCompatActivity {
 			});
 		});
 		
-		n.cvDbkp.setOnClickListener(a -> {
+		n.dbkp.setOnClickListener(a -> {
 			if (!isNetworkConnected(this)) {
 				nointernet();
 				return;
@@ -869,7 +858,7 @@ public class MainActivity extends AppCompatActivity {
 			}
 		});
 		
-		n.cvDevcfg.setOnClickListener(a -> {
+		n.devcfg.setOnClickListener(a -> {
 			if (!isNetworkConnected(this)) {
 				String finddevcfg = ShellUtils.fastCmd("find " + getFilesDir() + " -maxdepth 1 -name OOS11_devcfg_*");
 				if (finddevcfg.isEmpty()) {
@@ -925,7 +914,7 @@ public class MainActivity extends AppCompatActivity {
 			});
 		});
 		
-		n.cvSoftware.setOnClickListener(a -> {
+		n.software.setOnClickListener(a -> {
 			Dlg.show(this, R.string.software_question, R.drawable.ic_sensor);
 			Dlg.setNo(R.string.no, Dlg::close);
 			Dlg.setYes(R.string.yes, () -> {
@@ -954,7 +943,7 @@ public class MainActivity extends AppCompatActivity {
 			});
 		});
 
-		n.cvAtlasos.setOnClickListener(a -> {
+		n.atlasos.setOnClickListener(a -> {
 			if (!isNetworkConnected(this)) {
 				nointernet();
 				return;
@@ -1023,7 +1012,7 @@ public class MainActivity extends AppCompatActivity {
 			});
 		});
 
-		z.cvUsbhost.setOnClickListener(a -> {
+		n.usbhost.setOnClickListener(a -> {
 			Dlg.show(this, R.string.usbhost_question, R.drawable.ic_mnt);
 			Dlg.setNo(R.string.no, Dlg::close);
 			Dlg.setYes(R.string.yes, () -> {
@@ -1045,7 +1034,7 @@ public class MainActivity extends AppCompatActivity {
 			});
 		});
 		
-		z.cvRotation.setOnClickListener(a -> {
+		n.rotation.setOnClickListener(a -> {
 			Dlg.show(this, R.string.rotation_question, R.drawable.ic_disk);
 			Dlg.setNo(R.string.no, Dlg::close);
 			Dlg.setYes(R.string.yes, () -> {
@@ -1066,7 +1055,7 @@ public class MainActivity extends AppCompatActivity {
 			});
 		});
 		
-		z.cvTablet.setOnClickListener(a -> {
+		n.tablet.setOnClickListener(a -> {
 			Dlg.show(this, R.string.tablet_question, R.drawable.ic_sensor);
 			Dlg.setNo(R.string.no, Dlg::close);
 			Dlg.setYes(R.string.yes, () -> {
@@ -1086,7 +1075,7 @@ public class MainActivity extends AppCompatActivity {
 			});
 		});
 
-		z.cvSetup.setOnClickListener(a -> {
+		n.setup.setOnClickListener(a -> {
 			if (!isNetworkConnected(this)) {
 				nointernet();
 				return;
@@ -1156,7 +1145,7 @@ public class MainActivity extends AppCompatActivity {
 			});
 		});
 
-		z.cvDefender.setOnClickListener(a -> {
+		n.defender.setOnClickListener(a -> {
 			Dlg.show(this, R.string.defender_question, R.drawable.edge2);
 			Dlg.setNo(R.string.no, Dlg::close);
 			Dlg.setYes(R.string.yes, () -> {
@@ -1225,7 +1214,7 @@ public class MainActivity extends AppCompatActivity {
 			k.toolbarlayout.settings.setVisibility(View.GONE);
 			AppCompatSpinner langSpinner = findViewById(R.id.languages);
 			langSpinner.setAdapter(adapter);
-			Locale l=AppCompatDelegate.getApplicationLocales().get(0);
+			Locale l= AppCompatDelegate.getApplicationLocales().get(0);
 			if(l!=null) {
 				l=new Locale(l.toLanguageTag());
 				int index = locales.indexOf(l.toString());
@@ -1248,12 +1237,12 @@ public class MainActivity extends AppCompatActivity {
 		n.toolbarlayout.settings.setOnClickListener(settingsIconClick);
 		z.toolbarlayout.settings.setOnClickListener(settingsIconClick);
 		
-		k.mountLocation.setOnCheckedChangeListener((compoundButton, b) -> {
+		k.mountLocation.setOnChangeListener((b) -> {
 			pref.setMountLocation(this, b);
 			updateWinPath();
 		});
 		
-		k.backupQB.setOnCheckedChangeListener((compoundButton, b) -> {
+		k.backupQB.setOnChangeListener((b) -> {
 			if (pref.getBACKUP(this)) {
 				pref.setBACKUP(this, false);
 				k.autobackup.setVisibility(View.VISIBLE);
@@ -1272,7 +1261,7 @@ public class MainActivity extends AppCompatActivity {
 			});
 		});
 
-		k.backupQBA.setOnCheckedChangeListener((compoundButton, b) -> {
+		k.backupQBA.setOnChangeListener((b) -> {
 			if (pref.getBACKUP_A(this)) {
 				pref.setBACKUP_A(this, false);
 				k.autobackupA.setVisibility(View.VISIBLE);
@@ -1290,8 +1279,6 @@ public class MainActivity extends AppCompatActivity {
 				Dlg.close();
 			});
 		});
-		
-
 
 		x.cvInfo.setOnClickListener(a -> {
 			if (BuildConfig.DEBUG) return;
@@ -1315,28 +1302,25 @@ public class MainActivity extends AppCompatActivity {
 			});
 		});
 			
-		k.autobackup.setOnCheckedChangeListener((compoundButton, b) -> pref.setAUTO(this, !b));
-		k.autobackupA.setOnCheckedChangeListener((compoundButton, b) -> pref.setAUTO_A(this, !b));
-		k.confirmation.setOnCheckedChangeListener((compoundButton, b) -> pref.setCONFIRM(this, b));
-		k.securelock.setOnCheckedChangeListener((compoundButton, b) -> pref.setSecure(this, !b));
-		k.automount.setOnCheckedChangeListener((compoundButton, b) -> pref.setAutoMount(this, b));
-		k.appUpdate.setOnCheckedChangeListener((compoundButton, b) -> pref.setAppUpdate(this, b));
+		k.autobackup.setOnChangeListener((b) -> pref.setAUTO(this, !b));
+		k.autobackupA.setOnChangeListener((b) -> pref.setAUTO_A(this, !b));
+		k.confirmation.setOnChangeListener((b) -> pref.setCONFIRM(this, b));
+		k.securelock.setOnChangeListener((b) -> pref.setSecure(this, !b));
+		k.automount.setOnChangeListener((b) -> pref.setAutoMount(this, b));
+		k.appUpdate.setOnChangeListener((b) -> pref.setAppUpdate(this, b));
 		//String op7funny = ShellUtils.fastCmd("getprop ro.boot.vendor.lge.model.name");
 		//if (("guacamole".equals(device) || "guacamolet".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device) || "OnePlus7ProTMO".equals(device) || "hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) && (op7funny.contains("LM") || op7funny.contains("OPPO"))) {
 		String op7funny = ShellUtils.fastCmd("getprop persist.camera.privapp.list");
 		if (("guacamole".equals(device) || "guacamolet".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device) || "OnePlus7ProTMO".equals(device) || "hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) && (op7funny.contains("oppo") || op7funny.contains("OPPO"))) {
-			k.devcfg1.setOnCheckedChangeListener((compoundButton, b) -> {pref.setDevcfg1(this, b);if(b)k.devcfg2.setVisibility(View.VISIBLE); else k.devcfg2.setVisibility(View.GONE);pref.setDevcfg2(this, false);});
-			k.devcfg2.setOnCheckedChangeListener((compoundButton, b) -> pref.setDevcfg2(this, b));
-			n.cvDevcfg.setVisibility(View.VISIBLE);
+			k.devcfg1.setOnChangeListener((b) -> {pref.setDevcfg1(this, b);if(b)k.devcfg2.setVisibility(View.VISIBLE); else k.devcfg2.setVisibility(View.GONE);pref.setDevcfg2(this, false);});
+			k.devcfg2.setOnChangeListener((b) -> pref.setDevcfg2(this, b));
+			n.devcfg.setVisibility(View.VISIBLE);
 		} else {
 			k.devcfg1.setVisibility(View.GONE);
 			k.devcfg2.setVisibility(View.GONE);
 			pref.setDevcfg1(this, false);
 			pref.setDevcfg2(this, false);
 		}
-		k.button.setOnClickListener(v -> {
-			onBackPressed();
-		});
 	}
 
 	@Override
@@ -1448,20 +1432,19 @@ public class MainActivity extends AppCompatActivity {
 		ShellUtils.fastCmd("su -c mkdir /sdcard/UEFI");
 		finduefi = "\""+ShellUtils.fastCmd(getString(R.string.uefiChk))+"\"";
 		if (finduefi.contains("img")) {
-			x.tvQuickBoot.setText(R.string.quickboot_title);
-			x.cvQuickBoot.setEnabled(true);
-			x.tvQuickBoot.setText(R.string.quickboot_title);
-			x.tvBootSubtitle.setText(R.string.quickboot_subtitle_nabu);
-			n.tvFlashUefi.setText(R.string.flash_uefi_title);
-			n.tvUefiSubtitle.setText(R.string.flash_uefi_subtitle);
-			n.cvFlashUefi.setEnabled(true);
+			x.quickBoot.setTitle(R.string.quickboot_title);
+			x.quickBoot.setSubtitle(R.string.quickboot_subtitle_nabu);
+			x.quickBoot.setEnabled(true);
+			n.flashUefi.setTitle(R.string.flash_uefi_title);
+			n.flashUefi.setSubtitle(R.string.flash_uefi_subtitle);
+			n.flashUefi.setEnabled(true);
 		} else {
-			x.cvQuickBoot.setEnabled(false);
-			x.tvQuickBoot.setText(R.string.uefi_not_found);
-			x.tvBootSubtitle.setText(getString(R.string.uefi_not_found_subtitle, device));
-			n.tvFlashUefi.setText(R.string.uefi_not_found);
-			n.tvUefiSubtitle.setText(getString(R.string.uefi_not_found_subtitle, device));
-			n.cvFlashUefi.setEnabled(false);
+			x.quickBoot.setEnabled(false);
+			x.quickBoot.setTitle(R.string.uefi_not_found);
+			x.quickBoot.setSubtitle(getString(R.string.uefi_not_found_subtitle, device));
+			n.flashUefi.setTitle(R.string.uefi_not_found);
+			n.flashUefi.setSubtitle(getString(R.string.uefi_not_found_subtitle, device));
+			n.flashUefi.setEnabled(false);
 		}
 	}
 	
@@ -1469,10 +1452,10 @@ public class MainActivity extends AppCompatActivity {
 		if (!win.isEmpty()) return;
 		Dlg.show(this, R.string.partition);
 		Dlg.setCancelable(false);
-		x.cvMnt.setEnabled(false);
-		x.cvToolbox.setEnabled(false);
-		x.cvQuickBoot.setEnabled(false);
-		n.cvFlashUefi.setEnabled(false);
+		x.mnt.setEnabled(false);
+		x.toolbox.setEnabled(false);
+		x.quickBoot.setEnabled(false);
+		n.flashUefi.setEnabled(false);
 	}
 
 	public void checkupdate() {
@@ -1559,7 +1542,7 @@ public class MainActivity extends AppCompatActivity {
 	public static void updateMountText() {
 		if (isMounted()) mounted = context.getString(R.string.unmountt);
 		else mounted = context.getString(R.string.mountt);
-		if (x != null) x.tvMnt.setText(String.format(context.getString(R.string.mnt_title), mounted));
+		if (x != null) x.mnt.setTitle(String.format(context.getString(R.string.mnt_title), mounted));
 		MountWidget.updateText(context, String.format(context.getString(R.string.mnt_title), mounted));
 	}
 	public static String getWin() {

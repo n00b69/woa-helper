@@ -21,4 +21,14 @@
         <attr name="arc_bottom_text_size" format="dimension" />
     </declare-styleable>
 
+    <declare-styleable name="Button">
+        <attr name="title" format="string" />
+        <attr name="subtitle" format="string" />
+        <attr name="image" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="SettingsButton">
+        <attr name="text" format="string" />
+    </declare-styleable>
+
 </resources>

@@ -61,9 +61,9 @@
                         android:id="@+id/DeviceImage"
                         android:layout_width="@dimen/_115sdp"
                         android:layout_height="@dimen/_138sdp"
+                        android:src="@drawable/unknown"
                         android:contentDescription="TODO"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/vayu" />
+                        android:scaleType="fitXY"/>
 
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/cv_info"
@@ -71,7 +71,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="@dimen/_4sdp"
-                        android:layout_weight="1"
                         android:adjustViewBounds="true"
                         android:animateLayoutChanges="true"
                         android:clickable="true"
@@ -107,7 +106,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
-                                android:text="POCO X3 PRO (VAYU)"
                                 android:textSize="@dimen/_11sdp" />
 
                             <TextView
@@ -142,12 +140,11 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_weight="1"
                                 android:gravity="bottom"
                                 android:orientation="horizontal">
 
                                 <com.google.android.material.card.MaterialCardView
-                                    android:id="@+id/cv_guide"
+                                    android:id="@+id/guide"
                                     style="@style/Widget.Material3.CardView.Filled"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -177,7 +174,7 @@
                                 </com.google.android.material.card.MaterialCardView>
 
                                 <com.google.android.material.card.MaterialCardView
-                                    android:id="@+id/cv_group"
+                                    android:id="@+id/group"
                                     style="@style/Widget.Material3.CardView.Filled"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -217,252 +214,52 @@
                 android:id="@+id/appRight"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:orientation="vertical"
                 android:paddingBottom="25dp">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cv_backup"
-                    style="@style/Widget.Material3.CardView.Filled"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="4dp"
+                <id.kuato.woahelper.main.Button
+                    style="@style/button"
+                    android:id="@+id/backup"
                     android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:animateLayoutChanges="true"
-                    android:clickable="true"
-                    android:elevation="@dimen/cardElevation"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/parentMargin"
-                    android:stateListAnimator="@animator/state_list_anim"
-					app:cardBackgroundColor="?attr/colorOnSurfaceInverse"
-                    app:cardCornerRadius="@dimen/cardCornerRadius"
-                    app:cardMaxElevation="0dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="0dp"
-                        android:gravity="left|center"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/disk"
-                            android:layout_width="@dimen/_48sdp"
-                            android:layout_height="@dimen/_48sdp"
-                            android:contentDescription="TODO"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/ic_disk" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tv_backup"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="30dp"
-                                android:text="@string/backup_boot_title"
-                                android:textSize="@dimen/_12sdp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/tv_backup_sub"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-								android:gravity="left"
-                                android:text="@string/backup_boot_subtitle"
-								android:paddingRight="@dimen/_15sdp"
-                                android:textSize="@dimen/_10sdp"
-                                android:textStyle="italic" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cv_mnt"
-                    style="@style/Widget.Material3.CardView.Filled"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    app:title="@string/backup_boot_title"
+                    app:subtitle="@string/backup_boot_subtitle"
+                    app:image="@drawable/ic_disk"
                     android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:animateLayoutChanges="true"
-                    android:clickable="true"
-                    android:elevation="@dimen/cardElevation"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/parentMargin"
-                    android:stateListAnimator="@animator/state_list_anim"
-					app:cardBackgroundColor="?attr/colorOnSurfaceInverse"
-                    app:cardCornerRadius="@dimen/cardCornerRadius"
-                    app:cardMaxElevation="0dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="0dp"
-                        android:gravity="left|center"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/windows_logo"
-                            android:layout_width="@dimen/_48sdp"
-                            android:layout_height="@dimen/_48sdp"
-                            android:contentDescription="TODO"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/mnt" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tv_mnt"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/mnt_title"
-                                android:textSize="@dimen/_12sdp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/tv_mnt_subtitle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-								android:gravity="left"
-                                android:text="@string/mnt_subtitle"
-								android:paddingRight="@dimen/_15sdp"
-                                android:textSize="@dimen/_10sdp"
-                                android:textStyle="italic" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cv_toolbox"
-                    style="@style/Widget.Material3.CardView.Filled"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="4dp"
+                    android:layout_height="match_parent" />
+
+                <id.kuato.woahelper.main.Button
+                    style="@style/button"
+                    android:id="@+id/mnt"
                     android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:animateLayoutChanges="true"
-                    android:clickable="true"
-                    android:elevation="@dimen/cardElevation"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/parentMargin"
-                    android:stateListAnimator="@animator/state_list_anim"
-					app:cardBackgroundColor="?attr/colorOnSurfaceInverse"
-                    app:cardCornerRadius="@dimen/cardCornerRadius"
-                    app:cardMaxElevation="0dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="0dp"
-                        android:gravity="left|center"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/toolbox"
-                            android:layout_width="@dimen/_48sdp"
-                            android:layout_height="@dimen/_48sdp"
-                            android:contentDescription="TODO"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/toolbox" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tv_toolbox"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="30dp"
-                                android:text="@string/toolbox_title"
-                                android:textSize="@dimen/_12sdp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/tv_toolbox_subtitle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-								android:gravity="left"
-                                android:text="@string/toolbox_subtitle"
-								android:paddingRight="@dimen/_15sdp"
-                                android:textSize="@dimen/_10sdp"
-                                android:textStyle="italic" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cv_quick_boot"
-                    style="@style/Widget.Material3.CardView.Filled"
+                    app:title="@string/mnt_title"
+                    app:subtitle="@string/mnt_subtitle"
+                    app:image="@drawable/mnt"
+                    android:layout_margin="4dp"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="4dp"
+                    android:layout_height="match_parent" />
+
+                <id.kuato.woahelper.main.Button
+                    style="@style/button"
+                    android:id="@+id/toolbox"
                     android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:animateLayoutChanges="true"
-                    android:clickable="true"
-                    android:elevation="@dimen/cardElevation"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/parentMargin"
-                    android:stateListAnimator="@animator/state_list_anim"
-					app:cardBackgroundColor="?attr/colorOnSurfaceInverse"
-                    app:cardCornerRadius="@dimen/cardCornerRadius"
-                    app:cardMaxElevation="0dp">
+                    app:title="@string/toolbox_title"
+                    app:subtitle="@string/toolbox_subtitle"
+                    app:image="@drawable/toolbox"
+                    android:layout_margin="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="0dp"
-                        android:gravity="left|center"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/windowsLogo2"
-                            android:layout_width="@dimen/_48sdp"
-                            android:layout_height="@dimen/_48sdp"
-                            android:contentDescription="TODO"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/ic_launcher_foreground"
-                            android:text="@string/quickboot_title" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tv_quick_boot"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="30dp"
-                                android:text="@string/quickboot_question"
-                                android:textSize="@dimen/_12sdp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/tv_boot_subtitle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-								android:gravity="left"
-                                android:paddingRight="@dimen/_15sdp"
-                                android:textSize="@dimen/_10sdp"
-                                android:textStyle="italic" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                <id.kuato.woahelper.main.Button
+                    style="@style/button"
+                    android:id="@+id/quick_boot"
+                    android:layout_weight="1"
+                    app:title="@string/quickboot_title"
+                    app:subtitle="@string/quickboot_subtitle"
+                    app:image="@drawable/ic_launcher_foreground"
+                    android:layout_margin="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
             </LinearLayout>
         </LinearLayout>
 
