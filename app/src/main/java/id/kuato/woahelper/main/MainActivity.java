@@ -499,7 +499,7 @@ public class MainActivity extends AppCompatActivity {
 				grouplink = "https://t.me/dikeckaan";
 				x.DeviceImage.setImageResource(R.drawable.nord);
 			}
-			case "nx729j", "NX729J" -> {
+			case "nx729j", "NX729J", "NX729J-UN" -> {
 				guidelink = "https://github.com/Project-Silicium/Mu-Silicium";
 				grouplink = "https://t.me/woahelperchat";
 				x.DeviceImage.setImageResource(R.drawable.nx729j);
@@ -1435,15 +1435,14 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public void checkdbkpmodel() {
-		dbkpmodel = ShellUtils.fastCmd("getprop ro.product.device");
-        switch (dbkpmodel) {
-            case "guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO" -> dbkpmodel = "ONEPLUS 7 PRO";
-            case "hotdog", "OnePlus7TPro", "OnePlus7TPro4G" -> dbkpmodel = "ONEPLUS 7T PRO";
-            case "cepheus" -> dbkpmodel = "XIAOMI MI 9";
-            case "nabu" -> dbkpmodel = "XIAOMI PAD 5";
-        //    case "pipa" -> dbkpmodel = "XIAOMI PAD 6";
-            default -> dbkpmodel = "UNSUPPORTED";
-        }
+		dbkpmodel = switch (dbkpmodel) {
+            case "guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO" -> "ONEPLUS 7 PRO";
+            case "hotdog", "OnePlus7TPro", "OnePlus7TPro4G" -> "ONEPLUS 7T PRO";
+            case "cepheus" -> "XIAOMI MI 9";
+            case "nabu" -> "XIAOMI PAD 5";
+        //    case "pipa" -> "XIAOMI PAD 6";
+            default -> "UNSUPPORTED";
+        };
 	}
 	public void checkuefi() {
 		ShellUtils.fastCmd("su -c mkdir /sdcard/UEFI");
@@ -1469,6 +1468,7 @@ public class MainActivity extends AppCompatActivity {
 	public void checkwin() {
 		if (!win.isEmpty()) return;
 		Dlg.show(this, R.string.partition);
+		Dlg.setCancelable(false);
 		x.cvMnt.setEnabled(false);
 		x.cvToolbox.setEnabled(false);
 		x.cvQuickBoot.setEnabled(false);
