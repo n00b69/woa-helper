@@ -40,7 +40,7 @@
 	<string name="usbhost_subtitle">Adds a tool to C:⧹Toolbox which allows you to toggle USB Host Mode</string>
 	<string name="software_subtitle">Adds browser shortcuts containing ARM software to C:⧹Toolbox</string>
 	<string name="rotation_subtitle">Adds a tool to C:⧹Toolbox that lets you rotate the screen with a shortcut\n(useful for devices without working sensors)</string>
-	<string name="autoflash_subtitle">Adds a tool to Windows that lets you set up the Android boot.img auto-flashing (whenever Windows boots \/ when battery is low)</string>
+	<string name="autoflash_subtitle">Adds a tool to Windows that lets you set up boot.img auto-flashing (whenever Windows boots \/ when the battery is low).</string>
 	<string name="atlasos_subtitle">Copies the AtlasOS or ReviOS playbook and AME Wizard to C:⧹Toolbox</string>
 	<string name="defender_subtitle">Adds a script to C:⧹Toolbox which allows you to remove Microsoft Edge \/ Windows Defender</string>
 	<string name="script_subtitle">Tools and scripts for a more enjoyable Windows experience</string>
