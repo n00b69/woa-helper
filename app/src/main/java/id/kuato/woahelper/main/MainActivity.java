@@ -68,10 +68,8 @@ public class MainActivity extends AppCompatActivity {
 	public static Context context;
     String panel, finduefi, device, model, dbkpmodel, boot;
     static String mounted, win, winpath;
-	String grouplink = "https://t.me/woahelperchat";
-	String guidelink = "https://github.com/n00b69";
-	boolean unsupported = false;
-	boolean tablet = false;
+	String grouplink = "https://t.me/woahelperchat", guidelink = "https://github.com/n00b69";
+	boolean unsupported = false, tablet = false;
 	static int blur = 0;
 	List<View> views = new ArrayList<>();
 
@@ -512,8 +510,8 @@ public class MainActivity extends AppCompatActivity {
 			default -> {
 				guidelink = "https://renegade-project.tech/";
 				grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA";
-				x.DeviceImage.setImageResource(R.drawable.unknown);
-				x.deviceName.setText(device);
+				//x.DeviceImage.setImageResource(R.drawable.unknown);
+				//x.deviceName.setText(device);
 				n.dumpModem.setVisibility(View.VISIBLE);
 				unsupported = true;
 			}
@@ -1431,21 +1429,13 @@ public class MainActivity extends AppCompatActivity {
 	public void checkuefi() {
 		ShellUtils.fastCmd("su -c mkdir /sdcard/UEFI");
 		finduefi = "\""+ShellUtils.fastCmd(getString(R.string.uefiChk))+"\"";
-		if (finduefi.contains("img")) {
-			x.quickBoot.setTitle(R.string.quickboot_title);
-			x.quickBoot.setSubtitle(R.string.quickboot_subtitle_nabu);
-			x.quickBoot.setEnabled(true);
-			n.flashUefi.setTitle(R.string.flash_uefi_title);
-			n.flashUefi.setSubtitle(R.string.flash_uefi_subtitle);
-			n.flashUefi.setEnabled(true);
-		} else {
-			x.quickBoot.setEnabled(false);
-			x.quickBoot.setTitle(R.string.uefi_not_found);
-			x.quickBoot.setSubtitle(getString(R.string.uefi_not_found_subtitle, device));
-			n.flashUefi.setTitle(R.string.uefi_not_found);
-			n.flashUefi.setSubtitle(getString(R.string.uefi_not_found_subtitle, device));
-			n.flashUefi.setEnabled(false);
-		}
+		boolean found = finduefi.contains("img");
+		x.quickBoot.setEnabled(found);
+		n.flashUefi.setEnabled(found);
+		x.quickBoot.setTitle((found) ? R.string.quickboot_title : R.string.uefi_not_found);
+		x.quickBoot.setSubtitle((found) ? getString(R.string.quickboot_subtitle_nabu) : getString(R.string.uefi_not_found_subtitle, device));
+		n.flashUefi.setTitle((found) ? R.string.flash_uefi_title : R.string.uefi_not_found);
+		n.flashUefi.setSubtitle((found) ? getString(R.string.flash_uefi_subtitle) : getString(R.string.uefi_not_found_subtitle, device));
 	}
 	
 	public void checkwin() {
