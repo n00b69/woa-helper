@@ -66,8 +66,7 @@ public class MainActivity extends AppCompatActivity {
 	public static ToolboxBinding n;
 	public static ScriptsBinding z;
 	public static Context context;
-    String panel, finduefi, device, model, dbkpmodel, boot;
-    static String mounted, win, winpath;
+    static String mounted, win, winpath, panel, finduefi, device, model, dbkpmodel, boot;
 	String grouplink = "https://t.me/woahelperchat", guidelink = "https://github.com/n00b69";
 	boolean unsupported = false, tablet = false;
 	static int blur = 0;
@@ -164,10 +163,10 @@ public class MainActivity extends AppCompatActivity {
 		n.toolbarlayout.settings.setColorFilter(R.color.md_theme_primary);
 		z.toolbarlayout.settings.setColorFilter(R.color.md_theme_primary);
 
-		device = ShellUtils.fastCmd("getprop ro.product.device");
 		model = ShellUtils.fastCmd("getprop ro.product.model");
 		win = getWin();
 		boot = getBoot();
+		updateDevice();
 		updateWinPath();
 		updateMountText();
 		x.tvDate.setText(String.format(getString(R.string.last), pref.getDATE(this)));
@@ -605,64 +604,7 @@ public class MainActivity extends AppCompatActivity {
 		
 		x.mnt.setOnClickListener(a -> { mountUI(); });
 
-		x.quickBoot.setOnClickListener(a -> {
-			Dlg.show(this, R.string.quickboot_question, R.drawable.ic_launcher_foreground);
-			Dlg.setNo(R.string.no, Dlg::close);
-			Dlg.setYes(R.string.yes, () -> {
-				Dlg.dialogLoading();
-				new Handler().postDelayed(() -> {
-					mount();
-					String found = ShellUtils.fastCmd(String.format("ls %s | grep boot.img", updateWinPath()));
-					if (pref.getBACKUP(this) || (!pref.getAUTO(this) && found.isEmpty())) {
-						winBackup();
-						updateLastBackupDate();
-					}
-					found = ShellUtils.fastCmd("find /sdcard | grep boot.img");
-					if (pref.getBACKUP_A(this) || (!pref.getAUTO_A(this) && found.isEmpty())) {
-						androidBackup();
-						updateLastBackupDate();
-					}
-					if (pref.getDevcfg1(this)) {
-						if (!isNetworkConnected(this)) {
-							String finddevcfg = ShellUtils.fastCmd("find " + getFilesDir() + " -maxdepth 1 -name OOS11_devcfg_*");
-							if (finddevcfg.isEmpty()) {
-								nointernet();
-								return;
-							}
-						}
-						String devcfgDevice = "";
-						if ("guacamole".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device)) devcfgDevice = "guacamole";
-						else if ("hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) devcfgDevice = "hotdog";
-						String findoriginaldevcfg = ShellUtils.fastCmd("find " + getFilesDir() + " -maxdepth 1 -name original-devcfg.img");
-						if (findoriginaldevcfg.isEmpty()) {
-							ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=/sdcard/original-devcfg.img");
-							ShellUtils.fastCmd("cp /sdcard/original-devcfg.img " + getFilesDir() + "/original-devcfg.img");
-						}
-						String finddevcfg = ShellUtils.fastCmd("find " + getFilesDir() + " -maxdepth 1 -name OOS11_devcfg_*");
-						if (finddevcfg.isEmpty()) {
-							ShellUtils.fastCmd(String.format("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_%s.img -O /sdcard/OOS11_devcfg_%s.img\" | su -mm -c sh", devcfgDevice, devcfgDevice));
-							ShellUtils.fastCmd(String.format("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_%s.img -O /sdcard/OOS12_devcfg_%s.img\" | su -mm -c sh", devcfgDevice, devcfgDevice));
-							ShellUtils.fastCmd(String.format("cp /sdcard/OOS11_devcfg_%s.img %s", devcfgDevice, getFilesDir()));
-							ShellUtils.fastCmd(String.format("cp /sdcard/OOS12_devcfg_%s.img %s", devcfgDevice, getFilesDir()));
-							ShellUtils.fastCmd(String.format("dd bs=8M if=%s/OOS11_devcfg_%s.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)", getFilesDir(), devcfgDevice));
-						} else {
-							ShellUtils.fastCmd(String.format("dd bs=8M if=%s/OOS11_devcfg_%s.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)", getFilesDir(), devcfgDevice));
-						}
-					}	
-					if (pref.getDevcfg2(this) && pref.getDevcfg1(this)) {
-						ShellUtils.fastCmd("mkdir " + winpath + "/sta || true ");
-						ShellUtils.fastCmd("cp '" + getFilesDir() + "/Flash Devcfg.lnk' " + winpath + "/Users/Public/Desktop");
-						ShellUtils.fastCmd("cp " + getFilesDir() + "/sdd.exe " + winpath + "/sta/sdd.exe");
-						ShellUtils.fastCmd("cp " + getFilesDir() + "/devcfg-boot-sdd.conf " + winpath + "/sta/sdd.conf");
-						ShellUtils.fastCmd("cp " + getFilesDir() + "/original-devcfg.img " + winpath + "/original-devcfg.img");
-					}
-					flash(finduefi);
-					ShellUtils.fastCmd("su -c svc power reboot");
-					Dlg.setText(R.string.wrong);
-					Dlg.dismissButton();
-				}, 25);
-			});
-		});
+		x.quickBoot.setOnClickListener(a -> { quickbootUI(); });
 
 		x.toolbox.setOnClickListener(v -> {
 			views.add(n.getRoot());
@@ -1348,7 +1290,7 @@ public class MainActivity extends AppCompatActivity {
 		views.get(views.size() - 1).startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_in));
 	}
 
-	public void flash(String uefi) {
+	public static void flash(String uefi) {
 		ShellUtils.fastCmd("dd if=" + uefi + " of=/dev/block/bootdevice/by-name/boot$(getprop ro.boot.slot_suffix) bs=16m");
 	}
 
@@ -1379,6 +1321,68 @@ public class MainActivity extends AppCompatActivity {
 			}, 25);
 		});
 	}
+
+	public static void quickbootUI() {
+		if (boot == null) boot = getBoot();
+		if (winpath == null) updateWinPath();
+		if (device == null) updateDevice();
+		Dlg.show(context, R.string.quickboot_question, R.drawable.ic_launcher_foreground);
+		Dlg.setNo(R.string.no, Dlg::close);
+		Dlg.setYes(R.string.yes, () -> {
+			Dlg.dialogLoading();
+			new Handler().postDelayed(() -> {
+				mount();
+				String found = ShellUtils.fastCmd(String.format("ls %s | grep boot.img", updateWinPath()));
+				if (pref.getBACKUP(context) || (!pref.getAUTO(context) && found.isEmpty())) {
+					winBackup();
+					updateLastBackupDate();
+				}
+				found = ShellUtils.fastCmd("find /sdcard | grep boot.img");
+				if (pref.getBACKUP_A(context) || (!pref.getAUTO_A(context) && found.isEmpty())) {
+					androidBackup();
+					updateLastBackupDate();
+				}
+				if (pref.getDevcfg1(context)) {
+					if (!isNetworkConnected(context)) {
+						String finddevcfg = ShellUtils.fastCmd("find " + context.getFilesDir() + " -maxdepth 1 -name OOS11_devcfg_*");
+						if (finddevcfg.isEmpty()) {
+							nointernet();
+							return;
+						}
+					}
+					String devcfgDevice = "";
+					if ("guacamole".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device)) devcfgDevice = "guacamole";
+					else if ("hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) devcfgDevice = "hotdog";
+					String findoriginaldevcfg = ShellUtils.fastCmd("find " + context.getFilesDir() + " -maxdepth 1 -name original-devcfg.img");
+					if (findoriginaldevcfg.isEmpty()) {
+						ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=/sdcard/original-devcfg.img");
+						ShellUtils.fastCmd("cp /sdcard/original-devcfg.img " + context.getFilesDir() + "/original-devcfg.img");
+					}
+					String finddevcfg = ShellUtils.fastCmd("find " + context.getFilesDir() + " -maxdepth 1 -name OOS11_devcfg_*");
+					if (finddevcfg.isEmpty()) {
+						ShellUtils.fastCmd(String.format("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_%s.img -O /sdcard/OOS11_devcfg_%s.img\" | su -mm -c sh", devcfgDevice, devcfgDevice));
+						ShellUtils.fastCmd(String.format("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_%s.img -O /sdcard/OOS12_devcfg_%s.img\" | su -mm -c sh", devcfgDevice, devcfgDevice));
+						ShellUtils.fastCmd(String.format("cp /sdcard/OOS11_devcfg_%s.img %s", devcfgDevice, context.getFilesDir()));
+						ShellUtils.fastCmd(String.format("cp /sdcard/OOS12_devcfg_%s.img %s", devcfgDevice, context.getFilesDir()));
+						ShellUtils.fastCmd(String.format("dd bs=8M if=%s/OOS11_devcfg_%s.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)", context.getFilesDir(), devcfgDevice));
+					} else {
+						ShellUtils.fastCmd(String.format("dd bs=8M if=%s/OOS11_devcfg_%s.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)", context.getFilesDir(), devcfgDevice));
+					}
+				}
+				if (pref.getDevcfg2(context) && pref.getDevcfg1(context)) {
+					ShellUtils.fastCmd("mkdir " + winpath + "/sta || true ");
+					ShellUtils.fastCmd("cp '" + context.getFilesDir() + "/Flash Devcfg.lnk' " + winpath + "/Users/Public/Desktop");
+					ShellUtils.fastCmd("cp " + context.getFilesDir() + "/sdd.exe " + winpath + "/sta/sdd.exe");
+					ShellUtils.fastCmd("cp " + context.getFilesDir() + "/devcfg-boot-sdd.conf " + winpath + "/sta/sdd.conf");
+					ShellUtils.fastCmd("cp " + context.getFilesDir() + "/original-devcfg.img " + winpath + "/original-devcfg.img");
+				}
+				flash(finduefi);
+				ShellUtils.fastCmd("su -c svc power reboot");
+				Dlg.setText(R.string.wrong);
+				Dlg.dismissButton();
+			}, 25);
+		});
+	}
 	
 	public static void mount() {
 		if (win == null) win = getWin();
@@ -1402,12 +1406,12 @@ public class MainActivity extends AppCompatActivity {
 		updateMountText();
 	}
 	
-	public void winBackup() {
+	public static void winBackup() {
 		mount();
 		ShellUtils.fastCmd("su -mm -c dd bs=8m if=" + boot + " of=" + winpath + "/boot.img");
 	}
 	
-	public void androidBackup() {
+	public static void androidBackup() {
 		ShellUtils.fastCmd("su -mm -c dd bs=8m if=" + boot + " of=/sdcard/boot.img");
 	}
 
@@ -1477,8 +1481,8 @@ public class MainActivity extends AppCompatActivity {
 		Dlg.setYes(R.string.chat, () -> openLink("https://t.me/woahelperchat"));
 	}
 	
-	public void nointernet() {
-		Dlg.show(this, R.string.internet);
+	public static void nointernet() {
+		Dlg.show(context, R.string.internet);
 		Dlg.dismissButton();
 	}
 	
@@ -1522,11 +1526,11 @@ public class MainActivity extends AppCompatActivity {
 		return (ViewGroup) ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
 	}
 
-	void updateLastBackupDate() {
+	static void updateLastBackupDate() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM HH:mm", Locale.US);
 		String currentDateAndTime = sdf.format(new Date());
-		pref.setDATE(this, currentDateAndTime);
-		x.tvDate.setText(getString(R.string.last, pref.getDATE(this)));
+		pref.setDATE(context, currentDateAndTime);
+		x.tvDate.setText(context.getString(R.string.last, pref.getDATE(context)));
 	}
 
 	public static void updateMountText() {
@@ -1543,6 +1547,7 @@ public class MainActivity extends AppCompatActivity {
 		winpath = pref.getMountLocation(context) ? "/mnt/Windows" : "/mnt/sdcard/Windows";
 		return winpath;
 	}
+	public static String updateDevice() { return device = ShellUtils.fastCmd("getprop ro.product.device"); }
 
 	public static String getBoot() {
 		String partition = ShellUtils.fastCmd("find /dev/block | grep \"boot$(getprop ro.boot.slot_suffix)$\" | grep -E \"(/boot|/BOOT|/boot_a|/boot_b|/BOOT_a|/BOOT_b)$\" | head -1 ");

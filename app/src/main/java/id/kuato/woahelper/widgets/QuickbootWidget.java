@@ -28,8 +28,7 @@ public class QuickbootWidget extends AppWidgetProvider {
 
             views.setImageViewResource(R.id.image, R.drawable.ic_launcher_foreground);
 
-            MainActivity.context = context;
-            updateText(context, context.getString(R.string.quickboot_title));
+            QuickbootWidget.updateText(context, context.getString(R.string.quickboot_title));
 
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }

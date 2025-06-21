@@ -28,7 +28,6 @@ public class MountWidget extends AppWidgetProvider {
 
             views.setImageViewResource(R.id.image, R.drawable.ic_mnt);
 
-            //MainActivity.context = context;
 
             if (MainActivity.isMounted()) MountWidget.updateText(context, context.getString(R.string.mnt_title, context.getString(R.string.unmountt)));
             else MountWidget.updateText(context, context.getString(R.string.mnt_title, context.getString(R.string.mountt)));

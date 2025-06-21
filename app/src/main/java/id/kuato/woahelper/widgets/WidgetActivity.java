@@ -30,7 +30,7 @@ public class 	WidgetActivity extends AppCompatActivity {
 		Dlg.dialog.dismiss();
 		finish();
 	}
-	private static void sizeCheck(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
+	/*private static void sizeCheck(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
 		Bundle options = appWidgetManager.getAppWidgetOptions(appWidgetId);
 		RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
 		int width = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH);
@@ -50,7 +50,7 @@ public class 	WidgetActivity extends AppCompatActivity {
 			sizeCheck(context, appWidgetManager, appWidgetId);
 		}
 	}
-
+*/
 
 	@SuppressLint({"StringFormatInvalid", "SdCardPath"})
 	@Override
@@ -68,7 +68,7 @@ public class 	WidgetActivity extends AppCompatActivity {
 		if (Objects.equals(widget_type, "mount")) {
 			MainActivity.mountUI();
 		} else if (Objects.equals(widget_type, "quickboot")) {
-
+			MainActivity.quickbootUI();
 		}
 		Dlg.dialog.setOnCancelListener((dialog) -> {
 			dialog.dismiss();

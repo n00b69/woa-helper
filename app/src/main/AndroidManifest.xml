@@ -28,7 +28,7 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/mount_widget_info" />
         </receiver>
-        <!--<receiver android:name=".widgets.QuickbootWidget"
+        <receiver android:name=".widgets.QuickbootWidget"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -38,7 +38,7 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/quickboot_widget_info" />
-        </receiver>-->
+        </receiver>
         <receiver
             android:name=".main.automount"
             android:enabled="true"
