@@ -101,9 +101,7 @@ public class MainActivity extends AppCompatActivity {
 				out.close();
 			} catch (IOException ignored) { }
 		}
-		ShellUtils.fastCmd("chmod 777 " + getFilesDir() + "/mount.ntfs");
-		ShellUtils.fastCmd("chmod 777 " + getFilesDir() + "/libfuse-lite.so");
-		ShellUtils.fastCmd("chmod 777 " + getFilesDir() + "/libntfs-3g.so");
+		List.of("mount.ntfs", "libfuse-lite.so", "libntfs-3g.so").forEach(v -> ShellUtils.fastCmd(String.format("chmod 777 %s/%s", getFilesDir(), v)));
 	}
 
 	@SuppressLint("UseCompatLoadingForDrawables")
@@ -127,14 +125,8 @@ public class MainActivity extends AppCompatActivity {
 		ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content), (v, insets) -> {
 			Insets sysInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars());
 			x.tvAppCreator.setPadding(0, 0, 0, sysInsets.bottom);
-			x.app.setPadding(0, 0, 0, sysInsets.bottom);
-			n.app.setPadding(0, 0, 0, sysInsets.bottom);
-			k.app.setPadding(0, 0, 0, sysInsets.bottom);
-			z.app.setPadding(0, 0, 0, sysInsets.bottom);
-			x.linearLayout.setPadding(sysInsets.left, sysInsets.top, sysInsets.right, 0);
-			n.linearLayout.setPadding(sysInsets.left, sysInsets.top, sysInsets.right, 0);
-			k.linearLayout.setPadding(sysInsets.left, sysInsets.top, sysInsets.right, 0);
-			z.linearLayout.setPadding(sysInsets.left, sysInsets.top, sysInsets.right, 0);
+			List.of(x.app, n.app, k.app, z.app).forEach(a -> a.setPadding(0, 0, 0, sysInsets.bottom));
+			List.of(x.linearLayout, n.linearLayout, k.linearLayout, z.linearLayout).forEach(a -> a.setPadding(sysInsets.left, sysInsets.top, sysInsets.right, 0));
 			return insets;
 		});
 
@@ -158,10 +150,7 @@ public class MainActivity extends AppCompatActivity {
 		x.toolbarlayout.toolbar.setTitle(R.string.app_name);
 		x.toolbarlayout.toolbar.setSubtitle("v" + BuildConfig.VERSION_NAME);
 		x.toolbarlayout.toolbar.setNavigationIcon(R.drawable.ic_launcher_foreground);
-		x.toolbarlayout.settings.setColorFilter(R.color.md_theme_primary);
-		k.toolbarlayout.settings.setColorFilter(R.color.md_theme_primary);
-		n.toolbarlayout.settings.setColorFilter(R.color.md_theme_primary);
-		z.toolbarlayout.settings.setColorFilter(R.color.md_theme_primary);
+		List.of(x.toolbarlayout.settings, k.toolbarlayout.settings, n.toolbarlayout.settings, z.toolbarlayout.settings).forEach(v -> v.setColorFilter(R.color.md_theme_primary));
 
 		model = ShellUtils.fastCmd("getprop ro.product.model");
 		win = getWin();
@@ -509,15 +498,12 @@ public class MainActivity extends AppCompatActivity {
 			default -> {
 				guidelink = "https://renegade-project.tech/";
 				grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA";
-				//x.DeviceImage.setImageResource(R.drawable.unknown);
-				//x.deviceName.setText(device);
 				n.dumpModem.setVisibility(View.VISIBLE);
 				unsupported = true;
 			}
 		}
 		onConfigurationChanged(getResources().getConfiguration());
-		if (tablet)
-			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		if (!tablet) setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		if (unsupported && !pref.getAGREE(this)) {
 			Dlg.show(this, R.string.unsupported);
 			Dlg.setYes(R.string.sure, () -> {
@@ -550,20 +536,19 @@ public class MainActivity extends AppCompatActivity {
 		if (panel == null) {
 			panel = ShellUtils.fastCmd("su -c cat /proc/cmdline | tr ' :=' '\n'|grep dsi|tr ' _' '\n'|tail -3|head -1 ");
 		}
-		if (!pref.getAGREE(this))
-			if (Objects.equals(panel, "f1p2_2") || Objects.equals(panel, "f1")) {
-				Dlg.show(this, R.string.upanel);
-				Dlg.setYes(R.string.chat, () -> {
-					openLink(grouplink);
-					pref.setAGREE(this, true);
-					Dlg.close();
-				});
-				Dlg.setDismiss(R.string.nah, () -> {
-					pref.setAGREE(this, true);
-					Dlg.close();
-				});
-				Dlg.setNo(R.string.later, Dlg::close);
-			}
+		if (!pref.getAGREE(this) && (Objects.equals(panel, "f1p2_2") || Objects.equals(panel, "f1"))) {
+			Dlg.show(this, R.string.upanel);
+			Dlg.setYes(R.string.chat, () -> {
+				openLink(grouplink);
+				pref.setAGREE(this, true);
+				Dlg.close();
+			});
+			Dlg.setDismiss(R.string.nah, () -> {
+				pref.setAGREE(this, true);
+				Dlg.close();
+			});
+			Dlg.setNo(R.string.later, Dlg::close);
+		}
 
 		x.tvRamvalue.setText(getString(R.string.ramvalue, Double.parseDouble(new RAM().getMemory(this))));
 		x.tvPanel.setText(getString(R.string.paneltype, panel));
@@ -620,10 +605,7 @@ public class MainActivity extends AppCompatActivity {
 			Dlg.setNo(R.string.no, Dlg::close);
 			Dlg.setYes(R.string.yes, () -> {
 				ShellUtils.fastCmd("mkdir /sdcard/sta || true");
-				ShellUtils.fastCmd("cp " + getFilesDir() + "/sta.exe /sdcard/sta/sta.exe");
-				ShellUtils.fastCmd("cp " + getFilesDir() + "/sdd.exe /sdcard/sta/sdd.exe");
-				ShellUtils.fastCmd("cp " + getFilesDir() + "/sdd.conf /sdcard/sta/sdd.conf");
-				ShellUtils.fastCmd("cp " + getFilesDir() + "/boot_img_auto-flasher_V1.1.exe /sdcard/sta/boot_img_auto-flasher_V1.1.exe");
+				List.of("sta.exe", "sdd.exe", "sdd.conf", "boot_img_auto-flasher_V1.1.exe").forEach(file -> ShellUtils.fastCmd("cp " + getFilesDir() + "/sta.exe /sdcard/sta/" + file));
 				mount();
 				if (!isMounted()) {
 					Dlg.close();
@@ -859,25 +841,14 @@ public class MainActivity extends AppCompatActivity {
 			Dlg.setNo(R.string.no, Dlg::close);
 			Dlg.setYes(R.string.yes, () -> {
 				Dlg.dialogLoading();
-				ShellUtils.fastCmd("cp " + getFilesDir() + "/WorksOnWoa.url /sdcard");
-				ShellUtils.fastCmd("cp " + getFilesDir() + "/TestedSoftware.url /sdcard");
-				ShellUtils.fastCmd("cp " + getFilesDir() + "/ARMSoftware.url /sdcard");
-				ShellUtils.fastCmd("cp " + getFilesDir() + "/ARMRepo.url /sdcard");
-				mount();
+				if (!isMounted()) mount();
 				if (!isMounted()) {
 					Dlg.close();
 					mountfail();
 					return;
 				}
 				ShellUtils.fastCmd("mkdir " + winpath + "/Toolbox || true ");
-				ShellUtils.fastCmd("cp /sdcard/WorksOnWoa.url " + winpath + "/Toolbox");
-				ShellUtils.fastCmd("cp /sdcard/TestedSoftware.url " + winpath + "/Toolbox");
-				ShellUtils.fastCmd("cp /sdcard/ARMSoftware.url " + winpath + "/Toolbox");
-				ShellUtils.fastCmd("cp /sdcard/ARMRepo.url " + winpath + "/Toolbox");
-				ShellUtils.fastCmd("rm /sdcard/WorksOnWoa.url");
-				ShellUtils.fastCmd("rm /sdcard/TestedSoftware.url");
-				ShellUtils.fastCmd("rm /sdcard/ARMSoftware.url");
-				ShellUtils.fastCmd("rm /sdcard/ARMRepo.url");
+				List.of("WorksOnWoa.url", "TestedSoftware.url", "ARMSoftware.url", "ARMRepo.url").forEach(file -> ShellUtils.fastCmd(String.format("cp %s/%s %s/Toolbox", getFilesDir(), file, winpath)));
 				Dlg.setText(R.string.done);
 				Dlg.dismissButton();
 			});
@@ -909,10 +880,8 @@ public class MainActivity extends AppCompatActivity {
 						Dlg.setIcon(R.drawable.ic_ar_mainactivity);
 						Dlg.hideBar();
 						ShellUtils.fastCmd("mkdir " + winpath + "/Toolbox || true ");
-						ShellUtils.fastCmd("cp /sdcard/ReviPlaybook.apbx " + winpath + "/Toolbox/ReviPlaybook.apbx");
-						ShellUtils.fastCmd("cp /sdcard/AMEWizardBeta.zip " + winpath + "/Toolbox");
-						ShellUtils.fastCmd("su -mm -c rm /sdcard/ReviPlaybook.apbx");
-						ShellUtils.fastCmd("su -mm -c rm /sdcard/AMEWizardBeta.zip");
+						ShellUtils.fastCmd("mv /sdcard/ReviPlaybook.apbx " + winpath + "/Toolbox/ReviPlaybook.apbx");
+						ShellUtils.fastCmd("mv /sdcard/AMEWizardBeta.zip " + winpath + "/Toolbox");
 						Dlg.setText(R.string.done);
 						Dlg.dismissButton();
 					});
@@ -939,12 +908,9 @@ public class MainActivity extends AppCompatActivity {
 						Dlg.setIcon(R.drawable.ic_ar_mainactivity);
 						Dlg.hideBar();
 						ShellUtils.fastCmd("mkdir " + winpath + "/Toolbox || true ");
-						ShellUtils.fastCmd("cp /sdcard/AtlasPlaybook.apbx " + winpath + "/Toolbox/AtlasPlaybook_v0.4.1.apbx");
-						ShellUtils.fastCmd("cp /sdcard/AtlasPlaybook.apbx " + winpath + "/Toolbox/AtlasPlaybook_v0.4.0_23H2Only.apbx");
-						ShellUtils.fastCmd("cp /sdcard/AMEWizardBeta.zip " + winpath + "/Toolbox");
-						ShellUtils.fastCmd("su -mm -c rm /sdcard/AtlasPlaybook_v0.4.1.apbx");
-						ShellUtils.fastCmd("su -mm -c rm /sdcard/AtlasPlaybook_v0.4.0_23H2Only.apbx");
-						ShellUtils.fastCmd("su -mm -c rm /sdcard/AMEWizardBeta.zip");
+						ShellUtils.fastCmd("mv /sdcard/AtlasPlaybook.apbx " + winpath + "/Toolbox/AtlasPlaybook_v0.4.1.apbx");
+						ShellUtils.fastCmd("mv /sdcard/AtlasPlaybook_v0.4.0_23H2Only.apbx " + winpath + "/Toolbox/AtlasPlaybook_v0.4.0_23H2Only.apbx");
+						ShellUtils.fastCmd("mv /sdcard/AMEWizardBeta.zip " + winpath + "/Toolbox");
 						Dlg.setText(R.string.done);
 						Dlg.dismissButton();
 					});
@@ -966,9 +932,8 @@ public class MainActivity extends AppCompatActivity {
 					return;
 				}
 				ShellUtils.fastCmd("mkdir " + winpath + "/Toolbox || true ");
-				ShellUtils.fastCmd("cp /sdcard/usbhostmode.exe " + winpath + "/Toolbox");
+				ShellUtils.fastCmd("mv /sdcard/usbhostmode.exe " + winpath + "/Toolbox");
 				ShellUtils.fastCmd("cp '" + getFilesDir() + "/USB Host Mode.lnk' " + winpath + "/Users/Public/Desktop");
-				ShellUtils.fastCmd("rm /sdcard/usbhostmode.exe");
 				Dlg.setText(R.string.done);
 				Dlg.dismissButton();
 			});
@@ -988,8 +953,7 @@ public class MainActivity extends AppCompatActivity {
 				}
 				ShellUtils.fastCmd("mkdir " + winpath + "/Toolbox || true ");
 				ShellUtils.fastCmd("cp /sdcard/QuickRotate_V3.0.exe " + winpath + "/Toolbox");
-				ShellUtils.fastCmd("cp /sdcard/QuickRotate_V3.0.exe " + winpath + "/Users/Public/Desktop");
-				ShellUtils.fastCmd("rm /sdcard/QuickRotate_V3.0.exe");
+				ShellUtils.fastCmd("mv /sdcard/QuickRotate_V3.0.exe " + winpath + "/Users/Public/Desktop");
 				Dlg.setText(R.string.done);
 				Dlg.dismissButton();
 			});
@@ -1008,8 +972,7 @@ public class MainActivity extends AppCompatActivity {
 					return;
 				}
 				ShellUtils.fastCmd("mkdir " + winpath + "/Toolbox || true ");
-				ShellUtils.fastCmd("cp /sdcard/Optimized_Taskbar_Control_V3.1.exe " + winpath + "/Toolbox");
-				ShellUtils.fastCmd("rm /sdcard/Optimized_Taskbar_Control_V3.1.exe");
+				ShellUtils.fastCmd("mv /sdcard/Optimized_Taskbar_Control_V3.1.exe " + winpath + "/Toolbox");
 				Dlg.setText(R.string.done);
 				Dlg.dismissButton();
 			});
@@ -1029,42 +992,12 @@ public class MainActivity extends AppCompatActivity {
 				new Thread(() -> {
 					ShellUtils.fastCmd("mkdir /sdcard/Frameworks || true");
 					ShellUtils.fastCmd("cp " + getFilesDir() + "/install.bat /sdcard/Frameworks/install.bat");
-					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/PhysX-9.13.0604-SystemSoftware-Legacy.msi -O /sdcard/Frameworks/PhysX-9.13.0604-SystemSoftware-Legacy.msi\" | su -mm -c sh");
-					Dlg.setBar(10);
-					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/PhysX_9.23.1019_SystemSoftware.exe -O /sdcard/Frameworks/PhysX_9.23.1019_SystemSoftware.exe\" | su -mm -c sh");
-					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/xnafx40_redist.msi -O /sdcard/Frameworks/xnafx40_redist.msi\" | su -mm -c sh");
-					Dlg.setBar(20);
-					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/opengl.appx -O /sdcard/Frameworks/opengl.1.2409.2.0.appx\" | su -mm -c sh");
-					Dlg.setBar(30);
-					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2005vcredist_x64.EXE -O /sdcard/Frameworks/2005vcredist_x64.EXE\" | su -mm -c sh");
-					Dlg.setBar(35);
-					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2005vcredist_x86.EXE -O /sdcard/Frameworks/2005vcredist_x86.EXE\" | su -mm -c sh");
-					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2008vcredist_x64.exe -O /sdcard/Frameworks/2008vcredist_x64.exe\" | su -mm -c sh");
-					Dlg.setBar(40);
-					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2008vcredist_x86.exe -O /sdcard/Frameworks/2008vcredist_x86.exe\" | su -mm -c sh");
-					Dlg.setBar(45);
-					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2010vcredist_x64.exe -O /sdcard/Frameworks/2010vcredist_x64.exe\" | su -mm -c sh");
-					Dlg.setBar(50);
-					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2010vcredist_x86.exe -O /sdcard/Frameworks/2010vcredist_x86.exe\" | su -mm -c sh");
-					Dlg.setBar(55);
-					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2012vcredist_x64.exe -O /sdcard/Frameworks/2012vcredist_x64.exe\" | su -mm -c sh");
-					Dlg.setBar(60);
-					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2012vcredist_x86.exe -O /sdcard/Frameworks/2012vcredist_x86.exe\" | su -mm -c sh");
-					Dlg.setBar(65);
-					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2013vcredist_x64.exe -O /sdcard/Frameworks/2013vcredist_x64.exe\" | su -mm -c sh");
-					Dlg.setBar(70);
-					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2013vcredist_x86.exe -O /sdcard/Frameworks/2013vcredist_x86.exe\" | su -mm -c sh");
-					Dlg.setBar(75);
-					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2015VC_redist.x64.exe -O /sdcard/Frameworks/2015VC_redist.x64.exe\" | su -mm -c sh");
-					Dlg.setBar(80);
-					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2015VC_redist.x86.exe -O /sdcard/Frameworks/2015VC_redist.x86.exe\" | su -mm -c sh");
-					Dlg.setBar(85);
-					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/2022VC_redist.arm64.exe -O /sdcard/Frameworks/2022VC_redist.arm64.exe\" | su -mm -c sh");
-					Dlg.setBar(90);
-					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/dxwebsetup.exe -O /sdcard/Frameworks/dxwebsetup.exe\" | su -mm -c sh");
-					Dlg.setBar(95);
-					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/oalinst.exe -O /sdcard/Frameworks/oalinst.exe\" | su -mm -c sh");
-					Dlg.setBar(1);
+					List.of("PhysX-9.13.0604-SystemSoftware-Legacy.msi", "PhysX_9.23.1019_SystemSoftware.exe", "xnafx40_redist.msi", "opengl.appx", "2005vcredist_x64.EXE", "2005vcredist_x86.EXE", "2008vcredist_x64.exe",
+							"2008vcredist_x86.exe", "2010vcredist_x64.exe", "2010vcredist_x86.exe", "2012vcredist_x64.exe", "2012vcredist_x86.exe", "2013vcredist_x64.exe", "2013vcredist_x86.exe", "2015VC_redist.x64.exe",
+							"2015VC_redist.x86.exe", "2022VC_redist.arm64.exe", "dxwebsetup.exe", "oalinst.exe").forEach(file -> {
+						ShellUtils.fastCmd(String.format("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/%s -O /sdcard/Frameworks/%s\" | su -mm -c sh", file, file));
+						Dlg.setBar(Dlg.bar.getProgress() + 5);
+					});
 					runOnUiThread(() -> {
 						mount();
 						if (!isMounted()) {
@@ -1173,9 +1106,7 @@ public class MainActivity extends AppCompatActivity {
 				public void onNothingSelected(AdapterView<?> parent) {}
 			});
 		};
-		x.toolbarlayout.settings.setOnClickListener(settingsIconClick);
-		n.toolbarlayout.settings.setOnClickListener(settingsIconClick);
-		z.toolbarlayout.settings.setOnClickListener(settingsIconClick);
+		List.of(x.toolbarlayout.settings, n.toolbarlayout.settings, z.toolbarlayout.settings).forEach(v -> v.setOnClickListener(settingsIconClick));
 		
 		k.mountLocation.setOnChangeListener((b) -> {
 			pref.setMountLocation(this, b);
@@ -1256,8 +1187,7 @@ public class MainActivity extends AppCompatActivity {
 			k.devcfg2.setOnChangeListener((b) -> pref.setDevcfg2(this, b));
 			n.devcfg.setVisibility(View.VISIBLE);
 		} else {
-			k.devcfg1.setVisibility(View.GONE);
-			k.devcfg2.setVisibility(View.GONE);
+			List.of(k.devcfg1, k.devcfg2).forEach(v -> v.setVisibility(View.GONE));
 			pref.setDevcfg1(this, false);
 			pref.setDevcfg2(this, false);
 		}
@@ -1389,10 +1319,10 @@ public class MainActivity extends AppCompatActivity {
 		ShellUtils.fastCmd("mkdir " + winpath + " || true");
 		ShellUtils.fastCmd("cd " + context.getFilesDir());
 		ShellUtils.fastCmd("su -mm -c ./mount.ntfs " + win + " " + winpath);
-		String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + win);
-		if (mnt_stat.isEmpty()) {
+		if (isMounted()) {
 			pref.setMountLocation(context,true);
-			updateWinPath();
+			// Causes some issues idk. Better be here for later
+			//updateWinPath();
 			ShellUtils.fastCmd("mkdir " + winpath + " || true");
 			ShellUtils.fastCmd("cd " + context.getFilesDir());
 			ShellUtils.fastCmd("su -mm -c ./mount.ntfs " + win + " " + winpath);
@@ -1411,9 +1341,7 @@ public class MainActivity extends AppCompatActivity {
 		ShellUtils.fastCmd("su -mm -c dd bs=8m if=" + boot + " of=" + winpath + "/boot.img");
 	}
 	
-	public static void androidBackup() {
-		ShellUtils.fastCmd("su -mm -c dd bs=8m if=" + boot + " of=/sdcard/boot.img");
-	}
+	public static void androidBackup() { ShellUtils.fastCmd("su -mm -c dd bs=8m if=" + boot + " of=/sdcard/boot.img"); }
 
 	public void dump() {
 		ShellUtils.fastCmd("su -mm -c dd if=/dev/block/by-name/modemst1 of=$(find " + winpath + "/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/bootmodem_fs1");
@@ -1434,8 +1362,7 @@ public class MainActivity extends AppCompatActivity {
 		ShellUtils.fastCmd("su -c mkdir /sdcard/UEFI");
 		finduefi = "\""+ShellUtils.fastCmd(getString(R.string.uefiChk))+"\"";
 		boolean found = finduefi.contains("img");
-		x.quickBoot.setEnabled(found);
-		n.flashUefi.setEnabled(found);
+		List.of(x.quickBoot, n.flashUefi).forEach(v -> v.setEnabled(found));
 		x.quickBoot.setTitle((found) ? R.string.quickboot_title : R.string.uefi_not_found);
 		x.quickBoot.setSubtitle((found) ? getString(R.string.quickboot_subtitle_nabu) : getString(R.string.uefi_not_found_subtitle, device));
 		n.flashUefi.setTitle((found) ? R.string.flash_uefi_title : R.string.uefi_not_found);
@@ -1446,15 +1373,11 @@ public class MainActivity extends AppCompatActivity {
 		if (!win.isEmpty()) return;
 		Dlg.show(this, R.string.partition);
 		Dlg.setCancelable(false);
-		x.mnt.setEnabled(false);
-		x.toolbox.setEnabled(false);
-		x.quickBoot.setEnabled(false);
-		n.flashUefi.setEnabled(false);
+		List.of(x.mnt, x.toolbox, x.quickBoot, n.flashUefi).forEach(v -> v.setEnabled(false));
 	}
 
 	public void checkupdate() {
-		if (pref.getAppUpdate(this)) return;
-		if (!MainActivity.isNetworkConnected(this)) return;
+		if (pref.getAppUpdate(this) || !MainActivity.isNetworkConnected(this)) return;
 
 		String version = ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget -q -O - https://raw.githubusercontent.com/n00b69/woa-helper-update/main/README.md\" | su -mm -c sh");
 		if (BuildConfig.VERSION_NAME.equals(version)) return;
@@ -1491,36 +1414,21 @@ public class MainActivity extends AppCompatActivity {
 		super.onConfigurationChanged(newConfig);
 		if (getTargetViewGroup().getId() != R.id.mainlayout)
 			return;
-		if (Configuration.ORIENTATION_PORTRAIT == newConfig.orientation && tablet) {
-			x.app.setOrientation(LinearLayout.VERTICAL);
-			x.top.setOrientation(LinearLayout.HORIZONTAL);
-		}
-		else if (Configuration.ORIENTATION_LANDSCAPE == newConfig.orientation && tablet) {
-			x.app.setOrientation(LinearLayout.HORIZONTAL);
-			x.top.setOrientation(LinearLayout.VERTICAL);
-		}
+		x.app.setOrientation((Configuration.ORIENTATION_PORTRAIT == newConfig.orientation && tablet) ? LinearLayout.HORIZONTAL : LinearLayout.VERTICAL);
+		x.top.setOrientation((Configuration.ORIENTATION_PORTRAIT == newConfig.orientation && tablet) ? LinearLayout.VERTICAL : LinearLayout.HORIZONTAL);
 	}
 
 	static void showBlur() {
 		blur++;
-		try {
-			x.blur.setVisibility(View.VISIBLE);
-			k.blur.setVisibility(View.VISIBLE);
-			n.blur.setVisibility(View.VISIBLE);
-			z.blur.setVisibility(View.VISIBLE);
-		} catch (Exception ignored) {};
+		runSilently(() -> List.of(x.blur, k.blur, n.blur, z.blur).forEach(v -> v.setVisibility(View.VISIBLE)));
 	}
 	static void hideBlur(boolean check) {
 		if (!check) blur = 1;
 		blur--;
 		if (blur > 0) return;
-		try {
-			x.blur.setVisibility(View.GONE);
-			k.blur.setVisibility(View.GONE);
-			n.blur.setVisibility(View.GONE);
-			z.blur.setVisibility(View.GONE);
-		} catch (Exception ignored) {};
+		runSilently(() -> List.of(x.blur, k.blur, n.blur, z.blur).forEach(v -> v.setVisibility(View.GONE)));
 	}
+	public static void runSilently(Runnable action) { try { action.run(); } catch (Exception ignored) {} }
 
 	ViewGroup getTargetViewGroup() {
 		return (ViewGroup) ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
@@ -1554,9 +1462,7 @@ public class MainActivity extends AppCompatActivity {
 		Log.d("INFO", partition);
 		return ShellUtils.fastCmd("realpath " + partition);
 	}
-	public static Boolean isMounted() {
-		return !ShellUtils.fastCmd("su -mm -c mount | grep " + getWin()).isEmpty();
-	}
+	public static Boolean isMounted() { return !ShellUtils.fastCmd("su -mm -c mount | grep " + getWin()).isEmpty(); }
 	static void openLink(String link) {
 		Intent i = new Intent(Intent.ACTION_VIEW);
 		i.setData(Uri.parse(link));
