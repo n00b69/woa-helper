@@ -563,7 +563,7 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 			Dlg.setNo(R.string.no, Dlg::close);
 			Dlg.setYes(R.string.yes, () -> {
 				ShellUtils.fastCmd("mkdir /sdcard/sta || true");
-				List.of("sta.exe", "sdd.exe", "sdd.conf", "boot_img_auto-flasher_V1.1.exe").forEach(file -> ShellUtils.fastCmd("cp " + getFilesDir() + "/sta.exe /sdcard/sta/" + file));
+				List.of("sta.exe", "sdd.exe", "sdd.conf", "boot_img_auto-flasher_V1.2.exe").forEach(file -> ShellUtils.fastCmd("cp " + getFilesDir() + "/sta.exe /sdcard/sta/" + file));
 				mount();
 				if (!isMounted()) {
 					Dlg.close();
