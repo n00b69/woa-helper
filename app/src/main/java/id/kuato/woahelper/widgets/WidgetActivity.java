@@ -68,7 +68,7 @@ public class 	WidgetActivity extends AppCompatActivity {
 		String widget_type = intent.getStringExtra("WIDGET_TYPE");
 
 		MainActivity.context = this;
-		if (!Shell.isAppGrantedRoot() == true) {
+		if (Shell.isAppGrantedRoot() != true) {
 			Toast.makeText(this, "NO ROOT!", Toast.LENGTH_SHORT).show();
 			finish();
 			return;
