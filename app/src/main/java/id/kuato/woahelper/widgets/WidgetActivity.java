@@ -13,6 +13,8 @@ import android.widget.RemoteViews;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.topjohnwu.superuser.Shell;
+
 import java.util.Objects;
 
 import id.kuato.woahelper.BuildConfig;
@@ -65,7 +67,7 @@ public class 	WidgetActivity extends AppCompatActivity {
 		String widget_type = intent.getStringExtra("WIDGET_TYPE");
 
 		MainActivity.context = this;
-
+		if (Boolean.FALSE.equals(Shell.isAppGrantedRoot())) return;
 		if (Objects.equals(widget_type, "mount")) {
 			Log.d("INFO", "mount");
 			MainActivity.mountUI();
