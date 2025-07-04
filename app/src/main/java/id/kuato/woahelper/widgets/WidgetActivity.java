@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,7 +31,7 @@ public class 	WidgetActivity extends AppCompatActivity {
 	protected void onDestroy() {
 		super.onDestroy();
 		active = false;
-		Dlg.dialog.dismiss();
+		MainActivity.runSilently(() -> Dlg.dialog.dismiss());
 		finish();
 	}
 	/*private static void sizeCheck(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
@@ -67,7 +68,11 @@ public class 	WidgetActivity extends AppCompatActivity {
 		String widget_type = intent.getStringExtra("WIDGET_TYPE");
 
 		MainActivity.context = this;
-		if (Boolean.FALSE.equals(Shell.isAppGrantedRoot())) return;
+		if (Boolean.FALSE.equals(Shell.isAppGrantedRoot())) {
+			Toast.makeText(this, "NO ROOT!", Toast.LENGTH_SHORT).show();
+			finish();
+			return;
+		}
 		if (Objects.equals(widget_type, "mount")) {
 			Log.d("INFO", "mount");
 			MainActivity.mountUI();
