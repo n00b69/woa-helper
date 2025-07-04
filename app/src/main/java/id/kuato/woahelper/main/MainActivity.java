@@ -1,8 +1,6 @@
 package id.kuato.woahelper.main;
 
 import android.annotation.SuppressLint;
-import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -12,9 +10,9 @@ import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
@@ -22,7 +20,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -42,12 +39,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 import id.kuato.woahelper.BuildConfig;
 import id.kuato.woahelper.R;
@@ -59,13 +55,13 @@ import id.kuato.woahelper.preference.pref;
 import id.kuato.woahelper.util.RAM;
 import id.kuato.woahelper.widgets.MountWidget;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 
 	public static ActivityMainBinding x;
 	public static SetPanelBinding k;
 	public static ToolboxBinding n;
 	public static ScriptsBinding z;
-	public static Context context;
+	public static AppCompatActivity context;
     static String mounted, win, winpath, panel, finduefi, device, model, dbkpmodel, boot;
 	String grouplink = "https://t.me/woahelperchat", guidelink = "https://github.com/n00b69";
 	boolean unsupported = false, tablet = false;
@@ -106,8 +102,8 @@ public class MainActivity extends AppCompatActivity {
 
 	@SuppressLint("UseCompatLoadingForDrawables")
     @Override
-	protected void onCreate(Bundle savedInstanceState) {
-		EdgeToEdge.enable(this);
+	protected void onCreate(android.os.Bundle savedInstanceState) {
+		androidx.activity.EdgeToEdge.enable(this);
 		super.onCreate(savedInstanceState);
 		copyAssets();
 		x = ActivityMainBinding.inflate(getLayoutInflater());
@@ -224,10 +220,7 @@ public class MainActivity extends AppCompatActivity {
 				guidelink = "https://github.com/fbernkastel228/Port-Windows-XiaoMI-9";
 				grouplink = "http://t.me/woacepheus";
 				x.DeviceImage.setImageResource(R.drawable.cepheus);
-				x.tvPanel.setVisibility(View.VISIBLE);
-				n.dbkp.setVisibility(View.VISIBLE);
-				n.dumpModem.setVisibility(View.VISIBLE);
-				n.flashUefi.setVisibility(View.GONE);
+				List.of(Pair.create(x.tvPanel, View.VISIBLE), Pair.create(n.dbkp, View.VISIBLE), Pair.create(n.dumpModem, View.VISIBLE), Pair.create(n.flashUefi, View.GONE)).forEach(v -> v.first.setVisibility(v.second));
 			}
 			case "chiron" -> {
 				guidelink = "https://renegade-project.tech/";
@@ -259,9 +252,7 @@ public class MainActivity extends AppCompatActivity {
 				guidelink = "https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5";
 				grouplink = "https://t.me/nabuwoa";
 				x.DeviceImage.setImageResource(R.drawable.nabu);
-				x.tvPanel.setVisibility(View.VISIBLE);
-				n.dbkp.setVisibility(View.VISIBLE);
-				n.flashUefi.setVisibility(View.GONE);
+				List.of(Pair.create(x.tvPanel, View.VISIBLE), Pair.create(n.dbkp, View.VISIBLE), Pair.create(n.flashUefi, View.GONE)).forEach(v -> v.first.setVisibility(v.second));
 				tablet = true;
 			}
 			case "perseus" -> {
@@ -273,9 +264,7 @@ public class MainActivity extends AppCompatActivity {
 				guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md";
 				grouplink = "https://t.me/xiaomi_pipa";
 				x.DeviceImage.setImageResource(R.drawable.pipa);
-				x.tvPanel.setVisibility(View.VISIBLE);
-				n.dbkp.setVisibility(View.VISIBLE);
-				n.flashUefi.setVisibility(View.GONE);
+				List.of(Pair.create(x.tvPanel, View.VISIBLE), Pair.create(n.dbkp, View.VISIBLE), Pair.create(n.flashUefi, View.GONE)).forEach(v -> v.first.setVisibility(v.second));
 				tablet = true;
 			}
 			case "polaris" -> {
@@ -288,8 +277,7 @@ public class MainActivity extends AppCompatActivity {
 				guidelink = "https://github.com/new-WoA-Raphael/woa-raphael";
 				grouplink = "https://t.me/woaraphael";
 				x.DeviceImage.setImageResource(R.drawable.raphael);
-				x.tvPanel.setVisibility(View.VISIBLE);
-				n.dumpModem.setVisibility(View.VISIBLE);
+				List.of(x.tvPanel, n.dumpModem).forEach(v -> v.setVisibility(View.VISIBLE));
 			}
 			case "surya", "karna" -> {
 				guidelink = "https://github.com/woa-surya/POCOX3NFC-Guides";
@@ -337,17 +325,13 @@ public class MainActivity extends AppCompatActivity {
 				guidelink = "https://github.com/n00b69/woa-op7";
 				grouplink = "https://t.me/onepluswoachat";
 				x.DeviceImage.setImageResource(R.drawable.hotdog);
-				n.dumpModem.setVisibility(View.VISIBLE);
-				n.dbkp.setVisibility(View.VISIBLE);
-				n.flashUefi.setVisibility(View.GONE);
+				List.of(Pair.create(n.dumpModem, View.VISIBLE), Pair.create(n.dbkp, View.VISIBLE), Pair.create(n.flashUefi, View.GONE)).forEach(v -> v.first.setVisibility(v.second));
 			}
 			case "guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO" -> {
 				guidelink = "https://github.com/n00b69/woa-op7";
 				grouplink = "https://t.me/onepluswoachat";
 				x.DeviceImage.setImageResource(R.drawable.guacamole);
-				n.dumpModem.setVisibility(View.VISIBLE);
-				n.dbkp.setVisibility(View.VISIBLE);
-				n.flashUefi.setVisibility(View.GONE);
+				List.of(Pair.create(n.dumpModem, View.VISIBLE), Pair.create(n.dbkp, View.VISIBLE), Pair.create(n.flashUefi, View.GONE)).forEach(v -> v.first.setVisibility(v.second));
 			}
 			case "guacamoleb", "hotdogb", "OnePlus7T", "OnePlus7" -> {
 				guidelink = "https://project-aloha.github.io/";
@@ -511,31 +495,8 @@ public class MainActivity extends AppCompatActivity {
 				Dlg.close();
 			});
 		}
-
-		String run = ShellUtils.fastCmd(" su -c cat /proc/cmdline ");
-		Map<String, List<String>> panelMap = Map.of(
-				"Huaxing", Arrays.asList("j20s_42_02_0b", "k82_42", "ft8756_huaxing", "huaxing"),
-				"Tianma", Arrays.asList("j20s_36_02_0a", "k82_36", "nt36675_tianma", "tianma_fhd_nt36672a", "tianma"),
-				"EBBG", List.of("ebbg_fhd_ft8719"),
-				"global", List.of("fhd_ea8076_global"),
-				"f1mp", List.of("fhd_ea8076_f1mp_cmd"),
-				"f1p2", List.of("fhd_ea8076_f1p2_cmd"),
-				"f1p2_2", List.of("fhd_ea8076_f1p2_2"),
-				"f1", List.of("fhd_ea8076_f1_cmd"),
-				"ea8076_cmd", List.of("fhd_ea8076_cmd")
-		);
-
-		for (Map.Entry<String, List<String>> entry : panelMap.entrySet()) {
-			for (String keyword : entry.getValue()) {
-				if (!run.contains(keyword)) continue;
-				panel = entry.getKey();
-				break;
-			}
-			if (panel != null) break;
-		}
-		if (panel == null) {
-			panel = ShellUtils.fastCmd("su -c cat /proc/cmdline | tr ' :=' '\n'|grep dsi|tr ' _' '\n'|tail -3|head -1 ");
-		}
+		String run = ShellUtils.fastCmd("su -c cat /proc/cmdline");
+		panel = (Stream.of("j20s_42_02_0b", "k82_42", "ft8756_huaxing", "huaxing").anyMatch(run::contains)) ? "Huaxing" : (Stream.of("j20s_36_02_0a", "k82_36", "nt36675_tianma", "tianma_fhd_nt36672a", "tianma").anyMatch(run::contains)) ? "Tianma" : (run.contains("ebbg_fhd_ft8719")) ? "EBBG" : (run.contains("fhd_ea8076_global")) ? "global" : (run.contains("fhd_ea8076_f1mp_cmd")) ? "f1mp" : (run.contains("fhd_ea8076_f1p2_cmd")) ? "f1p2" : (run.contains("fhd_ea8076_f1p2_2")) ? "f1p2_2" : (run.contains("fhd_ea8076_f1_cmd")) ? "f1" : (run.contains("fhd_ea8076_cmd")) ? "ea8076_cmd" : ShellUtils.fastCmd("su -c cat /proc/cmdline | tr ' :=' '\n'|grep dsi|tr ' _' '\n'|tail -3|head -1 ");
 		if (!pref.getAGREE(this) && (Objects.equals(panel, "f1p2_2") || Objects.equals(panel, "f1"))) {
 			Dlg.show(this, R.string.upanel);
 			Dlg.setYes(R.string.chat, () -> {
@@ -549,13 +510,10 @@ public class MainActivity extends AppCompatActivity {
 			});
 			Dlg.setNo(R.string.later, Dlg::close);
 		}
+		List.of(Pair.create(x.tvRamvalue, getString(R.string.ramvalue, Double.parseDouble(new RAM().getMemory(this)))), Pair.create(x.tvPanel, getString(R.string.paneltype, panel))).forEach(v -> v.first.setText(v.second));
+		List.of(Pair.create(x.guide, guidelink), Pair.create(x.group, grouplink)).forEach(v -> v.first.setOnClickListener(a -> openLink(v.second)));
 
-		x.tvRamvalue.setText(getString(R.string.ramvalue, Double.parseDouble(new RAM().getMemory(this))));
-		x.tvPanel.setText(getString(R.string.paneltype, panel));
-		x.guide.setOnClickListener(v -> openLink(guidelink));
-		x.group.setOnClickListener(v -> openLink(grouplink));
-
-		 if (!BuildConfig.DEBUG) {
+		if (!BuildConfig.DEBUG) {
 			checkdbkpmodel();
 			checkupdate();
 		}
@@ -722,7 +680,7 @@ public class MainActivity extends AppCompatActivity {
 						ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/DBKP/dbkp -O /sdcard/dbkp/dbkp\" | su -mm -c sh");
 						ShellUtils.fastCmd("cp /sdcard/dbkp/dbkp "+getFilesDir());
 						ShellUtils.fastCmd("chmod 777 " + getFilesDir() + "/dbkp");
-						if ("guacamole".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device)) {
+						if (List.of("guacamole", "OnePlus7Pro", "OnePlus7Pro4G").contains(device)) {
 							ShellUtils.fastCmd("cp " + getFilesDir() + "/dbkp.hotdog.bin /sdcard/dbkp");
 							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/DBKP/guacamole.fd -O /sdcard/dbkp/guacamole.fd\" | su -mm -c sh");
 							ShellUtils.fastCmd("cd /sdcard/dbkp");
@@ -736,7 +694,7 @@ public class MainActivity extends AppCompatActivity {
 							ShellUtils.fastCmd("rm -r /sdcard/dbkp");
 							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_a bs=16m");
 							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16m");
-						} else if ("hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) {
+						} else if (List.of("hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) {
 							ShellUtils.fastCmd("cp " + getFilesDir() + "/dbkp.hotdog.bin /sdcard/dbkp");
 							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/DBKP/hotdog.fd -O /sdcard/dbkp/hotdog.fd\" | su -mm -c sh");
 							ShellUtils.fastCmd("cd /sdcard/dbkp");
@@ -765,11 +723,7 @@ public class MainActivity extends AppCompatActivity {
 							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot bs=16m");
 						}
 						runOnUiThread(()->{
-							if ("guacamole".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device) || "hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) {
-								Dlg.setText(getString(R.string.dbkp, getString(R.string.op7)));
-							} else if ("cepheus".equals(device)) {
-								Dlg.setText(getString(R.string.dbkp, getString(R.string.cepheus)));
-							}
+							Dlg.setText((List.of("guacamole", "OnePlus7Pro", "OnePlus7Pro4G", "hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) ? getString(R.string.dbkp, getString(R.string.op7)) : getString(R.string.dbkp, getString(R.string.cepheus)));
 							Dlg.setDismiss(R.string.dismiss, Dlg::close);
 							Dlg.setNo(R.string.reboot, () -> {
 								ShellUtils.fastCmd("su -c svc power reboot");
@@ -793,9 +747,7 @@ public class MainActivity extends AppCompatActivity {
 			Dlg.setYes(R.string.yes, () -> {
 				Dlg.dialogLoading();
 				new Thread(()->{
-					String devcfgDevice = "";
-					if ("guacamole".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device)) devcfgDevice = "guacamole";
-					else if ("hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) devcfgDevice = "hotdog";
+					String devcfgDevice = (List.of("guacamole", "OnePlus7Pro", "OnePlus7Pro4G").contains(device)) ? "guacamole" : (List.of("hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) ? "hotdog" : null;
 					String findoriginaldevcfg = ShellUtils.fastCmd("find " + getFilesDir() + " -maxdepth 1 -name original-devcfg.img");
 					if (findoriginaldevcfg.isEmpty()) {
 						ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=/sdcard/original-devcfg.img");
@@ -992,9 +944,7 @@ public class MainActivity extends AppCompatActivity {
 				new Thread(() -> {
 					ShellUtils.fastCmd("mkdir /sdcard/Frameworks || true");
 					ShellUtils.fastCmd("cp " + getFilesDir() + "/install.bat /sdcard/Frameworks/install.bat");
-					List.of("PhysX-9.13.0604-SystemSoftware-Legacy.msi", "PhysX_9.23.1019_SystemSoftware.exe", "xnafx40_redist.msi", "opengl.appx", "2005vcredist_x64.EXE", "2005vcredist_x86.EXE", "2008vcredist_x64.exe",
-							"2008vcredist_x86.exe", "2010vcredist_x64.exe", "2010vcredist_x86.exe", "2012vcredist_x64.exe", "2012vcredist_x86.exe", "2013vcredist_x64.exe", "2013vcredist_x86.exe", "2015VC_redist.x64.exe",
-							"2015VC_redist.x86.exe", "2022VC_redist.arm64.exe", "dxwebsetup.exe", "oalinst.exe").forEach(file -> {
+					List.of("PhysX-9.13.0604-SystemSoftware-Legacy.msi", "PhysX_9.23.1019_SystemSoftware.exe", "xnafx40_redist.msi", "opengl.appx", "2005vcredist_x64.EXE", "2005vcredist_x86.EXE", "2008vcredist_x64.exe", "2008vcredist_x86.exe", "2010vcredist_x64.exe", "2010vcredist_x86.exe", "2012vcredist_x64.exe", "2012vcredist_x86.exe", "2013vcredist_x64.exe", "2013vcredist_x86.exe", "2015VC_redist.x64.exe", "2015VC_redist.x86.exe", "2022VC_redist.arm64.exe", "dxwebsetup.exe", "oalinst.exe").forEach(file -> {
 						ShellUtils.fastCmd(String.format("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/%s -O /sdcard/Frameworks/%s\" | su -mm -c sh", file, file));
 						Dlg.setBar(Dlg.bar.getProgress() + 5);
 					});
@@ -1023,46 +973,25 @@ public class MainActivity extends AppCompatActivity {
 			Dlg.setNo(R.string.no, Dlg::close);
 			Dlg.setYes(R.string.yes, () -> {
 				Dlg.dialogLoading();
-				String finddefenderremover = ShellUtils.fastCmd("find " + getFilesDir() + " -maxdepth 1 -name DefenderRemover.exe");
-				if (finddefenderremover.isEmpty()) {
+				if (ShellUtils.fastCmd("find " + getFilesDir() + " -maxdepth 1 -name DefenderRemover.exe").isEmpty()) {
 					if (!isNetworkConnected(this)) {
 						Dlg.close();
 						nointernet();
 						return;
 					}
-					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/DefenderRemover.exe -O /sdcard/DefenderRemover.exe\" | su -mm -c sh");
-					ShellUtils.fastCmd("cp /sdcard/DefenderRemover.exe " + getFilesDir());
-					ShellUtils.fastCmd("cp " + getFilesDir() + "/RemoveEdge.bat /sdcard");
-					mount();
-					if (!isMounted()) {
-						Dlg.close();
-						mountfail();
-						return;
-					}
-					ShellUtils.fastCmd("mkdir " + winpath + "/Toolbox || true ");
-					ShellUtils.fastCmd("cp " + getFilesDir() + "/DefenderRemover.exe " + winpath + "/Toolbox");
-					ShellUtils.fastCmd("rm /sdcard/DefenderRemover.exe");
-					ShellUtils.fastCmd("cp /sdcard/RemoveEdge.bat " + winpath + "/Toolbox");
-					ShellUtils.fastCmd("rm /sdcard/RemoveEdge.bat");
-					Dlg.setText(R.string.done);
-					Dlg.dismissButton();
-				} else {
-					ShellUtils.fastCmd("cp " + getFilesDir() + "/RemoveEdge.bat /sdcard");
-					ShellUtils.fastCmd("cp " + getFilesDir() + "/DefenderRemover.exe /sdcard");
-					mount();
-					if (!isMounted()) {
-						Dlg.close();
-						mountfail();
-						return;
-					}
-					ShellUtils.fastCmd("mkdir " + winpath + "/Toolbox || true ");
-					ShellUtils.fastCmd("cp " + getFilesDir() + "/DefenderRemover.exe " + winpath + "/Toolbox");
-					ShellUtils.fastCmd("cp " + getFilesDir() + "/RemoveEdge.bat " + winpath + "/Toolbox");
-					ShellUtils.fastCmd("rm /sdcard/DefenderRemover.exe");
-					ShellUtils.fastCmd("rm /sdcard/RemoveEdge.bat");
-					Dlg.setText(R.string.done);
-					Dlg.dismissButton();
+					ShellUtils.fastCmd(String.format("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/DefenderRemover.exe -O %s/DefenderRemover.exe\" | su -mm -c sh", getFilesDir()));
 				}
+				mount();
+				if (!isMounted()) {
+					Dlg.close();
+					mountfail();
+					return;
+				}
+				ShellUtils.fastCmd("mkdir " + winpath + "/Toolbox || true ");
+				ShellUtils.fastCmd("cp " + getFilesDir() + "/DefenderRemover.exe " + winpath + "/Toolbox");
+				ShellUtils.fastCmd("cp " + getFilesDir() + "/RemoveEdge.bat " + winpath + "/Toolbox");
+				Dlg.setText(R.string.done);
+				Dlg.dismissButton();
 			});
 		});
 		
@@ -1073,17 +1002,8 @@ public class MainActivity extends AppCompatActivity {
 			views.get(views.size() - 2).startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out));
 			setContentView(k.getRoot());
 			views.get(views.size() - 1).startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in));
-			k.backupQB.setChecked(pref.getBACKUP(this));
-			k.backupQBA.setChecked(pref.getBACKUP_A(this));
-			k.autobackup.setChecked(!pref.getAUTO(this));
-			k.autobackupA.setChecked(!pref.getAUTO(this));
-			k.confirmation.setChecked(pref.getCONFIRM(this));
-			k.automount.setChecked(pref.getAutoMount(this));
-			k.securelock.setChecked(!pref.getSecure(this));
-			k.mountLocation.setChecked(pref.getMountLocation(this));
-			k.appUpdate.setChecked(pref.getAppUpdate(this));
-			k.devcfg1.setChecked(pref.getDevcfg1(this)&&k.devcfg1.getVisibility()==View.VISIBLE);
-			k.devcfg2.setChecked(pref.getDevcfg2(this));
+			// Scary big line! (Victoria)
+			List.of(Pair.create(k.backupQB, pref.getBACKUP(this)), Pair.create(k.backupQBA, pref.getBACKUP_A(this)), Pair.create(k.autobackup, !pref.getAUTO(this)), Pair.create(k.autobackupA, !pref.getAUTO(this)), Pair.create(k.autobackupA, !pref.getAUTO(this)), Pair.create(k.confirmation, pref.getCONFIRM(this)), Pair.create(k.automount, pref.getAutoMount(this)), Pair.create(k.securelock, !pref.getSecure(this)), Pair.create(k.mountLocation, pref.getMountLocation(this)), Pair.create(k.appUpdate, pref.getAppUpdate(this)), Pair.create(k.devcfg1, pref.getDevcfg1(this)&&k.devcfg1.getVisibility()==View.VISIBLE), Pair.create(k.devcfg2, pref.getDevcfg2(this))).forEach(a -> a.first.setChecked(a.second));
 			k.toolbarlayout.settings.setVisibility(View.GONE);
 			AppCompatSpinner langSpinner = findViewById(R.id.languages);
 			langSpinner.setAdapter(adapter);
@@ -1096,11 +1016,7 @@ public class MainActivity extends AppCompatActivity {
 			langSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 				@Override
 				public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-					if(languages.get(position)=="System Default")
-						AppCompatDelegate.setApplicationLocales(LocaleListCompat.getEmptyLocaleList());
-					else
-						AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(locales.get(position)));
-
+					AppCompatDelegate.setApplicationLocales((languages.get(position)=="System Default") ? LocaleListCompat.getEmptyLocaleList() : LocaleListCompat.forLanguageTags(locales.get(position)));
 				}
 				@Override
 				public void onNothingSelected(AdapterView<?> parent) {}
@@ -1172,7 +1088,7 @@ public class MainActivity extends AppCompatActivity {
 				update();
 			});
 		});
-			
+
 		k.autobackup.setOnChangeListener((b) -> pref.setAUTO(this, !b));
 		k.autobackupA.setOnChangeListener((b) -> pref.setAUTO_A(this, !b));
 		k.confirmation.setOnChangeListener((b) -> pref.setCONFIRM(this, b));
@@ -1182,8 +1098,12 @@ public class MainActivity extends AppCompatActivity {
 		//String op7funny = ShellUtils.fastCmd("getprop ro.boot.vendor.lge.model.name");
 		//if (("guacamole".equals(device) || "guacamolet".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device) || "OnePlus7ProTMO".equals(device) || "hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) && (op7funny.contains("LM") || op7funny.contains("OPPO"))) {
 		String op7funny = ShellUtils.fastCmd("getprop persist.camera.privapp.list");
-		if (("guacamole".equals(device) || "guacamolet".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device) || "OnePlus7ProTMO".equals(device) || "hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) && (op7funny.contains("oppo") || op7funny.contains("OPPO"))) {
-			k.devcfg1.setOnChangeListener((b) -> {pref.setDevcfg1(this, b);if(b)k.devcfg2.setVisibility(View.VISIBLE); else k.devcfg2.setVisibility(View.GONE);pref.setDevcfg2(this, false);});
+		if (List.of("guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO", "hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device) && op7funny.toLowerCase().contains("oppo")) {
+			k.devcfg1.setOnChangeListener((b) -> {
+				pref.setDevcfg1(this, b);
+				k.devcfg2.setVisibility((b) ? View.VISIBLE : View.GONE);
+				pref.setDevcfg2(this, false);
+			});
 			k.devcfg2.setOnChangeListener((b) -> pref.setDevcfg2(this, b));
 			n.devcfg.setVisibility(View.VISIBLE);
 		} else {
@@ -1196,15 +1116,16 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	public void onResume() {
 		super.onResume();
+		runSilently(() -> context = this);
 		checkwin();
 		checkuefi();
-		if (!Shell.isAppGrantedRoot()) {
+		if (Boolean.FALSE.equals(Shell.isAppGrantedRoot())) {
 			Dlg.show(this, R.string.nonroot);
 			Dlg.setCancelable(false);
 		}
-		AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+		/*AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
 		int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, MountWidget.class));
-		new MountWidget().onUpdate(this, appWidgetManager, appWidgetIds);
+		new MountWidget().onUpdate(this, appWidgetManager, appWidgetIds);*/
 	}
 
 	@Override
@@ -1280,9 +1201,7 @@ public class MainActivity extends AppCompatActivity {
 							return;
 						}
 					}
-					String devcfgDevice = "";
-					if ("guacamole".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device)) devcfgDevice = "guacamole";
-					else if ("hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) devcfgDevice = "hotdog";
+					String devcfgDevice = (List.of("guacamole", "OnePlus7Pro", "OnePlus7Pro4G").contains(device)) ? "guacamole" : (List.of("hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) ? "hotdog" : null;
 					String findoriginaldevcfg = ShellUtils.fastCmd("find " + context.getFilesDir() + " -maxdepth 1 -name original-devcfg.img");
 					if (findoriginaldevcfg.isEmpty()) {
 						ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=/sdcard/original-devcfg.img");
@@ -1320,9 +1239,8 @@ public class MainActivity extends AppCompatActivity {
 		ShellUtils.fastCmd("cd " + context.getFilesDir());
 		ShellUtils.fastCmd("su -mm -c ./mount.ntfs " + win + " " + winpath);
 		if (isMounted()) {
-			pref.setMountLocation(context,true);
 			// Causes some issues idk. Better be here for later
-			//updateWinPath();
+			updateWinPath();
 			ShellUtils.fastCmd("mkdir " + winpath + " || true");
 			ShellUtils.fastCmd("cd " + context.getFilesDir());
 			ShellUtils.fastCmd("su -mm -c ./mount.ntfs " + win + " " + winpath);
@@ -1343,30 +1261,16 @@ public class MainActivity extends AppCompatActivity {
 	
 	public static void androidBackup() { ShellUtils.fastCmd("su -mm -c dd bs=8m if=" + boot + " of=/sdcard/boot.img"); }
 
-	public void dump() {
-		ShellUtils.fastCmd("su -mm -c dd if=/dev/block/by-name/modemst1 of=$(find " + winpath + "/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/bootmodem_fs1");
-		ShellUtils.fastCmd("su -mm -c dd if=/dev/block/by-name/modemst2 of=$(find " + winpath + "/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/bootmodem_fs2");
-	}
+	public void dump() { List.of(Pair.create("modemst1", "bootmodem_fs1"), Pair.create("modemst2", "bootmodem_fs2")).forEach(v -> ShellUtils.fastCmd(String.format("su -mm -c dd if=/dev/block/by-name/%s of=$(find %s/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/%s", v.first, winpath, v.second))); }
 
-	public void checkdbkpmodel() {
-		dbkpmodel = switch (dbkpmodel) {
-            case "guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO" -> "ONEPLUS 7 PRO";
-            case "hotdog", "OnePlus7TPro", "OnePlus7TPro4G" -> "ONEPLUS 7T PRO";
-            case "cepheus" -> "XIAOMI MI 9";
-            case "nabu" -> "XIAOMI PAD 5";
-        //    case "pipa" -> "XIAOMI PAD 6";
-            default -> "UNSUPPORTED";
-        };
-	}
+	public void checkdbkpmodel() { dbkpmodel = (List.of("guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO").contains(device)) ? "ONEPLUS 7 PRO" : (List.of("hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) ? "ONEPLUS 7T PRO" : (device.equals("cepheus")) ? "XIAOMI MI 9" : (device.equals("nabu")) ? "XIAOMI PAD 5" : "UNSUPPORTED"; }
 	public void checkuefi() {
 		ShellUtils.fastCmd("su -c mkdir /sdcard/UEFI");
 		finduefi = "\""+ShellUtils.fastCmd(getString(R.string.uefiChk))+"\"";
 		boolean found = finduefi.contains("img");
 		List.of(x.quickBoot, n.flashUefi).forEach(v -> v.setEnabled(found));
-		x.quickBoot.setTitle((found) ? R.string.quickboot_title : R.string.uefi_not_found);
-		x.quickBoot.setSubtitle((found) ? getString(R.string.quickboot_subtitle_nabu) : getString(R.string.uefi_not_found_subtitle, device));
-		n.flashUefi.setTitle((found) ? R.string.flash_uefi_title : R.string.uefi_not_found);
-		n.flashUefi.setSubtitle((found) ? getString(R.string.flash_uefi_subtitle) : getString(R.string.uefi_not_found_subtitle, device));
+		List.of(Pair.create(x.quickBoot, (found) ? R.string.quickboot_title : R.string.uefi_not_found), Pair.create(n.flashUefi, (found) ? R.string.flash_uefi_title : R.string.uefi_not_found)).forEach(v -> v.first.setTitle(v.second));
+		List.of(Pair.create(x.quickBoot, (found) ? getString(R.string.quickboot_subtitle_nabu) : getString(R.string.uefi_not_found_subtitle, device)), Pair.create(n.flashUefi, (found) ? getString(R.string.flash_uefi_subtitle) : getString(R.string.uefi_not_found_subtitle, device))).forEach(v -> v.first.setSubtitle(v.second));
 	}
 	
 	public void checkwin() {
@@ -1412,10 +1316,9 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
-		if (getTargetViewGroup().getId() != R.id.mainlayout)
-			return;
-		x.app.setOrientation((Configuration.ORIENTATION_PORTRAIT == newConfig.orientation && tablet) ? LinearLayout.HORIZONTAL : LinearLayout.VERTICAL);
-		x.top.setOrientation((Configuration.ORIENTATION_PORTRAIT == newConfig.orientation && tablet) ? LinearLayout.VERTICAL : LinearLayout.HORIZONTAL);
+		//if (getTargetViewGroup().getId() != R.id.mainlayout || !tablet) return;
+		if (!tablet) return;
+		List.of(x.app, x.top).forEach(v -> v.setOrientation((Configuration.ORIENTATION_PORTRAIT == newConfig.orientation && tablet) ? ((v == x.app) ? LinearLayout.VERTICAL : LinearLayout.HORIZONTAL) : ((v == x.app) ? LinearLayout.HORIZONTAL : LinearLayout.VERTICAL)));
 	}
 
 	static void showBlur() {
@@ -1442,9 +1345,8 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public static void updateMountText() {
-		if (isMounted()) mounted = context.getString(R.string.unmountt);
-		else mounted = context.getString(R.string.mountt);
-		if (x != null) x.mnt.setTitle(String.format(context.getString(R.string.mnt_title), mounted));
+		mounted = (isMounted()) ? context.getString(R.string.unmountt) : context.getString(R.string.mountt);
+		context.runOnUiThread(() -> { if (x != null) x.mnt.setTitle(String.format(context.getString(R.string.mnt_title), mounted)); });
 		MountWidget.updateText(context, String.format(context.getString(R.string.mnt_title), mounted));
 	}
 	public static String getWin() {
@@ -1455,7 +1357,10 @@ public class MainActivity extends AppCompatActivity {
 		winpath = pref.getMountLocation(context) ? "/mnt/Windows" : "/mnt/sdcard/Windows";
 		return winpath;
 	}
-	public static String updateDevice() { return device = ShellUtils.fastCmd("getprop ro.product.device"); }
+	public static String updateDevice() {
+		device = ShellUtils.fastCmd("getprop ro.product.device");
+		return device;
+	}
 
 	public static String getBoot() {
 		String partition = ShellUtils.fastCmd("find /dev/block | grep \"boot$(getprop ro.boot.slot_suffix)$\" | grep -E \"(/boot|/BOOT|/boot_a|/boot_b|/BOOT_a|/BOOT_b)$\" | head -1 ");

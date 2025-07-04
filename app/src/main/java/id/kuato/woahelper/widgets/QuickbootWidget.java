@@ -25,11 +25,9 @@ public class QuickbootWidget extends AppWidgetProvider {
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
             views.setOnClickPendingIntent(R.id.root, pendingIntent);
-
             views.setImageViewResource(R.id.image, R.drawable.ic_launcher_foreground);
 
-            QuickbootWidget.updateText(context, context.getString(R.string.quickboot_title));
-
+            views.setTextViewText(R.id.text, context.getString(R.string.quickboot_title));
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
     }
@@ -49,11 +47,12 @@ public class QuickbootWidget extends AppWidgetProvider {
 
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
-
         if ("UPDATE".equals(intent.getAction())) {
+            String text = intent.getStringExtra("text");
+
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
             int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, QuickbootWidget.class));
-            String text = intent.getStringExtra("text");
+            onUpdate(context, appWidgetManager, appWidgetIds);
 
             for (int appWidgetId : appWidgetIds) {
                 RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);

@@ -1,6 +1,6 @@
 <resources>
 	<string name="error_title">Hui znaet ce eroare o apărut.\nSori pentru asta.</string>
-	<string name="backup_boot_title">FACE BACKUP LA IMAGINEA DE BOOT</string>
+	<string name="backup_boot_title">FAȘI BACKUP LA IMAGINEA DE BOOT</string>
 	<string name="mnt_title">%s WINDOWS</string>
 	<string name="toolbox_title">WOA SUMCĂ</string>
 	<string name="dump_modem_title">DUMP MODEM</string>
@@ -15,21 +15,21 @@
 	<string name="atlasos_title">COPIEAZĂ FAILURILE ATLASOS / REVIOS</string>
 	<string name="defender_title">UDALENIE EDGE / DEFENDER</string>
 	<string name="script_title">COROBCĂ CU SCRIPTURI</string>
-	<string name="setup_title">FAILURI DE INSTALARE FRAMEWORK</string>
+	<string name="setup_title">FAILURI DE INSTALARI FRAMEWORK</string>
 	<string name="dbkp_title">MODIFICAREA KERNELULUI PENTRU DUALBOOT</string>
 	<string name="tablet_title">SCRIPT PENTRU MOD TABLETĂ</string>
 	<string name="devcfg_title">DEVCFG FLĂSHER</string>
 
 	<string name="backup_boot_subtitle">Backup la imaginea de boot în Android și/sau în Windows</string>
-	<string name="mnt_subtitle">Montează partiția Windows pentru să te uiîti sau să editezi cei acolo</string>
+	<string name="mnt_subtitle">Montează partiția Windows pentru să te uiîti sau să editezi șii acolo</string>
 	<string name="toolbox_subtitle">Instrumenturi și scripturi pentru experiență mai bună cu Windows</string>
-	<string name="dump_modem_subtitle">Sahranețti modemul pentru să reparo LTE în SIM1 în Windows.\Nu mai decît înainte de fiecari dată cînd pornești Windows</string>
+	<string name="dump_modem_subtitle">Sahranețti modemu pentru să reparo LTE în SIM1 în Windows.\Nu mai decît înainte de fiecari dată cînd pornești Windows</string>
 	<string name="flash_uefi_subtitle">Instalează UEFI în partiția de boot</string>
 	<string name="uefi_not_found_subtitle">Blea căceiește imaginea UEFI pentru %s și punio în papca UEFI în pamiti la mobilnik (/sdcard/UEFI)</string>
-	<string name="quickboot_subtitle">Sahranețti modemul, căceiește UEFI, și fă reboot în Windows cu un click</string>
+	<string name="quickboot_subtitle">Sahranețti modemu, căceiește UEFI, și fă reboot în Windows cu un click</string>
 	<string name="quickboot_subtitle_nabu">Căceiește UEFI și fă reboot în Windows cu un click</string>
 	<string name="sta_subtitle">Adaugă aplicația Treceți în Android în Windows</string>
-	<string name="usbhost_subtitle">Adaugă un script în C:⧹Toolbox care îți dă voie să schimbi Modul Host USB</string>
+	<string name="usbhost_subtitle">Adaugă un script în C:⧹Toolbox care îți dă voie să schimbi Modu Host USB</string>
 	<string name="software_subtitle">Adaugă sîlși pentru browser care au software ARM în C:⧹Toolbox</string>
 	<string name="rotation_subtitle">Adaugț un script în C:⧹Toolbox care îți dă voie să perevernești ecranu cu o comandă bîstrîi\n(ahuitelen pentru dispozitive cu senzoru iobnit)</string>
 	<string name="autoflash_subtitle">Adaugă un script în Windows care instalează automat imagine de boot Android oricând pornești Windows</string>
@@ -37,7 +37,7 @@
 	<string name="defender_subtitle">Adaugă un script în C:⧹Toolbox care îți dă voie să udaleți Microsoft Edge / Windows Defender</string>
 	<string name="script_subtitle">Adaugă dohuia de scripturi și modificatori la C:⧹Toolbox</string>
 	<string name="setup_subtitle">Adaugă failuri de instalare pentru mai multe framework-uri în C:⧹Toolbox</string>
-	<string name="dbkp_subtitle">Modifică kernelul pentru dualboot mai ușor</string>
+	<string name="dbkp_subtitle">Modifică kernelu pentru dualboot mai ușor</string>
 	<string name="tablet_subtitle">Adaugă un script în C:⧹Toolbox care permite să activezi modu de tabletă</string>
 	<string name="devcfg_subtitle">Flașează OOS11 devcfg ca Windows să se pornească cu dispozitive cu OOS12</string>
 
@@ -45,7 +45,7 @@
 	<string name="mount_question">Montați Windows în %s?</string>
 	<string name="unmount_question">Demontați Windows?</string>
 	<string name="dump_modem_question">Vrei să sahranești modem1st și modem2st în partiția Windows?</string>
-	<string name="flash_uefi_question">Vrei să căceiețti UEFI? \nDacă da, următoarea repornire o să fie în Windows.</string>
+	<string name="flash_uefi_question">Vrei să căceiești UEFI? \nDacă da, următoarea repornire o să fie în Windows.</string>
 	<string name="quickboot_question">Pornire bîstraia în Windows?</string>
 	<string name="sta_question">Vrei să copiezi Treceți to Android în C:\\sta?</string>
 	<string name="usbhost_question">Copiază scriptu USB Host Mode în C:⧹Toolbox?</string>
@@ -55,13 +55,13 @@
 	<string name="atlasos_question">Să căceiesc și să copiez AtlasOS sau ReviOS playbook în C:⧹Toolbox?</string>
 	<string name="defender_question">Copiază Edge / Defender remover script în C:⧹Toolbox?</string>
 	<string name="setup_question">Să căceiesc și să copiez failurile pentru instalare pentru C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, și XNA framework în C:⧹Toolbox?\n(poate să ieie dohuia la timp)</string>
-	<string name="dbkp_question">Modifică și instalează kernelul current?\n!!!APASĂ NUMA DACĂ DISPOZITIVU TĂU ÎI %s!!!</string>
-	<string name="tablet_question">Copiază scriptul pentru modul tabletă în C:⧹Toolbox?</string>
+	<string name="dbkp_question">Modifică și instalează kernelu current?\n!!!APASĂ NUMA DACĂ DISPOZITIVU TĂU ÎI %s!!!</string>
+	<string name="tablet_question">Copiază scriptu pentru modu tabletă în C:⧹Toolbox?</string>
 	<string name="devcfg_question">Flash OOS11 devcfg?\n!!!NU APĂSA DACĂ DISPOZITIVU TĂU NUI %s!!!</string>
 
 	<string name="wrong">Șeva so dus dea sula</string>
-	<string name="mountfail">Șeva so dus dea sula, \nWindows nu so montat.\nȘeri ajutor în grupul de Telegram.</string>
-	<string name="ntfs">Supportul NTFS nu so detectat. \nInstalează modulul NTFS3G ?</string>
+	<string name="mountfail">Șeva so dus dea sula, \nWindows nu so montat.\nȘeri ajutor în grupu de Telegram.</string>
+	<string name="ntfs">Supportu NTFS nu so detectat. \nInstalează modulul NTFS3G ?</string>
 	<string name="internet">Nai internet.\nConectează-te la internet și încearcă po novoi.</string>
 	<string name="partition">Partitia Windows nu so detectat.</string>
 	<string name="internalstorage">Failurile so copiet în pamiti a lu telefon</string>
@@ -83,9 +83,9 @@
 	<string name="bwarn">!!ATENȚIE!!\n UFS va si folosit, activează numa dacă primești dohuia abnavlenii OTA</string>
 	<string name="agree">Da brat</string>
 	<string name="nonroot">Root nu so găsit</string>
-	<string name="unsupported">!!ATENȚIE!!\nDispozitivu nu îi suportat\nFoloseăte aplicația asta pe riscu tău</string>
+	<string name="unsupported">!!ATENȚIE!!\Telefonu tău nu îi suportat\nFoloseăști programa asta pe strahu tău</string>
 	<string name="sure">OK, dă să folosesc programa</string>
-	<string name="upanel">Ecranu tău nu so confirmat să meargă, te rog să spui experianța ta cu Windows în chatul de Telegram</string>
+	<string name="upanel">Ecranu tău nu so confirmat să meargă, te rog să spui experianța ta cu Windows în chatu de Telegram</string>
 	<string name="chat">Chat</string>
 	<string name="nah">Nu</string>
 	<string name="later">Mai încolu</string>
@@ -98,7 +98,7 @@
 	<string name="qspressagain">Mai apasă odată</string>
 	<string name="qsinternet">Trebu internet</string>
 
-	<string name="last">ULTIMUL BACKUP : %s</string>
+	<string name="last">ULTIMU BACKUP : %s</string>
 	<string name="slot">SLOT : %s</string>
 	<string name="ramvalue">MEMORIE : %.2fGB </string>
 	<string name="paneltype">ECRAN : %s</string>
@@ -116,7 +116,7 @@
 	<string name="preference2">Impune backup boot.img la quickboot (Android)</string>
 	<string name="preference3">Backup boot.img dacă nui deamu găsit (Windows)</string>
 	<string name="preference4">Backup boot.img dacă nu deamu găsit (Android)</string>
-	<string name="preference5">Șeri confirmațtie pentru tile-ul quickboot</string>
+	<string name="preference5">Șeri confirmațtie pentru tileu quickboot</string>
 	<string name="preference6">Vîbirești limba</string>
 	<string name="preference7">Montează automat Windows la pornirea dispozitivului</string>
 	<string name="preference8">Stînge funcțîonalu de dump a modemului</string>
@@ -124,5 +124,5 @@
 	<string name="preference10">Montează Windows în /mnt vmesto /sdcard</string>
 	<string name="preference11">Stînge verificarea de actualizări a programii</string>
 	<string name="preference12">Flaș OOS11 devcfg cînd quickbooting</string>
-	<string name="preference13">Check pentru failurile care trebu cînd devcfg se flașează</string>
+	<string name="preference13">Check pentru failurili care trebu cînd devcfg se flașează</string>
 </resources>

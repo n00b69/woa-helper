@@ -7,7 +7,10 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.RemoteViews;
+
+import java.util.List;
 
 import id.kuato.woahelper.R;
 import id.kuato.woahelper.main.MainActivity;
@@ -25,13 +28,9 @@ public class MountWidget extends AppWidgetProvider {
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
             views.setOnClickPendingIntent(R.id.root, pendingIntent);
-
             views.setImageViewResource(R.id.image, R.drawable.ic_mnt);
 
-
-            if (MainActivity.isMounted()) MountWidget.updateText(context, context.getString(R.string.mnt_title, context.getString(R.string.unmountt)));
-            else MountWidget.updateText(context, context.getString(R.string.mnt_title, context.getString(R.string.mountt)));
-
+            views.setTextViewText(R.id.text, (MainActivity.isMounted() ? context.getString(R.string.mnt_title, context.getString(R.string.unmountt)) : context.getString(R.string.mnt_title, context.getString(R.string.mountt))));
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
     }
@@ -51,11 +50,12 @@ public class MountWidget extends AppWidgetProvider {
 
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
-
         if ("UPDATE".equals(intent.getAction())) {
+            String text = intent.getStringExtra("text");
+
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
             int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, MountWidget.class));
-            String text = intent.getStringExtra("text");
+            onUpdate(context, appWidgetManager, appWidgetIds);
 
             for (int appWidgetId : appWidgetIds) {
                 RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);

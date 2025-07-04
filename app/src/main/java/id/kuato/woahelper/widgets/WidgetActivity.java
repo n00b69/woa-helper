@@ -6,6 +6,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.RemoteViews;
@@ -66,8 +67,10 @@ public class 	WidgetActivity extends AppCompatActivity {
 		MainActivity.context = this;
 
 		if (Objects.equals(widget_type, "mount")) {
+			Log.d("INFO", "mount");
 			MainActivity.mountUI();
 		} else if (Objects.equals(widget_type, "quickboot")) {
+			Log.d("INFO", "quickboot");
 			MainActivity.quickbootUI();
 		}
 		Dlg.dialog.setOnCancelListener((dialog) -> {
