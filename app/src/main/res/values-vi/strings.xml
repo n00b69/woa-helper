@@ -65,8 +65,8 @@
 	<string name="internet">Không có kết nối internet. \nHãy kết nối và thử lại.</string>
 	<string name="partition">Không phát hiện phân vùng Windows</string>
 	<string name="internalstorage">Tệp đã được tải vào bộ nhớ trong.</string>
-	<string name="dbkp">Đã vá và flash ảnh khởi động\nẢnh khởi động cũng có thể được tìm thấy ở /sdcard/patched-boot.img.\n Sử dụng %s để chuyển đổi giữa Windows và Android.</string>
-	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/devcfg.img.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
+	<string name="dbkp">Đã vá và flash ảnh khởi động\nẢnh khởi động cũng có thể được tìm thấy ở /sdcard/WOAHelper/Backups.\n Sử dụng %s để chuyển đổi giữa Windows và Android.</string>
+	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/WOAHelper/Backups.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
 	<string name="op7">thanh trượt thông báo</string>
 	<string name="cepheus">nút trợ lý</string>
 	<string name="nabu">hộp từ tính</string>

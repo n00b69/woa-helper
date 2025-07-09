@@ -65,8 +65,8 @@
 	<string name="internet">Нет интернет соединения.\nПодключитесь к интернету и повторите процесс.</string>
 	<string name="partition">Рздел Windows не найден.</string>
 	<string name="internalstorage">Файлы загруженны во внутреннее хранилище</string>
-	<string name="dbkp">boot.img был пропатчен и прошит.\nПропатченый boot.img можно также найти по адресу /sdcard/patched-boot.img.\nИспользуйте %s для переключения между Windows и Android.</string>
-	<string name="devcfg">OOS11 devcfg успешно прошит.\nОригинальный devcfg можно найти по адресу /sdcard/devcfg.img.\nИспользуйте sdd.exe (в STA Creator) чтобы прошивать OOS12 devcfg при перезагрузке обратно в Android</string>
+	<string name="dbkp">boot.img был пропатчен и прошит.\nПропатченый boot.img можно также найти по адресу /sdcard/WOAHelper/Backups.\nИспользуйте %s для переключения между Windows и Android.</string>
+	<string name="devcfg">OOS11 devcfg успешно прошит.\nОригинальный devcfg можно найти по адресу /sdcard/WOAHelper/Backups.\nИспользуйте sdd.exe (в STA Creator) чтобы прошивать OOS12 devcfg при перезагрузке обратно в Android</string>
 	<string name="op7">ползунок оповещения</string>
 	<string name="cepheus">вспомогательную кнопку</string>
 	<string name="nabu">магнитный чехол</string>

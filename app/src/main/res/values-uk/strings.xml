@@ -65,8 +65,8 @@
 	<string name="internet">Не знайдено інтернет з\'єднання.\nПідключіться до інтернету і спробуйте знову.</string>
 	<string name="partition">Не знайдено розділ із Windows.</string>
 	<string name="internalstorage">Файли завантажено у внутрішнє сховище.</string>
-	<string name="dbkp">Завантажувальний образ було виправлено та прошито.\nВиправлений образ також можна знайти у /sdcard/patched-boot.img.\nВикористовуйте , щоб перемикатися між Windows та Android.</string>
-	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/devcfg.img.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
+	<string name="dbkp">Завантажувальний образ було виправлено та прошито.\nВиправлений образ також можна знайти у /sdcard/WOAHelper/Backups.\nВикористовуйте , щоб перемикатися між Windows та Android.</string>
+	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/WOAHelper/Backups.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
 	<string name="op7">повзунок</string>
 	<string name="cepheus">кнопку помічника</string>
 	<string name="nabu">магнітний футляр</string>

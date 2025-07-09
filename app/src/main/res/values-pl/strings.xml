@@ -65,8 +65,8 @@
 	<string name="internet">Nie znaleziono połączenia z Internetem.\nPołącz się z siecią i spróbuj ponownie.</string>
 	<string name="partition">Nie wykryto partycji Windows.</string>
 	<string name="internalstorage">Pliki zostały pobrane do pamięci wewnętrznej</string>
-	<string name="dbkp">Obraz rozruchu został zmodyfikowany i wgrany.\nZmodyfikowany obraz można również znaleźć w /sdcard/patched-boot.img.\nUżyj %s, aby przełączać się miedzy systemami Windows i Android.</string>
-	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/devcfg.img.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
+	<string name="dbkp">Obraz rozruchu został zmodyfikowany i wgrany.\nZmodyfikowany obraz można również znaleźć w /sdcard/WOAHelper/Backups.\nUżyj %s, aby przełączać się miedzy systemami Windows i Android.</string>
+	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/WOAHelper/Backups.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
 	<string name="op7">przełącznika trybu dźwięku</string>
 	<string name="cepheus">przycisku asystenta</string>
 	<string name="nabu">klawiatura magnetyczna</string>

@@ -73,7 +73,7 @@ C:⧹Toolbox?"</string>
 	<string name="partition">درایو ویندوز پیدا نشد</string>
 	<string name="internalstorage">فایل ها در حافظه‌ی داخلی دانلود شدند</string>
 	<string name="dbkp">فایل بوت پچ و فلش زده شده.\n می‌تونید فایل پچ شده را در حافظه داخلی پیدا کنید .\n از  %s استفاده کنید تا از بین ویندوز و اندروید انتخاب کنید.</string>
-	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/devcfg.img.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
+	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/WOAHelper/Backups.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
 	<string name="op7">کشاننده هشدار </string>
 	<string name="cepheus">دکمه دستیار کمک</string>
 	<string name="nabu">قاب آهنربایی</string>

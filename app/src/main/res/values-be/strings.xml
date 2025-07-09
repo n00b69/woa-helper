@@ -65,8 +65,8 @@
 	<string name="internet">Злучэнне з інтэрнэтам не знойдзена.\nПадключыцеся да інтэрнэту і паспрабуйце яшчэ раз.</string>
 	<string name="partition">Партыцыя Windows не выяўлена.</string>
 	<string name="internalstorage">Файлы загружаны ў ўнутранае сховішча.</string>
-	<string name="dbkp">Выява загрузкі была патчана і запісана.\nПатчаную выяву таксама можна знайсці па адрасе /sdcard/patched-boot.img.\nВыкарыстоўвайце %s, каб пераключацца паміж Windows і Android.</string>
-	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/devcfg.img.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
+	<string name="dbkp">Выява загрузкі была патчана і запісана.\nПатчаную выяву таксама можна знайсці па адрасе /sdcard/WOAHelper/Backups.\nВыкарыстоўвайце %s, каб пераключацца паміж Windows і Android.</string>
+	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/WOAHelper/Backups.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
 	<string name="op7">слайдэр апавяшчэнняў</string>
 	<string name="cepheus">кнопку памочніка</string>
 	<string name="nabu">magnetic case</string>

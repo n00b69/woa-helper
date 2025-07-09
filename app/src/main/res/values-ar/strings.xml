@@ -65,8 +65,8 @@
 	<string name="internet">لم يتم العثور على اتصال إنترنت.\nاتصل بالإنترنت وحاول مرة أخرى.</string>
 	<string name="partition">لم يتم اكتشاف قسم لنظام ويندوز.</string>
 	<string name="internalstorage">تم تنزيل الملفات إلى الذاكرة الداخلية</string>
-	<string name="dbkp">صورة البوت تستشعر بين السحب عند الوميض.\nيمكن أيضًا العثور على الصورة المصححة في /sdcard/patched-boot.img.\nاستخدم %s للتبديل بين Windows وAndroid.</string>
-	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/devcfg.img.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
+	<string name="dbkp">صورة البوت تستشعر بين السحب عند الوميض.\nيمكن أيضًا العثور على الصورة المصححة في /sdcard/WOAHelper/Backups.\nاستخدم %s للتبديل بين Windows وAndroid.</string>
+	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/WOAHelper/Backups.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
 	<string name="op7">شريط التنبيهات</string>
 	<string name="cepheus">مساعد بوتوn</string>
 	<string name="nabu">حالة مغناطيسية</string>

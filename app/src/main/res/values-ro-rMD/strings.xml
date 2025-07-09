@@ -65,8 +65,8 @@
 	<string name="internet">Nai internet.\nConectează-te la internet și încearcă po novoi.</string>
 	<string name="partition">Partitia Windows nu so detectat.</string>
 	<string name="internalstorage">Failurile so copiet în pamiti a lu telefon</string>
-	<string name="dbkp">Imaginea de boot so modificat și instalat.\Originalu îi în /sdcard/patched-boot.img.\Folosește %s ca să intri Windows și Android.</string>
-	<string name="devcfg">OOS11 devcfg so flașat.\nOriginalu îi în /sdcard/devcfg.img.\Folosește sdd.exe în STA Creator ca să flașezo OOS12 devcfg cînd te întorci în Android</string>
+	<string name="dbkp">Imaginea de boot so modificat și instalat.\Originalu îi în /sdcard/WOAHelper/Backups.\Folosește %s ca să intri Windows și Android.</string>
+	<string name="devcfg">OOS11 devcfg so flașat.\nOriginalu îi în /sdcard/WOAHelper/Backups.\Folosește sdd.exe în STA Creator ca să flașezo OOS12 devcfg cînd te întorci în Android</string>
 	<string name="op7">slideru de alertă</string>
 	<string name="cepheus">cnopca de asistent</string>
 	<string name="nabu">cihol magnetic</string>

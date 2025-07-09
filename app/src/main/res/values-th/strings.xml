@@ -65,8 +65,8 @@
 	<string name="internet">ไม่พบการเชื่อมต่ออินเทอร์เน็ต\nโปรดเชื่อมต่ออินเทอร์เน็ตแล้วลองอีกครั้ง</string>
 	<string name="partition">ไม่พบพาร์ติชัน Windows</string>
 	<string name="internalstorage">ไฟล์ที่ดาวน์โหลดลงในที่เก็บข้อมูลภายใน</string>
-	<string name="dbkp">image การบูตได้รับการแก้ไขและแฟลชแล้ว\nยังสามารถพบ image ที่แก้ไขแล้วได้ที่ /sdcard/patched-boot.img\nใช้ %s ของคุณเพื่อสลับระหว่าง Windows และ Android</string>
-	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/devcfg.img.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
+	<string name="dbkp">image การบูตได้รับการแก้ไขและแฟลชแล้ว\nยังสามารถพบ image ที่แก้ไขแล้วได้ที่ /sdcard/WOAHelper/Backups\nใช้ %s ของคุณเพื่อสลับระหว่าง Windows และ Android</string>
+	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/WOAHelper/Backups.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
 	<string name="op7">แถบเลื่อนการแจ้งเตือน</string>
 	<string name="cepheus">ปุ่มผู้ช่วย</string>
 	<string name="nabu">เคสแม่เหล็ก</string>

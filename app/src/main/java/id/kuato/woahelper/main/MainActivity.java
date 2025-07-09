@@ -562,8 +562,9 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 			Dlg.show(this, R.string.sta_question, R.drawable.android);
 			Dlg.setNo(R.string.no, Dlg::close);
 			Dlg.setYes(R.string.yes, () -> {
-				ShellUtils.fastCmd("mkdir /sdcard/sta || true");
-				List.of("sta.exe", "sdd.exe", "sdd.conf", "boot_img_auto-flasher_V1.2.exe").forEach(file -> ShellUtils.fastCmd("cp " + getFilesDir() + "/sta.exe /sdcard/sta/" + file));
+				ShellUtils.fastCmd("mkdir /sdcard/WOAHelper || true");
+				ShellUtils.fastCmd("mkdir /sdcard/WOAHelper/sta || true");
+				List.of("sta.exe", "sdd.exe", "sdd.conf", "boot_img_auto-flasher_V1.2.exe").forEach(file -> ShellUtils.fastCmd("cp " + getFilesDir() + "/sta.exe /sdcard/WOAHelper/sta/" + file));
 				mount();
 				if (!isMounted()) {
 					Dlg.close();
@@ -574,7 +575,7 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 				ShellUtils.fastCmd("mkdir " + winpath + "/ProgramData/sta || true ");
 				ShellUtils.fastCmd("cp '" + getFilesDir() + "/Switch to Android.lnk' " + winpath + "/Users/Public/Desktop");
 				ShellUtils.fastCmd("cp " + getFilesDir() + "/sta.exe " + winpath + "/ProgramData/sta/sta.exe");
-				ShellUtils.fastCmd("mv /sdcard/sta " + winpath );
+				ShellUtils.fastCmd("cp /sdcard/WOAHelper/sta " + winpath );
 
 				Dlg.clearButtons();
 				Dlg.setText(R.string.done);
@@ -627,112 +628,34 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 				Dlg.setNo(R.string.no, Dlg::close);
 				Dlg.setYes(R.string.nabu, () -> {
 					ShellUtils.fastCmd("cp " + getFilesDir() + "/dbkp.nabu.bin /sdcard/dbkp/dbkp.bin");
-					ShellUtils.fastCmd("cp " + getFilesDir() + "/dbkp8150.cfg /sdcard/dbkp/dbkp.cfg");
 					Dlg.dialogLoading();
 					kernelPatch(getString(R.string.nabu),"https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/releases/download/1.0/nabu.fd");
 				});
 				Dlg.setDismiss(R.string.nabu2, () -> {
+					ShellUtils.fastCmd("cp " + getFilesDir() + "/dbkp.nabu2.bin /sdcard/dbkp/dbkp.bin");
 					Dlg.dialogLoading();
-					new Thread(()->{
-						ShellUtils.fastCmd("mkdir /sdcard/dbkp || true");
-						androidBackup();
-						ShellUtils.fastCmd("rm /sdcard/original-boot.img || true");
-						ShellUtils.fastCmd("cp /sdcard/boot.img /sdcard/dbkp/boot.img");
-						ShellUtils.fastCmd("su -mm -c mv /sdcard/boot.img /sdcard/original-boot.img");
-						ShellUtils.fastCmd("cp " + getFilesDir() + "/dbkp8150.cfg /sdcard/dbkp");
-						ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/DBKP/dbkp -O /sdcard/dbkp/dbkp\" | su -mm -c sh");
-						ShellUtils.fastCmd("cp /sdcard/dbkp/dbkp " + getFilesDir());
-						ShellUtils.fastCmd("chmod 777 " + getFilesDir() + "/dbkp");
-						ShellUtils.fastCmd("cp " + getFilesDir() + "/dbkp.nabu2.bin /sdcard/dbkp");
-						ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/releases/download/1.0/nabuVolumebuttons.fd -O /sdcard/dbkp/nabuVolumebuttons.fd\" | su -mm -c sh");
-						ShellUtils.fastCmd("cd /sdcard/dbkp");
-						ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) unpack boot.img\" | su -c sh");
-						ShellUtils.fastCmd("su -mm -c " + getFilesDir() + "/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/nabuVolumebuttons.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp8150.cfg /sdcard/dbkp/dbkp.nabu2.bin");
-						ShellUtils.fastCmd("su -mm -c rm /sdcard/dbkp/kernel");
-						ShellUtils.fastCmd("su -mm -c mv output kernel");
-						ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) repack boot.img\" | su -c sh");
-						ShellUtils.fastCmd("su -mm -c cp new-boot.img /sdcard/new-boot.img");
-						ShellUtils.fastCmd("su -mm -c mv /sdcard/new-boot.img /sdcard/patched-boot.img");
-						ShellUtils.fastCmd("rm -r /sdcard/dbkp");
-						ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_a bs=16m");
-						ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16m");
-						runOnUiThread(()->{
-							Dlg.setText(getString(R.string.dbkp, getString(R.string.nabu2)));
-							Dlg.setDismiss(R.string.dismiss, Dlg::close);
-							Dlg.setNo(R.string.reboot, () -> {
-								ShellUtils.fastCmd("su -c svc power reboot");
-							});
-						});
-					}).start();
+					kernelPatch(getString(R.string.nabu),"https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/releases/download/1.0/nabuVolumebuttons.fd");
 				});
 			} else {
 				Dlg.show(this, getString(R.string.dbkp_question, dbkpmodel), R.drawable.ic_uefi);
 				Dlg.setNo(R.string.no, Dlg::close);
 				Dlg.setYes(R.string.yes, () -> {
-					Dlg.dialogLoading();
-					new Thread(()->{
-						ShellUtils.fastCmd("mkdir /sdcard/dbkp || true");
-						androidBackup();
-						ShellUtils.fastCmd("rm /sdcard/original-boot.img || true");
-						ShellUtils.fastCmd("cp /sdcard/boot.img /sdcard/dbkp/boot.img");
-						ShellUtils.fastCmd("su -mm -c mv /sdcard/boot.img /sdcard/original-boot.img");
-						ShellUtils.fastCmd("cp " + getFilesDir() + "/dbkp8150.cfg /sdcard/dbkp");
-						ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/DBKP/dbkp -O /sdcard/dbkp/dbkp\" | su -mm -c sh");
-						ShellUtils.fastCmd("cp /sdcard/dbkp/dbkp "+getFilesDir());
-						ShellUtils.fastCmd("chmod 777 " + getFilesDir() + "/dbkp");
-						if (List.of("guacamole", "OnePlus7Pro", "OnePlus7Pro4G").contains(device)) {
-							ShellUtils.fastCmd("cp " + getFilesDir() + "/dbkp.hotdog.bin /sdcard/dbkp");
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/DBKP/guacamole.fd -O /sdcard/dbkp/guacamole.fd\" | su -mm -c sh");
-							ShellUtils.fastCmd("cd /sdcard/dbkp");
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) unpack boot.img\" | su -c sh");
-							ShellUtils.fastCmd("su -mm -c " + getFilesDir() + "/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/guacamole.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp8150.cfg /sdcard/dbkp/dbkp.hotdog.bin");
-							ShellUtils.fastCmd("su -mm -c rm /sdcard/dbkp/kernel");
-							ShellUtils.fastCmd("su -mm -c mv output kernel");
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) repack boot.img\" | su -c sh");
-							ShellUtils.fastCmd("su -mm -c cp new-boot.img /sdcard/new-boot.img");
-							ShellUtils.fastCmd("su -mm -c mv /sdcard/new-boot.img /sdcard/patched-boot.img");
-							ShellUtils.fastCmd("rm -r /sdcard/dbkp");
-							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_a bs=16m");
-							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16m");
-						} else if (List.of("hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) {
-							ShellUtils.fastCmd("cp " + getFilesDir() + "/dbkp.hotdog.bin /sdcard/dbkp");
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/DBKP/hotdog.fd -O /sdcard/dbkp/hotdog.fd\" | su -mm -c sh");
-							ShellUtils.fastCmd("cd /sdcard/dbkp");
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) unpack boot.img\" | su -c sh");
-							ShellUtils.fastCmd("su -mm -c " + getFilesDir() + "/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/hotdog.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp8150.cfg /sdcard/dbkp/dbkp.hotdog.bin");
-							ShellUtils.fastCmd("su -mm -c rm /sdcard/dbkp/kernel");
-							ShellUtils.fastCmd("su -mm -c mv output kernel");
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) repack boot.img\" | su -c sh");
-							ShellUtils.fastCmd("su -mm -c cp new-boot.img /sdcard/new-boot.img");
-							ShellUtils.fastCmd("su -mm -c mv /sdcard/new-boot.img /sdcard/patched-boot.img");
-							ShellUtils.fastCmd("rm -r /sdcard/dbkp");
-							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_a bs=16m");
-							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16m");
-						} else if ("cepheus".equals(device)) {
-							ShellUtils.fastCmd("cp " + getFilesDir() + "/dbkp.cepheus.bin /sdcard/dbkp");
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-everything/releases/download/Files/cepheus.fd -O /sdcard/dbkp/cepheus.fd\" | su -mm -c sh");
-							ShellUtils.fastCmd("cd /sdcard/dbkp");
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) unpack boot.img\" | su -c sh");
-							ShellUtils.fastCmd("su -mm -c " + getFilesDir() + "/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/cepheus.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp8150.cfg /sdcard/dbkp/dbkp.cepheus.bin");
-							ShellUtils.fastCmd("su -mm -c rm /sdcard/dbkp/kernel");
-							ShellUtils.fastCmd("su -mm -c mv output kernel");
-							ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name magiskboot) repack boot.img\" | su -c sh");
-							ShellUtils.fastCmd("su -mm -c cp new-boot.img /sdcard/new-boot.img");
-							ShellUtils.fastCmd("su -mm -c mv /sdcard/new-boot.img /sdcard/patched-boot.img");
-							ShellUtils.fastCmd("rm -r /sdcard/dbkp");
-							ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot bs=16m");
-						}
-						runOnUiThread(()->{
-							Dlg.setText((List.of("guacamole", "OnePlus7Pro", "OnePlus7Pro4G", "hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) ? getString(R.string.dbkp, getString(R.string.op7)) : getString(R.string.dbkp, getString(R.string.cepheus)));
-							Dlg.setDismiss(R.string.dismiss, Dlg::close);
-							Dlg.setNo(R.string.reboot, () -> {
-								ShellUtils.fastCmd("su -c svc power reboot");
-							});
-						});
-					}).start();
+					if (List.of("guacamole", "OnePlus7Pro", "OnePlus7Pro4G").contains(device)) {
+						ShellUtils.fastCmd("cp " + getFilesDir() + "/dbkp.hotdog.bin /sdcard/dbkp/dbkp.bin");
+						Dlg.dialogLoading();
+						kernelPatch(getString(R.string.op7),"https://github.com/n00b69/woa-op7/releases/download/DBKP/guacamole.fd");
+					} else if (List.of("hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) {
+						ShellUtils.fastCmd("cp " + getFilesDir() + "/dbkp.hotdog.bin /sdcard/dbkp/dbkp.bin");
+						Dlg.dialogLoading();
+						kernelPatch(getString(R.string.op7),"https://github.com/n00b69/woa-op7/releases/download/DBKP/hotdog.fd");
+					} else if ("cepheus".equals(device)) {
+						ShellUtils.fastCmd("cp " + getFilesDir() + "/dbkp.cepheus.bin /sdcard/dbkp/dbkp.bin");
+						Dlg.dialogLoading();
+						kernelPatch(getString(R.string.cepheus),"https://github.com/n00b69/woa-everything/releases/download/Files/cepheus.fd");
+					}
 				});
 			}
-		});
+		});				
 		
 		n.devcfg.setOnClickListener(a -> {
 			if (!isNetworkConnected(this)) {
@@ -747,28 +670,32 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 			Dlg.setYes(R.string.yes, () -> {
 				Dlg.dialogLoading();
 				new Thread(()->{
+					ShellUtils.fastCmd("mkdir /sdcard/WOAHelper || true");
+					ShellUtils.fastCmd("mkdir /sdcard/WOAHelper/Backups || true");
 					String devcfgDevice = (List.of("guacamole", "OnePlus7Pro", "OnePlus7Pro4G").contains(device)) ? "guacamole" : (List.of("hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) ? "hotdog" : null;
 					String findoriginaldevcfg = ShellUtils.fastCmd("find " + getFilesDir() + " -maxdepth 1 -name original-devcfg.img");
 					if (findoriginaldevcfg.isEmpty()) {
-						ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=/sdcard/original-devcfg.img");
-						ShellUtils.fastCmd("cp /sdcard/original-devcfg.img " + getFilesDir() + "/original-devcfg.img");
+						ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=/sdcard/WOAHelper/Backups/original-devcfg.img");
+						ShellUtils.fastCmd("cp /sdcard/WOAHelper/Backups/original-devcfg.img " + getFilesDir() + "/original-devcfg.img");
 					}
 					String finddevcfg = ShellUtils.fastCmd("find " + getFilesDir() + " -maxdepth 1 -name OOS11_devcfg_*");
 					if (finddevcfg.isEmpty()) {
-						ShellUtils.fastCmd(String.format("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_%s.img -O /sdcard/OOS11_devcfg_%s.img\" | su -mm -c sh", devcfgDevice, devcfgDevice));
-						ShellUtils.fastCmd(String.format("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_%s.img -O /sdcard/OOS12_devcfg_%s.img\" | su -mm -c sh", devcfgDevice, devcfgDevice));
-						ShellUtils.fastCmd(String.format("cp /sdcard/OOS11_devcfg_%s.img %s", devcfgDevice, getFilesDir()));
-						ShellUtils.fastCmd(String.format("cp /sdcard/OOS12_devcfg_%s.img %s", devcfgDevice, getFilesDir()));
+						ShellUtils.fastCmd(String.format("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_%s.img -O /sdcard/WOAHelper/Backups/OOS11_devcfg_%s.img\" | su -mm -c sh", devcfgDevice, devcfgDevice));
+						ShellUtils.fastCmd(String.format("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_%s.img -O /sdcard/WOAHelper/Backups/OOS12_devcfg_%s.img\" | su -mm -c sh", devcfgDevice, devcfgDevice));
+						ShellUtils.fastCmd(String.format("cp /sdcard/WOAHelper/Backups/OOS11_devcfg_%s.img %s", devcfgDevice, getFilesDir()));
+						ShellUtils.fastCmd(String.format("cp /sdcard/WOAHelper/Backups/OOS12_devcfg_%s.img %s", devcfgDevice, getFilesDir()));
 						ShellUtils.fastCmd(String.format("dd bs=8M if=%s/OOS11_devcfg_%s.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)", getFilesDir(), devcfgDevice));
 					} else {
 						ShellUtils.fastCmd(String.format("dd bs=8M if=%s/OOS11_devcfg_%s.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)", getFilesDir(), devcfgDevice));
 					}
 					runOnUiThread(()->{
+						ShellUtils.fastCmd("mkdir /sdcard/WOAHelper || true");
+						ShellUtils.fastCmd("mkdir /sdcard/WOAHelper/staDevcfg || true");
+						ShellUtils.fastCmd("cp " + getFilesDir() + "/sdd.exe /sdcard/WOAHelper/staDevcfg/sdd.exe");
+						ShellUtils.fastCmd("cp " + getFilesDir() + "/devcfg-sdd.conf /sdcard/WOAHelper/staDevcfg/sdd.conf");
 						mount();
 						String mnt_stat = ShellUtils.fastCmd("su -mm -c mount | grep " + win);
 						if (mnt_stat.isEmpty()) {
-							ShellUtils.fastCmd("cp " + getFilesDir() + "/sdd.exe /sdcard/sdd.exe");
-							ShellUtils.fastCmd("cp " + getFilesDir() + "/devcfg-sdd.conf /sdcard/sdd.conf");
 							Dlg.close();
 							mountfail();
 						} else {
@@ -776,7 +703,7 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 							ShellUtils.fastCmd("cp '" + getFilesDir() + "/Flash Devcfg.lnk' " + winpath + "/Users/Public/Desktop");
 							ShellUtils.fastCmd("cp " + getFilesDir() + "/sdd.exe " + winpath + "/sta/sdd.exe");
 							ShellUtils.fastCmd("cp " + getFilesDir() + "/devcfg-sdd.conf " + winpath + "/sta/sdd.conf");
-							ShellUtils.fastCmd("cp /sdcard/original-devcfg.img " + winpath + "/original-devcfg.img");
+							ShellUtils.fastCmd("cp /sdcard/WOAHelper/Backups/original-devcfg.img " + winpath + "/original-devcfg.img");
 						}
 						Dlg.setText(R.string.devcfg);
 						Dlg.setDismiss(R.string.dismiss, Dlg::close);
@@ -799,6 +726,9 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 					mountfail();
 					return;
 				}
+				ShellUtils.fastCmd("mkdir /sdcard/WOAHelper || true");
+				ShellUtils.fastCmd("mkdir /sdcard/WOAHelper/Toolbox || true");
+				List.of("WorksOnWoa.url", "TestedSoftware.url", "ARMSoftware.url", "ARMRepo.url").forEach(file -> ShellUtils.fastCmd(String.format("cp %s/%s /sdcard/WOAHelper/Toolbox", getFilesDir(), file)));
 				ShellUtils.fastCmd("mkdir " + winpath + "/Toolbox || true ");
 				List.of("WorksOnWoa.url", "TestedSoftware.url", "ARMSoftware.url", "ARMRepo.url").forEach(file -> ShellUtils.fastCmd(String.format("cp %s/%s %s/Toolbox", getFilesDir(), file, winpath)));
 				Dlg.setText(R.string.done);
@@ -818,9 +748,11 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 				Dlg.setBar(0);
 				Dlg.setIcon(R.drawable.ic_download);
 				new Thread(() -> {
-					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/ReviOS/ReviPlaybook.apbx -O /sdcard/ReviPlaybook.apbx\" | su -mm -c sh");
+					ShellUtils.fastCmd("mkdir /sdcard/WOAHelper || true");
+					ShellUtils.fastCmd("mkdir /sdcard/WOAHelper/Toolbox || true");
+					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/ReviOS/ReviPlaybook.apbx -O /sdcard/WOAHelper/Toolbox/ReviPlaybook.apbx\" | su -mm -c sh");
 					Dlg.setBar(50);
-					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://download.ameliorated.io/AME%20Wizard%20Beta.zip -O /sdcard/AMEWizardBeta.zip\" | su -mm -c sh");
+					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://download.ameliorated.io/AME%20Wizard%20Beta.zip -O /sdcard/WOAHelper/Toolbox/AMEWizardBeta.zip\" | su -mm -c sh");
 					Dlg.setBar(80);
 					runOnUiThread(() -> {
 						mount();
@@ -832,8 +764,8 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 						Dlg.setIcon(R.drawable.ic_ar_mainactivity);
 						Dlg.hideBar();
 						ShellUtils.fastCmd("mkdir " + winpath + "/Toolbox || true ");
-						ShellUtils.fastCmd("mv /sdcard/ReviPlaybook.apbx " + winpath + "/Toolbox/ReviPlaybook.apbx");
-						ShellUtils.fastCmd("mv /sdcard/AMEWizardBeta.zip " + winpath + "/Toolbox");
+						ShellUtils.fastCmd("cp /sdcard/WOAHelper/Toolbox/ReviPlaybook.apbx " + winpath + "/Toolbox/ReviPlaybook.apbx");
+						ShellUtils.fastCmd("cp /sdcard/WOAHelper/Toolbox/AMEWizardBeta.zip " + winpath + "/Toolbox");
 						Dlg.setText(R.string.done);
 						Dlg.dismissButton();
 					});
@@ -844,11 +776,13 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 				Dlg.setBar(0);
 				Dlg.setIcon(R.drawable.ic_download);
 				new Thread(() -> {
-					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook.apbx -O /sdcard/AtlasPlaybook_v0.4.1.apbx\" | su -mm -c sh");
+					ShellUtils.fastCmd("mkdir /sdcard/WOAHelper || true");
+					ShellUtils.fastCmd("mkdir /sdcard/WOAHelper/Toolbox || true");
+					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook.apbx -O /sdcard/WOAHelper/Toolbox/AtlasPlaybook_v0.4.1.apbx\" | su -mm -c sh");
 					Dlg.setBar(35);
-					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook_v0.4.0_23H2Only.apbx -O /sdcard/AtlasPlaybook_v0.4.0_23H2Only.apbx\" | su -mm -c sh");
+					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook_v0.4.0_23H2Only.apbx -O /sdcard/WOAHelper/Toolbox/AtlasPlaybook_v0.4.0_23H2Only.apbx\" | su -mm -c sh");
 					Dlg.setBar(60);
-					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://download.ameliorated.io/AME%20Wizard%20Beta.zip -O /sdcard/AMEWizardBeta.zip\" | su -mm -c sh");
+					ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://download.ameliorated.io/AME%20Wizard%20Beta.zip -O /sdcard/WOAHelper/Toolbox/AMEWizardBeta.zip\" | su -mm -c sh");
 					Dlg.setBar(80);
 					runOnUiThread(() -> {
 						mount();
@@ -860,9 +794,9 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 						Dlg.setIcon(R.drawable.ic_ar_mainactivity);
 						Dlg.hideBar();
 						ShellUtils.fastCmd("mkdir " + winpath + "/Toolbox || true ");
-						ShellUtils.fastCmd("mv /sdcard/AtlasPlaybook.apbx " + winpath + "/Toolbox/AtlasPlaybook_v0.4.1.apbx");
-						ShellUtils.fastCmd("mv /sdcard/AtlasPlaybook_v0.4.0_23H2Only.apbx " + winpath + "/Toolbox/AtlasPlaybook_v0.4.0_23H2Only.apbx");
-						ShellUtils.fastCmd("mv /sdcard/AMEWizardBeta.zip " + winpath + "/Toolbox");
+						ShellUtils.fastCmd("cp /sdcard/WOAHelper/Toolbox/AtlasPlaybook.apbx " + winpath + "/Toolbox/AtlasPlaybook_v0.4.1.apbx");
+						ShellUtils.fastCmd("cp /sdcard/WOAHelper/Toolbox/AtlasPlaybook_v0.4.0_23H2Only.apbx " + winpath + "/Toolbox/AtlasPlaybook_v0.4.0_23H2Only.apbx");
+						ShellUtils.fastCmd("cp /sdcard/WOAHelper/Toolbox/AMEWizardBeta.zip " + winpath + "/Toolbox");
 						Dlg.setText(R.string.done);
 						Dlg.dismissButton();
 					});
@@ -875,8 +809,9 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 			Dlg.setNo(R.string.no, Dlg::close);
 			Dlg.setYes(R.string.yes, () -> {
 				Dlg.dialogLoading();
-				ShellUtils.fastCmd("cp " + getFilesDir() + "/usbhostmode.exe /sdcard");
-				ShellUtils.fastCmd("cp '" + getFilesDir() + "/USB Host Mode.lnk' /sdcard");
+				ShellUtils.fastCmd("mkdir /sdcard/WOAHelper || true");
+				ShellUtils.fastCmd("mkdir /sdcard/WOAHelper/Toolbox || true ");
+				ShellUtils.fastCmd("cp " + getFilesDir() + "/usbhostmode.exe /sdcard/WOAHelper/Toolbox/");
 				mount();
 				if (!isMounted()) {
 					Dlg.close();
@@ -884,7 +819,7 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 					return;
 				}
 				ShellUtils.fastCmd("mkdir " + winpath + "/Toolbox || true ");
-				ShellUtils.fastCmd("mv /sdcard/usbhostmode.exe " + winpath + "/Toolbox");
+				ShellUtils.fastCmd("cp /sdcard/WOAHelper/Toolbox/usbhostmode.exe " + winpath + "/Toolbox");
 				ShellUtils.fastCmd("cp '" + getFilesDir() + "/USB Host Mode.lnk' " + winpath + "/Users/Public/Desktop");
 				Dlg.setText(R.string.done);
 				Dlg.dismissButton();
@@ -896,7 +831,9 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 			Dlg.setNo(R.string.no, Dlg::close);
 			Dlg.setYes(R.string.yes, () -> {
 				Dlg.dialogLoading();
-				ShellUtils.fastCmd("cp " + getFilesDir() + "/QuickRotate_V3.0.exe /sdcard/");
+				ShellUtils.fastCmd("mkdir /sdcard/WOAHelper || true");
+				ShellUtils.fastCmd("mkdir /sdcard/WOAHelper/Toolbox || true ");
+				ShellUtils.fastCmd("cp " + getFilesDir() + "/QuickRotate_V3.0.exe /sdcard/WOAHelper/Toolbox/");
 				mount();
 				if (!isMounted()) {
 					Dlg.close();
@@ -904,8 +841,8 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 					return;
 				}
 				ShellUtils.fastCmd("mkdir " + winpath + "/Toolbox || true ");
-				ShellUtils.fastCmd("cp /sdcard/QuickRotate_V3.0.exe " + winpath + "/Toolbox");
-				ShellUtils.fastCmd("mv /sdcard/QuickRotate_V3.0.exe " + winpath + "/Users/Public/Desktop");
+				ShellUtils.fastCmd("cp /sdcard/WOAHelper/Toolbox/QuickRotate_V3.0.exe " + winpath + "/Toolbox");
+				ShellUtils.fastCmd("cp /sdcard/WOAHelper/Toolbox/QuickRotate_V3.0.exe " + winpath + "/Users/Public/Desktop");
 				Dlg.setText(R.string.done);
 				Dlg.dismissButton();
 			});
@@ -916,7 +853,9 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 			Dlg.setNo(R.string.no, Dlg::close);
 			Dlg.setYes(R.string.yes, () -> {
 				Dlg.dialogLoading();
-				ShellUtils.fastCmd("cp " + getFilesDir() + "/Optimized_Taskbar_Control_V3.1.exe /sdcard/");
+				ShellUtils.fastCmd("mkdir /sdcard/WOAHelper || true");
+				ShellUtils.fastCmd("mkdir /sdcard/WOAHelper/Toolbox || true ");
+				ShellUtils.fastCmd("cp " + getFilesDir() + "/Optimized_Taskbar_Control_V3.1.exe /sdcard/WOAHelper/Toolbox/");
 				mount();
 				if (!isMounted()) {
 					Dlg.close();
@@ -924,7 +863,7 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 					return;
 				}
 				ShellUtils.fastCmd("mkdir " + winpath + "/Toolbox || true ");
-				ShellUtils.fastCmd("mv /sdcard/Optimized_Taskbar_Control_V3.1.exe " + winpath + "/Toolbox");
+				ShellUtils.fastCmd("cp /sdcard/WOAHelper/Toolbox/Optimized_Taskbar_Control_V3.1.exe " + winpath + "/Toolbox");
 				Dlg.setText(R.string.done);
 				Dlg.dismissButton();
 			});
@@ -942,10 +881,11 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 				Dlg.setIcon(R.drawable.ic_download);
 				Dlg.setBar(0);
 				new Thread(() -> {
-					ShellUtils.fastCmd("mkdir /sdcard/Frameworks || true");
-					ShellUtils.fastCmd("cp " + getFilesDir() + "/install.bat /sdcard/Frameworks/install.bat");
+					ShellUtils.fastCmd("mkdir /sdcard/WOAHelper || true");
+					ShellUtils.fastCmd("mkdir /sdcard/WOAHelper/Frameworks || true");
+					ShellUtils.fastCmd("cp " + getFilesDir() + "/install.bat /sdcard/WOAHelper/Frameworks/install.bat");
 					List.of("PhysX-9.13.0604-SystemSoftware-Legacy.msi", "PhysX_9.23.1019_SystemSoftware.exe", "xnafx40_redist.msi", "opengl.appx", "2005vcredist_x64.EXE", "2005vcredist_x86.EXE", "2008vcredist_x64.exe", "2008vcredist_x86.exe", "2010vcredist_x64.exe", "2010vcredist_x86.exe", "2012vcredist_x64.exe", "2012vcredist_x86.exe", "2013vcredist_x64.exe", "2013vcredist_x86.exe", "2015VC_redist.x64.exe", "2015VC_redist.x86.exe", "2022VC_redist.arm64.exe", "dxwebsetup.exe", "oalinst.exe").forEach(file -> {
-						ShellUtils.fastCmd(String.format("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/%s -O /sdcard/Frameworks/%s\" | su -mm -c sh", file, file));
+						ShellUtils.fastCmd(String.format("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/%s -O /sdcard/WOAHelper/Frameworks/%s\" | su -mm -c sh", file, file));
 						Dlg.setBar(Dlg.bar.getProgress() + 5);
 					});
 					runOnUiThread(() -> {
@@ -957,8 +897,7 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 						}
 						ShellUtils.fastCmd("mkdir " + winpath + "/Toolbox || true ");
 						ShellUtils.fastCmd("mkdir " + winpath + "/Toolbox/Frameworks || true ");
-						ShellUtils.fastCmd("cp /sdcard/Frameworks/* " + winpath + "/Toolbox/Frameworks");
-						ShellUtils.fastCmd("rm -r /sdcard/Frameworks");
+						ShellUtils.fastCmd("cp /sdcard/WOAHelper/Frameworks/* " + winpath + "/Toolbox/Frameworks");
 						Dlg.setIcon(R.drawable.ic_mnt);
 						Dlg.hideBar();
 						Dlg.setText(R.string.done);
@@ -987,7 +926,11 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 					mountfail();
 					return;
 				}
+				ShellUtils.fastCmd("mkdir /sdcard/WOAHelper || true");
+				ShellUtils.fastCmd("mkdir /sdcard/WOAHelper/Toolbox || true");
 				ShellUtils.fastCmd("mkdir " + winpath + "/Toolbox || true ");
+				ShellUtils.fastCmd("cp " + getFilesDir() + "/DefenderRemover.exe /sdcard/WOAHelper/Toolbox");
+				ShellUtils.fastCmd("cp " + getFilesDir() + "/RemoveEdge.bat /sdcard/WOAHelper/Toolbox");
 				ShellUtils.fastCmd("cp " + getFilesDir() + "/DefenderRemover.exe " + winpath + "/Toolbox");
 				ShellUtils.fastCmd("cp " + getFilesDir() + "/RemoveEdge.bat " + winpath + "/Toolbox");
 				Dlg.setText(R.string.done);
@@ -1387,9 +1330,15 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 			@Override
 			public void run() {
 				ShellUtils.fastCmd("mkdir /sdcard/dbkp || true");
+				ShellUtils.fastCmd("mkdir /sdcard/WOAHelper || true");
+				ShellUtils.fastCmd("mkdir /sdcard/WOAHelper/Backups || true");
 				androidBackup();
-				ShellUtils.fastCmd("cp /sdcard/boot.img /sdcard/dbkp/boot.img");
-				ShellUtils.fastCmd("mv /sdcard/boot.img /sdcard/original-boot.img");
+				ShellUtils.fastCmd("dd bs=8M if=/sdcard/WOAHelper/Backups/original-boot.img of=/dev/block/by-name/boot$(getprop ro.boot.slot_suffix)");
+				ShellUtils.fastCmd("rm /sdcard/WOAHelper/Backups/original-boot.img || true");
+				ShellUtils.fastCmd("rm /sdcard/WOAHelper/Backups/patched-boot.img || true");
+				ShellUtils.fastCmd("mv /sdcard/boot.img /sdcard/dbkp/boot.img");
+				ShellUtils.fastCmd("cp /sdcard/dbkp/boot.img /sdcard/WOAHelper/Backups/original-boot.img");
+				ShellUtils.fastCmd("cp " + getFilesDir() + "/dbkp8150.cfg /sdcard/dbkp/dbkp.cfg");
 				ShellUtils.fastCmd("$(find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/DBKP/dbkp -O /sdcard/dbkp/dbkp");
 				ShellUtils.fastCmd("cp /sdcard/dbkp/dbkp " + getFilesDir());
 				ShellUtils.fastCmd("chmod 777 " + getFilesDir() + "/dbkp");
@@ -1399,10 +1348,14 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 				ShellUtils.fastCmd(getFilesDir() + "/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/file.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp.cfg /sdcard/dbkp/dbkp.bin");
 				ShellUtils.fastCmd("mv output kernel");
 				ShellUtils.fastCmd("$(su -c find /data/adb -name magiskboot) repack boot.img");
-				ShellUtils.fastCmd("cp new-boot.img /sdcard/patched-boot.img");
+				ShellUtils.fastCmd("cp new-boot.img /sdcard/WOAHelper/Backups/patched-boot.img");
 				ShellUtils.fastCmd("rm -r /sdcard/dbkp");
-				ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_a bs=16m");
-				ShellUtils.fastCmd("dd if=/sdcard/patched-boot.img of=/dev/block/by-name/boot_b bs=16m");
+				if ("cepheus".equals(device)) {
+					ShellUtils.fastCmd("dd if=/sdcard/WOAHelper/Backups/patched-boot.img of=/dev/block/by-name/boot bs=16m");
+				} else {
+					ShellUtils.fastCmd("dd if=/sdcard/WOAHelper/Backups/patched-boot.img of=/dev/block/by-name/boot_a bs=16m");
+					ShellUtils.fastCmd("dd if=/sdcard/WOAHelper/Backups/patched-boot.img of=/dev/block/by-name/boot_b bs=16m");
+				}
 				runOnUiThread(() -> {
 					Dlg.setText(getString(R.string.dbkp, message));
 					Dlg.setDismiss(R.string.dismiss, Dlg::close);

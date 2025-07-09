@@ -65,8 +65,8 @@
 	<string name="internet">Nebylo nalezeno internetové připojení. \nPřipojte se k internetu a zkuste to znovu.</string>
 	<string name="partition">Nebyl detekován oddíl Windows.</string>
 	<string name="internalstorage">Soubory staženy do interního úložiště.</string>
-	<string name="dbkp">Obraz spousteni byl upraven a nahrán. \nUpravený obraz lze také najít na /sdcard/patched-boot.img. \nPoužijte %s pro přepínání mezi Windows a Androidem.</string>
-	<string name="devcfg">OOS11 devcfg byl nahrán.\nPůvodní devcfg najdete v /sdcard/devcfg.img.\nPoužijte sdd.exe v STA Creator k nahrání OOS12 devcfg při návratu na Android.</string>
+	<string name="dbkp">Obraz spousteni byl upraven a nahrán. \nUpravený obraz lze také najít na /sdcard/WOAHelper/Backups. \nPoužijte %s pro přepínání mezi Windows a Androidem.</string>
+	<string name="devcfg">OOS11 devcfg byl nahrán.\nPůvodní devcfg najdete v /sdcard/WOAHelper/Backups.\nPoužijte sdd.exe v STA Creator k nahrání OOS12 devcfg při návratu na Android.</string>
 	<string name="op7">alert slider</string>
 	<string name="cepheus">tlačítko asistenta</string>
 	<string name="nabu">magnetické pouzdro</string>

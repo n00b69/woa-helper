@@ -21,7 +21,7 @@ This project is in late stages of development. Most features have already been a
 | Automount Windows partition     | Optionally automatically mounts Windows when the device starts                  | ✅     |
 | Quickboot to Windows            | To use the Quick Boot feature, you need to place the UEFI image in /sdcard/UEFI | ✅     |
 | Quickboot Quick Settings toggle |                                                                                 | ✅     |
-| Quickboot widget                | To be added in the future                                                       | ❌     |
+| Quickboot widget                |                                                                                 | ✅     |
 | StA Creator & Auto boot flasher | Creates dualboot files & tool to automatically flash boot.img                   | ✅     |
 | Provisioning Modem              | Only for devices that may need it for LTE to work                               | ✅     |
 | DBKP (Dualboot Kernel Patcher)  | Only for supported devices: Oneplus 7(T) Pro 4G, Xiaomi Mi 9 & Xiaomi Pad 5     | ✅     |

@@ -65,8 +65,8 @@
 	<string name="internet">Tidak ditemukan koneksi internet.\nHubungkan ke internet dan coba lagi.</string>
 	<string name="partition">Tidak ada partisi Windows yang terdeteksi.</string>
 	<string name="internalstorage">File diunduh pada penyimpanan internal</string>
-	<string name="dbkp">Image boot telah di-patch dan di-flash.\Image yang di-patch juga dapat ditemukan pada /sdcard/patched-boot.img.\nGunakan %s untuk beralih antara Windows dan Android.</string>
-	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/devcfg.img.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
+	<string name="dbkp">Image boot telah di-patch dan di-flash.\Image yang di-patch juga dapat ditemukan pada /sdcard/WOAHelper/Backups.\nGunakan %s untuk beralih antara Windows dan Android.</string>
+	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/WOAHelper/Backups.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
 	<string name="op7">slider peringatan</string>
 	<string name="cepheus">tombol asisten</string>
 	<string name="nabu">magnetic case</string>

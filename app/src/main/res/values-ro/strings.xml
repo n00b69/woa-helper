@@ -65,8 +65,8 @@
 	<string name="internet">Conexiunea la internet nu a fost gasită.\nConectează-te la internet și încearcă din nou.</string>
 	<string name="partition">Partitia Windows nu a fost detectată.</string>
 	<string name="internalstorage">Fișierele au fost descărcate în memoria internă</string>
-	<string name="dbkp">Imaginea de boot a fost modificată și instalată.\nImaginea de boot modificată poate fi gasită la /sdcard/patched-boot.img.\nUtilizați %s pentru a comuta între Windows și Android.</string>
-	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/devcfg.img.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
+	<string name="dbkp">Imaginea de boot a fost modificată și instalată.\nImaginea de boot modificată poate fi gasită la /sdcard/WOAHelper/Backups.\nUtilizați %s pentru a comuta între Windows și Android.</string>
+	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/WOAHelper/Backups.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
 	<string name="op7">sliderul de alertă</string>
 	<string name="cepheus">butonul de asistent</string>
 	<string name="nabu">carcasa magnetica</string>

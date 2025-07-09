@@ -65,8 +65,8 @@
 	<string name="internet">未連接到互聯網。\n請聯網後重試。</string>
 	<string name="partition">未檢測到 Windows 分區。</string>
 	<string name="internalstorage">文件已下載到內部存儲。</string>
-	<string name="dbkp">已修補並刷入 Boot 分區鏡像。\n你也可以在 /sdcard/patched-boot.img 找到修補後的鏡像。\n使用您的 %s 在 Windows 和 Android 之間切換。</string>
-	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/devcfg.img.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
+	<string name="dbkp">已修補並刷入 Boot 分區鏡像。\n你也可以在 /sdcard/WOAHelper/Backups 找到修補後的鏡像。\n使用您的 %s 在 Windows 和 Android 之間切換。</string>
+	<string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/WOAHelper/Backups.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
 	<string name="op7">警報滑桿</string>
 	<string name="cepheus">人工智慧按鈕</string>
 	<string name="nabu">磁性盒</string>

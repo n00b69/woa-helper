@@ -65,8 +65,8 @@
 	<string name="internet">Geen internetverbinding gevonden.\nMaak verbinding met internet en probeer het opnieuw.</string>
 	<string name="partition">Geen Windows partitie gevonden.</string>
 	<string name="internalstorage">Bestanden zijn in uw interne geheugen opgeslagen</string>
-	<string name="dbkp">Boot image is gepatcht en geinstalleerd.\nDe gepatchte boot.img is ook te vinden in /sdcard/patched-boot.img.\nGebruik uw %s om te schakelen tussen Windows en Android.</string>
-	<string name="devcfg">OOS11 devcfg is geflasht.\nOriginele devcfg backup is te vinden in /sdcard/devcfg.img.\nGebruik sdd.exe in STA Creator om OOS12 devcfg te flashen bij uw terugkeer naar Android.</string>
+	<string name="dbkp">Boot image is gepatcht en geinstalleerd.\nDe gepatchte boot.img is ook te vinden in /sdcard/WOAHelper/Backups.\nGebruik uw %s om te schakelen tussen Windows en Android.</string>
+	<string name="devcfg">OOS11 devcfg is geflasht.\nOriginele devcfg backup is te vinden in /sdcard/WOAHelper/Backups.\nGebruik sdd.exe in STA Creator om OOS12 devcfg te flashen bij uw terugkeer naar Android.</string>
 	<string name="op7">alert slider</string>
 	<string name="cepheus">assistant knop</string>
 	<string name="nabu">magnetische hoes</string>
