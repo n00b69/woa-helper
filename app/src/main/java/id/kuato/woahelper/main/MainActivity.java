@@ -1349,7 +1349,7 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 				ShellUtils.fastCmd("mv output kernel");
 				ShellUtils.fastCmd("$(su -c find /data/adb -name magiskboot) repack boot.img");
 				ShellUtils.fastCmd("cp new-boot.img /sdcard/WOAHelper/Backups/patched-boot.img");
-				ShellUtils.fastCmd("rm -r /sdcard/dbkp");
+				// ShellUtils.fastCmd("rm -r /sdcard/dbkp");
 				if ("cepheus".equals(device)) {
 					ShellUtils.fastCmd("dd if=/sdcard/WOAHelper/Backups/patched-boot.img of=/dev/block/by-name/boot bs=16m");
 				} else {
