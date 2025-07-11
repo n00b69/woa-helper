@@ -13,6 +13,13 @@ import id.kuato.woahelper.R;
 import id.kuato.woahelper.main.MainActivity;
 
 public class MountWidget extends AppWidgetProvider {
+    public static void updateText(Context context, String text) {
+        Intent intent = new Intent(context, MountWidget.class);
+        intent.setAction("UPDATE");
+        intent.putExtra("text", text);
+        context.sendBroadcast(intent);
+    }
+
     @SuppressLint("StringFormatInvalid")
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -62,12 +69,5 @@ public class MountWidget extends AppWidgetProvider {
                 appWidgetManager.updateAppWidget(appWidgetId, views);
             }
         }
-    }
-
-    public static void updateText(Context context,  String text) {
-        Intent intent = new Intent(context, MountWidget.class);
-        intent.setAction("UPDATE");
-        intent.putExtra("text", text);
-        context.sendBroadcast(intent);
     }
 }

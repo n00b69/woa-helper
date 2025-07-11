@@ -17,17 +17,17 @@ import id.kuato.woahelper.BuildConfig;
 import id.kuato.woahelper.main.Dlg;
 import id.kuato.woahelper.main.MainActivity;
 
-public class 	WidgetActivity extends AppCompatActivity {
-	public static final String ACTION_CLICK = BuildConfig.APPLICATION_ID + ".ACTION_CLICK";
-	public static boolean active;
+public class WidgetActivity extends AppCompatActivity {
+    public static final String ACTION_CLICK = BuildConfig.APPLICATION_ID + ".ACTION_CLICK";
+    public static boolean active;
 
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		active = false;
-		MainActivity.runSilently(() -> Dlg.dialog.dismiss());
-		finish();
-	}
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        active = false;
+        MainActivity.runSilently(() -> Dlg.dialog.dismiss());
+        finish();
+    }
 	/*private static void sizeCheck(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
 		Bundle options = appWidgetManager.getAppWidgetOptions(appWidgetId);
 		RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
@@ -50,34 +50,34 @@ public class 	WidgetActivity extends AppCompatActivity {
 	}
 */
 
-	@SuppressLint({"StringFormatInvalid", "SdCardPath"})
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+    @SuppressLint({"StringFormatInvalid", "SdCardPath"})
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
-		active = true;
+        active = true;
 
-		Intent intent = getIntent();
-		String widget_type = intent.getStringExtra("WIDGET_TYPE");
+        Intent intent = getIntent();
+        String widget_type = intent.getStringExtra("WIDGET_TYPE");
 
-		MainActivity.context = this;
-		if (!Boolean.TRUE.equals(Shell.isAppGrantedRoot())) {
-			Toast.makeText(this, "NO ROOT!", Toast.LENGTH_SHORT).show();
-			finish();
-			return;
-		}
-		if (Objects.equals(widget_type, "mount")) {
-			Log.d("INFO", "mount");
-			MainActivity.mountUI();
-		} else if (Objects.equals(widget_type, "quickboot")) {
-			Log.d("INFO", "quickboot");
-			MainActivity.quickbootUI();
-		}
-		Dlg.dialog.setOnCancelListener((dialog) -> {
-			dialog.dismiss();
-			finish();
-		});
-		Dlg.dialog.show();
-	}
+        MainActivity.context = this;
+        if (!Boolean.TRUE.equals(Shell.isAppGrantedRoot())) {
+            Toast.makeText(this, "NO ROOT!", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+        if (Objects.equals(widget_type, "mount")) {
+            Log.d("INFO", "mount");
+            MainActivity.mountUI();
+        } else if (Objects.equals(widget_type, "quickboot")) {
+            Log.d("INFO", "quickboot");
+            MainActivity.quickbootUI();
+        }
+        Dlg.dialog.setOnCancelListener((dialog) -> {
+            dialog.dismiss();
+            finish();
+        });
+        Dlg.dialog.show();
+    }
 }

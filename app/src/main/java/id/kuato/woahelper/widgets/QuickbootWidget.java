@@ -12,6 +12,13 @@ import android.widget.RemoteViews;
 import id.kuato.woahelper.R;
 
 public class QuickbootWidget extends AppWidgetProvider {
+    public static void updateText(Context context, String text) {
+        Intent intent = new Intent(context, QuickbootWidget.class);
+        intent.setAction("UPDATE");
+        intent.putExtra("text", text);
+        context.sendBroadcast(intent);
+    }
+
     @SuppressLint("StringFormatInvalid")
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -61,12 +68,5 @@ public class QuickbootWidget extends AppWidgetProvider {
                 appWidgetManager.updateAppWidget(appWidgetId, views);
             }
         }
-    }
-
-    public static void updateText(Context context,  String text) {
-        Intent intent = new Intent(context, QuickbootWidget.class);
-        intent.setAction("UPDATE");
-        intent.putExtra("text", text);
-        context.sendBroadcast(intent);
     }
 }
