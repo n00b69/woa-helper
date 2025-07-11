@@ -10,16 +10,18 @@ import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.Uri;
+import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -55,9 +57,10 @@ import id.kuato.woahelper.preference.pref;
 import id.kuato.woahelper.util.RAM;
 import id.kuato.woahelper.widgets.MountWidget;
 
+@SuppressLint("StaticFieldLeak")
 public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 
-	public static ActivityMainBinding x;
+    public static ActivityMainBinding x;
 	public static SetPanelBinding k;
 	public static ToolboxBinding n;
 	public static ScriptsBinding z;
@@ -105,6 +108,21 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 	protected void onCreate(android.os.Bundle savedInstanceState) {
 		androidx.activity.EdgeToEdge.enable(this);
 		super.onCreate(savedInstanceState);
+
+		getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+			@Override
+			public void handleOnBackPressed() {
+				if (views.size() - 1 == 0) {
+					finish();
+					return;
+				}
+				views.get(views.size() - 1).startAnimation(AnimationUtils.loadAnimation(MainActivity.context, R.anim.slide_back_out));
+				views.remove(views.size() - 1);
+				setContentView(views.get(views.size() - 1));
+				views.get(views.size() - 1).startAnimation(AnimationUtils.loadAnimation(MainActivity.context, R.anim.slide_back_in));
+			}
+		});
+
 		copyAssets();
 		x = ActivityMainBinding.inflate(getLayoutInflater());
 		k = SetPanelBinding.inflate(getLayoutInflater());
@@ -132,6 +150,7 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 		for (String i : BuildConfig.LOCALES) {
 			locales.add(i.toLowerCase());
 			Locale locale = LocaleListCompat.forLanguageTags(i).get(0);
+            assert locale != null;
             String country = locale.getDisplayCountry(locale);
 			boolean c = !country.isEmpty();
 			String lang = locale.getDisplayLanguage(locale)+ (c?" (":"")+country+ (c?")":"");
@@ -544,9 +563,9 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 			});
 		});
 		
-		x.mnt.setOnClickListener(a -> { mountUI(); });
+		x.mnt.setOnClickListener(a -> mountUI());
 
-		x.quickBoot.setOnClickListener(a -> { quickbootUI(); });
+		x.quickBoot.setOnClickListener(a -> quickbootUI());
 
 		x.toolbox.setOnClickListener(v -> {
 			views.add(n.getRoot());
@@ -688,9 +707,7 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 						}
 						Dlg.setText(R.string.devcfg);
 						Dlg.setDismiss(R.string.dismiss, Dlg::close);
-						Dlg.setYes(R.string.reboot, () -> {
-							ShellUtils.fastCmd("su -c svc power reboot");
-						});
+						Dlg.setYes(R.string.reboot, () -> ShellUtils.fastCmd("su -c svc power reboot"));
 					});
 				}).start();
 			});
@@ -930,7 +947,7 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 			langSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 				@Override
 				public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-					AppCompatDelegate.setApplicationLocales((languages.get(position)=="System Default") ? LocaleListCompat.getEmptyLocaleList() : LocaleListCompat.forLanguageTags(locales.get(position)));
+					AppCompatDelegate.setApplicationLocales((Objects.equals(languages.get(position), "System Default")) ? LocaleListCompat.getEmptyLocaleList() : LocaleListCompat.forLanguageTags(locales.get(position)));
 				}
 				@Override
 				public void onNothingSelected(AdapterView<?> parent) {}
@@ -1037,19 +1054,6 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 			Dlg.show(this, R.string.nonroot);
 			Dlg.setCancelable(false);
 		}
-	}
-
-	@Override
-	public void onBackPressed() {
-		if (views.size() - 1 == 0) {
-			super.onBackPressed();
-			finish();
-			return;
-		}
-		views.get(views.size() - 1).startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_out));
-		views.remove(views.size() - 1);
-		setContentView(views.get(views.size() - 1));
-		views.get(views.size() - 1).startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_in));
 	}
 
 	public static void flash(String uefi) {
@@ -1225,7 +1229,7 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 	}
 	
 	@Override
-	public void onConfigurationChanged(Configuration newConfig) {
+	public void onConfigurationChanged(@NonNull Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
 		if (!tablet) return;
 		List.of(x.app, x.top).forEach(v -> v.setOrientation((Configuration.ORIENTATION_PORTRAIT == newConfig.orientation && tablet) ? ((v == x.app) ? LinearLayout.VERTICAL : LinearLayout.HORIZONTAL) : ((v == x.app) ? LinearLayout.HORIZONTAL : LinearLayout.VERTICAL)));
@@ -1260,7 +1264,7 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 		return ShellUtils.fastCmd("realpath " + partition);
 	}
 	public static String updateWinPath() {
-		winpath = pref.getMountLocation(context) ? "/mnt/Windows" : "/mnt/sdcard/Windows";
+		winpath = pref.getMountLocation(context) ? "/mnt/Windows" : Environment.getExternalStorageDirectory().getPath()+"/Windows";
 		return winpath;
 	}
 	public static String updateDevice() {
@@ -1319,9 +1323,7 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 				runOnUiThread(() -> {
 					Dlg.setText(getString(R.string.dbkp, message));
 					Dlg.setDismiss(R.string.dismiss, Dlg::close);
-					Dlg.setNo(R.string.reboot, () -> {
-						ShellUtils.fastCmd("su -c svc power reboot");
-					});
+					Dlg.setNo(R.string.reboot, () -> ShellUtils.fastCmd("su -c svc power reboot"));
 				});
 			}
 		}.init(message,link)).start();

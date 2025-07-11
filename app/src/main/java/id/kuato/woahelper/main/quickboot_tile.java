@@ -1,6 +1,7 @@
 package id.kuato.woahelper.main;
 
 import android.os.Build;
+import android.os.Environment;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 import android.widget.Toast;
@@ -10,7 +11,6 @@ import com.topjohnwu.superuser.ShellUtils;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Objects;
 
 import id.kuato.woahelper.R;
 import id.kuato.woahelper.preference.pref;
@@ -60,7 +60,7 @@ public class quickboot_tile extends TileService {
 		final Tile tile = getQsTile();
 		if (2 == tile.getState() || !pref.getCONFIRM(this)) {
 			mount();
-			String found = ShellUtils.fastCmd("ls " + (pref.getMountLocation(this) ? "/mnt/Windows" : "/mnt/sdcard/Windows") + " | grep boot.img");
+			String found = ShellUtils.fastCmd("ls " + (pref.getMountLocation(this) ? "/mnt/Windows" : Environment.getExternalStorageDirectory().getPath()+"/Windows") + " | grep boot.img");
 			if (pref.getMountLocation(this)) {
 				if (pref.getBACKUP(this) || (!pref.getAUTO(this) && found.isEmpty())) {
 					ShellUtils.fastCmd("dd bs=8m if=" + boot + " of=/mnt/Windows/boot.img");
@@ -151,7 +151,7 @@ public class quickboot_tile extends TileService {
 		finduefi = ShellUtils.fastCmd(getString(R.string.uefiChk));
 		findwin = ShellUtils.fastCmd("find /dev/block | grep -i -E \"win|mindows|windows\" | head -1");
 		win = ShellUtils.fastCmd("realpath " + findwin);
-		winpath = (pref.getMountLocation(this) ? "/mnt/Windows" : "/mnt/sdcard/Windows");
+		winpath = (pref.getMountLocation(this) ? "/mnt/Windows" : Environment.getExternalStorageDirectory().getPath()+"/Windows");
 		findboot = ShellUtils.fastCmd("find /dev/block | grep boot$(getprop ro.boot.slot_suffix)");
 		if (findboot.isEmpty()) findboot = ShellUtils.fastCmd("find /dev/block | grep BOOT$(getprop ro.boot.slot_suffix)");
 		boot = ShellUtils.fastCmd("realpath " + findboot);

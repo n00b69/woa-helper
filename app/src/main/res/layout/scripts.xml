@@ -44,7 +44,7 @@
             <LinearLayout
                 android:id="@+id/appRight"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
 				android:background="@android:color/transparent"
                 android:orientation="vertical"
@@ -54,7 +54,7 @@
                     android:id="@+id/cv_defender"
                     style="@style/Widget.Material3.CardView.Filled"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"

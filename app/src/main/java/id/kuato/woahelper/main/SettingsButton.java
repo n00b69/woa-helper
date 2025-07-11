@@ -2,16 +2,13 @@ package id.kuato.woahelper.main;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 
 import id.kuato.woahelper.R;
 import id.kuato.woahelper.databinding.SettingsButtonBinding;
@@ -20,8 +17,8 @@ public class SettingsButton extends FrameLayout {
     public interface OnChangeClickListener {
         void onClick(boolean state);
     }
-    private SettingsButtonBinding layout;
-    private Context context;
+    private final SettingsButtonBinding layout;
+    private final Context context;
 
     public SettingsButton(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);

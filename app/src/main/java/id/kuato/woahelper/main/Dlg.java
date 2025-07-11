@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
 
@@ -54,7 +53,7 @@ public class Dlg {
         MainActivity.showBlur();
         dialog.setOnDismissListener(v -> {
             MainActivity.hideBlur(true);
-            if (WidgetActivity.active) ((AppCompatActivity) MainActivity.context).finish();
+            if (WidgetActivity.active) MainActivity.context.finish();
         });
 
         dialog.show();
@@ -94,7 +93,7 @@ public class Dlg {
     private static void setButton(MaterialButton button, String text, OnButtonClick onButtonClick) {
         button.setVisibility(View.VISIBLE);
         button.setText(text);
-        button.setOnClickListener(v -> { onButtonClick.execute(); });
+        button.setOnClickListener(v -> onButtonClick.execute());
     }
     public static void setText(@StringRes int stringId) {
         setText(ctx.getString(stringId));

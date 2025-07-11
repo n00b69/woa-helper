@@ -1,15 +1,10 @@
 package id.kuato.woahelper.widgets;
 
 import android.annotation.SuppressLint;
-import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.RemoteViews;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +14,6 @@ import com.topjohnwu.superuser.Shell;
 import java.util.Objects;
 
 import id.kuato.woahelper.BuildConfig;
-import id.kuato.woahelper.R;
 import id.kuato.woahelper.main.Dlg;
 import id.kuato.woahelper.main.MainActivity;
 
@@ -68,7 +62,7 @@ public class 	WidgetActivity extends AppCompatActivity {
 		String widget_type = intent.getStringExtra("WIDGET_TYPE");
 
 		MainActivity.context = this;
-		if (Shell.isAppGrantedRoot() != true) {
+		if (!Boolean.TRUE.equals(Shell.isAppGrantedRoot())) {
 			Toast.makeText(this, "NO ROOT!", Toast.LENGTH_SHORT).show();
 			finish();
 			return;

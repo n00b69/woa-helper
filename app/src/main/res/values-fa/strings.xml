@@ -103,7 +103,7 @@ C:⧹Toolbox?"</string>
 	<string name="unmountt">قطع کردن</string>
 	<string name="update">آپدیت</string>
 	<string name="update1">آپدیت جدیدی در دسترس است</string>
-	<string name="update2">در حال آپدیت کردن...</string>
+	<string name="update2">در حال آپدیت کردن…</string>
 	<string name="qspressagain">Press again</string>
 	<string name="qsinternet">Internet required</string>
 
@@ -119,7 +119,7 @@ C:⧹Toolbox?"</string>
 	<string name="yes">بله</string>
 	<string name="dismiss">تمام</string>
 	<string name="no">نه</string>
-	<string name="please_wait">لطفاً منتظر بمانید...</string>
+	<string name="please_wait">لطفاً منتظر بمانید…</string>
 
 	<string name="preference1">در صورت استفاده از راه‌اندازی سریع به اجبار از فایل بوت در ویندوز پشتیبان گیری شود</string>
 	<string name="preference2">در صورت استفاده از راه‌اندازی سریع به اجبار از فایل بوت در اندروید پشتیبان گیری شود</string>

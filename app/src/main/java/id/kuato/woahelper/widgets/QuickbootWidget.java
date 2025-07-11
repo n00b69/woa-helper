@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.widget.RemoteViews;
 
 import id.kuato.woahelper.R;
-import id.kuato.woahelper.main.MainActivity;
 
 public class QuickbootWidget extends AppWidgetProvider {
     @SuppressLint("StringFormatInvalid")

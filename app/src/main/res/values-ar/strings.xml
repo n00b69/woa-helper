@@ -94,7 +94,7 @@
 	<string name="unmountt">إلغاء الربط</string>
 	<string name="update">تحديث</string>
 	<string name="update1">تحديث متوفر</string>
-	<string name="update2">جاري التحديث...</string>
+	<string name="update2">جاري التحديث…</string>
 	<string name="qspressagain">Press again</string>
 	<string name="qsinternet">Internet required</string>
 	
@@ -110,7 +110,7 @@
 	<string name="yes">نعم</string>
 	<string name="dismiss">تجاهل</string>
 	<string name="no">لا</string>
-	<string name="please_wait">يرجى الانتظار...</string>
+	<string name="please_wait">يرجى الانتظار…</string>
 
 	<string name="preference1">فرض أخذ نسخة احتياطية للـ Boot عند كل إقلاع سريع، احفظها في (Windows)</string>
 	<string name="preference2">فرض أخذ نسخة احتياطية للـ Boot عند كل إقلاع سريع، احفظها في (Android)</string>

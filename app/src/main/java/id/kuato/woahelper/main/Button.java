@@ -1,11 +1,9 @@
 package id.kuato.woahelper.main;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -16,8 +14,8 @@ import id.kuato.woahelper.R;
 import id.kuato.woahelper.databinding.ButtonBinding;
 
 public class Button extends MaterialCardView {
-    private ButtonBinding layout;
-    private Context context;
+    private final ButtonBinding layout;
+    private final Context context;
 
     public Button(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);

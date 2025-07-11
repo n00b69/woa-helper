@@ -14,27 +14,27 @@ This project is in late stages of development. Most features have already been a
 ## Features
 | Feature                         | Notes                                                                           | Status |
 |---------------------------------|---------------------------------------------------------------------------------|--------|
-| Backup Android Boot             | Will be stored in internal storage and/or in Windows                            | ✅     |
-| Mount/Unmount Windows partition | Needed to view/modify Windows files from Android                                | ✅     |
-| Mount Quick Settings toggle     |                                                                                 | ✅     |
-| Mount widget                    |                                                                                 | ✅     |
-| Automount Windows partition     | Optionally automatically mounts Windows when the device starts                  | ✅     |
-| Quickboot to Windows            | To use the Quick Boot feature, you need to place the UEFI image in /sdcard/UEFI | ✅     |
-| Quickboot Quick Settings toggle |                                                                                 | ✅     |
-| Quickboot widget                |                                                                                 | ✅     |
-| StA Creator & Auto boot flasher | Creates dualboot files & tool to automatically flash boot.img                   | ✅     |
-| Provisioning Modem              | Only for devices that may need it for LTE to work                               | ✅     |
-| DBKP (Dualboot Kernel Patcher)  | Only for supported devices: Oneplus 7(T) Pro 4G, Xiaomi Mi 9 & Xiaomi Pad 5     | ✅     |
-| DBKP uninstaller                | To be added in the future. To uninstall manually, flash the boot.img backup     | ❌     |
-| Devcfg flasher                  | Only for Oneplus 7(T) Pro 4G, needed on OOS12 to boot Windows                   | ✅     |
-| Devcfg Quick Settings toggle    | To be added in the future                                                       | ❌     |
-| Devcfg flasher widget           | To be added in the future                                                       | ❌     |
-| Edge & Defender Remover         | To remove Microsoft Edge & Windows Defender                                     | ✅     |
-| USB host mode toggle            | To switch USB modes; ON for USB, OFF for charging                               | ✅     |
-| Display rotation script         | Shortcuts to rotate the screen, especially useful for devices without sensors   | ✅     |
-| AtlasOS and ReviOS              | Modified versions to remove the charging requirement                            | ✅     |
-| Framework installers            | DirectX, C++ redistributables, XNA framework, OpenAL, OpenGL compatibility pack | ✅     |
-| In-app updater                  | If an app update is available, you'll receive an in-app popup (can be disabled) | ✅     |
+| Backup Android Boot             | Will be stored in internal storage and/or in Windows                            | ✅      |
+| Mount/Unmount Windows partition | Needed to view/modify Windows files from Android                                | ✅      |
+| Mount Quick Settings toggle     |                                                                                 | ✅      |
+| Mount widget                    |                                                                                 | ✅      |
+| Automount Windows partition     | Optionally automatically mounts Windows when the device starts                  | ✅      |
+| Quickboot to Windows            | To use the Quick Boot feature, you need to place the UEFI image in /sdcard/UEFI | ✅      |
+| Quickboot Quick Settings toggle |                                                                                 | ✅      |
+| Quickboot widget                |                                                                                 | ✅      |
+| StA Creator & Auto boot flasher | Creates dualboot files & tool to automatically flash boot.img                   | ✅      |
+| Provisioning Modem              | Only for devices that may need it for LTE to work                               | ✅      |
+| DBKP (Dualboot Kernel Patcher)  | Only for supported devices: Oneplus 7(T) Pro 4G, Xiaomi Mi 9 & Xiaomi Pad 5     | ✅      |
+| DBKP uninstaller                | To be added in the future. To uninstall manually, flash the boot.img backup     | ❌      |
+| Devcfg flasher                  | Only for Oneplus 7(T) Pro 4G, needed on OOS12 to boot Windows                   | ✅      |
+| Devcfg Quick Settings toggle    | To be added in the future                                                       | ❌      |
+| Devcfg flasher widget           | To be added in the future                                                       | ❌      |
+| Edge & Defender Remover         | To remove Microsoft Edge & Windows Defender                                     | ✅      |
+| USB host mode toggle            | To switch USB modes; ON for USB, OFF for charging                               | ✅      |
+| Display rotation script         | Shortcuts to rotate the screen, especially useful for devices without sensors   | ✅      |
+| AtlasOS and ReviOS              | Modified versions to remove the charging requirement                            | ✅      |
+| Framework installers            | DirectX, C++ redistributables, XNA framework, OpenAL, OpenGL compatibility pack | ✅      |
+| In-app updater                  | If an app update is available, you'll receive an in-app popup (can be disabled) | ✅      |
 
 ## Requirements
 - Android 7 and up (Only Android 8+ was tested).

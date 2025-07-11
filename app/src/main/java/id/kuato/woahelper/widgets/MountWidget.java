@@ -7,10 +7,7 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.widget.RemoteViews;
-
-import java.util.List;
 
 import id.kuato.woahelper.R;
 import id.kuato.woahelper.main.MainActivity;

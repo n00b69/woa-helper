@@ -1,11 +1,11 @@
 package id.kuato.woahelper.main;
 
+import android.os.Environment;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 
 import com.topjohnwu.superuser.ShellUtils;
 
-import id.kuato.woahelper.R;
 import id.kuato.woahelper.preference.pref;
 
 public class mount_tile extends TileService {
@@ -40,7 +40,7 @@ public class mount_tile extends TileService {
 			return;
 		}
 		win = ShellUtils.fastCmd("realpath " + findwin);
-		winpath = (pref.getMountLocation(this) ? "/mnt/Windows" : "/mnt/sdcard/Windows");
+		winpath = (pref.getMountLocation(this) ? "/mnt/Windows" : Environment.getExternalStorageDirectory().getPath()+"/Windows");
 		mnt_stat = ShellUtils.fastCmd("mount | grep " + win);
 		if (mnt_stat.isEmpty()) tile.setState(1);
 		else tile.setState(2);
