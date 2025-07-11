@@ -25,10 +25,6 @@ public class Dlg {
     static TextView text;
     private static Context ctx;
 
-    public interface OnButtonClick {
-        void execute();
-    }
-
     public static void dialogLoading() {
         setCancelable(false);
         clearButtons();
@@ -36,7 +32,9 @@ public class Dlg {
     }
 
     public static void show(Context context, String text) {
-        if (dialog != null && dialog.isShowing()) { dialog.dismiss(); }
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
         ctx = context;
         dialog = new Dialog(context);
         dialog.setContentView(R.layout.dialog);
@@ -58,19 +56,24 @@ public class Dlg {
 
         dialog.show();
     }
+
     public static void show(Context context, @StringRes int stringId) {
         show(context, context.getString(stringId));
 
     }
+
     public static void show(Context context, @StringRes int stringId, @DrawableRes int resId) {
         show(context, context.getString(stringId), resId);
     }
+
     public static void show(Context context, String text, @DrawableRes int resId) {
         show(context, text);
         setIcon(resId);
     }
 
-    public static void close() { dialog.dismiss(); }
+    public static void close() {
+        dialog.dismiss();
+    }
 
     public static void clearButtons() {
         yes.setVisibility(View.GONE);
@@ -78,26 +81,37 @@ public class Dlg {
         dismiss.setVisibility(View.GONE);
     }
 
-    public static void setCancelable(Boolean state) { dialog.setCancelable(state); }
+    public static void setCancelable(Boolean state) {
+        dialog.setCancelable(state);
+    }
 
-    public static void dismissButton() { setDismiss(R.string.dismiss, Dlg::close); setCancelable(true);}
+    public static void dismissButton() {
+        setDismiss(R.string.dismiss, Dlg::close);
+        setCancelable(true);
+    }
+
     public static void setDismiss(@StringRes int stringId, OnButtonClick onButtonClick) {
         setButton(dismiss, ctx.getString(stringId), onButtonClick);
     }
+
     public static void setNo(@StringRes int stringId, OnButtonClick onButtonClick) {
         setButton(no, ctx.getString(stringId), onButtonClick);
     }
+
     public static void setYes(@StringRes int stringId, OnButtonClick onButtonClick) {
         setButton(yes, ctx.getString(stringId), onButtonClick);
     }
+
     private static void setButton(MaterialButton button, String text, OnButtonClick onButtonClick) {
         button.setVisibility(View.VISIBLE);
         button.setText(text);
         button.setOnClickListener(v -> onButtonClick.execute());
     }
+
     public static void setText(@StringRes int stringId) {
         setText(ctx.getString(stringId));
     }
+
     public static void setText(String text) {
         Dlg.text.setText(text);
     }
@@ -106,24 +120,33 @@ public class Dlg {
         icon.setVisibility(View.VISIBLE);
         icon.setImageResource(resId);
     }
+
     public static void hideIcon() {
         icon.setVisibility(View.GONE);
     }
+
     public static void setBar(int progress, boolean animate) {
         bar.setVisibility(View.VISIBLE);
         bar.setProgress(progress, animate);
     }
+
     public static void setBar(int progress) {
-       setBar(progress, true);
+        setBar(progress, true);
     }
+
     public static void hideBar() {
         bar.setVisibility(View.GONE);
     }
+
     public static void onCancel(OnButtonClick event) {
         dialog.setOnCancelListener(v -> {
             event.execute();
             close();
         });
+    }
+
+    public interface OnButtonClick {
+        void execute();
     }
 
 }

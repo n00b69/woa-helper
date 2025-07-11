@@ -29,16 +29,20 @@ public class Button extends MaterialCardView {
         layout.subtitle.setText(subtitle);
         layout.image.setImageResource(imageId);
     }
+
     public void setTitle(@StringRes int stringId) {
         layout.title.setText(context.getString(stringId));
     }
+
     public void setTitle(String title) {
         layout.title.setText(title);
     }
 
     public void setSubtitle(@StringRes int stringId) {
         layout.subtitle.setText(context.getString(stringId));
-    }public void setSubtitle(String subtitle) {
+    }
+
+    public void setSubtitle(String subtitle) {
         layout.subtitle.setText(subtitle);
     }
 }
