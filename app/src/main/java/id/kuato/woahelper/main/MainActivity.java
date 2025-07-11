@@ -1288,7 +1288,7 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
     }
 
     private void checkwin() {
-        if (win.isEmpty()) return;
+        if (!win.isEmpty()) return;
         Dlg.show(this, R.string.partition);
         Dlg.setCancelable(false);
         List.of(x.mnt, x.toolbox, x.quickBoot, n.flashUefi).forEach(v -> v.setEnabled(false));
