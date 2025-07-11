@@ -12,7 +12,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-		android:background="@android:color/transparent"
+        android:background="@android:color/transparent"
         android:orientation="vertical">
 
         <include
@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-			android:background="@color/md_theme_background"
+            android:background="@color/md_theme_background"
             android:foregroundGravity="center"
             android:gravity="center"
             android:orientation="vertical"
@@ -63,7 +63,7 @@
                         android:layout_height="@dimen/_138sdp"
                         android:src="@drawable/unknown"
                         android:contentDescription="TODO"
-                        android:scaleType="fitXY"/>
+                        android:scaleType="fitXY" />
 
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/cv_info"
@@ -80,7 +80,7 @@
                         android:gravity="left"
                         android:padding="@dimen/parentMargin"
                         android:stateListAnimator="@animator/state_list_anim"
-						app:cardBackgroundColor="?attr/colorOnSurfaceInverse"
+                        app:cardBackgroundColor="?attr/colorOnSurfaceInverse"
                         app:cardCornerRadius="@dimen/cardCornerRadius"
                         app:cardMaxElevation="0dp">
 

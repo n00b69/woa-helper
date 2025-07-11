@@ -1,12 +1,10 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/settingsPanel"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorOnSurfaceInverse"
     android:orientation="vertical">
-
 
 
     <LinearLayout
@@ -37,66 +35,77 @@
                     android:layout_height="45dp"
                     android:visibility="gone"
                     app:text="Disable modem dump option" />
+
                 <id.kuato.woahelper.main.SettingsButton
                     style="@style/settingsButton"
                     android:id="@+id/backupQB"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     app:text="@string/preference1" />
+
                 <id.kuato.woahelper.main.SettingsButton
                     style="@style/settingsButton"
                     android:id="@+id/backupQB_A"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     app:text="@string/preference2" />
+
                 <id.kuato.woahelper.main.SettingsButton
                     style="@style/settingsButton"
                     android:id="@+id/autobackup"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     app:text="@string/preference3" />
+
                 <id.kuato.woahelper.main.SettingsButton
                     style="@style/settingsButton"
                     android:id="@+id/autobackup_a"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     app:text="@string/preference4" />
+
                 <id.kuato.woahelper.main.SettingsButton
                     style="@style/settingsButton"
                     android:id="@+id/confirmation"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     app:text="@string/preference5" />
+
                 <id.kuato.woahelper.main.SettingsButton
                     style="@style/settingsButton"
                     android:id="@+id/automount"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     app:text="@string/preference7" />
+
                 <id.kuato.woahelper.main.SettingsButton
                     style="@style/settingsButton"
                     android:id="@+id/securelock"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     app:text="@string/preference9" />
+
                 <id.kuato.woahelper.main.SettingsButton
                     style="@style/settingsButton"
                     android:id="@+id/mountLocation"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     app:text="@string/preference10" />
+
                 <id.kuato.woahelper.main.SettingsButton
                     style="@style/settingsButton"
                     android:id="@+id/appUpdate"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     app:text="@string/preference11" />
+
                 <id.kuato.woahelper.main.SettingsButton
                     style="@style/settingsButton"
                     android:id="@+id/devcfg1"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     app:text="@string/preference12" />
+
                 <id.kuato.woahelper.main.SettingsButton
                     style="@style/settingsButton"
                     android:id="@+id/devcfg2"
@@ -113,11 +122,13 @@
                     android:background="@drawable/default_background"
                     android:gravity="center"
                     android:padding="@dimen/_5sdp">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:text="Language" />
+
                     <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/languages"
                         android:layout_width="wrap_content"

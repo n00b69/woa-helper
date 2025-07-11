@@ -12,7 +12,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-		android:background="@android:color/transparent"
+        android:background="@android:color/transparent"
         android:orientation="vertical">
 
         <include
@@ -54,7 +54,7 @@
                     android:paddingBottom="10dp">
 
                     <id.kuato.woahelper.main.Button
-                    style="@style/button"
+                        style="@style/button"
                         android:id="@+id/sta"
                         app:title="@string/sta_title"
                         app:subtitle="@string/sta_subtitle"
@@ -63,7 +63,7 @@
                         android:layout_height="100dp" />
 
                     <id.kuato.woahelper.main.Button
-                    style="@style/button"
+                        style="@style/button"
                         android:id="@+id/flash_uefi"
                         app:title="@string/flash_uefi_title"
                         app:subtitle="@string/flash_uefi_subtitle"
@@ -72,7 +72,7 @@
                         android:layout_height="100dp" />
 
                     <id.kuato.woahelper.main.Button
-                    style="@style/button"
+                        style="@style/button"
                         android:id="@+id/dbkp"
                         app:title="@string/dbkp_title"
                         app:subtitle="@string/dbkp_subtitle"
@@ -82,7 +82,7 @@
                         android:layout_height="100dp" />
 
                     <id.kuato.woahelper.main.Button
-                    style="@style/button"
+                        style="@style/button"
                         android:id="@+id/dump_modem"
                         app:title="@string/dump_modem_title"
                         app:subtitle="@string/dump_modem_subtitle"
@@ -92,7 +92,7 @@
                         android:layout_height="100dp" />
 
                     <id.kuato.woahelper.main.Button
-                    style="@style/button"
+                        style="@style/button"
                         android:id="@+id/devcfg"
                         app:title="@string/devcfg_title"
                         app:subtitle="@string/devcfg_subtitle"
@@ -102,7 +102,7 @@
                         android:layout_height="100dp" />
 
                     <id.kuato.woahelper.main.Button
-                    style="@style/button"
+                        style="@style/button"
                         android:id="@+id/software"
                         app:title="@string/software_title"
                         app:subtitle="@string/software_subtitle"
@@ -111,47 +111,52 @@
                         android:layout_height="100dp" />
 
                     <id.kuato.woahelper.main.Button
-                    style="@style/button"
+                        style="@style/button"
                         android:id="@+id/atlasos"
                         app:title="@string/atlasos_title"
                         app:subtitle="@string/atlasos_subtitle"
                         app:image="@drawable/ic_ar"
                         android:layout_width="match_parent"
                         android:layout_height="100dp" />
+
                     <id.kuato.woahelper.main.Button
-                    style="@style/button"
+                        style="@style/button"
                         android:id="@+id/usbhost"
                         app:title="@string/usbhost_title"
                         app:subtitle="@string/usbhost_subtitle"
                         app:image="@drawable/mnt"
                         android:layout_width="match_parent"
                         android:layout_height="100dp" />
+
                     <id.kuato.woahelper.main.Button
-                    style="@style/button"
+                        style="@style/button"
                         android:id="@+id/rotation"
                         app:title="@string/rotation_title"
                         app:subtitle="@string/rotation_subtitle"
                         app:image="@drawable/ic_disk"
                         android:layout_width="match_parent"
                         android:layout_height="100dp" />
+
                     <id.kuato.woahelper.main.Button
-                    style="@style/button"
+                        style="@style/button"
                         android:id="@+id/tablet"
                         app:title="@string/tablet_title"
                         app:subtitle="@string/tablet_subtitle"
                         app:image="@drawable/ic_sensor"
                         android:layout_width="match_parent"
                         android:layout_height="100dp" />
+
                     <id.kuato.woahelper.main.Button
-                    style="@style/button"
+                        style="@style/button"
                         android:id="@+id/setup"
                         app:title="@string/setup_title"
                         app:subtitle="@string/setup_subtitle"
                         app:image="@drawable/mnt"
                         android:layout_width="match_parent"
                         android:layout_height="100dp" />
+
                     <id.kuato.woahelper.main.Button
-                    style="@style/button"
+                        style="@style/button"
                         android:id="@+id/defender"
                         app:title="@string/defender_title"
                         app:subtitle="@string/defender_subtitle"

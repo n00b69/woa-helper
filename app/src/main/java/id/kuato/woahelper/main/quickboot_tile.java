@@ -17,13 +17,13 @@ import id.kuato.woahelper.preference.pref;
 
 public class quickboot_tile extends TileService {
 
-    String finduefi;
-    String device;
-    String win;
-    String findwin;
-    String winpath;
-    String findboot;
-    String boot;
+    private String finduefi = null;
+    private String device = null;
+    private String win = null;
+    private String findwin = null;
+    private String winpath = null;
+    private String findboot = null;
+    private String boot = null;
 
     // Called when your app can update your tile.
     @Override
@@ -37,15 +37,15 @@ public class quickboot_tile extends TileService {
             tile.setState(0);
         else tile.setState(1);
         if (pref.getDevcfg1(this)) {
-            if (!MainActivity.isNetworkConnected(this)) {
+            if (MainActivity.isNetworkConnected(this)) {
+                tile.setState(1);
+            } else {
                 String finddevcfg = ShellUtils.fastCmd("find " + getFilesDir() + " -maxdepth 1 -name OOS11_devcfg_*");
                 if (finddevcfg.isEmpty()) {
                     tile.setState(0);
                     // These titles don't actually even seem to work and are obsolete I guess, is there even a way to change the titles?
                     tile.setSubtitle(getString(R.string.qsinternet));
                 }
-            } else {
-                tile.setState(1);
             }
         }
         if (Build.VERSION_CODES.Q <= Build.VERSION.SDK_INT) {
@@ -146,11 +146,11 @@ public class quickboot_tile extends TileService {
         }
     }
 
-    public void flash() {
+    private void flash() {
         ShellUtils.fastCmd("dd if=" + finduefi + " of=/dev/block/bootdevice/by-name/boot$(getprop ro.boot.slot_suffix) bs=16m");
     }
 
-    public void checkuefi() {
+    private void checkuefi() {
         finduefi = ShellUtils.fastCmd(getString(R.string.uefiChk));
         findwin = ShellUtils.fastCmd("find /dev/block | grep -i -E \"win|mindows|windows\" | head -1");
         win = ShellUtils.fastCmd("realpath " + findwin);

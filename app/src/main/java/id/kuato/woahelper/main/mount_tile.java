@@ -10,10 +10,10 @@ import id.kuato.woahelper.preference.pref;
 
 public class mount_tile extends TileService {
 
-    String win;
-    String findwin;
-    String mnt_stat;
-    String winpath;
+    private String win = null;
+    private String findwin = null;
+    private String mnt_stat = null;
+    private String winpath = null;
 
     @Override
     public void onStartListening() {
@@ -59,7 +59,7 @@ public class mount_tile extends TileService {
         }
     }
 
-    public void unmount() {
+    private void unmount() {
         ShellUtils.fastCmd("su -mm -c umount " + winpath);
         ShellUtils.fastCmd("rmdir " + winpath);
     }

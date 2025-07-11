@@ -16,7 +16,7 @@ package id.kuato.woahelper.util;
  *  * limitations under the License.
  *  */
 
-public class MemoryUtils {
+class MemoryUtils {
 
     private String floatForm(final double d) {
         return String.format(java.util.Locale.US, "%.2f", d);

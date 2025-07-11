@@ -28,7 +28,7 @@
 	<string name="uefi_not_found_subtitle">Пожалуйста, скачайте UEFI для %s и поместите в папку UEFI во внутреннем хранилище (/sdcard/UEFI)</string>
 	<string name="quickboot_subtitle">Дамп modem, прошивка UEFI и перезагрузка в Windows в один клик</string>
 	<string name="quickboot_subtitle_nabu">Прошить UEFI и перезагрузиться в Windows одним кликом!</string>
-	<string name="sta_subtitle">Добавляет приложение "Switch to Android" в Windows</string>
+	<string name="sta_subtitle">Добавляет приложение “Switch to Android” в Windows</string>
 	<string name="usbhost_subtitle">Добавляет утилиту для переключения режима USB в C:⧹Toolbox</string>
 	<string name="software_subtitle">Добавляет ярлык на сайт с программами для ARM в C:⧹Toolbox</string>
 	<string name="rotation_subtitle">Добавляет утилиту для переключения ориентации экрана с помощью ярлыка в C:⧹Toolbox\n (Полезно для устройств без работающих сенсоров)</string>
@@ -47,7 +47,7 @@
 	<string name="dump_modem_question">Сдампить modem1st и modem2st в Windows?</string>
 	<string name="flash_uefi_question">Прошить UEFI? \nЕсли да, то следующая загрузка будет в Windows</string>
 	<string name="quickboot_question">Перезагрузиться в Windows?</string>
-	<string name="sta_question">Создать приложение "Switch to Android" в C:\\sta?</string>
+	<string name="sta_question">Создать приложение “Switch to Android” в C:\\sta?</string>
 	<string name="usbhost_question">Скопировать утилиту для переключения режимов USB в C:⧹Toolbox?</string>
 	<string name="software_question">Скопировать ярлык на сайт в C:⧹Toolbox?</string>
 	<string name="rotation_question">Скопировать утилиту для переключения ориентации экрана в C:⧹Toolbox?</string>
@@ -55,9 +55,9 @@
 	<string name="atlasos_question">Загрузить и переместить AtlasOS / ReviOS playbook в C:⧹Toolbox?</string>
 	<string name="defender_question">Скопировать скрипт для удаления Edge / Defender в C:⧹Toolbox?</string>
 	<string name="setup_question">Скачать и переместить установщики C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, и XNA в C:⧹Toolbox?\n(это может занять некоторое время)</string>
-	<string name="dbkp_question">Пропатчить и прошить ваше текущее ядро?\n!!!НЕ НАЖИМАЙТЕ КНОПКУ "ДА", ЕСЛИ ВАШЕ УСТРОЙСТВО НЕ %s!!!</string>
+	<string name="dbkp_question">Пропатчить и прошить ваше текущее ядро?\n!!!НЕ НАЖИМАЙТЕ КНОПКУ “ДА”, ЕСЛИ ВАШЕ УСТРОЙСТВО НЕ %s!!!</string>
 	<string name="tablet_question">Скопировать утилиту для переключения режима планшета в C:⧹Toolbox?</string>
-	<string name="devcfg_question">Прошить devcfg OOS11?\n!!!НЕ НАЖИМАЙТЕ КНОПКУ "ДА", ЕСЛИ ВАШЕ УСТРОЙСТВО НЕ %s!!!</string>
+	<string name="devcfg_question">Прошить devcfg OOS11?\n!!!НЕ НАЖИМАЙТЕ КНОПКУ “ДА”, ЕСЛИ ВАШЕ УСТРОЙСТВО НЕ %s!!!</string>
 
 	<string name="wrong">Что-то пошло не так</string>
 	<string name="mountfail">Что-то пошло не так, \nНе удалось смонтировать Windows.\nОбратитесь за помощью в чат Telegram.</string>

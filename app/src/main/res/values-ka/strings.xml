@@ -80,7 +80,7 @@
 	<string name="flash">UEFI წარმატებით გაფლაშდა.\nშემდეგი გადატვირთვა მოხდება Windows-ში. </string>
 	<string name="backuped">Boot image-ს სარეზერვო ასლი წარმატებით შეიქმნა\n</string>
 	<string name="preferences">პრეფერენციები</string>
-	<string name="bwarn">!!გაფრთხილება!!\n ამის გამო UFS შეიძლება "გაცვდეს", ჩართეთ მხოლოდ იმ შემთხვევაში, თუ ბევრ OTA განახლებას მიიღებთ</string>
+	<string name="bwarn">!!გაფრთხილება!!\n ამის გამო UFS შეიძლება “გაცვდეს”, ჩართეთ მხოლოდ იმ შემთხვევაში, თუ ბევრ OTA განახლებას მიიღებთ</string>
 	<string name="agree">ვეთანხმები</string>
 	<string name="nonroot">Root ვერ მოიძებნა</string>
 	<string name="unsupported">!!გაფრთხილება!!\nმოწყობილობა მხარდაუჭერელია\nგამოიყენეთ ეს აპი თქვენი რისკით</string>

@@ -7,11 +7,11 @@
     <locale android:name="de" />
     <locale android:name="en" />
     <locale android:name="es" />
-	<locale android:name="fa" />
+    <locale android:name="fa" />
     <locale android:name="fr" />
     <locale android:name="id" />
-	<locale android:name="ja" />
-	<locale android:name="ka" />
+    <locale android:name="ja" />
+    <locale android:name="ka" />
     <locale android:name="ko" />
     <locale android:name="ms" />
     <locale android:name="nl" />

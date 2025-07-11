@@ -17,7 +17,8 @@
         android:theme="@style/Theme.MyApplication"
         android:enableOnBackInvokedCallback="true"
         tools:targetApi="tiramisu">
-        <receiver android:name=".widgets.MountWidget"
+        <receiver
+            android:name=".widgets.MountWidget"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -28,7 +29,8 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/mount_widget_info" />
         </receiver>
-        <receiver android:name=".widgets.QuickbootWidget"
+        <receiver
+            android:name=".widgets.QuickbootWidget"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -49,7 +51,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
-		
+
         <service
             android:name=".main.quickboot_tile"
             android:exported="true"
@@ -78,6 +80,7 @@
                 android:name="autoStoreLocales"
                 android:value="true" />
         </service>
+
         <activity
             android:name=".widgets.WidgetActivity"
             android:theme="@style/TransparentTheme"

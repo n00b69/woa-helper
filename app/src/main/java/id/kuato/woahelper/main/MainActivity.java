@@ -35,6 +35,7 @@ import com.topjohnwu.superuser.Shell;
 import com.topjohnwu.superuser.ShellUtils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -60,30 +61,40 @@ import id.kuato.woahelper.widgets.MountWidget;
 @SuppressLint("StaticFieldLeak")
 public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
 
-    public static ActivityMainBinding x;
-    public static SetPanelBinding k;
-    public static ToolboxBinding n;
-    public static ScriptsBinding z;
-    public static AppCompatActivity context;
-    static String mounted, win, winpath, panel, finduefi, device, model, dbkpmodel, boot;
-    static int blur = 0;
-    String grouplink = "https://t.me/woahelperchat", guidelink = "https://github.com/n00b69";
-    boolean unsupported = false, tablet = false;
-    List<View> views = new ArrayList<>();
+    private static ActivityMainBinding x = null;
+    private static SetPanelBinding k = null;
+    private static ToolboxBinding n = null;
+    private static ScriptsBinding z = null;
+    public static AppCompatActivity context = null;
+    private static String mounted = null;
+    private static String win = null;
+    private static String winpath = null;
+    private static String panel = null;
+    private static String finduefi = null;
+    private static String device = null;
+    private static String model = null;
+    private static String dbkpmodel = null;
+    private static String boot = null;
+    private static int blur = 0;
+    private String grouplink = "https://t.me/woahelperchat";
+    private String guidelink = "https://github.com/n00b69";
+    private boolean unsupported = false;
+    private boolean tablet = false;
+    private final List<View> views = new ArrayList<>();
 
     public static boolean isNetworkConnected(Context context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(CONNECTIVITY_SERVICE);
         Network activeNetwork = connectivityManager.getActiveNetwork();
         NetworkCapabilities capabilities = connectivityManager.getNetworkCapabilities(activeNetwork);
         return null != capabilities && (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) || capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) || capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET));
     }
 
-    public static void flash(String uefi) {
+    private static void flash(String uefi) {
         ShellUtils.fastCmd("dd if=" + uefi + " of=/dev/block/bootdevice/by-name/boot$(getprop ro.boot.slot_suffix) bs=16m");
     }
 
     public static void mountUI() {
-        if (winpath == null) updateWinPath();
+        if (null == winpath) updateWinPath();
         Dlg.show(context, isMounted() ? context.getString(R.string.unmount_question) : context.getString(R.string.mount_question, winpath), R.drawable.ic_mnt);
         Dlg.setNo(R.string.no, Dlg::close);
         Dlg.setYes(R.string.yes, () -> {
@@ -106,14 +117,14 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
                 Dlg.hideIcon();
                 Dlg.setText(R.string.mountfail);
                 Dlg.setYes(R.string.chat, () -> openLink("https://t.me/woahelperchat"));
-            }, 25);
+            }, 25L);
         });
     }
 
     public static void quickbootUI() {
-        if (boot == null) boot = getBoot();
-        if (winpath == null) updateWinPath();
-        if (device == null) updateDevice();
+        if (null == boot) boot = getBoot();
+        if (null == winpath) updateWinPath();
+        if (null == device) updateDevice();
         Dlg.show(context, R.string.quickboot_question, R.drawable.ic_launcher_foreground);
         Dlg.setNo(R.string.no, Dlg::close);
         Dlg.setYes(R.string.yes, () -> {
@@ -166,12 +177,12 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
                 ShellUtils.fastCmd("su -c svc power reboot");
                 Dlg.setText(R.string.wrong);
                 Dlg.dismissButton();
-            }, 25);
+            }, 25L);
         });
     }
 
-    public static void mount() {
-        if (win == null) win = getWin();
+    private static void mount() {
+        if (null == win) win = getWin();
         ShellUtils.fastCmd("mkdir " + winpath + " || true");
         ShellUtils.fastCmd("cd " + context.getFilesDir());
         ShellUtils.fastCmd("su -mm -c ./mount.ntfs " + win + " " + winpath);
@@ -185,22 +196,22 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
         updateMountText();
     }
 
-    public static void unmount() {
+    private static void unmount() {
         ShellUtils.fastCmd("su -mm -c umount " + winpath);
         ShellUtils.fastCmd("rmdir " + winpath);
         updateMountText();
     }
 
-    public static void winBackup() {
+    private static void winBackup() {
         mount();
         ShellUtils.fastCmd("su -mm -c dd bs=8m if=" + boot + " of=" + winpath + "/boot.img");
     }
 
-    public static void androidBackup() {
+    private static void androidBackup() {
         ShellUtils.fastCmd("su -mm -c dd bs=8m if=" + boot + " of=/sdcard/boot.img");
     }
 
-    public static void nointernet() {
+    private static void nointernet() {
         Dlg.show(context, R.string.internet);
         Dlg.dismissButton();
     }
@@ -213,49 +224,48 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
     static void hideBlur(boolean check) {
         if (!check) blur = 1;
         blur--;
-        if (blur > 0) return;
+        if (0 < blur) return;
         runSilently(() -> List.of(x.blur, k.blur, n.blur, z.blur).forEach(v -> v.setVisibility(View.GONE)));
     }
 
     public static void runSilently(Runnable action) {
         try {
             action.run();
-        } catch (Exception ignored) {
+        } catch (RuntimeException ignored) {
         }
     }
 
-    static void updateLastBackupDate() {
+    private static void updateLastBackupDate() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM HH:mm", Locale.US);
         String currentDateAndTime = sdf.format(new Date());
         pref.setDATE(context, currentDateAndTime);
         x.tvDate.setText(context.getString(R.string.last, pref.getDATE(context)));
     }
 
-    public static void updateMountText() {
+    private static void updateMountText() {
         mounted = (isMounted()) ? context.getString(R.string.unmountt) : context.getString(R.string.mountt);
         context.runOnUiThread(() -> {
-            if (x != null)
+            if (null != x)
                 x.mnt.setTitle(String.format(context.getString(R.string.mnt_title), mounted));
         });
         MountWidget.updateText(context, String.format(context.getString(R.string.mnt_title), mounted));
     }
 
-    public static String getWin() {
+    private static String getWin() {
         String partition = ShellUtils.fastCmd("find /dev/block | grep -i -E \"win|mindows|windows\" | head -1");
         return ShellUtils.fastCmd("realpath " + partition);
     }
 
-    public static String updateWinPath() {
+    private static String updateWinPath() {
         winpath = pref.getMountLocation(context) ? "/mnt/Windows" : Environment.getExternalStorageDirectory().getPath() + "/Windows";
         return winpath;
     }
 
-    public static String updateDevice() {
+    private static void updateDevice() {
         device = ShellUtils.fastCmd("getprop ro.product.device");
-        return device;
     }
 
-    public static String getBoot() {
+    private static String getBoot() {
         String partition = ShellUtils.fastCmd("find /dev/block | grep \"boot$(getprop ro.boot.slot_suffix)$\" | grep -E \"(/boot|/BOOT|/boot_a|/boot_b|/BOOT_a|/BOOT_b)$\" | head -1 ");
         Log.d("INFO", partition);
         return ShellUtils.fastCmd("realpath " + partition);
@@ -265,7 +275,7 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
         return !ShellUtils.fastCmd("su -mm -c mount | grep " + getWin()).isEmpty();
     }
 
-    static void openLink(String link) {
+    private static void openLink(String link) {
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(link));
         context.startActivity(i);
@@ -294,6 +304,8 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
                 in.close();
                 out.flush();
                 out.close();
+            } catch (FileNotFoundException e) {
+//                throw new RuntimeException(e);
             } catch (IOException ignored) {
             }
         }
@@ -309,14 +321,14 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                if (views.size() - 1 == 0) {
+                if (0 == views.size() - 1) {
                     finish();
                     return;
                 }
-                views.get(views.size() - 1).startAnimation(AnimationUtils.loadAnimation(MainActivity.context, R.anim.slide_back_out));
+                views.get(views.size() - 1).startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_back_out));
                 views.remove(views.size() - 1);
                 setContentView(views.get(views.size() - 1));
-                views.get(views.size() - 1).startAnimation(AnimationUtils.loadAnimation(MainActivity.context, R.anim.slide_back_in));
+                views.get(views.size() - 1).startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_back_in));
             }
         });
 
@@ -347,7 +359,7 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
         for (String i : BuildConfig.LOCALES) {
             locales.add(i.toLowerCase());
             Locale locale = LocaleListCompat.forLanguageTags(i).get(0);
-            assert locale != null;
+            assert null != locale;
             String country = locale.getDisplayCountry(locale);
             boolean c = !country.isEmpty();
             String lang = locale.getDisplayLanguage(locale) + (c ? " (" : "") + country + (c ? ")" : "");
@@ -827,7 +839,7 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
                             Dlg.setText(R.string.flash);
                             Dlg.dismissButton();
                         });
-                    } catch (Exception error) {
+                    } catch (RuntimeException error) {
                         error.printStackTrace();
                     }
                 }).start();
@@ -1134,12 +1146,12 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
             setContentView(k.getRoot());
             views.get(views.size() - 1).startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in));
             // Scary big line! (Victoria)
-            List.of(Pair.create(k.backupQB, pref.getBACKUP(this)), Pair.create(k.backupQBA, pref.getBACKUP_A(this)), Pair.create(k.autobackup, !pref.getAUTO(this)), Pair.create(k.autobackupA, !pref.getAUTO(this)), Pair.create(k.autobackupA, !pref.getAUTO(this)), Pair.create(k.confirmation, pref.getCONFIRM(this)), Pair.create(k.automount, pref.getAutoMount(this)), Pair.create(k.securelock, !pref.getSecure(this)), Pair.create(k.mountLocation, pref.getMountLocation(this)), Pair.create(k.appUpdate, pref.getAppUpdate(this)), Pair.create(k.devcfg1, pref.getDevcfg1(this) && k.devcfg1.getVisibility() == View.VISIBLE), Pair.create(k.devcfg2, pref.getDevcfg2(this))).forEach(a -> a.first.setChecked(a.second));
+            List.of(Pair.create(k.backupQB, pref.getBACKUP(this)), Pair.create(k.backupQBA, pref.getBACKUP_A(this)), Pair.create(k.autobackup, !pref.getAUTO(this)), Pair.create(k.autobackupA, !pref.getAUTO(this)), Pair.create(k.autobackupA, !pref.getAUTO(this)), Pair.create(k.confirmation, pref.getCONFIRM(this)), Pair.create(k.automount, pref.getAutoMount(this)), Pair.create(k.securelock, !pref.getSecure(this)), Pair.create(k.mountLocation, pref.getMountLocation(this)), Pair.create(k.appUpdate, pref.getAppUpdate(this)), Pair.create(k.devcfg1, pref.getDevcfg1(this) && View.VISIBLE == k.devcfg1.getVisibility()), Pair.create(k.devcfg2, pref.getDevcfg2(this))).forEach(a -> a.first.setChecked(a.second));
             k.toolbarlayout.settings.setVisibility(View.GONE);
             AppCompatSpinner langSpinner = findViewById(R.id.languages);
             langSpinner.setAdapter(adapter);
             Locale l = AppCompatDelegate.getApplicationLocales().get(0);
-            if (l != null) {
+            if (null != l) {
                 l = new Locale(l.toLanguageTag());
                 int index = locales.indexOf(l.toString());
                 langSpinner.setSelection(index);
@@ -1258,15 +1270,15 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
         }
     }
 
-    public void dump() {
+    private void dump() {
         List.of(Pair.create("modemst1", "bootmodem_fs1"), Pair.create("modemst2", "bootmodem_fs2")).forEach(v -> ShellUtils.fastCmd(String.format("su -mm -c dd if=/dev/block/by-name/%s of=$(find %s/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/%s", v.first, winpath, v.second)));
     }
 
-    public void checkdbkpmodel() {
-        dbkpmodel = (List.of("guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO").contains(device)) ? "ONEPLUS 7 PRO" : (List.of("hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) ? "ONEPLUS 7T PRO" : (device.equals("cepheus")) ? "XIAOMI MI 9" : (device.equals("nabu")) ? "XIAOMI PAD 5" : "UNSUPPORTED";
+    private void checkdbkpmodel() {
+        dbkpmodel = (List.of("guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO").contains(device)) ? "ONEPLUS 7 PRO" : (List.of("hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) ? "ONEPLUS 7T PRO" : ("cepheus".equals(device)) ? "XIAOMI MI 9" : ("nabu".equals(device)) ? "XIAOMI PAD 5" : "UNSUPPORTED";
     }
 
-    public void checkuefi() {
+    private void checkuefi() {
         ShellUtils.fastCmd("su -c mkdir /sdcard/UEFI");
         finduefi = "\"" + ShellUtils.fastCmd(getString(R.string.uefiChk)) + "\"";
         boolean found = finduefi.contains("img");
@@ -1275,14 +1287,14 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
         List.of(Pair.create(x.quickBoot, (found) ? getString(R.string.quickboot_subtitle_nabu) : getString(R.string.uefi_not_found_subtitle, device)), Pair.create(n.flashUefi, (found) ? getString(R.string.flash_uefi_subtitle) : getString(R.string.uefi_not_found_subtitle, device))).forEach(v -> v.first.setSubtitle(v.second));
     }
 
-    public void checkwin() {
-        if (!win.isEmpty()) return;
+    private void checkwin() {
+        if (win.isEmpty()) return;
         Dlg.show(this, R.string.partition);
         Dlg.setCancelable(false);
         List.of(x.mnt, x.toolbox, x.quickBoot, n.flashUefi).forEach(v -> v.setEnabled(false));
     }
 
-    public void checkupdate() {
+    private void checkupdate() {
         if (pref.getAppUpdate(this) || !MainActivity.isNetworkConnected(this)) return;
 
         String version = ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget -q -O - https://raw.githubusercontent.com/n00b69/woa-helper-update/main/README.md\" | su -mm -c sh");
@@ -1297,14 +1309,14 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
         });
     }
 
-    public void update() {
+    private void update() {
         new Thread(() -> {
             ShellUtils.fastCmd(String.format("echo \"$(su -mm -c find /data/adb -name busybox) wget https://raw.githubusercontent.com/n00b69/woa-helper-update/main/woahelper.apk -O %s\" | su -mm -c sh", getFilesDir() + "/woahelper.apk"));
             ShellUtils.fastCmd("pm install " + getFilesDir() + "/woahelper.apk && rm " + getFilesDir() + "/woahelper.apk");
         }).start();
     }
 
-    public void mountfail() {
+    private void mountfail() {
         Dlg.show(this, getString(R.string.mountfail) + "\n" + getString(R.string.internalstorage));
         Dlg.setDismiss(R.string.cancel, Dlg::close);
         Dlg.setYes(R.string.chat, () -> openLink("https://t.me/woahelperchat"));
@@ -1317,12 +1329,12 @@ public class MainActivity extends androidx.appcompat.app.AppCompatActivity {
         List.of(x.app, x.top).forEach(v -> v.setOrientation((Configuration.ORIENTATION_PORTRAIT == newConfig.orientation && tablet) ? ((v == x.app) ? LinearLayout.VERTICAL : LinearLayout.HORIZONTAL) : ((v == x.app) ? LinearLayout.HORIZONTAL : LinearLayout.VERTICAL)));
     }
 
-    void kernelPatch(String message, String link) {
+    private void kernelPatch(String message, String link) {
         new Thread(new Runnable() {
-            private String message;
-            private String link;
+            private String message = null;
+            private String link = null;
 
-            public Runnable init(String parameter, String parameter2) {
+            Runnable init(String parameter, String parameter2) {
                 this.message = parameter;
                 this.link = parameter2;
                 return this;

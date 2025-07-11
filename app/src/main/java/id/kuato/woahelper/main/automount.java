@@ -10,14 +10,13 @@ import id.kuato.woahelper.preference.pref;
 
 public class automount extends BroadcastReceiver {
 
-    String win;
-    String findwin;
+    private String win = null;
+    private String findwin = null;
 
     @Override
     public void onReceive(final Context context, final Intent intent) {
         final boolean ok = pref.getSharedPreference(context).getBoolean(pref.autoMount, false);
         if (ok) {
-            final String busyBox = pref.getSharedPreference(context).getString(pref.busybox, "");
             findwin = ShellUtils.fastCmd("find /dev/block | grep win");
             if (findwin.isEmpty()) findwin = ShellUtils.fastCmd("find /dev/block | grep mindows");
             if (findwin.isEmpty()) findwin = ShellUtils.fastCmd("find /dev/block | grep windows");

@@ -19,7 +19,7 @@ import id.kuato.woahelper.main.MainActivity;
 
 public class WidgetActivity extends AppCompatActivity {
     public static final String ACTION_CLICK = BuildConfig.APPLICATION_ID + ".ACTION_CLICK";
-    public static boolean active;
+    public static boolean active = false;
 
     @Override
     protected void onDestroy() {

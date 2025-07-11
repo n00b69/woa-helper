@@ -16,12 +16,13 @@ import id.kuato.woahelper.databinding.SettingsButtonBinding;
 public class SettingsButton extends FrameLayout {
     private final SettingsButtonBinding layout;
     private final Context context;
+
     public SettingsButton(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         layout = SettingsButtonBinding.inflate(LayoutInflater.from(context), this, true);
         this.context = context;
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.SettingsButton, 0, 0);
-        if (attrs == null) return;
+        if (null == attrs) return;
         String text = a.getString(R.styleable.SettingsButton_text);
         layout.text.setText(text);
         setCornerRadius();
@@ -29,7 +30,7 @@ public class SettingsButton extends FrameLayout {
         });
     }
 
-    public void setOnChangeListener(OnChangeClickListener onChangeListener) {
+    void setOnChangeListener(OnChangeClickListener onChangeListener) {
         layout.switchButton.setOnCheckedChangeListener((v, state) -> {
             setCornerRadius();
             onChangeListener.onClick(state);
@@ -47,7 +48,7 @@ public class SettingsButton extends FrameLayout {
     private void setCornerRadius() {
         GradientDrawable background = new GradientDrawable();
         background.setColor(getColor());
-        background.setCornerRadius(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5f, context.getResources().getDisplayMetrics()));
+        background.setCornerRadius(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5.0f, context.getResources().getDisplayMetrics()));
         layout.getRoot().setBackground(background);
     }
 

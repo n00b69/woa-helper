@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     android:screenOrientation="portrait"
     tools:context=".main.MainActivity"
-    android:background="?attr/colorOnSurfaceInverse" >
+    android:background="?attr/colorOnSurfaceInverse">
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-		android:background="@android:color/transparent"
+        android:background="@android:color/transparent"
         android:orientation="vertical">
 
         <include
@@ -36,17 +36,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:layout_marginBottom="6dp"
-				android:background="@android:color/transparent"
+                android:background="@android:color/transparent"
                 android:gravity="center"
-                android:orientation="vertical">
-            </LinearLayout>
+                android:orientation="vertical"></LinearLayout>
 
             <LinearLayout
                 android:id="@+id/appRight"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-				android:background="@android:color/transparent"
+                android:background="@android:color/transparent"
                 android:orientation="vertical"
                 android:paddingBottom="10dp">
 
@@ -65,7 +64,7 @@
                     android:foreground="?android:attr/selectableItemBackground"
                     android:padding="@dimen/parentMargin"
                     android:stateListAnimator="@animator/state_list_anim"
-					app:cardBackgroundColor="?attr/colorOnSurfaceInverse"
+                    app:cardBackgroundColor="?attr/colorOnSurfaceInverse"
                     app:cardCornerRadius="@dimen/cardCornerRadius"
                     app:cardMaxElevation="0dp">
 

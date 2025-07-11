@@ -5,7 +5,7 @@ import android.content.Context;
 
 public class RAM {
 
-    public final long getTotalMemory(final Context context) {
+    private long getTotalMemory(final Context context) {
         final ActivityManager actManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         final ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
         assert null != actManager;

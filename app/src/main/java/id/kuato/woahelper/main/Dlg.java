@@ -18,21 +18,23 @@ import id.kuato.woahelper.R;
 import id.kuato.woahelper.widgets.WidgetActivity;
 
 public class Dlg {
-    public static Dialog dialog;
-    static MaterialButton yes, no, dismiss;
-    static ImageView icon;
-    static ProgressBar bar;
-    static TextView text;
-    private static Context ctx;
+    public static Dialog dialog = null;
+    private static MaterialButton yes = null;
+    private static MaterialButton no = null;
+    private static MaterialButton dismiss = null;
+    private static ImageView icon = null;
+    static ProgressBar bar = null;
+    private static TextView text = null;
+    private static Context ctx = null;
 
     public static void dialogLoading() {
-        setCancelable(false);
+        setCancelable(Boolean.FALSE);
         clearButtons();
         setText(ctx.getString(R.string.please_wait));
     }
 
     public static void show(Context context, String text) {
-        if (dialog != null && dialog.isShowing()) {
+        if (null != dialog && dialog.isShowing()) {
             dialog.dismiss();
         }
         ctx = context;
@@ -47,7 +49,7 @@ public class Dlg {
         bar = dialog.findViewById(R.id.progress);
 
         setText(text);
-        setCancelable(true);
+        setCancelable(Boolean.TRUE);
         MainActivity.showBlur();
         dialog.setOnDismissListener(v -> {
             MainActivity.hideBlur(true);
@@ -87,7 +89,7 @@ public class Dlg {
 
     public static void dismissButton() {
         setDismiss(R.string.dismiss, Dlg::close);
-        setCancelable(true);
+        setCancelable(Boolean.TRUE);
     }
 
     public static void setDismiss(@StringRes int stringId, OnButtonClick onButtonClick) {
@@ -125,7 +127,7 @@ public class Dlg {
         icon.setVisibility(View.GONE);
     }
 
-    public static void setBar(int progress, boolean animate) {
+    private static void setBar(int progress, boolean animate) {
         bar.setVisibility(View.VISIBLE);
         bar.setProgress(progress, animate);
     }

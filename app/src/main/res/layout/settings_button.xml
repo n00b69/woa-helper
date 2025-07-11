@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/red"
     xmlns:tools="http://schemas.android.com/tools">
+
     <TextView
         android:id="@+id/text"
         android:layout_width="match_parent"
@@ -12,6 +13,7 @@
         android:textStyle="bold"
         android:textColor="@color/white"
         android:text="TEMPLATE" />
+
     <Switch
         android:id="@+id/switchButton"
         android:layout_width="match_parent"

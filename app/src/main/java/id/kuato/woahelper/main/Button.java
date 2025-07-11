@@ -22,7 +22,7 @@ public class Button extends MaterialCardView {
         layout = ButtonBinding.inflate(LayoutInflater.from(context), this, true);
         this.context = context;
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.Button, 0, 0);
-        if (attrs == null) return;
+        if (null == attrs) return;
         String title = a.getString(R.styleable.Button_title), subtitle = a.getString(R.styleable.Button_subtitle);
         int imageId = a.getResourceId(R.styleable.Button_image, R.drawable.ic_disk);
         layout.title.setText(title);
