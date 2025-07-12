@@ -4,7 +4,6 @@
     android:id="@+id/scriptstab"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:screenOrientation="portrait"
     tools:context=".main.MainActivity"
     android:background="?attr/colorOnSurfaceInverse">
 
@@ -38,7 +37,7 @@
                 android:layout_marginBottom="6dp"
                 android:background="@android:color/transparent"
                 android:gravity="center"
-                android:orientation="vertical"></LinearLayout>
+                android:orientation="vertical" />
 
             <LinearLayout
                 android:id="@+id/appRight"
@@ -53,9 +52,8 @@
                     android:id="@+id/cv_defender"
                     style="@style/Widget.Material3.CardView.Filled"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="match_parent"
                     android:layout_margin="4dp"
-                    android:layout_weight="1"
                     android:adjustViewBounds="true"
                     android:animateLayoutChanges="true"
                     android:clickable="true"
@@ -94,7 +92,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="30dp"
                                 android:text="@string/defender_title"
-                                android:textSize="@dimen/_12sdp"
+                                android:textSize="@dimen/_12ssp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -102,9 +100,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
-                                android:paddingRight="@dimen/_15sdp"
+                                android:paddingRight="@dimen/_15ssp"
                                 android:text="@string/defender_subtitle"
-                                android:textSize="@dimen/_10sdp"
+                                android:textSize="@dimen/_10ssp"
                                 android:textStyle="italic" />
                         </LinearLayout>
 

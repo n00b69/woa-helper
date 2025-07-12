@@ -20,6 +20,7 @@ com-github-topjohnwu-libsu-service = { group = "com.github.topjohnwu.libsu", nam
 com-github-topjohnwu-libsu-nio = { group = "com.github.topjohnwu.libsu", name = "nio", version.ref = "libsu" }
 
 com-intuit-sdp-sdp-android = { group = "com.intuit.sdp", name = "sdp-android", version = "1.1.1" }
+com-intuit-ssp-ssp-android = { group = "com.intuit.ssp", name = "ssp-android", version = "1.1.1" }
 
 material = { module = "com.google.android.material:material", version.ref = "material" }
 realtimeblurview = { module = "com.github.mmin18:realtimeblurview", version.ref = "realtimeblurview" }

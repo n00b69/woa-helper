@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorOnSurfaceInverse"
-    android:screenOrientation="portrait"
     tools:context=".main.MainActivity">
 
     <LinearLayout
@@ -47,20 +46,10 @@
                     android:gravity="center">
 
                     <ImageView
-                        android:id="@+id/NabuImage"
-                        android:layout_width="@dimen/_115sdp"
-                        android:layout_height="@dimen/_138sdp"
-                        android:layout_gravity="center"
-                        android:contentDescription="TODO"
-                        android:paddingBottom="@dimen/_4sdp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/nabu"
-                        android:visibility="gone" />
-
-                    <ImageView
                         android:id="@+id/DeviceImage"
                         android:layout_width="@dimen/_115sdp"
                         android:layout_height="@dimen/_138sdp"
+                        android:layout_gravity="center"
                         android:src="@drawable/unknown"
                         android:contentDescription="TODO"
                         android:scaleType="fitXY" />
@@ -73,10 +62,9 @@
                         android:layout_marginLeft="@dimen/_4sdp"
                         android:adjustViewBounds="true"
                         android:animateLayoutChanges="true"
-                        android:clickable="true"
+                        android:clickable="false"
                         android:elevation="@dimen/cardElevation"
-                        android:focusable="true"
-                        android:foreground="@drawable/vayu"
+                        android:focusable="false"
                         android:gravity="left"
                         android:padding="@dimen/parentMargin"
                         android:stateListAnimator="@animator/state_list_anim"
@@ -98,7 +86,7 @@
                                 android:layout_marginVertical="4dp"
                                 android:gravity="center"
                                 android:text="WINDOWS ON ARM"
-                                android:textSize="@dimen/_12sdp"
+                                android:textSize="@dimen/_12ssp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -106,21 +94,21 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
-                                android:textSize="@dimen/_11sdp" />
+                                android:textSize="@dimen/_11ssp" />
 
                             <TextView
                                 android:id="@+id/tv_ramvalue"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
-                                android:textSize="@dimen/_11sdp" />
+                                android:textSize="@dimen/_11ssp" />
 
                             <TextView
                                 android:id="@+id/tv_panel"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
-                                android:textSize="@dimen/_11sdp"
+                                android:textSize="@dimen/_11ssp"
                                 android:visibility="gone" />
 
                             <TextView
@@ -128,14 +116,14 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
-                                android:textSize="@dimen/_11sdp" />
+                                android:textSize="@dimen/_11ssp" />
 
                             <TextView
                                 android:id="@+id/tv_slot"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
-                                android:textSize="@dimen/_11sdp" />
+                                android:textSize="@dimen/_11ssp" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -169,7 +157,7 @@
                                         android:gravity="center"
                                         android:paddingVertical="4dp"
                                         android:text="@string/guide"
-                                        android:textSize="@dimen/_12sdp"
+                                        android:textSize="@dimen/_12ssp"
                                         android:textStyle="bold" />
                                 </com.google.android.material.card.MaterialCardView>
 
@@ -199,7 +187,7 @@
                                         android:gravity="center"
                                         android:paddingVertical="4dp"
                                         android:text="@string/group"
-                                        android:textSize="@dimen/_12sdp"
+                                        android:textSize="@dimen/_12ssp"
                                         android:textStyle="bold" />
 
                                 </com.google.android.material.card.MaterialCardView>
@@ -273,7 +261,7 @@
         android:layout_gravity="bottom|end"
         android:gravity="end"
         android:maxLines="1"
-        android:textSize="@dimen/_9sdp"
+        android:textSize="@dimen/_9ssp"
         android:layout_margin="4dp"
         android:text="@string/creator" />
 

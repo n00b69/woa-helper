@@ -2,9 +2,8 @@ package com.woa.helper.preference
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
-import androidx.preference.PreferenceManager
 import androidx.core.content.edit
+import androidx.preference.PreferenceManager
 
 enum class pref {
     ;

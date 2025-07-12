@@ -44,6 +44,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_21
     }
     kotlinOptions {
+
         jvmTarget = "21"
     }
 
@@ -58,6 +59,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.preference.preference)
     implementation(libs.com.intuit.sdp.sdp.android)
+    implementation(libs.com.intuit.ssp.ssp.android)
     implementation(libs.com.github.topjohnwu.libsu.core)
     implementation(libs.com.github.topjohnwu.libsu.service)
     implementation(libs.com.github.topjohnwu.libsu.nio)

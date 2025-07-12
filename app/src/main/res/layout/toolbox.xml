@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorOnSurfaceInverse"
-    android:screenOrientation="portrait"
     tools:context=".main.MainActivity">
 
     <LinearLayout
@@ -60,7 +59,7 @@
                         app:subtitle="@string/sta_subtitle"
                         app:image="@drawable/adrod"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp" />
+                        android:layout_height="@dimen/_60sdp" />
 
                     <com.woa.helper.main.Button
                         style="@style/button"
@@ -69,7 +68,7 @@
                         app:subtitle="@string/flash_uefi_subtitle"
                         app:image="@drawable/ic_uefi"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp" />
+                        android:layout_height="@dimen/_60sdp" />
 
                     <com.woa.helper.main.Button
                         style="@style/button"
@@ -79,7 +78,7 @@
                         app:image="@drawable/ic_uefi"
                         android:visibility="gone"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp" />
+                        android:layout_height="@dimen/_60sdp" />
 
                     <com.woa.helper.main.Button
                         style="@style/button"
@@ -89,7 +88,7 @@
                         app:image="@drawable/ic_modem"
                         android:visibility="gone"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp" />
+                        android:layout_height="@dimen/_60sdp" />
 
                     <com.woa.helper.main.Button
                         style="@style/button"
@@ -99,7 +98,7 @@
                         app:image="@drawable/ic_uefi"
                         android:visibility="gone"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp" />
+                        android:layout_height="@dimen/_60sdp" />
 
                     <com.woa.helper.main.Button
                         style="@style/button"
@@ -108,7 +107,7 @@
                         app:subtitle="@string/software_subtitle"
                         app:image="@drawable/ic_sensor"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp" />
+                        android:layout_height="@dimen/_60sdp" />
 
                     <com.woa.helper.main.Button
                         style="@style/button"
@@ -117,7 +116,7 @@
                         app:subtitle="@string/atlasos_subtitle"
                         app:image="@drawable/ic_ar"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp" />
+                        android:layout_height="@dimen/_60sdp" />
 
                     <com.woa.helper.main.Button
                         style="@style/button"
@@ -126,7 +125,7 @@
                         app:subtitle="@string/usbhost_subtitle"
                         app:image="@drawable/mnt"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp" />
+                        android:layout_height="@dimen/_60sdp" />
 
                     <com.woa.helper.main.Button
                         style="@style/button"
@@ -135,7 +134,7 @@
                         app:subtitle="@string/rotation_subtitle"
                         app:image="@drawable/ic_disk"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp" />
+                        android:layout_height="@dimen/_60sdp" />
 
                     <com.woa.helper.main.Button
                         style="@style/button"
@@ -144,7 +143,7 @@
                         app:subtitle="@string/tablet_subtitle"
                         app:image="@drawable/ic_sensor"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp" />
+                        android:layout_height="@dimen/_60sdp" />
 
                     <com.woa.helper.main.Button
                         style="@style/button"
@@ -153,7 +152,7 @@
                         app:subtitle="@string/setup_subtitle"
                         app:image="@drawable/mnt"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp" />
+                        android:layout_height="@dimen/_60sdp" />
 
                     <com.woa.helper.main.Button
                         style="@style/button"
@@ -162,7 +161,7 @@
                         app:subtitle="@string/defender_subtitle"
                         app:image="@drawable/edge"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp" />
+                        android:layout_height="@dimen/_60sdp" />
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>

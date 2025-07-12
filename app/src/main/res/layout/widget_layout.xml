@@ -27,6 +27,6 @@
         android:text="@string/quickboot_question"
         android:textColor="@color/textColor"
         android:textStyle="bold"
-        android:textSize="10sp"
+        android:textSize="@dimen/_10ssp"
         tools:ignore="HardcodedText" />
 </LinearLayout>

@@ -1177,7 +1177,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkwin() {
-        if (win!!.isEmpty()) return
+        if (!win!!.isEmpty()) return
         Dlg.show(this, R.string.partition)
         Dlg.setCancelable(false)
         listOf(x!!.mnt, x!!.toolbox, x!!.quickBoot, n!!.flashUefi).forEach(Consumer { v: Button -> v.isEnabled = false })
@@ -1476,6 +1476,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         private fun updateDevice() {
+            ShellUtils.fastCmd("pm uninstall id.kuato.woahelper")
             device = ShellUtils.fastCmd("getprop ro.product.device")
         }
 

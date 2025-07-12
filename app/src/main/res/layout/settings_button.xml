@@ -11,6 +11,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:textStyle="bold"
+        android:textSize="@dimen/_8ssp"
         android:textColor="@color/white"
         android:text="TEMPLATE" />
 

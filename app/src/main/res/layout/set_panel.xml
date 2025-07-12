@@ -32,7 +32,7 @@
                     style="@style/settingsButton"
                     android:id="@+id/modemdump"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="@dimen/_35sdp"
                     android:visibility="gone"
                     app:text="Disable modem dump option" />
 
@@ -40,84 +40,84 @@
                     style="@style/settingsButton"
                     android:id="@+id/backupQB"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="@dimen/_35sdp"
                     app:text="@string/preference1" />
 
                 <com.woa.helper.main.SettingsButton
                     style="@style/settingsButton"
                     android:id="@+id/backupQB_A"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="@dimen/_35sdp"
                     app:text="@string/preference2" />
 
                 <com.woa.helper.main.SettingsButton
                     style="@style/settingsButton"
                     android:id="@+id/autobackup"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="@dimen/_35sdp"
                     app:text="@string/preference3" />
 
                 <com.woa.helper.main.SettingsButton
                     style="@style/settingsButton"
                     android:id="@+id/autobackup_a"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="@dimen/_35sdp"
                     app:text="@string/preference4" />
 
                 <com.woa.helper.main.SettingsButton
                     style="@style/settingsButton"
                     android:id="@+id/confirmation"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="@dimen/_35sdp"
                     app:text="@string/preference5" />
 
                 <com.woa.helper.main.SettingsButton
                     style="@style/settingsButton"
                     android:id="@+id/automount"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="@dimen/_35sdp"
                     app:text="@string/preference7" />
 
                 <com.woa.helper.main.SettingsButton
                     style="@style/settingsButton"
                     android:id="@+id/securelock"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="@dimen/_35sdp"
                     app:text="@string/preference9" />
 
                 <com.woa.helper.main.SettingsButton
                     style="@style/settingsButton"
                     android:id="@+id/mountLocation"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="@dimen/_35sdp"
                     app:text="@string/preference10" />
 
                 <com.woa.helper.main.SettingsButton
                     style="@style/settingsButton"
                     android:id="@+id/appUpdate"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="@dimen/_35sdp"
                     app:text="@string/preference11" />
 
                 <com.woa.helper.main.SettingsButton
                     style="@style/settingsButton"
                     android:id="@+id/devcfg1"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="@dimen/_35sdp"
                     app:text="@string/preference12" />
 
                 <com.woa.helper.main.SettingsButton
                     style="@style/settingsButton"
                     android:id="@+id/devcfg2"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="@dimen/_35sdp"
                     android:visibility="gone"
                     app:text="@string/preference13" />
 
                 <LinearLayout
                     style="@style/settingsButton"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="@dimen/_35sdp"
                     android:layout_gravity="center"
                     android:background="@drawable/default_background"
                     android:gravity="center"
@@ -127,12 +127,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
+                        android:textSize="@dimen/_8ssp"
                         android:text="Language" />
 
                     <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/languages"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_8ssp" />
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
