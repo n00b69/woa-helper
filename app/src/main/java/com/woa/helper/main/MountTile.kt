@@ -3,7 +3,7 @@ package com.woa.helper.main
 import android.os.Environment
 import android.service.quicksettings.TileService
 import com.topjohnwu.superuser.ShellUtils
-import com.woa.helper.preference.pref
+import com.woa.helper.preference.Pref
 
 class MountTile : TileService() {
     private var win: String? = null
@@ -26,7 +26,7 @@ class MountTile : TileService() {
 
     private fun update() {
         val tile = qsTile
-        if (isSecure && !pref.getSecure(this)) {
+        if (isSecure && !Pref.getSecure(this)) {
             tile.state = 0
             return
         }
@@ -37,7 +37,7 @@ class MountTile : TileService() {
             return
         }
         win = ShellUtils.fastCmd("realpath $findWin")
-        winPath = (if (pref.getMountLocation(this)) "/mnt/Windows" else Environment.getExternalStorageDirectory().path + "/Windows")
+        winPath = (if (Pref.getMountLocation(this)) "/mnt/Windows" else Environment.getExternalStorageDirectory().path + "/Windows")
         mntStat = ShellUtils.fastCmd("mount | grep $win")
         if (mntStat!!.isEmpty()) tile.state = 1
         else tile.state = 2

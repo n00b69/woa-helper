@@ -4,14 +4,14 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import com.topjohnwu.superuser.ShellUtils
-import com.woa.helper.preference.pref
+import com.woa.helper.preference.Pref
 
 class AutoMount : BroadcastReceiver() {
     private var win: String? = null
     private var findWin: String? = null
 
     override fun onReceive(context: Context?, intent: Intent?) {
-        val ok = pref.getSharedPreference(context)?.getBoolean(pref.autoMount, false)
+        val ok = Pref.getSharedPreference(context)?.getBoolean(Pref.AUTOMOUNT, false)
         if (ok == true) {
             findWin = ShellUtils.fastCmd("find /dev/block | grep win")
             if (findWin!!.isEmpty()) findWin = ShellUtils.fastCmd("find /dev/block | grep mindows")
@@ -20,7 +20,7 @@ class AutoMount : BroadcastReceiver() {
             if (findWin!!.isEmpty()) findWin = ShellUtils.fastCmd("find /dev/block | grep Mindows")
             if (findWin!!.isEmpty()) findWin = ShellUtils.fastCmd("find /dev/block | grep Windows")
             win = ShellUtils.fastCmd("realpath $findWin")
-            if (pref.getSharedPreference(context)?.getBoolean(pref.mountLocation, false) == true) {
+            if (Pref.getSharedPreference(context)?.getBoolean(Pref.MOUNT_LOCATION, false) == true) {
                 ShellUtils.fastCmd("su -mm -c mkdir /mnt/Windows || true")
                 ShellUtils.fastCmd("cd /data/data/com.woa.helper/files")
                 ShellUtils.fastCmd("su -mm -c ./mount.ntfs $win /mnt/Windows")

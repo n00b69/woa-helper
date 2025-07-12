@@ -54,7 +54,7 @@ class WidgetActivity : AppCompatActivity() {
         active = true
 
         val intent = getIntent()
-        val widget_type = intent.getStringExtra("WIDGET_TYPE")
+        val widgetType = intent.getStringExtra("WIDGET_TYPE")
 
         MainActivity.context = this
         if (Boolean.TRUE != Shell.isAppGrantedRoot()) {
@@ -62,10 +62,10 @@ class WidgetActivity : AppCompatActivity() {
             finish()
             return
         }
-        if (widget_type == "mount") {
+        if (widgetType == "mount") {
             Log.d("INFO", "mount")
             mountUI()
-        } else if (widget_type == "quickboot") {
+        } else if (widgetType == "quickboot") {
             Log.d("INFO", "quickboot")
             quickbootUI()
         }

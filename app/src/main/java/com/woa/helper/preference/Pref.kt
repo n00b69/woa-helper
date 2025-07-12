@@ -5,27 +5,27 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 
-enum class pref {
+enum class Pref {
     ;
 
     companion object {
-        private const val modem = "woa unsupported modem"
-        private const val backup_quick = "woa backup when quickboot windows"
-        private const val backup_quick_A = "woa backup when quickboot android"
-        private const val backup_date = "woa last backup date"
-        private const val agreed = "woa unsupported"
-        private const val agreedntfs = "ntfs unsupported"
-        private const val autobackup = "woa force autobackup windows"
-        private const val autobackup_A = "woa force autobackup android"
-        private const val confirmation = "woa quickboot confirmation"
-        const val autoMount: String = "woa auto mount preference"
-        private const val secure = "woa secure tile"
-        private const val locale = "woa active language locale"
-        const val mountLocation: String = "woa mount location"
-        private const val appUpdate = "woa app update"
-        private const val widgetOpacity = "widget opacity"
-        private const val devcfg1 = "devcfg flasher"
-        private const val devcfg2 = "devcfg flasher & check for sdd.exe etc."
+        private const val MODEM = "woa unsupported modem"
+        private const val BACKUP_QUICK = "woa backup when quickboot windows"
+        private const val BACKUP_QUICK_A = "woa backup when quickboot android"
+        private const val BACKUP_DATE = "woa last backup date"
+        private const val AGREED = "woa unsupported"
+        private const val AGREED_NTFS = "ntfs unsupported"
+        private const val AUTOBACKUP = "woa force autobackup windows"
+        private const val AUTOBACKUP_A = "woa force autobackup android"
+        private const val CONFIRMATION = "woa quickboot confirmation"
+        const val AUTOMOUNT: String = "woa auto mount preference"
+        private const val SECURE = "woa secure tile"
+        private const val LOCALE = "woa active language locale"
+        const val MOUNT_LOCATION: String = "woa mount location"
+        private const val APP_UPDATE = "woa app update"
+        private const val WIDGET_OPACITY = "widget opacity"
+        private const val DEVCFG1 = "devcfg flasher"
+        private const val DEVCFG2 = "devcfg flasher & check for sdd.exe etc."
 
         fun getSharedPreference(context: Context?): SharedPreferences? {
             return PreferenceManager.getDefaultSharedPreferences(context!!)
@@ -33,172 +33,172 @@ enum class pref {
 
         fun setWidgetOpacity(context: Context, value: Int) {
             getSharedPreference(context)!!.edit {
-                putInt(widgetOpacity, value)
+                putInt(WIDGET_OPACITY, value)
             }
         }
 
         fun getWidgetOpacity(context: Context): Int {
-            return getSharedPreference(context)!!.getInt(widgetOpacity, 255)
+            return getSharedPreference(context)!!.getInt(WIDGET_OPACITY, 255)
         }
 
         fun setlocale(context: Context, value: String?) {
             getSharedPreference(context)!!.edit {
-                putString(locale, value)
+                putString(LOCALE, value)
             }
         }
 
         fun getlocale(context: Context): String {
-            return getSharedPreference(context)!!.getString(locale, "")!!
+            return getSharedPreference(context)!!.getString(LOCALE, "")!!
         }
 
         fun setMODEM(context: Context, value: Boolean) {
             getSharedPreference(context)!!.edit {
-                putBoolean(modem, value)
+                putBoolean(MODEM, value)
             }
         }
 
         fun getMODEM(context: Context): Boolean {
-            return getSharedPreference(context)!!.getBoolean(modem, false)
+            return getSharedPreference(context)!!.getBoolean(MODEM, false)
         }
 
         fun setAUTO(context: Context, value: Boolean) {
             getSharedPreference(context)!!.edit {
-                putBoolean(autobackup, value)
+                putBoolean(AUTOBACKUP, value)
             }
         }
 
         fun getAUTO(context: Context): Boolean {
-            return getSharedPreference(context)!!.getBoolean(autobackup, false)
+            return getSharedPreference(context)!!.getBoolean(AUTOBACKUP, false)
         }
 
-        fun setAUTO_A(context: Context, value: Boolean) {
+        fun setAutoA(context: Context, value: Boolean) {
             getSharedPreference(context)!!.edit {
-                putBoolean(autobackup_A, value)
+                putBoolean(AUTOBACKUP_A, value)
             }
         }
 
-        fun getAUTO_A(context: Context): Boolean {
-            return getSharedPreference(context)!!.getBoolean(autobackup_A, false)
+        fun getAutoA(context: Context): Boolean {
+            return getSharedPreference(context)!!.getBoolean(AUTOBACKUP_A, false)
         }
 
 
         fun setCONFIRM(context: Context, value: Boolean) {
             getSharedPreference(context)!!.edit {
-                putBoolean(confirmation, value)
+                putBoolean(CONFIRMATION, value)
             }
         }
 
         fun getCONFIRM(context: Context): Boolean {
-            return getSharedPreference(context)!!.getBoolean(confirmation, false)
+            return getSharedPreference(context)!!.getBoolean(CONFIRMATION, false)
         }
 
         fun setAGREE(context: Context, value: Boolean) {
             getSharedPreference(context)!!.edit {
-                putBoolean(agreed, value)
+                putBoolean(AGREED, value)
             }
         }
 
         fun getAGREE(context: Context): Boolean {
-            return getSharedPreference(context)!!.getBoolean(agreed, false)
+            return getSharedPreference(context)!!.getBoolean(AGREED, false)
         }
 
         fun setAGREENTFS(context: Context, value: Boolean) {
             getSharedPreference(context)!!.edit {
-                putBoolean(agreedntfs, value)
+                putBoolean(AGREED_NTFS, value)
             }
         }
 
         fun getAGREENTFS(context: Context): Boolean {
-            return getSharedPreference(context)!!.getBoolean(agreedntfs, false)
+            return getSharedPreference(context)!!.getBoolean(AGREED_NTFS, false)
         }
 
         fun setBACKUP(context: Context, value: Boolean) {
             getSharedPreference(context)!!.edit {
-                putBoolean(backup_quick, value)
+                putBoolean(BACKUP_QUICK, value)
             }
         }
 
         fun getBACKUP(context: Context): Boolean {
-            return getSharedPreference(context)!!.getBoolean(backup_quick, false)
+            return getSharedPreference(context)!!.getBoolean(BACKUP_QUICK, false)
         }
 
-        fun setBACKUP_A(context: Context, value: Boolean) {
+        fun setBackupA(context: Context, value: Boolean) {
             getSharedPreference(context)!!.edit {
-                putBoolean(backup_quick_A, value)
+                putBoolean(BACKUP_QUICK_A, value)
             }
         }
 
-        fun getBACKUP_A(context: Context): Boolean {
-            return getSharedPreference(context)!!.getBoolean(backup_quick_A, false)
+        fun getBackupA(context: Context): Boolean {
+            return getSharedPreference(context)!!.getBoolean(BACKUP_QUICK_A, false)
         }
 
         fun setDATE(context: Context, value: String?) {
             getSharedPreference(context)!!.edit {
-                putString(backup_date, value)
+                putString(BACKUP_DATE, value)
             }
         }
 
         fun getDATE(context: Context): String {
-            return getSharedPreference(context)!!.getString(backup_date, "")!!
+            return getSharedPreference(context)!!.getString(BACKUP_DATE, "")!!
         }
 
         fun setAutoMount(context: Context, value: Boolean) {
             getSharedPreference(context)!!.edit {
-                putBoolean(autoMount, value)
+                putBoolean(AUTOMOUNT, value)
             }
         }
 
         fun getAutoMount(context: Context): Boolean {
-            return getSharedPreference(context)!!.getBoolean(autoMount, false)
+            return getSharedPreference(context)!!.getBoolean(AUTOMOUNT, false)
         }
 
         fun setSecure(context: Context, value: Boolean) {
             getSharedPreference(context)!!.edit {
-                putBoolean(secure, value)
+                putBoolean(SECURE, value)
             }
         }
 
         fun getSecure(context: Context): Boolean {
-            return getSharedPreference(context)!!.getBoolean(secure, false)
+            return getSharedPreference(context)!!.getBoolean(SECURE, false)
         }
 
         fun setMountLocation(context: Context, value: Boolean) {
             getSharedPreference(context)!!.edit {
-                putBoolean(mountLocation, value)
+                putBoolean(MOUNT_LOCATION, value)
             }
         }
 
         fun getMountLocation(context: Context): Boolean {
-            return getSharedPreference(context)!!.getBoolean(mountLocation, false)
+            return getSharedPreference(context)!!.getBoolean(MOUNT_LOCATION, false)
         }
 
         fun setAppUpdate(context: Context, value: Boolean) {
             getSharedPreference(context)!!.edit {
-                putBoolean(appUpdate, value)
+                putBoolean(APP_UPDATE, value)
             }
         }
 
         fun getAppUpdate(context: Context): Boolean {
-            return getSharedPreference(context)!!.getBoolean(appUpdate, false)
+            return getSharedPreference(context)!!.getBoolean(APP_UPDATE, false)
         }
 
         fun getDevcfg1(context: Context): Boolean {
-            return getSharedPreference(context)!!.getBoolean(devcfg1, false)
+            return getSharedPreference(context)!!.getBoolean(DEVCFG1, false)
         }
 
         fun getDevcfg2(context: Context): Boolean {
-            return getSharedPreference(context)!!.getBoolean(devcfg2, false)
+            return getSharedPreference(context)!!.getBoolean(DEVCFG2, false)
         }
 
         fun setDevcfg1(context: Context, value: Boolean) {
             getSharedPreference(context)!!.edit {
-                putBoolean(devcfg1, value)
+                putBoolean(DEVCFG1, value)
             }
         }
 
         fun setDevcfg2(context: Context, value: Boolean) {
             getSharedPreference(context)!!.edit {
-                putBoolean(devcfg2, value)
+                putBoolean(DEVCFG2, value)
             }
         }
     }

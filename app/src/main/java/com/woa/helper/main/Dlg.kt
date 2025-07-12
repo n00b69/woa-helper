@@ -1,6 +1,5 @@
 package com.woa.helper.main
 
-import com.woa.helper.R
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
@@ -13,6 +12,7 @@ import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.google.android.material.button.MaterialButton
+import com.woa.helper.R
 import com.woa.helper.main.MainActivity.Companion.hideBlur
 import com.woa.helper.main.MainActivity.Companion.showBlur
 import com.woa.helper.widgets.WidgetActivity
