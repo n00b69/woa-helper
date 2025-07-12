@@ -52,7 +52,6 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import java.util.function.Consumer
-import java.util.stream.Stream
 
 @SuppressLint("StaticFieldLeak")
 class MainActivity : AppCompatActivity() {

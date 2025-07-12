@@ -89,7 +89,7 @@
                 android:animateLayoutChanges="true"
                 android:clipToOutline="true"
                 android:stateListAnimator="@animator/state_list_anim"
-                android:text="No"
+                android:text="@string/no"
                 android:textStyle="bold"
                 android:visibility="gone"
                 app:backgroundTint="?attr/colorAccent"

@@ -49,7 +49,7 @@ object Dlg {
         ctx = context
         dialog = Dialog(context)
         dialog!!.setContentView(R.layout.dialog)
-        Objects.requireNonNull<Window?>(dialog!!.window).setBackgroundDrawableResource(android.R.color.transparent)
+        Objects.requireNonNull<Window>(dialog!!.window).setBackgroundDrawableResource(android.R.color.transparent)
         yes = dialog!!.findViewById<MaterialButton?>(R.id.yes)
         no = dialog!!.findViewById<MaterialButton?>(R.id.no)
         dismiss = dialog!!.findViewById<MaterialButton?>(R.id.dismiss)
