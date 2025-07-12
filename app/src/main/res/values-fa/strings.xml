@@ -25,7 +25,7 @@
     <string name="toolbox_subtitle">جعبه ابزار</string>
     <string name="dump_modem_subtitle">دامپ مودم برای فعال سازی اینترنت سیم کارت ۱ در ویندوز</string>
     <string name="flash_uefi_subtitle">فلش بوت فایل ویندوز</string>
-    <string name="uefi_not_found_subtitle">بوت فایل ویندوز پیدا نشد! لطفاً فایل مناسب را دانلود کنید و در پوشه مربوطه قرار دهید</string>
+    <string name="uefi_not_found_subtitle">%sبوت فایل ویندوز پیدا نشد! لطفاً فایل مناسب را دانلود کنید و در پوشه مربوطه قرار دهید</string>
     <string name="quickboot_subtitle">دامپ مودم ، فلش زدن بوت ویندوز و رفتن به ویندوز</string>
     <string name="quickboot_subtitle_nabu">رفتن سریع به ویندوز</string>
     <string name="sta_subtitle">افزودن فایل اجرایی رفتن به اندروید در ویندوز</string>

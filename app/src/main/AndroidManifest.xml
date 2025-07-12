@@ -42,7 +42,7 @@
                 android:resource="@xml/quickboot_widget_info" />
         </receiver>
         <receiver
-            android:name=".main.automount"
+            android:name=".main.AutoMount"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -53,7 +53,7 @@
         </receiver>
 
         <service
-            android:name=".main.quickboot_tile"
+            android:name=".main.QuickbootTile"
             android:exported="true"
             android:icon="@drawable/qs_tile"
             android:label="Quickboot"
@@ -63,7 +63,7 @@
             </intent-filter>
         </service>
         <service
-            android:name=".main.mount_tile"
+            android:name=".main.MountTile"
             android:exported="true"
             android:icon="@drawable/mnt2"
             android:label="Mount win"
