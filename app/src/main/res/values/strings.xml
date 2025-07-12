@@ -136,6 +136,8 @@
 
     <string name="uefiChk" translatable="false">su -c find /mnt/sdcard/UEFI/ -type f  | grep ".img" | head -n 1 </string>
 
+    <string name="default1">Default</string>
+
     <!-- Not used, but might be useful to keep  -->
     <string name="backup" translatable="false">dd bs=8M if=/dev/block/by-name/boot$(getprop ro.boot.slot_suffix) of=/sdcard/boot.img</string>
     <string name="ntfsChk" translatable="false">su -c find /system/bin -name mount.ntfs</string>

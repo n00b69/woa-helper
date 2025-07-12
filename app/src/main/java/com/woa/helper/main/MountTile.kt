@@ -48,8 +48,7 @@ class MountTile : TileService() {
         val mntstat = ShellUtils.fastCmd("su -mm -c mount | grep $win")
         if (mntstat.isEmpty()) {
             ShellUtils.fastCmd("mkdir $winPath || true")
-            ShellUtils.fastCmd("cd $filesDir")
-            ShellUtils.fastCmd("su -mm -c ./mount.ntfs $win $winPath")
+            ShellUtils.fastCmd("su -mm -c $filesDir/mount.ntfs $win $winPath")
         }
     }
 

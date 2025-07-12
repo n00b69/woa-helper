@@ -7,11 +7,11 @@ import android.content.ComponentName
 import android.widget.RemoteViews
 import com.woa.helper.R
 
-class QuickbootWidget : AppWidgetProvider() {
+class QuickBootWidget : AppWidgetProvider() {
     @android.annotation.SuppressLint("StringFormatInvalid")
     override fun onUpdate(context: android.content.Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
         for (appWidgetId in appWidgetIds) {
-            val intent = android.content.Intent(context, QuickbootWidget::class.java)
+            val intent = android.content.Intent(context, QuickBootWidget::class.java)
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
             intent.action = WidgetActivity.ACTION_CLICK
             val views = RemoteViews(context.packageName, R.layout.widget_layout)
@@ -44,7 +44,7 @@ class QuickbootWidget : AppWidgetProvider() {
             val text = intent.getStringExtra("text")
 
             val appWidgetManager: AppWidgetManager = AppWidgetManager.getInstance(context)
-            val appWidgetIds: IntArray = appWidgetManager.getAppWidgetIds(ComponentName(context, QuickbootWidget::class.java))
+            val appWidgetIds: IntArray = appWidgetManager.getAppWidgetIds(ComponentName(context, QuickBootWidget::class.java))
             onUpdate(context, appWidgetManager, appWidgetIds)
 
             for (appWidgetId in appWidgetIds) {
@@ -59,7 +59,7 @@ class QuickbootWidget : AppWidgetProvider() {
 
     companion object {
         fun updateText(context: android.content.Context, text: String?) {
-            val intent = android.content.Intent(context, QuickbootWidget::class.java)
+            val intent = android.content.Intent(context, QuickBootWidget::class.java)
             intent.action = "UPDATE"
             intent.putExtra("text", text)
             context.sendBroadcast(intent)

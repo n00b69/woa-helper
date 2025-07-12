@@ -131,7 +131,7 @@ class MainActivity : AppCompatActivity() {
         val languages: MutableList<String> = ArrayList()
         val locales: MutableList<String> = ArrayList()
         locales.add("und")
-        languages.add("System Default")
+        languages.add(getString(R.string.default1))
         for (i in BuildConfig.LOCALES) {
             locales.add(i!!.lowercase(Locale.getDefault()))
             val locale = checkNotNull(LocaleListCompat.forLanguageTags(i)[0])
@@ -222,7 +222,7 @@ class MainActivity : AppCompatActivity() {
 
             "bhima", "vayu" -> {
                 guidelink = "https://github.com/WaLoVayu/POCOX3Pro-Windows-Guides"
-                grouplink = "https://t.me/windowsonvayu"
+                grouplink = "https://t.me/WaLoVayu"
                 x!!.DeviceImage.setImageResource(R.drawable.vayu)
                 x!!.tvPanel.visibility = View.VISIBLE
             }
@@ -570,10 +570,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
         val run = ShellUtils.fastCmd("su -c cat /proc/cmdline")
-        panel = if (Stream.of("j20s_42_02_0b", "k82_42", "ft8756_huaxing", "huaxing").anyMatch { s: String? -> run.contains(s!!) }) "Huaxing" else if (Stream.of("j20s_36_02_0a", "k82_36", "nt36675_tianma", "tianma_fhd_nt36672a", "tianma")
-                .anyMatch { s: String? -> run.contains(s!!) }
-        ) "Tianma" else if (run.contains("ebbg_fhd_ft8719")) "EBBG" else if (run.contains("fhd_ea8076_global")) "global" else if (run.contains("fhd_ea8076_f1mp_cmd")) "f1mp" else if (run.contains("fhd_ea8076_f1p2_cmd")) "f1p2" else if (run.contains("fhd_ea8076_f1p2_2")) "f1p2_2" else if (run.contains("fhd_ea8076_f1_cmd")) "f1" else if (run.contains("fhd_ea8076_cmd")) "ea8076_cmd" else ShellUtils.fastCmd("su -c cat /proc/cmdline | tr ' :=' '\n'|grep dsi|tr ' _' '\n'|tail -3|head -1 ")
-        if (!Pref.getAGREE(this) && (panel == "f1p2_2" || panel == "f1")) {
+        panel = if (listOf("j20s_42_02_0b", "k82_42", "ft8756_huaxing", "huaxing").contains(run)) "Huaxing"
+        else if (listOf("j20s_36_02_0a", "k82_36", "nt36675_tianma", "tianma_fhd_nt36672a", "tianma").contains(run)) "Tianma"
+        else if (listOf("fhd_ea8076_global", "fhd_ea8076_f1mp_cmd", "fhd_ea8076_f1p2_cmd", "fhd_ea8076_f1p2_2", "fhd_ea8076_f1_cmd", "fhd_ea8076_cmd").contains(run)) "Samsung"
+        else if (run.contains("ebbg_fhd_ft8719")) "EBBG"
+        else ShellUtils.fastCmd("su -c cat /proc/cmdline | tr ' :=' '\n'|grep dsi|tr ' _' '\n'|tail -3|head -1 ")
+        if (!Pref.getAGREE(this) && (listOf("f1p2_2", "f1_cmd").contains(run))) {
             Dlg.show(this, R.string.upanel)
             Dlg.setYes(R.string.chat) {
                 openLink(grouplink)
@@ -1396,14 +1398,12 @@ class MainActivity : AppCompatActivity() {
         internal fun mount() {
             if (null == win) win = getWin()
             ShellUtils.fastCmd("mkdir $winpath || true")
-            ShellUtils.fastCmd("cd " + context!!.filesDir)
-            ShellUtils.fastCmd("su -mm -c ./mount.ntfs $win $winpath")
+            ShellUtils.fastCmd("su -mm -c "+ context!!.filesDir+ "/mount.ntfs $win $winpath")
             if (isMounted()) {
                 // Causes some issues idk. Better be here for later
                 updateWinPath()
                 ShellUtils.fastCmd("mkdir $winpath || true")
-                ShellUtils.fastCmd("cd " + context!!.filesDir)
-                ShellUtils.fastCmd("su -mm -c ./mount.ntfs $win $winpath")
+                ShellUtils.fastCmd("su -mm -c "+ context!!.filesDir+ "/mount.ntfs $win $winpath")
             }
             updateMountText()
         }

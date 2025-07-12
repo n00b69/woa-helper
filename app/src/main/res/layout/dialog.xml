@@ -29,7 +29,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="24dp" />
+            android:padding="24dp"
+            android:textSize="@dimen/_15ssp" />
 
         <ProgressBar
             android:id="@+id/progress"

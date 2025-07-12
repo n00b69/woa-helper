@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class QuickbootTile : TileService() {
+class QuickBootTile : TileService() {
     private var findUefi: String? = null
     private var device: String? = null
     private var win: String? = null
@@ -136,8 +136,7 @@ class QuickbootTile : TileService() {
         val mntStat = ShellUtils.fastCmd("su -mm -c mount | grep $win")
         if (mntStat.isEmpty()) {
             ShellUtils.fastCmd("mkdir $winPath || true")
-            ShellUtils.fastCmd("cd $filesDir")
-            ShellUtils.fastCmd("su -mm -c ./mount.ntfs $win $winPath")
+            ShellUtils.fastCmd("su -mm -c $filesDir/mount.ntfs $win $winPath")
         }
     }
 
