@@ -4,8 +4,6 @@ material = "1.12.0"
 libsu = "6.0.0"
 realtimeblurview = "82df3520b4"
 kotlin = "2.2.0"
-coreKtx = "1.16.0"
-
 [plugins]
 agp-app = { id = "com.android.application", version.ref = "agp" }
 agp-lib = { id = "com.android.library", version.ref = "agp" }
@@ -24,4 +22,3 @@ com-intuit-ssp-ssp-android = { group = "com.intuit.ssp", name = "ssp-android", v
 
 material = { module = "com.google.android.material:material", version.ref = "material" }
 realtimeblurview = { module = "com.github.mmin18:realtimeblurview", version.ref = "realtimeblurview" }
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }

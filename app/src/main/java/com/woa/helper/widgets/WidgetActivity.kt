@@ -14,7 +14,6 @@ import com.woa.helper.main.MainActivity
 import com.woa.helper.main.MainActivity.Companion.mountUI
 import com.woa.helper.main.MainActivity.Companion.quickbootUI
 import com.woa.helper.main.MainActivity.Companion.runSilently
-import java.lang.Boolean
 import kotlin.String
 
 class WidgetActivity : AppCompatActivity() {
@@ -57,7 +56,7 @@ class WidgetActivity : AppCompatActivity() {
         val widgetType = intent.getStringExtra("WIDGET_TYPE")
 
         MainActivity.context = this
-        if (Boolean.TRUE != Shell.isAppGrantedRoot()) {
+        if (true != Shell.isAppGrantedRoot()) {
             Toast.makeText(this, "NO ROOT!", Toast.LENGTH_SHORT).show()
             finish()
             return
@@ -78,6 +77,6 @@ class WidgetActivity : AppCompatActivity() {
 
     companion object {
         const val ACTION_CLICK: String = BuildConfig.APPLICATION_ID + ".ACTION_CLICK"
-        var active: kotlin.Boolean = false
+        var active: Boolean = false
     }
 }

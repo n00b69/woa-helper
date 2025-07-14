@@ -16,12 +16,9 @@ import com.woa.helper.R
 import com.woa.helper.main.MainActivity.Companion.hideBlur
 import com.woa.helper.main.MainActivity.Companion.showBlur
 import com.woa.helper.widgets.WidgetActivity
-import java.lang.Boolean
 import java.util.Objects
 import kotlin.Int
 import kotlin.String
-import kotlin.Unit
-
 
 @SuppressLint("StaticFieldLeak")
 object Dlg {
@@ -37,7 +34,7 @@ object Dlg {
     private var ctx: Context? = null
 
     fun dialogLoading() {
-        setCancelable(Boolean.FALSE)
+        setCancelable(false)
         clearButtons()
         setText(ctx!!.getString(R.string.please_wait))
     }
@@ -58,7 +55,7 @@ object Dlg {
         bar = dialog!!.findViewById<ProgressBar?>(R.id.progress)
 
         setText(text)
-        setCancelable(Boolean.TRUE)
+        setCancelable(true)
         showBlur()
         dialog!!.setOnDismissListener { v: DialogInterface? ->
             hideBlur(true)
@@ -96,8 +93,8 @@ object Dlg {
     }
 
     fun dismissButton() {
-        setDismiss(R.string.dismiss, { dialog!!.dismiss() })
-        setCancelable(Boolean.TRUE)
+        setDismiss(R.string.dismiss, { dismiss })
+        setCancelable(true)
     }
 
     fun setDismiss(@StringRes stringId: Int, onButtonClick: OnButtonClick) {
@@ -135,7 +132,7 @@ object Dlg {
         icon!!.visibility = View.GONE
     }
 
-    private fun setBar(progress: Int, animate: kotlin.Boolean) {
+    private fun setBar(progress: Int, animate: Boolean) {
         bar!!.visibility = View.VISIBLE
         bar!!.setProgress(progress, animate)
     }

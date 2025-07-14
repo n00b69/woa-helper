@@ -726,11 +726,11 @@ class MainActivity : AppCompatActivity() {
             Dlg.show(this, getString(R.string.dbkp_question, dbkpmodel), R.drawable.ic_uefi)
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(if ("nabu" == device) R.string.nabu else R.string.yes) {
-                ShellUtils.fastCmd(String.format("cp $filesDir/dbkp.%s.bin /sdcard/dbkp/dbkp.bin", if ("nabu" == device) "nabu" else if (listOf<String?>("guacamole", "OnePlus7Pro", "OnePlus7Pro4G", "hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) "hotdog" else if ("cepheus" == device) "cepheus" else null))
+                ShellUtils.fastCmd(String.format("cp $filesDir/dbkp.%s.bin /sdcard/dbkp/dbkp.bin", if ("nabu" == device) "nabu" else if (arrayOf("guacamole", "OnePlus7Pro", "OnePlus7Pro4G", "hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) "hotdog" else if ("cepheus" == device) "cepheus" else null))
                 Dlg.dialogLoading()
                 kernelPatch(
-                    (if ("nabu" == device) getString(R.string.nabu) else if (listOf<String?>("guacamole", "OnePlus7Pro", "OnePlus7Pro4G", "hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) getString(R.string.op7) else if ("cepheus" == device) getString(R.string.cepheus) else null)!!,
-                    (if ("nabu" == device) "https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/releases/download/1.0/nabu.fd" else if (listOf<String?>("guacamole", "OnePlus7Pro", "OnePlus7Pro4G").contains(device)) "https://github.com/n00b69/woa-op7/releases/download/DBKP/guacamole.fd" else if (listOf<String?>("hotdog", "OnePlus7TPro", "OnePlus7TPro4G")
+                    (if ("nabu" == device) getString(R.string.nabu) else if (arrayOf("guacamole", "OnePlus7Pro", "OnePlus7Pro4G", "hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) getString(R.string.op7) else if ("cepheus" == device) getString(R.string.cepheus) else null)!!,
+                    (if ("nabu" == device) "https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/releases/download/1.0/nabu.fd" else if (arrayOf("guacamole", "OnePlus7Pro", "OnePlus7Pro4G").contains(device)) "https://github.com/n00b69/woa-op7/releases/download/DBKP/guacamole.fd" else if (arrayOf("hotdog", "OnePlus7TPro", "OnePlus7TPro4G")
                             .contains(device)
                     ) "https://github.com/n00b69/woa-op7/releases/download/DBKP/hotdog.fd" else if ("cepheus" == device) "https://github.com/n00b69/woa-everything/releases/download/Files/cepheus.fd" else null)!!
                 )
@@ -1169,7 +1169,7 @@ class MainActivity : AppCompatActivity() {
         runSilently { context = this }
         checkwin()
         checkuefi()
-        if (java.lang.Boolean.FALSE == Shell.isAppGrantedRoot()) {
+        if (true != Shell.isAppGrantedRoot()) {
             Dlg.show(this, R.string.nonroot)
             Dlg.setCancelable(false)
         }

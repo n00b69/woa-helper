@@ -1,6 +1,8 @@
 package com.woa.helper.util
 
-import java.util.Locale /*
+import java.util.Locale
+
+/*
  *  * Copyright (C) 2020 Vern Kuato
  *  *
  *  * Licensed under the Apache License, Version 2.0 (the "License");
