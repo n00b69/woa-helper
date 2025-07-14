@@ -10,6 +10,7 @@ import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.util.Pair
 import android.view.View
@@ -157,7 +158,7 @@ class MainActivity : AppCompatActivity() {
         updateDevice()
         updateWinPath()
         updateMountText()
-        x!!.tvDate.text = String.format(getString(R.string.last), Pref.getDATE(this))
+        x!!.tvDate.text = String.format(getString(R.string.last), Pref.getDate(this))
 
         val slot = ShellUtils.fastCmd("getprop ro.boot.slot_suffix")
         if (slot.isEmpty()) x!!.tvSlot.visibility = View.GONE
@@ -1041,9 +1042,9 @@ class MainActivity : AppCompatActivity() {
             views[views.size - 1].startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in))
             // Scary big line! (Victoria)
             listOf(
-                Pair.create(k!!.backupQB, Pref.getBACKUP(this)), Pair.create(k!!.backupQBA, Pref.getBackupA(this)), Pair.create(k!!.autobackup, !Pref.getAUTO(this)), Pair.create(
-                    k!!.autobackupA, !Pref.getAUTO(this)
-                ), Pair.create(k!!.autobackupA, !Pref.getAUTO(this)), Pair.create(k!!.confirmation, Pref.getCONFIRM(this)), Pair.create(k!!.automount, Pref.getAutoMount(this)), Pair.create(
+                Pair.create(k!!.backupQB, Pref.getBackup(this)), Pair.create(k!!.backupQBA, Pref.getBackupA(this)), Pair.create(k!!.autobackup, !Pref.getAuto(this)), Pair.create(
+                    k!!.autobackupA, !Pref.getAuto(this)
+                ), Pair.create(k!!.autobackupA, !Pref.getAuto(this)), Pair.create(k!!.confirmation, Pref.getConfirm(this)), Pair.create(k!!.automount, Pref.getAutoMount(this)), Pair.create(
                     k!!.securelock, !Pref.getSecure(this)
                 ), Pair.create(k!!.mountLocation, Pref.getMountLocation(this)), Pair.create(k!!.appUpdate, Pref.getAppUpdate(this)), Pair.create(k!!.devcfg1, Pref.getDevcfg1(this) && View.VISIBLE == k!!.devcfg1.visibility), Pair.create(
                     k!!.devcfg2, Pref.getDevcfg2(this)
@@ -1076,8 +1077,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         k!!.backupQB.setOnChangeListener { b: Boolean ->
-            if (Pref.getBACKUP(this)) {
-                Pref.setBACKUP(this, false)
+            if (Pref.getBackup(this)) {
+                Pref.setBackup(this, false)
                 k!!.autobackup.visibility = View.VISIBLE
                 return@setOnChangeListener
             }
@@ -1088,7 +1089,7 @@ class MainActivity : AppCompatActivity() {
                 Dlg.close()
             }
             Dlg.setYes(R.string.agree) {
-                Pref.setBACKUP(this, true)
+                Pref.setBackup(this, true)
                 k!!.autobackup.visibility = View.GONE
                 Dlg.close()
             }
@@ -1140,9 +1141,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        k!!.autobackup.setOnChangeListener { b: Boolean -> Pref.setAUTO(this, !b) }
+        k!!.autobackup.setOnChangeListener { b: Boolean -> Pref.setAuto(this, !b) }
         k!!.autobackupA.setOnChangeListener { b: Boolean -> Pref.setAutoA(this, !b) }
-        k!!.confirmation.setOnChangeListener { b: Boolean -> Pref.setCONFIRM(this, b) }
+        k!!.confirmation.setOnChangeListener { b: Boolean -> Pref.setConfirm(this, b) }
         k!!.securelock.setOnChangeListener { b: Boolean -> Pref.setSecure(this, !b) }
         k!!.automount.setOnChangeListener { b: Boolean -> Pref.setAutoMount(this, b) }
         k!!.appUpdate.setOnChangeListener { b: Boolean -> Pref.setAppUpdate(this, b) }
@@ -1327,7 +1328,7 @@ class MainActivity : AppCompatActivity() {
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
                 Dlg.dialogLoading()
-                Handler().postDelayed({
+                Handler(Looper.getMainLooper()).postDelayed({
                     Log.d("debug", winpath!!)
                     if (isMounted()) {
                         unmount()
@@ -1358,10 +1359,10 @@ class MainActivity : AppCompatActivity() {
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
                 Dlg.dialogLoading()
-                Handler().postDelayed({
+                Handler(Looper.getMainLooper()).postDelayed({
                     mount()
                     var found = ShellUtils.fastCmd(String.format("ls %s | grep boot.img", updateWinPath()))
-                    if (Pref.getBACKUP(context!!) || (!Pref.getAUTO(context!!) && found.isEmpty())) {
+                    if (Pref.getBackup(context!!) || (!Pref.getAuto(context!!) && found.isEmpty())) {
                         winBackup()
                         updateLastBackupDate()
                     }
@@ -1413,12 +1414,12 @@ class MainActivity : AppCompatActivity() {
         internal fun mount() {
             if (null == win) win = getWin()
             ShellUtils.fastCmd("mkdir $winpath || true")
-            ShellUtils.fastCmd("su -mm -c "+ context!!.filesDir+ "/mount.ntfs $win $winpath")
+            ShellUtils.fastCmd("su -mm -c " + context!!.filesDir + "/mount.ntfs $win $winpath")
             if (isMounted()) {
                 // Causes some issues idk. Better be here for later
                 updateWinPath()
                 ShellUtils.fastCmd("mkdir $winpath || true")
-                ShellUtils.fastCmd("su -mm -c "+ context!!.filesDir+ "/mount.ntfs $win $winpath")
+                ShellUtils.fastCmd("su -mm -c " + context!!.filesDir + "/mount.ntfs $win $winpath")
             }
             updateMountText()
         }
@@ -1468,8 +1469,8 @@ class MainActivity : AppCompatActivity() {
         internal fun updateLastBackupDate() {
             val sdf = SimpleDateFormat("dd-MM HH:mm", Locale.US)
             val currentDateAndTime = sdf.format(Date())
-            Pref.setDATE(context!!, currentDateAndTime)
-            x!!.tvDate.text = context!!.getString(R.string.last, Pref.getDATE(context!!))
+            Pref.setDate(context!!, currentDateAndTime)
+            x!!.tvDate.text = context!!.getString(R.string.last, Pref.getDate(context!!))
         }
 
         internal fun updateMountText() {

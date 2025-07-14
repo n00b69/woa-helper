@@ -12,25 +12,24 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-private var win: String? = null
-private var findWin: String? = null
-private var winPath: String? = null
+private lateinit var win: String
+private lateinit var findWin: String
+private lateinit var winPath: String
 
 
 class QuickBootTile : TileService() {
-    private var findUefi: String? = null
+    private lateinit var findUefi: String
     private var device: String? = null
     private var findBoot: String? = null
     private var boot: String? = null
 
-    // Called when your app can update your tile.
     override fun onStartListening() {
         super.onStartListening()
         val tile = qsTile
         checkuefi()
         device = ShellUtils.fastCmd("getprop ro.product.device")
         findWin = ShellUtils.fastCmd("find /dev/block | grep -i -E \"win|mindows|windows\" | head -1")
-        if (findUefi!!.isEmpty() || (isSecure && !Pref.getSecure(this)) || findWin!!.isEmpty()) tile.state = 0
+        if (findUefi.isEmpty() || (isSecure && !Pref.getSecure(this)) || findWin.isEmpty()) tile.state = 0
         else tile.state = 1
         if (Pref.getDevcfg1(this)) {
             if (isNetworkConnected(this)) {
@@ -52,26 +51,25 @@ class QuickBootTile : TileService() {
         tile.updateTile()
     }
 
-    // Called when the user taps on your tile in an active or inactive state.
     override fun onClick() {
         super.onClick()
         val tile = qsTile
-        if (2 == tile.state || !Pref.getCONFIRM(this)) {
+        if (2 == tile.state || !Pref.getConfirm(this)) {
             mount()
             var found = ShellUtils.fastCmd("ls " + (if (Pref.getMountLocation(this)) "/mnt/Windows" else Environment.getExternalStorageDirectory().path + "/Windows") + " | grep boot.img")
             if (Pref.getMountLocation(this)) {
-                if (Pref.getBACKUP(this) || (!Pref.getAUTO(this) && found.isEmpty())) {
+                if (Pref.getBackup(this) || (!Pref.getAuto(this) && found.isEmpty())) {
                     ShellUtils.fastCmd("dd bs=8m if=$boot of=/mnt/Windows/boot.img")
                     val sdf = SimpleDateFormat("dd-MM HH:mm", Locale.US)
                     val currentDateAndTime = sdf.format(Date())
-                    Pref.setDATE(this, currentDateAndTime)
+                    Pref.setDate(this, currentDateAndTime)
                 }
             } else {
-                if (Pref.getBACKUP(this) || (!Pref.getAUTO(this) && found.isEmpty())) {
+                if (Pref.getBackup(this) || (!Pref.getAuto(this) && found.isEmpty())) {
                     ShellUtils.fastCmd("dd bs=8m if=$boot of=/mnt/sdcard/Windows/boot.img")
                     val sdf = SimpleDateFormat("dd-MM HH:mm", Locale.US)
                     val currentDateAndTime = sdf.format(Date())
-                    Pref.setDATE(this, currentDateAndTime)
+                    Pref.setDate(this, currentDateAndTime)
                 }
             }
             found = ShellUtils.fastCmd("find /sdcard | grep boot.img")
@@ -79,13 +77,13 @@ class QuickBootTile : TileService() {
                 ShellUtils.fastCmd("dd bs=8m if=$boot of=/sdcard/boot.img")
                 val sdf = SimpleDateFormat("dd-MM HH:mm", Locale.US)
                 val currentDateAndTime = sdf.format(Date())
-                Pref.setDATE(this, currentDateAndTime)
+                Pref.setDate(this, currentDateAndTime)
             }
             // This whole feature feels very laggy to me in the QS tile, needs overhauling.
             if (Pref.getDevcfg1(this)) {
                 if (!isNetworkConnected(this)) {
-                    val finddevcfg = ShellUtils.fastCmd("find $filesDir -maxdepth 1 -name OOS11_devcfg_*")
-                    if (finddevcfg.isEmpty()) {
+                    val findDevCfg = ShellUtils.fastCmd("find $filesDir -maxdepth 1 -name OOS11_devcfg_*")
+                    if (findDevCfg.isEmpty()) {
                         Toast.makeText(this, (getString(R.string.internet)), Toast.LENGTH_LONG).show()
                         tile.state = 0
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -97,8 +95,8 @@ class QuickBootTile : TileService() {
                     }
                 }
                 var devcfgDevice = ""
-                if ("guacamole" == device || "OnePlus7Pro" == device || "OnePlus7Pro4G" == device) devcfgDevice = "guacamole"
-                else if ("hotdog" == device || "OnePlus7TPro" == device || "OnePlus7TPro4G" == device) devcfgDevice = "hotdog"
+                if (arrayOf("guacamole", "OnePlus7Pro", "OnePlus7Pro4G").contains(device)) devcfgDevice = "guacamole"
+                else if (arrayOf("hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) devcfgDevice = "hotdog"
                 val findoriginaldevcfg = ShellUtils.fastCmd("find $filesDir -maxdepth 1 -name original-devcfg.img")
                 if (findoriginaldevcfg.isEmpty()) {
                     ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=/sdcard/original-devcfg.img")
@@ -165,7 +163,6 @@ class MountTile : TileService() {
         update()
     }
 
-    // Called when the user taps on your tile in an active or inactive state.
     override fun onClick() {
         super.onClick()
         if (mntStat!!.isEmpty()) mount()
@@ -180,7 +177,7 @@ class MountTile : TileService() {
             return
         }
         findWin = ShellUtils.fastCmd("find /dev/block | grep -i -E \"win|mindows|windows\" | head -1")
-        if (findWin!!.isEmpty()) {
+        if (findWin.isEmpty()) {
             tile.state = 0
             tile.updateTile()
             return

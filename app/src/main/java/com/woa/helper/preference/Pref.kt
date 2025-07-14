@@ -41,33 +41,33 @@ enum class Pref {
             return getSharedPreference(context)!!.getInt(WIDGET_OPACITY, 255)
         }
 
-        fun setlocale(context: Context, value: String?) {
+        fun setLocale(context: Context, value: String?) {
             getSharedPreference(context)!!.edit {
                 putString(LOCALE, value)
             }
         }
 
-        fun getlocale(context: Context): String {
+        fun getLocale(context: Context): String {
             return getSharedPreference(context)!!.getString(LOCALE, "")!!
         }
 
-        fun setMODEM(context: Context, value: Boolean) {
+        fun setModem(context: Context, value: Boolean) {
             getSharedPreference(context)!!.edit {
                 putBoolean(MODEM, value)
             }
         }
 
-        fun getMODEM(context: Context): Boolean {
+        fun getModem(context: Context): Boolean {
             return getSharedPreference(context)!!.getBoolean(MODEM, false)
         }
 
-        fun setAUTO(context: Context, value: Boolean) {
+        fun setAuto(context: Context, value: Boolean) {
             getSharedPreference(context)!!.edit {
                 putBoolean(AUTOBACKUP, value)
             }
         }
 
-        fun getAUTO(context: Context): Boolean {
+        fun getAuto(context: Context): Boolean {
             return getSharedPreference(context)!!.getBoolean(AUTOBACKUP, false)
         }
 
@@ -82,13 +82,13 @@ enum class Pref {
         }
 
 
-        fun setCONFIRM(context: Context, value: Boolean) {
+        fun setConfirm(context: Context, value: Boolean) {
             getSharedPreference(context)!!.edit {
                 putBoolean(CONFIRMATION, value)
             }
         }
 
-        fun getCONFIRM(context: Context): Boolean {
+        fun getConfirm(context: Context): Boolean {
             return getSharedPreference(context)!!.getBoolean(CONFIRMATION, false)
         }
 
@@ -102,23 +102,23 @@ enum class Pref {
             return getSharedPreference(context)!!.getBoolean(AGREED, false)
         }
 
-        fun setAGREENTFS(context: Context, value: Boolean) {
+        fun setAgreeNTFS(context: Context, value: Boolean) {
             getSharedPreference(context)!!.edit {
                 putBoolean(AGREED_NTFS, value)
             }
         }
 
-        fun getAGREENTFS(context: Context): Boolean {
+        fun getAgreeNTFS(context: Context): Boolean {
             return getSharedPreference(context)!!.getBoolean(AGREED_NTFS, false)
         }
 
-        fun setBACKUP(context: Context, value: Boolean) {
+        fun setBackup(context: Context, value: Boolean) {
             getSharedPreference(context)!!.edit {
                 putBoolean(BACKUP_QUICK, value)
             }
         }
 
-        fun getBACKUP(context: Context): Boolean {
+        fun getBackup(context: Context): Boolean {
             return getSharedPreference(context)!!.getBoolean(BACKUP_QUICK, false)
         }
 
@@ -132,13 +132,13 @@ enum class Pref {
             return getSharedPreference(context)!!.getBoolean(BACKUP_QUICK_A, false)
         }
 
-        fun setDATE(context: Context, value: String?) {
+        fun setDate(context: Context, value: String?) {
             getSharedPreference(context)!!.edit {
                 putString(BACKUP_DATE, value)
             }
         }
 
-        fun getDATE(context: Context): String {
+        fun getDate(context: Context): String {
             return getSharedPreference(context)!!.getString(BACKUP_DATE, "")!!
         }
 

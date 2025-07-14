@@ -47,12 +47,12 @@ object Dlg {
         dialog = Dialog(context)
         dialog!!.setContentView(R.layout.dialog)
         Objects.requireNonNull<Window>(dialog!!.window).setBackgroundDrawableResource(android.R.color.transparent)
-        yes = dialog!!.findViewById<MaterialButton?>(R.id.yes)
-        no = dialog!!.findViewById<MaterialButton?>(R.id.no)
-        dismiss = dialog!!.findViewById<MaterialButton?>(R.id.dismiss)
-        Dlg.text = dialog!!.findViewById<TextView?>(R.id.messages)
-        icon = dialog!!.findViewById<ImageView?>(R.id.icon)
-        bar = dialog!!.findViewById<ProgressBar?>(R.id.progress)
+        yes = dialog!!.findViewById(R.id.yes)
+        no = dialog!!.findViewById(R.id.no)
+        dismiss = dialog!!.findViewById(R.id.dismiss)
+        Dlg.text = dialog!!.findViewById(R.id.messages)
+        icon = dialog!!.findViewById(R.id.icon)
+        bar = dialog!!.findViewById(R.id.progress)
 
         setText(text)
         setCancelable(true)
@@ -88,12 +88,12 @@ object Dlg {
         dismiss!!.visibility = View.GONE
     }
 
-    fun setCancelable(state: kotlin.Boolean) {
+    fun setCancelable(state: Boolean) {
         dialog!!.setCancelable(state)
     }
 
     fun dismissButton() {
-        setDismiss(R.string.dismiss, { dismiss })
+        setDismiss(R.string.dismiss) { dialog!!.dismiss() }
         setCancelable(true)
     }
 
