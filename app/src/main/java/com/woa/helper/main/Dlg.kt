@@ -96,7 +96,7 @@ object Dlg {
     }
 
     fun dismissButton() {
-        setDismiss(R.string.dismiss, { obj: Dlg? -> close() } as () -> Unit)
+        setDismiss(R.string.dismiss, { dialog!!.dismiss() })
         setCancelable(Boolean.TRUE)
     }
 

@@ -106,10 +106,10 @@
     <string name="qspressagain">Press again</string>
     <string name="qsinternet">Internet required</string>
 
-    <string name="last">LAST BACKUP : %s</string>
-    <string name="slot">SLOT : %s</string>
-    <string name="ramvalue">MEMORY : %.2fGB </string>
-    <string name="paneltype">PANEL : %s</string>
+    <string name="last">LAST BACKUP: %s</string>
+    <string name="slot">SLOT: %s</string>
+    <string name="ramvalue">MEMORY: %.2fGB </string>
+    <string name="paneltype">PANEL: %s</string>
 
     <string name="guide">GUIDE</string>
     <string name="group">GROUP</string>

@@ -98,10 +98,10 @@
     <string name="qspressagain">Press again</string>
     <string name="qsinternet">Internet required</string>
 
-    <string name="last">AXIRINCI Ehtiyat nüsxəsi : %s</string>
-    <string name="slot">SLOT : %s</string>
-    <string name="ramvalue">YADDAŞ : %.2fGB </string>
-    <string name="paneltype">PANEL : %s</string>
+    <string name="last">AXIRINCI Ehtiyat nüsxəsi: %s</string>
+    <string name="slot">SLOT: %s</string>
+    <string name="ramvalue">YADDAŞ: %.2fGB </string>
+    <string name="paneltype">PANEL: %s</string>
 
     <string name="guide">TƏLİMAT</string>
     <string name="group">QRUP</string>

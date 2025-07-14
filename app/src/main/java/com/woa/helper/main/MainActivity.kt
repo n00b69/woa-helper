@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
         listOf("mount.ntfs", "libfuse-lite.so", "libntfs-3g.so").forEach(Consumer { v: String? -> ShellUtils.fastCmd("chmod 777 $filesDir/$v") })
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
+    @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         this.enableEdgeToEdge()
         super.onCreate(savedInstanceState)
@@ -99,11 +99,12 @@ class MainActivity : AppCompatActivity() {
         onBackPressedDispatcher.addCallback(this) {
             if (0 == views.size - 1) {
                 finish()
+            } else {
+                views[views.size - 1].startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_back_out))
+                views.removeAt(views.size - 1)
+                setContentView(views[views.size - 1])
+                views[views.size - 1].startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_back_in))
             }
-            views[views.size - 1].startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_back_out))
-            views.removeAt(views.size - 1)
-            setContentView(views[views.size - 1])
-            views[views.size - 1].startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_back_in))
         }
 
         copyAssets()
@@ -568,13 +569,28 @@ class MainActivity : AppCompatActivity() {
                 Dlg.close()
             }
         }
-        val run = ShellUtils.fastCmd("su -c cat /proc/cmdline")
-        panel = if (listOf("j20s_42_02_0b", "k82_42", "ft8756_huaxing", "huaxing").contains(run)) "Huaxing"
-        else if (listOf("j20s_36_02_0a", "k82_36", "nt36675_tianma", "tianma_fhd_nt36672a", "tianma").contains(run)) "Tianma"
-        else if (listOf("fhd_ea8076_global", "fhd_ea8076_f1mp_cmd", "fhd_ea8076_f1p2_cmd", "fhd_ea8076_f1p2_2", "fhd_ea8076_f1_cmd", "fhd_ea8076_cmd").contains(run)) "Samsung"
-        else if (run.contains("ebbg_fhd_ft8719")) "EBBG"
-        else ShellUtils.fastCmd("su -c cat /proc/cmdline | tr ' :=' '\n'|grep dsi|tr ' _' '\n'|tail -3|head -1 ")
-        if (!Pref.getAGREE(this) && (listOf("f1p2_2", "f1_cmd").contains(run))) {
+        var panel = ShellUtils.fastCmd("su -c cat /proc/cmdline")
+        panel = when {
+            panel.contains("j20s_42")
+                    || panel.contains("k82_42")
+                    || panel.contains("huaxing") -> "Huaxing"
+
+            panel.contains("j20s_36")
+                    || panel.contains("tianma")
+                    || panel.contains("k82_36") -> "Tianma"
+
+            panel.contains("ebbg") -> "EBBG"
+
+            panel.contains("samsung")
+                    || panel.contains("ea8076_f1mp")
+                    || panel.contains("ea8076_f1p2")
+                    || panel.contains("ea8076_global")
+                    || panel.contains("S6E3FC3")
+                    || panel.contains("AMS646YD01") -> "Samsung"
+
+            else -> ShellUtils.fastCmd("su -c cat /proc/cmdline | tr ' :=' '\n'|grep dsi|tr ' _' '\n'|tail -3|head -1 ")
+        }
+        if (!Pref.getAGREE(this) && (panel.contains("f1p2_2") || panel.contains("f1_cmd"))) {
             Dlg.show(this, R.string.upanel)
             Dlg.setYes(R.string.chat) {
                 openLink(grouplink)
@@ -1180,7 +1196,7 @@ class MainActivity : AppCompatActivity() {
     private fun checkwin() {
         if (!win!!.isEmpty()) return
         Dlg.show(this, R.string.partition)
-        Dlg.setCancelable(false)
+        Dlg.setCancelable(true)
         listOf(x!!.mnt, x!!.toolbox, x!!.quickBoot, n!!.flashUefi).forEach(Consumer { v: Button -> v.isEnabled = false })
     }
 
