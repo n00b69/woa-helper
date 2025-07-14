@@ -14,7 +14,7 @@ import com.woa.helper.main.MainActivity
 import com.woa.helper.main.MainActivity.Companion.mountUI
 import com.woa.helper.main.MainActivity.Companion.quickbootUI
 import com.woa.helper.main.MainActivity.Companion.runSilently
-import kotlin.String
+
 
 class WidgetActivity : AppCompatActivity() {
     override fun onDestroy() {
@@ -24,27 +24,28 @@ class WidgetActivity : AppCompatActivity() {
         finish()
     }
 
-    /*private static void sizeCheck(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
-		Bundle options = appWidgetManager.getAppWidgetOptions(appWidgetId);
-		RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
-		int width = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH);
-		if (width <= 100) {
-			views.setViewVisibility(R.id.text, View.GONE);
-		} else views.setViewVisibility(R.id.text, View.VISIBLE);
-		appWidgetManager.updateAppWidget(appWidgetId, views);
-	}
-	public static void checks(Context context) {
-		AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-		int[] mountWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, MountWidget.class));
-		int[] quickbootWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, QuickbootWidget.class));
-		int[] allWidgetIds = new int[mountWidgetIds.length + quickbootWidgetIds.length];
-		System.arraycopy(mountWidgetIds, 0, allWidgetIds, 0, mountWidgetIds.length);
-		System.arraycopy(quickbootWidgetIds, 0, allWidgetIds, mountWidgetIds.length, quickbootWidgetIds.length);
-		for (int appWidgetId : allWidgetIds) {
-			sizeCheck(context, appWidgetManager, appWidgetId);
-		}
-	}
-*/
+    /*private fun sizeCheck(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
+        val options = appWidgetManager.getAppWidgetOptions(appWidgetId)
+        val views = RemoteViews(context.packageName, R.layout.widget_layout)
+        val width = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH)
+        if (width <= 100) {
+            views.setViewVisibility(R.id.text, View.GONE)
+        } else views.setViewVisibility(R.id.text, View.VISIBLE)
+        appWidgetManager.updateAppWidget(appWidgetId, views)
+    }
+
+    fun checks(context: Context) {
+        val appWidgetManager = AppWidgetManager.getInstance(context)
+        val mountWidgetIds = appWidgetManager.getAppWidgetIds(ComponentName(context, MountWidget::class.java))
+        val quickbootWidgetIds = appWidgetManager.getAppWidgetIds(ComponentName(context, QuickBootWidget::class.java))
+        val allWidgetIds = IntArray(mountWidgetIds.size + quickbootWidgetIds.size)
+        System.arraycopy(mountWidgetIds, 0, allWidgetIds, 0, mountWidgetIds.size)
+        System.arraycopy(quickbootWidgetIds, 0, allWidgetIds, mountWidgetIds.size, quickbootWidgetIds.size)
+        for (appWidgetId in allWidgetIds) {
+            sizeCheck(context, appWidgetManager, appWidgetId)
+        }
+    }*/
+
     @SuppressLint("StringFormatInvalid", "SdCardPath")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
