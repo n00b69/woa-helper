@@ -12,12 +12,14 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+private var win: String? = null
+private var findWin: String? = null
+private var winPath: String? = null
+
+
 class QuickBootTile : TileService() {
     private var findUefi: String? = null
     private var device: String? = null
-    private var win: String? = null
-    private var findWin: String? = null
-    private var winPath: String? = null
     private var findBoot: String? = null
     private var boot: String? = null
 
@@ -152,5 +154,55 @@ class QuickBootTile : TileService() {
         findBoot = ShellUtils.fastCmd("find /dev/block | grep boot$(getprop ro.boot.slot_suffix)")
         if (findBoot!!.isEmpty()) findBoot = ShellUtils.fastCmd("find /dev/block | grep BOOT$(getprop ro.boot.slot_suffix)")
         boot = ShellUtils.fastCmd("realpath $findBoot")
+    }
+}
+
+class MountTile : TileService() {
+    private var mntStat: String? = null
+
+    override fun onStartListening() {
+        super.onStartListening()
+        update()
+    }
+
+    // Called when the user taps on your tile in an active or inactive state.
+    override fun onClick() {
+        super.onClick()
+        if (mntStat!!.isEmpty()) mount()
+        else unmount()
+        update()
+    }
+
+    private fun update() {
+        val tile = qsTile
+        if (isSecure && !Pref.getSecure(this)) {
+            tile.state = 0
+            return
+        }
+        findWin = ShellUtils.fastCmd("find /dev/block | grep -i -E \"win|mindows|windows\" | head -1")
+        if (findWin!!.isEmpty()) {
+            tile.state = 0
+            tile.updateTile()
+            return
+        }
+        win = ShellUtils.fastCmd("realpath $findWin")
+        winPath = (if (Pref.getMountLocation(this)) "/mnt/Windows" else Environment.getExternalStorageDirectory().path + "/Windows")
+        mntStat = ShellUtils.fastCmd("mount | grep $win")
+        if (mntStat!!.isEmpty()) tile.state = 1
+        else tile.state = 2
+        tile.updateTile()
+    }
+
+    private fun mount() {
+        val mntstat = ShellUtils.fastCmd("su -mm -c mount | grep $win")
+        if (mntstat.isEmpty()) {
+            ShellUtils.fastCmd("mkdir $winPath || true")
+            ShellUtils.fastCmd("su -mm -c $filesDir/mount.ntfs $win $winPath")
+        }
+    }
+
+    private fun unmount() {
+        ShellUtils.fastCmd("su -mm -c umount $winPath")
+        ShellUtils.fastCmd("rmdir $winPath")
     }
 }
