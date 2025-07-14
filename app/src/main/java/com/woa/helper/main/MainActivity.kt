@@ -14,13 +14,10 @@ import android.os.Looper
 import android.util.Log
 import android.util.Pair
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.ImageButton
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -30,8 +27,6 @@ import androidx.core.net.toUri
 import androidx.core.os.LocaleListCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.github.mmin18.widget.RealtimeBlurView
-import com.google.android.material.card.MaterialCardView
 import com.topjohnwu.superuser.Shell
 import com.topjohnwu.superuser.ShellUtils
 import com.woa.helper.BuildConfig
@@ -52,7 +47,6 @@ import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import java.util.function.Consumer
 
 @SuppressLint("StaticFieldLeak")
 class MainActivity : AppCompatActivity() {
@@ -89,7 +83,7 @@ class MainActivity : AppCompatActivity() {
             } catch (_: IOException) {
             }
         }
-        listOf("mount.ntfs", "libfuse-lite.so", "libntfs-3g.so").forEach(Consumer { v: String? -> ShellUtils.fastCmd("chmod 777 $filesDir/$v") })
+        arrayOf("mount.ntfs", "libfuse-lite.so", "libntfs-3g.so").forEach { ShellUtils.fastCmd("chmod 777 $filesDir/$it") }
     }
 
     @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
@@ -124,8 +118,8 @@ class MainActivity : AppCompatActivity() {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content)) { v: View?, insets: WindowInsetsCompat ->
             val sysInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             x!!.tvAppCreator.setPadding(0, 0, 0, sysInsets.bottom)
-            listOf(x!!.app, n!!.app, k!!.app, z!!.app).forEach(Consumer { a: ViewGroup -> a.setPadding(0, 0, 0, sysInsets.bottom) })
-            listOf(x!!.linearLayout, n!!.linearLayout, k!!.linearLayout, z!!.linearLayout).forEach(Consumer { a: LinearLayout -> a.setPadding(sysInsets.left, sysInsets.top, sysInsets.right, 0) })
+            arrayOf(x!!.app, n!!.app, k!!.app, z!!.app).forEach { it.setPadding(0, 0, 0, sysInsets.bottom) }
+            arrayOf(x!!.linearLayout, n!!.linearLayout, k!!.linearLayout, z!!.linearLayout).forEach { it.setPadding(sysInsets.left, sysInsets.top, sysInsets.right, 0) }
             insets
         }
 
@@ -150,7 +144,7 @@ class MainActivity : AppCompatActivity() {
         x!!.toolbarlayout.toolbar.setTitle(R.string.app_name)
         x!!.toolbarlayout.toolbar.subtitle = "v" + BuildConfig.VERSION_NAME
         x!!.toolbarlayout.toolbar.setNavigationIcon(R.drawable.ic_launcher_foreground)
-        listOf(x!!.toolbarlayout.settings, k!!.toolbarlayout.settings, n!!.toolbarlayout.settings, z!!.toolbarlayout.settings).forEach(Consumer { v: ImageButton -> v.setColorFilter(R.color.md_theme_primary) })
+        arrayOf(x!!.toolbarlayout.settings, k!!.toolbarlayout.settings, n!!.toolbarlayout.settings, z!!.toolbarlayout.settings).forEach { it.setColorFilter(R.color.md_theme_primary) }
 
         model = ShellUtils.fastCmd("getprop ro.product.model")
         win = getWin()
@@ -232,12 +226,11 @@ class MainActivity : AppCompatActivity() {
                 guidelink = "https://github.com/fbernkastel228/Port-Windows-XiaoMI-9"
                 grouplink = "http://t.me/woacepheus"
                 x!!.DeviceImage.setImageResource(R.drawable.cepheus)
-                listOf(
+                arrayOf(
                     Pair.create(x!!.tvPanel, View.VISIBLE), Pair.create(n!!.dbkp, View.VISIBLE), Pair.create(n!!.dumpModem, View.VISIBLE), Pair.create(
                         n!!.flashUefi, View.GONE
                     )
-                ).forEach(
-                    Consumer { v: Pair<out View, Int> -> v.first.visibility = v.second })
+                ).forEach { it.first.visibility = it.second }
             }
 
             "chiron" -> {
@@ -275,10 +268,10 @@ class MainActivity : AppCompatActivity() {
                 guidelink = "https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5"
                 grouplink = "https://t.me/nabuwoa"
                 x!!.DeviceImage.setImageResource(R.drawable.nabu)
-                listOf(Pair.create(x!!.tvPanel, View.VISIBLE), Pair.create(n!!.dbkp, View.VISIBLE), Pair.create(n!!.flashUefi, View.GONE)).forEach(Consumer { v: Pair<out View, Int> ->
-                    v.first.visibility =
-                        v.second
-                })
+                arrayOf(Pair.create(x!!.tvPanel, View.VISIBLE), Pair.create(n!!.dbkp, View.VISIBLE), Pair.create(n!!.flashUefi, View.GONE)).forEach {
+                    it.first.visibility =
+                        it.second
+                }
                 tablet = true
             }
 
@@ -292,10 +285,10 @@ class MainActivity : AppCompatActivity() {
                 guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md"
                 grouplink = "https://t.me/xiaomi_pipa"
                 x!!.DeviceImage.setImageResource(R.drawable.pipa)
-                listOf(Pair.create(x!!.tvPanel, View.VISIBLE), Pair.create(n!!.dbkp, View.VISIBLE), Pair.create(n!!.flashUefi, View.GONE)).forEach(Consumer { v: Pair<out View, Int> ->
-                    v.first.visibility =
-                        v.second
-                })
+                arrayOf(Pair.create(x!!.tvPanel, View.VISIBLE), Pair.create(n!!.dbkp, View.VISIBLE), Pair.create(n!!.flashUefi, View.GONE)).forEach {
+                    it.first.visibility =
+                        it.second
+                }
                 tablet = true
             }
 
@@ -310,7 +303,7 @@ class MainActivity : AppCompatActivity() {
                 guidelink = "https://github.com/new-WoA-Raphael/woa-raphael"
                 grouplink = "https://t.me/woaraphael"
                 x!!.DeviceImage.setImageResource(R.drawable.raphael)
-                listOf(x!!.tvPanel, n!!.dumpModem).forEach(Consumer { v: View -> v.visibility = View.VISIBLE })
+                arrayOf(x!!.tvPanel, n!!.dumpModem).forEach { it.visibility = View.VISIBLE }
             }
 
             "surya", "karna" -> {
@@ -366,20 +359,20 @@ class MainActivity : AppCompatActivity() {
                 guidelink = "https://github.com/n00b69/woa-op7"
                 grouplink = "https://t.me/onepluswoachat"
                 x!!.DeviceImage.setImageResource(R.drawable.hotdog)
-                listOf(Pair.create(n!!.dumpModem, View.VISIBLE), Pair.create(n!!.dbkp, View.VISIBLE), Pair.create(n!!.flashUefi, View.GONE)).forEach(Consumer { v: Pair<Button, Int> ->
-                    v.first.visibility =
-                        v.second
-                })
+                arrayOf(Pair.create(n!!.dumpModem, View.VISIBLE), Pair.create(n!!.dbkp, View.VISIBLE), Pair.create(n!!.flashUefi, View.GONE)).forEach {
+                    it.first.visibility =
+                        it.second
+                }
             }
 
             "guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO" -> {
                 guidelink = "https://github.com/n00b69/woa-op7"
                 grouplink = "https://t.me/onepluswoachat"
                 x!!.DeviceImage.setImageResource(R.drawable.guacamole)
-                listOf(Pair.create(n!!.dumpModem, View.VISIBLE), Pair.create(n!!.dbkp, View.VISIBLE), Pair.create(n!!.flashUefi, View.GONE)).forEach(Consumer { v: Pair<Button, Int> ->
-                    v.first.visibility =
-                        v.second
-                })
+                arrayOf(Pair.create(n!!.dumpModem, View.VISIBLE), Pair.create(n!!.dbkp, View.VISIBLE), Pair.create(n!!.flashUefi, View.GONE)).forEach {
+                    it.first.visibility =
+                        it.second
+                }
             }
 
             "guacamoleb", "hotdogb", "OnePlus7T", "OnePlus7" -> {
@@ -604,17 +597,17 @@ class MainActivity : AppCompatActivity() {
             }
             Dlg.setNo(R.string.later) { Dlg.close() }
         }
-        listOf(Pair.create(x!!.tvRamvalue, getString(R.string.ramvalue, RAM().getMemory(this).toDouble())), Pair.create(x!!.tvPanel, getString(R.string.paneltype, panel))).forEach(Consumer { v: Pair<TextView, String> ->
-            v.first.text =
-                v.second
-        })
-        listOf(Pair.create(x!!.guide, guidelink), Pair.create(x!!.group, grouplink)).forEach(Consumer { v: Pair<MaterialCardView, String> ->
-            v.first.setOnClickListener { a: View? ->
+        arrayOf(Pair.create(x!!.tvRamvalue, getString(R.string.ramvalue, RAM().getMemory(this).toDouble())), Pair.create(x!!.tvPanel, getString(R.string.paneltype, panel))).forEach {
+            it.first.text =
+                it.second
+        }
+        arrayOf(Pair.create(x!!.guide, guidelink), Pair.create(x!!.group, grouplink)).forEach {
+            it.first.setOnClickListener { a: View? ->
                 openLink(
-                    v.second
+                    it.second
                 )
             }
-        })
+        }
 
         if (!BuildConfig.DEBUG) {
             checkdbkpmodel()
@@ -666,7 +659,7 @@ class MainActivity : AppCompatActivity() {
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
                 ShellUtils.fastCmd("mkdir -p /sdcard/WOAHelper/sta || true")
-                listOf("sta.exe", "sdd.exe", "sdd.conf", "boot_img_auto-flasher_V1.2.exe").forEach(Consumer { file: String -> ShellUtils.fastCmd("cp $filesDir/sta.exe /sdcard/WOAHelper/sta/$file") })
+                arrayOf("sta.exe", "sdd.exe", "sdd.conf", "boot_img_auto-flasher_V1.2.exe").forEach { ShellUtils.fastCmd("cp $filesDir/sta.exe /sdcard/WOAHelper/sta/$it") }
                 mount()
                 if (!isMounted()) {
                     Dlg.close()
@@ -759,7 +752,7 @@ class MainActivity : AppCompatActivity() {
                 Dlg.dialogLoading()
                 Thread {
                     ShellUtils.fastCmd("mkdir -p /sdcard/WOAHelper/Backups || true")
-                    val devcfgDevice = if (listOf<String?>("guacamole", "OnePlus7Pro", "OnePlus7Pro4G").contains(device)) "guacamole" else (if (listOf<String?>("hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) "hotdog" else null)!!
+                    val devcfgDevice = if (arrayOf("guacamole", "OnePlus7Pro", "OnePlus7Pro4G").contains(device)) "guacamole" else (if (arrayOf("hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) "hotdog" else null)!!
                     val findoriginaldevcfg = ShellUtils.fastCmd("find $filesDir -maxdepth 1 -name original-devcfg.img")
                     if (findoriginaldevcfg.isEmpty()) {
                         ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=/sdcard/WOAHelper/Backups/original-devcfg.img")
@@ -811,9 +804,9 @@ class MainActivity : AppCompatActivity() {
                     return@setYes
                 }
                 ShellUtils.fastCmd("mkdir -p /sdcard/WOAHelper/Toolbox || true")
-                listOf("WorksOnWoa.url", "TestedSoftware.url", "ARMSoftware.url", "ARMRepo.url").forEach(Consumer { file: String? -> ShellUtils.fastCmd("cp $filesDir/$file /sdcard/WOAHelper/Toolbox") })
+                arrayOf("WorksOnWoa.url", "TestedSoftware.url", "ARMSoftware.url", "ARMRepo.url").forEach( { ShellUtils.fastCmd("cp $filesDir/$it /sdcard/WOAHelper/Toolbox") })
                 ShellUtils.fastCmd("mkdir $winpath/Toolbox || true ")
-                listOf("WorksOnWoa.url", "TestedSoftware.url", "ARMSoftware.url", "ARMRepo.url").forEach(Consumer { file: String? -> ShellUtils.fastCmd("cp $filesDir/$file $winpath/Toolbox") })
+                arrayOf("WorksOnWoa.url", "TestedSoftware.url", "ARMSoftware.url", "ARMRepo.url").forEach( { ShellUtils.fastCmd("cp $filesDir/$it $winpath/Toolbox") })
                 Dlg.setText(R.string.done)
                 Dlg.dismissButton()
             }
@@ -920,7 +913,7 @@ class MainActivity : AppCompatActivity() {
                     return@setYes
                 }
                 ShellUtils.fastCmd("mkdir $winpath/Toolbox || true ")
-                listOf("/Toolbox", "/Users/Public/Desktop").forEach(Consumer { v: String -> ShellUtils.fastCmd("cp /sdcard/WOAHelper/Toolbox/QuickRotate_V3.0.exe $winpath$v") })
+                arrayOf("/Toolbox", "/Users/Public/Desktop").forEach({ ShellUtils.fastCmd("cp /sdcard/WOAHelper/Toolbox/QuickRotate_V3.0.exe $winpath$it") })
                 Dlg.setText(R.string.done)
                 Dlg.dismissButton()
             }
@@ -960,7 +953,7 @@ class MainActivity : AppCompatActivity() {
                 Thread {
                     ShellUtils.fastCmd("mkdir -p /sdcard/WOAHelper/Frameworks || true")
                     ShellUtils.fastCmd("cp $filesDir/install.bat /sdcard/WOAHelper/Frameworks/install.bat")
-                    listOf(
+                    arrayOf(
                         "PhysX-9.13.0604-SystemSoftware-Legacy.msi",
                         "PhysX_9.23.1019_SystemSoftware.exe",
                         "xnafx40_redist.msi",
@@ -980,11 +973,10 @@ class MainActivity : AppCompatActivity() {
                         "2022VC_redist.arm64.exe",
                         "dxwebsetup.exe",
                         "oalinst.exe"
-                    ).forEach(
-                        Consumer { file: String? ->
-                            ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/$file -O /sdcard/WOAHelper/Frameworks/$file\" | su -mm -c sh")
-                            Dlg.setBar(Dlg.bar!!.progress + 5)
-                        })
+                    ).forEach {
+                        ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/$it -O /sdcard/WOAHelper/Frameworks/$it\" | su -mm -c sh")
+                        Dlg.setBar(Dlg.bar!!.progress + 5)
+                    }
                     runOnUiThread {
                         mount()
                         if (!isMounted()) {
@@ -1041,7 +1033,7 @@ class MainActivity : AppCompatActivity() {
             setContentView(k!!.root)
             views[views.size - 1].startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in))
             // Scary big line! (Victoria)
-            listOf(
+            arrayOf(
                 Pair.create(k!!.backupQB, Pref.getBackup(this)), Pair.create(k!!.backupQBA, Pref.getBackupA(this)), Pair.create(k!!.autobackup, !Pref.getAuto(this)), Pair.create(
                     k!!.autobackupA, !Pref.getAuto(this)
                 ), Pair.create(k!!.autobackupA, !Pref.getAuto(this)), Pair.create(k!!.confirmation, Pref.getConfirm(this)), Pair.create(k!!.automount, Pref.getAutoMount(this)), Pair.create(
@@ -1050,7 +1042,7 @@ class MainActivity : AppCompatActivity() {
                     k!!.devcfg2, Pref.getDevcfg2(this)
                 )
             ).forEach(
-                Consumer { a: Pair<SettingsButton, Boolean> -> a.first.setChecked(a.second) })
+                { it.first.setChecked(it.second) })
             k!!.toolbarlayout.settings.visibility = View.GONE
             val langSpinner = findViewById<AppCompatSpinner>(R.id.languages)
             langSpinner.adapter = adapter
@@ -1069,7 +1061,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        listOf(x!!.toolbarlayout.settings, n!!.toolbarlayout.settings, z!!.toolbarlayout.settings).forEach(Consumer { v: ImageButton -> v.setOnClickListener(settingsIconClick) })
+        arrayOf(x!!.toolbarlayout.settings, n!!.toolbarlayout.settings, z!!.toolbarlayout.settings).forEach { it.setOnClickListener(settingsIconClick) }
 
         k!!.mountLocation.setOnChangeListener { b: Boolean ->
             Pref.setMountLocation(this, b)
@@ -1150,7 +1142,7 @@ class MainActivity : AppCompatActivity() {
         //String op7funny = ShellUtils.fastCmd("getprop ro.boot.vendor.lge.model.name");
         //if (("guacamole".equals(device) || "guacamolet".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device) || "OnePlus7ProTMO".equals(device) || "hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) && (op7funny.contains("LM") || op7funny.contains("OPPO"))) {
         val op7funny = ShellUtils.fastCmd("getprop persist.camera.privapp.list")
-        if (listOf<String?>("guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO", "hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device) && op7funny.lowercase(Locale.getDefault()).contains("oppo")) {
+        if (arrayOf("guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO", "hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device) && op7funny.lowercase(Locale.getDefault()).contains("oppo")) {
             k!!.devcfg1.setOnChangeListener { b: Boolean ->
                 Pref.setDevcfg1(this, b)
                 k!!.devcfg2.visibility = if (b) View.VISIBLE else View.GONE
@@ -1159,7 +1151,7 @@ class MainActivity : AppCompatActivity() {
             k!!.devcfg2.setOnChangeListener { b: Boolean -> Pref.setDevcfg2(this, b) }
             n!!.devcfg.visibility = View.VISIBLE
         } else {
-            listOf(k!!.devcfg1, k!!.devcfg2).forEach(Consumer { v: SettingsButton -> v.visibility = View.GONE })
+            arrayOf(k!!.devcfg1, k!!.devcfg2).forEach { it.visibility = View.GONE }
             Pref.setDevcfg1(this, false)
             Pref.setDevcfg2(this, false)
         }
@@ -1177,28 +1169,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun dump() {
-        listOf(Pair.create("modemst1", "bootmodem_fs1"), Pair.create("modemst2", "bootmodem_fs2")).forEach(Consumer { v: Pair<String, String> -> ShellUtils.fastCmd(String.format("su -mm -c dd if=/dev/block/by-name/%s of=$(find $winpath/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/%s", v.first, v.second)) })
+        arrayOf(Pair.create("modemst1", "bootmodem_fs1"), Pair.create("modemst2", "bootmodem_fs2")).forEach( { ShellUtils.fastCmd(String.format("su -mm -c dd if=/dev/block/by-name/%s of=$(find $winpath/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/%s", it.first, it.second)) })
     }
 
     private fun checkdbkpmodel() {
-        dbkpmodel = if (listOf<String?>("guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO").contains(device)) "ONEPLUS 7 PRO" else if (listOf<String?>("hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) "ONEPLUS 7T PRO" else if ("cepheus" == device) "XIAOMI MI 9" else if ("nabu" == device) "XIAOMI PAD 5" else "UNSUPPORTED"
+        dbkpmodel = if (arrayOf("guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO").contains(device)) "ONEPLUS 7 PRO" else if (arrayOf("hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) "ONEPLUS 7T PRO" else if ("cepheus" == device) "XIAOMI MI 9" else if ("nabu" == device) "XIAOMI PAD 5" else "UNSUPPORTED"
     }
 
     private fun checkuefi() {
         ShellUtils.fastCmd("su -c mkdir /sdcard/UEFI")
         finduefi = "\"" + ShellUtils.fastCmd(getString(R.string.uefiChk)) + "\""
         val found = finduefi!!.contains("img")
-        listOf(x!!.quickBoot, n!!.flashUefi).forEach(Consumer { v: Button -> v.isEnabled = found })
-        listOf(Pair.create(x!!.quickBoot, if (found) R.string.quickboot_title else R.string.uefi_not_found), Pair.create(n!!.flashUefi, if (found) R.string.flash_uefi_title else R.string.uefi_not_found)).forEach(Consumer { v: Pair<Button, Int> -> v.first.setTitle(v.second) })
-        listOf(Pair.create(x!!.quickBoot, if (found) getString(R.string.quickboot_subtitle_nabu) else getString(R.string.uefi_not_found_subtitle, device)), Pair.create(n!!.flashUefi, if (found) getString(R.string.flash_uefi_subtitle) else getString(R.string.uefi_not_found_subtitle, device))).forEach(
-            Consumer { v: Pair<Button, String> -> v.first.setSubtitle(v.second) })
+        arrayOf(x!!.quickBoot, n!!.flashUefi).forEach( { it.isEnabled = found })
+        arrayOf(Pair.create(x!!.quickBoot, if (found) R.string.quickboot_title else R.string.uefi_not_found), Pair.create(n!!.flashUefi, if (found) R.string.flash_uefi_title else R.string.uefi_not_found)).forEach { it.first.setTitle(it.second) }
+        arrayOf(Pair.create(x!!.quickBoot, if (found) getString(R.string.quickboot_subtitle_nabu) else getString(R.string.uefi_not_found_subtitle, device)), Pair.create(n!!.flashUefi, if (found) getString(R.string.flash_uefi_subtitle) else getString(R.string.uefi_not_found_subtitle, device))).forEach { it.first.setSubtitle(it.second) }
     }
 
     private fun checkwin() {
         if (!win!!.isEmpty()) return
         Dlg.show(this, R.string.partition)
         Dlg.setCancelable(true)
-        listOf(x!!.mnt, x!!.toolbox, x!!.quickBoot, n!!.flashUefi).forEach(Consumer { v: Button -> v.isEnabled = false })
+        arrayOf(x!!.mnt, x!!.toolbox, x!!.quickBoot, n!!.flashUefi).forEach { it.isEnabled = false }
     }
 
     private fun checkupdate() {
@@ -1242,7 +1233,7 @@ class MainActivity : AppCompatActivity() {
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         if (!tablet) return
-        listOf(x!!.app, x!!.top).forEach(Consumer { v: LinearLayout -> v.orientation = if (Configuration.ORIENTATION_PORTRAIT == newConfig.orientation && tablet) (if (v === x!!.app) LinearLayout.VERTICAL else LinearLayout.HORIZONTAL) else (if (v === x!!.app) LinearLayout.HORIZONTAL else LinearLayout.VERTICAL) })
+        arrayOf(x!!.app, x!!.top).forEach { it.orientation = if (Configuration.ORIENTATION_PORTRAIT == newConfig.orientation && tablet) (if (it === x!!.app) LinearLayout.VERTICAL else LinearLayout.HORIZONTAL) else (if (it === x!!.app) LinearLayout.HORIZONTAL else LinearLayout.VERTICAL) }
     }
 
     private fun kernelPatch(message: String, link: String) {
@@ -1379,7 +1370,7 @@ class MainActivity : AppCompatActivity() {
                                 return@postDelayed
                             }
                         }
-                        val devcfgDevice = if (listOf<String?>("guacamole", "OnePlus7Pro", "OnePlus7Pro4G").contains(device)) "guacamole" else (if (listOf<String?>("hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) "hotdog" else null)!!
+                        val devcfgDevice = if (arrayOf("guacamole", "OnePlus7Pro", "OnePlus7Pro4G").contains(device)) "guacamole" else (if (arrayOf("hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) "hotdog" else null)!!
                         val findoriginaldevcfg = ShellUtils.fastCmd("find " + context!!.filesDir + " -maxdepth 1 -name original-devcfg.img")
                         if (findoriginaldevcfg.isEmpty()) {
                             ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=/sdcard/original-devcfg.img")
@@ -1447,7 +1438,7 @@ class MainActivity : AppCompatActivity() {
         @JvmStatic
         fun showBlur() {
             blur++
-            runSilently { listOf(x!!.blur, k!!.blur, n!!.blur, z!!.blur).forEach(Consumer { v: RealtimeBlurView -> v.visibility = View.VISIBLE }) }
+            runSilently { arrayOf(x!!.blur, k!!.blur, n!!.blur, z!!.blur).forEach { it.visibility = View.VISIBLE } }
         }
 
         @JvmStatic
@@ -1455,7 +1446,7 @@ class MainActivity : AppCompatActivity() {
             if (!check) blur = 1
             blur--
             if (0 < blur) return
-            runSilently { listOf(x!!.blur, k!!.blur, n!!.blur, z!!.blur).forEach(Consumer { v: RealtimeBlurView -> v.visibility = View.GONE }) }
+            runSilently { arrayOf(x!!.blur, k!!.blur, n!!.blur, z!!.blur).forEach { it.visibility = View.GONE } }
         }
 
         @JvmStatic
