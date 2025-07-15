@@ -1336,6 +1336,7 @@ class MainActivity : AppCompatActivity() {
                     Dlg.hideIcon()
                     Dlg.setText(R.string.mountfail)
                     Dlg.setYes(R.string.chat) { openLink("https://t.me/woahelperchat") }
+					Dlg.setNo(R.string.dismiss) { Dlg.close() }
                 }, 25L)
             }
         }
