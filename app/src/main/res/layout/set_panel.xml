@@ -128,7 +128,7 @@
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:textSize="@dimen/_8ssp"
-                        android:text="Language" />
+                        android:text="@string/preference6" />
 
                     <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/languages"

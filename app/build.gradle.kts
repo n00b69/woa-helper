@@ -14,7 +14,7 @@ android {
         versionCode = 5
         versionName = "1.8.4_BETA43"
 
-        val locales = arrayOf(
+        val locales = listOf(
             "ar", "az", "be", "cs", "de", "en", "es", "fa", "fr", "in", "ja", "ka", "ko", "ms", "nl", "pl", "pt", "ru", "ro", "ro-rMD", "th", "tr", "uk", "vi", "zh", "zh-rCN", "zh-rHK", "zh-rMO", "zh-rSG", "zh-rTW"
         )
         buildConfigField("String[]", "LOCALES", "{\"${locales.toString().trim('[').trim(']').replace(", ", "\",\"").replace("zh-", "zh-Hans-").replace("-r", "-")}\"}")

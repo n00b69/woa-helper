@@ -1041,8 +1041,7 @@ class MainActivity : AppCompatActivity() {
                 ), Pair.create(k!!.mountLocation, Pref.getMountLocation(this)), Pair.create(k!!.appUpdate, Pref.getAppUpdate(this)), Pair.create(k!!.devcfg1, Pref.getDevcfg1(this) && View.VISIBLE == k!!.devcfg1.visibility), Pair.create(
                     k!!.devcfg2, Pref.getDevcfg2(this)
                 )
-            ).forEach(
-                { it.first.setChecked(it.second) })
+            ).forEach { it.first.setChecked(it.second) }
             k!!.toolbarlayout.settings.visibility = View.GONE
             val langSpinner = findViewById<AppCompatSpinner>(R.id.languages)
             langSpinner.adapter = adapter
