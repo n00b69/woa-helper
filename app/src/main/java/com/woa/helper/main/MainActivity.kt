@@ -7,6 +7,7 @@ import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
@@ -18,6 +19,7 @@ import android.view.animation.AnimationUtils
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -55,7 +57,6 @@ class MainActivity : AppCompatActivity() {
     private var unsupported = false
     private var tablet = false
     private val views: MutableList<View> = ArrayList()
-
     private fun copyAssets() {
         val assetManager = assets
         var files: Array<String>? = null
@@ -83,7 +84,7 @@ class MainActivity : AppCompatActivity() {
             } catch (_: IOException) {
             }
         }
-        arrayOf("mount.ntfs", "libfuse-lite.so", "libntfs-3g.so").forEach { ShellUtils.fastCmd("chmod 777 $filesDir/$it") }
+        arrayOf("mount.ntfs", "libfuse-lite.so", "libntfs-3g.so").forEach { rootCommand("chmod 777 $filesDir/$it") }
     }
 
     @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
@@ -91,10 +92,25 @@ class MainActivity : AppCompatActivity() {
         this.enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
+        rootCommand("cd $filesDir")
+
         onBackPressedDispatcher.addCallback(this) {
             if (0 == views.size - 1) {
                 finish()
             } else {
+                if (BuildConfig.DEBUG){
+                    if(views[views.size-1]===k!!.root) {
+                        val textbox = findViewById<TextView>(R.id.codename)
+                        if (textbox.text.isNotBlank() && (textbox.text.toString() != Pref.codename_changer(
+                                false,
+                                context!!,
+                                ""
+                            ))
+                        ) {
+                            Pref.codename_changer(true, context!!, textbox.text.toString())
+                        }
+                    }
+                }
                 views[views.size - 1].startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_back_out))
                 views.removeAt(views.size - 1)
                 setContentView(views[views.size - 1])
@@ -146,7 +162,7 @@ class MainActivity : AppCompatActivity() {
         x!!.toolbarlayout.toolbar.setNavigationIcon(R.drawable.ic_launcher_foreground)
         arrayOf(x!!.toolbarlayout.settings, k!!.toolbarlayout.settings, n!!.toolbarlayout.settings, z!!.toolbarlayout.settings).forEach { it.setColorFilter(R.color.md_theme_primary) }
 
-        model = ShellUtils.fastCmd("getprop ro.product.model")
+        model = Build.MODEL
         win = getWin()
         boot = getBoot()
         updateDevice()
@@ -154,7 +170,7 @@ class MainActivity : AppCompatActivity() {
         updateMountText()
         x!!.tvDate.text = String.format(getString(R.string.last), Pref.getDate(this))
 
-        val slot = ShellUtils.fastCmd("getprop ro.boot.slot_suffix")
+        val slot = rootCommand("getprop ro.boot.slot_suffix")
         if (slot.isEmpty()) x!!.tvSlot.visibility = View.GONE
         else x!!.tvSlot.text = getString(R.string.slot, slot.substring(1, 2)).uppercase(Locale.getDefault())
 
@@ -563,7 +579,7 @@ class MainActivity : AppCompatActivity() {
                 Dlg.close()
             }
         }
-        var panel = ShellUtils.fastCmd("su -c cat /proc/cmdline")
+        var panel = rootCommand("cat /proc/cmdline")
         panel = when {
             panel.contains("j20s_42")
                     || panel.contains("k82_42")
@@ -582,7 +598,7 @@ class MainActivity : AppCompatActivity() {
                     || panel.contains("S6E3FC3")
                     || panel.contains("AMS646YD01") -> "Samsung"
 
-            else -> ShellUtils.fastCmd("su -c cat /proc/cmdline | tr ' :=' '\n'|grep dsi|tr ' _' '\n'|tail -3|head -1 ")
+            else -> rootCommand("cat /proc/cmdline | tr ' :=' '\n'|grep dsi|tr ' _' '\n'|tail -3|head -1 ")
         }
         if (!Pref.getAGREE(this) && (panel.contains("f1p2_2") || panel.contains("f1_cmd"))) {
             Dlg.show(this, R.string.upanel)
@@ -612,6 +628,7 @@ class MainActivity : AppCompatActivity() {
         if (!BuildConfig.DEBUG) {
             checkdbkpmodel()
             checkupdate()
+            k!!.codename.visibility = View.GONE
         }
 
         x!!.backup.setOnClickListener { a: View? ->
@@ -658,18 +675,18 @@ class MainActivity : AppCompatActivity() {
             Dlg.show(this, R.string.sta_question, R.drawable.android)
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
-                ShellUtils.fastCmd("mkdir -p /sdcard/WOAHelper/sta || true")
-                arrayOf("sta.exe", "sdd.exe", "sdd.conf", "boot_img_auto-flasher_V1.2.exe").forEach { ShellUtils.fastCmd("cp $filesDir/sta.exe /sdcard/WOAHelper/sta/$it") }
+                rootCommand("mkdir -p /sdcard/WOAHelper/sta || true")
+                arrayOf("sta.exe", "sdd.exe", "sdd.conf", "boot_img_auto-flasher_V1.2.exe").forEach { rootCommand("cp $filesDir/sta.exe /sdcard/WOAHelper/sta/$it") }
                 mount()
                 if (!isMounted()) {
                     Dlg.close()
                     mountfail()
                     return@setYes
                 }
-                ShellUtils.fastCmd("mkdir $winpath/sta $winpath/ProgramData/sta")
-                ShellUtils.fastCmd("cp '$filesDir/Switch to Android.lnk' $winpath/Users/Public/Desktop")
-                ShellUtils.fastCmd("cp $filesDir/sta.exe $winpath/ProgramData/sta/sta.exe")
-                ShellUtils.fastCmd("cp /sdcard/WOAHelper/sta $winpath")
+                rootCommand("mkdir $winpath/sta $winpath/ProgramData/sta")
+                rootCommand("cp '$filesDir/Switch to Android.lnk' $winpath/Users/Public/Desktop")
+                rootCommand("cp $filesDir/sta.exe $winpath/ProgramData/sta/sta.exe")
+                rootCommand("cp /sdcard/WOAHelper/sta $winpath")
 
                 Dlg.clearButtons()
                 Dlg.setText(R.string.done)
@@ -720,7 +737,7 @@ class MainActivity : AppCompatActivity() {
             Dlg.show(this, getString(R.string.dbkp_question, dbkpmodel), R.drawable.ic_uefi)
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(if ("nabu" == device) R.string.nabu else R.string.yes) {
-                ShellUtils.fastCmd(String.format("cp $filesDir/dbkp.%s.bin /sdcard/dbkp/dbkp.bin", if ("nabu" == device) "nabu" else if (arrayOf("guacamole", "OnePlus7Pro", "OnePlus7Pro4G", "hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) "hotdog" else if ("cepheus" == device) "cepheus" else null))
+                rootCommand(String.format("cp $filesDir/dbkp.%s.bin /sdcard/dbkp/dbkp.bin", if ("nabu" == device) "nabu" else if (arrayOf("guacamole", "OnePlus7Pro", "OnePlus7Pro4G", "hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) "hotdog" else if ("cepheus" == device) "cepheus" else null))
                 Dlg.dialogLoading()
                 kernelPatch(
                     (if ("nabu" == device) getString(R.string.nabu) else if (arrayOf("guacamole", "OnePlus7Pro", "OnePlus7Pro4G", "hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) getString(R.string.op7) else if ("cepheus" == device) getString(R.string.cepheus) else null)!!,
@@ -731,7 +748,7 @@ class MainActivity : AppCompatActivity() {
             }
             if ("nabu" == device) {
                 Dlg.setDismiss(R.string.nabu2) {
-                    ShellUtils.fastCmd("cp $filesDir/dbkp.nabu2.bin /sdcard/dbkp/dbkp.bin")
+                    rootCommand("cp $filesDir/dbkp.nabu2.bin /sdcard/dbkp/dbkp.bin")
                     Dlg.dialogLoading()
                     kernelPatch(getString(R.string.nabu), "https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/releases/download/1.0/nabuVolumebuttons.fd")
                 }
@@ -740,7 +757,7 @@ class MainActivity : AppCompatActivity() {
 
         n!!.devcfg.setOnClickListener { a: View? ->
             if (!isNetworkConnected(this)) {
-                val finddevcfg = ShellUtils.fastCmd("find $filesDir -maxdepth 1 -name OOS11_devcfg_*")
+                val finddevcfg = rootCommand("find $filesDir -maxdepth 1 -name OOS11_devcfg_*")
                 if (finddevcfg.isEmpty()) {
                     nointernet()
                     return@setOnClickListener
@@ -751,42 +768,41 @@ class MainActivity : AppCompatActivity() {
             Dlg.setYes(R.string.yes) {
                 Dlg.dialogLoading()
                 Thread {
-                    ShellUtils.fastCmd("mkdir -p /sdcard/WOAHelper/Backups || true")
+                    rootCommand("mkdir -p /sdcard/WOAHelper/Backups || true")
                     val devcfgDevice = if (arrayOf("guacamole", "OnePlus7Pro", "OnePlus7Pro4G").contains(device)) "guacamole" else (if (arrayOf("hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) "hotdog" else null)!!
-                    val findoriginaldevcfg = ShellUtils.fastCmd("find $filesDir -maxdepth 1 -name original-devcfg.img")
+                    val findoriginaldevcfg = rootCommand("find $filesDir -maxdepth 1 -name original-devcfg.img")
                     if (findoriginaldevcfg.isEmpty()) {
-                        ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=/sdcard/WOAHelper/Backups/original-devcfg.img")
-                        ShellUtils.fastCmd("cp /sdcard/WOAHelper/Backups/original-devcfg.img $filesDir/original-devcfg.img")
+                        rootCommand("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=/sdcard/WOAHelper/Backups/original-devcfg.img")
+                        rootCommand("cp /sdcard/WOAHelper/Backups/original-devcfg.img $filesDir/original-devcfg.img")
                     }
-                    val finddevcfg = ShellUtils.fastCmd("find $filesDir -maxdepth 1 -name OOS11_devcfg_*")
+                    val finddevcfg = rootCommand("find $filesDir -maxdepth 1 -name OOS11_devcfg_*")
                     if (finddevcfg.isEmpty()) {
-                        ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_$devcfgDevice.img -O /sdcard/WOAHelper/Backups/OOS11_devcfg_$devcfgDevice.img\" | su -mm -c sh")
-                        ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_$devcfgDevice.img -O /sdcard/WOAHelper/Backups/OOS12_devcfg_$devcfgDevice.img\" | su -mm -c sh")
-                        ShellUtils.fastCmd("cp /sdcard/WOAHelper/Backups/OOS11_devcfg_$devcfgDevice.img $filesDir")
-                        ShellUtils.fastCmd("cp /sdcard/WOAHelper/Backups/OOS12_devcfg_$devcfgDevice.img $filesDir")
-                        ShellUtils.fastCmd("dd bs=8M if=$filesDir/OOS11_devcfg_$devcfgDevice.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)")
+                        rootCommand("echo \"$(find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_$devcfgDevice.img -O /sdcard/WOAHelper/Backups/OOS11_devcfg_$devcfgDevice.img\" | sh")
+                        rootCommand("echo \"$(find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_$devcfgDevice.img -O /sdcard/WOAHelper/Backups/OOS12_devcfg_$devcfgDevice.img\" | sh")
+                        rootCommand("cp /sdcard/WOAHelper/Backups/OOS11_devcfg_$devcfgDevice.img $filesDir")
+                        rootCommand("cp /sdcard/WOAHelper/Backups/OOS12_devcfg_$devcfgDevice.img $filesDir")
+                        rootCommand("dd bs=8M if=$filesDir/OOS11_devcfg_$devcfgDevice.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)")
                     } else {
-                        ShellUtils.fastCmd("dd bs=8M if=$filesDir/OOS11_devcfg_$devcfgDevice.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)")
+                        rootCommand("dd bs=8M if=$filesDir/OOS11_devcfg_$devcfgDevice.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)")
                     }
                     runOnUiThread {
-                        ShellUtils.fastCmd("mkdir -p /sdcard/WOAHelper/staDevcfg || true")
-                        ShellUtils.fastCmd("cp $filesDir/sdd.exe /sdcard/WOAHelper/staDevcfg/sdd.exe")
-                        ShellUtils.fastCmd("cp $filesDir/devcfg-sdd.conf /sdcard/WOAHelper/staDevcfg/sdd.conf")
+                        rootCommand("mkdir -p /sdcard/WOAHelper/staDevcfg || true")
+                        rootCommand("cp $filesDir/sdd.exe /sdcard/WOAHelper/staDevcfg/sdd.exe")
+                        rootCommand("cp $filesDir/devcfg-sdd.conf /sdcard/WOAHelper/staDevcfg/sdd.conf")
                         mount()
-                        val mntStat = ShellUtils.fastCmd("su -mm -c mount | grep $win")
-                        if (mntStat.isEmpty()) {
+                        if (!isMounted()) {
                             Dlg.close()
                             mountfail()
                         } else {
-                            ShellUtils.fastCmd("mkdir $winpath/sta || true ")
-                            ShellUtils.fastCmd("cp '$filesDir/Flash Devcfg.lnk' $winpath/Users/Public/Desktop")
-                            ShellUtils.fastCmd("cp $filesDir/sdd.exe $winpath/sta/sdd.exe")
-                            ShellUtils.fastCmd("cp $filesDir/devcfg-sdd.conf $winpath/sta/sdd.conf")
-                            ShellUtils.fastCmd("cp /sdcard/WOAHelper/Backups/original-devcfg.img $winpath/original-devcfg.img")
+                            rootCommand("mkdir $winpath/sta || true ")
+                            rootCommand("cp '$filesDir/Flash Devcfg.lnk' $winpath/Users/Public/Desktop")
+                            rootCommand("cp $filesDir/sdd.exe $winpath/sta/sdd.exe")
+                            rootCommand("cp $filesDir/devcfg-sdd.conf $winpath/sta/sdd.conf")
+                            rootCommand("cp /sdcard/WOAHelper/Backups/original-devcfg.img $winpath/original-devcfg.img")
                         }
                         Dlg.setText(R.string.devcfg)
                         Dlg.setDismiss(R.string.dismiss) { Dlg.close() }
-                        Dlg.setYes(R.string.reboot) { ShellUtils.fastCmd("su -c svc power reboot") }
+                        Dlg.setYes(R.string.reboot) { rootCommand("svc power reboot") }
                     }
                 }.start()
             }
@@ -803,10 +819,10 @@ class MainActivity : AppCompatActivity() {
                     mountfail()
                     return@setYes
                 }
-                ShellUtils.fastCmd("mkdir -p /sdcard/WOAHelper/Toolbox || true")
-                arrayOf("WorksOnWoa.url", "TestedSoftware.url", "ARMSoftware.url", "ARMRepo.url").forEach( { ShellUtils.fastCmd("cp $filesDir/$it /sdcard/WOAHelper/Toolbox") })
-                ShellUtils.fastCmd("mkdir $winpath/Toolbox || true ")
-                arrayOf("WorksOnWoa.url", "TestedSoftware.url", "ARMSoftware.url", "ARMRepo.url").forEach( { ShellUtils.fastCmd("cp $filesDir/$it $winpath/Toolbox") })
+                rootCommand("mkdir -p /sdcard/WOAHelper/Toolbox || true")
+                arrayOf("WorksOnWoa.url", "TestedSoftware.url", "ARMSoftware.url", "ARMRepo.url").forEach( { rootCommand("cp $filesDir/$it /sdcard/WOAHelper/Toolbox") })
+                rootCommand("mkdir $winpath/Toolbox || true ")
+                arrayOf("WorksOnWoa.url", "TestedSoftware.url", "ARMSoftware.url", "ARMRepo.url").forEach( { rootCommand("cp $filesDir/$it $winpath/Toolbox") })
                 Dlg.setText(R.string.done)
                 Dlg.dismissButton()
             }
@@ -824,10 +840,10 @@ class MainActivity : AppCompatActivity() {
                 Dlg.setBar(0)
                 Dlg.setIcon(R.drawable.ic_download)
                 Thread {
-                    ShellUtils.fastCmd("mkdir -p /sdcard/WOAHelper/Toolbox || true")
-                    ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/ReviOS/ReviPlaybook.apbx -O /sdcard/WOAHelper/Toolbox/ReviPlaybook.apbx\" | su -mm -c sh")
+                    rootCommand("mkdir -p /sdcard/WOAHelper/Toolbox || true")
+                    rootCommand("echo \"$(find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/ReviOS/ReviPlaybook.apbx -O /sdcard/WOAHelper/Toolbox/ReviPlaybook.apbx\" | sh")
                     Dlg.setBar(50)
-                    ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://download.ameliorated.io/AME%20Wizard%20Beta.zip -O /sdcard/WOAHelper/Toolbox/AMEWizardBeta.zip\" | su -mm -c sh")
+                    rootCommand("echo \"$(find /data/adb -name busybox) wget https://download.ameliorated.io/AME%20Wizard%20Beta.zip -O /sdcard/WOAHelper/Toolbox/AMEWizardBeta.zip\" | sh")
                     Dlg.setBar(80)
                     runOnUiThread {
                         mount()
@@ -838,9 +854,9 @@ class MainActivity : AppCompatActivity() {
                         }
                         Dlg.setIcon(R.drawable.ic_ar_mainactivity)
                         Dlg.hideBar()
-                        ShellUtils.fastCmd("mkdir $winpath/Toolbox || true ")
-                        ShellUtils.fastCmd("cp /sdcard/WOAHelper/Toolbox/ReviPlaybook.apbx $winpath/Toolbox/ReviPlaybook.apbx")
-                        ShellUtils.fastCmd("cp /sdcard/WOAHelper/Toolbox/AMEWizardBeta.zip $winpath/Toolbox")
+                        rootCommand("mkdir $winpath/Toolbox || true ")
+                        rootCommand("cp /sdcard/WOAHelper/Toolbox/ReviPlaybook.apbx $winpath/Toolbox/ReviPlaybook.apbx")
+                        rootCommand("cp /sdcard/WOAHelper/Toolbox/AMEWizardBeta.zip $winpath/Toolbox")
                         Dlg.setText(R.string.done)
                         Dlg.dismissButton()
                     }
@@ -851,12 +867,12 @@ class MainActivity : AppCompatActivity() {
                 Dlg.setBar(0)
                 Dlg.setIcon(R.drawable.ic_download)
                 Thread {
-                    ShellUtils.fastCmd("mkdir -p /sdcard/WOAHelper/Toolbox || true")
-                    ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook.apbx -O /sdcard/WOAHelper/Toolbox/AtlasPlaybook_v0.4.1.apbx\" | su -mm -c sh")
+                    rootCommand("mkdir -p /sdcard/WOAHelper/Toolbox || true")
+                    rootCommand("echo \"$(find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook.apbx -O /sdcard/WOAHelper/Toolbox/AtlasPlaybook_v0.4.1.apbx\" | sh")
                     Dlg.setBar(35)
-                    ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook_v0.4.0_23H2Only.apbx -O /sdcard/WOAHelper/Toolbox/AtlasPlaybook_v0.4.0_23H2Only.apbx\" | su -mm -c sh")
+                    rootCommand("echo \"$(find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook_v0.4.0_23H2Only.apbx -O /sdcard/WOAHelper/Toolbox/AtlasPlaybook_v0.4.0_23H2Only.apbx\" | sh")
                     Dlg.setBar(60)
-                    ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://download.ameliorated.io/AME%20Wizard%20Beta.zip -O /sdcard/WOAHelper/Toolbox/AMEWizardBeta.zip\" | su -mm -c sh")
+                    rootCommand("echo \"$(find /data/adb -name busybox) wget https://download.ameliorated.io/AME%20Wizard%20Beta.zip -O /sdcard/WOAHelper/Toolbox/AMEWizardBeta.zip\" | sh")
                     Dlg.setBar(80)
                     runOnUiThread {
                         mount()
@@ -867,10 +883,10 @@ class MainActivity : AppCompatActivity() {
                         }
                         Dlg.setIcon(R.drawable.ic_ar_mainactivity)
                         Dlg.hideBar()
-                        ShellUtils.fastCmd("mkdir $winpath/Toolbox || true ")
-                        ShellUtils.fastCmd("cp /sdcard/WOAHelper/Toolbox/AtlasPlaybook.apbx $winpath/Toolbox/AtlasPlaybook_v0.4.1.apbx")
-                        ShellUtils.fastCmd("cp /sdcard/WOAHelper/Toolbox/AtlasPlaybook_v0.4.0_23H2Only.apbx $winpath/Toolbox/AtlasPlaybook_v0.4.0_23H2Only.apbx")
-                        ShellUtils.fastCmd("cp /sdcard/WOAHelper/Toolbox/AMEWizardBeta.zip $winpath/Toolbox")
+                        rootCommand("mkdir $winpath/Toolbox || true ")
+                        rootCommand("cp /sdcard/WOAHelper/Toolbox/AtlasPlaybook.apbx $winpath/Toolbox/AtlasPlaybook_v0.4.1.apbx")
+                        rootCommand("cp /sdcard/WOAHelper/Toolbox/AtlasPlaybook_v0.4.0_23H2Only.apbx $winpath/Toolbox/AtlasPlaybook_v0.4.0_23H2Only.apbx")
+                        rootCommand("cp /sdcard/WOAHelper/Toolbox/AMEWizardBeta.zip $winpath/Toolbox")
                         Dlg.setText(R.string.done)
                         Dlg.dismissButton()
                     }
@@ -883,17 +899,17 @@ class MainActivity : AppCompatActivity() {
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
                 Dlg.dialogLoading()
-                ShellUtils.fastCmd("mkdir -p /sdcard/WOAHelper/Toolbox || true")
-                ShellUtils.fastCmd("cp $filesDir/usbhostmode.exe /sdcard/WOAHelper/Toolbox/")
+                rootCommand("mkdir -p /sdcard/WOAHelper/Toolbox || true")
+                rootCommand("cp $filesDir/usbhostmode.exe /sdcard/WOAHelper/Toolbox/")
                 mount()
                 if (!isMounted()) {
                     Dlg.close()
                     mountfail()
                     return@setYes
                 }
-                ShellUtils.fastCmd("mkdir $winpath/Toolbox || true ")
-                ShellUtils.fastCmd("cp /sdcard/WOAHelper/Toolbox/usbhostmode.exe $winpath/Toolbox")
-                ShellUtils.fastCmd("cp '$filesDir/USB Host Mode.lnk' $winpath/Users/Public/Desktop")
+                rootCommand("mkdir $winpath/Toolbox || true ")
+                rootCommand("cp /sdcard/WOAHelper/Toolbox/usbhostmode.exe $winpath/Toolbox")
+                rootCommand("cp '$filesDir/USB Host Mode.lnk' $winpath/Users/Public/Desktop")
                 Dlg.setText(R.string.done)
                 Dlg.dismissButton()
             }
@@ -904,16 +920,16 @@ class MainActivity : AppCompatActivity() {
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
                 Dlg.dialogLoading()
-                ShellUtils.fastCmd("mkdir -p /sdcard/WOAHelper/Toolbox || true")
-                ShellUtils.fastCmd("cp $filesDir/QuickRotate_V3.0.exe /sdcard/WOAHelper/Toolbox/")
+                rootCommand("mkdir -p /sdcard/WOAHelper/Toolbox || true")
+                rootCommand("cp $filesDir/QuickRotate_V3.0.exe /sdcard/WOAHelper/Toolbox/")
                 mount()
                 if (!isMounted()) {
                     Dlg.close()
                     mountfail()
                     return@setYes
                 }
-                ShellUtils.fastCmd("mkdir $winpath/Toolbox || true ")
-                arrayOf("/Toolbox", "/Users/Public/Desktop").forEach({ ShellUtils.fastCmd("cp /sdcard/WOAHelper/Toolbox/QuickRotate_V3.0.exe $winpath$it") })
+                rootCommand("mkdir $winpath/Toolbox || true ")
+                arrayOf("/Toolbox", "/Users/Public/Desktop").forEach({ rootCommand("cp /sdcard/WOAHelper/Toolbox/QuickRotate_V3.0.exe $winpath$it") })
                 Dlg.setText(R.string.done)
                 Dlg.dismissButton()
             }
@@ -924,16 +940,16 @@ class MainActivity : AppCompatActivity() {
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
                 Dlg.dialogLoading()
-                ShellUtils.fastCmd("mkdir -p /sdcard/WOAHelper/Toolbox || true")
-                ShellUtils.fastCmd("cp $filesDir/Optimized_Taskbar_Control_V3.1.exe /sdcard/WOAHelper/Toolbox/")
+                rootCommand("mkdir -p /sdcard/WOAHelper/Toolbox || true")
+                rootCommand("cp $filesDir/Optimized_Taskbar_Control_V3.1.exe /sdcard/WOAHelper/Toolbox/")
                 mount()
                 if (!isMounted()) {
                     Dlg.close()
                     mountfail()
                     return@setYes
                 }
-                ShellUtils.fastCmd("mkdir $winpath/Toolbox || true ")
-                ShellUtils.fastCmd("cp /sdcard/WOAHelper/Toolbox/Optimized_Taskbar_Control_V3.1.exe $winpath/Toolbox")
+                rootCommand("mkdir $winpath/Toolbox || true ")
+                rootCommand("cp /sdcard/WOAHelper/Toolbox/Optimized_Taskbar_Control_V3.1.exe $winpath/Toolbox")
                 Dlg.setText(R.string.done)
                 Dlg.dismissButton()
             }
@@ -951,8 +967,8 @@ class MainActivity : AppCompatActivity() {
                 Dlg.setIcon(R.drawable.ic_download)
                 Dlg.setBar(0)
                 Thread {
-                    ShellUtils.fastCmd("mkdir -p /sdcard/WOAHelper/Frameworks || true")
-                    ShellUtils.fastCmd("cp $filesDir/install.bat /sdcard/WOAHelper/Frameworks/install.bat")
+                    rootCommand("mkdir -p /sdcard/WOAHelper/Frameworks || true")
+                    rootCommand("cp $filesDir/install.bat /sdcard/WOAHelper/Frameworks/install.bat")
                     arrayOf(
                         "PhysX-9.13.0604-SystemSoftware-Legacy.msi",
                         "PhysX_9.23.1019_SystemSoftware.exe",
@@ -974,7 +990,7 @@ class MainActivity : AppCompatActivity() {
                         "dxwebsetup.exe",
                         "oalinst.exe"
                     ).forEach {
-                        ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/$it -O /sdcard/WOAHelper/Frameworks/$it\" | su -mm -c sh")
+                        rootCommand("echo \"$(find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/$it -O /sdcard/WOAHelper/Frameworks/$it\" |  sh")
                         Dlg.setBar(Dlg.bar!!.progress + 5)
                     }
                     runOnUiThread {
@@ -984,8 +1000,8 @@ class MainActivity : AppCompatActivity() {
                             mountfail()
                             return@runOnUiThread
                         }
-                        ShellUtils.fastCmd("mkdir -p $winpath/Toolbox/Frameworks || true ")
-                        ShellUtils.fastCmd("cp /sdcard/WOAHelper/Frameworks/* $winpath/Toolbox/Frameworks")
+                        rootCommand("mkdir -p $winpath/Toolbox/Frameworks || true ")
+                        rootCommand("cp /sdcard/WOAHelper/Frameworks/* $winpath/Toolbox/Frameworks")
                         Dlg.setIcon(R.drawable.ic_mnt)
                         Dlg.hideBar()
                         Dlg.setText(R.string.done)
@@ -1000,13 +1016,13 @@ class MainActivity : AppCompatActivity() {
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
                 Dlg.dialogLoading()
-                if (ShellUtils.fastCmd("find $filesDir -maxdepth 1 -name DefenderRemover.exe").isEmpty()) {
+                if (rootCommand("find $filesDir -maxdepth 1 -name DefenderRemover.exe").isEmpty()) {
                     if (!isNetworkConnected(this)) {
                         Dlg.close()
                         nointernet()
                         return@setYes
                     }
-                    ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/DefenderRemover.exe -O $filesDir/DefenderRemover.exe\" | su -mm -c sh")
+                    rootCommand("echo \"$(find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/DefenderRemover.exe -O $filesDir/DefenderRemover.exe\" | sh")
                 }
                 mount()
                 if (!isMounted()) {
@@ -1014,12 +1030,12 @@ class MainActivity : AppCompatActivity() {
                     mountfail()
                     return@setYes
                 }
-                ShellUtils.fastCmd("mkdir -p /sdcard/WOAHelper/Toolbox || true")
-                ShellUtils.fastCmd("mkdir $winpath/Toolbox || true ")
-                ShellUtils.fastCmd("cp $filesDir/DefenderRemover.exe /sdcard/WOAHelper/Toolbox")
-                ShellUtils.fastCmd("cp $filesDir/RemoveEdge.bat /sdcard/WOAHelper/Toolbox")
-                ShellUtils.fastCmd("cp $filesDir/DefenderRemover.exe $winpath/Toolbox")
-                ShellUtils.fastCmd("cp $filesDir/RemoveEdge.bat $winpath/Toolbox")
+                rootCommand("mkdir -p /sdcard/WOAHelper/Toolbox || true")
+                rootCommand("mkdir $winpath/Toolbox || true ")
+                rootCommand("cp $filesDir/DefenderRemover.exe /sdcard/WOAHelper/Toolbox")
+                rootCommand("cp $filesDir/RemoveEdge.bat /sdcard/WOAHelper/Toolbox")
+                rootCommand("cp $filesDir/DefenderRemover.exe $winpath/Toolbox")
+                rootCommand("cp $filesDir/RemoveEdge.bat $winpath/Toolbox")
                 Dlg.setText(R.string.done)
                 Dlg.dismissButton()
             }
@@ -1112,7 +1128,7 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             Dlg.show(this, R.string.please_wait)
-            val version = ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget -q -O - https://raw.githubusercontent.com/n00b69/woa-helper-update/main/README.md\" | su -mm -c sh")
+            val version = rootCommand("echo \"$(find /data/adb -name busybox) wget -q -O - https://raw.githubusercontent.com/n00b69/woa-helper-update/main/README.md\" | sh")
             if (BuildConfig.VERSION_NAME == version) {
                 Dlg.setText(getString(R.string.no) + " " + getString(R.string.update1))
                 Dlg.dismissButton()
@@ -1138,9 +1154,9 @@ class MainActivity : AppCompatActivity() {
         k!!.securelock.setOnChangeListener { b: Boolean -> Pref.setSecure(this, !b) }
         k!!.automount.setOnChangeListener { b: Boolean -> Pref.setAutoMount(this, b) }
         k!!.appUpdate.setOnChangeListener { b: Boolean -> Pref.setAppUpdate(this, b) }
-        //String op7funny = ShellUtils.fastCmd("getprop ro.boot.vendor.lge.model.name");
+        //String op7funny = rootCommand("getprop ro.boot.vendor.lge.model.name");
         //if (("guacamole".equals(device) || "guacamolet".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device) || "OnePlus7ProTMO".equals(device) || "hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) && (op7funny.contains("LM") || op7funny.contains("OPPO"))) {
-        val op7funny = ShellUtils.fastCmd("getprop persist.camera.privapp.list")
+        val op7funny = rootCommand("getprop persist.camera.privapp.list")
         if (arrayOf("guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO", "hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device) && op7funny.lowercase(Locale.getDefault()).contains("oppo")) {
             k!!.devcfg1.setOnChangeListener { b: Boolean ->
                 Pref.setDevcfg1(this, b)
@@ -1168,7 +1184,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun dump() {
-        arrayOf(Pair.create("modemst1", "bootmodem_fs1"), Pair.create("modemst2", "bootmodem_fs2")).forEach( { ShellUtils.fastCmd(String.format("su -mm -c dd if=/dev/block/by-name/%s of=$(find $winpath/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/%s", it.first, it.second)) })
+        arrayOf(Pair.create("modemst1", "bootmodem_fs1"), Pair.create("modemst2", "bootmodem_fs2")).forEach( { rootCommand(String.format("dd if=/dev/block/by-name/%s of=$(find $winpath/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/%s", it.first, it.second)) })
     }
 
     private fun checkdbkpmodel() {
@@ -1176,8 +1192,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkuefi() {
-        ShellUtils.fastCmd("su -c mkdir /sdcard/UEFI")
-        finduefi = "\"" + ShellUtils.fastCmd(getString(R.string.uefiChk)) + "\""
+        rootCommand("mkdir /sdcard/UEFI")
+        finduefi = "\"" + rootCommand(getString(R.string.uefiChk)) + "\""
         val found = finduefi!!.contains("img")
         arrayOf(x!!.quickBoot, n!!.flashUefi).forEach( { it.isEnabled = found })
         arrayOf(Pair.create(x!!.quickBoot, if (found) R.string.quickboot_title else R.string.uefi_not_found), Pair.create(n!!.flashUefi, if (found) R.string.flash_uefi_title else R.string.uefi_not_found)).forEach { it.first.setTitle(it.second) }
@@ -1194,7 +1210,7 @@ class MainActivity : AppCompatActivity() {
     private fun checkupdate() {
         if (Pref.getAppUpdate(this) || !isNetworkConnected(this)) return
 
-        val version = ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget -q -O - https://raw.githubusercontent.com/n00b69/woa-helper-update/main/README.md\" | su -mm -c sh")
+        val version = rootCommand("echo \"$(find /data/adb -name busybox) wget -q -O - https://raw.githubusercontent.com/n00b69/woa-helper-update/main/README.md\" | sh")
         if (BuildConfig.VERSION_NAME == version) return
 
         Dlg.show(this, R.string.update1)
@@ -1213,8 +1229,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun update() {
         Thread {
-            ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://raw.githubusercontent.com/n00b69/woa-helper-update/main/woahelper.apk -O $filesDir/woahelper.apk\" | su -mm -c sh")
-            ShellUtils.fastCmd("pm install $filesDir/woahelper.apk && rm $filesDir/woahelper.apk")
+            rootCommand("echo \"$(find /data/adb -name busybox) wget https://raw.githubusercontent.com/n00b69/woa-helper-update/main/woahelper.apk -O $filesDir/woahelper.apk\" | sh")
+            rootCommand("pm install $filesDir/woahelper.apk && rm $filesDir/woahelper.apk")
         }.start()
     }
 
@@ -1225,7 +1241,7 @@ class MainActivity : AppCompatActivity() {
      ${getString(R.string.internalstorage)}
      """.trimIndent()
         )
-        Dlg.setDismiss(R.string.cancel) { Dlg.close() }
+        Dlg.dismissButton()
         Dlg.setYes(R.string.chat) { openLink("https://t.me/woahelperchat") }
     }
 
@@ -1247,34 +1263,35 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun run() {
-                ShellUtils.fastCmd("mkdir -p /sdcard/dbkp /sdcard/WOAHelper/Backups || true")
+                rootCommand("mkdir -p /sdcard/dbkp /sdcard/WOAHelper/Backups || true")
                 androidBackup()
-                ShellUtils.fastCmd("dd bs=8M if=/sdcard/WOAHelper/Backups/original-boot.img of=/dev/block/by-name/boot$(getprop ro.boot.slot_suffix)")
-                ShellUtils.fastCmd("rm /sdcard/WOAHelper/Backups/original-boot.img /sdcard/WOAHelper/Backups/patched-boot.img || true")
-                ShellUtils.fastCmd("mv /sdcard/boot.img /sdcard/dbkp/boot.img")
-                ShellUtils.fastCmd("cp /sdcard/dbkp/boot.img /sdcard/WOAHelper/Backups/original-boot.img")
-                ShellUtils.fastCmd("cp $filesDir/dbkp8150.cfg /sdcard/dbkp/dbkp.cfg")
-                ShellUtils.fastCmd("$(find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/DBKP/dbkp -O /sdcard/dbkp/dbkp")
-                ShellUtils.fastCmd("cp /sdcard/dbkp/dbkp $filesDir")
-                ShellUtils.fastCmd("chmod 777 $filesDir/dbkp")
-                ShellUtils.fastCmd("$(find /data/adb -name busybox) wget $link -O /sdcard/dbkp/file.fd")
-                ShellUtils.fastCmd("cd /sdcard/dbkp")
-                ShellUtils.fastCmd("$(find /data/adb -name magiskboot) unpack boot.img")
-                ShellUtils.fastCmd("$filesDir/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/file.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp.cfg /sdcard/dbkp/dbkp.bin")
-                ShellUtils.fastCmd("mv output kernel")
-                ShellUtils.fastCmd("$(su -c find /data/adb -name magiskboot) repack boot.img")
-                ShellUtils.fastCmd("cp new-boot.img /sdcard/WOAHelper/Backups/patched-boot.img")
-                ShellUtils.fastCmd("rm -r /sdcard/dbkp")
+                rootCommand("dd bs=8M if=/sdcard/WOAHelper/Backups/original-boot.img of=/dev/block/by-name/boot$(getprop ro.boot.slot_suffix)")
+                rootCommand("rm /sdcard/WOAHelper/Backups/original-boot.img /sdcard/WOAHelper/Backups/patched-boot.img || true")
+                rootCommand("mv /sdcard/boot.img /sdcard/dbkp/boot.img")
+                rootCommand("cp /sdcard/dbkp/boot.img /sdcard/WOAHelper/Backups/original-boot.img")
+                rootCommand("cp $filesDir/dbkp8150.cfg /sdcard/dbkp/dbkp.cfg")
+                rootCommand("$(find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/DBKP/dbkp -O /sdcard/dbkp/dbkp")
+                rootCommand("cp /sdcard/dbkp/dbkp $filesDir")
+                rootCommand("chmod 777 $filesDir/dbkp")
+                rootCommand("$(find /data/adb -name busybox) wget $link -O /sdcard/dbkp/file.fd")
+                rootCommand("cd /sdcard/dbkp")
+                rootCommand("$(find /data/adb -name magiskboot) unpack boot.img")
+                rootCommand("$filesDir/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/file.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp.cfg /sdcard/dbkp/dbkp.bin")
+                rootCommand("mv output kernel")
+                rootCommand("$(find /data/adb -name magiskboot) repack boot.img")
+                rootCommand("cp new-boot.img /sdcard/WOAHelper/Backups/patched-boot.img")
+                rootCommand("cd $filesDir")
+                rootCommand("rm -r /sdcard/dbkp")
                 if ("cepheus" == device) {
-                    ShellUtils.fastCmd("dd if=/sdcard/WOAHelper/Backups/patched-boot.img of=/dev/block/by-name/boot bs=16m")
+                    rootCommand("dd if=/sdcard/WOAHelper/Backups/patched-boot.img of=/dev/block/by-name/boot bs=16m")
                 } else {
-                    ShellUtils.fastCmd("dd if=/sdcard/WOAHelper/Backups/patched-boot.img of=/dev/block/by-name/boot_a bs=16m")
-                    ShellUtils.fastCmd("dd if=/sdcard/WOAHelper/Backups/patched-boot.img of=/dev/block/by-name/boot_b bs=16m")
+                    rootCommand("dd if=/sdcard/WOAHelper/Backups/patched-boot.img of=/dev/block/by-name/boot_a bs=16m")
+                    rootCommand("dd if=/sdcard/WOAHelper/Backups/patched-boot.img of=/dev/block/by-name/boot_b bs=16m")
                 }
                 runOnUiThread {
                     Dlg.setText(getString(R.string.dbkp, message))
                     Dlg.setDismiss(R.string.dismiss) { Dlg.close() }
-                    Dlg.setNo(R.string.reboot) { ShellUtils.fastCmd("su -c svc power reboot") }
+                    Dlg.setNo(R.string.reboot) { rootCommand("svc power reboot") }
                 }
             }
         }.init(message, link)).start()
@@ -1298,6 +1315,7 @@ class MainActivity : AppCompatActivity() {
         private var dbkpmodel: String? = null
         private var boot: String? = null
         private var blur = 0
+        val rootShell: Shell = Shell.Builder.create().build()
 
         @JvmStatic
         fun isNetworkConnected(context: Context): Boolean {
@@ -1308,7 +1326,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         internal fun flash(uefi: String?) {
-            ShellUtils.fastCmd("dd if=$uefi of=/dev/block/bootdevice/by-name/boot$(getprop ro.boot.slot_suffix) bs=16m")
+            rootCommand("dd if=$uefi of=/dev/block/bootdevice/by-name/boot$(getprop ro.boot.slot_suffix) bs=16m")
         }
 
         @JvmStatic
@@ -1352,50 +1370,50 @@ class MainActivity : AppCompatActivity() {
                 Dlg.dialogLoading()
                 Handler(Looper.getMainLooper()).postDelayed({
                     mount()
-                    var found = ShellUtils.fastCmd(String.format("ls %s | grep boot.img", updateWinPath()))
+                    var found = rootCommand(String.format("ls %s | grep boot.img", updateWinPath()))
                     if (Pref.getBackup(context!!) || (!Pref.getAuto(context!!) && found.isEmpty())) {
                         winBackup()
                         updateLastBackupDate()
                     }
-                    found = ShellUtils.fastCmd("find /sdcard | grep boot.img")
+                    found = rootCommand("find /sdcard | grep boot.img")
                     if (Pref.getBackupA(context!!) || (!Pref.getAutoA(context!!) && found.isEmpty())) {
                         androidBackup()
                         updateLastBackupDate()
                     }
                     if (Pref.getDevcfg1(context!!)) {
                         if (!isNetworkConnected(context!!)) {
-                            val finddevcfg = ShellUtils.fastCmd("find " + context!!.filesDir + " -maxdepth 1 -name OOS11_devcfg_*")
+                            val finddevcfg = rootCommand("find " + context!!.filesDir + " -maxdepth 1 -name OOS11_devcfg_*")
                             if (finddevcfg.isEmpty()) {
                                 nointernet()
                                 return@postDelayed
                             }
                         }
                         val devcfgDevice = if (arrayOf("guacamole", "OnePlus7Pro", "OnePlus7Pro4G").contains(device)) "guacamole" else (if (arrayOf("hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) "hotdog" else null)!!
-                        val findoriginaldevcfg = ShellUtils.fastCmd("find " + context!!.filesDir + " -maxdepth 1 -name original-devcfg.img")
+                        val findoriginaldevcfg = rootCommand("find " + context!!.filesDir + " -maxdepth 1 -name original-devcfg.img")
                         if (findoriginaldevcfg.isEmpty()) {
-                            ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=/sdcard/original-devcfg.img")
-                            ShellUtils.fastCmd("cp /sdcard/original-devcfg.img " + context!!.filesDir + "/original-devcfg.img")
+                            rootCommand("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=/sdcard/original-devcfg.img")
+                            rootCommand("cp /sdcard/original-devcfg.img " + context!!.filesDir + "/original-devcfg.img")
                         }
-                        val finddevcfg = ShellUtils.fastCmd("find " + context!!.filesDir + " -maxdepth 1 -name OOS11_devcfg_*")
+                        val finddevcfg = rootCommand("find " + context!!.filesDir + " -maxdepth 1 -name OOS11_devcfg_*")
                         if (finddevcfg.isEmpty()) {
-                            ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_$devcfgDevice.img -O /sdcard/OOS11_devcfg_$devcfgDevice.img\" | su -mm -c sh")
-                            ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_$devcfgDevice.img -O /sdcard/OOS12_devcfg_$devcfgDevice.img\" | su -mm -c sh")
-                            ShellUtils.fastCmd(String.format("cp /sdcard/OOS11_devcfg_$devcfgDevice.img %s", context!!.filesDir))
-                            ShellUtils.fastCmd(String.format("cp /sdcard/OOS12_devcfg_$devcfgDevice.img %s", context!!.filesDir))
-                            ShellUtils.fastCmd(String.format("dd bs=8M if=%s/OOS11_devcfg_$devcfgDevice.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)", context!!.filesDir))
+                            rootCommand("echo \"$(find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_$devcfgDevice.img -O /sdcard/OOS11_devcfg_$devcfgDevice.img\" | sh")
+                            rootCommand("echo \"$(find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_$devcfgDevice.img -O /sdcard/OOS12_devcfg_$devcfgDevice.img\" | sh")
+                            rootCommand(String.format("cp /sdcard/OOS11_devcfg_$devcfgDevice.img %s", context!!.filesDir))
+                            rootCommand(String.format("cp /sdcard/OOS12_devcfg_$devcfgDevice.img %s", context!!.filesDir))
+                            rootCommand(String.format("dd bs=8M if=%s/OOS11_devcfg_$devcfgDevice.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)", context!!.filesDir))
                         } else {
-                            ShellUtils.fastCmd(String.format("dd bs=8M if=%s/OOS11_devcfg_$devcfgDevice.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)", context!!.filesDir))
+                            rootCommand(String.format("dd bs=8M if=%s/OOS11_devcfg_$devcfgDevice.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)", context!!.filesDir))
                         }
                     }
                     if (Pref.getDevcfg2(context!!) && Pref.getDevcfg1(context!!)) {
-                        ShellUtils.fastCmd("mkdir $winpath/sta || true ")
-                        ShellUtils.fastCmd("cp '" + context!!.filesDir + "/Flash Devcfg.lnk' $winpath/Users/Public/Desktop")
-                        ShellUtils.fastCmd("cp " + context!!.filesDir + "/sdd.exe $winpath/sta/sdd.exe")
-                        ShellUtils.fastCmd("cp " + context!!.filesDir + "/devcfg-boot-sdd.conf $winpath/sta/sdd.conf")
-                        ShellUtils.fastCmd("cp " + context!!.filesDir + "/original-devcfg.img $winpath/original-devcfg.img")
+                        rootCommand("mkdir $winpath/sta || true ")
+                        rootCommand("cp '" + context!!.filesDir + "/Flash Devcfg.lnk' $winpath/Users/Public/Desktop")
+                        rootCommand("cp " + context!!.filesDir + "/sdd.exe $winpath/sta/sdd.exe")
+                        rootCommand("cp " + context!!.filesDir + "/devcfg-boot-sdd.conf $winpath/sta/sdd.conf")
+                        rootCommand("cp " + context!!.filesDir + "/original-devcfg.img $winpath/original-devcfg.img")
                     }
                     flash(finduefi)
-                    ShellUtils.fastCmd("su -c svc power reboot")
+                    rootCommand("svc power reboot")
                     Dlg.setText(R.string.wrong)
                     Dlg.dismissButton()
                 }, 25L)
@@ -1404,30 +1422,30 @@ class MainActivity : AppCompatActivity() {
 
         internal fun mount() {
             if (null == win) win = getWin()
-            ShellUtils.fastCmd("mkdir $winpath || true")
-            ShellUtils.fastCmd("su -mm -c " + context!!.filesDir + "/mount.ntfs $win $winpath")
+            rootCommand("mkdir $winpath || true")
+            rootCommand("su -mm -c " + context!!.filesDir + "/mount.ntfs $win $winpath")
             if (isMounted()) {
                 // Causes some issues idk. Better be here for later
                 updateWinPath()
-                ShellUtils.fastCmd("mkdir $winpath || true")
-                ShellUtils.fastCmd("su -mm -c " + context!!.filesDir + "/mount.ntfs $win $winpath")
+                rootCommand("mkdir $winpath || true")
+                rootCommand("su -mm -c " + context!!.filesDir + "/mount.ntfs $win $winpath")
             }
             updateMountText()
         }
 
         internal fun unmount() {
-            ShellUtils.fastCmd("su -mm -c umount $winpath")
-            ShellUtils.fastCmd("rmdir $winpath")
+            rootCommand("su -mm -c umount $winpath")
+            rootCommand("rmdir $winpath")
             updateMountText()
         }
 
         internal fun winBackup() {
             mount()
-            ShellUtils.fastCmd("su -mm -c dd bs=8m if=$boot of=$winpath/boot.img")
+            rootCommand("dd bs=8m if=$boot of=$winpath/boot.img")
         }
 
         internal fun androidBackup() {
-            ShellUtils.fastCmd("su -mm -c dd bs=8m if=$boot of=/sdcard/boot.img")
+            rootCommand("dd bs=8m if=$boot of=/sdcard/boot.img")
         }
 
         internal fun nointernet() {
@@ -1473,8 +1491,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         internal fun getWin(): String {
-            val partition = ShellUtils.fastCmd("find /dev/block | grep -i -E \"win|mindows|windows\" | head -1")
-            return ShellUtils.fastCmd("realpath $partition")
+            val partition = rootCommand("find /dev/block | grep -i -E \"win|mindows|windows\" | head -1")
+            return rootCommand("realpath $partition")
         }
 
         internal fun updateWinPath(): String {
@@ -1483,19 +1501,27 @@ class MainActivity : AppCompatActivity() {
         }
 
         internal fun updateDevice() {
-            ShellUtils.fastCmd("pm uninstall id.kuato.woahelper")
-            device = ShellUtils.fastCmd("getprop ro.product.device")
+            rootCommand("pm uninstall id.kuato.woahelper")
+            device = Build.DEVICE
+            if (BuildConfig.DEBUG)
+                device = Pref.codename_changer(false,context!!,Build.DEVICE)
         }
 
         internal fun getBoot(): String {
-            val partition = ShellUtils.fastCmd("find /dev/block | grep \"boot$(getprop ro.boot.slot_suffix)$\" | grep -E \"(/boot|/BOOT|/boot_a|/boot_b|/BOOT_a|/BOOT_b)$\" | head -1 ")
+            val partition = rootCommand("find /dev/block | grep -i \"/boot$(getprop ro.boot.slot_suffix)$\" | head -1")
             Log.d("INFO", partition)
-            return ShellUtils.fastCmd("realpath $partition")
+            return rootCommand("realpath $partition")
+        }
+
+        fun rootCommand(command: String): String{
+            if (BuildConfig.DEBUG)
+                println(command)
+            return ShellUtils.fastCmd(rootShell,command)
         }
 
         @JvmStatic
         fun isMounted(): Boolean {
-            return !ShellUtils.fastCmd("su -mm -c mount | grep " + getWin()).isEmpty()
+            return !rootCommand("su -mm -c mount | grep " + getWin()).isEmpty()
         }
 
         internal fun openLink(link: String) {

@@ -26,9 +26,21 @@ enum class Pref {
         private const val WIDGET_OPACITY = "widget opacity"
         private const val DEVCFG1 = "devcfg flasher"
         private const val DEVCFG2 = "devcfg flasher & check for sdd.exe etc."
+        private const val codename = "woa_codename_changer"
 
         fun getSharedPreference(context: Context?): SharedPreferences? {
             return PreferenceManager.getDefaultSharedPreferences(context!!)
+        }
+
+        fun codename_changer(rw: Boolean, context: Context,value: String): String {
+            if (rw){
+                getSharedPreference(context)!!.edit {
+                    putString(codename, value)
+                }
+            }
+            else
+                return getSharedPreference(context)!!.getString(codename, value)!!
+            return ""
         }
 
         fun setWidgetOpacity(context: Context, value: Int) {

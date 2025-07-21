@@ -128,14 +128,20 @@
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:textSize="@dimen/_8ssp"
-                        android:text="@string/preference6" />
+                        android:text="@string/preference6"
+                        android:layout_marginEnd="20dp"/>
 
                     <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/languages"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/_8ssp" />
+                        android:textSize="@dimen/_8ssp"
+                        android:layout_weight="1"/>
                 </LinearLayout>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/codename"/>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
