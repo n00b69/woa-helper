@@ -734,6 +734,7 @@ class MainActivity : AppCompatActivity() {
                 nointernet()
                 return@setOnClickListener
             }
+            rootCommand("mkdir -p /sdcard/dbkp /sdcard/WOAHelper/Backups || true")
             Dlg.show(this, getString(R.string.dbkp_question, dbkpmodel), R.drawable.ic_uefi)
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(if ("nabu" == device) R.string.nabu else R.string.yes) {
@@ -1263,7 +1264,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun run() {
-                rootCommand("mkdir -p /sdcard/dbkp /sdcard/WOAHelper/Backups || true")
                 androidBackup()
                 rootCommand("dd bs=8M if=/sdcard/WOAHelper/Backups/original-boot.img of=/dev/block/by-name/boot$(getprop ro.boot.slot_suffix)")
                 rootCommand("rm /sdcard/WOAHelper/Backups/original-boot.img /sdcard/WOAHelper/Backups/patched-boot.img || true")
