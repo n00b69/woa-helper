@@ -5,14 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorOnSurfaceInverse"
-    android:screenOrientation="portrait"
     tools:context=".main.MainActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-		android:background="@android:color/transparent"
+        android:background="@android:color/transparent"
         android:orientation="vertical">
 
         <include
@@ -24,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-			android:background="@color/md_theme_background"
+            android:background="@color/md_theme_background"
             android:foregroundGravity="center"
             android:gravity="center"
             android:orientation="vertical"
@@ -47,23 +46,13 @@
                     android:gravity="center">
 
                     <ImageView
-                        android:id="@+id/NabuImage"
-                        android:layout_width="@dimen/_115sdp"
-                        android:layout_height="@dimen/_138sdp"
-                        android:layout_gravity="center"
-                        android:contentDescription="TODO"
-                        android:paddingBottom="@dimen/_4sdp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/nabu"
-                        android:visibility="gone" />
-
-                    <ImageView
                         android:id="@+id/DeviceImage"
                         android:layout_width="@dimen/_115sdp"
                         android:layout_height="@dimen/_138sdp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/unknown"
                         android:contentDescription="TODO"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/vayu" />
+                        android:scaleType="fitXY" />
 
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/cv_info"
@@ -71,17 +60,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="@dimen/_4sdp"
-                        android:layout_weight="1"
                         android:adjustViewBounds="true"
                         android:animateLayoutChanges="true"
-                        android:clickable="true"
+                        android:clickable="false"
                         android:elevation="@dimen/cardElevation"
-                        android:focusable="true"
-                        android:foreground="@drawable/vayu"
+                        android:focusable="false"
                         android:gravity="left"
                         android:padding="@dimen/parentMargin"
                         android:stateListAnimator="@animator/state_list_anim"
-						app:cardBackgroundColor="?attr/colorOnSurfaceInverse"
+                        app:cardBackgroundColor="?attr/colorOnSurfaceInverse"
                         app:cardCornerRadius="@dimen/cardCornerRadius"
                         app:cardMaxElevation="0dp">
 
@@ -99,7 +86,7 @@
                                 android:layout_marginVertical="4dp"
                                 android:gravity="center"
                                 android:text="WINDOWS ON ARM"
-                                android:textSize="@dimen/_12sdp"
+                                android:textSize="@dimen/_12ssp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -107,22 +94,21 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
-                                android:text="POCO X3 PRO (VAYU)"
-                                android:textSize="@dimen/_11sdp" />
+                                android:textSize="@dimen/_11ssp" />
 
                             <TextView
                                 android:id="@+id/tv_ramvalue"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
-                                android:textSize="@dimen/_11sdp" />
+                                android:textSize="@dimen/_11ssp" />
 
                             <TextView
                                 android:id="@+id/tv_panel"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
-                                android:textSize="@dimen/_11sdp"
+                                android:textSize="@dimen/_11ssp"
                                 android:visibility="gone" />
 
                             <TextView
@@ -130,24 +116,23 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
-                                android:textSize="@dimen/_11sdp" />
+                                android:textSize="@dimen/_11ssp" />
 
                             <TextView
                                 android:id="@+id/tv_slot"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
-                                android:textSize="@dimen/_11sdp" />
+                                android:textSize="@dimen/_11ssp" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_weight="1"
                                 android:gravity="bottom"
                                 android:orientation="horizontal">
 
                                 <com.google.android.material.card.MaterialCardView
-                                    android:id="@+id/cv_guide"
+                                    android:id="@+id/guide"
                                     style="@style/Widget.Material3.CardView.Filled"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -172,12 +157,12 @@
                                         android:gravity="center"
                                         android:paddingVertical="4dp"
                                         android:text="@string/guide"
-                                        android:textSize="@dimen/_12sdp"
+                                        android:textSize="@dimen/_12ssp"
                                         android:textStyle="bold" />
                                 </com.google.android.material.card.MaterialCardView>
 
                                 <com.google.android.material.card.MaterialCardView
-                                    android:id="@+id/cv_group"
+                                    android:id="@+id/group"
                                     style="@style/Widget.Material3.CardView.Filled"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -202,7 +187,7 @@
                                         android:gravity="center"
                                         android:paddingVertical="4dp"
                                         android:text="@string/group"
-                                        android:textSize="@dimen/_12sdp"
+                                        android:textSize="@dimen/_12ssp"
                                         android:textStyle="bold" />
 
                                 </com.google.android.material.card.MaterialCardView>
@@ -217,252 +202,52 @@
                 android:id="@+id/appRight"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:orientation="vertical"
                 android:paddingBottom="25dp">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cv_backup"
-                    style="@style/Widget.Material3.CardView.Filled"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="4dp"
+                <com.woa.helper.main.Button
+                    style="@style/button"
+                    android:id="@+id/backup"
                     android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:animateLayoutChanges="true"
-                    android:clickable="true"
-                    android:elevation="@dimen/cardElevation"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/parentMargin"
-                    android:stateListAnimator="@animator/state_list_anim"
-					app:cardBackgroundColor="?attr/colorOnSurfaceInverse"
-                    app:cardCornerRadius="@dimen/cardCornerRadius"
-                    app:cardMaxElevation="0dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="0dp"
-                        android:gravity="left|center"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/disk"
-                            android:layout_width="@dimen/_48sdp"
-                            android:layout_height="@dimen/_48sdp"
-                            android:contentDescription="TODO"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/ic_disk" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tv_backup"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="30dp"
-                                android:text="@string/backup_boot_title"
-                                android:textSize="@dimen/_12sdp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/tv_backup_sub"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-								android:gravity="left"
-                                android:text="@string/backup_boot_subtitle"
-								android:paddingRight="@dimen/_15sdp"
-                                android:textSize="@dimen/_10sdp"
-                                android:textStyle="italic" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cv_mnt"
-                    style="@style/Widget.Material3.CardView.Filled"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    app:title="@string/backup_boot_title"
+                    app:subtitle="@string/backup_boot_subtitle"
+                    app:image="@drawable/ic_disk"
                     android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:animateLayoutChanges="true"
-                    android:clickable="true"
-                    android:elevation="@dimen/cardElevation"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/parentMargin"
-                    android:stateListAnimator="@animator/state_list_anim"
-					app:cardBackgroundColor="?attr/colorOnSurfaceInverse"
-                    app:cardCornerRadius="@dimen/cardCornerRadius"
-                    app:cardMaxElevation="0dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="0dp"
-                        android:gravity="left|center"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/windows_logo"
-                            android:layout_width="@dimen/_48sdp"
-                            android:layout_height="@dimen/_48sdp"
-                            android:contentDescription="TODO"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/mnt" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tv_mnt"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/mnt_title"
-                                android:textSize="@dimen/_12sdp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/tv_mnt_subtitle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-								android:gravity="left"
-                                android:text="@string/mnt_subtitle"
-								android:paddingRight="@dimen/_15sdp"
-                                android:textSize="@dimen/_10sdp"
-                                android:textStyle="italic" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cv_toolbox"
-                    style="@style/Widget.Material3.CardView.Filled"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="4dp"
+                    android:layout_height="match_parent" />
+
+                <com.woa.helper.main.Button
+                    style="@style/button"
+                    android:id="@+id/mnt"
                     android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:animateLayoutChanges="true"
-                    android:clickable="true"
-                    android:elevation="@dimen/cardElevation"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/parentMargin"
-                    android:stateListAnimator="@animator/state_list_anim"
-					app:cardBackgroundColor="?attr/colorOnSurfaceInverse"
-                    app:cardCornerRadius="@dimen/cardCornerRadius"
-                    app:cardMaxElevation="0dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="0dp"
-                        android:gravity="left|center"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/toolbox"
-                            android:layout_width="@dimen/_48sdp"
-                            android:layout_height="@dimen/_48sdp"
-                            android:contentDescription="TODO"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/toolbox" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tv_toolbox"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="30dp"
-                                android:text="@string/toolbox_title"
-                                android:textSize="@dimen/_12sdp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/tv_toolbox_subtitle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-								android:gravity="left"
-                                android:text="@string/toolbox_subtitle"
-								android:paddingRight="@dimen/_15sdp"
-                                android:textSize="@dimen/_10sdp"
-                                android:textStyle="italic" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cv_quick_boot"
-                    style="@style/Widget.Material3.CardView.Filled"
+                    app:title="@string/mnt_title"
+                    app:subtitle="@string/mnt_subtitle"
+                    app:image="@drawable/mnt"
+                    android:layout_margin="4dp"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="4dp"
+                    android:layout_height="match_parent" />
+
+                <com.woa.helper.main.Button
+                    style="@style/button"
+                    android:id="@+id/toolbox"
                     android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:animateLayoutChanges="true"
-                    android:clickable="true"
-                    android:elevation="@dimen/cardElevation"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/parentMargin"
-                    android:stateListAnimator="@animator/state_list_anim"
-					app:cardBackgroundColor="?attr/colorOnSurfaceInverse"
-                    app:cardCornerRadius="@dimen/cardCornerRadius"
-                    app:cardMaxElevation="0dp">
+                    app:title="@string/toolbox_title"
+                    app:subtitle="@string/toolbox_subtitle"
+                    app:image="@drawable/toolbox"
+                    android:layout_margin="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="0dp"
-                        android:gravity="left|center"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/windowsLogo2"
-                            android:layout_width="@dimen/_48sdp"
-                            android:layout_height="@dimen/_48sdp"
-                            android:contentDescription="TODO"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/ic_launcher_foreground"
-                            android:text="@string/quickboot_title" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tv_quick_boot"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="30dp"
-                                android:text="@string/quickboot_question"
-                                android:textSize="@dimen/_12sdp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/tv_boot_subtitle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-								android:gravity="left"
-                                android:paddingRight="@dimen/_15sdp"
-                                android:textSize="@dimen/_10sdp"
-                                android:textStyle="italic" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                <com.woa.helper.main.Button
+                    style="@style/button"
+                    android:id="@+id/quick_boot"
+                    android:layout_weight="1"
+                    app:title="@string/quickboot_title"
+                    app:subtitle="@string/quickboot_subtitle"
+                    app:image="@drawable/ic_launcher_foreground"
+                    android:layout_margin="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
             </LinearLayout>
         </LinearLayout>
 
@@ -476,7 +261,7 @@
         android:layout_gravity="bottom|end"
         android:gravity="end"
         android:maxLines="1"
-        android:textSize="@dimen/_9sdp"
+        android:textSize="@dimen/_9ssp"
         android:layout_margin="4dp"
         android:text="@string/creator" />
 
