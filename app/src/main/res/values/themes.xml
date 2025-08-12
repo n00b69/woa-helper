@@ -1,5 +1,6 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Base application theme. -->
     <style name="Theme.MyApplication" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/md_theme_primary</item>
         <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
@@ -55,19 +56,8 @@
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:windowContentTransitions">true</item>
     </style>
-    <style name="button">
-        <item name="android:stateListAnimator">@animator/state_list_anim</item>
-        <item name="cardCornerRadius">@dimen/cardCornerRadius</item>
-        <item name="cardMaxElevation">0dp</item>
-        <item name="elevation">@dimen/cardElevation</item>
-        <item name="android:animateLayoutChanges">true</item>
-        <item name="android:layout_margin">4dp</item>
-    </style>
-    <style name="settingsButton">
-        <item name="android:layout_margin">5dp</item>
-    </style>
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:textSize">@dimen/_13ssp</item>
+        <item name="android:textSize">22sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 

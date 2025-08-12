@@ -8,41 +8,26 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
-        android:hardwareAccelerated="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:localeConfig="@xml/languages"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/Theme.MyApplication"
-        android:enableOnBackInvokedCallback="true"
         tools:targetApi="tiramisu">
-        <receiver
-            android:name=".widgets.MountWidget"
-            android:exported="true">
+        <receiver android:name=".widgets.WidgetProvider" android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="android.appwidget.action.ACTION_CLICK" />
-                <action android:name="android.appwidget.action.UPDATE" />
+                <action android:name="id.kuato.woahelper.ACTION_SET"/>
+                <action android:name="id.kuato.woahelper.ACTION_CLICK"/>
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/mount_widget_info" />
+                android:resource="@xml/widget_info" />
         </receiver>
         <receiver
-            android:name=".widgets.QuickBootWidget"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="android.appwidget.action.ACTION_CLICK" />
-                <action android:name="android.appwidget.action.UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/quickboot_widget_info" />
-        </receiver>
-        <receiver
-            android:name=".main.AutoMount"
+            android:name=".main.automount"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -51,19 +36,19 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
-
+		
         <service
-            android:name=".main.QuickBootTile"
+            android:name=".main.quickboot_tile"
             android:exported="true"
             android:icon="@drawable/qs_tile"
-            android:label="QuickBoot"
+            android:label="Quickboot"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
         </service>
         <service
-            android:name=".main.MountTile"
+            android:name=".main.mount_tile"
             android:exported="true"
             android:icon="@drawable/mnt2"
             android:label="Mount win"
@@ -80,15 +65,18 @@
                 android:name="autoStoreLocales"
                 android:value="true" />
         </service>
-
         <activity
             android:name=".widgets.WidgetActivity"
-            android:theme="@style/TransparentTheme"
+            android:theme="@style/Theme.AppCompat.Dialog.Alert"
             android:exported="true"
             android:taskAffinity=""
             android:excludeFromRecents="true"
             android:noHistory="true"
             android:launchMode="singleInstance" />
+        <activity
+            android:name=".main.WidgetConfigActivity"
+            android:exported="true">
+        </activity>
         <activity
             android:name=".main.MainActivity"
             android:configChanges="orientation|screenSize"

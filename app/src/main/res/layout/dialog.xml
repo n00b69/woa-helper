@@ -29,8 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="24dp"
-            android:textSize="@dimen/_15ssp" />
+            android:padding="24dp" />
 
         <ProgressBar
             android:id="@+id/progress"
@@ -89,7 +88,7 @@
                 android:animateLayoutChanges="true"
                 android:clipToOutline="true"
                 android:stateListAnimator="@animator/state_list_anim"
-                android:text="@string/no"
+                android:text="No"
                 android:textStyle="bold"
                 android:visibility="gone"
                 app:backgroundTint="?attr/colorAccent"
