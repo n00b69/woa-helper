@@ -1,35 +1,36 @@
 plugins {
     alias(libs.plugins.agp.app)
-    alias(libs.plugins.kotlin.android)
 }
 
 android {
-    namespace = "com.woa.helper"
-    compileSdk = 35
+    namespace = "id.kuato.woahelper"
+    compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.woa.helper"
-        minSdk = 25
-        targetSdk = 35
-        versionCode = 5
-        versionName = "1.8.4_BETA42"
+        applicationId = "id.kuato.woahelper"
+        minSdk = 24
+        targetSdk = 34
+        versionCode = 3
+        versionName = "1.8.4_BETA41"
 
-        val locales = listOf(
-            "ar", "az", "be", "cs", "de", "en", "es", "fa", "fr", "in", "ja", "ka", "ko", "ms", "nl", "pl", "pt", "ru", "ro", "ro-rMD", "th", "tr", "uk", "vi", "zh", "zh-rCN", "zh-rHK", "zh-rMO", "zh-rSG", "zh-rTW"
+        val locales =listOf(
+            "ar", "az", "be", "cs", "de", "en", "es", "fa", "fr", "in", "ja", "ka", "ko", "ms", "nl", "pl", "pt", "ru", "ro","ro-rMD", "th", "tr", "uk", "vi", "zh", "zh-rCN", "zh-rHK", "zh-rMO", "zh-rSG", "zh-rTW"
         )
-        buildConfigField("String[]", "LOCALES", "{\"${locales.toString().trim('[').trim(']').replace(", ", "\",\"").replace("zh-", "zh-Hans-").replace("-r", "-")}\"}")
-        resourceConfigurations += locales
+        buildConfigField("String[]","LOCALES","{\"${locales.toString().trim('[').trim(']').replace(", ","\",\"").replace("zh-","zh-Hans-").replace("-r","-")}\"}");
+        resourceConfigurations +=locales;
     }
 
     buildTypes {
-        release {
+        getByName("release") {
             isShrinkResources = true
             isMinifyEnabled = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"))
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+            )
             isDebuggable = false
             isJniDebuggable = false
         }
-        debug {
+        getByName("debug") {
             isDebuggable = true
         }
     }
@@ -43,14 +44,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
     }
-    kotlinOptions {
-
-        jvmTarget = "21"
-    }
 
     buildFeatures {
         viewBinding = true
-        buildConfig = true
     }
 }
 
@@ -59,9 +55,9 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.preference.preference)
     implementation(libs.com.intuit.sdp.sdp.android)
-    implementation(libs.com.intuit.ssp.ssp.android)
     implementation(libs.com.github.topjohnwu.libsu.core)
     implementation(libs.com.github.topjohnwu.libsu.service)
     implementation(libs.com.github.topjohnwu.libsu.nio)
     implementation(libs.realtimeblurview)
+    //implementation(libs.blurry)
 }
