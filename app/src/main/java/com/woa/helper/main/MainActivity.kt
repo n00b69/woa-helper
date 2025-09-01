@@ -676,17 +676,17 @@ class MainActivity : AppCompatActivity() {
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
                 rootCommand("mkdir -p /sdcard/WOAHelper/sta || true")
-                arrayOf("sta.exe", "sdd.exe", "sdd.conf", "boot_img_auto-flasher_V1.2.exe").forEach { rootCommand("cp $filesDir/sta.exe /sdcard/WOAHelper/sta/$it") }
+                arrayOf("sta.exe", "sdd.exe", "sdd.conf", "boot_img_auto-flasher_V1.2.exe").forEach { rootCommand("cp $filesDir/$it /sdcard/WOAHelper/sta/") }
                 mount()
                 if (!isMounted()) {
                     Dlg.close()
                     mountfail()
                     return@setYes
                 }
-                rootCommand("mkdir $winpath/sta $winpath/ProgramData/sta")
+                rootCommand("mkdir $winpath/sta")
                 rootCommand("cp '$filesDir/Switch to Android.lnk' $winpath/Users/Public/Desktop")
                 rootCommand("cp $filesDir/sta.exe $winpath/ProgramData/sta/sta.exe")
-                rootCommand("cp /sdcard/WOAHelper/sta $winpath")
+                rootCommand("cp /sdcard/WOAHelper/sta/* $winpath/sta/")
 
                 Dlg.clearButtons()
                 Dlg.setText(R.string.done)
