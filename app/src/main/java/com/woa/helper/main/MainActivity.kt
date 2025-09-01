@@ -869,7 +869,7 @@ class MainActivity : AppCompatActivity() {
                 Dlg.setIcon(R.drawable.ic_download)
                 Thread {
                     rootCommand("mkdir -p /sdcard/WOAHelper/Toolbox || true")
-                    rootCommand("echo \"$(find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook.apbx -O /sdcard/WOAHelper/Toolbox/AtlasPlaybook_v0.4.1.apbx\" | sh")
+                    rootCommand("echo \"$(find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook.apbx -O /sdcard/WOAHelper/Toolbox/AtlasPlaybook.apbx\" | sh")
                     Dlg.setBar(35)
                     rootCommand("echo \"$(find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook_v0.4.0_23H2Only.apbx -O /sdcard/WOAHelper/Toolbox/AtlasPlaybook_v0.4.0_23H2Only.apbx\" | sh")
                     Dlg.setBar(60)
@@ -1023,7 +1023,7 @@ class MainActivity : AppCompatActivity() {
                         nointernet()
                         return@setYes
                     }
-                    rootCommand("echo \"$(find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/DefenderRemover.exe -O $filesDir/DefenderRemover.exe\" | sh")
+                    rootCommand("echo \"$(find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/DefenderRemover.exe -O /sdcard/WOAHelper/Toolbox/DefenderRemover.exe\" | sh")
                 }
                 mount()
                 if (!isMounted()) {
@@ -1033,7 +1033,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 rootCommand("mkdir -p /sdcard/WOAHelper/Toolbox || true")
                 rootCommand("mkdir $winpath/Toolbox || true ")
-                rootCommand("cp $filesDir/DefenderRemover.exe /sdcard/WOAHelper/Toolbox")
+                rootCommand("cp /sdcard/WOAHelper/Toolbox/DefenderRemover.exe $filesDir/DefenderRemover.exe")
                 rootCommand("cp $filesDir/RemoveEdge.bat /sdcard/WOAHelper/Toolbox")
                 rootCommand("cp $filesDir/DefenderRemover.exe $winpath/Toolbox")
                 rootCommand("cp $filesDir/RemoveEdge.bat $winpath/Toolbox")
