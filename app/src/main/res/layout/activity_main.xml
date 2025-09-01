@@ -253,18 +253,6 @@
 
     </LinearLayout>
 
-
-    <TextView
-        android:id="@+id/tvAppCreator"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:gravity="end"
-        android:maxLines="1"
-        android:textSize="@dimen/_9ssp"
-        android:layout_margin="4dp"
-        android:text="@string/creator" />
-
     <com.github.mmin18.widget.RealtimeBlurView
         android:id="@+id/blur"
         android:layout_width="match_parent"
