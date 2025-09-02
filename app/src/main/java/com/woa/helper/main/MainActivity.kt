@@ -1427,12 +1427,13 @@ class MainActivity : AppCompatActivity() {
         internal fun mount() {
             if (null == win) win = getWin()
             rootCommand("mkdir $winpath || true")
-            rootCommand("su -mm -c " + context!!.filesDir + "/mount.ntfs $win $winpath")
+			rootCommand("cd ${context!!.filesDir}")
+            rootCommand("su -mm -c ./mount.ntfs $win $winpath")
             if (isMounted()) {
                 // Causes some issues idk. Better be here for later
                 updateWinPath()
                 rootCommand("mkdir $winpath || true")
-                rootCommand("su -mm -c " + context!!.filesDir + "/mount.ntfs $win $winpath")
+                rootCommand("su -mm -c ./mount.ntfs $win $winpath")
             }
             updateMountText()
         }
