@@ -22,7 +22,7 @@ abstract class CommonTileService : TileService() {
         if (mntstat.isEmpty()) {
             ShellUtils.fastCmd("mkdir $winPath || true")
             ShellUtils.fastCmd("cd $filesDir")
-            ShellUtils.fastCmd("su -mm -c mount.ntfs $win $winPath")
+            ShellUtils.fastCmd("su -mm -c ./mount.ntfs $win $winPath")
         }
     }
 
