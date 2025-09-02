@@ -27,6 +27,7 @@ enum class Pref {
         private const val DEVCFG1 = "devcfg flasher"
         private const val DEVCFG2 = "devcfg flasher & check for sdd.exe etc."
         private const val codename = "woa_codename_changer"
+        const val filesDir = "woa_app_filesdir"
 
         fun getSharedPreference(context: Context?): SharedPreferences? {
             return PreferenceManager.getDefaultSharedPreferences(context!!)
@@ -213,6 +214,13 @@ enum class Pref {
                 putBoolean(DEVCFG2, value)
             }
         }
+
+        fun setFilesDir(context: Context, value: String?) {
+            getSharedPreference(context)!!.edit {
+                putString(filesDir, value)
+            }
+        }
+
     }
 }
 

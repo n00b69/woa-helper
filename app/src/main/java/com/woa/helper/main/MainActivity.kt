@@ -93,6 +93,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         rootCommand("cd $filesDir")
+        Pref.setFilesDir(this!!, filesDir.toString())
 
         onBackPressedDispatcher.addCallback(this) {
             if (0 == views.size - 1) {
@@ -133,7 +134,6 @@ class MainActivity : AppCompatActivity() {
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content)) { v: View?, insets: WindowInsetsCompat ->
             val sysInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            x!!.tvAppCreator.setPadding(0, 0, 0, sysInsets.bottom)
             arrayOf(x!!.app, n!!.app, k!!.app, z!!.app).forEach { it.setPadding(0, 0, 0, sysInsets.bottom) }
             arrayOf(x!!.linearLayout, n!!.linearLayout, k!!.linearLayout, z!!.linearLayout).forEach { it.setPadding(sysInsets.left, sysInsets.top, sysInsets.right, 0) }
             insets
@@ -1204,7 +1204,7 @@ class MainActivity : AppCompatActivity() {
     private fun checkwin() {
         if (!win!!.isEmpty()) return
         Dlg.show(this, R.string.partition)
-        Dlg.setCancelable(true)
+        Dlg.setCancelable(false)
         arrayOf(x!!.mnt, x!!.toolbox, x!!.quickBoot, n!!.flashUefi).forEach { it.isEnabled = false }
     }
 
