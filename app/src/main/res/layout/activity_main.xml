@@ -94,21 +94,21 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
-                                android:textSize="@dimen/_11ssp" />
+                                android:textSize="@dimen/_9ssp" />
 
                             <TextView
                                 android:id="@+id/tv_ramvalue"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
-                                android:textSize="@dimen/_11ssp" />
+                                android:textSize="@dimen/_9ssp" />
 
                             <TextView
                                 android:id="@+id/tv_panel"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
-                                android:textSize="@dimen/_11ssp"
+                                android:textSize="@dimen/_9ssp"
                                 android:visibility="gone" />
 
                             <TextView
@@ -116,14 +116,14 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
-                                android:textSize="@dimen/_11ssp" />
+                                android:textSize="@dimen/_9ssp" />
 
                             <TextView
                                 android:id="@+id/tv_slot"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
-                                android:textSize="@dimen/_11ssp" />
+                                android:textSize="@dimen/_9ssp" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -157,7 +157,7 @@
                                         android:gravity="center"
                                         android:paddingVertical="4dp"
                                         android:text="@string/guide"
-                                        android:textSize="@dimen/_12ssp"
+                                        android:textSize="@dimen/_11ssp"
                                         android:textStyle="bold" />
                                 </com.google.android.material.card.MaterialCardView>
 
@@ -187,7 +187,7 @@
                                         android:gravity="center"
                                         android:paddingVertical="4dp"
                                         android:text="@string/group"
-                                        android:textSize="@dimen/_12ssp"
+                                        android:textSize="@dimen/_11ssp"
                                         android:textStyle="bold" />
 
                                 </com.google.android.material.card.MaterialCardView>
@@ -203,7 +203,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingBottom="25dp">
+                android:paddingBottom="6dp">
 
                 <com.woa.helper.main.Button
                     style="@style/button"

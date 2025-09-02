@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="24dp"
-            android:textSize="@dimen/_15ssp" />
+            android:textSize="@dimen/_10ssp" />
 
         <ProgressBar
             android:id="@+id/progress"

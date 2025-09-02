@@ -127,7 +127,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
-                        android:textSize="@dimen/_8ssp"
+                        android:textSize="@dimen/_11ssp"
                         android:text="@string/preference6"
                         android:layout_marginEnd="20dp"/>
 
@@ -135,7 +135,7 @@
                         android:id="@+id/languages"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/_8ssp"
+                        android:textSize="@dimen/_11ssp"
                         android:layout_weight="1"/>
                 </LinearLayout>
                 <EditText
