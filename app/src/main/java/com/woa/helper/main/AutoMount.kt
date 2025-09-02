@@ -15,12 +15,13 @@ class AutoMount : BroadcastReceiver() {
         val filesdir = PreferenceManager.getDefaultSharedPreferences(context!!).getString(Pref.filesDir,"")
         if (Pref.getSharedPreference(context)?.getBoolean(Pref.AUTOMOUNT, false) == true) {
             win = getWin()
+            ShellUtils.fastCmd("cd $filesdir")
             if (Pref.getSharedPreference(context)?.getBoolean(Pref.MOUNT_LOCATION, false) == true) {
                 ShellUtils.fastCmd("mkdir /mnt/Windows || true")
-                ShellUtils.fastCmd("su -mm -c $filesdir/mount.ntfs $win /mnt/Windows")
+                ShellUtils.fastCmd("su -mm -c ./mount.ntfs $win /mnt/Windows")
             } else {
                 ShellUtils.fastCmd("mkdir /mnt/sdcard/Windows || true")
-                ShellUtils.fastCmd("su -mm -c $filesdir/mount.ntfs $win /mnt/sdcard/Windows")
+                ShellUtils.fastCmd("su -mm -c ./mount.ntfs $win /mnt/sdcard/Windows")
             }
         }
     }
