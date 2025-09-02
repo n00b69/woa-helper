@@ -158,7 +158,7 @@ class MainActivity : AppCompatActivity() {
         )
         setSupportActionBar(x!!.toolbarlayout.toolbar)
         x!!.toolbarlayout.toolbar.setTitle(R.string.app_name)
-        x!!.toolbarlayout.toolbar.subtitle = "v" + BuildConfig.VERSION_NAME
+        x!!.toolbarlayout.toolbar.subtitle = "v${BuildConfig.VERSION_NAME}"
         x!!.toolbarlayout.toolbar.setNavigationIcon(R.drawable.ic_launcher_foreground)
         arrayOf(x!!.toolbarlayout.settings, k!!.toolbarlayout.settings, n!!.toolbarlayout.settings, z!!.toolbarlayout.settings).forEach { it.setColorFilter(R.color.md_theme_primary) }
 
