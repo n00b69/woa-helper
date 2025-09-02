@@ -16,8 +16,23 @@ private lateinit var win: String
 private lateinit var findWin: String
 private lateinit var winPath: String
 
+abstract class CommonTileService : TileService() {
+    protected fun mount() {
+        val mntstat = ShellUtils.fastCmd("su -mm -c mount | grep $win")
+        if (mntstat.isEmpty()) {
+            ShellUtils.fastCmd("mkdir $winPath || true")
+            ShellUtils.fastCmd("cd $filesDir")
+            ShellUtils.fastCmd("su -mm -c mount.ntfs $win $winPath")
+        }
+    }
 
-class QuickBootTile : TileService() {
+    protected fun unmount() {
+        ShellUtils.fastCmd("su -mm -c umount $winPath")
+        ShellUtils.fastCmd("rmdir $winPath")
+    }
+}
+
+class QuickBootTile : CommonTileService() {
     private lateinit var findUefi: String
     private var device: String? = null
     private var findBoot: String? = null
@@ -132,14 +147,6 @@ class QuickBootTile : TileService() {
         }
     }
 
-    private fun mount() {
-        val mntStat = ShellUtils.fastCmd("su -mm -c mount | grep $win")
-        if (mntStat.isEmpty()) {
-            ShellUtils.fastCmd("mkdir $winPath || true")
-            ShellUtils.fastCmd("su -mm -c $filesDir/mount.ntfs $win $winPath")
-        }
-    }
-
     private fun flash() {
         ShellUtils.fastCmd("dd if=$findUefi of=/dev/block/bootdevice/by-name/boot$(getprop ro.boot.slot_suffix) bs=16m")
     }
@@ -155,7 +162,7 @@ class QuickBootTile : TileService() {
     }
 }
 
-class MountTile : TileService() {
+class MountTile : CommonTileService() {
     private var mntStat: String? = null
 
     override fun onStartListening() {
@@ -188,18 +195,5 @@ class MountTile : TileService() {
         if (mntStat!!.isEmpty()) tile.state = 1
         else tile.state = 2
         tile.updateTile()
-    }
-
-    private fun mount() {
-        val mntstat = ShellUtils.fastCmd("su -mm -c mount | grep $win")
-        if (mntstat.isEmpty()) {
-            ShellUtils.fastCmd("mkdir $winPath || true")
-            ShellUtils.fastCmd("su -mm -c $filesDir/mount.ntfs $win $winPath")
-        }
-    }
-
-    private fun unmount() {
-        ShellUtils.fastCmd("su -mm -c umount $winPath")
-        ShellUtils.fastCmd("rmdir $winPath")
     }
 }
