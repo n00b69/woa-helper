@@ -1051,13 +1051,17 @@ class MainActivity : AppCompatActivity() {
             views[views.size - 1].startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in))
             // Scary big line! (Victoria)
             arrayOf(
-                Pair.create(k!!.backupQB, Pref.getBackup(this)), Pair.create(k!!.backupQBA, Pref.getBackupA(this)), Pair.create(k!!.autobackup, !Pref.getAuto(this)), Pair.create(
-                    k!!.autobackupA, !Pref.getAuto(this)
-                ), Pair.create(k!!.autobackupA, !Pref.getAuto(this)), Pair.create(k!!.confirmation, Pref.getConfirm(this)), Pair.create(k!!.automount, Pref.getAutoMount(this)), Pair.create(
-                    k!!.securelock, !Pref.getSecure(this)
-                ), Pair.create(k!!.mountLocation, Pref.getMountLocation(this)), Pair.create(k!!.appUpdate, Pref.getAppUpdate(this)), Pair.create(k!!.devcfg1, Pref.getDevcfg1(this) && View.VISIBLE == k!!.devcfg1.visibility), Pair.create(
-                    k!!.devcfg2, Pref.getDevcfg2(this)
-                )
+                Pair.create(k!!.backupQB, Pref.getBackup(this)),
+                Pair.create(k!!.backupQBA, Pref.getBackupA(this)),
+                Pair.create(k!!.autobackup, !Pref.getAuto(this)),
+                Pair.create(k!!.autobackupA, !Pref.getAutoA(this)),
+                Pair.create(k!!.confirmation, Pref.getConfirm(this)),
+                Pair.create(k!!.automount, Pref.getAutoMount(this)),
+                Pair.create(k!!.securelock, !Pref.getSecure(this)),
+                Pair.create(k!!.mountLocation, Pref.getMountLocation(this)),
+                Pair.create(k!!.appUpdate, Pref.getAppUpdate(this)),
+                Pair.create(k!!.devcfg1, Pref.getDevcfg1(this) && View.VISIBLE == k!!.devcfg1.visibility),
+                Pair.create(k!!.devcfg2, Pref.getDevcfg2(this))
             ).forEach { it.first.setChecked(it.second) }
             k!!.toolbarlayout.settings.visibility = View.GONE
             val langSpinner = findViewById<AppCompatSpinner>(R.id.languages)
