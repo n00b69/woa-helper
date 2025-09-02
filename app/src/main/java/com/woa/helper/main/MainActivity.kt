@@ -1350,7 +1350,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     mount()
                     if (isMounted()) {
-                        Dlg.setText(String.format("%s\n$winpath", context!!.getString(R.string.mounted)))
+                        Dlg.setText("${context!!.getString(R.string.mounted)}\n$winpath")
                         MountWidget.updateText(context!!, context!!.getString(R.string.mnt_title, context!!.getString(R.string.unmountt)))
                         Dlg.dismissButton()
                         return@postDelayed
@@ -1374,7 +1374,7 @@ class MainActivity : AppCompatActivity() {
                 Dlg.dialogLoading()
                 Handler(Looper.getMainLooper()).postDelayed({
                     mount()
-                    var found = rootCommand(String.format("ls %s | grep boot.img", updateWinPath()))
+                    var found = rootCommand("ls ${updateWinPath()} | grep boot.img")
                     if (Pref.getBackup(context!!) || (!Pref.getAuto(context!!) && found.isEmpty())) {
                         winBackup()
                         updateLastBackupDate()
@@ -1386,35 +1386,35 @@ class MainActivity : AppCompatActivity() {
                     }
                     if (Pref.getDevcfg1(context!!)) {
                         if (!isNetworkConnected(context!!)) {
-                            val finddevcfg = rootCommand("find " + context!!.filesDir + " -maxdepth 1 -name OOS11_devcfg_*")
+                            val finddevcfg = rootCommand("find ${context!!.filesDir} -maxdepth 1 -name OOS11_devcfg_*")
                             if (finddevcfg.isEmpty()) {
                                 nointernet()
                                 return@postDelayed
                             }
                         }
                         val devcfgDevice = if (arrayOf("guacamole", "OnePlus7Pro", "OnePlus7Pro4G").contains(device)) "guacamole" else (if (arrayOf("hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) "hotdog" else null)!!
-                        val findoriginaldevcfg = rootCommand("find " + context!!.filesDir + " -maxdepth 1 -name original-devcfg.img")
+                        val findoriginaldevcfg = rootCommand("find ${context!!.filesDir} -maxdepth 1 -name original-devcfg.img")
                         if (findoriginaldevcfg.isEmpty()) {
                             rootCommand("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=/sdcard/original-devcfg.img")
-                            rootCommand("cp /sdcard/original-devcfg.img " + context!!.filesDir + "/original-devcfg.img")
+                            rootCommand("cp /sdcard/original-devcfg.img ${context!!.filesDir}/original-devcfg.img")
                         }
-                        val finddevcfg = rootCommand("find " + context!!.filesDir + " -maxdepth 1 -name OOS11_devcfg_*")
+                        val finddevcfg = rootCommand("find ${context!!.filesDir} -maxdepth 1 -name OOS11_devcfg_*")
                         if (finddevcfg.isEmpty()) {
                             rootCommand("echo \"$(find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_$devcfgDevice.img -O /sdcard/OOS11_devcfg_$devcfgDevice.img\" | sh")
                             rootCommand("echo \"$(find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_$devcfgDevice.img -O /sdcard/OOS12_devcfg_$devcfgDevice.img\" | sh")
-                            rootCommand(String.format("cp /sdcard/OOS11_devcfg_$devcfgDevice.img %s", context!!.filesDir))
-                            rootCommand(String.format("cp /sdcard/OOS12_devcfg_$devcfgDevice.img %s", context!!.filesDir))
-                            rootCommand(String.format("dd bs=8M if=%s/OOS11_devcfg_$devcfgDevice.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)", context!!.filesDir))
+                            rootCommand("cp /sdcard/OOS11_devcfg_$devcfgDevice.img ${context!!.filesDir}")
+                            rootCommand("cp /sdcard/OOS12_devcfg_$devcfgDevice.img ${context!!.filesDir}")
+                            rootCommand("dd bs=8M if=${context!!.filesDir}/OOS11_devcfg_$devcfgDevice.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)")
                         } else {
-                            rootCommand(String.format("dd bs=8M if=%s/OOS11_devcfg_$devcfgDevice.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)", context!!.filesDir))
+                            rootCommand("dd bs=8M if=${context!!.filesDir}/OOS11_devcfg_$devcfgDevice.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)")
                         }
                     }
                     if (Pref.getDevcfg2(context!!) && Pref.getDevcfg1(context!!)) {
                         rootCommand("mkdir $winpath/sta || true ")
-                        rootCommand("cp '" + context!!.filesDir + "/Flash Devcfg.lnk' $winpath/Users/Public/Desktop")
-                        rootCommand("cp " + context!!.filesDir + "/sdd.exe $winpath/sta/sdd.exe")
-                        rootCommand("cp " + context!!.filesDir + "/devcfg-boot-sdd.conf $winpath/sta/sdd.conf")
-                        rootCommand("cp " + context!!.filesDir + "/original-devcfg.img $winpath/original-devcfg.img")
+                        rootCommand("cp '${context!!.filesDir}/Flash Devcfg.lnk' $winpath/Users/Public/Desktop")
+                        rootCommand("cp ${context!!.filesDir}/sdd.exe $winpath/sta/sdd.exe")
+                        rootCommand("cp ${context!!.filesDir}/devcfg-boot-sdd.conf $winpath/sta/sdd.conf")
+                        rootCommand("cp ${context!!.filesDir}/original-devcfg.img $winpath/original-devcfg.img")
                     }
                     flash(finduefi)
                     rootCommand("svc power reboot")
