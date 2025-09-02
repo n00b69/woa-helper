@@ -1501,7 +1501,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         internal fun updateWinPath(): String {
-            winpath = if (Pref.getMountLocation(context!!)) "/mnt/Windows" else Environment.getExternalStorageDirectory().path + "/Windows"
+            winpath = if (Pref.getMountLocation(context!!)) "/mnt/Windows" else "${Environment.getExternalStorageDirectory().path}/Windows"
             return winpath!!
         }
 
@@ -1526,7 +1526,7 @@ class MainActivity : AppCompatActivity() {
 
         @JvmStatic
         fun isMounted(): Boolean {
-            return !rootCommand("su -mm -c mount | grep " + getWin()).isEmpty()
+            return !rootCommand("su -mm -c mount | grep ${getWin()}").isEmpty()
         }
 
         internal fun openLink(link: String) {
