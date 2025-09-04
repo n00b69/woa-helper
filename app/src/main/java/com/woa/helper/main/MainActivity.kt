@@ -1507,9 +1507,7 @@ class MainActivity : AppCompatActivity() {
 
         internal fun updateDevice() {
             rootCommand("pm uninstall id.kuato.woahelper")
-            device = Build.DEVICE
-            if (BuildConfig.DEBUG)
-                device = Pref.codename_changer(false,context!!,Build.DEVICE)
+            device = Pref.codename_changer(false,context!!,Build.DEVICE)
         }
 
         internal fun getBoot(): String {
