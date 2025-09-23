@@ -256,7 +256,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             "curtana", "curtana2", "curtana_india", "curtana_cn", "curtanacn", "durandal", "durandal_india", "excalibur", "excalibur2", "excalibur_india", "gram", "joyeuse", "miatoll" -> {
-                guidelink = "https://github.com/woa-miatoll/Port-Windows-11-Redmi-Note-9-Pro"
+                guidelink = "https://github.com/woa-miatoll/Miatoll-Guide"
                 grouplink = "http://t.me/woamiatoll"
                 x!!.DeviceImage.setImageResource(R.drawable.miatoll)
                 x!!.tvPanel.visibility = View.VISIBLE
