@@ -373,7 +373,7 @@ class MainActivity : AppCompatActivity() {
 
             "hotdog", "OnePlus7TPro", "OnePlus7TPro4G" -> {
                 guidelink = "https://github.com/n00b69/woa-op7"
-                grouplink = "https://t.me/woahelperchat"
+                grouplink = "https://t.me/oneplus7woa"
                 x!!.DeviceImage.setImageResource(R.drawable.hotdog)
                 arrayOf(Pair.create(n!!.dumpModem, View.VISIBLE), Pair.create(n!!.dbkp, View.VISIBLE), Pair.create(n!!.flashUefi, View.GONE)).forEach {
                     it.first.visibility =
@@ -383,7 +383,7 @@ class MainActivity : AppCompatActivity() {
 
             "guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO" -> {
                 guidelink = "https://github.com/n00b69/woa-op7"
-                grouplink = "https://t.me/woahelperchat"
+                grouplink = "https://t.me/oneplus7woa"
                 x!!.DeviceImage.setImageResource(R.drawable.guacamole)
                 arrayOf(Pair.create(n!!.dumpModem, View.VISIBLE), Pair.create(n!!.dbkp, View.VISIBLE), Pair.create(n!!.flashUefi, View.GONE)).forEach {
                     it.first.visibility =
@@ -393,20 +393,20 @@ class MainActivity : AppCompatActivity() {
 
             "guacamoleb", "hotdogb", "OnePlus7T", "OnePlus7" -> {
                 guidelink = "https://project-aloha.github.io/"
-                grouplink = "https://t.me/woahelperchat"
+                grouplink = "https://t.me/oneplus7woa"
                 x!!.DeviceImage.setImageResource(R.drawable.unknown)
                 n!!.dumpModem.visibility = View.VISIBLE
             }
 
             "OnePlus7TPro5G", "OnePlus7TProNR", "hotdogg" -> {
                 guidelink = "https://project-aloha.github.io/"
-                grouplink = "https://t.me/woahelperchat"
+                grouplink = "https://t.me/oneplus7woa"
                 x!!.DeviceImage.setImageResource(R.drawable.hotdog)
             }
 
             "OP7ProNRSpr", "OnePlus7ProNR", "guacamoleg", "guacamoles" -> {
                 guidelink = "https://project-aloha.github.io/"
-                grouplink = "https://t.me/woahelperchat"
+                grouplink = "https://t.me/oneplus7woa"
                 x!!.DeviceImage.setImageResource(R.drawable.guacamole)
             }
 
