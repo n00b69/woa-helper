@@ -1207,6 +1207,7 @@ class MainActivity : AppCompatActivity() {
         if (!win!!.isEmpty()) return
         Dlg.show(this, R.string.partition)
         Dlg.setCancelable(false)
+        Dlg.setYes(R.string.guide,{openLink(guidelink)})
         arrayOf(x!!.mnt, x!!.toolbox, x!!.quickBoot, n!!.flashUefi).forEach { it.isEnabled = false }
     }
 

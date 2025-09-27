@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.woa.helper"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.woa.helper"
         minSdk = 25
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 5
         versionName = "1.8.4_BETA43"
 
@@ -18,7 +18,7 @@ android {
             "ar", "az", "be", "cs", "de", "en", "es", "fa", "fr", "in", "ja", "ka", "ko", "ms", "nl", "pl", "pt", "ru", "ro", "ro-rMD", "th", "tr", "uk", "vi", "zh", "zh-rCN", "zh-rHK", "zh-rMO", "zh-rSG", "zh-rTW"
         )
         buildConfigField("String[]", "LOCALES", "{\"${locales.toString().trim('[').trim(']').replace(", ", "\",\"").replace("zh-", "zh-Hans-").replace("-r", "-")}\"}")
-        resourceConfigurations += locales
+        androidResources.localeFilters +=locales
     }
 
     buildTypes {
