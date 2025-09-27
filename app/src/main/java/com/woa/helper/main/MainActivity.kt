@@ -1159,10 +1159,8 @@ class MainActivity : AppCompatActivity() {
         k!!.securelock.setOnChangeListener { b: Boolean -> Pref.setSecure(this, !b) }
         k!!.automount.setOnChangeListener { b: Boolean -> Pref.setAutoMount(this, b) }
         k!!.appUpdate.setOnChangeListener { b: Boolean -> Pref.setAppUpdate(this, b) }
-        //String op7funny = rootCommand("getprop ro.boot.vendor.lge.model.name");
-        //if (("guacamole".equals(device) || "guacamolet".equals(device) || "OnePlus7Pro".equals(device) || "OnePlus7Pro4G".equals(device) || "OnePlus7ProTMO".equals(device) || "hotdog".equals(device) || "OnePlus7TPro".equals(device) || "OnePlus7TPro4G".equals(device)) && (op7funny.contains("LM") || op7funny.contains("OPPO"))) {
-        val op7funny = rootCommand("getprop persist.camera.privapp.list")
-        if (arrayOf("guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO", "hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device) && op7funny.lowercase(Locale.getDefault()).contains("oppo")) {
+        val op7funny = rootCommand("cat /proc/cmdline | grep oplus")
+        if (arrayOf("guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO", "hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device) && !op7funny.isEmpty()) {
             k!!.devcfg1.setOnChangeListener { b: Boolean ->
                 Pref.setDevcfg1(this, b)
                 k!!.devcfg2.visibility = if (b) View.VISIBLE else View.GONE
