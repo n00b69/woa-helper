@@ -1213,8 +1213,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkupdate() {
         if (Pref.getAppUpdate(this) || !isNetworkConnected(this)) return
-
-        val version = rootCommand("echo \"$(find /data/adb -name busybox) wget -q -O - https://raw.githubusercontent.com/n00b69/woa-helper-update/main/README.md\" | sh")
+        val version = rootCommand("timeout 10s $(find /data/adb -name busybox | head -1) wget -q -O - https://raw.githubusercontent.com/n00b69/woa-helper-update/main/README.md")
         if (BuildConfig.VERSION_NAME == version) return
 
         Dlg.show(this, R.string.update1)
