@@ -26,21 +26,20 @@ enum class Pref {
         private const val WIDGET_OPACITY = "widget opacity"
         private const val DEVCFG1 = "devcfg flasher"
         private const val DEVCFG2 = "devcfg flasher & check for sdd.exe etc."
-        private const val codename = "woa_codename_changer"
-        const val filesDir = "woa_app_filesdir"
+        private const val CODENAME = "woa_codename_changer"
+        const val FILESDIR: String = "woa_app_filesdir"
 
         fun getSharedPreference(context: Context?): SharedPreferences? {
             return PreferenceManager.getDefaultSharedPreferences(context!!)
         }
 
-        fun codename_changer(rw: Boolean, context: Context,value: String): String {
-            if (rw){
+        fun codenameChanger(rw: Boolean, context: Context, value: String): String {
+            if (rw) {
                 getSharedPreference(context)!!.edit {
-                    putString(codename, value)
+                    putString(CODENAME, value)
                 }
-            }
-            else
-                return getSharedPreference(context)!!.getString(codename, value)!!
+            } else
+                return getSharedPreference(context)!!.getString(CODENAME, value)!!
             return ""
         }
 
@@ -217,7 +216,7 @@ enum class Pref {
 
         fun setFilesDir(context: Context, value: String?) {
             getSharedPreference(context)!!.edit {
-                putString(filesDir, value)
+                putString(FILESDIR, value)
             }
         }
 

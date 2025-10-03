@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:layout_margin="4dp"
     android:animateLayoutChanges="true"
-    android:background="?attr/colorSurface"
     android:clickable="false"
     android:foreground="?android:attr/selectableItemBackground"
     android:stateListAnimator="@animator/state_list_anim"

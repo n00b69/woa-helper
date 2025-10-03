@@ -4,8 +4,7 @@
     android:id="@+id/scriptstab"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main.MainActivity"
-    android:background="?attr/colorOnSurfaceInverse">
+    tools:context=".main.MainActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -77,7 +76,6 @@
                             android:id="@+id/defender"
                             android:layout_width="@dimen/_48sdp"
                             android:layout_height="@dimen/_48sdp"
-                            android:contentDescription="TODO"
                             android:scaleType="fitXY"
                             android:src="@drawable/edge" />
 
@@ -117,8 +115,8 @@
         android:id="@+id/blur"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:realtimeBlurRadius="10dp"
         android:visibility="gone"
+        app:realtimeBlurRadius="10dp"
         app:realtimeOverlayColor="#80000000" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

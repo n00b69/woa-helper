@@ -17,8 +17,6 @@ import com.woa.helper.main.MainActivity.Companion.hideBlur
 import com.woa.helper.main.MainActivity.Companion.showBlur
 import com.woa.helper.widgets.WidgetActivity
 import java.util.Objects
-import kotlin.Int
-import kotlin.String
 
 @SuppressLint("StaticFieldLeak")
 object Dlg {

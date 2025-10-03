@@ -12,7 +12,7 @@ class AutoMount : BroadcastReceiver() {
     private var win: String? = null
 
     override fun onReceive(context: Context?, intent: Intent?) {
-        val filesdir = PreferenceManager.getDefaultSharedPreferences(context!!).getString(Pref.filesDir,"")
+        val filesdir = PreferenceManager.getDefaultSharedPreferences(context!!).getString(Pref.FILESDIR, "")
         if (Pref.getSharedPreference(context)?.getBoolean(Pref.AUTOMOUNT, false) == true) {
             win = getWin()
             ShellUtils.fastCmd("cd $filesdir")

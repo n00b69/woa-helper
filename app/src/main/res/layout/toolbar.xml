@@ -24,7 +24,6 @@
             android:layout_marginRight="@dimen/_12sdp"
             android:background="@android:color/transparent"
             android:clickable="true"
-            android:contentDescription="TODO"
             android:elevation="@dimen/cardElevation"
             android:focusable="true"
             android:src="@drawable/settings" />

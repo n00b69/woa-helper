@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/red"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:background="@color/red">
 
     <TextView
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="@dimen/_8ssp"
+        android:text="TEMPLATE"
         android:textColor="@color/white"
-        android:text="TEMPLATE" />
+        android:textSize="@dimen/_8ssp"
+        android:textStyle="bold" />
 
     <Switch
         android:id="@+id/switchButton"

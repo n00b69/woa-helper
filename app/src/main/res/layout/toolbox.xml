@@ -4,7 +4,6 @@
     android:id="@+id/toolboxtab"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorOnSurfaceInverse"
     tools:context=".main.MainActivity">
 
     <LinearLayout
@@ -41,9 +40,9 @@
             </LinearLayout>
 
             <ScrollView
-                android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="0dp">
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
                 <LinearLayout
                     android:id="@+id/appRight"
@@ -53,115 +52,115 @@
                     android:paddingBottom="10dp">
 
                     <com.woa.helper.main.Button
-                        style="@style/button"
                         android:id="@+id/sta"
-                        app:title="@string/sta_title"
-                        app:subtitle="@string/sta_subtitle"
+                        style="@style/button"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_60sdp"
                         app:image="@drawable/adrod"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_60sdp" />
+                        app:subtitle="@string/sta_subtitle"
+                        app:title="@string/sta_title" />
 
                     <com.woa.helper.main.Button
-                        style="@style/button"
                         android:id="@+id/flash_uefi"
-                        app:title="@string/flash_uefi_title"
+                        style="@style/button"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_60sdp"
+                        app:image="@drawable/ic_uefi"
                         app:subtitle="@string/flash_uefi_subtitle"
-                        app:image="@drawable/ic_uefi"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_60sdp" />
+                        app:title="@string/flash_uefi_title" />
 
                     <com.woa.helper.main.Button
-                        style="@style/button"
                         android:id="@+id/dbkp"
-                        app:title="@string/dbkp_title"
+                        style="@style/button"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_60sdp"
+                        android:visibility="gone"
+                        app:image="@drawable/ic_uefi"
                         app:subtitle="@string/dbkp_subtitle"
-                        app:image="@drawable/ic_uefi"
-                        android:visibility="gone"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_60sdp" />
+                        app:title="@string/dbkp_title" />
 
                     <com.woa.helper.main.Button
-                        style="@style/button"
                         android:id="@+id/dump_modem"
-                        app:title="@string/dump_modem_title"
-                        app:subtitle="@string/dump_modem_subtitle"
+                        style="@style/button"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_60sdp"
+                        android:visibility="gone"
                         app:image="@drawable/ic_modem"
-                        android:visibility="gone"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_60sdp" />
+                        app:subtitle="@string/dump_modem_subtitle"
+                        app:title="@string/dump_modem_title" />
 
                     <com.woa.helper.main.Button
-                        style="@style/button"
                         android:id="@+id/devcfg"
-                        app:title="@string/devcfg_title"
-                        app:subtitle="@string/devcfg_subtitle"
-                        app:image="@drawable/ic_uefi"
+                        style="@style/button"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_60sdp"
                         android:visibility="gone"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_60sdp" />
+                        app:image="@drawable/ic_uefi"
+                        app:subtitle="@string/devcfg_subtitle"
+                        app:title="@string/devcfg_title" />
 
                     <com.woa.helper.main.Button
-                        style="@style/button"
                         android:id="@+id/software"
-                        app:title="@string/software_title"
+                        style="@style/button"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_60sdp"
+                        app:image="@drawable/ic_sensor"
                         app:subtitle="@string/software_subtitle"
-                        app:image="@drawable/ic_sensor"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_60sdp" />
+                        app:title="@string/software_title" />
 
                     <com.woa.helper.main.Button
-                        style="@style/button"
                         android:id="@+id/atlasos"
-                        app:title="@string/atlasos_title"
-                        app:subtitle="@string/atlasos_subtitle"
+                        style="@style/button"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_60sdp"
                         app:image="@drawable/ic_ar"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_60sdp" />
+                        app:subtitle="@string/atlasos_subtitle"
+                        app:title="@string/atlasos_title" />
 
                     <com.woa.helper.main.Button
-                        style="@style/button"
                         android:id="@+id/usbhost"
-                        app:title="@string/usbhost_title"
+                        style="@style/button"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_60sdp"
+                        app:image="@drawable/mnt"
                         app:subtitle="@string/usbhost_subtitle"
-                        app:image="@drawable/mnt"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_60sdp" />
+                        app:title="@string/usbhost_title" />
 
                     <com.woa.helper.main.Button
-                        style="@style/button"
                         android:id="@+id/rotation"
-                        app:title="@string/rotation_title"
-                        app:subtitle="@string/rotation_subtitle"
+                        style="@style/button"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_60sdp"
                         app:image="@drawable/ic_disk"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_60sdp" />
+                        app:subtitle="@string/rotation_subtitle"
+                        app:title="@string/rotation_title" />
 
                     <com.woa.helper.main.Button
-                        style="@style/button"
                         android:id="@+id/tablet"
-                        app:title="@string/tablet_title"
-                        app:subtitle="@string/tablet_subtitle"
+                        style="@style/button"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_60sdp"
                         app:image="@drawable/ic_sensor"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_60sdp" />
+                        app:subtitle="@string/tablet_subtitle"
+                        app:title="@string/tablet_title" />
 
                     <com.woa.helper.main.Button
-                        style="@style/button"
                         android:id="@+id/setup"
-                        app:title="@string/setup_title"
-                        app:subtitle="@string/setup_subtitle"
-                        app:image="@drawable/mnt"
+                        style="@style/button"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_60sdp" />
+                        android:layout_height="@dimen/_60sdp"
+                        app:image="@drawable/mnt"
+                        app:subtitle="@string/setup_subtitle"
+                        app:title="@string/setup_title" />
 
                     <com.woa.helper.main.Button
-                        style="@style/button"
                         android:id="@+id/defender"
-                        app:title="@string/defender_title"
-                        app:subtitle="@string/defender_subtitle"
-                        app:image="@drawable/edge"
+                        style="@style/button"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_60sdp" />
+                        android:layout_height="@dimen/_60sdp"
+                        app:image="@drawable/edge"
+                        app:subtitle="@string/defender_subtitle"
+                        app:title="@string/defender_title" />
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>
@@ -171,7 +170,7 @@
         android:id="@+id/blur"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:realtimeBlurRadius="10dp"
         android:visibility="gone"
+        app:realtimeBlurRadius="10dp"
         app:realtimeOverlayColor="#80000000" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

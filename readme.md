@@ -9,9 +9,11 @@
 > We're not responsible for bricked devices, missing recovery partitions, dead microSD cards, dead cats or dogs, nuclear wars or you getting fired because of you forgetting to boot back into Android for your alarm.
 
 ## Project status
+
 This project is in late stages of development. Most features have already been added, while some others are still in development. The code may also be refined in the future, to make everything more seamless.
 
 ## Features
+
 | Feature                         | Notes                                                                           | Status |
 |---------------------------------|---------------------------------------------------------------------------------|--------|
 | Backup Android Boot             | Will be stored in internal storage and/or in Windows                            | ✅      |
@@ -24,24 +26,26 @@ This project is in late stages of development. Most features have already been a
 | Quickboot widget                |                                                                                 | ✅      |
 | StA Creator & Auto boot flasher | Creates dualboot files & tool to automatically flash boot.img                   | ✅      |
 | Provisioning Modem              | Only for devices that may need it for LTE to work                               | ✅      |
-| DBKP (Dualboot Kernel Patcher)  | Only for supported devices: Oneplus 7(T) Pro 4G, Xiaomi Mi 9 & Xiaomi Pad 5     | ✅      |
+| DBKP (DualBoot Kernel Patcher)  | Only for supported devices: OnePlus 7(T) Pro 4G, Xiaomi Mi 9 & Xiaomi Pad 5     | ✅      |
 | DBKP uninstaller                | To be added in the future. To uninstall manually, flash the boot.img backup     | ❌      |
-| Devcfg flasher                  | Only for Oneplus 7(T) Pro 4G, needed on OOS12 to boot Windows                   | ✅      |
+| Devcfg flasher                  | Only for OnePlus 7(T) Pro 4G, needed on OOS12 to boot Windows                   | ✅      |
 | Devcfg Quick Settings toggle    | To be added in the future                                                       | ❌      |
 | Devcfg flasher widget           | To be added in the future                                                       | ❌      |
 | Edge & Defender Remover         | To remove Microsoft Edge & Windows Defender                                     | ✅      |
 | USB host mode toggle            | To switch USB modes; ON for USB, OFF for charging                               | ✅      |
 | Display rotation script         | Shortcuts to rotate the screen, especially useful for devices without sensors   | ✅      |
 | AtlasOS and ReviOS              | Modified versions to remove the charging requirement                            | ✅      |
-| Framework installers            | DirectX, C++ redistributables, XNA framework, OpenAL, OpenGL compatibility pack | ✅      |
+| Framework installers            | DirectX, C++ redistributable, XNA framework, OpenAL, OpenGL compatibility pack  | ✅      |
 | In-app updater                  | If an app update is available, you'll receive an in-app popup (can be disabled) | ✅      |
 
 ## Requirements
+
 - Android 7 and up (Only Android 8+ was tested).
 - Rooted device with Windows installed (Windows partition must be named **win**, **windows**, **mindows**, **Win**, **Windows**, or **Mindows**).
 - UEFI image (To boot Windows).
 
 ## Credits
+
 - [KuatoDev](https://github.com/KuatoDev) for making the original app
 - [Halal Beef](https://github.com/halal-beef) for updating the original app
 - [Bibarub](https://github.com/bibarub) for being involved in the original app and making the USB host mode script and StA
@@ -53,6 +57,7 @@ This project is in late stages of development. Most features have already been a
 - [Misha803](https://github.com/Misha803) for testing the app
 
 ## Supported languages & language credits
+
 - Arabic ([maydoxx1](https://github.com/maydoxx1), [Ali](https://github.com/gixousiyq) & rivas)
 - Azerbaijani (Aven1us)
 - Belarusian ([Gosha](https://github.com/Xhdsos) & [Victoria Freeman](https://github.com/Victoria-Freeman))

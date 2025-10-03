@@ -99,16 +99,16 @@ class MainActivity : AppCompatActivity() {
             if (0 == views.size - 1) {
                 finish()
             } else {
-                if (BuildConfig.DEBUG){
-                    if(views[views.size-1]===k!!.root) {
+                if (BuildConfig.DEBUG) {
+                    if (views[views.size - 1] === k!!.root) {
                         val textbox = findViewById<TextView>(R.id.codename)
-                        if (textbox.text.isNotBlank() && (textbox.text.toString() != Pref.codename_changer(
+                        if (textbox.text.isNotBlank() && (textbox.text.toString() != Pref.codenameChanger(
                                 false,
                                 context!!,
                                 ""
                             ))
                         ) {
-                            Pref.codename_changer(true, context!!, textbox.text.toString())
+                            Pref.codenameChanger(true, context!!, textbox.text.toString())
                         }
                     }
                 }
@@ -929,7 +929,7 @@ class MainActivity : AppCompatActivity() {
                     return@setYes
                 }
                 rootCommand("mkdir $winpath/Toolbox || true ")
-                arrayOf("/Toolbox", "/Users/Public/Desktop").forEach{ rootCommand("cp /sdcard/WOAHelper/Toolbox/QuickRotate_V3.0.exe $winpath$it") }
+                arrayOf("/Toolbox", "/Users/Public/Desktop").forEach { rootCommand("cp /sdcard/WOAHelper/Toolbox/QuickRotate_V3.0.exe $winpath$it") }
                 Dlg.setText(R.string.done)
                 Dlg.dismissButton()
             }
@@ -1185,7 +1185,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun dump() {
-        arrayOf(Pair.create("modemst1", "bootmodem_fs1"), Pair.create("modemst2", "bootmodem_fs2")).forEach{ rootCommand(String.format("dd if=/dev/block/by-name/%s of=$(find $winpath/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/%s", it.first, it.second)) }
+        arrayOf(Pair.create("modemst1", "bootmodem_fs1"), Pair.create("modemst2", "bootmodem_fs2")).forEach { rootCommand(String.format("dd if=/dev/block/by-name/%s of=$(find $winpath/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/%s", it.first, it.second)) }
     }
 
     private fun checkdbkpmodel() {
@@ -1196,7 +1196,7 @@ class MainActivity : AppCompatActivity() {
         rootCommand("mkdir /sdcard/UEFI")
         finduefi = "\"" + rootCommand(getString(R.string.uefiChk)) + "\""
         val found = finduefi!!.contains("img")
-        arrayOf(x!!.quickBoot, n!!.flashUefi).forEach{ it.isEnabled = found }
+        arrayOf(x!!.quickBoot, n!!.flashUefi).forEach { it.isEnabled = found }
         arrayOf(Pair.create(x!!.quickBoot, if (found) R.string.quickboot_title else R.string.uefi_not_found), Pair.create(n!!.flashUefi, if (found) R.string.flash_uefi_title else R.string.uefi_not_found)).forEach { it.first.setTitle(it.second) }
         arrayOf(Pair.create(x!!.quickBoot, if (found) getString(R.string.quickboot_subtitle_nabu) else getString(R.string.uefi_not_found_subtitle, device)), Pair.create(n!!.flashUefi, if (found) getString(R.string.flash_uefi_subtitle) else getString(R.string.uefi_not_found_subtitle, device))).forEach { it.first.setSubtitle(it.second) }
     }
@@ -1205,7 +1205,7 @@ class MainActivity : AppCompatActivity() {
         if (!win!!.isEmpty()) return
         Dlg.show(this, R.string.partition)
         Dlg.setCancelable(false)
-        Dlg.setYes(R.string.guide){openLink(guidelink)}
+        Dlg.setYes(R.string.guide) { openLink(guidelink) }
         arrayOf(x!!.mnt, x!!.toolbox, x!!.quickBoot, n!!.flashUefi).forEach { it.isEnabled = false }
     }
 
@@ -1314,7 +1314,7 @@ class MainActivity : AppCompatActivity() {
         private var dbkpmodel: String? = null
         private var boot: String? = null
         private var blur = 0
-        val rootShell: Shell = Shell.Builder.create().build()
+        private val rootShell: Shell = Shell.Builder.create().build()
 
         @JvmStatic
         fun isNetworkConnected(context: Context): Boolean {
@@ -1336,7 +1336,7 @@ class MainActivity : AppCompatActivity() {
             Dlg.setYes(R.string.yes) {
                 Dlg.dialogLoading()
                 Handler(Looper.getMainLooper()).postDelayed({
-                    Log.d("debug", winpath!!)
+                    if (BuildConfig.DEBUG) Log.d("debug", winpath!!)
                     if (isMounted()) {
                         unmount()
                         Dlg.setText(R.string.unmounted)
@@ -1353,7 +1353,7 @@ class MainActivity : AppCompatActivity() {
                     Dlg.hideIcon()
                     Dlg.setText(R.string.mountfail)
                     Dlg.setYes(R.string.chat) { openLink("https://t.me/woahelperchat") }
-					Dlg.setNo(R.string.dismiss) { Dlg.close() }
+                    Dlg.setNo(R.string.dismiss) { Dlg.close() }
                 }, 25L)
             }
         }
@@ -1422,7 +1422,7 @@ class MainActivity : AppCompatActivity() {
         internal fun mount() {
             if (null == win) win = getWin()
             rootCommand("mkdir $winpath || true")
-			rootCommand("cd ${context!!.filesDir}")
+            rootCommand("cd ${context!!.filesDir}")
             rootCommand("su -mm -c ./mount.ntfs $win $winpath")
             if (isMounted()) {
                 // Causes some issues idk. Better be here for later
@@ -1433,7 +1433,7 @@ class MainActivity : AppCompatActivity() {
             updateMountText()
         }
 
-        internal fun unmount() {
+        private fun unmount() {
             rootCommand("su -mm -c umount $winpath")
             rootCommand("rmdir $winpath")
             updateMountText()
@@ -1502,7 +1502,7 @@ class MainActivity : AppCompatActivity() {
 
         internal fun updateDevice() {
             rootCommand("pm uninstall id.kuato.woahelper")
-            device = Pref.codename_changer(false,context!!,Build.DEVICE)
+            device = Pref.codenameChanger(false, context!!, Build.DEVICE)
         }
 
         internal fun getBoot(): String {
@@ -1511,10 +1511,10 @@ class MainActivity : AppCompatActivity() {
             return rootCommand("realpath $partition")
         }
 
-        fun rootCommand(command: String): String{
+        fun rootCommand(command: String): String {
             if (BuildConfig.DEBUG)
                 println(command)
-            return ShellUtils.fastCmd(rootShell,command)
+            return ShellUtils.fastCmd(rootShell, command)
         }
 
         @JvmStatic

@@ -62,7 +62,7 @@
     <string name="autoflash_question">Copy boot.img auto-flasher tool to C:\\Toolbox?</string>
     <string name="atlasos_question">Download and move AtlasOS or ReviOS playbook to C:\\Toolbox?</string>
     <string name="defender_question">Copy Edge \/ Defender remover scripts to C:\\Toolbox?</string>
-    <string name="setup_question">Download and move C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, and XNA framework installers to C:\\Toolbox?\n(this may take some time)</string>
+    <string name="setup_question">Download and move C++ Redistributable, DirectX, OpenGL, OpenAL, PhysX, and XNA framework installers to C:\\Toolbox?\n(this may take some time)</string>
     <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
     <string name="tablet_question">Copy OptimizedTaskbarControl tool to C:\\Toolbox?</string>
     <string name="devcfg_question">Flash OOS11 devcfg?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>

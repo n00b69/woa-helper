@@ -4,7 +4,6 @@
     android:id="@+id/mainlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorOnSurfaceInverse"
     tools:context=".main.MainActivity">
 
     <LinearLayout
@@ -50,9 +49,8 @@
                         android:layout_width="@dimen/_115sdp"
                         android:layout_height="@dimen/_138sdp"
                         android:layout_gravity="center"
-                        android:src="@drawable/unknown"
-                        android:contentDescription="TODO"
-                        android:scaleType="fitXY" />
+                        android:scaleType="fitXY"
+                        android:src="@drawable/unknown" />
 
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/cv_info"
@@ -206,48 +204,48 @@
                 android:paddingBottom="6dp">
 
                 <com.woa.helper.main.Button
-                    style="@style/button"
                     android:id="@+id/backup"
+                    style="@style/button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="4dp"
                     android:layout_weight="1"
-                    app:title="@string/backup_boot_title"
-                    app:subtitle="@string/backup_boot_subtitle"
                     app:image="@drawable/ic_disk"
-                    android:layout_margin="4dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    app:subtitle="@string/backup_boot_subtitle"
+                    app:title="@string/backup_boot_title" />
 
                 <com.woa.helper.main.Button
-                    style="@style/button"
                     android:id="@+id/mnt"
+                    style="@style/button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="4dp"
                     android:layout_weight="1"
-                    app:title="@string/mnt_title"
-                    app:subtitle="@string/mnt_subtitle"
                     app:image="@drawable/mnt"
-                    android:layout_margin="4dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    app:subtitle="@string/mnt_subtitle"
+                    app:title="@string/mnt_title" />
 
                 <com.woa.helper.main.Button
-                    style="@style/button"
                     android:id="@+id/toolbox"
-                    android:layout_weight="1"
-                    app:title="@string/toolbox_title"
-                    app:subtitle="@string/toolbox_subtitle"
-                    app:image="@drawable/toolbox"
-                    android:layout_margin="4dp"
+                    style="@style/button"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    app:image="@drawable/toolbox"
+                    app:subtitle="@string/toolbox_subtitle"
+                    app:title="@string/toolbox_title" />
 
                 <com.woa.helper.main.Button
-                    style="@style/button"
                     android:id="@+id/quick_boot"
-                    android:layout_weight="1"
-                    app:title="@string/quickboot_title"
-                    app:subtitle="@string/quickboot_subtitle"
-                    app:image="@drawable/ic_launcher_foreground"
-                    android:layout_margin="4dp"
+                    style="@style/button"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    app:image="@drawable/ic_launcher_foreground"
+                    app:subtitle="@string/quickboot_subtitle"
+                    app:title="@string/quickboot_title" />
             </LinearLayout>
         </LinearLayout>
 
@@ -257,8 +255,8 @@
         android:id="@+id/blur"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:realtimeBlurRadius="10dp"
         android:visibility="gone"
+        app:realtimeBlurRadius="10dp"
         app:realtimeOverlayColor="#80000000" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
