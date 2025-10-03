@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         rootCommand("cd $filesDir")
-        Pref.setFilesDir(this!!, filesDir.toString())
+        Pref.setFilesDir(this, filesDir.toString())
 
         onBackPressedDispatcher.addCallback(this) {
             if (0 == views.size - 1) {
@@ -147,8 +147,7 @@ class MainActivity : AppCompatActivity() {
             locales.add(i!!.lowercase(Locale.getDefault()))
             val locale = checkNotNull(LocaleListCompat.forLanguageTags(i)[0])
             val country = locale.getDisplayCountry(locale)
-            val c = !country.isEmpty()
-            val lang = locale.getDisplayLanguage(locale) + (if (c) " (" else "") + country + (if (c) ")" else "")
+            val lang = locale.getDisplayLanguage(locale) + (if (!country.isEmpty()) " ($country)" else "")
             languages.add(lang)
         }
         val adapter = ArrayAdapter(
@@ -821,9 +820,9 @@ class MainActivity : AppCompatActivity() {
                     return@setYes
                 }
                 rootCommand("mkdir -p /sdcard/WOAHelper/Toolbox || true")
-                arrayOf("WorksOnWoa.url", "TestedSoftware.url", "ARMSoftware.url", "ARMRepo.url").forEach( { rootCommand("cp $filesDir/$it /sdcard/WOAHelper/Toolbox") })
+                arrayOf("WorksOnWoa.url", "TestedSoftware.url", "ARMSoftware.url", "ARMRepo.url").forEach { rootCommand("cp $filesDir/$it /sdcard/WOAHelper/Toolbox") }
                 rootCommand("mkdir $winpath/Toolbox || true ")
-                arrayOf("WorksOnWoa.url", "TestedSoftware.url", "ARMSoftware.url", "ARMRepo.url").forEach( { rootCommand("cp $filesDir/$it $winpath/Toolbox") })
+                arrayOf("WorksOnWoa.url", "TestedSoftware.url", "ARMSoftware.url", "ARMRepo.url").forEach { rootCommand("cp $filesDir/$it $winpath/Toolbox") }
                 Dlg.setText(R.string.done)
                 Dlg.dismissButton()
             }
@@ -930,7 +929,7 @@ class MainActivity : AppCompatActivity() {
                     return@setYes
                 }
                 rootCommand("mkdir $winpath/Toolbox || true ")
-                arrayOf("/Toolbox", "/Users/Public/Desktop").forEach({ rootCommand("cp /sdcard/WOAHelper/Toolbox/QuickRotate_V3.0.exe $winpath$it") })
+                arrayOf("/Toolbox", "/Users/Public/Desktop").forEach{ rootCommand("cp /sdcard/WOAHelper/Toolbox/QuickRotate_V3.0.exe $winpath$it") }
                 Dlg.setText(R.string.done)
                 Dlg.dismissButton()
             }
@@ -1066,10 +1065,9 @@ class MainActivity : AppCompatActivity() {
             k!!.toolbarlayout.settings.visibility = View.GONE
             val langSpinner = findViewById<AppCompatSpinner>(R.id.languages)
             langSpinner.adapter = adapter
-            var l = AppCompatDelegate.getApplicationLocales()[0]
+            val l = AppCompatDelegate.getApplicationLocales()[0]
             if (null != l) {
-                l = Locale(l.toLanguageTag())
-                val index = locales.indexOf(l.toString())
+                val index = locales.indexOf(l.toLanguageTag().lowercase())
                 langSpinner.setSelection(index)
             }
             langSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -1187,7 +1185,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun dump() {
-        arrayOf(Pair.create("modemst1", "bootmodem_fs1"), Pair.create("modemst2", "bootmodem_fs2")).forEach( { rootCommand(String.format("dd if=/dev/block/by-name/%s of=$(find $winpath/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/%s", it.first, it.second)) })
+        arrayOf(Pair.create("modemst1", "bootmodem_fs1"), Pair.create("modemst2", "bootmodem_fs2")).forEach{ rootCommand(String.format("dd if=/dev/block/by-name/%s of=$(find $winpath/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/%s", it.first, it.second)) }
     }
 
     private fun checkdbkpmodel() {
@@ -1198,7 +1196,7 @@ class MainActivity : AppCompatActivity() {
         rootCommand("mkdir /sdcard/UEFI")
         finduefi = "\"" + rootCommand(getString(R.string.uefiChk)) + "\""
         val found = finduefi!!.contains("img")
-        arrayOf(x!!.quickBoot, n!!.flashUefi).forEach( { it.isEnabled = found })
+        arrayOf(x!!.quickBoot, n!!.flashUefi).forEach{ it.isEnabled = found }
         arrayOf(Pair.create(x!!.quickBoot, if (found) R.string.quickboot_title else R.string.uefi_not_found), Pair.create(n!!.flashUefi, if (found) R.string.flash_uefi_title else R.string.uefi_not_found)).forEach { it.first.setTitle(it.second) }
         arrayOf(Pair.create(x!!.quickBoot, if (found) getString(R.string.quickboot_subtitle_nabu) else getString(R.string.uefi_not_found_subtitle, device)), Pair.create(n!!.flashUefi, if (found) getString(R.string.flash_uefi_subtitle) else getString(R.string.uefi_not_found_subtitle, device))).forEach { it.first.setSubtitle(it.second) }
     }
@@ -1207,7 +1205,7 @@ class MainActivity : AppCompatActivity() {
         if (!win!!.isEmpty()) return
         Dlg.show(this, R.string.partition)
         Dlg.setCancelable(false)
-        Dlg.setYes(R.string.guide,{openLink(guidelink)})
+        Dlg.setYes(R.string.guide){openLink(guidelink)}
         arrayOf(x!!.mnt, x!!.toolbox, x!!.quickBoot, n!!.flashUefi).forEach { it.isEnabled = false }
     }
 
@@ -1310,7 +1308,6 @@ class MainActivity : AppCompatActivity() {
         private var mounted: String? = null
         private var win: String? = null
         private var winpath: String? = null
-        private var panel: String? = null
         private var finduefi: String? = null
         private var device: String? = null
         private var model: String? = null
