@@ -212,7 +212,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             "joan" -> {
-                guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md"
+                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://t.me/lgedevices"
                 x!!.DeviceImage.setImageResource(R.drawable.unknown)
             }
@@ -297,7 +297,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             "pipa" -> {
-                guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md"
+                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://t.me/xiaomi_pipa"
                 x!!.DeviceImage.setImageResource(R.drawable.pipa)
                 arrayOf(Pair.create(x!!.tvPanel, View.VISIBLE), Pair.create(n!!.dbkp, View.VISIBLE), Pair.create(n!!.flashUefi, View.GONE)).forEach {
@@ -335,13 +335,13 @@ class MainActivity : AppCompatActivity() {
             }
 
             "ingres" -> {
-                guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md"
+                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://discord.gg/Dx2QgMx7Sv"
                 x!!.DeviceImage.setImageResource(R.drawable.ingres)
             }
 
             "vili", "lavender" -> {
-                guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md"
+                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://discord.gg/Dx2QgMx7Sv"
                 x!!.DeviceImage.setImageResource(R.drawable.unknown)
             }
@@ -392,20 +392,20 @@ class MainActivity : AppCompatActivity() {
 
             "guacamoleb", "hotdogb", "OnePlus7T", "OnePlus7" -> {
                 guidelink = "https://project-aloha.github.io/"
-                grouplink = "https://t.me/oneplus7woa"
+                grouplink = "https://t.me/project_aloha_issues"
                 x!!.DeviceImage.setImageResource(R.drawable.unknown)
                 n!!.dumpModem.visibility = View.VISIBLE
             }
 
             "OnePlus7TPro5G", "OnePlus7TProNR", "hotdogg" -> {
                 guidelink = "https://project-aloha.github.io/"
-                grouplink = "https://t.me/oneplus7woa"
+                grouplink = "https://t.me/project_aloha_issues"
                 x!!.DeviceImage.setImageResource(R.drawable.hotdog)
             }
 
             "OP7ProNRSpr", "OnePlus7ProNR", "guacamoleg", "guacamoles" -> {
                 guidelink = "https://project-aloha.github.io/"
-                grouplink = "https://t.me/oneplus7woa"
+                grouplink = "https://t.me/project_aloha_issues"
                 x!!.DeviceImage.setImageResource(R.drawable.guacamole)
             }
 
@@ -422,13 +422,13 @@ class MainActivity : AppCompatActivity() {
             }
 
             "dm3q", "dm3" -> {
-                guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md"
+                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://t.me/dumanthecat"
                 x!!.DeviceImage.setImageResource(R.drawable.dm3q)
             }
 
             "e3q" -> {
-                guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md"
+                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://t.me/biskupmuf"
                 x!!.DeviceImage.setImageResource(R.drawable.e3q)
             }
@@ -448,7 +448,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             "star2qlte", "star2qltechn", "r3q" -> {
-                guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md"
+                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://discord.gg/Dx2QgMx7Sv"
                 x!!.DeviceImage.setImageResource(R.drawable.unknown)
             }
@@ -461,19 +461,19 @@ class MainActivity : AppCompatActivity() {
             }
 
             "venus" -> {
-                guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md"
+                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://discord.gg/Dx2QgMx7Sv"
                 x!!.DeviceImage.setImageResource(R.drawable.venus)
             }
 
             "alioth" -> {
-                guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md"
+                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://discord.gg/Dx2QgMx7Sv"
                 x!!.DeviceImage.setImageResource(R.drawable.alioth)
             }
 
             "davinci" -> {
-                guidelink = "https://github.com/zxcwsurx/woa-davinci"
+                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://t.me/woa_davinci"
                 x!!.DeviceImage.setImageResource(R.drawable.raphael)
             }
@@ -491,73 +491,73 @@ class MainActivity : AppCompatActivity() {
             }
 
             "xpeng" -> {
-                guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md"
+                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://t.me/woahelperchat"
                 x!!.DeviceImage.setImageResource(R.drawable.xpeng)
             }
 
             "RMX2061" -> {
-                guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md"
-                grouplink = "https://t.me/realme6PROwindowsARM64"
+                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
+                grouplink = "https://discord.gg/Dx2QgMx7Sv"
                 x!!.DeviceImage.setImageResource(R.drawable.rmx2061)
             }
 
             "RMX2170" -> {
-                guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md"
-                grouplink = "https://t.me/realme6PROwindowsARM64"
+                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
+                grouplink = "https://discord.gg/Dx2QgMx7Sv"
                 x!!.DeviceImage.setImageResource(R.drawable.rmx2170)
             }
 
             "cmi" -> {
-                guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md"
+                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://t.me/dumanthecat"
                 x!!.DeviceImage.setImageResource(R.drawable.cmi)
             }
 
             "houji" -> {
-                guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md"
+                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://t.me/dumanthecat"
                 x!!.DeviceImage.setImageResource(R.drawable.houji)
             }
 
             "meizu20pro", "meizu20Pro" -> {
-                guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md"
+                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://t.me/dumanthecat"
                 x!!.DeviceImage.setImageResource(R.drawable.meizu20pro)
             }
 
             "husky" -> {
-                guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md"
+                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://t.me/dumanthecat"
                 x!!.DeviceImage.setImageResource(R.drawable.husky)
             }
 
             "redfin", "herolte", "crownlte" -> {
-                guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md"
+                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://t.me/dumanthecat"
                 x!!.DeviceImage.setImageResource(R.drawable.redfin)
             }
 
             "haotian" -> {
-                guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md"
+                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://t.me/dumanthecat"
                 x!!.DeviceImage.setImageResource(R.drawable.haotian)
             }
 
             "Nord", "nord" -> {
-                guidelink = "https://github.com/Robotix22/WoA-Guides/blob/main/Mu-Qcom/README.md"
+                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://t.me/dikeckaan"
                 x!!.DeviceImage.setImageResource(R.drawable.nord)
             }
 
             "nx729j", "NX729J", "NX729J-UN" -> {
-                guidelink = "https://github.com/Project-Silicium/Mu-Silicium"
+                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://t.me/woahelperchat"
                 x!!.DeviceImage.setImageResource(R.drawable.nx729j)
             }
 
             "brepdugl" -> {
-                guidelink = "https://github.com/Project-Silicium/Mu-Silicium"
+                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://discord.gg/Dx2QgMx7Sv"
                 x!!.DeviceImage.setImageResource(R.drawable.unknown)
             }
