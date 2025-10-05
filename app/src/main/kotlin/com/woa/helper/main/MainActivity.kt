@@ -126,7 +126,7 @@ class MainActivity : AppCompatActivity() {
         z = ScriptsBinding.inflate(layoutInflater)
 
         context = this
-
+        download.permission(this)
         setContentView(x!!.root)
 
         views.clear()
@@ -777,8 +777,8 @@ class MainActivity : AppCompatActivity() {
                     }
                     val finddevcfg = rootCommand("find $filesDir -maxdepth 1 -name OOS11_devcfg_*")
                     if (finddevcfg.isEmpty()) {
-                        rootCommand("echo \"$(find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_$devcfgDevice.img -O /sdcard/WOAHelper/Backups/OOS11_devcfg_$devcfgDevice.img\" | sh")
-                        rootCommand("echo \"$(find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_$devcfgDevice.img -O /sdcard/WOAHelper/Backups/OOS12_devcfg_$devcfgDevice.img\" | sh")
+                        download.file("https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_$devcfgDevice.img","/sdcard/WOAHelper/Backups/OOS11_devcfg_$devcfgDevice.img")
+                        download.file("https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_$devcfgDevice.img","/sdcard/WOAHelper/Backups/OOS12_devcfg_$devcfgDevice.img")
                         rootCommand("cp /sdcard/WOAHelper/Backups/OOS11_devcfg_$devcfgDevice.img $filesDir")
                         rootCommand("cp /sdcard/WOAHelper/Backups/OOS12_devcfg_$devcfgDevice.img $filesDir")
                         rootCommand("dd bs=8M if=$filesDir/OOS11_devcfg_$devcfgDevice.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)")
@@ -833,7 +833,7 @@ class MainActivity : AppCompatActivity() {
                 nointernet()
                 return@setOnClickListener
             }
-            Dlg.show(this, R.string.atlasos_question, R.drawable.ic_ar_mainactivity)
+            Dlg.show(this, R.string.atlasos_question, R.drawable.ic_ar)
             Dlg.dismissButton()
             Dlg.setNo(R.string.revios) {
                 Dlg.dialogLoading()
@@ -841,9 +841,9 @@ class MainActivity : AppCompatActivity() {
                 Dlg.setIcon(R.drawable.ic_download)
                 Thread {
                     rootCommand("mkdir -p /sdcard/WOAHelper/Toolbox || true")
-                    rootCommand("echo \"$(find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/ReviOS/ReviPlaybook.apbx -O /sdcard/WOAHelper/Toolbox/ReviPlaybook.apbx\" | sh")
+                    download.file("https://github.com/n00b69/modified-playbooks/releases/download/ReviOS/ReviPlaybook.apbx","/sdcard/WOAHelper/Toolbox/ReviPlaybook.apbx")
                     Dlg.setBar(50)
-                    rootCommand("echo \"$(find /data/adb -name busybox) wget https://download.ameliorated.io/AME%20Wizard%20Beta.zip -O /sdcard/WOAHelper/Toolbox/AMEWizardBeta.zip\" | sh")
+                    download.file("https://download.ameliorated.io/AME%20Wizard%20Beta.zip","/sdcard/WOAHelper/Toolbox/AMEWizardBeta.zip")
                     Dlg.setBar(80)
                     runOnUiThread {
                         mount()
@@ -852,7 +852,7 @@ class MainActivity : AppCompatActivity() {
                             mountfail()
                             return@runOnUiThread
                         }
-                        Dlg.setIcon(R.drawable.ic_ar_mainactivity)
+                        Dlg.setIcon(R.drawable.ic_ar)
                         Dlg.hideBar()
                         rootCommand("mkdir $winpath/Toolbox || true ")
                         rootCommand("cp /sdcard/WOAHelper/Toolbox/ReviPlaybook.apbx $winpath/Toolbox/ReviPlaybook.apbx")
@@ -868,11 +868,11 @@ class MainActivity : AppCompatActivity() {
                 Dlg.setIcon(R.drawable.ic_download)
                 Thread {
                     rootCommand("mkdir -p /sdcard/WOAHelper/Toolbox || true")
-                    rootCommand("echo \"$(find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook.apbx -O /sdcard/WOAHelper/Toolbox/AtlasPlaybook.apbx\" | sh")
+                    download.file("https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook.apbx", "/sdcard/WOAHelper/Toolbox/AtlasPlaybook.apbx")
                     Dlg.setBar(35)
-                    rootCommand("echo \"$(find /data/adb -name busybox) wget https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook_v0.4.0_23H2Only.apbx -O /sdcard/WOAHelper/Toolbox/AtlasPlaybook_v0.4.0_23H2Only.apbx\" | sh")
+                    download.file("https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook_v0.4.0_23H2Only.apbx","/sdcard/WOAHelper/Toolbox/AtlasPlaybook_v0.4.0_23H2Only.apbx")
                     Dlg.setBar(60)
-                    rootCommand("echo \"$(find /data/adb -name busybox) wget https://download.ameliorated.io/AME%20Wizard%20Beta.zip -O /sdcard/WOAHelper/Toolbox/AMEWizardBeta.zip\" | sh")
+                    download.file("https://download.ameliorated.io/AME%20Wizard%20Beta.zip","/sdcard/WOAHelper/Toolbox/AMEWizardBeta.zip")
                     Dlg.setBar(80)
                     runOnUiThread {
                         mount()
@@ -881,7 +881,7 @@ class MainActivity : AppCompatActivity() {
                             mountfail()
                             return@runOnUiThread
                         }
-                        Dlg.setIcon(R.drawable.ic_ar_mainactivity)
+                        Dlg.setIcon(R.drawable.ic_ar)
                         Dlg.hideBar()
                         rootCommand("mkdir $winpath/Toolbox || true ")
                         rootCommand("cp /sdcard/WOAHelper/Toolbox/AtlasPlaybook.apbx $winpath/Toolbox/AtlasPlaybook_v0.4.1.apbx")
@@ -990,7 +990,7 @@ class MainActivity : AppCompatActivity() {
                         "dxwebsetup.exe",
                         "oalinst.exe"
                     ).forEach {
-                        rootCommand("echo \"$(find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/$it -O /sdcard/WOAHelper/Frameworks/$it\" |  sh")
+                        download.file("https://github.com/n00b69/woasetup/releases/download/Installers/$it","/sdcard/WOAHelper/Frameworks/$it")
                         Dlg.setBar(Dlg.bar!!.progress + 5)
                     }
                     runOnUiThread {
@@ -1022,7 +1022,7 @@ class MainActivity : AppCompatActivity() {
                         nointernet()
                         return@setYes
                     }
-                    rootCommand("echo \"$(find /data/adb -name busybox) wget https://github.com/n00b69/woasetup/releases/download/Installers/DefenderRemover.exe -O /sdcard/WOAHelper/Toolbox/DefenderRemover.exe\" | sh")
+                    download.file("https://github.com/n00b69/woasetup/releases/download/Installers/DefenderRemover.exe","/sdcard/WOAHelper/Toolbox/DefenderRemover.exe")
                 }
                 mount()
                 if (!isMounted()) {
@@ -1125,19 +1125,20 @@ class MainActivity : AppCompatActivity() {
         }
 
         x!!.cvInfo.setOnClickListener { a: View? ->
-            if (BuildConfig.DEBUG) return@setOnClickListener
-            if (!isNetworkConnected(this)) {
+            //if (BuildConfig.DEBUG) return@setOnClickListener
+            Dlg.show(this, R.string.please_wait)
+            val version = download.text("https://raw.githubusercontent.com/n00b69/woa-helper-update/main/debug/README.md")
+            val changelog = download.text("https://raw.githubusercontent.com/n00b69/woa-helper-update/main/debug/changelog.md")
+            if (version.isEmpty()) {
                 nointernet()
                 return@setOnClickListener
             }
-            Dlg.show(this, R.string.please_wait)
-            val version = rootCommand("echo \"$(find /data/adb -name busybox) wget -q -O - https://raw.githubusercontent.com/n00b69/woa-helper-update/main/README.md\" | sh")
             if (BuildConfig.VERSION_NAME == version) {
                 Dlg.setText(getString(R.string.no) + " " + getString(R.string.update1))
                 Dlg.dismissButton()
                 return@setOnClickListener
             }
-            Dlg.setText(R.string.update1)
+            Dlg.setText(getString(R.string.update1)+": "+version+"\n"+changelog)
             Dlg.setNo(R.string.later) { Dlg.close() }
             Dlg.setYes(R.string.update) {
                 Dlg.clearButtons()
@@ -1211,8 +1212,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkupdate() {
         if (Pref.getAppUpdate(this) || !isNetworkConnected(this)) return
-        val version = rootCommand("timeout 10s $(find /data/adb -name busybox | head -1) wget -q -O - https://raw.githubusercontent.com/n00b69/woa-helper-update/main/README.md")
-        if (BuildConfig.VERSION_NAME == version) return
+        val version = download.text("https://raw.githubusercontent.com/n00b69/woa-helper-update/main/README.md")
+        if (BuildConfig.VERSION_NAME == version || version.isEmpty()) return
 
         Dlg.show(this, R.string.update1)
         Dlg.setNo(R.string.later) { Dlg.close() }
@@ -1230,7 +1231,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun update() {
         Thread {
-            rootCommand("echo \"$(find /data/adb -name busybox) wget https://raw.githubusercontent.com/n00b69/woa-helper-update/main/woahelper.apk -O $filesDir/woahelper.apk\" | sh")
+            download.file("https://raw.githubusercontent.com/n00b69/woa-helper-update/main/woahelper.apk","$filesDir/woahelper.apk")
             rootCommand("pm install $filesDir/woahelper.apk && rm $filesDir/woahelper.apk")
         }.start()
     }
@@ -1270,10 +1271,10 @@ class MainActivity : AppCompatActivity() {
                 rootCommand("mv /sdcard/boot.img /sdcard/dbkp/boot.img")
                 rootCommand("cp /sdcard/dbkp/boot.img /sdcard/WOAHelper/Backups/original-boot.img")
                 rootCommand("cp $filesDir/dbkp8150.cfg /sdcard/dbkp/dbkp.cfg")
-                rootCommand("$(find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/DBKP/dbkp -O /sdcard/dbkp/dbkp")
+                download.file("https://github.com/n00b69/woa-op7/releases/download/DBKP/dbkp","/sdcard/dbkp/dbkp")
                 rootCommand("cp /sdcard/dbkp/dbkp $filesDir")
                 rootCommand("chmod 777 $filesDir/dbkp")
-                rootCommand("$(find /data/adb -name busybox) wget $link -O /sdcard/dbkp/file.fd")
+                download.file(link,"/sdcard/dbkp/file.fd")
                 rootCommand("cd /sdcard/dbkp")
                 rootCommand("$(find /data/adb -name magiskboot) unpack boot.img")
                 rootCommand("$filesDir/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/file.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp.cfg /sdcard/dbkp/dbkp.bin")
@@ -1395,8 +1396,8 @@ class MainActivity : AppCompatActivity() {
                         }
                         val finddevcfg = rootCommand("find ${context!!.filesDir} -maxdepth 1 -name OOS11_devcfg_*")
                         if (finddevcfg.isEmpty()) {
-                            rootCommand("echo \"$(find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_$devcfgDevice.img -O /sdcard/OOS11_devcfg_$devcfgDevice.img\" | sh")
-                            rootCommand("echo \"$(find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_$devcfgDevice.img -O /sdcard/OOS12_devcfg_$devcfgDevice.img\" | sh")
+                            download.file("https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_$devcfgDevice.img","/sdcard/OOS11_devcfg_$devcfgDevice.img")
+                            download.file("https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_$devcfgDevice.img","/sdcard/OOS12_devcfg_$devcfgDevice.img")
                             rootCommand("cp /sdcard/OOS11_devcfg_$devcfgDevice.img ${context!!.filesDir}")
                             rootCommand("cp /sdcard/OOS12_devcfg_$devcfgDevice.img ${context!!.filesDir}")
                             rootCommand("dd bs=8M if=${context!!.filesDir}/OOS11_devcfg_$devcfgDevice.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)")

@@ -56,7 +56,7 @@
                         style="@style/button"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_60sdp"
-                        app:image="@drawable/adrod"
+                        app:image="@drawable/android"
                         app:subtitle="@string/sta_subtitle"
                         app:title="@string/sta_title" />
 
