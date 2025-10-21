@@ -1125,7 +1125,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         x!!.cvInfo.setOnClickListener { a: View? ->
-            //if (BuildConfig.DEBUG) return@setOnClickListener
+            if (BuildConfig.DEBUG) return@setOnClickListener
             Dlg.show(this, R.string.please_wait)
             val version = download.text("https://raw.githubusercontent.com/n00b69/woa-helper-update/main/debug/README.md")
             val changelog = download.text("https://raw.githubusercontent.com/n00b69/woa-helper-update/main/debug/changelog.md")
