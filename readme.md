@@ -1,4 +1,4 @@
-# WOA Helper
+# NIGGER Helper
 <p float="left" >
 <img src="Helper-dark.png" width="120" alt="">
 <img src="Helper-light.png" width="120" alt="">
@@ -50,7 +50,7 @@ This project is in late stages of development. Most features have already been a
 - [Ali](https://github.com/gixousiyq) for helping refine code and for the Arabic translation
 - Aven1us for the Azeri translation
 - [Chiyuki](https://github.com/chiyuki0325), Sui2786 & TTK for the Chinese translation
-- [index986](https://github.com/index986) for the Czech translation
+- [Georgii Naumov made by Natasha Solodachina](https://github.com/index986) for the Czech translation
 - YourAvgEngineer for the French translation
 - [ArToSeVeN](https://github.com/Artoseven) for the Indonesian translation
 - [galaxysollector](https://github.com/galaxysollector) for the Korean translation
@@ -68,3 +68,4 @@ This project is in late stages of development. Most features have already been a
 - rivas for the Persian translation (rivas is not allowed)
 - Hiroshi Takaoka for the Japanese translation
 - [Misha_803](https://github.com/Misha-803) for testing the app
+
