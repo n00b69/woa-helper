@@ -197,12 +197,14 @@ class MainActivity : AppCompatActivity() {
                 guidelink = "https://github.com/n00b69/woa-mh2lm"
                 grouplink = "https://t.me/lgedevices"
                 x!!.DeviceImage.setImageResource(R.drawable.mh2lm)
+                x!!.tvPanel.visibility = View.VISIBLE
             }
 
             "mh2lm5g", "mh2lm5g_lao_com" -> {
                 guidelink = "https://github.com/n00b69/woa-mh2lm5g"
                 grouplink = "https://t.me/lgedevices"
                 x!!.DeviceImage.setImageResource(R.drawable.mh2lm)
+                x!!.tvPanel.visibility = View.VISIBLE
             }
 
             "judyln", "judyp", "judypn" -> {
@@ -596,6 +598,12 @@ class MainActivity : AppCompatActivity() {
                     || panel.contains("ea8076_global")
                     || panel.contains("S6E3FC3")
                     || panel.contains("AMS646YD01") -> "Samsung"
+
+            panel.contains("tianmamd_dv2") -> "Tianma DV2"
+
+            panel.contains("tianmamd_pp1") -> "Tianma PP1"
+
+            panel.contains("tianmamd_pv") -> "Tianma PV"
 
             else -> rootCommand("cat /proc/cmdline | tr ' :=' '\n'|grep dsi|tr ' _' '\n'|tail -3|head -1 ")
         }
