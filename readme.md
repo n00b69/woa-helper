@@ -41,8 +41,10 @@ This project is in late stages of development. Most features have already been a
 ## Requirements
 
 - Android 7 and up (Only Android 8+ was tested).
-- Rooted device with Windows installed (Windows partition must be named **win**, **windows**, **mindows**, **Win**, **Windows**, or **Mindows**).
+- Rooted* device with Windows installed (Windows partition must be named **win**, **windows**, **mindows**, **Win**, **Windows**, or **Mindows**).
 - UEFI image (To boot Windows).
+
+*: Your device must be rooted with Magisk v28.1 or higher to ensure the most functionality. If you are using KSU and mount does not work, change kernels or try using Magisk. If you are using KSU-Next; suffer.
 
 ## Credits
 
@@ -83,3 +85,4 @@ This project is in late stages of development. Most features have already been a
 - Turkish (sercancamli, [ErdilS](https://github.com/erdilS) & [Kaan Dikeç](https://github.com/dikeckaan))
 - Ukrainian ([Ost268](https://github.com/Ost268) & [Ilya114](https://github.com/Ilya114))
 - Vietnamese (HieusayHi & bobert10)
+
