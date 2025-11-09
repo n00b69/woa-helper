@@ -40,11 +40,12 @@ This project is in late stages of development. Most features have already been a
 
 ## Requirements
 
-- Android 7 and up (Only Android 8+ was tested).
-- Rooted* device with Windows installed (Windows partition must be named **win**, **windows**, **mindows**, **Win**, **Windows**, or **Mindows**).
+- Android **7**¹ and up (Only Android 8+ was tested).
+- Rooted² device with Windows installed (Windows partition must be named **win**, **windows**, **mindows**, **Win**, **Windows**, or **Mindows**).
 - UEFI image (To boot Windows).
 
-*: Your device must be rooted with Magisk v28.1 or higher to ensure the most functionality. If you are using KSU and mount does not work, change kernels or try using Magisk. If you are using KSU-Next; suffer.
+¹: App features are likely limited to just Quickbooting & backing up boot.img on Android versions lower than 12 or 11.
+²: Your device must be rooted with Magisk v28.1 or higher to ensure the most functionality. If you are using KSU and mount does not work, change kernels or try using Magisk. If you are using KSU-Next; suffer.
 
 ## Credits
 

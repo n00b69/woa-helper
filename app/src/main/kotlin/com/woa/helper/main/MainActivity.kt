@@ -1132,8 +1132,8 @@ class MainActivity : AppCompatActivity() {
         x!!.cvInfo.setOnClickListener { a: View? ->
             if (BuildConfig.DEBUG) return@setOnClickListener
             Dlg.show(this, R.string.please_wait)
-            val version = download.text("https://raw.githubusercontent.com/n00b69/woa-helper-update/main/debug/README.md")
-            val changelog = download.text("https://raw.githubusercontent.com/n00b69/woa-helper-update/main/debug/changelog.md")
+            val version = download.text("https://raw.githubusercontent.com/n00b69/woa-helper-update/main/README.md")
+            val changelog = download.text("https://raw.githubusercontent.com/n00b69/woa-helper-update/main/changelog.md")
             if (version.isEmpty()) {
                 nointernet()
                 return@setOnClickListener
