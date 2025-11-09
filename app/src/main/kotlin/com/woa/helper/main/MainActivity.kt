@@ -1521,7 +1521,10 @@ class MainActivity : AppCompatActivity() {
         fun rootCommand(command: String): String {
             if (BuildConfig.DEBUG)
                 println(command)
-            return ShellUtils.fastCmd(rootShell, command)
+            val output = ShellUtils.fastCmd(rootShell, command)
+            if (BuildConfig.DEBUG)
+                println(output)
+            return output
         }
 
         @JvmStatic
