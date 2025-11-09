@@ -49,6 +49,7 @@ import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import kotlin.system.exitProcess
 
 @SuppressLint("StaticFieldLeak")
 class MainActivity : AppCompatActivity() {
@@ -98,7 +99,8 @@ class MainActivity : AppCompatActivity() {
 
         onBackPressedDispatcher.addCallback(this) {
             if (0 == views.size - 1) {
-                finish()
+                moveTaskToBack(true)
+                exitProcess(0)
             } else {
                 if (BuildConfig.DEBUG) {
                     if (views[views.size - 1] === k!!.root) {
@@ -684,7 +686,7 @@ class MainActivity : AppCompatActivity() {
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
                 rootCommand("mkdir -p /sdcard/WOAHelper/sta || true")
-                arrayOf("sta.exe", "sdd.exe", "sdd.conf", "boot_img_auto-flasher_V1.2.exe").forEach { rootCommand("cp $filesDir/$it /sdcard/WOAHelper/sta/") }
+                arrayOf("sta.exe", "sdd.exe", "sdd.conf", "boot.img_auto-flasher_V1.2.exe").forEach { rootCommand("cp $filesDir/$it /sdcard/WOAHelper/sta/") }
                 mount()
                 if (!isMounted()) {
                     Dlg.close()
@@ -811,7 +813,7 @@ class MainActivity : AppCompatActivity() {
                         }
                         Dlg.setText(R.string.devcfg)
                         Dlg.setDismiss(R.string.dismiss) { Dlg.close() }
-                        Dlg.setYes(R.string.reboot) { rootCommand("svc power reboot") }
+                        Dlg.setYes(R.string.reboot) { rootCommand("/system/bin/svc power reboot") }
                     }
                 }.start()
             }
@@ -1029,7 +1031,10 @@ class MainActivity : AppCompatActivity() {
                         return@setYes
                     }
                     rootCommand("wget https://github.com/n00b69/woasetup/releases/download/Installers/DefenderRemover.exe -O /sdcard/WOAHelper/Toolbox/DefenderRemover.exe")
+                    rootCommand("cp /sdcard/WOAHelper/Toolbox/DefenderRemover.exe $filesDir/DefenderRemover.exe")
                 }
+                else
+                    rootCommand("cp $filesDir/DefenderRemover.exe /sdcard/WOAHelper/Toolbox/DefenderRemover.exe")
                 mount()
                 if (!isMounted()) {
                     Dlg.close()
@@ -1038,7 +1043,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 rootCommand("mkdir -p /sdcard/WOAHelper/Toolbox || true")
                 rootCommand("mkdir $winpath/Toolbox || true ")
-                rootCommand("cp /sdcard/WOAHelper/Toolbox/DefenderRemover.exe $filesDir/DefenderRemover.exe")
                 rootCommand("cp $filesDir/RemoveEdge.bat /sdcard/WOAHelper/Toolbox")
                 rootCommand("cp $filesDir/DefenderRemover.exe $winpath/Toolbox")
                 rootCommand("cp $filesDir/RemoveEdge.bat $winpath/Toolbox")
@@ -1131,31 +1135,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         x!!.cvInfo.setOnClickListener { a: View? ->
-            if (BuildConfig.DEBUG) return@setOnClickListener
-            Dlg.show(this, R.string.please_wait)
-            val version = download.text("https://raw.githubusercontent.com/n00b69/woa-helper-update/main/README.md")
-            val changelog = download.text("https://raw.githubusercontent.com/n00b69/woa-helper-update/main/changelog.md")
-            if (version.isEmpty()) {
-                nointernet()
-                return@setOnClickListener
-            }
-            if (BuildConfig.VERSION_NAME == version) {
-                Dlg.setText(getString(R.string.no) + " " + getString(R.string.update1))
-                Dlg.dismissButton()
-                return@setOnClickListener
-            }
-            Dlg.setText(getString(R.string.update1)+": "+version+"\n"+changelog)
-            Dlg.setNo(R.string.later) { Dlg.close() }
-            Dlg.setYes(R.string.update) {
-                Dlg.clearButtons()
-                Dlg.setText(
-                    """
-                        ${getString(R.string.update2)}
-                        ${getString(R.string.please_wait)}
-                        """.trimIndent()
-                )
-                update()
-            }
+            checkupdate(true)
         }
 
         k!!.autobackup.setOnChangeListener { b: Boolean -> Pref.setAuto(this, !b) }
@@ -1216,12 +1196,28 @@ class MainActivity : AppCompatActivity() {
         arrayOf(x!!.mnt, x!!.toolbox, x!!.quickBoot, n!!.flashUefi).forEach { it.isEnabled = false }
     }
 
-    private fun checkupdate() {
-        if (Pref.getAppUpdate(this) || !isNetworkConnected(this)) return
-        val version = download.text("https://raw.githubusercontent.com/n00b69/woa-helper-update/main/README.md")
-        if (BuildConfig.VERSION_NAME == version || version.isEmpty()) return
-
-        Dlg.show(this, R.string.update1)
+    private fun checkupdate(){
+        checkupdate(false)
+    }
+    private fun checkupdate(manual :  Boolean) {
+        if (!isNetworkConnected(this)){
+            nointernet()
+            return
+        }
+        if (Pref.getAppUpdate(this)&&!manual) return
+        Dlg.show(this, R.string.please_wait)
+        val version = download.text("https://raw.githubusercontent.com/n00b69/woa-helper-update/main"+ (if (BuildConfig.DEBUG) "/debug" else "")+"/README.md")
+        val changelog = download.text("https://raw.githubusercontent.com/n00b69/woa-helper-update/main"+ (if (BuildConfig.DEBUG) "/debug" else "")+"/changelog.md")
+        if (version.isEmpty()) {
+            nointernet()
+            return
+        }
+        if (BuildConfig.VERSION_NAME == version && !manual) {
+            Dlg.setText(getString(R.string.no) + " " + getString(R.string.update1))
+            Dlg.dismissButton()
+            return
+        }
+        Dlg.setText(getString(R.string.update1)+": "+version+"\n"+changelog)
         Dlg.setNo(R.string.later) { Dlg.close() }
         Dlg.setYes(R.string.update) {
             Dlg.clearButtons()
@@ -1290,15 +1286,15 @@ class MainActivity : AppCompatActivity() {
                 rootCommand("cd $filesDir")
                 rootCommand("rm -r /sdcard/dbkp")
                 if ("cepheus" == device) {
-                    rootCommand("dd if=/sdcard/WOAHelper/Backups/patched-boot.img of=/dev/block/by-name/boot bs=16m")
+                    rootCommand("dd if=/sdcard/WOAHelper/Backups/patched-boot.img of=/dev/block/by-name/boot bs=16M")
                 } else {
-                    rootCommand("dd if=/sdcard/WOAHelper/Backups/patched-boot.img of=/dev/block/by-name/boot_a bs=16m")
-                    rootCommand("dd if=/sdcard/WOAHelper/Backups/patched-boot.img of=/dev/block/by-name/boot_b bs=16m")
+                    rootCommand("dd if=/sdcard/WOAHelper/Backups/patched-boot.img of=/dev/block/by-name/boot_a bs=16M")
+                    rootCommand("dd if=/sdcard/WOAHelper/Backups/patched-boot.img of=/dev/block/by-name/boot_b bs=16M")
                 }
                 runOnUiThread {
                     Dlg.setText(getString(R.string.dbkp, message))
                     Dlg.setDismiss(R.string.dismiss) { Dlg.close() }
-                    Dlg.setNo(R.string.reboot) { rootCommand("svc power reboot") }
+                    Dlg.setNo(R.string.reboot) { rootCommand("/system/bin/svc power reboot") }
                 }
             }
         }.init(message, link)).start()
@@ -1332,7 +1328,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         internal fun flash(uefi: String?) {
-            rootCommand("dd if=$uefi of=/dev/block/bootdevice/by-name/boot$(getprop ro.boot.slot_suffix) bs=16m")
+            rootCommand("dd if=$uefi of=/dev/block/bootdevice/by-name/boot$(getprop ro.boot.slot_suffix) bs=16M")
         }
 
         @JvmStatic
@@ -1419,7 +1415,7 @@ class MainActivity : AppCompatActivity() {
                         rootCommand("cp ${context!!.filesDir}/original-devcfg.img $winpath/original-devcfg.img")
                     }
                     flash(finduefi)
-                    rootCommand("svc power reboot")
+                    rootCommand("/system/bin/svcsvc power reboot")
                     Dlg.setText(R.string.wrong)
                     Dlg.dismissButton()
                 }, 25L)
@@ -1448,11 +1444,11 @@ class MainActivity : AppCompatActivity() {
 
         internal fun winBackup() {
             mount()
-            rootCommand("dd bs=8m if=$boot of=$winpath/boot.img")
+            rootCommand("dd bs=8M if=$boot of=$winpath/boot.img")
         }
 
         internal fun androidBackup() {
-            rootCommand("dd bs=8m if=$boot of=/sdcard/boot.img")
+            rootCommand("dd bs=8M if=$boot of=/sdcard/boot.img")
         }
 
         internal fun nointernet() {
