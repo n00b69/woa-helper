@@ -877,9 +877,7 @@ class MainActivity : AppCompatActivity() {
                 Thread {
                     rootCommand("mkdir -p /sdcard/WOAHelper/Toolbox || true")
                     download.file("https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook.apbx", "/sdcard/WOAHelper/Toolbox/AtlasPlaybook.apbx")
-                    Dlg.setBar(35)
-                    download.file("https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook_v0.4.0_23H2Only.apbx","/sdcard/WOAHelper/Toolbox/AtlasPlaybook_v0.4.0_23H2Only.apbx")
-                    Dlg.setBar(60)
+                    Dlg.setBar(50)
                     download.file("https://download.ameliorated.io/AME%20Wizard%20Beta.zip","/sdcard/WOAHelper/Toolbox/AMEWizardBeta.zip")
                     Dlg.setBar(80)
                     runOnUiThread {
@@ -892,8 +890,7 @@ class MainActivity : AppCompatActivity() {
                         Dlg.setIcon(R.drawable.ic_ar)
                         Dlg.hideBar()
                         rootCommand("mkdir $winpath/Toolbox || true ")
-                        rootCommand("cp /sdcard/WOAHelper/Toolbox/AtlasPlaybook.apbx $winpath/Toolbox/AtlasPlaybook_v0.4.1.apbx")
-                        rootCommand("cp /sdcard/WOAHelper/Toolbox/AtlasPlaybook_v0.4.0_23H2Only.apbx $winpath/Toolbox/AtlasPlaybook_v0.4.0_23H2Only.apbx")
+                        rootCommand("cp /sdcard/WOAHelper/Toolbox/AtlasPlaybook.apbx $winpath/Toolbox/AtlasPlaybook_v0.5.0.apbx")
                         rootCommand("cp /sdcard/WOAHelper/Toolbox/AMEWizardBeta.zip $winpath/Toolbox")
                         Dlg.setText(R.string.done)
                         Dlg.dismissButton()
