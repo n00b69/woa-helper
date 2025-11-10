@@ -1517,10 +1517,19 @@ class MainActivity : AppCompatActivity() {
         fun rootCommand(command: String): String {
             if (BuildConfig.DEBUG)
                 println(command)
-            val output = ShellUtils.fastCmd(rootShell, command)
-            if (BuildConfig.DEBUG)
-                println(output)
-            return output
+            val out=ArrayList<String>()
+            val err=ArrayList<String>()
+            rootShell.newJob().add(command).to(out,err).exec()
+            if (BuildConfig.DEBUG) {
+                if (out.isNotEmpty())
+                Log.d("debug stdout",out.last())
+                if (err.isNotEmpty())
+                Log.w("debug stderr",err.toString())
+            }
+            if (out.isNotEmpty())
+                return out.last() as String
+            else
+                return ""
         }
 
         @JvmStatic
