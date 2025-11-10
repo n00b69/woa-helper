@@ -44,9 +44,11 @@ This project is in late stages of development. Most features have already been a
 - Rooted² device with Windows installed (Windows partition must be named **win**, **windows**, **mindows**, **Win**, **Windows**, or **Mindows**).
 - UEFI image (To boot Windows).
 
-¹: App features are likely limited to just Quickbooting & backing up boot.img on Android versions lower than 12 or 11.
+¹: App features are likely limited to just Quickbooting & backing up boot.img on Android versions lower than 12 or 11, as mounting likely doesn't work on them.
 
-²: Your device must be rooted with Magisk v28.1 or higher to ensure the most functionality. If you are using KSU and mount does not work, change kernels or try using Magisk. If you are using KSU-Next; suffer.
+²: Your device must be rooted with Magisk **v28.1** or higher to ensure the most functionality. Forks such as Magisk Alpha are not supported.
+
+If you are using KSU and mount does not work, change kernels or try using Magisk. If you are using KSU-Next; suffer.
 
 ## Credits
 
@@ -87,5 +89,6 @@ This project is in late stages of development. Most features have already been a
 - Turkish (sercancamli, [ErdilS](https://github.com/erdilS) & [Kaan Dikeç](https://github.com/dikeckaan))
 - Ukrainian ([Ost268](https://github.com/Ost268) & [Ilya114](https://github.com/Ilya114))
 - Vietnamese (HieusayHi & bobert10)
+
 
 
