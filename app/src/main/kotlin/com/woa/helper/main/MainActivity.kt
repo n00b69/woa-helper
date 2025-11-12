@@ -1415,7 +1415,7 @@ class MainActivity : AppCompatActivity() {
                         rootCommand("cp ${context!!.filesDir}/original-devcfg.img $winpath/original-devcfg.img")
                     }
                     flash(finduefi)
-                    rootCommand("/system/bin/svcsvc power reboot")
+                    rootCommand("/system/bin/svc power reboot")
                     Dlg.setText(R.string.wrong)
                     Dlg.dismissButton()
                 }, 25L)
