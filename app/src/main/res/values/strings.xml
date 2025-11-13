@@ -137,6 +137,4 @@
     <string name="uefiChk" translatable="false">su -c find /mnt/sdcard/UEFI/ -type f  | grep ".img" | head -n 1 </string>
 
     <string name="default1">Default</string>
-
-    <!-- Not used, but might be useful to keep  -->
 </resources>

@@ -649,6 +649,7 @@ class MainActivity : AppCompatActivity() {
                 updateLastBackupDate()
                 Thread {
                     androidBackup()
+					modemBackup()
                     runOnUiThread {
                         Dlg.setText(R.string.backuped)
                         Dlg.dismissButton()
@@ -1201,7 +1202,7 @@ class MainActivity : AppCompatActivity() {
     }
     private fun checkupdate(manual :  Boolean) {
         if (!isNetworkConnected(this)){
-            nointernet()
+            if (manual) nointernet()
             return
         }
         if (Pref.getAppUpdate(this)&&!manual) return
@@ -1209,7 +1210,7 @@ class MainActivity : AppCompatActivity() {
         val version = download.text("https://raw.githubusercontent.com/n00b69/woa-helper-update/main"+ (if (BuildConfig.DEBUG) "/debug" else "")+"/README.md")
         val changelog = download.text("https://raw.githubusercontent.com/n00b69/woa-helper-update/main"+ (if (BuildConfig.DEBUG) "/debug" else "")+"/changelog.md")
         if (version.isEmpty()) {
-            nointernet()
+            if (manual) nointernet()
             return
         }
         if (BuildConfig.VERSION_NAME == version && !manual) {
@@ -1270,7 +1271,7 @@ class MainActivity : AppCompatActivity() {
                 androidBackup()
                 rootCommand("dd bs=8M if=/sdcard/WOAHelper/Backups/original-boot.img of=/dev/block/by-name/boot$(getprop ro.boot.slot_suffix)")
                 rootCommand("rm /sdcard/WOAHelper/Backups/original-boot.img /sdcard/WOAHelper/Backups/patched-boot.img || true")
-                rootCommand("mv /sdcard/boot.img /sdcard/dbkp/boot.img")
+                rootCommand("mv /sdcard/WOAHelper/Backups/boot.img /sdcard/dbkp/boot.img")
                 rootCommand("cp /sdcard/dbkp/boot.img /sdcard/WOAHelper/Backups/original-boot.img")
                 rootCommand("cp $filesDir/dbkp8150.cfg /sdcard/dbkp/dbkp.cfg")
                 rootCommand("wget https://github.com/n00b69/woa-op7/releases/download/DBKP/dbkp -O /sdcard/dbkp/dbkp")
@@ -1377,7 +1378,7 @@ class MainActivity : AppCompatActivity() {
                         winBackup()
                         updateLastBackupDate()
                     }
-                    found = rootCommand("find /sdcard | grep boot.img")
+                    found = rootCommand("find /sdcard/WOAHelper/Backups | grep boot.img")
                     if (Pref.getBackupA(context!!) || (!Pref.getAutoA(context!!) && found.isEmpty())) {
                         androidBackup()
                         updateLastBackupDate()
@@ -1415,6 +1416,10 @@ class MainActivity : AppCompatActivity() {
                         rootCommand("cp ${context!!.filesDir}/original-devcfg.img $winpath/original-devcfg.img")
                     }
                     flash(finduefi)
+					val findmodem = rootCommand("find /sdcard/WOAHelper/Backups | grep modemst1.img")
+					if (findmodem.isEmpty()) {
+               			modemBackup()
+            		}
                     rootCommand("/system/bin/svc power reboot")
                     Dlg.setText(R.string.wrong)
                     Dlg.dismissButton()
@@ -1448,7 +1453,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         internal fun androidBackup() {
-            rootCommand("dd bs=8M if=$boot of=/sdcard/boot.img")
+		    rootCommand("mkdir -p /sdcard/WOAHelper/Backups || true")
+            rootCommand("dd bs=8M if=$boot of=/sdcard/WOAHelper/Backups/boot.img")
+        }
+		
+		internal fun modemBackup() {
+            rootCommand("dd bs=8M if=/dev/block/by-name/modemst1 of=/sdcard/WOAHelper/Backups/modemst1.img")
+			rootCommand("dd bs=8M if=/dev/block/by-name/modemst2 of=/sdcard/WOAHelper/Backups/modemst2.img")
+			rootCommand("dd bs=8M if=/dev/block/by-name/fsc of=/sdcard/WOAHelper/Backups/fsc.img")
+			rootCommand("dd bs=8M if=/dev/block/by-name/fsg of=/sdcard/WOAHelper/Backups/fsg.img")
+			rootCommand("dd bs=8M if=/dev/block/by-name/ftm of=/sdcard/WOAHelper/Backups/ftm.img")
         }
 
         internal fun nointernet() {
