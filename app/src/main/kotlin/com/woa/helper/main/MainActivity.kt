@@ -30,7 +30,6 @@ import androidx.core.os.LocaleListCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.topjohnwu.superuser.Shell
-import com.topjohnwu.superuser.ShellUtils
 import com.woa.helper.BuildConfig
 import com.woa.helper.R
 import com.woa.helper.databinding.ActivityMainBinding
@@ -85,7 +84,9 @@ class MainActivity : AppCompatActivity() {
             } catch (_: IOException) {
             }
         }
-        arrayOf("mount.ntfs", "libfuse-lite.so", "libntfs-3g.so").forEach { rootCommand("chmod 777 $filesDir/$it") }
+        rootCommand("chmod 644 $filesDir/libfuse-lite.so && chown root:root $filesDir/libfuse-lite.so")
+        rootCommand("chmod 644 $filesDir/libntfs-3g.so && chown root:root $filesDir/libntfs-3g.so")
+        rootCommand("chmod 755 $filesDir/mount.ntfs && chown root:root $filesDir/mount.ntfs")
     }
 
     @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
@@ -762,7 +763,7 @@ class MainActivity : AppCompatActivity() {
                 Dlg.setDismiss(R.string.nabu2) {
                     rootCommand("cp $filesDir/dbkp.nabu2.bin /sdcard/dbkp/dbkp.bin")
                     Dlg.dialogLoading()
-                    kernelPatch(getString(R.string.nabu), "https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/releases/download/1.0/nabuVolumebuttons.fd")
+                    kernelPatch(getString(R.string.nabu2), "https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/releases/download/1.0/nabuVolumebuttons.fd")
                 }
             }
         }
@@ -1429,15 +1430,11 @@ class MainActivity : AppCompatActivity() {
 
         internal fun mount() {
             if (null == win) win = getWin()
+            if (isMounted()) return
+            updateWinPath()
             rootCommand("mkdir $winpath || true")
             rootCommand("cd ${context!!.filesDir}")
             rootCommand("su -mm -c ./mount.ntfs $win $winpath")
-            if (isMounted()) {
-                // Causes some issues idk. Better be here for later
-                updateWinPath()
-                rootCommand("mkdir $winpath || true")
-                rootCommand("su -mm -c ./mount.ntfs $win $winpath")
-            }
             updateMountText()
         }
 
@@ -1530,20 +1527,19 @@ class MainActivity : AppCompatActivity() {
 
         fun rootCommand(command: String): String {
             if (BuildConfig.DEBUG)
-                println(command)
+                Log.d("debug stdout",command)
             val out=ArrayList<String>()
             val err=ArrayList<String>()
             rootShell.newJob().add(command).to(out,err).exec()
             if (BuildConfig.DEBUG) {
                 if (out.isNotEmpty())
-                Log.d("debug stdout",out.last())
+                    Log.d("debug stdout",out.last())
                 if (err.isNotEmpty())
-                Log.w("debug stderr",err.toString())
+                    Log.w("debug stderr",err.toString())
             }
             if (out.isNotEmpty())
                 return out.last() as String
-            else
-                return ""
+            return ""
         }
 
         @JvmStatic
