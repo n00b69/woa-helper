@@ -688,7 +688,7 @@ class MainActivity : AppCompatActivity() {
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
                 rootCommand("mkdir -p /sdcard/WOAHelper/sta || true")
-                arrayOf("sta.exe", "sdd.exe", "sdd.conf", "boot.img_auto-flasher_V1.2.exe").forEach { rootCommand("cp $filesDir/$it /sdcard/WOAHelper/sta/") }
+                arrayOf("sta.exe", "sdd.exe", "sdd.conf", "boot.img_auto-flasher_V1.4.exe").forEach { rootCommand("cp $filesDir/$it /sdcard/WOAHelper/sta/") }
                 mount()
                 if (!isMounted()) {
                     Dlg.close()
@@ -931,7 +931,7 @@ class MainActivity : AppCompatActivity() {
             Dlg.setYes(R.string.yes) {
                 Dlg.dialogLoading()
                 rootCommand("mkdir -p /sdcard/WOAHelper/Toolbox || true")
-                rootCommand("cp $filesDir/QuickRotate_V3.0.exe /sdcard/WOAHelper/Toolbox/")
+                rootCommand("cp $filesDir/QuickRotate_V4.1.exe /sdcard/WOAHelper/Toolbox/")
                 mount()
                 if (!isMounted()) {
                     Dlg.close()
@@ -939,7 +939,7 @@ class MainActivity : AppCompatActivity() {
                     return@setYes
                 }
                 rootCommand("mkdir $winpath/Toolbox || true ")
-                arrayOf("/Toolbox", "/Users/Public/Desktop").forEach { rootCommand("cp /sdcard/WOAHelper/Toolbox/QuickRotate_V3.0.exe $winpath$it") }
+                arrayOf("/Toolbox", "/Users/Public/Desktop").forEach { rootCommand("cp /sdcard/WOAHelper/Toolbox/QuickRotate_V4.1.exe $winpath$it") }
                 Dlg.setText(R.string.done)
                 Dlg.dismissButton()
             }
