@@ -12,7 +12,7 @@ android {
         minSdk = 25
         targetSdk = 36
         versionCode = 5
-        versionName = "1.8.4_BETA43"
+        versionName = "1.8.4_BETA44"
 
         val locales = listOf(
             "ar", "az", "be", "cs", "de", "en", "es", "fa", "fr", "ind", "ja", "ka", "ko", "ms", "nl", "pl", "pt", "ru", "ro", "ro-rMD", "th", "tr", "uk", "vi", "zh", "zh-rCN", "zh-rHK", "zh-rMO", "zh-rSG", "zh-rTW"

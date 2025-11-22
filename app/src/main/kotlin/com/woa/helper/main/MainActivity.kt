@@ -641,6 +641,11 @@ class MainActivity : AppCompatActivity() {
             checkupdate()
             k!!.codename.visibility = View.GONE
         }
+		
+		/// because the lack of checkupdate in debug builds AGAIN semi-ruined the update thing
+		if (BuildConfig.DEBUG) {
+            checkupdate()
+        }
 
         x!!.backup.setOnClickListener { a: View? ->
             Dlg.show(this, R.string.backup_boot_question, R.drawable.ic_disk)
@@ -1207,22 +1212,31 @@ class MainActivity : AppCompatActivity() {
             return
         }
         if (Pref.getAppUpdate(this)&&!manual) return
-        Dlg.show(this, R.string.please_wait)
+	//	if (manual) {
+            Dlg.show(this, R.string.please_wait)
+		    Dlg.setCancelable(false)
+	//	}
         val version = download.text("https://raw.githubusercontent.com/n00b69/woa-helper-update/main"+ (if (BuildConfig.DEBUG) "/debug" else "")+"/README.md")
         val changelog = download.text("https://raw.githubusercontent.com/n00b69/woa-helper-update/main"+ (if (BuildConfig.DEBUG) "/debug" else "")+"/changelog.md")
         if (version.isEmpty()) {
             if (manual) nointernet()
             return
         }
-        if (BuildConfig.VERSION_NAME == version && !manual) {
-            Dlg.setText(getString(R.string.no) + " " + getString(R.string.update1))
-            Dlg.dismissButton()
-            return
+        if (BuildConfig.VERSION_NAME == version) {
+			if (manual) {
+            	Dlg.setText(getString(R.string.no) + " " + getString(R.string.update1))
+            	Dlg.dismissButton()
+				return
+			} else {
+				Dlg.close()
+				return
+			}
         }
         Dlg.setText(getString(R.string.update1)+": "+version+"\n"+changelog)
         Dlg.setNo(R.string.later) { Dlg.close() }
         Dlg.setYes(R.string.update) {
             Dlg.clearButtons()
+			Dlg.setCancelable(false)
             Dlg.setText(
                 """
                     ${getString(R.string.update2)}
