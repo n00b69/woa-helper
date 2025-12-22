@@ -283,6 +283,7 @@ class MainActivity : AppCompatActivity() {
                 guidelink = "https://github.com/n00b69/woa-lisa"
                 grouplink = "https://t.me/lisawoa"
                 x!!.DeviceImage.setImageResource(R.drawable.lisa)
+				x!!.tvPanel.visibility = View.VISIBLE
             }
 
             "nabu" -> {
@@ -586,12 +587,20 @@ class MainActivity : AppCompatActivity() {
         }
         var panel = rootCommand("cat /proc/cmdline")
         panel = when {
+			panel.contains("tianmamd_dv2") -> "Tianma DV2"
+
+            panel.contains("tianmamd_pp1") -> "Tianma PP1"
+
+            panel.contains("tianmamd_pv") -> "Tianma PV"
+			
             panel.contains("j20s_42")
                     || panel.contains("k82_42")
+					|| panel.contains("k9d_42")
                     || panel.contains("huaxing") -> "Huaxing"
 
             panel.contains("j20s_36")
                     || panel.contains("tianma")
+					|| panel.contains("k9d_36")
                     || panel.contains("k82_36") -> "Tianma"
 
             panel.contains("ebbg") -> "EBBG"
@@ -602,12 +611,6 @@ class MainActivity : AppCompatActivity() {
                     || panel.contains("ea8076_global")
                     || panel.contains("S6E3FC3")
                     || panel.contains("AMS646YD01") -> "Samsung"
-
-            panel.contains("tianmamd_dv2") -> "Tianma DV2"
-
-            panel.contains("tianmamd_pp1") -> "Tianma PP1"
-
-            panel.contains("tianmamd_pv") -> "Tianma PV"
 
             else -> rootCommand("cat /proc/cmdline | tr ' :=' '\n'|grep dsi|tr ' _' '\n'|tail -3|head -1 ")
         }
