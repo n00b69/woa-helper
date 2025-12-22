@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:layout_margin="4dp"
     android:animateLayoutChanges="true"
-    android:background="?attr/colorOnSurfaceInverse"
     android:clickable="false"
     android:foreground="?android:attr/selectableItemBackground"
     android:stateListAnimator="@animator/state_list_anim"
@@ -29,7 +28,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="24dp" />
+            android:padding="24dp"
+            android:textSize="@dimen/_10ssp" />
 
         <ProgressBar
             android:id="@+id/progress"
@@ -88,7 +88,7 @@
                 android:animateLayoutChanges="true"
                 android:clipToOutline="true"
                 android:stateListAnimator="@animator/state_list_anim"
-                android:text="No"
+                android:text="@string/no"
                 android:textStyle="bold"
                 android:visibility="gone"
                 app:backgroundTint="?attr/colorAccent"
