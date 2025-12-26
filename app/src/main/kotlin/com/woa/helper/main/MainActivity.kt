@@ -58,32 +58,18 @@ class MainActivity : AppCompatActivity() {
     private var tablet = false
     private val views: MutableList<View> = ArrayList()
     private fun copyAssets() {
-        val assetManager = assets
-        var files: Array<String>? = null
-        try {
-            files = assetManager.list("")
-        } catch (_: IOException) {
-        }
-        checkNotNull(files)
-        for (filename in files) {
-            val `in`: InputStream
-            val out: OutputStream?
+        assets.list("")?.forEach { filename ->
             try {
-                `in` = assetManager.open(filename)
-                val outDir = filesDir.toString()
-                val outFile = File(outDir, filename)
-                out = FileOutputStream(outFile)
-                val buffer = ByteArray(1024)
-                var read: Int
-                while (-1 != (`in`.read(buffer).also { read = it })) out.write(buffer, 0, read)
-                `in`.close()
-                out.flush()
-                out.close()
-            } catch (_: FileNotFoundException) {
-//                throw new RuntimeException(e);
+                assets.open(filename).use { input ->
+                    File(filesDir, filename).outputStream().use { output ->
+                        input.copyTo(output)
+                    }
+                }
             } catch (_: IOException) {
+                // Ignore directories
             }
         }
+
         rootCommand("chmod 644 $filesDir/libfuse-lite.so && chown root:root $filesDir/libfuse-lite.so")
         rootCommand("chmod 644 $filesDir/libntfs-3g.so && chown root:root $filesDir/libntfs-3g.so")
         rootCommand("chmod 755 $filesDir/mount.ntfs && chown root:root $filesDir/mount.ntfs")
@@ -104,7 +90,7 @@ class MainActivity : AppCompatActivity() {
                 exitProcess(0)
             } else {
                 if (BuildConfig.DEBUG) {
-                    if (views[views.size - 1] === k!!.root) {
+                    if (views[views.size - 1] === k.root) {
                         val textbox = findViewById<TextView>(R.id.codename)
                         if (textbox.text.isNotBlank() && (textbox.text.toString() != Pref.codenameChanger(
                                 false,
@@ -131,15 +117,15 @@ class MainActivity : AppCompatActivity() {
 
         context = this
         download.permission(this)
-        setContentView(x!!.root)
+        setContentView(x.root)
 
         views.clear()
-        views.add(x!!.root)
+        views.add(x.root)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content)) { v: View?, insets: WindowInsetsCompat ->
             val sysInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            arrayOf(x!!.app, n!!.app, k!!.app, z!!.app).forEach { it.setPadding(0, 0, 0, sysInsets.bottom) }
-            arrayOf(x!!.linearLayout, n!!.linearLayout, k!!.linearLayout, z!!.linearLayout).forEach { it.setPadding(sysInsets.left, sysInsets.top, sysInsets.right, 0) }
+            arrayOf(x.app, n.app, k.app, z.app).forEach { it.setPadding(0, 0, 0, sysInsets.bottom) }
+            arrayOf(x.linearLayout, n.linearLayout, k.linearLayout, z.linearLayout).forEach { it.setPadding(sysInsets.left, sysInsets.top, sysInsets.right, 0) }
             insets
         }
 
@@ -159,11 +145,11 @@ class MainActivity : AppCompatActivity() {
             android.R.layout.simple_spinner_dropdown_item,
             languages
         )
-        setSupportActionBar(x!!.toolbarlayout.toolbar)
-        x!!.toolbarlayout.toolbar.setTitle(R.string.app_name)
-        x!!.toolbarlayout.toolbar.subtitle = "v${BuildConfig.VERSION_NAME}"
-        x!!.toolbarlayout.toolbar.setNavigationIcon(R.drawable.ic_launcher_foreground)
-        arrayOf(x!!.toolbarlayout.settings, k!!.toolbarlayout.settings, n!!.toolbarlayout.settings, z!!.toolbarlayout.settings).forEach { it.setColorFilter(R.color.md_theme_primary) }
+        setSupportActionBar(x.toolbarlayout.toolbar)
+        x.toolbarlayout.toolbar.setTitle(R.string.app_name)
+        x.toolbarlayout.toolbar.subtitle = "v${BuildConfig.VERSION_NAME}"
+        x.toolbarlayout.toolbar.setNavigationIcon(R.drawable.ic_launcher_foreground)
+        arrayOf(x.toolbarlayout.settings, k.toolbarlayout.settings, n.toolbarlayout.settings, z.toolbarlayout.settings).forEach { it.setColorFilter(R.color.md_theme_primary) }
 
         model = Build.MODEL
         win = getWin()
@@ -171,85 +157,85 @@ class MainActivity : AppCompatActivity() {
         updateDevice()
         updateWinPath()
         updateMountText()
-        x!!.tvDate.text = String.format(getString(R.string.last), Pref.getDate(this))
+        x.tvDate.text = String.format(getString(R.string.last), Pref.getDate(this))
 
         val slot = rootCommand("getprop ro.boot.slot_suffix")
-        if (slot.isEmpty()) x!!.tvSlot.visibility = View.GONE
-        else x!!.tvSlot.text = getString(R.string.slot, slot.substring(1, 2)).uppercase(Locale.getDefault())
+        if (slot.isEmpty()) x.tvSlot.visibility = View.GONE
+        else x.tvSlot.text = getString(R.string.slot, slot.substring(1, 2)).uppercase(Locale.getDefault())
 
-        x!!.deviceName.text = "$model ($device)"
+        x.deviceName.text = "$model ($device)"
         when (device) {
             "alphalm", "alphaplus", "alpha_lao_com", "alphalm_lao_com", "alphaplus_lao_com" -> {
                 guidelink = "https://github.com/n00b69/woa-alphaplus"
                 grouplink = "https://t.me/lgedevices"
-                x!!.DeviceImage.setImageResource(R.drawable.alphaplus)
+                x.DeviceImage.setImageResource(R.drawable.alphaplus)
             }
 
             "betalm", "betalm_lao_com" -> {
                 guidelink = "https://github.com/n00b69/woa-betalm"
                 grouplink = "https://t.me/lgedevices"
-                x!!.DeviceImage.setImageResource(R.drawable.betalm)
+                x.DeviceImage.setImageResource(R.drawable.betalm)
             }
 
             "flashlmdd", "flash_lao_com", "flashlm", "flashlmdd_lao_com" -> {
                 guidelink = "https://github.com/n00b69/woa-flashlmdd"
                 grouplink = "https://t.me/lgedevices"
-                x!!.DeviceImage.setImageResource(R.drawable.flashlmdd)
+                x.DeviceImage.setImageResource(R.drawable.flashlmdd)
             }
 
             "mh2lm", "mh2lm_lao_com" -> {
                 guidelink = "https://github.com/n00b69/woa-mh2lm"
                 grouplink = "https://t.me/lgedevices"
-                x!!.DeviceImage.setImageResource(R.drawable.mh2lm)
-                x!!.tvPanel.visibility = View.VISIBLE
+                x.DeviceImage.setImageResource(R.drawable.mh2lm)
+                x.tvPanel.visibility = View.VISIBLE
             }
 
             "mh2lm5g", "mh2lm5g_lao_com" -> {
                 guidelink = "https://github.com/n00b69/woa-mh2lm5g"
                 grouplink = "https://t.me/lgedevices"
-                x!!.DeviceImage.setImageResource(R.drawable.mh2lm)
-                x!!.tvPanel.visibility = View.VISIBLE
+                x.DeviceImage.setImageResource(R.drawable.mh2lm)
+                x.tvPanel.visibility = View.VISIBLE
             }
 
             "judyln", "judyp", "judypn" -> {
                 guidelink = "https://github.com/n00b69/woa-everything"
                 grouplink = "https://t.me/lgedevices"
-                x!!.DeviceImage.setImageResource(R.drawable.unknown)
+                x.DeviceImage.setImageResource(R.drawable.unknown)
             }
 
             "joan" -> {
                 guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://t.me/lgedevices"
-                x!!.DeviceImage.setImageResource(R.drawable.unknown)
+                x.DeviceImage.setImageResource(R.drawable.unknown)
             }
 
             "andromeda" -> {
                 guidelink = "https://project-aloha.github.io/"
                 grouplink = "https://t.me/project_aloha_issues"
-                x!!.DeviceImage.setImageResource(R.drawable.unknown)
+                x.DeviceImage.setImageResource(R.drawable.unknown)
             }
 
             "beryllium" -> {
                 guidelink = "https://github.com/n00b69/woa-beryllium"
                 grouplink = "https://t.me/WinOnF1"
-                x!!.DeviceImage.setImageResource(R.drawable.beryllium)
-                x!!.tvPanel.visibility = View.VISIBLE
+                x.DeviceImage.setImageResource(R.drawable.beryllium)
+                x.tvPanel.visibility = View.VISIBLE
             }
 
             "bhima", "vayu" -> {
                 guidelink = "https://github.com/WaLoVayu/POCOX3Pro-Windows-Guides"
                 grouplink = "https://t.me/WaLoVayu"
-                x!!.DeviceImage.setImageResource(R.drawable.vayu)
-                x!!.tvPanel.visibility = View.VISIBLE
+                x.DeviceImage.setImageResource(R.drawable.vayu)
+                x.tvPanel.visibility = View.VISIBLE
             }
 
             "cepheus" -> {
                 guidelink = "https://github.com/n00b69/woa-cepheus"
                 grouplink = "http://t.me/woahelperchat"
-                x!!.DeviceImage.setImageResource(R.drawable.cepheus)
+                x.DeviceImage.setImageResource(R.drawable.cepheus)
                 arrayOf(
-                    Pair.create(x!!.tvPanel, View.VISIBLE), Pair.create(n!!.dbkp, View.VISIBLE), Pair.create(n!!.dumpModem, View.VISIBLE), Pair.create(
-                        n!!.flashUefi, View.GONE
+                    Pair.create(x.tvPanel, View.VISIBLE), Pair.create(n.dbkp, View.VISIBLE), Pair.create(n.dumpModem, View.VISIBLE), Pair.create(
+                        n.flashUefi, View.GONE
                     )
                 ).forEach { it.first.visibility = it.second }
             }
@@ -257,40 +243,40 @@ class MainActivity : AppCompatActivity() {
             "chiron" -> {
                 guidelink = "https://renegade-project.tech/"
                 grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA"
-                x!!.DeviceImage.setImageResource(R.drawable.chiron)
+                x.DeviceImage.setImageResource(R.drawable.chiron)
             }
 
             "curtana", "curtana2", "curtana_india", "curtana_cn", "curtanacn", "durandal", "durandal_india", "excalibur", "excalibur2", "excalibur_india", "gram", "joyeuse", "miatoll" -> {
                 guidelink = "https://github.com/woa-miatoll/Miatoll-Guide"
                 grouplink = "http://t.me/woamiatoll"
-                x!!.DeviceImage.setImageResource(R.drawable.miatoll)
-                x!!.tvPanel.visibility = View.VISIBLE
+                x.DeviceImage.setImageResource(R.drawable.miatoll)
+                x.tvPanel.visibility = View.VISIBLE
             }
 
             "dipper" -> {
                 guidelink = "https://github.com/n00b69/woa-dipper"
                 grouplink = "https://t.me/woadipper"
-                x!!.DeviceImage.setImageResource(R.drawable.dipper)
+                x.DeviceImage.setImageResource(R.drawable.dipper)
             }
 
             "equuleus", "ursa" -> {
                 guidelink = "https://github.com/n00b69/woa-equuleus"
                 grouplink = "https://t.me/woaequuleus"
-                x!!.DeviceImage.setImageResource(R.drawable.equuleus)
+                x.DeviceImage.setImageResource(R.drawable.equuleus)
             }
 
             "lisa" -> {
                 guidelink = "https://github.com/n00b69/woa-lisa"
                 grouplink = "https://t.me/lisawoa"
-                x!!.DeviceImage.setImageResource(R.drawable.lisa)
-				x!!.tvPanel.visibility = View.VISIBLE
+                x.DeviceImage.setImageResource(R.drawable.lisa)
+				x.tvPanel.visibility = View.VISIBLE
             }
 
             "nabu" -> {
                 guidelink = "https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5"
                 grouplink = "https://t.me/nabuwoa"
-                x!!.DeviceImage.setImageResource(R.drawable.nabu)
-                arrayOf(Pair.create(x!!.tvPanel, View.VISIBLE), Pair.create(n!!.dbkp, View.VISIBLE), Pair.create(n!!.flashUefi, View.GONE)).forEach {
+                x.DeviceImage.setImageResource(R.drawable.nabu)
+                arrayOf(Pair.create(x.tvPanel, View.VISIBLE), Pair.create(n.dbkp, View.VISIBLE), Pair.create(n.flashUefi, View.GONE)).forEach {
                     it.first.visibility =
                         it.second
                 }
@@ -300,14 +286,14 @@ class MainActivity : AppCompatActivity() {
             "perseus" -> {
                 guidelink = "https://github.com/n00b69/woa-perseus"
                 grouplink = "https://t.me/woaperseus"
-                x!!.DeviceImage.setImageResource(R.drawable.perseus)
+                x.DeviceImage.setImageResource(R.drawable.perseus)
             }
 
             "pipa" -> {
                 guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://t.me/xiaomi_pipa"
-                x!!.DeviceImage.setImageResource(R.drawable.pipa)
-                arrayOf(Pair.create(x!!.tvPanel, View.VISIBLE), Pair.create(n!!.dbkp, View.VISIBLE), Pair.create(n!!.flashUefi, View.GONE)).forEach {
+                x.DeviceImage.setImageResource(R.drawable.pipa)
+                arrayOf(Pair.create(x.tvPanel, View.VISIBLE), Pair.create(n.dbkp, View.VISIBLE), Pair.create(n.flashUefi, View.GONE)).forEach {
                     it.first.visibility =
                         it.second
                 }
@@ -317,71 +303,71 @@ class MainActivity : AppCompatActivity() {
             "polaris" -> {
                 guidelink = "https://github.com/n00b69/woa-polaris"
                 grouplink = "https://t.me/WinOnMIX2S"
-                x!!.DeviceImage.setImageResource(R.drawable.polaris)
-                x!!.tvPanel.visibility = View.VISIBLE
+                x.DeviceImage.setImageResource(R.drawable.polaris)
+                x.tvPanel.visibility = View.VISIBLE
             }
 
             "raphael", "raphaelin", "raphaels" -> {
                 guidelink = "https://github.com/new-WoA-Raphael/woa-raphael"
                 grouplink = "https://t.me/woaraphael"
-                x!!.DeviceImage.setImageResource(R.drawable.raphael)
-                arrayOf(x!!.tvPanel, n!!.dumpModem).forEach { it.visibility = View.VISIBLE }
+                x.DeviceImage.setImageResource(R.drawable.raphael)
+                arrayOf(x.tvPanel, n.dumpModem).forEach { it.visibility = View.VISIBLE }
             }
 
             "surya", "karna" -> {
                 guidelink = "https://github.com/woa-surya/POCOX3NFC-Guides"
                 grouplink = "https://t.me/windows_on_pocox3_nfc"
-                x!!.DeviceImage.setImageResource(R.drawable.vayu)
-                x!!.tvPanel.visibility = View.VISIBLE
+                x.DeviceImage.setImageResource(R.drawable.vayu)
+                x.tvPanel.visibility = View.VISIBLE
             }
 
             "sagit" -> {
                 guidelink = "https://renegade-project.tech/"
                 grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA"
-                x!!.DeviceImage.setImageResource(R.drawable.unknown)
+                x.DeviceImage.setImageResource(R.drawable.unknown)
             }
 
             "ingres" -> {
                 guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://discord.gg/Dx2QgMx7Sv"
-                x!!.DeviceImage.setImageResource(R.drawable.ingres)
+                x.DeviceImage.setImageResource(R.drawable.ingres)
             }
 
             "vili", "lavender" -> {
                 guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://discord.gg/Dx2QgMx7Sv"
-                x!!.DeviceImage.setImageResource(R.drawable.unknown)
+                x.DeviceImage.setImageResource(R.drawable.unknown)
             }
 
             "OnePlus5", "cheeseburger" -> {
                 guidelink = "https://renegade-project.tech/"
                 grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA"
-                x!!.DeviceImage.setImageResource(R.drawable.cheeseburger)
+                x.DeviceImage.setImageResource(R.drawable.cheeseburger)
             }
 
             "OnePlus5T", "dumpling" -> {
                 guidelink = "https://renegade-project.tech/"
                 grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA"
-                x!!.DeviceImage.setImageResource(R.drawable.dumpling)
+                x.DeviceImage.setImageResource(R.drawable.dumpling)
             }
 
             "OnePlus6", "fajita" -> {
                 guidelink = "https://github.com/n00b69/woa-op6"
                 grouplink = "https://t.me/WinOnOP6"
-                x!!.DeviceImage.setImageResource(R.drawable.fajita)
+                x.DeviceImage.setImageResource(R.drawable.fajita)
             }
 
             "OnePlus6T", "OnePlus6TSingle", "enchilada" -> {
                 guidelink = "https://github.com/n00b69/woa-op6"
                 grouplink = "https://t.me/WinOnOP6"
-                x!!.DeviceImage.setImageResource(R.drawable.enchilada)
+                x.DeviceImage.setImageResource(R.drawable.enchilada)
             }
 
             "hotdog", "OnePlus7TPro", "OnePlus7TPro4G" -> {
                 guidelink = "https://github.com/n00b69/woa-op7"
                 grouplink = "https://t.me/oneplus7woa"
-                x!!.DeviceImage.setImageResource(R.drawable.hotdog)
-                arrayOf(Pair.create(n!!.dumpModem, View.VISIBLE), Pair.create(n!!.dbkp, View.VISIBLE), Pair.create(n!!.flashUefi, View.GONE)).forEach {
+                x.DeviceImage.setImageResource(R.drawable.hotdog)
+                arrayOf(Pair.create(n.dumpModem, View.VISIBLE), Pair.create(n.dbkp, View.VISIBLE), Pair.create(n.flashUefi, View.GONE)).forEach {
                     it.first.visibility =
                         it.second
                 }
@@ -390,8 +376,8 @@ class MainActivity : AppCompatActivity() {
             "guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO" -> {
                 guidelink = "https://github.com/n00b69/woa-op7"
                 grouplink = "https://t.me/oneplus7woa"
-                x!!.DeviceImage.setImageResource(R.drawable.guacamole)
-                arrayOf(Pair.create(n!!.dumpModem, View.VISIBLE), Pair.create(n!!.dbkp, View.VISIBLE), Pair.create(n!!.flashUefi, View.GONE)).forEach {
+                x.DeviceImage.setImageResource(R.drawable.guacamole)
+                arrayOf(Pair.create(n.dumpModem, View.VISIBLE), Pair.create(n.dbkp, View.VISIBLE), Pair.create(n.flashUefi, View.GONE)).forEach {
                     it.first.visibility =
                         it.second
                 }
@@ -400,179 +386,179 @@ class MainActivity : AppCompatActivity() {
             "guacamoleb", "hotdogb", "OnePlus7T", "OnePlus7" -> {
                 guidelink = "https://project-aloha.github.io/"
                 grouplink = "https://t.me/project_aloha_issues"
-                x!!.DeviceImage.setImageResource(R.drawable.unknown)
-                n!!.dumpModem.visibility = View.VISIBLE
+                x.DeviceImage.setImageResource(R.drawable.unknown)
+                n.dumpModem.visibility = View.VISIBLE
             }
 
             "OnePlus7TPro5G", "OnePlus7TProNR", "hotdogg" -> {
                 guidelink = "https://project-aloha.github.io/"
                 grouplink = "https://t.me/project_aloha_issues"
-                x!!.DeviceImage.setImageResource(R.drawable.hotdog)
+                x.DeviceImage.setImageResource(R.drawable.hotdog)
             }
 
             "OP7ProNRSpr", "OnePlus7ProNR", "guacamoleg", "guacamoles" -> {
                 guidelink = "https://project-aloha.github.io/"
                 grouplink = "https://t.me/project_aloha_issues"
-                x!!.DeviceImage.setImageResource(R.drawable.guacamole)
+                x.DeviceImage.setImageResource(R.drawable.guacamole)
             }
 
             "a52sxq" -> {
                 guidelink = "https://github.com/n00b69/woa-a52s"
                 grouplink = "https://t.me/a52sxq_uefi"
-                x!!.DeviceImage.setImageResource(R.drawable.a52sxq)
+                x.DeviceImage.setImageResource(R.drawable.a52sxq)
             }
 
             "beyond1lte", "beyond1qlte", "beyond1" -> {
                 guidelink = "https://github.com/sonic011gamer/Mu-Samsung"
                 grouplink = "https://t.me/woahelperchat"
-                x!!.DeviceImage.setImageResource(R.drawable.beyond1)
+                x.DeviceImage.setImageResource(R.drawable.beyond1)
             }
 
             "dm3q", "dm3" -> {
                 guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://t.me/dumanthecat"
-                x!!.DeviceImage.setImageResource(R.drawable.dm3q)
+                x.DeviceImage.setImageResource(R.drawable.dm3q)
             }
 
             "e3q" -> {
                 guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://t.me/biskupmuf"
-                x!!.DeviceImage.setImageResource(R.drawable.e3q)
+                x.DeviceImage.setImageResource(R.drawable.e3q)
             }
 
             "gts6l", "gts6lwifi" -> {
                 guidelink = "https://project-aloha.github.io/"
                 grouplink = "https://t.me/project_aloha_issues"
-                x!!.DeviceImage.setImageResource(R.drawable.gts6l)
+                x.DeviceImage.setImageResource(R.drawable.gts6l)
                 tablet = true
             }
 
             "q2q" -> {
                 guidelink = "https://project-aloha.github.io/"
                 grouplink = "https://t.me/project_aloha_issues"
-                x!!.DeviceImage.setImageResource(R.drawable.q2q)
+                x.DeviceImage.setImageResource(R.drawable.q2q)
                 tablet = true
             }
 
             "star2qlte", "star2qltechn", "r3q" -> {
                 guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://discord.gg/Dx2QgMx7Sv"
-                x!!.DeviceImage.setImageResource(R.drawable.unknown)
+                x.DeviceImage.setImageResource(R.drawable.unknown)
             }
 
             "winnerx", "winner" -> {
                 guidelink = "https://github.com/n00b69/woa-winner"
                 grouplink = "https://t.me/project_aloha_issues"
-                x!!.DeviceImage.setImageResource(R.drawable.winner)
+                x.DeviceImage.setImageResource(R.drawable.winner)
                 tablet = true
             }
 
             "venus" -> {
                 guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://discord.gg/Dx2QgMx7Sv"
-                x!!.DeviceImage.setImageResource(R.drawable.venus)
+                x.DeviceImage.setImageResource(R.drawable.venus)
             }
 
             "alioth" -> {
                 guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://discord.gg/Dx2QgMx7Sv"
-                x!!.DeviceImage.setImageResource(R.drawable.alioth)
+                x.DeviceImage.setImageResource(R.drawable.alioth)
             }
 
             "davinci" -> {
                 guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://t.me/woa_davinci"
-                x!!.DeviceImage.setImageResource(R.drawable.raphael)
+                x.DeviceImage.setImageResource(R.drawable.raphael)
             }
 
             "marble" -> {
                 guidelink = "https://github.com/Xhdsos/woa-marble"
                 grouplink = "https://t.me/woa_marble"
-                x!!.DeviceImage.setImageResource(R.drawable.marble)
+                x.DeviceImage.setImageResource(R.drawable.marble)
             }
 
             "Pong", "pong" -> {
                 guidelink = "https://github.com/index986/woa-pong"
                 grouplink = "https://t.me/WoA_spacewar_pong"
-                x!!.DeviceImage.setImageResource(R.drawable.pong)
+                x.DeviceImage.setImageResource(R.drawable.pong)
             }
 
             "xpeng" -> {
                 guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://t.me/woahelperchat"
-                x!!.DeviceImage.setImageResource(R.drawable.xpeng)
+                x.DeviceImage.setImageResource(R.drawable.xpeng)
             }
 
             "RMX2061" -> {
                 guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://discord.gg/Dx2QgMx7Sv"
-                x!!.DeviceImage.setImageResource(R.drawable.rmx2061)
+                x.DeviceImage.setImageResource(R.drawable.rmx2061)
             }
 
             "RMX2170" -> {
                 guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://discord.gg/Dx2QgMx7Sv"
-                x!!.DeviceImage.setImageResource(R.drawable.rmx2170)
+                x.DeviceImage.setImageResource(R.drawable.rmx2170)
             }
 
             "cmi" -> {
                 guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://t.me/dumanthecat"
-                x!!.DeviceImage.setImageResource(R.drawable.cmi)
+                x.DeviceImage.setImageResource(R.drawable.cmi)
             }
 
             "houji" -> {
                 guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://t.me/dumanthecat"
-                x!!.DeviceImage.setImageResource(R.drawable.houji)
+                x.DeviceImage.setImageResource(R.drawable.houji)
             }
 
             "meizu20pro", "meizu20Pro" -> {
                 guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://t.me/dumanthecat"
-                x!!.DeviceImage.setImageResource(R.drawable.meizu20pro)
+                x.DeviceImage.setImageResource(R.drawable.meizu20pro)
             }
 
             "husky" -> {
                 guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://t.me/dumanthecat"
-                x!!.DeviceImage.setImageResource(R.drawable.husky)
+                x.DeviceImage.setImageResource(R.drawable.husky)
             }
 
             "redfin", "herolte", "crownlte" -> {
                 guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://t.me/dumanthecat"
-                x!!.DeviceImage.setImageResource(R.drawable.redfin)
+                x.DeviceImage.setImageResource(R.drawable.redfin)
             }
 
             "haotian" -> {
                 guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://t.me/dumanthecat"
-                x!!.DeviceImage.setImageResource(R.drawable.haotian)
+                x.DeviceImage.setImageResource(R.drawable.haotian)
             }
 
             "Nord", "nord" -> {
                 guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://t.me/dikeckaan"
-                x!!.DeviceImage.setImageResource(R.drawable.nord)
+                x.DeviceImage.setImageResource(R.drawable.nord)
             }
 
             "nx729j", "NX729J", "NX729J-UN" -> {
                 guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://t.me/woahelperchat"
-                x!!.DeviceImage.setImageResource(R.drawable.nx729j)
+                x.DeviceImage.setImageResource(R.drawable.nx729j)
             }
 
             "brepdugl" -> {
                 guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
                 grouplink = "https://discord.gg/Dx2QgMx7Sv"
-                x!!.DeviceImage.setImageResource(R.drawable.unknown)
+                x.DeviceImage.setImageResource(R.drawable.unknown)
             }
 
             else -> {
                 guidelink = "https://renegade-project.tech/"
                 grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA"
-                n!!.dumpModem.visibility = View.VISIBLE
+                n.dumpModem.visibility = View.VISIBLE
                 unsupported = true
             }
         }
@@ -627,11 +613,11 @@ class MainActivity : AppCompatActivity() {
             }
             Dlg.setNo(R.string.later) { Dlg.close() }
         }
-        arrayOf(Pair.create(x!!.tvRamvalue, getString(R.string.ramvalue, RAM().getMemory(this).toDouble())), Pair.create(x!!.tvPanel, getString(R.string.paneltype, panel))).forEach {
+        arrayOf(Pair.create(x.tvRamvalue, getString(R.string.ramvalue, RAM().getMemory(this).toDouble())), Pair.create(x.tvPanel, getString(R.string.paneltype, panel))).forEach {
             it.first.text =
                 it.second
         }
-        arrayOf(Pair.create(x!!.guide, guidelink), Pair.create(x!!.group, grouplink)).forEach {
+        arrayOf(Pair.create(x.guide, guidelink), Pair.create(x.group, grouplink)).forEach {
             it.first.setOnClickListener { a: View? ->
                 openLink(
                     it.second
@@ -639,18 +625,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        checkupdate()
+
         if (!BuildConfig.DEBUG) {
             checkdbkpmodel()
-            checkupdate()
-            k!!.codename.visibility = View.GONE
-        }
-		
-		/// because the lack of checkupdate in debug builds AGAIN semi-ruined the update thing
-		if (BuildConfig.DEBUG) {
-            checkupdate()
+            k.codename.visibility = View.GONE
         }
 
-        x!!.backup.setOnClickListener { a: View? ->
+        x.backup.setOnClickListener { a: View? ->
             Dlg.show(this, R.string.backup_boot_question, R.drawable.ic_disk)
             Dlg.setDismiss(R.string.no) { Dlg.close() }
             Dlg.setNo(R.string.android) {
@@ -678,20 +660,20 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        x!!.mnt.setOnClickListener { a: View? -> mountUI() }
+        x.mnt.setOnClickListener { a: View? -> mountUI() }
 
-        x!!.quickBoot.setOnClickListener { a: View? -> quickbootUI() }
+        x.quickBoot.setOnClickListener { a: View? -> quickbootUI() }
 
-        x!!.toolbox.setOnClickListener { v: View? ->
-            views.add(n!!.root)
-            x!!.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out))
-            setContentView(n!!.root)
-            n!!.toolboxtab.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in))
-            n!!.toolbarlayout.toolbar.title = getString(R.string.toolbox_title)
-            n!!.toolbarlayout.toolbar.navigationIcon = getDrawable(R.drawable.ic_launcher_foreground)
+        x.toolbox.setOnClickListener { v: View? ->
+            views.add(n.root)
+            x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out))
+            setContentView(n.root)
+            n.toolboxtab.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in))
+            n.toolbarlayout.toolbar.title = getString(R.string.toolbox_title)
+            n.toolbarlayout.toolbar.navigationIcon = getDrawable(R.drawable.ic_launcher_foreground)
         }
 
-        n!!.sta.setOnClickListener { a: View? ->
+        n.sta.setOnClickListener { a: View? ->
             Dlg.show(this, R.string.sta_question, R.drawable.android)
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
@@ -714,7 +696,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        n!!.dumpModem.setOnClickListener { a: View? ->
+        n.dumpModem.setOnClickListener { a: View? ->
             Dlg.show(this, R.string.dump_modem_question, R.drawable.ic_modem)
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
@@ -730,7 +712,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        n!!.flashUefi.setOnClickListener { a: View? ->
+        n.flashUefi.setOnClickListener { a: View? ->
             Dlg.show(this, R.string.flash_uefi_question, R.drawable.ic_uefi)
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
@@ -749,7 +731,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        n!!.dbkp.setOnClickListener { a: View? ->
+        n.dbkp.setOnClickListener { a: View? ->
             if (!isNetworkConnected(this)) {
                 nointernet()
                 return@setOnClickListener
@@ -776,7 +758,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        n!!.devcfg.setOnClickListener { a: View? ->
+        n.devcfg.setOnClickListener { a: View? ->
             if (!isNetworkConnected(this)) {
                 val finddevcfg = rootCommand("find $filesDir -maxdepth 1 -name OOS11_devcfg_*")
                 if (finddevcfg.isEmpty()) {
@@ -829,7 +811,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        n!!.software.setOnClickListener { a: View? ->
+        n.software.setOnClickListener { a: View? ->
             Dlg.show(this, R.string.software_question, R.drawable.ic_sensor)
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
@@ -849,7 +831,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        n!!.atlasos.setOnClickListener { a: View? ->
+        n.atlasos.setOnClickListener { a: View? ->
             if (!isNetworkConnected(this)) {
                 nointernet()
                 return@setOnClickListener
@@ -912,7 +894,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        n!!.usbhost.setOnClickListener { a: View? ->
+        n.usbhost.setOnClickListener { a: View? ->
             Dlg.show(this, R.string.usbhost_question, R.drawable.ic_mnt)
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
@@ -933,7 +915,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        n!!.rotation.setOnClickListener { a: View? ->
+        n.rotation.setOnClickListener { a: View? ->
             Dlg.show(this, R.string.rotation_question, R.drawable.ic_disk)
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
@@ -953,7 +935,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        n!!.tablet.setOnClickListener { a: View? ->
+        n.tablet.setOnClickListener { a: View? ->
             Dlg.show(this, R.string.tablet_question, R.drawable.ic_sensor)
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
@@ -973,7 +955,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        n!!.setup.setOnClickListener { a: View? ->
+        n.setup.setOnClickListener { a: View? ->
             if (!isNetworkConnected(this)) {
                 nointernet()
                 return@setOnClickListener
@@ -1029,7 +1011,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        n!!.defender.setOnClickListener { a: View? ->
+        n.defender.setOnClickListener { a: View? ->
             Dlg.show(this, R.string.defender_question, R.drawable.edge2)
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
@@ -1061,28 +1043,28 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        k!!.toolbarlayout.toolbar.setTitle(R.string.preferences)
-        k!!.toolbarlayout.toolbar.setNavigationIcon(R.drawable.ic_launcher_foreground)
+        k.toolbarlayout.toolbar.setTitle(R.string.preferences)
+        k.toolbarlayout.toolbar.setNavigationIcon(R.drawable.ic_launcher_foreground)
         val settingsIconClick = View.OnClickListener { v: View? ->
-            views.add(k!!.root)
+            views.add(k.root)
             views[views.size - 2].startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out))
-            setContentView(k!!.root)
+            setContentView(k.root)
             views[views.size - 1].startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in))
             // Scary big line! (Victoria)
             arrayOf(
-                Pair.create(k!!.backupQB, Pref.getBackup(this)),
-                Pair.create(k!!.backupQBA, Pref.getBackupA(this)),
-                Pair.create(k!!.autobackup, !Pref.getAuto(this)),
-                Pair.create(k!!.autobackupA, !Pref.getAutoA(this)),
-                Pair.create(k!!.confirmation, Pref.getConfirm(this)),
-                Pair.create(k!!.automount, Pref.getAutoMount(this)),
-                Pair.create(k!!.securelock, !Pref.getSecure(this)),
-                Pair.create(k!!.mountLocation, Pref.getMountLocation(this)),
-                Pair.create(k!!.appUpdate, Pref.getAppUpdate(this)),
-                Pair.create(k!!.devcfg1, Pref.getDevcfg1(this) && View.VISIBLE == k!!.devcfg1.visibility),
-                Pair.create(k!!.devcfg2, Pref.getDevcfg2(this))
+                Pair.create(k.backupQB, Pref.getBackup(this)),
+                Pair.create(k.backupQBA, Pref.getBackupA(this)),
+                Pair.create(k.autobackup, !Pref.getAuto(this)),
+                Pair.create(k.autobackupA, !Pref.getAutoA(this)),
+                Pair.create(k.confirmation, Pref.getConfirm(this)),
+                Pair.create(k.automount, Pref.getAutoMount(this)),
+                Pair.create(k.securelock, !Pref.getSecure(this)),
+                Pair.create(k.mountLocation, Pref.getMountLocation(this)),
+                Pair.create(k.appUpdate, Pref.getAppUpdate(this)),
+                Pair.create(k.devcfg1, Pref.getDevcfg1(this) && View.VISIBLE == k.devcfg1.visibility),
+                Pair.create(k.devcfg2, Pref.getDevcfg2(this))
             ).forEach { it.first.setChecked(it.second) }
-            k!!.toolbarlayout.settings.visibility = View.GONE
+            k.toolbarlayout.settings.visibility = View.GONE
             val langSpinner = findViewById<AppCompatSpinner>(R.id.languages)
             langSpinner.adapter = adapter
             val l = AppCompatDelegate.getApplicationLocales()[0]
@@ -1099,72 +1081,72 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        arrayOf(x!!.toolbarlayout.settings, n!!.toolbarlayout.settings, z!!.toolbarlayout.settings).forEach { it.setOnClickListener(settingsIconClick) }
+        arrayOf(x.toolbarlayout.settings, n.toolbarlayout.settings, z.toolbarlayout.settings).forEach { it.setOnClickListener(settingsIconClick) }
 
-        k!!.mountLocation.setOnChangeListener { b: Boolean ->
+        k.mountLocation.setOnChangeListener { b: Boolean ->
             Pref.setMountLocation(this, b)
             updateWinPath()
         }
 
-        k!!.backupQB.setOnChangeListener { b: Boolean ->
+        k.backupQB.setOnChangeListener { b: Boolean ->
             if (Pref.getBackup(this)) {
                 Pref.setBackup(this, false)
-                k!!.autobackup.visibility = View.VISIBLE
+                k.autobackup.visibility = View.VISIBLE
                 return@setOnChangeListener
             }
             Dlg.show(this, R.string.bwarn)
-            Dlg.onCancel { k!!.backupQB.setChecked(false) }
+            Dlg.onCancel { k.backupQB.setChecked(false) }
             Dlg.setDismiss(R.string.cancel) {
-                k!!.backupQB.setChecked(false)
+                k.backupQB.setChecked(false)
                 Dlg.close()
             }
             Dlg.setYes(R.string.agree) {
                 Pref.setBackup(this, true)
-                k!!.autobackup.visibility = View.GONE
+                k.autobackup.visibility = View.GONE
                 Dlg.close()
             }
         }
 
-        k!!.backupQBA.setOnChangeListener { b: Boolean ->
+        k.backupQBA.setOnChangeListener { b: Boolean ->
             if (Pref.getBackupA(this)) {
                 Pref.setBackupA(this, false)
-                k!!.autobackupA.visibility = View.VISIBLE
+                k.autobackupA.visibility = View.VISIBLE
                 return@setOnChangeListener
             }
             Dlg.show(this, R.string.bwarn)
-            Dlg.onCancel { k!!.backupQBA.setChecked(false) }
+            Dlg.onCancel { k.backupQBA.setChecked(false) }
             Dlg.setDismiss(R.string.cancel) {
-                k!!.backupQBA.setChecked(false)
+                k.backupQBA.setChecked(false)
                 Dlg.close()
             }
             Dlg.setYes(R.string.agree) {
                 Pref.setBackupA(this, true)
-                k!!.autobackupA.visibility = View.GONE
+                k.autobackupA.visibility = View.GONE
                 Dlg.close()
             }
         }
 
-        x!!.cvInfo.setOnClickListener { a: View? ->
+        x.cvInfo.setOnClickListener { a: View? ->
             checkupdate(true)
         }
 
-        k!!.autobackup.setOnChangeListener { b: Boolean -> Pref.setAuto(this, !b) }
-        k!!.autobackupA.setOnChangeListener { b: Boolean -> Pref.setAutoA(this, !b) }
-        k!!.confirmation.setOnChangeListener { b: Boolean -> Pref.setConfirm(this, b) }
-        k!!.securelock.setOnChangeListener { b: Boolean -> Pref.setSecure(this, !b) }
-        k!!.automount.setOnChangeListener { b: Boolean -> Pref.setAutoMount(this, b) }
-        k!!.appUpdate.setOnChangeListener { b: Boolean -> Pref.setAppUpdate(this, b) }
+        k.autobackup.setOnChangeListener { b: Boolean -> Pref.setAuto(this, !b) }
+        k.autobackupA.setOnChangeListener { b: Boolean -> Pref.setAutoA(this, !b) }
+        k.confirmation.setOnChangeListener { b: Boolean -> Pref.setConfirm(this, b) }
+        k.securelock.setOnChangeListener { b: Boolean -> Pref.setSecure(this, !b) }
+        k.automount.setOnChangeListener { b: Boolean -> Pref.setAutoMount(this, b) }
+        k.appUpdate.setOnChangeListener { b: Boolean -> Pref.setAppUpdate(this, b) }
         val op7funny = rootCommand("cat /proc/cmdline | grep oplus")
         if (arrayOf("guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO", "hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device) && !op7funny.isEmpty()) {
-            k!!.devcfg1.setOnChangeListener { b: Boolean ->
+            k.devcfg1.setOnChangeListener { b: Boolean ->
                 Pref.setDevcfg1(this, b)
-                k!!.devcfg2.visibility = if (b) View.VISIBLE else View.GONE
+                k.devcfg2.visibility = if (b) View.VISIBLE else View.GONE
                 Pref.setDevcfg2(this, false)
             }
-            k!!.devcfg2.setOnChangeListener { b: Boolean -> Pref.setDevcfg2(this, b) }
-            n!!.devcfg.visibility = View.VISIBLE
+            k.devcfg2.setOnChangeListener { b: Boolean -> Pref.setDevcfg2(this, b) }
+            n.devcfg.visibility = View.VISIBLE
         } else {
-            arrayOf(k!!.devcfg1, k!!.devcfg2).forEach { it.visibility = View.GONE }
+            arrayOf(k.devcfg1, k.devcfg2).forEach { it.visibility = View.GONE }
             Pref.setDevcfg1(this, false)
             Pref.setDevcfg2(this, false)
         }
@@ -1193,17 +1175,17 @@ class MainActivity : AppCompatActivity() {
         rootCommand("mkdir /sdcard/UEFI")
         finduefi = "\"" + rootCommand(getString(R.string.uefiChk)) + "\""
         val found = finduefi!!.contains("img")
-        arrayOf(x!!.quickBoot, n!!.flashUefi).forEach { it.isEnabled = found }
-        arrayOf(Pair.create(x!!.quickBoot, if (found) R.string.quickboot_title else R.string.uefi_not_found), Pair.create(n!!.flashUefi, if (found) R.string.flash_uefi_title else R.string.uefi_not_found)).forEach { it.first.setTitle(it.second) }
-        arrayOf(Pair.create(x!!.quickBoot, if (found) getString(R.string.quickboot_subtitle_nabu) else getString(R.string.uefi_not_found_subtitle, device)), Pair.create(n!!.flashUefi, if (found) getString(R.string.flash_uefi_subtitle) else getString(R.string.uefi_not_found_subtitle, device))).forEach { it.first.setSubtitle(it.second) }
+        arrayOf(x.quickBoot, n.flashUefi).forEach { it.isEnabled = found }
+        arrayOf(Pair.create(x.quickBoot, if (found) R.string.quickboot_title else R.string.uefi_not_found), Pair.create(n.flashUefi, if (found) R.string.flash_uefi_title else R.string.uefi_not_found)).forEach { it.first.setTitle(it.second) }
+        arrayOf(Pair.create(x.quickBoot, if (found) getString(R.string.quickboot_subtitle_nabu) else getString(R.string.uefi_not_found_subtitle, device)), Pair.create(n.flashUefi, if (found) getString(R.string.flash_uefi_subtitle) else getString(R.string.uefi_not_found_subtitle, device))).forEach { it.first.setSubtitle(it.second) }
     }
 
     private fun checkwin() {
-        if (!win!!.isEmpty()) return
+        if (!win.isEmpty() || BuildConfig.DEBUG) return
         Dlg.show(this, R.string.partition)
         Dlg.setCancelable(false)
         Dlg.setYes(R.string.guide) { openLink(guidelink) }
-        arrayOf(x!!.mnt, x!!.toolbox, x!!.quickBoot, n!!.flashUefi).forEach { it.isEnabled = false }
+        arrayOf(x.mnt, x.toolbox, x.quickBoot, n.flashUefi).forEach { it.isEnabled = false }
     }
 
     private fun checkupdate(){
@@ -1271,7 +1253,7 @@ class MainActivity : AppCompatActivity() {
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         if (!tablet) return
-        arrayOf(x!!.app, x!!.top).forEach { it.orientation = if (Configuration.ORIENTATION_PORTRAIT == newConfig.orientation && tablet) (if (it === x!!.app) LinearLayout.VERTICAL else LinearLayout.HORIZONTAL) else (if (it === x!!.app) LinearLayout.HORIZONTAL else LinearLayout.VERTICAL) }
+        arrayOf(x.app, x.top).forEach { it.orientation = if (Configuration.ORIENTATION_PORTRAIT == newConfig.orientation && tablet) (if (it === x.app) LinearLayout.VERTICAL else LinearLayout.HORIZONTAL) else (if (it === x.app) LinearLayout.HORIZONTAL else LinearLayout.VERTICAL) }
     }
 
     private fun kernelPatch(message: String, link: String) {
@@ -1320,15 +1302,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        private var x: ActivityMainBinding? = null
-        private var k: SetPanelBinding? = null
-        private var n: ToolboxBinding? = null
-        private var z: ScriptsBinding? = null
+        private lateinit var x: ActivityMainBinding
+        private lateinit var k: SetPanelBinding
+        private lateinit var n: ToolboxBinding
+        private lateinit var z: ScriptsBinding
 
         @JvmField
         var context: AppCompatActivity? = null
         private var mounted: String? = null
-        private var win: String? = null
+        private var win: String = ""
         private var winpath: String? = null
         private var finduefi: String? = null
         private var device: String? = null
@@ -1487,7 +1469,7 @@ class MainActivity : AppCompatActivity() {
         @JvmStatic
         fun showBlur() {
             blur++
-            runSilently { arrayOf(x!!.blur, k!!.blur, n!!.blur, z!!.blur).forEach { it.visibility = View.VISIBLE } }
+            runSilently { arrayOf(x.blur, k.blur, n.blur, z.blur).forEach { it.visibility = View.VISIBLE } }
         }
 
         @JvmStatic
@@ -1495,7 +1477,7 @@ class MainActivity : AppCompatActivity() {
             if (!check) blur = 1
             blur--
             if (0 < blur) return
-            runSilently { arrayOf(x!!.blur, k!!.blur, n!!.blur, z!!.blur).forEach { it.visibility = View.GONE } }
+            runSilently { arrayOf(x.blur, k.blur, n.blur, z.blur).forEach { it.visibility = View.GONE } }
         }
 
         @JvmStatic
@@ -1510,13 +1492,13 @@ class MainActivity : AppCompatActivity() {
             val sdf = SimpleDateFormat("dd-MM HH:mm", Locale.US)
             val currentDateAndTime = sdf.format(Date())
             Pref.setDate(context!!, currentDateAndTime)
-            x!!.tvDate.text = context!!.getString(R.string.last, Pref.getDate(context!!))
+            x.tvDate.text = context!!.getString(R.string.last, Pref.getDate(context!!))
         }
 
         internal fun updateMountText() {
             mounted = if (isMounted()) context!!.getString(R.string.unmountt) else context!!.getString(R.string.mountt)
             context!!.runOnUiThread {
-                if (null != x) x!!.mnt.setTitle(String.format(context!!.getString(R.string.mnt_title), mounted))
+                if (null != x) x.mnt.setTitle(String.format(context!!.getString(R.string.mnt_title), mounted))
             }
             MountWidget.updateText(context!!, String.format(context!!.getString(R.string.mnt_title), mounted))
         }
