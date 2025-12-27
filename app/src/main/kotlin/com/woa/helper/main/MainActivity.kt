@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import android.content.res.Resources
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
@@ -68,6 +69,19 @@ class MainActivity : AppCompatActivity() {
         rootCommand("chmod 644 $filesDir/libfuse-lite.so && chown root:root $filesDir/libfuse-lite.so")
         rootCommand("chmod 644 $filesDir/libntfs-3g.so && chown root:root $filesDir/libntfs-3g.so")
         rootCommand("chmod 755 $filesDir/mount.ntfs && chown root:root $filesDir/mount.ntfs")
+    }
+
+    private fun aspectRatio() : Float{
+        val metrics = Resources.getSystem().displayMetrics
+        var size1 = metrics.widthPixels
+        var size2 = metrics.heightPixels
+        if (size1>size2)
+            size1=size2.also{size2 =size1}
+        return size2.toFloat() / size1.toFloat()
+    }
+
+    private fun isTablet(): Boolean{
+        return aspectRatio() < 1.7
     }
 
     @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
@@ -275,7 +289,6 @@ class MainActivity : AppCompatActivity() {
                     it.first.visibility =
                         it.second
                 }
-                tablet = true
             }
 
             "perseus" -> {
@@ -292,7 +305,6 @@ class MainActivity : AppCompatActivity() {
                     it.first.visibility =
                         it.second
                 }
-                tablet = true
             }
 
             "polaris" -> {
@@ -425,14 +437,12 @@ class MainActivity : AppCompatActivity() {
                 guidelink = "https://project-aloha.github.io/"
                 grouplink = "https://t.me/project_aloha_issues"
                 x.DeviceImage.setImageResource(R.drawable.gts6l)
-                tablet = true
             }
 
             "q2q" -> {
                 guidelink = "https://project-aloha.github.io/"
                 grouplink = "https://t.me/project_aloha_issues"
                 x.DeviceImage.setImageResource(R.drawable.q2q)
-                tablet = true
             }
 
             "star2qlte", "star2qltechn", "r3q" -> {
@@ -445,7 +455,6 @@ class MainActivity : AppCompatActivity() {
                 guidelink = "https://github.com/n00b69/woa-winner"
                 grouplink = "https://t.me/project_aloha_issues"
                 x.DeviceImage.setImageResource(R.drawable.winner)
-                tablet = true
             }
 
             "venus" -> {
@@ -557,6 +566,7 @@ class MainActivity : AppCompatActivity() {
                 unsupported = true
             }
         }
+        tablet= isTablet()
         onConfigurationChanged(resources.configuration)
         //if (!tablet) requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         if (unsupported && !Pref.getAGREE(this)) {
