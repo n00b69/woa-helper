@@ -3,7 +3,6 @@ package com.woa.helper.main
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -40,11 +39,7 @@ import com.woa.helper.preference.Pref
 import com.woa.helper.util.RAM
 import com.woa.helper.widgets.MountWidget
 import java.io.File
-import java.io.FileNotFoundException
-import java.io.FileOutputStream
 import java.io.IOException
-import java.io.InputStream
-import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -122,7 +117,7 @@ class MainActivity : AppCompatActivity() {
         views.clear()
         views.add(x.root)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content)) { v: View?, insets: WindowInsetsCompat ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content)) { _: View?, insets: WindowInsetsCompat ->
             val sysInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             arrayOf(x.app, n.app, k.app, z.app).forEach { it.setPadding(0, 0, 0, sysInsets.bottom) }
             arrayOf(x.linearLayout, n.linearLayout, k.linearLayout, z.linearLayout).forEach { it.setPadding(sysInsets.left, sysInsets.top, sysInsets.right, 0) }
@@ -161,7 +156,7 @@ class MainActivity : AppCompatActivity() {
 
         val slot = rootCommand("getprop ro.boot.slot_suffix")
         if (slot.isEmpty()) x.tvSlot.visibility = View.GONE
-        else x.tvSlot.text = getString(R.string.slot, slot.substring(1, 2)).uppercase(Locale.getDefault())
+        else x.tvSlot.text = getString(R.string.slot, slot[1]).uppercase(Locale.getDefault())
 
         x.deviceName.text = "$model ($device)"
         when (device) {
@@ -563,7 +558,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         onConfigurationChanged(resources.configuration)
-        if (!tablet) requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        //if (!tablet) requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         if (unsupported && !Pref.getAGREE(this)) {
             Dlg.show(this, R.string.unsupported)
             Dlg.setYes(R.string.sure) {
@@ -618,7 +613,7 @@ class MainActivity : AppCompatActivity() {
                 it.second
         }
         arrayOf(Pair.create(x.guide, guidelink), Pair.create(x.group, grouplink)).forEach {
-            it.first.setOnClickListener { a: View? ->
+            it.first.setOnClickListener { _: View? ->
                 openLink(
                     it.second
                 )
@@ -632,7 +627,7 @@ class MainActivity : AppCompatActivity() {
             k.codename.visibility = View.GONE
         }
 
-        x.backup.setOnClickListener { a: View? ->
+        x.backup.setOnClickListener { _: View? ->
             Dlg.show(this, R.string.backup_boot_question, R.drawable.ic_disk)
             Dlg.setDismiss(R.string.no) { Dlg.close() }
             Dlg.setNo(R.string.android) {
@@ -660,11 +655,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        x.mnt.setOnClickListener { a: View? -> mountUI() }
+        x.mnt.setOnClickListener { _: View? -> mountUI() }
 
-        x.quickBoot.setOnClickListener { a: View? -> quickbootUI() }
+        x.quickBoot.setOnClickListener { _: View? -> quickbootUI() }
 
-        x.toolbox.setOnClickListener { v: View? ->
+        x.toolbox.setOnClickListener { _: View? ->
             views.add(n.root)
             x.mainlayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out))
             setContentView(n.root)
@@ -673,7 +668,7 @@ class MainActivity : AppCompatActivity() {
             n.toolbarlayout.toolbar.navigationIcon = getDrawable(R.drawable.ic_launcher_foreground)
         }
 
-        n.sta.setOnClickListener { a: View? ->
+        n.sta.setOnClickListener { _: View? ->
             Dlg.show(this, R.string.sta_question, R.drawable.android)
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
@@ -696,7 +691,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        n.dumpModem.setOnClickListener { a: View? ->
+        n.dumpModem.setOnClickListener { _: View? ->
             Dlg.show(this, R.string.dump_modem_question, R.drawable.ic_modem)
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
@@ -712,7 +707,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        n.flashUefi.setOnClickListener { a: View? ->
+        n.flashUefi.setOnClickListener { _: View? ->
             Dlg.show(this, R.string.flash_uefi_question, R.drawable.ic_uefi)
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
@@ -731,7 +726,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        n.dbkp.setOnClickListener { a: View? ->
+        n.dbkp.setOnClickListener { _: View? ->
             if (!isNetworkConnected(this)) {
                 nointernet()
                 return@setOnClickListener
@@ -758,7 +753,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        n.devcfg.setOnClickListener { a: View? ->
+        n.devcfg.setOnClickListener { _: View? ->
             if (!isNetworkConnected(this)) {
                 val finddevcfg = rootCommand("find $filesDir -maxdepth 1 -name OOS11_devcfg_*")
                 if (finddevcfg.isEmpty()) {
@@ -811,7 +806,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        n.software.setOnClickListener { a: View? ->
+        n.software.setOnClickListener { _: View? ->
             Dlg.show(this, R.string.software_question, R.drawable.ic_sensor)
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
@@ -831,7 +826,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        n.atlasos.setOnClickListener { a: View? ->
+        n.atlasos.setOnClickListener { _: View? ->
             if (!isNetworkConnected(this)) {
                 nointernet()
                 return@setOnClickListener
@@ -894,7 +889,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        n.usbhost.setOnClickListener { a: View? ->
+        n.usbhost.setOnClickListener { _: View? ->
             Dlg.show(this, R.string.usbhost_question, R.drawable.ic_mnt)
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
@@ -915,7 +910,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        n.rotation.setOnClickListener { a: View? ->
+        n.rotation.setOnClickListener { _: View? ->
             Dlg.show(this, R.string.rotation_question, R.drawable.ic_disk)
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
@@ -935,7 +930,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        n.tablet.setOnClickListener { a: View? ->
+        n.tablet.setOnClickListener { _: View? ->
             Dlg.show(this, R.string.tablet_question, R.drawable.ic_sensor)
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
@@ -955,7 +950,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        n.setup.setOnClickListener { a: View? ->
+        n.setup.setOnClickListener { _: View? ->
             if (!isNetworkConnected(this)) {
                 nointernet()
                 return@setOnClickListener
@@ -1011,7 +1006,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        n.defender.setOnClickListener { a: View? ->
+        n.defender.setOnClickListener { _: View? ->
             Dlg.show(this, R.string.defender_question, R.drawable.edge2)
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
@@ -1126,7 +1121,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        x.cvInfo.setOnClickListener { a: View? ->
+        x.cvInfo.setOnClickListener { _: View? ->
             checkupdate(true)
         }
 
@@ -1197,10 +1192,10 @@ class MainActivity : AppCompatActivity() {
             return
         }
         if (Pref.getAppUpdate(this)&&!manual) return
-	//	if (manual) {
+		if (manual) {
             Dlg.show(this, R.string.please_wait)
 		    Dlg.setCancelable(false)
-	//	}
+		}
         val version = download.text("https://raw.githubusercontent.com/n00b69/woa-helper-update/main"+ (if (BuildConfig.DEBUG) "/debug" else "")+"/README.md")
         val changelog = download.text("https://raw.githubusercontent.com/n00b69/woa-helper-update/main"+ (if (BuildConfig.DEBUG) "/debug" else "")+"/changelog.md")
         if (version.isEmpty()) {
@@ -1211,12 +1206,10 @@ class MainActivity : AppCompatActivity() {
 			if (manual) {
             	Dlg.setText(getString(R.string.no) + " " + getString(R.string.update1))
             	Dlg.dismissButton()
-				return
-			} else {
-				Dlg.close()
-				return
 			}
+            return
         }
+        if (!manual) Dlg.show(this,"")
         Dlg.setText(getString(R.string.update1)+": "+version+"\n"+changelog)
         Dlg.setNo(R.string.later) { Dlg.close() }
         Dlg.setYes(R.string.update) {
@@ -1252,8 +1245,20 @@ class MainActivity : AppCompatActivity() {
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        if (!tablet) return
-        arrayOf(x.app, x.top).forEach { it.orientation = if (Configuration.ORIENTATION_PORTRAIT == newConfig.orientation && tablet) (if (it === x.app) LinearLayout.VERTICAL else LinearLayout.HORIZONTAL) else (if (it === x.app) LinearLayout.HORIZONTAL else LinearLayout.VERTICAL) }
+
+        var params = arrayOf(LinearLayout.HORIZONTAL, View.GONE, LinearLayout.LayoutParams.MATCH_PARENT, 100,
+            LinearLayout.VERTICAL)
+        if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
+            params = arrayOf(LinearLayout.VERTICAL, View.VISIBLE, LinearLayout.LayoutParams.WRAP_CONTENT, 0,
+                LinearLayout.HORIZONTAL)
+
+        x.app.orientation = params[0]
+        x.top.orientation = params[4]
+        if (tablet) return
+        x.DeviceImage.visibility = params[1]
+        x.up.layoutParams.height = params[2]
+        x.infoText.setPadding(params[3],0,params[3],0)
+
     }
 
     private fun kernelPatch(message: String, link: String) {
