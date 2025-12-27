@@ -1050,7 +1050,7 @@ class MainActivity : AppCompatActivity() {
 
         k.toolbarlayout.toolbar.setTitle(R.string.preferences)
         k.toolbarlayout.toolbar.setNavigationIcon(R.drawable.ic_launcher_foreground)
-        val settingsIconClick = View.OnClickListener { v: View? ->
+        val settingsIconClick = View.OnClickListener { _: View? ->
             views.add(k.root)
             views[views.size - 2].startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out))
             setContentView(k.root)
@@ -1093,7 +1093,7 @@ class MainActivity : AppCompatActivity() {
             updateWinPath()
         }
 
-        k.backupQB.setOnChangeListener { b: Boolean ->
+        k.backupQB.setOnChangeListener { _: Boolean ->
             if (Pref.getBackup(this)) {
                 Pref.setBackup(this, false)
                 k.autobackup.visibility = View.VISIBLE
@@ -1112,7 +1112,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        k.backupQBA.setOnChangeListener { b: Boolean ->
+        k.backupQBA.setOnChangeListener { _: Boolean ->
             if (Pref.getBackupA(this)) {
                 Pref.setBackupA(this, false)
                 k.autobackupA.visibility = View.VISIBLE
