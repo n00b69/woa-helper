@@ -156,11 +156,10 @@ class MainActivity : AppCompatActivity() {
         )
         setSupportActionBar(x.toolbarlayout.toolbar)
         x.toolbarlayout.toolbar.setTitle(R.string.app_name)
-        x.toolbarlayout.toolbar.subtitle = "v${BuildConfig.VERSION_NAME}"
+        x.toolbarlayout.toolbar.subtitle = "v${BuildConfig.VERSION_NAME}"+if (BuildConfig.DEBUG) " (Debug)" else ""
         x.toolbarlayout.toolbar.setNavigationIcon(R.drawable.ic_launcher_foreground)
         arrayOf(x.toolbarlayout.settings, k.toolbarlayout.settings, n.toolbarlayout.settings, z.toolbarlayout.settings).forEach { it.setColorFilter(R.color.md_theme_primary) }
 
-        model = Build.MODEL
         win = getWin()
         boot = getBoot()
         updateDevice()
@@ -172,400 +171,15 @@ class MainActivity : AppCompatActivity() {
         if (slot.isEmpty()) x.tvSlot.visibility = View.GONE
         else x.tvSlot.text = getString(R.string.slot, slot[1]).uppercase(Locale.getDefault())
 
-        x.deviceName.text = "$model ($device)"
-        when (device) {
-            "alphalm", "alphaplus", "alpha_lao_com", "alphalm_lao_com", "alphaplus_lao_com" -> {
-                guidelink = "https://github.com/n00b69/woa-alphaplus"
-                grouplink = "https://t.me/lgedevices"
-                x.DeviceImage.setImageResource(R.drawable.alphaplus)
-            }
-
-            "betalm", "betalm_lao_com" -> {
-                guidelink = "https://github.com/n00b69/woa-betalm"
-                grouplink = "https://t.me/lgedevices"
-                x.DeviceImage.setImageResource(R.drawable.betalm)
-            }
-
-            "flashlmdd", "flash_lao_com", "flashlm", "flashlmdd_lao_com" -> {
-                guidelink = "https://github.com/n00b69/woa-flashlmdd"
-                grouplink = "https://t.me/lgedevices"
-                x.DeviceImage.setImageResource(R.drawable.flashlmdd)
-            }
-
-            "mh2lm", "mh2lm_lao_com" -> {
-                guidelink = "https://github.com/n00b69/woa-mh2lm"
-                grouplink = "https://t.me/lgedevices"
-                x.DeviceImage.setImageResource(R.drawable.mh2lm)
-                x.tvPanel.visibility = View.VISIBLE
-            }
-
-            "mh2lm5g", "mh2lm5g_lao_com" -> {
-                guidelink = "https://github.com/n00b69/woa-mh2lm5g"
-                grouplink = "https://t.me/lgedevices"
-                x.DeviceImage.setImageResource(R.drawable.mh2lm)
-                x.tvPanel.visibility = View.VISIBLE
-            }
-
-            "judyln", "judyp", "judypn" -> {
-                guidelink = "https://github.com/n00b69/woa-everything"
-                grouplink = "https://t.me/lgedevices"
-                x.DeviceImage.setImageResource(R.drawable.unknown)
-            }
-
-            "joan" -> {
-                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
-                grouplink = "https://t.me/lgedevices"
-                x.DeviceImage.setImageResource(R.drawable.unknown)
-            }
-
-            "andromeda" -> {
-                guidelink = "https://project-aloha.github.io/"
-                grouplink = "https://t.me/project_aloha_issues"
-                x.DeviceImage.setImageResource(R.drawable.unknown)
-            }
-
-            "beryllium" -> {
-                guidelink = "https://github.com/n00b69/woa-beryllium"
-                grouplink = "https://t.me/WinOnF1"
-                x.DeviceImage.setImageResource(R.drawable.beryllium)
-                x.tvPanel.visibility = View.VISIBLE
-            }
-
-            "bhima", "vayu" -> {
-                guidelink = "https://github.com/WaLoVayu/POCOX3Pro-Windows-Guides"
-                grouplink = "https://t.me/WaLoVayu"
-                x.DeviceImage.setImageResource(R.drawable.vayu)
-                x.tvPanel.visibility = View.VISIBLE
-            }
-
-            "cepheus" -> {
-                guidelink = "https://github.com/n00b69/woa-cepheus"
-                grouplink = "http://t.me/woahelperchat"
-                x.DeviceImage.setImageResource(R.drawable.cepheus)
-                arrayOf(
-                    Pair.create(x.tvPanel, View.VISIBLE), Pair.create(n.dbkp, View.VISIBLE), Pair.create(n.dumpModem, View.VISIBLE), Pair.create(
-                        n.flashUefi, View.GONE
-                    )
-                ).forEach { it.first.visibility = it.second }
-            }
-
-            "chiron" -> {
-                guidelink = "https://renegade-project.tech/"
-                grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA"
-                x.DeviceImage.setImageResource(R.drawable.chiron)
-            }
-
-            "curtana", "curtana2", "curtana_india", "curtana_cn", "curtanacn", "durandal", "durandal_india", "excalibur", "excalibur2", "excalibur_india", "gram", "joyeuse", "miatoll" -> {
-                guidelink = "https://github.com/woa-miatoll/Miatoll-Guide"
-                grouplink = "http://t.me/woamiatoll"
-                x.DeviceImage.setImageResource(R.drawable.miatoll)
-                x.tvPanel.visibility = View.VISIBLE
-            }
-
-            "dipper" -> {
-                guidelink = "https://github.com/n00b69/woa-dipper"
-                grouplink = "https://t.me/woadipper"
-                x.DeviceImage.setImageResource(R.drawable.dipper)
-            }
-
-            "equuleus", "ursa" -> {
-                guidelink = "https://github.com/n00b69/woa-equuleus"
-                grouplink = "https://t.me/woaequuleus"
-                x.DeviceImage.setImageResource(R.drawable.equuleus)
-            }
-
-            "lisa" -> {
-                guidelink = "https://github.com/n00b69/woa-lisa"
-                grouplink = "https://t.me/lisawoa"
-                x.DeviceImage.setImageResource(R.drawable.lisa)
-				x.tvPanel.visibility = View.VISIBLE
-            }
-
-            "nabu" -> {
-                guidelink = "https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5"
-                grouplink = "https://t.me/nabuwoa"
-                x.DeviceImage.setImageResource(R.drawable.nabu)
-                arrayOf(Pair.create(x.tvPanel, View.VISIBLE), Pair.create(n.dbkp, View.VISIBLE), Pair.create(n.flashUefi, View.GONE)).forEach {
-                    it.first.visibility =
-                        it.second
-                }
-            }
-
-            "perseus" -> {
-                guidelink = "https://github.com/n00b69/woa-perseus"
-                grouplink = "https://t.me/woaperseus"
-                x.DeviceImage.setImageResource(R.drawable.perseus)
-            }
-
-            "pipa" -> {
-                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
-                grouplink = "https://t.me/xiaomi_pipa"
-                x.DeviceImage.setImageResource(R.drawable.pipa)
-                arrayOf(Pair.create(x.tvPanel, View.VISIBLE), Pair.create(n.dbkp, View.VISIBLE), Pair.create(n.flashUefi, View.GONE)).forEach {
-                    it.first.visibility =
-                        it.second
-                }
-            }
-
-            "polaris" -> {
-                guidelink = "https://github.com/n00b69/woa-polaris"
-                grouplink = "https://t.me/WinOnMIX2S"
-                x.DeviceImage.setImageResource(R.drawable.polaris)
-                x.tvPanel.visibility = View.VISIBLE
-            }
-
-            "raphael", "raphaelin", "raphaels" -> {
-                guidelink = "https://github.com/new-WoA-Raphael/woa-raphael"
-                grouplink = "https://t.me/woaraphael"
-                x.DeviceImage.setImageResource(R.drawable.raphael)
-                arrayOf(x.tvPanel, n.dumpModem).forEach { it.visibility = View.VISIBLE }
-            }
-
-            "surya", "karna" -> {
-                guidelink = "https://github.com/woa-surya/POCOX3NFC-Guides"
-                grouplink = "https://t.me/windows_on_pocox3_nfc"
-                x.DeviceImage.setImageResource(R.drawable.vayu)
-                x.tvPanel.visibility = View.VISIBLE
-            }
-
-            "sagit" -> {
-                guidelink = "https://renegade-project.tech/"
-                grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA"
-                x.DeviceImage.setImageResource(R.drawable.unknown)
-            }
-
-            "ingres" -> {
-                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
-                grouplink = "https://discord.gg/Dx2QgMx7Sv"
-                x.DeviceImage.setImageResource(R.drawable.ingres)
-            }
-
-            "vili", "lavender" -> {
-                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
-                grouplink = "https://discord.gg/Dx2QgMx7Sv"
-                x.DeviceImage.setImageResource(R.drawable.unknown)
-            }
-
-            "OnePlus5", "cheeseburger" -> {
-                guidelink = "https://renegade-project.tech/"
-                grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA"
-                x.DeviceImage.setImageResource(R.drawable.cheeseburger)
-            }
-
-            "OnePlus5T", "dumpling" -> {
-                guidelink = "https://renegade-project.tech/"
-                grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA"
-                x.DeviceImage.setImageResource(R.drawable.dumpling)
-            }
-
-            "OnePlus6", "fajita" -> {
-                guidelink = "https://github.com/n00b69/woa-op6"
-                grouplink = "https://t.me/WinOnOP6"
-                x.DeviceImage.setImageResource(R.drawable.fajita)
-            }
-
-            "OnePlus6T", "OnePlus6TSingle", "enchilada" -> {
-                guidelink = "https://github.com/n00b69/woa-op6"
-                grouplink = "https://t.me/WinOnOP6"
-                x.DeviceImage.setImageResource(R.drawable.enchilada)
-            }
-
-            "hotdog", "OnePlus7TPro", "OnePlus7TPro4G" -> {
-                guidelink = "https://github.com/n00b69/woa-op7"
-                grouplink = "https://t.me/oneplus7woa"
-                x.DeviceImage.setImageResource(R.drawable.hotdog)
-                arrayOf(Pair.create(n.dumpModem, View.VISIBLE), Pair.create(n.dbkp, View.VISIBLE), Pair.create(n.flashUefi, View.GONE)).forEach {
-                    it.first.visibility =
-                        it.second
-                }
-            }
-
-            "guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO" -> {
-                guidelink = "https://github.com/n00b69/woa-op7"
-                grouplink = "https://t.me/oneplus7woa"
-                x.DeviceImage.setImageResource(R.drawable.guacamole)
-                arrayOf(Pair.create(n.dumpModem, View.VISIBLE), Pair.create(n.dbkp, View.VISIBLE), Pair.create(n.flashUefi, View.GONE)).forEach {
-                    it.first.visibility =
-                        it.second
-                }
-            }
-
-            "guacamoleb", "hotdogb", "OnePlus7T", "OnePlus7" -> {
-                guidelink = "https://project-aloha.github.io/"
-                grouplink = "https://t.me/project_aloha_issues"
-                x.DeviceImage.setImageResource(R.drawable.unknown)
-                n.dumpModem.visibility = View.VISIBLE
-            }
-
-            "OnePlus7TPro5G", "OnePlus7TProNR", "hotdogg" -> {
-                guidelink = "https://project-aloha.github.io/"
-                grouplink = "https://t.me/project_aloha_issues"
-                x.DeviceImage.setImageResource(R.drawable.hotdog)
-            }
-
-            "OP7ProNRSpr", "OnePlus7ProNR", "guacamoleg", "guacamoles" -> {
-                guidelink = "https://project-aloha.github.io/"
-                grouplink = "https://t.me/project_aloha_issues"
-                x.DeviceImage.setImageResource(R.drawable.guacamole)
-            }
-
-            "a52sxq" -> {
-                guidelink = "https://github.com/n00b69/woa-a52s"
-                grouplink = "https://t.me/a52sxq_uefi"
-                x.DeviceImage.setImageResource(R.drawable.a52sxq)
-            }
-
-            "beyond1lte", "beyond1qlte", "beyond1" -> {
-                guidelink = "https://github.com/sonic011gamer/Mu-Samsung"
-                grouplink = "https://t.me/woahelperchat"
-                x.DeviceImage.setImageResource(R.drawable.beyond1)
-            }
-
-            "dm3q", "dm3" -> {
-                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
-                grouplink = "https://t.me/dumanthecat"
-                x.DeviceImage.setImageResource(R.drawable.dm3q)
-            }
-
-            "e3q" -> {
-                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
-                grouplink = "https://t.me/biskupmuf"
-                x.DeviceImage.setImageResource(R.drawable.e3q)
-            }
-
-            "gts6l", "gts6lwifi" -> {
-                guidelink = "https://project-aloha.github.io/"
-                grouplink = "https://t.me/project_aloha_issues"
-                x.DeviceImage.setImageResource(R.drawable.gts6l)
-            }
-
-            "q2q" -> {
-                guidelink = "https://project-aloha.github.io/"
-                grouplink = "https://t.me/project_aloha_issues"
-                x.DeviceImage.setImageResource(R.drawable.q2q)
-            }
-
-            "star2qlte", "star2qltechn", "r3q" -> {
-                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
-                grouplink = "https://discord.gg/Dx2QgMx7Sv"
-                x.DeviceImage.setImageResource(R.drawable.unknown)
-            }
-
-            "winnerx", "winner" -> {
-                guidelink = "https://github.com/n00b69/woa-winner"
-                grouplink = "https://t.me/project_aloha_issues"
-                x.DeviceImage.setImageResource(R.drawable.winner)
-            }
-
-            "venus" -> {
-                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
-                grouplink = "https://discord.gg/Dx2QgMx7Sv"
-                x.DeviceImage.setImageResource(R.drawable.venus)
-            }
-
-            "alioth" -> {
-                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
-                grouplink = "https://discord.gg/Dx2QgMx7Sv"
-                x.DeviceImage.setImageResource(R.drawable.alioth)
-            }
-
-            "davinci" -> {
-                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
-                grouplink = "https://t.me/woa_davinci"
-                x.DeviceImage.setImageResource(R.drawable.raphael)
-            }
-
-            "marble" -> {
-                guidelink = "https://github.com/Xhdsos/woa-marble"
-                grouplink = "https://t.me/woa_marble"
-                x.DeviceImage.setImageResource(R.drawable.marble)
-            }
-
-            "Pong", "pong" -> {
-                guidelink = "https://github.com/index986/woa-pong"
-                grouplink = "https://t.me/WoA_spacewar_pong"
-                x.DeviceImage.setImageResource(R.drawable.pong)
-            }
-
-            "xpeng" -> {
-                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
-                grouplink = "https://t.me/woahelperchat"
-                x.DeviceImage.setImageResource(R.drawable.xpeng)
-            }
-
-            "RMX2061" -> {
-                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
-                grouplink = "https://discord.gg/Dx2QgMx7Sv"
-                x.DeviceImage.setImageResource(R.drawable.rmx2061)
-            }
-
-            "RMX2170" -> {
-                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
-                grouplink = "https://discord.gg/Dx2QgMx7Sv"
-                x.DeviceImage.setImageResource(R.drawable.rmx2170)
-            }
-
-            "cmi" -> {
-                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
-                grouplink = "https://t.me/dumanthecat"
-                x.DeviceImage.setImageResource(R.drawable.cmi)
-            }
-
-            "houji" -> {
-                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
-                grouplink = "https://t.me/dumanthecat"
-                x.DeviceImage.setImageResource(R.drawable.houji)
-            }
-
-            "meizu20pro", "meizu20Pro" -> {
-                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
-                grouplink = "https://t.me/dumanthecat"
-                x.DeviceImage.setImageResource(R.drawable.meizu20pro)
-            }
-
-            "husky" -> {
-                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
-                grouplink = "https://t.me/dumanthecat"
-                x.DeviceImage.setImageResource(R.drawable.husky)
-            }
-
-            "redfin", "herolte", "crownlte" -> {
-                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
-                grouplink = "https://t.me/dumanthecat"
-                x.DeviceImage.setImageResource(R.drawable.redfin)
-            }
-
-            "haotian" -> {
-                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
-                grouplink = "https://t.me/dumanthecat"
-                x.DeviceImage.setImageResource(R.drawable.haotian)
-            }
-
-            "Nord", "nord" -> {
-                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
-                grouplink = "https://t.me/dikeckaan"
-                x.DeviceImage.setImageResource(R.drawable.nord)
-            }
-
-            "nx729j", "NX729J", "NX729J-UN" -> {
-                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
-                grouplink = "https://t.me/woahelperchat"
-                x.DeviceImage.setImageResource(R.drawable.nx729j)
-            }
-
-            "brepdugl" -> {
-                guidelink = "https://github.com/Project-Silicium/Guides/blob/main/README.md"
-                grouplink = "https://discord.gg/Dx2QgMx7Sv"
-                x.DeviceImage.setImageResource(R.drawable.unknown)
-            }
-
-            else -> {
-                guidelink = "https://renegade-project.tech/"
-                grouplink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA"
-                n.dumpModem.visibility = View.VISIBLE
-                unsupported = true
-            }
-        }
+        x.deviceName.text = "${Build.MODEL} ($device)"
+        val props = Device.getVars(device)
+        guidelink = props.guideLink
+        grouplink = props.groupLink
+        x.DeviceImage.setImageResource(props.image)
+        x.tvPanel.visibility = props.panel
+        n.dbkp.visibility = props.dbkp
+        n.flashUefi.visibility = if (props.dbkp == View.VISIBLE) View.GONE else View.VISIBLE
+        unsupported = props.unsupported
         tablet= isTablet()
         onConfigurationChanged(resources.configuration)
         //if (!tablet) requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
@@ -1179,7 +793,7 @@ class MainActivity : AppCompatActivity() {
     private fun checkuefi() {
         rootCommand("mkdir /sdcard/UEFI")
         finduefi = "\"" + rootCommand(getString(R.string.uefiChk)) + "\""
-        val found = finduefi!!.contains("img")
+        val found = finduefi.contains("img")
         arrayOf(x.quickBoot, n.flashUefi).forEach { it.isEnabled = found }
         arrayOf(Pair.create(x.quickBoot, if (found) R.string.quickboot_title else R.string.uefi_not_found), Pair.create(n.flashUefi, if (found) R.string.flash_uefi_title else R.string.uefi_not_found)).forEach { it.first.setTitle(it.second) }
         arrayOf(Pair.create(x.quickBoot, if (found) getString(R.string.quickboot_subtitle_nabu) else getString(R.string.uefi_not_found_subtitle, device)), Pair.create(n.flashUefi, if (found) getString(R.string.flash_uefi_subtitle) else getString(R.string.uefi_not_found_subtitle, device))).forEach { it.first.setSubtitle(it.second) }
@@ -1324,14 +938,13 @@ class MainActivity : AppCompatActivity() {
 
         @JvmField
         var context: AppCompatActivity? = null
-        private var mounted: String? = null
+        private var mounted: String = ""
         private var win: String = ""
-        private var winpath: String? = null
-        private var finduefi: String? = null
-        private var device: String? = null
-        private var model: String? = null
-        private var dbkpmodel: String? = null
-        private var boot: String? = null
+        private var winpath: String = ""
+        private var finduefi: String = ""
+        private var device: String = ""
+        private var dbkpmodel: String = ""
+        private var boot: String = ""
         private var blur = 0
         private val rootShell: Shell = Shell.Builder.create().build()
 
@@ -1349,13 +962,13 @@ class MainActivity : AppCompatActivity() {
 
         @JvmStatic
         fun mountUI() {
-            if (null == winpath) updateWinPath()
+            if (winpath.isEmpty()) updateWinPath()
             Dlg.show(context!!, if (isMounted()) context!!.getString(R.string.unmount_question) else context!!.getString(R.string.mount_question, winpath), R.drawable.ic_mnt)
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
                 Dlg.dialogLoading()
                 Handler(Looper.getMainLooper()).postDelayed({
-                    if (BuildConfig.DEBUG) Log.d("debug", winpath!!)
+                    if (BuildConfig.DEBUG) Log.d("debug", winpath)
                     if (isMounted()) {
                         unmount()
                         Dlg.setText(R.string.unmounted)
@@ -1379,9 +992,9 @@ class MainActivity : AppCompatActivity() {
 
         @JvmStatic
         fun quickbootUI() {
-            if (null == boot) boot = getBoot()
-            if (null == winpath) updateWinPath()
-            if (null == device) updateDevice()
+            if (boot.isEmpty()) boot = getBoot()
+            if (winpath.isEmpty()) updateWinPath()
+            if (device.isEmpty()) updateDevice()
             Dlg.show(context!!, R.string.quickboot_question, R.drawable.ic_launcher_foreground)
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
@@ -1431,7 +1044,7 @@ class MainActivity : AppCompatActivity() {
                         rootCommand("cp ${context!!.filesDir}/original-devcfg.img $winpath/original-devcfg.img")
                     }
                     flash(finduefi)
-					val findmodem = rootCommand("find /sdcard/WOAHelper/Backups | grep modemst1.img")
+                    val findmodem = rootCommand("find /sdcard/WOAHelper/Backups | grep modemst1.img")
 					if (findmodem.isEmpty()) {
                			modemBackup()
             		}
@@ -1443,7 +1056,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         internal fun mount() {
-            if (null == win) win = getWin()
+            if (win.isEmpty()) win = getWin()
             if (isMounted()) return
             updateWinPath()
             rootCommand("mkdir $winpath || true")
@@ -1513,7 +1126,7 @@ class MainActivity : AppCompatActivity() {
         internal fun updateMountText() {
             mounted = if (isMounted()) context!!.getString(R.string.unmountt) else context!!.getString(R.string.mountt)
             context!!.runOnUiThread {
-                if (null != x) x.mnt.setTitle(String.format(context!!.getString(R.string.mnt_title), mounted))
+                x.mnt.setTitle(String.format(context!!.getString(R.string.mnt_title), mounted))
             }
             MountWidget.updateText(context!!, String.format(context!!.getString(R.string.mnt_title), mounted))
         }
@@ -1525,7 +1138,7 @@ class MainActivity : AppCompatActivity() {
 
         internal fun updateWinPath(): String {
             winpath = if (Pref.getMountLocation(context!!)) "/mnt/Windows" else "${Environment.getExternalStorageDirectory().path}/Windows"
-            return winpath!!
+            return winpath
         }
 
         internal fun updateDevice() {
@@ -1552,7 +1165,7 @@ class MainActivity : AppCompatActivity() {
                     Log.w("debug stderr",err.toString())
             }
             if (out.isNotEmpty())
-                return out.last() as String
+                return out.last()
             return ""
         }
 
