@@ -138,10 +138,8 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val languages: MutableList<String> = ArrayList()
-        val locales: MutableList<String> = ArrayList()
-        locales.add("und")
-        languages.add(getString(R.string.default1))
+        val languages: MutableList<String> = mutableListOf(getString(R.string.default1))
+        val locales: MutableList<String> = mutableListOf("und")
         for (i in BuildConfig.LOCALES) {
             locales.add(i!!.lowercase(Locale.getDefault()))
             val locale = checkNotNull(LocaleListCompat.forLanguageTags(i)[0])
@@ -693,7 +691,7 @@ class MainActivity : AppCompatActivity() {
             }
             langSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
-                    AppCompatDelegate.setApplicationLocales(if (languages[position] == "System Default") LocaleListCompat.getEmptyLocaleList() else LocaleListCompat.forLanguageTags(locales[position]))
+                    AppCompatDelegate.setApplicationLocales(if (languages[position] == getString(R.string.default1)) LocaleListCompat.getEmptyLocaleList() else LocaleListCompat.forLanguageTags(locales[position]))
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
