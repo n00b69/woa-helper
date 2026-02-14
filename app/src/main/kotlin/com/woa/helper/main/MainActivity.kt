@@ -463,7 +463,7 @@ class MainActivity : AppCompatActivity() {
                     rootCommand("mkdir -p /sdcard/WOAHelper/Toolbox || true")
                     rootCommand("wget https://github.com/n00b69/modified-playbooks/releases/download/ReviOS/ReviPlaybook.apbx -O /sdcard/WOAHelper/Toolbox/ReviPlaybook.apbx")
                     Dlg.setBar(50)
-                    rootCommand("wget https://download.ameliorated.io/AME%20Wizard%20Beta.zip -O /sdcard/WOAHelper/Toolbox/AMEWizardBeta.zip")
+                    rootCommand("wget https://download.ameliorated.io/AME%20Beta.zip -O /sdcard/WOAHelper/Toolbox/AMEWizardBeta.zip")
                     Dlg.setBar(80)
                     runOnUiThread {
                         mount()
@@ -490,7 +490,7 @@ class MainActivity : AppCompatActivity() {
                     rootCommand("mkdir -p /sdcard/WOAHelper/Toolbox || true")
                     rootCommand("wget https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook.apbx -O /sdcard/WOAHelper/Toolbox/AtlasPlaybook.apbx")
                     Dlg.setBar(50)
-                    rootCommand("wget https://download.ameliorated.io/AME%20Wizard%20Beta.zip -O /sdcard/WOAHelper/Toolbox/AMEWizardBeta.zip")
+                    rootCommand("wget https://download.ameliorated.io/AME%20Beta.zip -O /sdcard/WOAHelper/Toolbox/AMEWizardBeta.zip")
                     Dlg.setBar(80)
                     runOnUiThread {
                         mount()
@@ -538,7 +538,7 @@ class MainActivity : AppCompatActivity() {
             Dlg.setYes(R.string.yes) {
                 Dlg.dialogLoading()
                 rootCommand("mkdir -p /sdcard/WOAHelper/Toolbox || true")
-                rootCommand("cp $filesDir/QuickRotate_V4.1.exe /sdcard/WOAHelper/Toolbox/")
+                rootCommand("cp $filesDir/QuickRotate_V6.1.4.exe /sdcard/WOAHelper/Toolbox/")
                 mount()
                 if (!isMounted()) {
                     Dlg.close()
@@ -546,7 +546,7 @@ class MainActivity : AppCompatActivity() {
                     return@setYes
                 }
                 rootCommand("mkdir $winpath/Toolbox || true ")
-                arrayOf("/Toolbox", "/Users/Public/Desktop").forEach { rootCommand("cp /sdcard/WOAHelper/Toolbox/QuickRotate_V4.1.exe $winpath$it") }
+                arrayOf("/Toolbox", "/Users/Public/Desktop").forEach { rootCommand("cp /sdcard/WOAHelper/Toolbox/QuickRotate_V6.1.4.exe $winpath$it") }
                 Dlg.setText(R.string.done)
                 Dlg.dismissButton()
             }
@@ -1085,6 +1085,8 @@ class MainActivity : AppCompatActivity() {
 			rootCommand("dd bs=8M if=/dev/block/by-name/fsc of=/sdcard/WOAHelper/Backups/fsc.img")
 			rootCommand("dd bs=8M if=/dev/block/by-name/fsg of=/sdcard/WOAHelper/Backups/fsg.img")
 			rootCommand("dd bs=8M if=/dev/block/by-name/ftm of=/sdcard/WOAHelper/Backups/ftm.img")
+			rootCommand("dd bs=8M if=/dev/block/by-name/persist of=/sdcard/WOAHelper/Backups/persist.img")
+			rootCommand("dd bs=8M if=/dev/block/by-name/efs of=/sdcard/WOAHelper/Backups/efs.img")
         }
 
         internal fun nointernet() {

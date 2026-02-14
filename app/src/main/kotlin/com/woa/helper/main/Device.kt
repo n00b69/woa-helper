@@ -75,7 +75,7 @@ object Device {
 
             "bhima", "vayu" -> DeviceConfig (
                 guideLink = "https://github.com/WaLoVayu/POCOX3Pro-Windows-Guides",
-                groupLink = "https://t.me/WaLoVayu",
+                groupLink = "https://t.me/woahelperchat",
                 image = R.drawable.vayu,
                 panel = View.VISIBLE,
             )
