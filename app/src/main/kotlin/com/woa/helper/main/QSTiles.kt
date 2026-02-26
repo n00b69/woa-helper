@@ -4,9 +4,10 @@ import android.os.Build
 import android.os.Environment
 import android.service.quicksettings.TileService
 import android.widget.Toast
-import com.topjohnwu.superuser.ShellUtils
 import com.woa.helper.R
 import com.woa.helper.main.MainActivity.Companion.isNetworkConnected
+import com.woa.helper.main.MainActivity.Companion.rootCommand
+import com.woa.helper.main.MainActivity.Companion.shellInit
 import com.woa.helper.preference.Pref
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -18,17 +19,16 @@ private lateinit var winPath: String
 
 abstract class CommonTileService : TileService() {
     protected fun mount() {
-        val mntstat = ShellUtils.fastCmd("su -mm -c mount | grep $win")
+        val mntstat = rootCommand("mount | grep $win")
         if (mntstat.isEmpty()) {
-            ShellUtils.fastCmd("mkdir $winPath || true")
-            ShellUtils.fastCmd("cd $filesDir")
-            ShellUtils.fastCmd("su -mm -c ./mount.ntfs $win $winPath")
+            rootCommand("mkdir $winPath")
+            rootCommand("./mount.ntfs $win $winPath",master = true)
         }
     }
 
     protected fun unmount() {
-        ShellUtils.fastCmd("su -mm -c umount $winPath")
-        ShellUtils.fastCmd("rmdir $winPath")
+        rootCommand("umount $winPath", master = true)
+        rootCommand("rmdir $winPath")
     }
 }
 
@@ -40,17 +40,18 @@ class QuickBootTile : CommonTileService() {
 
     override fun onStartListening() {
         super.onStartListening()
+        shellInit(this.filesDir)
         val tile = qsTile
         checkuefi()
-        device = ShellUtils.fastCmd("getprop ro.product.device")
-        findWin = ShellUtils.fastCmd("find /dev/block | grep -i -E \"win|mindows|windows\" | head -1")
+        device = Pref.codenameChanger(false, MainActivity.Companion.context!!, Build.DEVICE)
+        findWin = rootCommand("find /dev/block | grep -i -E \"win|mindows|windows\" | head -1")
         if (findUefi.isEmpty() || (isSecure && !Pref.getSecure(this)) || findWin.isEmpty()) tile.state = 0
         else tile.state = 1
         if (Pref.getDevcfg1(this)) {
             if (isNetworkConnected(this)) {
                 tile.state = 1
             } else {
-                val finddevcfg = ShellUtils.fastCmd("find $filesDir -maxdepth 1 -name OOS11_devcfg_*")
+                val finddevcfg = rootCommand("find $filesDir -maxdepth 1 -name OOS11_devcfg_*")
                 if (finddevcfg.isEmpty()) {
                     tile.state = 0
                     // These titles don't actually even seem to work and are obsolete I guess, is there even a way to change the titles?
@@ -71,25 +72,25 @@ class QuickBootTile : CommonTileService() {
         val tile = qsTile
         if (2 == tile.state || !Pref.getConfirm(this)) {
             mount()
-            var found = ShellUtils.fastCmd("ls " + (if (Pref.getMountLocation(this)) "/mnt/Windows" else Environment.getExternalStorageDirectory().path + "/Windows") + " | grep boot.img")
+            var found = rootCommand("ls " + (if (Pref.getMountLocation(this)) "/mnt/Windows" else Environment.getExternalStorageDirectory().path + "/Windows") + " | grep boot.img")
             if (Pref.getMountLocation(this)) {
                 if (Pref.getBackup(this) || (!Pref.getAuto(this) && found.isEmpty())) {
-                    ShellUtils.fastCmd("dd bs=8m if=$boot of=/mnt/Windows/boot.img")
+                    rootCommand("dd bs=8m if=$boot of=/mnt/Windows/boot.img")
                     val sdf = SimpleDateFormat("dd-MM HH:mm", Locale.US)
                     val currentDateAndTime = sdf.format(Date())
                     Pref.setDate(this, currentDateAndTime)
                 }
             } else {
                 if (Pref.getBackup(this) || (!Pref.getAuto(this) && found.isEmpty())) {
-                    ShellUtils.fastCmd("dd bs=8m if=$boot of=/mnt/sdcard/Windows/boot.img")
+                    rootCommand("dd bs=8m if=$boot of=/mnt/sdcard/Windows/boot.img")
                     val sdf = SimpleDateFormat("dd-MM HH:mm", Locale.US)
                     val currentDateAndTime = sdf.format(Date())
                     Pref.setDate(this, currentDateAndTime)
                 }
             }
-            found = ShellUtils.fastCmd("find /sdcard | grep boot.img")
+            found = rootCommand("find -maxdepth 1 /sdcard | grep boot.img")
             if (Pref.getBackupA(this) || (!Pref.getAutoA(this) && found.isEmpty())) {
-                ShellUtils.fastCmd("dd bs=8m if=$boot of=/sdcard/boot.img")
+                rootCommand("dd bs=8m if=$boot of=/sdcard/boot.img")
                 val sdf = SimpleDateFormat("dd-MM HH:mm", Locale.US)
                 val currentDateAndTime = sdf.format(Date())
                 Pref.setDate(this, currentDateAndTime)
@@ -97,7 +98,7 @@ class QuickBootTile : CommonTileService() {
             // This whole feature feels very laggy to me in the QS tile, needs overhauling.
             if (Pref.getDevcfg1(this)) {
                 if (!isNetworkConnected(this)) {
-                    val findDevCfg = ShellUtils.fastCmd("find $filesDir -maxdepth 1 -name OOS11_devcfg_*")
+                    val findDevCfg = rootCommand("find $filesDir -maxdepth 1 -name OOS11_devcfg_*")
                     if (findDevCfg.isEmpty()) {
                         Toast.makeText(this, (getString(R.string.internet)), Toast.LENGTH_LONG).show()
                         tile.state = 0
@@ -112,32 +113,32 @@ class QuickBootTile : CommonTileService() {
                 var devcfgDevice = ""
                 if (arrayOf("guacamole", "OnePlus7Pro", "OnePlus7Pro4G").contains(device)) devcfgDevice = "guacamole"
                 else if (arrayOf("hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) devcfgDevice = "hotdog"
-                val findoriginaldevcfg = ShellUtils.fastCmd("find $filesDir -maxdepth 1 -name original-devcfg.img")
+                val findoriginaldevcfg = rootCommand("find $filesDir -maxdepth 1 -name original-devcfg.img")
                 if (findoriginaldevcfg.isEmpty()) {
-                    ShellUtils.fastCmd("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=/sdcard/original-devcfg.img")
-                    ShellUtils.fastCmd("cp /sdcard/original-devcfg.img $filesDir/original-devcfg.img")
+                    rootCommand("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=/sdcard/original-devcfg.img")
+                    rootCommand("cp /sdcard/original-devcfg.img $filesDir/original-devcfg.img")
                 }
-                val finddevcfg = ShellUtils.fastCmd("find $filesDir -maxdepth 1 -name OOS11_devcfg_*")
+                val finddevcfg = rootCommand("find $filesDir -maxdepth 1 -name OOS11_devcfg_*")
                 if (finddevcfg.isEmpty()) {
-                    ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_$devcfgDevice.img -O /sdcard/OOS11_devcfg_$devcfgDevice.img\" | su -mm -c sh")
-                    ShellUtils.fastCmd("echo \"$(su -mm -c find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_$devcfgDevice.img -O /sdcard/OOS12_devcfg_$devcfgDevice.img\" | su -mm -c sh")
-                    ShellUtils.fastCmd("cp /sdcard/OOS11_devcfg_$devcfgDevice.img $filesDir")
-                    ShellUtils.fastCmd("cp /sdcard/OOS12_devcfg_$devcfgDevice.img $filesDir")
-                    ShellUtils.fastCmd("dd bs=8M if=$filesDir/OOS11_devcfg_$devcfgDevice.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)")
+                    rootCommand("$(find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_$devcfgDevice.img -O /sdcard/OOS11_devcfg_$devcfgDevice.img",user = true)
+                    rootCommand("$(find /data/adb -name busybox) wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_$devcfgDevice.img -O /sdcard/OOS12_devcfg_$devcfgDevice.img", user = true)
+                    rootCommand("cp /sdcard/OOS11_devcfg_$devcfgDevice.img $filesDir")
+                    rootCommand("cp /sdcard/OOS12_devcfg_$devcfgDevice.img $filesDir")
+                    rootCommand("dd bs=8M if=$filesDir/OOS11_devcfg_$devcfgDevice.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)")
                 } else {
-                    ShellUtils.fastCmd("dd bs=8M if=$filesDir/OOS11_devcfg_$devcfgDevice.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)")
+                    rootCommand("dd bs=8M if=$filesDir/OOS11_devcfg_$devcfgDevice.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)")
                 }
             }
             if (Pref.getDevcfg2(this) && Pref.getDevcfg1(this)) {
-                ShellUtils.fastCmd("mkdir $winPath/sta || true ")
-                ShellUtils.fastCmd("cp '$filesDir/Flash Devcfg.lnk' $winPath/Users/Public/Desktop")
-                ShellUtils.fastCmd("cp $filesDir/sdd.exe $winPath/sta/sdd.exe")
-                ShellUtils.fastCmd("cp $filesDir/devcfg-boot-sdd.conf $winPath/sta/sdd.conf")
-                ShellUtils.fastCmd("cp $filesDir/original-devcfg.img $winPath/original-devcfg.img")
+                rootCommand("mkdir $winPath/sta || true ")
+                rootCommand("cp '$filesDir/Flash Devcfg.lnk' $winPath/Users/Public/Desktop")
+                rootCommand("cp $filesDir/sdd.exe $winPath/sta/sdd.exe")
+                rootCommand("cp $filesDir/devcfg-boot-sdd.conf $winPath/sta/sdd.conf")
+                rootCommand("cp $filesDir/original-devcfg.img $winPath/original-devcfg.img")
             }
             //	Toast.makeText(this, "This should appear if it reaches the (disabled) flash uefi section", Toast.LENGTH_LONG).show();
             flash()
-            ShellUtils.fastCmd("su -c svc power reboot")
+            rootCommand("/system/bin/svc power reboot")
         } else {
             tile.state = 2
             if (Build.VERSION_CODES.Q <= Build.VERSION.SDK_INT) {
@@ -148,17 +149,17 @@ class QuickBootTile : CommonTileService() {
     }
 
     private fun flash() {
-        ShellUtils.fastCmd("dd if=$findUefi of=/dev/block/bootdevice/by-name/boot$(getprop ro.boot.slot_suffix) bs=16m")
+        rootCommand("dd if=$findUefi of=/dev/block/bootdevice/by-name/boot$(getprop ro.boot.slot_suffix) bs=16m")
     }
 
     private fun checkuefi() {
-        findUefi = ShellUtils.fastCmd(getString(R.string.uefiChk))
-        findWin = ShellUtils.fastCmd("find /dev/block | grep -i -E \"win|mindows|windows\" | head -1")
-        win = ShellUtils.fastCmd("realpath $findWin")
+        findUefi = rootCommand(getString(R.string.uefiChk))
+        findWin = rootCommand("find /dev/block | grep -i -E \"win|mindows|windows\" | head -1")
+        win = rootCommand("realpath $findWin")
         winPath = (if (Pref.getMountLocation(this)) "/mnt/Windows" else Environment.getExternalStorageDirectory().path + "/Windows")
-        findBoot = ShellUtils.fastCmd("find /dev/block | grep boot$(getprop ro.boot.slot_suffix)")
-        if (findBoot!!.isEmpty()) findBoot = ShellUtils.fastCmd("find /dev/block | grep BOOT$(getprop ro.boot.slot_suffix)")
-        boot = ShellUtils.fastCmd("realpath $findBoot")
+        findBoot = rootCommand("find /dev/block | grep boot$(getprop ro.boot.slot_suffix)")
+        if (findBoot!!.isEmpty()) findBoot = rootCommand("find /dev/block | grep BOOT$(getprop ro.boot.slot_suffix)")
+        boot = rootCommand("realpath $findBoot")
     }
 }
 
@@ -167,6 +168,7 @@ class MountTile : CommonTileService() {
 
     override fun onStartListening() {
         super.onStartListening()
+        shellInit(this.filesDir)
         update()
     }
 
@@ -183,15 +185,15 @@ class MountTile : CommonTileService() {
             tile.state = 0
             return
         }
-        findWin = ShellUtils.fastCmd("find /dev/block | grep -i -E \"win|mindows|windows\" | head -1")
+        findWin = rootCommand("find /dev/block | grep -i -E \"win|mindows|windows\" | head -1")
         if (findWin.isEmpty()) {
             tile.state = 0
             tile.updateTile()
             return
         }
-        win = ShellUtils.fastCmd("realpath $findWin")
+        win = rootCommand("realpath $findWin")
         winPath = (if (Pref.getMountLocation(this)) "/mnt/Windows" else Environment.getExternalStorageDirectory().path + "/Windows")
-        mntStat = ShellUtils.fastCmd("mount | grep $win")
+        mntStat = rootCommand("mount | grep $win")
         if (mntStat!!.isEmpty()) tile.state = 1
         else tile.state = 2
         tile.updateTile()

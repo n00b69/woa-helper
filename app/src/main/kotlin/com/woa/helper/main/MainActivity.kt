@@ -88,11 +88,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         this.enableEdgeToEdge()
         super.onCreate(savedInstanceState)
-
-        rootCommand("ASH_STANDALONE=1 $(find /data/adb/ -name busybox) ash")
-        rootCommand("cd $filesDir")
         Pref.setFilesDir(this, filesDir.toString())
-
+        shellInit(this.filesDir)
         onBackPressedDispatcher.addCallback(this) {
             if (0 == views.size - 1) {
                 moveTaskToBack(true)
@@ -944,7 +941,9 @@ class MainActivity : AppCompatActivity() {
         private var dbkpmodel: String = ""
         private var boot: String = ""
         private var blur = 0
-        private val rootShell: Shell = Shell.Builder.create().build()
+        private lateinit var rootShell: Shell
+        private lateinit var masterShell: Shell
+        private lateinit var userShell: Shell
 
         @JvmStatic
         fun isNetworkConnected(context: Context): Boolean {
@@ -1059,12 +1058,12 @@ class MainActivity : AppCompatActivity() {
             updateWinPath()
             rootCommand("mkdir $winpath || true")
             rootCommand("cd ${context!!.filesDir}")
-            rootCommand("su -mm -c ./mount.ntfs $win $winpath")
+            rootCommand("./mount.ntfs $win $winpath", true)
             updateMountText()
         }
 
         private fun unmount() {
-            rootCommand("su -mm -c umount $winpath")
+            rootCommand("umount $winpath",true)
             rootCommand("rmdir $winpath")
             updateMountText()
         }
@@ -1151,13 +1150,30 @@ class MainActivity : AppCompatActivity() {
             Log.d("INFO", partition)
             return rootCommand("realpath $partition")
         }
+        fun shellInit(dir : File) {
+            if (::rootShell.isInitialized)
+                return
+            rootShell = Shell.Builder.create().build()
+            masterShell = Shell.Builder.create().setFlags(Shell.FLAG_MOUNT_MASTER).build()
+            userShell = Shell.Builder.create().setFlags(Shell.FLAG_NON_ROOT_SHELL).build()
+            for (i in listOf(rootShell, masterShell,userShell)){
+                rootCommand("ASH_STANDALONE=1 $(find /data/adb/ -name busybox) ash", i)
+                rootCommand("cd $dir", i)
+                Log.d("storage", dir.toString())
+            }
+        }
 
-        fun rootCommand(command: String): String {
+        fun rootCommand(command: String, master : Boolean = false, user : Boolean = false) : String{
+            return rootCommand(command,if (master) masterShell else if(user) userShell else rootShell)
+        }
+
+        fun rootCommand(command: String, shell: Shell): String {
+
             if (BuildConfig.DEBUG)
                 Log.d("debug stdout",command)
             val out=ArrayList<String>()
             val err=ArrayList<String>()
-            rootShell.newJob().add(command).to(out,err).exec()
+            shell.newJob().add(command).to(out,err).exec()
             if (BuildConfig.DEBUG) {
                 if (out.isNotEmpty())
                     Log.d("debug stdout",out.last())
@@ -1171,7 +1187,7 @@ class MainActivity : AppCompatActivity() {
 
         @JvmStatic
         fun isMounted(): Boolean {
-            return !rootCommand("su -mm -c mount | grep ${getWin()}").isEmpty()
+            return !rootCommand("mount | grep ${getWin()}").isEmpty()
         }
 
         internal fun openLink(link: String) {
