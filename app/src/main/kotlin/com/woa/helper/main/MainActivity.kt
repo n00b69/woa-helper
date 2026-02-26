@@ -353,7 +353,8 @@ class MainActivity : AppCompatActivity() {
             rootCommand("mkdir -p /sdcard/dbkp /sdcard/WOAHelper/Backups || true")
             Dlg.show(this, getString(R.string.dbkp_question, dbkpmodel), R.drawable.ic_uefi)
             Dlg.setNo(R.string.no) { Dlg.close() }
-            Dlg.setYes(if ("nabu" == device) R.string.nabu else R.string.yes) {
+            Dlg.setYes(R.string.yes) {
+		//	Dlg.setYes(if ("nabu" == device) R.string.nabu else R.string.yes) {
                 rootCommand(String.format("cp $filesDir/dbkp.%s.bin /sdcard/dbkp/dbkp.bin", if ("nabu" == device) "nabu" else if (arrayOf("guacamole", "OnePlus7Pro", "OnePlus7Pro4G", "hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) "hotdog" else if ("cepheus" == device) "cepheus" else null))
                 Dlg.dialogLoading()
                 kernelPatch(
@@ -363,13 +364,13 @@ class MainActivity : AppCompatActivity() {
                     ) "https://github.com/n00b69/woa-op7/releases/download/DBKP/hotdog.fd" else if ("cepheus" == device) "https://github.com/n00b69/woa-everything/releases/download/Files/cepheus.fd" else null)!!
                 )
             }
-            if ("nabu" == device) {
-                Dlg.setDismiss(R.string.nabu2) {
-                    rootCommand("cp $filesDir/dbkp.nabu2.bin /sdcard/dbkp/dbkp.bin")
-                    Dlg.dialogLoading()
-                    kernelPatch(getString(R.string.nabu2), "https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/releases/download/1.0/nabuVolumebuttons.fd")
-                }
-            }
+        //    if ("nabu" == device) {
+        //        Dlg.setDismiss(R.string.nabu2) {
+        //            rootCommand("cp $filesDir/dbkp.nabu2.bin /sdcard/dbkp/dbkp.bin")
+        //            Dlg.dialogLoading()
+        //            kernelPatch(getString(R.string.nabu2), "https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/releases/download/1.0/nabuVolumebuttons.fd")
+        //        }
+        //    }
         }
 
         n.devcfg.setOnClickListener { _: View? ->
