@@ -361,9 +361,13 @@ class MainActivity : AppCompatActivity() {
                     (if ("nabu" == device) getString(R.string.nabu) else if (arrayOf("guacamole", "OnePlus7Pro", "OnePlus7Pro4G", "hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) getString(R.string.op7) else if ("cepheus" == device) getString(R.string.cepheus) else null)!!,
                     (if ("nabu" == device) "https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/releases/download/1.0/nabu.fd" else if (arrayOf("guacamole", "OnePlus7Pro", "OnePlus7Pro4G").contains(device)) "https://github.com/n00b69/woa-op7/releases/download/DBKP/guacamole.fd" else if (arrayOf("hotdog", "OnePlus7TPro", "OnePlus7TPro4G")
                             .contains(device)
-                    ) "https://github.com/n00b69/woa-op7/releases/download/DBKP/hotdog.fd" else if ("cepheus" == device) "https://github.com/n00b69/woa-everything/releases/download/Files/cepheus.fd" else null)!!
+                    ) "https://github.com/n00b69/woa-op7/releases/download/DBKP/hotdog.fd" else if ("cepheus" == device) "https://github.com/n00b69/woa-cepheus/releases/download/Files/cepheus.fd" else null)!!
                 )
             }
+			Dlg.setDismiss(R.string.uninstall) {
+				Dlg.dialogLoading()
+				kernelRemove()
+			}
         //    if ("nabu" == device) {
         //        Dlg.setDismiss(R.string.nabu2) {
         //            rootCommand("cp $filesDir/dbkp.nabu2.bin /sdcard/dbkp/dbkp.bin")
@@ -901,7 +905,7 @@ class MainActivity : AppCompatActivity() {
                 rootCommand("cp $filesDir/dbkp8150.cfg /sdcard/dbkp/dbkp.cfg")
                 rootCommand("wget https://github.com/n00b69/woa-op7/releases/download/DBKP/dbkp -O /sdcard/dbkp/dbkp")
                 rootCommand("cp /sdcard/dbkp/dbkp $filesDir")
-                rootCommand("chmod 777 $filesDir/dbkp")
+				rootCommand("chmod 777 $filesDir/dbkp")
                 rootCommand("wget $link -O /sdcard/dbkp/file.fd")
                 rootCommand("cd /sdcard/dbkp")
                 rootCommand("$(find /data/adb -name magiskboot) unpack boot.img")
@@ -924,6 +928,34 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }.init(message, link)).start()
+    }
+	
+	private fun kernelRemove() {
+        androidBackup()
+        rootCommand("rm /sdcard/WOAHelper/Backups/unpatched-boot.img || true")
+        rootCommand("mv /sdcard/WOAHelper/Backups/boot.img /sdcard/dbkp/boot.img")
+		rootCommand("wget https://github.com/n00b69/woa-op7/releases/download/DBKP/remover -O /sdcard/dbkp/remover")
+        rootCommand("cp /sdcard/dbkp/remover $filesDir")
+        rootCommand("chmod 777 $filesDir/remover")
+        rootCommand("cd /sdcard/dbkp")
+        rootCommand("$(find /data/adb -name magiskboot) unpack boot.img")
+        rootCommand("$filesDir/remover /sdcard/dbkp/kernel /sdcard/dbkp/unpatchedkernel")
+		rootCommand("rm kernel")
+        rootCommand("mv unpatchedkernel kernel")
+        rootCommand("$(find /data/adb -name magiskboot) repack boot.img")
+        rootCommand("cp new-boot.img /sdcard/WOAHelper/Backups/unpatched-boot.img")
+        rootCommand("cd $filesDir")
+        rootCommand("rm -r /sdcard/dbkp")
+        if ("cepheus" == device) {
+            rootCommand("dd if=/sdcard/WOAHelper/Backups/unpatched-boot.img of=/dev/block/by-name/boot bs=16M")
+        } else {
+            rootCommand("dd if=/sdcard/WOAHelper/Backups/unpatched-boot.img of=/dev/block/by-name/boot_a bs=16M")
+            rootCommand("dd if=/sdcard/WOAHelper/Backups/unpatched-boot.img of=/dev/block/by-name/boot_b bs=16M")
+        }
+        runOnUiThread {
+            Dlg.setText(getString(R.string.dbkpuninstall))
+            Dlg.setDismiss(R.string.reboot) { rootCommand("/system/bin/svc power reboot") }
+        }
     }
 
     companion object {
