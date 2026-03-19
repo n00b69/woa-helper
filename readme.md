@@ -83,7 +83,7 @@ If you are using KSU and mount does not work, change kernels or try using Magisk
 - Polish (Win Polish)
 - Portuguese ([AdrianoA3](https://github.com/AdrianoA3))
 - Romanian ([Graphael](https://github.com/grphks), [Victoria Freeman](https://github.com/Victoria-Freeman) & [David42069](https://github.com/david-42069))
-- Russian ([Misha803](https://github.com/Misha803) & [Nikroks](https://github.com/N1kroks)
+- Russian ([Misha803](https://github.com/Misha803) & [Nikroks](https://github.com/N1kroks))
 - Spanish ([carloss15](https://github.com/rodriguezst))
 - Thai ([JadeKubPom](https://www.facebook.com/groups/jadekubpomservicethailand/))
 - Turkish (sercancamli, [ErdilS](https://github.com/erdilS) & [Kaan Dikeç](https://github.com/dikeckaan))
