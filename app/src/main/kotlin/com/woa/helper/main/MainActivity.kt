@@ -45,6 +45,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import kotlin.system.exitProcess
+import com.woa.helper.dbkp.Dbkp
 
 @SuppressLint("StaticFieldLeak")
 class MainActivity : AppCompatActivity() {
@@ -346,54 +347,48 @@ class MainActivity : AppCompatActivity() {
         }
 
         n.dbkp.setOnClickListener { _: View? ->
-		val finddetector = rootCommand("find $filesDir -maxdepth 1 -name detector")
-			if (finddetector.isEmpty()) {
-				if (!isNetworkConnected(this)) {
-                	nointernet()
-                	return@setOnClickListener
-            	} else {
-					Thread {
-						Dlg.show(this, R.string.please_wait)
-						rootCommand("wget https://github.com/n00b69/woa-op7/releases/download/DBKP/detector -O /sdcard/detector")
-            			rootCommand("mv /sdcard/detector $filesDir")
-						rootCommand("chmod 777 $filesDir/detector")
-						Dlg.close()
-					}.start()
+            unpackKernel()
+            val patched = Dbkp.isPatched(File("$filesDir/temp/kernel"))
+            Log.d("checker",if (patched)"patched" else "not patched")
+			if (!patched) {
+                checkdbkpmodel()
+				Dlg.show(this, getString(R.string.dbkp_question, dbkpmodel), R.drawable.ic_uefi)
+            	Dlg.setNo(R.string.no) { Dlg.close() ; rootCommand("rm -rf $filesDir/temp") }
+            	Dlg.setYes(R.string.yes) {
+            		rootCommand("cp $filesDir/dbkp.${props.dbkpCodename}.bin $filesDir/temp/dbkp.bin")
+            		Dlg.dialogLoading()
+            		kernelPatch(
+                		(when (props.dbkpCodename) {
+                            "nabu" -> getString(R.string.nabu)
+                            "hotdog" -> getString(R.string.op7)
+                            "cepheus" -> getString(R.string.cepheus)
+                            else -> null
+                        })!!,
+                		props.dbkpLink
+            		)
+
+            	}
+            } else {
+				Dlg.show(this, getString(R.string.dbkp_question2), R.drawable.ic_uefi)
+            	Dlg.setNo(R.string.no) { Dlg.close() ;rootCommand("rm -rf $filesDir/temp")}
+            	Dlg.setYes(R.string.reinstall) {
+                    rootCommand("cp $filesDir/dbkp.${props.dbkpCodename}.bin $filesDir/temp/dbkp.bin")
+                    Dlg.dialogLoading()
+                    kernelReinstall(
+                        (when (props.dbkpCodename) {
+                            "nabu" -> getString(R.string.nabu)
+                            "hotdog" -> getString(R.string.op7)
+                            "cepheus" -> getString(R.string.cepheus)
+                            else -> null
+                        })!!,
+                        props.dbkpLink
+                    )
+				}
+				Dlg.setDismiss(R.string.uninstall) {
+					kernelRemove()
 				}
 			}
-			androidBackup()
-			val dbkpbootimg = rootCommand("./detector /sdcard/WOAHelper/Backups/boot.img")
-				if (dbkpbootimg.contains("clean")) {
-					Dlg.show(this, getString(R.string.dbkp_question, dbkpmodel), R.drawable.ic_uefi)
-            		Dlg.setNo(R.string.no) { Dlg.close() }
-            		Dlg.setYes(R.string.yes) {
-                		rootCommand(String.format("cp $filesDir/dbkp.%s.bin /sdcard/dbkp/dbkp.bin", if ("nabu" == device) "nabu" else if (arrayOf("guacamole", "OnePlus7Pro", "OnePlus7Pro4G", "hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) "hotdog" else if ("cepheus" == device) "cepheus" else null))
-                		Dlg.dialogLoading()
-                		kernelPatch(
-                    		(if ("nabu" == device) getString(R.string.nabu) else if (arrayOf("guacamole", "OnePlus7Pro", "OnePlus7Pro4G", "hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) getString(R.string.op7) else if ("cepheus" == device) getString(R.string.cepheus) else null)!!,
-                    		(if ("nabu" == device) "https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/releases/download/1.0/nabu.fd" else if (arrayOf("guacamole", "OnePlus7Pro", "OnePlus7Pro4G").contains(device)) "https://github.com/n00b69/woa-op7/releases/download/DBKP/guacamole.fd" else if (arrayOf("hotdog", "OnePlus7TPro", "OnePlus7TPro4G")
-                           		.contains(device)
-                    		) "https://github.com/n00b69/woa-op7/releases/download/DBKP/hotdog.fd" else if ("cepheus" == device) "https://github.com/n00b69/woa-cepheus/releases/download/Files/cepheus.fd" else null)!!
-                		)
-            		}
-                } else if (dbkpbootimg.contains("DBKP")) {
-					Dlg.show(this, getString(R.string.dbkp_question2), R.drawable.ic_uefi)
-            		Dlg.setNo(R.string.no) { Dlg.close() }
-            		Dlg.setYes(R.string.reinstall) {
-						rootCommand(String.format("cp $filesDir/dbkp.%s.bin /sdcard/dbkp/dbkp.bin", if ("nabu" == device) "nabu" else if (arrayOf("guacamole", "OnePlus7Pro", "OnePlus7Pro4G", "hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) "hotdog" else if ("cepheus" == device) "cepheus" else null))
-                		Dlg.dialogLoading()
-                		kernelReinstall(
-                    		(if ("nabu" == device) getString(R.string.nabu) else if (arrayOf("guacamole", "OnePlus7Pro", "OnePlus7Pro4G", "hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) getString(R.string.op7) else if ("cepheus" == device) getString(R.string.cepheus) else null)!!,
-                    		(if ("nabu" == device) "https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/releases/download/1.0/nabu.fd" else if (arrayOf("guacamole", "OnePlus7Pro", "OnePlus7Pro4G").contains(device)) "https://github.com/n00b69/woa-op7/releases/download/DBKP/guacamole.fd" else if (arrayOf("hotdog", "OnePlus7TPro", "OnePlus7TPro4G")
-                           		.contains(device)
-                    		) "https://github.com/n00b69/woa-op7/releases/download/DBKP/hotdog.fd" else if ("cepheus" == device) "https://github.com/n00b69/woa-cepheus/releases/download/Files/cepheus.fd" else null)!!
-                		)
-					}
-					Dlg.setDismiss(R.string.uninstall) {
-						kernelRemove()
-					}
-				}	
-		}
+        }
 
 
         n.devcfg.setOnClickListener { _: View? ->
@@ -904,6 +899,15 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun unpackKernel(bootIMG:String = "/dev/block/by-name/boot$(getprop ro.boot.slot_suffix)"){
+        File("$filesDir/temp").mkdir()
+        rootCommand("( cd $filesDir/temp ; $(find /data/adb -name magiskboot) unpack $bootIMG)")
+    }
+
+    private fun repackKernel(bootIMG:String = "/dev/block/by-name/boot$(getprop ro.boot.slot_suffix)"){
+        rootCommand("( cd $filesDir/temp ; $(find /data/adb -name magiskboot) repack $bootIMG)")
+    }
+
     private fun kernelPatch(message: String, link: String) {
         Thread(object : Runnable {
             private var message: String? = null
@@ -917,24 +921,13 @@ class MainActivity : AppCompatActivity() {
 
             override fun run() {
                 androidBackup()
-				rootCommand("mkdir /sdcard/dbkp || true")
-                rootCommand("dd bs=8M if=/sdcard/WOAHelper/Backups/original-boot.img of=/dev/block/by-name/boot$(getprop ro.boot.slot_suffix)")
-                rootCommand("rm /sdcard/WOAHelper/Backups/original-boot.img /sdcard/WOAHelper/Backups/patched-boot.img || true")
-                rootCommand("mv /sdcard/WOAHelper/Backups/boot.img /sdcard/dbkp/boot.img")
-                rootCommand("cp /sdcard/dbkp/boot.img /sdcard/WOAHelper/Backups/original-boot.img")
-                rootCommand("cp $filesDir/dbkp8150.cfg /sdcard/dbkp/dbkp.cfg")
-                rootCommand("wget https://github.com/n00b69/woa-op7/releases/download/DBKP/dbkp -O /sdcard/dbkp/dbkp")
-                rootCommand("cp /sdcard/dbkp/dbkp $filesDir")
-				rootCommand("chmod 777 $filesDir/dbkp")
-                rootCommand("wget $link -O /sdcard/dbkp/file.fd")
-                rootCommand("cd /sdcard/dbkp")
-                rootCommand("$(find /data/adb -name magiskboot) unpack boot.img")
-                rootCommand("$filesDir/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/file.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp.cfg /sdcard/dbkp/dbkp.bin")
-                rootCommand("mv output kernel")
-                rootCommand("$(find /data/adb -name magiskboot) repack boot.img")
-                rootCommand("cp new-boot.img /sdcard/WOAHelper/Backups/patched-boot.img")
-                rootCommand("cd $filesDir")
-                //rootCommand("rm -r /sdcard/dbkp")
+                rootCommand("wget $link -O $filesDir/temp/file.fd")
+                val succ = Dbkp.patch(File("$filesDir/temp/kernel"), File("$filesDir/temp/file.fd"),File("$filesDir/temp/dbkp.bin"),
+                    File("$filesDir/temp/output"), File("$filesDir/dbkp8150.cfg"))
+                Log.d("debug dbkp install", succ.toString() )
+                rootCommand("mv $filesDir/temp/output $filesDir/temp/kernel")
+                repackKernel()
+                rootCommand("cp $filesDir/temp/new-boot.img /sdcard/WOAHelper/Backups/patched-boot.img")
                 if ("cepheus" == device) {
                     rootCommand("dd if=/sdcard/WOAHelper/Backups/patched-boot.img of=/dev/block/by-name/boot bs=16M")
                 } else {
@@ -942,9 +935,10 @@ class MainActivity : AppCompatActivity() {
                     rootCommand("dd if=/sdcard/WOAHelper/Backups/patched-boot.img of=/dev/block/by-name/boot_b bs=16M")
                 }
                 runOnUiThread {
+                    Dlg.clearButtons()
                     Dlg.setText(getString(R.string.dbkp, message))
                     Dlg.setDismiss(R.string.dismiss) { Dlg.close() }
-                    Dlg.setNo(R.string.reboot) { rootCommand("/system/bin/svc power reboot") }
+                    Dlg.setNo(R.string.reboot) {rootCommand("rm -rf $filesDir/temp"); rootCommand("/system/bin/svc power reboot") }
                 }
             }
         }.init(message, link)).start()
@@ -952,21 +946,11 @@ class MainActivity : AppCompatActivity() {
 	
 	private fun kernelRemove() {
         androidBackup()
-		rootCommand("mkdir /sdcard/dbkp || true")
-        rootCommand("rm /sdcard/WOAHelper/Backups/unpatched-boot.img || true")
-        rootCommand("mv /sdcard/WOAHelper/Backups/boot.img /sdcard/dbkp/boot.img")
-		rootCommand("wget https://github.com/n00b69/woa-op7/releases/download/DBKP/remover -O /sdcard/dbkp/remover")
-        rootCommand("cp /sdcard/dbkp/remover $filesDir")
-        rootCommand("chmod 777 $filesDir/remover")
-        rootCommand("cd /sdcard/dbkp")
-        rootCommand("$(find /data/adb -name magiskboot) unpack boot.img")
-        rootCommand("$filesDir/remover /sdcard/dbkp/kernel /sdcard/dbkp/unpatchedkernel")
-		rootCommand("rm kernel")
-        rootCommand("mv unpatchedkernel kernel")
-        rootCommand("$(find /data/adb -name magiskboot) repack boot.img")
-        rootCommand("cp new-boot.img /sdcard/WOAHelper/Backups/unpatched-boot.img")
-        rootCommand("cd $filesDir")
-        //rootCommand("rm -r /sdcard/dbkp")
+        val succ = Dbkp.removePatch(File("$filesDir/temp/kernel"), File("$filesDir/temp/out"))
+        Log.d ("debug dbkp remove", succ.toString())
+        rootCommand("mv $filesDir/temp/out $filesDir/temp/kernel")
+        repackKernel()
+        rootCommand("cp temp/new-boot.img /sdcard/WOAHelper/Backups/unpatched-boot.img")
         if ("cepheus" == device) {
             rootCommand("dd if=/sdcard/WOAHelper/Backups/unpatched-boot.img of=/dev/block/by-name/boot bs=16M")
         } else {
@@ -974,11 +958,13 @@ class MainActivity : AppCompatActivity() {
             rootCommand("dd if=/sdcard/WOAHelper/Backups/unpatched-boot.img of=/dev/block/by-name/boot_b bs=16M")
         }
         runOnUiThread {
+            Dlg.clearButtons()
             Dlg.setText(getString(R.string.dbkpuninstall))
-            Dlg.setDismiss(R.string.reboot) { rootCommand("/system/bin/svc power reboot") }
+            Dlg.setNo(R.string.reboot) {rootCommand("rm -rf $filesDir/temp"); rootCommand("/system/bin/svc power reboot") }
+            Dlg.setDismiss(R.string.dismiss) { Dlg.close() }
         }
     }
-	
+
 	private fun kernelReinstall(message: String, link: String) {
         Thread(object : Runnable {
             private var message: String? = null
@@ -992,31 +978,11 @@ class MainActivity : AppCompatActivity() {
 
             override fun run() {
                 androidBackup()
-				rootCommand("mkdir /sdcard/dbkp || true")
-				rootCommand("rm /sdcard/WOAHelper/Backups/unpatched-boot.img || true")
-        		rootCommand("mv /sdcard/WOAHelper/Backups/boot.img /sdcard/dbkp/boot.img")
-				rootCommand("wget https://github.com/n00b69/woa-op7/releases/download/DBKP/remover -O /sdcard/dbkp/remover")
-        		rootCommand("cp /sdcard/dbkp/remover $filesDir")
-        		rootCommand("chmod 777 $filesDir/remover")
-        		rootCommand("cd /sdcard/dbkp")
-        		rootCommand("$(find /data/adb -name magiskboot) unpack boot.img")
-        		rootCommand("$filesDir/remover /sdcard/dbkp/kernel /sdcard/dbkp/unpatchedkernel")
-				rootCommand("rm kernel")
-        		rootCommand("mv unpatchedkernel kernel")
-        		rootCommand("$(find /data/adb -name magiskboot) repack boot.img")
-        		rootCommand("cp new-boot.img /sdcard/WOAHelper/Backups/unpatched-boot.img")
-                rootCommand("cp $filesDir/dbkp8150.cfg /sdcard/dbkp/dbkp.cfg")
-                rootCommand("wget https://github.com/n00b69/woa-op7/releases/download/DBKP/dbkp -O /sdcard/dbkp/dbkp")
-                rootCommand("cp /sdcard/dbkp/dbkp $filesDir")
-				rootCommand("chmod 777 $filesDir/dbkp")
-                rootCommand("wget $link -O /sdcard/dbkp/file.fd")
-                rootCommand("$(find /data/adb -name magiskboot) unpack new-boot.img")
-                rootCommand("$filesDir/dbkp /sdcard/dbkp/kernel /sdcard/dbkp/file.fd /sdcard/dbkp/output /sdcard/dbkp/dbkp.cfg /sdcard/dbkp/dbkp.bin")
-                rootCommand("mv output kernel")
-                rootCommand("$(find /data/adb -name magiskboot) repack new-boot.img")
-                rootCommand("cp new-boot.img /sdcard/WOAHelper/Backups/patched-boot.img")
-                rootCommand("cd $filesDir")
-                //rootCommand("rm -r /sdcard/dbkp")
+                rootCommand("wget $link -O $filesDir/temp/file.fd")
+                val succ = Dbkp.updateFD(File("$filesDir/temp/kernel"), File("$filesDir/temp/file.fd"), File("$filesDir/temp/out"))
+                Log.d("debug dbkp update", succ.toString())
+                repackKernel()
+                rootCommand("cp temp/new-boot.img /sdcard/WOAHelper/Backups/patched-boot.img")
                 if ("cepheus" == device) {
                     rootCommand("dd if=/sdcard/WOAHelper/Backups/patched-boot.img of=/dev/block/by-name/boot bs=16M")
                 } else {
@@ -1024,9 +990,10 @@ class MainActivity : AppCompatActivity() {
                     rootCommand("dd if=/sdcard/WOAHelper/Backups/patched-boot.img of=/dev/block/by-name/boot_b bs=16M")
                 }
                 runOnUiThread {
+                    Dlg.clearButtons()
                     Dlg.setText(getString(R.string.dbkp, message))
                     Dlg.setDismiss(R.string.dismiss) { Dlg.close() }
-                    Dlg.setNo(R.string.reboot) { rootCommand("/system/bin/svc power reboot") }
+                    Dlg.setNo(R.string.reboot) { rootCommand("rm -rf $filesDir/temp"); rootCommand("/system/bin/svc power reboot") }
                 }
             }
         }.init(message, link)).start()
@@ -1050,7 +1017,6 @@ class MainActivity : AppCompatActivity() {
         private var blur = 0
         private lateinit var rootShell: Shell
         private lateinit var masterShell: Shell
-        private lateinit var userShell: Shell
 
         @JvmStatic
         fun isNetworkConnected(context: Context): Boolean {
@@ -1262,16 +1228,15 @@ class MainActivity : AppCompatActivity() {
                 return
             rootShell = Shell.Builder.create().build()
             masterShell = Shell.Builder.create().setFlags(Shell.FLAG_MOUNT_MASTER).build()
-            userShell = Shell.Builder.create().setFlags(Shell.FLAG_NON_ROOT_SHELL).build()
-            for (i in listOf(rootShell, masterShell,userShell)){
+            for (i in listOf(rootShell, masterShell)){
                 rootCommand("ASH_STANDALONE=1 $(find /data/adb/ -name busybox) ash", i)
                 rootCommand("cd $dir", i)
                 Log.d("storage", dir.toString())
             }
         }
 
-        fun rootCommand(command: String, master : Boolean = false, user : Boolean = false) : String{
-            return rootCommand(command,if (master) masterShell else if(user) userShell else rootShell)
+        fun rootCommand(command: String, master : Boolean = false) : String{
+            return rootCommand(command,if (master) masterShell else rootShell)
         }
 
         fun rootCommand(command: String, shell: Shell): String {
@@ -1283,7 +1248,7 @@ class MainActivity : AppCompatActivity() {
             shell.newJob().add(command).to(out,err).exec()
             if (BuildConfig.DEBUG) {
                 if (out.isNotEmpty())
-                    Log.d("debug stdout",out.last())
+                    Log.d("debug stdout",out.toString())
                 if (err.isNotEmpty())
                     Log.w("debug stderr",err.toString())
             }

@@ -8,6 +8,8 @@ data class DeviceConfig(
     val image: Int,
     val panel: Int = View.GONE,
     val dbkp: Int = View.GONE,
+    val dbkpLink: String = "",
+    val dbkpCodename: String = "",
     val modem: Int = View.GONE,
     val unsupported : Boolean = false
 )
@@ -87,6 +89,8 @@ object Device {
                 panel = View.VISIBLE,
                 dbkp = View.VISIBLE,
                 modem = View.VISIBLE,
+                dbkpCodename = "cepheus",
+                dbkpLink = "https://github.com/n00b69/woa-cepheus/releases/download/Files/cepheus.fd",
             )
 
             "chiron" -> DeviceConfig (
@@ -127,6 +131,8 @@ object Device {
                 image = R.drawable.nabu,
                 panel = View.VISIBLE,
                 dbkp = View.VISIBLE,
+                dbkpCodename = "nabu",
+                dbkpLink = "https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/releases/download/1.0/nabu.fd",
             )
 
             "perseus" -> DeviceConfig (
@@ -214,6 +220,8 @@ object Device {
                 image = R.drawable.hotdog,
                 dbkp = View.VISIBLE,
                 modem= View.VISIBLE,
+                dbkpLink = "https://github.com/n00b69/woa-op7/releases/download/DBKP/hotdog.fd",
+                dbkpCodename = "hotdog",
             )
 
             "guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO" -> DeviceConfig (
@@ -222,6 +230,8 @@ object Device {
                 image = R.drawable.guacamole,
                 dbkp = View.VISIBLE,
                 modem= View.VISIBLE,
+                dbkpLink = "https://github.com/n00b69/woa-op7/releases/download/DBKP/guacamole.fd",
+                dbkpCodename = "hotdog",
             )
 
             "guacamoleb", "hotdogb", "OnePlus7T", "OnePlus7" -> DeviceConfig (
