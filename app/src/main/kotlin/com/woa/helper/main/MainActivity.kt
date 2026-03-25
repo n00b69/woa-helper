@@ -385,6 +385,7 @@ class MainActivity : AppCompatActivity() {
                     )
 				}
 				Dlg.setDismiss(R.string.uninstall) {
+                    Dlg.dialogLoading()
 					kernelRemove()
 				}
 			}
@@ -925,6 +926,14 @@ class MainActivity : AppCompatActivity() {
                 val succ = Dbkp.patch(File("$filesDir/temp/kernel"), File("$filesDir/temp/file.fd"),File("$filesDir/temp/dbkp.bin"),
                     File("$filesDir/temp/output"), File("$filesDir/dbkp8150.cfg"))
                 Log.d("debug dbkp install", succ.toString() )
+                if (succ != 0){
+                    runOnUiThread {
+                        Dlg.clearButtons()
+                        Dlg.setText(R.string.wrong)
+                        Dlg.setDismiss(R.string.dismiss) { Dlg.close() }
+                    }
+                    return
+                }
                 rootCommand("mv $filesDir/temp/output $filesDir/temp/kernel")
                 repackKernel()
                 rootCommand("cp $filesDir/temp/new-boot.img /sdcard/WOAHelper/Backups/patched-boot.img")
@@ -934,35 +943,55 @@ class MainActivity : AppCompatActivity() {
                     rootCommand("dd if=/sdcard/WOAHelper/Backups/patched-boot.img of=/dev/block/by-name/boot_a bs=16M")
                     rootCommand("dd if=/sdcard/WOAHelper/Backups/patched-boot.img of=/dev/block/by-name/boot_b bs=16M")
                 }
+                rootCommand("rm -rf $filesDir/temp")
                 runOnUiThread {
                     Dlg.clearButtons()
                     Dlg.setText(getString(R.string.dbkp, message))
                     Dlg.setDismiss(R.string.dismiss) { Dlg.close() }
-                    Dlg.setNo(R.string.reboot) {rootCommand("rm -rf $filesDir/temp"); rootCommand("/system/bin/svc power reboot") }
+                    Dlg.setNo(R.string.reboot) { rootCommand("/system/bin/svc power reboot") }
                 }
             }
         }.init(message, link)).start()
     }
 	
 	private fun kernelRemove() {
-        androidBackup()
-        val succ = Dbkp.removePatch(File("$filesDir/temp/kernel"), File("$filesDir/temp/out"))
-        Log.d ("debug dbkp remove", succ.toString())
-        rootCommand("mv $filesDir/temp/out $filesDir/temp/kernel")
-        repackKernel()
-        rootCommand("cp temp/new-boot.img /sdcard/WOAHelper/Backups/unpatched-boot.img")
-        if ("cepheus" == device) {
-            rootCommand("dd if=/sdcard/WOAHelper/Backups/unpatched-boot.img of=/dev/block/by-name/boot bs=16M")
-        } else {
-            rootCommand("dd if=/sdcard/WOAHelper/Backups/unpatched-boot.img of=/dev/block/by-name/boot_a bs=16M")
-            rootCommand("dd if=/sdcard/WOAHelper/Backups/unpatched-boot.img of=/dev/block/by-name/boot_b bs=16M")
-        }
-        runOnUiThread {
-            Dlg.clearButtons()
-            Dlg.setText(getString(R.string.dbkpuninstall))
-            Dlg.setNo(R.string.reboot) {rootCommand("rm -rf $filesDir/temp"); rootCommand("/system/bin/svc power reboot") }
-            Dlg.setDismiss(R.string.dismiss) { Dlg.close() }
-        }
+        Thread(object : Runnable {
+
+            fun init(): Runnable {
+                return this
+            }
+
+            override fun run() {
+                androidBackup()
+                val succ =
+                    Dbkp.removePatch(File("$filesDir/temp/kernel"), File("$filesDir/temp/out"))
+                Log.d("debug dbkp remove", succ.toString())
+                if (succ != 0) {
+                    runOnUiThread {
+                        Dlg.clearButtons()
+                        Dlg.setText(R.string.wrong)
+                        Dlg.setDismiss(R.string.dismiss) { Dlg.close() }
+                    }
+                    return
+                }
+                rootCommand("mv $filesDir/temp/out $filesDir/temp/kernel")
+                repackKernel()
+                rootCommand("cp temp/new-boot.img /sdcard/WOAHelper/Backups/unpatched-boot.img")
+                if ("cepheus" == device) {
+                    rootCommand("dd if=/sdcard/WOAHelper/Backups/unpatched-boot.img of=/dev/block/by-name/boot bs=16M")
+                } else {
+                    rootCommand("dd if=/sdcard/WOAHelper/Backups/unpatched-boot.img of=/dev/block/by-name/boot_a bs=16M")
+                    rootCommand("dd if=/sdcard/WOAHelper/Backups/unpatched-boot.img of=/dev/block/by-name/boot_b bs=16M")
+                }
+                rootCommand("rm -rf $filesDir/temp")
+                runOnUiThread {
+                    Dlg.clearButtons()
+                    Dlg.setText(getString(R.string.dbkpuninstall))
+                    Dlg.setNo(R.string.reboot) {rootCommand("/system/bin/svc power reboot") }
+                    Dlg.setDismiss(R.string.dismiss) { Dlg.close() }
+                }
+            }
+        }.init()).start()
     }
 
 	private fun kernelReinstall(message: String, link: String) {
@@ -981,6 +1010,14 @@ class MainActivity : AppCompatActivity() {
                 rootCommand("wget $link -O $filesDir/temp/file.fd")
                 val succ = Dbkp.updateFD(File("$filesDir/temp/kernel"), File("$filesDir/temp/file.fd"), File("$filesDir/temp/out"))
                 Log.d("debug dbkp update", succ.toString())
+                if (succ != 0){
+                    runOnUiThread {
+                        Dlg.clearButtons()
+                        Dlg.setText(R.string.wrong)
+                        Dlg.setDismiss(R.string.dismiss) { Dlg.close() }
+                    }
+                    return
+                }
                 repackKernel()
                 rootCommand("cp temp/new-boot.img /sdcard/WOAHelper/Backups/patched-boot.img")
                 if ("cepheus" == device) {
@@ -989,11 +1026,12 @@ class MainActivity : AppCompatActivity() {
                     rootCommand("dd if=/sdcard/WOAHelper/Backups/patched-boot.img of=/dev/block/by-name/boot_a bs=16M")
                     rootCommand("dd if=/sdcard/WOAHelper/Backups/patched-boot.img of=/dev/block/by-name/boot_b bs=16M")
                 }
+                rootCommand("rm -rf $filesDir/temp")
                 runOnUiThread {
                     Dlg.clearButtons()
                     Dlg.setText(getString(R.string.dbkp, message))
                     Dlg.setDismiss(R.string.dismiss) { Dlg.close() }
-                    Dlg.setNo(R.string.reboot) { rootCommand("rm -rf $filesDir/temp"); rootCommand("/system/bin/svc power reboot") }
+                    Dlg.setNo(R.string.reboot) {rootCommand("/system/bin/svc power reboot") }
                 }
             }
         }.init(message, link)).start()

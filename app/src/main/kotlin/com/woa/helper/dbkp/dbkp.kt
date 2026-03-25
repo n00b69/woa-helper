@@ -1,6 +1,7 @@
 package com.woa.helper.dbkp
 
 import android.util.Log
+import com.woa.helper.main.MainActivity
 import java.io.File
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
@@ -20,6 +21,7 @@ object Dbkp{
         //code adapted from https://github.com/Project-Aloha/DualBootKernelPatcher
         if (!kernel.exists() || !fd.exists() || !shellCode.exists() || !config.exists())
             return -1
+        MainActivity.rootCommand("chmod 666 temp/*")
         if (!kernel.canRead() || !fd.canRead() || !shellCode.canRead() || !config.canRead())
             return -2
         if (patched.exists() && !patched.canWrite())
@@ -174,6 +176,7 @@ object Dbkp{
         //code adapted from https://github.com/Project-Aloha/DualBootKernelPatcher
         if (!kernel.exists())
             return -1
+        MainActivity.rootCommand("chmod 666 temp/*")
         if (!kernel.canRead())
             return -2
         if (output.exists() && !output.canWrite())
@@ -205,6 +208,7 @@ object Dbkp{
     fun updateFD(kernel: File,fd: File,output: File):Int{
         if (!kernel.exists() || !fd.exists())
             return -1
+        MainActivity.rootCommand("chmod 666 temp/*")
         if (!kernel.canRead() || !fd.canRead() )
             return -2
         if (output.exists() && !output.canWrite())
