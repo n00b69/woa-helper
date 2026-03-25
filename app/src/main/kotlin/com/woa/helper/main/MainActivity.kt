@@ -72,16 +72,16 @@ class MainActivity : AppCompatActivity() {
         rootCommand("chmod 755 $filesDir/mount.ntfs && chown root:root $filesDir/mount.ntfs")
     }
 
-    private fun aspectRatio() : Float{
+    private fun aspectRatio(): Float {
         val metrics = Resources.getSystem().displayMetrics
         var size1 = metrics.widthPixels
         var size2 = metrics.heightPixels
-        if (size1>size2)
-            size1=size2.also{size2 =size1}
+        if (size1 > size2)
+            size1 = size2.also { size2 = size1 }
         return size2.toFloat() / size1.toFloat()
     }
 
-    private fun isTablet(): Boolean{
+    private fun isTablet(): Boolean {
         return aspectRatio() < 1.7
     }
 
@@ -109,10 +109,20 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 }
-                views[views.size - 1].startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_back_out))
+                views[views.size - 1].startAnimation(
+                    AnimationUtils.loadAnimation(
+                        context,
+                        R.anim.slide_back_out
+                    )
+                )
                 views.removeAt(views.size - 1)
                 setContentView(views[views.size - 1])
-                views[views.size - 1].startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_back_in))
+                views[views.size - 1].startAnimation(
+                    AnimationUtils.loadAnimation(
+                        context,
+                        R.anim.slide_back_in
+                    )
+                )
             }
         }
 
@@ -132,7 +142,12 @@ class MainActivity : AppCompatActivity() {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content)) { _: View?, insets: WindowInsetsCompat ->
             val sysInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             arrayOf(x.app, n.app, k.app, z.app).forEach { it.setPadding(0, 0, 0, sysInsets.bottom) }
-            arrayOf(x.linearLayout, n.linearLayout, k.linearLayout, z.linearLayout).forEach { it.setPadding(sysInsets.left, sysInsets.top, sysInsets.right, 0) }
+            arrayOf(
+                x.linearLayout,
+                n.linearLayout,
+                k.linearLayout,
+                z.linearLayout
+            ).forEach { it.setPadding(sysInsets.left, sysInsets.top, sysInsets.right, 0) }
             insets
         }
 
@@ -142,7 +157,8 @@ class MainActivity : AppCompatActivity() {
             locales.add(i!!.lowercase(Locale.getDefault()))
             val locale = checkNotNull(LocaleListCompat.forLanguageTags(i)[0])
             val country = locale.getDisplayCountry(locale)
-            val lang = locale.getDisplayLanguage(locale) + (if (!country.isEmpty()) " ($country)" else "")
+            val lang =
+                locale.getDisplayLanguage(locale) + (if (!country.isEmpty()) " ($country)" else "")
             languages.add(lang)
         }
         val adapter = ArrayAdapter(
@@ -152,9 +168,15 @@ class MainActivity : AppCompatActivity() {
         )
         setSupportActionBar(x.toolbarlayout.toolbar)
         x.toolbarlayout.toolbar.setTitle(R.string.app_name)
-        x.toolbarlayout.toolbar.subtitle = "v${BuildConfig.VERSION_NAME}"+if (BuildConfig.DEBUG) " (Debug)" else ""
+        x.toolbarlayout.toolbar.subtitle =
+            "v${BuildConfig.VERSION_NAME}" + if (BuildConfig.DEBUG) " (Debug)" else ""
         x.toolbarlayout.toolbar.setNavigationIcon(R.drawable.ic_launcher_foreground)
-        arrayOf(x.toolbarlayout.settings, k.toolbarlayout.settings, n.toolbarlayout.settings, z.toolbarlayout.settings).forEach { it.setColorFilter(R.color.md_theme_primary) }
+        arrayOf(
+            x.toolbarlayout.settings,
+            k.toolbarlayout.settings,
+            n.toolbarlayout.settings,
+            z.toolbarlayout.settings
+        ).forEach { it.setColorFilter(R.color.md_theme_primary) }
 
         win = getWin()
         boot = getBoot()
@@ -176,7 +198,7 @@ class MainActivity : AppCompatActivity() {
         n.dbkp.visibility = props.dbkp
         n.flashUefi.visibility = if (props.dbkp == View.VISIBLE) View.GONE else View.VISIBLE
         unsupported = props.unsupported
-        tablet= isTablet()
+        tablet = isTablet()
         onConfigurationChanged(resources.configuration)
         //if (!tablet) requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         if (unsupported && !Pref.getAGREE(this)) {
@@ -188,20 +210,20 @@ class MainActivity : AppCompatActivity() {
         }
         var panel = rootCommand("cat /proc/cmdline")
         panel = when {
-			panel.contains("tianmamd_dv2") -> "Tianma DV2"
+            panel.contains("tianmamd_dv2") -> "Tianma DV2"
 
             panel.contains("tianmamd_pp1") -> "Tianma PP1"
 
             panel.contains("tianmamd_pv") -> "Tianma PV"
-			
+
             panel.contains("j20s_42")
                     || panel.contains("k82_42")
-					|| panel.contains("k9d_42")
+                    || panel.contains("k9d_42")
                     || panel.contains("huaxing") -> "Huaxing"
 
             panel.contains("j20s_36")
                     || panel.contains("tianma")
-					|| panel.contains("k9d_36")
+                    || panel.contains("k9d_36")
                     || panel.contains("k82_36") -> "Tianma"
 
             panel.contains("ebbg") -> "EBBG"
@@ -228,7 +250,12 @@ class MainActivity : AppCompatActivity() {
             }
             Dlg.setNo(R.string.later) { Dlg.close() }
         }
-        arrayOf(Pair.create(x.tvRamvalue, getString(R.string.ramvalue, RAM().getMemory(this).toDouble())), Pair.create(x.tvPanel, getString(R.string.paneltype, panel))).forEach {
+        arrayOf(
+            Pair.create(
+                x.tvRamvalue,
+                getString(R.string.ramvalue, RAM().getMemory(this).toDouble())
+            ), Pair.create(x.tvPanel, getString(R.string.paneltype, panel))
+        ).forEach {
             it.first.text =
                 it.second
         }
@@ -255,7 +282,7 @@ class MainActivity : AppCompatActivity() {
                 updateLastBackupDate()
                 Thread {
                     androidBackup()
-					modemBackup()
+                    modemBackup()
                     runOnUiThread {
                         Dlg.setText(R.string.backuped)
                         Dlg.dismissButton()
@@ -293,7 +320,12 @@ class MainActivity : AppCompatActivity() {
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
                 rootCommand("mkdir -p /sdcard/WOAHelper/sta || true")
-                arrayOf("sta.exe", "sdd.exe", "sdd.conf", "boot.img_auto-flasher_V2.0.exe").forEach { rootCommand("cp $filesDir/$it /sdcard/WOAHelper/sta/") }
+                arrayOf(
+                    "sta.exe",
+                    "sdd.exe",
+                    "sdd.conf",
+                    "boot.img_auto-flasher_V2.0.exe"
+                ).forEach { rootCommand("cp $filesDir/$it /sdcard/WOAHelper/sta/") }
                 mount()
                 if (!isMounted()) {
                     Dlg.close()
@@ -349,29 +381,29 @@ class MainActivity : AppCompatActivity() {
         n.dbkp.setOnClickListener { _: View? ->
             unpackKernel()
             val patched = Dbkp.isPatched(File("$filesDir/temp/kernel"))
-            Log.d("checker",if (patched)"patched" else "not patched")
-			if (!patched) {
+            Log.d("checker", if (patched) "patched" else "not patched")
+            if (!patched) {
                 checkdbkpmodel()
-				Dlg.show(this, getString(R.string.dbkp_question, dbkpmodel), R.drawable.ic_uefi)
-            	Dlg.setNo(R.string.no) { Dlg.close() ; rootCommand("rm -rf $filesDir/temp") }
-            	Dlg.setYes(R.string.yes) {
-            		rootCommand("cp $filesDir/dbkp.${props.dbkpCodename}.bin $filesDir/temp/dbkp.bin")
-            		Dlg.dialogLoading()
-            		kernelPatch(
-                		(when (props.dbkpCodename) {
+                Dlg.show(this, getString(R.string.dbkp_question, dbkpmodel), R.drawable.ic_uefi)
+                Dlg.setNo(R.string.no) { Dlg.close(); rootCommand("rm -rf $filesDir/temp") }
+                Dlg.setYes(R.string.yes) {
+                    rootCommand("cp $filesDir/dbkp.${props.dbkpCodename}.bin $filesDir/temp/dbkp.bin")
+                    Dlg.dialogLoading()
+                    kernelPatch(
+                        (when (props.dbkpCodename) {
                             "nabu" -> getString(R.string.nabu)
                             "hotdog" -> getString(R.string.op7)
                             "cepheus" -> getString(R.string.cepheus)
                             else -> null
                         })!!,
-                		props.dbkpLink
-            		)
+                        props.dbkpLink
+                    )
 
-            	}
+                }
             } else {
-				Dlg.show(this, getString(R.string.dbkp_question2), R.drawable.ic_uefi)
-            	Dlg.setNo(R.string.no) { Dlg.close() ;rootCommand("rm -rf $filesDir/temp")}
-            	Dlg.setYes(R.string.reinstall) {
+                Dlg.show(this, getString(R.string.dbkp_question2), R.drawable.ic_uefi)
+                Dlg.setNo(R.string.no) { Dlg.close(); rootCommand("rm -rf $filesDir/temp") }
+                Dlg.setYes(R.string.reinstall) {
                     rootCommand("cp $filesDir/dbkp.${props.dbkpCodename}.bin $filesDir/temp/dbkp.bin")
                     Dlg.dialogLoading()
                     kernelReinstall(
@@ -383,12 +415,12 @@ class MainActivity : AppCompatActivity() {
                         })!!,
                         props.dbkpLink
                     )
-				}
-				Dlg.setDismiss(R.string.uninstall) {
+                }
+                Dlg.setDismiss(R.string.uninstall) {
                     Dlg.dialogLoading()
-					kernelRemove()
-				}
-			}
+                    kernelRemove()
+                }
+            }
         }
 
 
@@ -406,8 +438,19 @@ class MainActivity : AppCompatActivity() {
                 Dlg.dialogLoading()
                 Thread {
                     rootCommand("mkdir -p /sdcard/WOAHelper/Backups || true")
-                    val devcfgDevice = if (arrayOf("guacamole", "OnePlus7Pro", "OnePlus7Pro4G").contains(device)) "guacamole" else (if (arrayOf("hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) "hotdog" else null)!!
-                    val findoriginaldevcfg = rootCommand("find $filesDir -maxdepth 1 -name original-devcfg.img")
+                    val devcfgDevice = if (arrayOf(
+                            "guacamole",
+                            "OnePlus7Pro",
+                            "OnePlus7Pro4G"
+                        ).contains(device)
+                    ) "guacamole" else (if (arrayOf(
+                            "hotdog",
+                            "OnePlus7TPro",
+                            "OnePlus7TPro4G"
+                        ).contains(device)
+                    ) "hotdog" else null)!!
+                    val findoriginaldevcfg =
+                        rootCommand("find $filesDir -maxdepth 1 -name original-devcfg.img")
                     if (findoriginaldevcfg.isEmpty()) {
                         rootCommand("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=/sdcard/WOAHelper/Backups/original-devcfg.img")
                         rootCommand("cp /sdcard/WOAHelper/Backups/original-devcfg.img $filesDir/original-devcfg.img")
@@ -457,9 +500,19 @@ class MainActivity : AppCompatActivity() {
                     return@setYes
                 }
                 rootCommand("mkdir -p /sdcard/WOAHelper/Toolbox || true")
-                arrayOf("WorksOnWoa.url", "TestedSoftware.url", "ARMSoftware.url", "ARMRepo.url").forEach { rootCommand("cp $filesDir/$it /sdcard/WOAHelper/Toolbox") }
+                arrayOf(
+                    "WorksOnWoa.url",
+                    "TestedSoftware.url",
+                    "ARMSoftware.url",
+                    "ARMRepo.url"
+                ).forEach { rootCommand("cp $filesDir/$it /sdcard/WOAHelper/Toolbox") }
                 rootCommand("mkdir $winpath/Toolbox || true ")
-                arrayOf("WorksOnWoa.url", "TestedSoftware.url", "ARMSoftware.url", "ARMRepo.url").forEach { rootCommand("cp $filesDir/$it $winpath/Toolbox") }
+                arrayOf(
+                    "WorksOnWoa.url",
+                    "TestedSoftware.url",
+                    "ARMSoftware.url",
+                    "ARMRepo.url"
+                ).forEach { rootCommand("cp $filesDir/$it $winpath/Toolbox") }
                 Dlg.setText(R.string.done)
                 Dlg.dismissButton()
             }
@@ -563,7 +616,10 @@ class MainActivity : AppCompatActivity() {
                     return@setYes
                 }
                 rootCommand("mkdir $winpath/Toolbox || true ")
-                arrayOf("/Toolbox", "/Users/Public/Desktop").forEach { rootCommand("cp /sdcard/WOAHelper/Toolbox/QuickRotate_V6.1.6.exe $winpath$it") }
+                arrayOf(
+                    "/Toolbox",
+                    "/Users/Public/Desktop"
+                ).forEach { rootCommand("cp /sdcard/WOAHelper/Toolbox/QuickRotate_V6.1.6.exe $winpath$it") }
                 Dlg.setText(R.string.done)
                 Dlg.dismissButton()
             }
@@ -658,8 +714,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     rootCommand("wget https://github.com/n00b69/woasetup/releases/download/Installers/DefenderRemover.exe -O /sdcard/WOAHelper/Toolbox/DefenderRemover.exe")
                     rootCommand("cp /sdcard/WOAHelper/Toolbox/DefenderRemover.exe $filesDir/DefenderRemover.exe")
-                }
-                else
+                } else
                     rootCommand("cp $filesDir/DefenderRemover.exe /sdcard/WOAHelper/Toolbox/DefenderRemover.exe")
                 mount()
                 if (!isMounted()) {
@@ -681,9 +736,19 @@ class MainActivity : AppCompatActivity() {
         k.toolbarlayout.toolbar.setNavigationIcon(R.drawable.ic_launcher_foreground)
         val settingsIconClick = View.OnClickListener { _: View? ->
             views.add(k.root)
-            views[views.size - 2].startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out))
+            views[views.size - 2].startAnimation(
+                AnimationUtils.loadAnimation(
+                    this,
+                    R.anim.slide_out
+                )
+            )
             setContentView(k.root)
-            views[views.size - 1].startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in))
+            views[views.size - 1].startAnimation(
+                AnimationUtils.loadAnimation(
+                    this,
+                    R.anim.slide_in
+                )
+            )
             // Scary big line! (Victoria)
             arrayOf(
                 Pair.create(k.backupQB, Pref.getBackup(this)),
@@ -695,7 +760,10 @@ class MainActivity : AppCompatActivity() {
                 Pair.create(k.securelock, !Pref.getSecure(this)),
                 Pair.create(k.mountLocation, Pref.getMountLocation(this)),
                 Pair.create(k.appUpdate, Pref.getAppUpdate(this)),
-                Pair.create(k.devcfg1, Pref.getDevcfg1(this) && View.VISIBLE == k.devcfg1.visibility),
+                Pair.create(
+                    k.devcfg1,
+                    Pref.getDevcfg1(this) && View.VISIBLE == k.devcfg1.visibility
+                ),
                 Pair.create(k.devcfg2, Pref.getDevcfg2(this))
             ).forEach { it.first.setChecked(it.second) }
             k.toolbarlayout.settings.visibility = View.GONE
@@ -707,15 +775,28 @@ class MainActivity : AppCompatActivity() {
                 langSpinner.setSelection(index)
             }
             langSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
-                    AppCompatDelegate.setApplicationLocales(if (languages[position] == getString(R.string.default1)) LocaleListCompat.getEmptyLocaleList() else LocaleListCompat.forLanguageTags(locales[position]))
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View,
+                    position: Int,
+                    id: Long
+                ) {
+                    AppCompatDelegate.setApplicationLocales(
+                        if (languages[position] == getString(R.string.default1)) LocaleListCompat.getEmptyLocaleList() else LocaleListCompat.forLanguageTags(
+                            locales[position]
+                        )
+                    )
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                 }
             }
         }
-        arrayOf(x.toolbarlayout.settings, n.toolbarlayout.settings, z.toolbarlayout.settings).forEach { it.setOnClickListener(settingsIconClick) }
+        arrayOf(
+            x.toolbarlayout.settings,
+            n.toolbarlayout.settings,
+            z.toolbarlayout.settings
+        ).forEach { it.setOnClickListener(settingsIconClick) }
 
         k.mountLocation.setOnChangeListener { b: Boolean ->
             Pref.setMountLocation(this, b)
@@ -771,7 +852,17 @@ class MainActivity : AppCompatActivity() {
         k.automount.setOnChangeListener { b: Boolean -> Pref.setAutoMount(this, b) }
         k.appUpdate.setOnChangeListener { b: Boolean -> Pref.setAppUpdate(this, b) }
         val op7funny = rootCommand("cat /proc/cmdline | grep oplus")
-        if (arrayOf("guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO", "hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device) && !op7funny.isEmpty()) {
+        if (arrayOf(
+                "guacamole",
+                "guacamolet",
+                "OnePlus7Pro",
+                "OnePlus7Pro4G",
+                "OnePlus7ProTMO",
+                "hotdog",
+                "OnePlus7TPro",
+                "OnePlus7TPro4G"
+            ).contains(device) && !op7funny.isEmpty()
+        ) {
             k.devcfg1.setOnChangeListener { b: Boolean ->
                 Pref.setDevcfg1(this, b)
                 k.devcfg2.visibility = if (b) View.VISIBLE else View.GONE
@@ -798,11 +889,32 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun dump() {
-        arrayOf(Pair.create("modemst1", "bootmodem_fs1"), Pair.create("modemst2", "bootmodem_fs2")).forEach { rootCommand(String.format("dd if=/dev/block/by-name/%s of=$(find $winpath/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/%s", it.first, it.second)) }
+        arrayOf(
+            Pair.create("modemst1", "bootmodem_fs1"),
+            Pair.create("modemst2", "bootmodem_fs2")
+        ).forEach {
+            rootCommand(
+                String.format(
+                    "dd if=/dev/block/by-name/%s of=$(find $winpath/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/%s",
+                    it.first,
+                    it.second
+                )
+            )
+        }
     }
 
     private fun checkdbkpmodel() {
-        dbkpmodel = if (arrayOf("guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO").contains(device)) "ONEPLUS 7 PRO" else if (arrayOf("hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) "ONEPLUS 7T PRO" else if ("cepheus" == device) "XIAOMI MI 9" else if ("nabu" == device) "XIAOMI PAD 5" else "UNSUPPORTED"
+        dbkpmodel = if (arrayOf(
+                "guacamole",
+                "guacamolet",
+                "OnePlus7Pro",
+                "OnePlus7Pro4G",
+                "OnePlus7ProTMO"
+            ).contains(device)
+        ) "ONEPLUS 7 PRO" else if (arrayOf("hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(
+                device
+            )
+        ) "ONEPLUS 7T PRO" else if ("cepheus" == device) "XIAOMI MI 9" else if ("nabu" == device) "XIAOMI PAD 5" else "UNSUPPORTED"
     }
 
     private fun checkuefi() {
@@ -810,8 +922,32 @@ class MainActivity : AppCompatActivity() {
         finduefi = "\"" + rootCommand(getString(R.string.uefiChk)) + "\""
         val found = finduefi.contains("img")
         arrayOf(x.quickBoot, n.flashUefi).forEach { it.isEnabled = found }
-        arrayOf(Pair.create(x.quickBoot, if (found) R.string.quickboot_title else R.string.uefi_not_found), Pair.create(n.flashUefi, if (found) R.string.flash_uefi_title else R.string.uefi_not_found)).forEach { it.first.setTitle(it.second) }
-        arrayOf(Pair.create(x.quickBoot, if (found) getString(R.string.quickboot_subtitle_nabu) else getString(R.string.uefi_not_found_subtitle, device)), Pair.create(n.flashUefi, if (found) getString(R.string.flash_uefi_subtitle) else getString(R.string.uefi_not_found_subtitle, device))).forEach { it.first.setSubtitle(it.second) }
+        arrayOf(
+            Pair.create(
+                x.quickBoot,
+                if (found) R.string.quickboot_title else R.string.uefi_not_found
+            ),
+            Pair.create(
+                n.flashUefi,
+                if (found) R.string.flash_uefi_title else R.string.uefi_not_found
+            )
+        ).forEach { it.first.setTitle(it.second) }
+        arrayOf(
+            Pair.create(
+                x.quickBoot,
+                if (found) getString(R.string.quickboot_subtitle_nabu) else getString(
+                    R.string.uefi_not_found_subtitle,
+                    device
+                )
+            ),
+            Pair.create(
+                n.flashUefi,
+                if (found) getString(R.string.flash_uefi_subtitle) else getString(
+                    R.string.uefi_not_found_subtitle,
+                    device
+                )
+            )
+        ).forEach { it.first.setSubtitle(it.second) }
     }
 
     private fun checkwin() {
@@ -822,38 +958,41 @@ class MainActivity : AppCompatActivity() {
         arrayOf(x.mnt, x.toolbox, x.quickBoot, n.flashUefi).forEach { it.isEnabled = false }
     }
 
-    private fun checkupdate(){
+    private fun checkupdate() {
         checkupdate(false)
     }
-    private fun checkupdate(manual :  Boolean) {
-        if (!isNetworkConnected(this)){
+
+    private fun checkupdate(manual: Boolean) {
+        if (!isNetworkConnected(this)) {
             if (manual) nointernet()
             return
         }
-        if (Pref.getAppUpdate(this)&&!manual) return
-		if (manual) {
+        if (Pref.getAppUpdate(this) && !manual) return
+        if (manual) {
             Dlg.show(this, R.string.please_wait)
-		    Dlg.setCancelable(false)
-		}
-        val version = download.text("https://raw.githubusercontent.com/n00b69/woa-helper-update/main"+ (if (BuildConfig.DEBUG) "/debug" else "")+"/README.md")
-        val changelog = download.text("https://raw.githubusercontent.com/n00b69/woa-helper-update/main"+ (if (BuildConfig.DEBUG) "/debug" else "")+"/changelog.md")
+            Dlg.setCancelable(false)
+        }
+        val version =
+            download.text("https://raw.githubusercontent.com/n00b69/woa-helper-update/main" + (if (BuildConfig.DEBUG) "/debug" else "") + "/README.md")
+        val changelog =
+            download.text("https://raw.githubusercontent.com/n00b69/woa-helper-update/main" + (if (BuildConfig.DEBUG) "/debug" else "") + "/changelog.md")
         if (version.isEmpty()) {
             if (manual) nointernet()
             return
         }
         if (BuildConfig.VERSION_NAME == version) {
-			if (manual) {
-            	Dlg.setText(getString(R.string.no) + " " + getString(R.string.update1))
-            	Dlg.dismissButton()
-			}
+            if (manual) {
+                Dlg.setText(getString(R.string.no) + " " + getString(R.string.update1))
+                Dlg.dismissButton()
+            }
             return
         }
-        if (!manual) Dlg.show(this,"")
-        Dlg.setText(getString(R.string.update1)+": "+version+"\n"+changelog)
+        if (!manual) Dlg.show(this, "")
+        Dlg.setText(getString(R.string.update1) + ": " + version + "\n" + changelog)
         Dlg.setNo(R.string.later) { Dlg.close() }
         Dlg.setYes(R.string.update) {
             Dlg.clearButtons()
-			Dlg.setCancelable(false)
+            Dlg.setCancelable(false)
             Dlg.setText(
                 """
                     ${getString(R.string.update2)}
@@ -885,27 +1024,31 @@ class MainActivity : AppCompatActivity() {
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
 
-        var params = arrayOf(LinearLayout.HORIZONTAL, View.GONE, LinearLayout.LayoutParams.MATCH_PARENT, 100,
-            LinearLayout.VERTICAL)
+        var params = arrayOf(
+            LinearLayout.HORIZONTAL, View.GONE, LinearLayout.LayoutParams.MATCH_PARENT, 100,
+            LinearLayout.VERTICAL
+        )
         if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
-            params = arrayOf(LinearLayout.VERTICAL, View.VISIBLE, LinearLayout.LayoutParams.WRAP_CONTENT, 0,
-                LinearLayout.HORIZONTAL)
+            params = arrayOf(
+                LinearLayout.VERTICAL, View.VISIBLE, LinearLayout.LayoutParams.WRAP_CONTENT, 0,
+                LinearLayout.HORIZONTAL
+            )
 
         x.app.orientation = params[0]
         x.top.orientation = params[4]
         if (tablet) return
         x.DeviceImage.visibility = params[1]
         x.up.layoutParams.height = params[2]
-        x.infoText.setPadding(params[3],0,params[3],0)
+        x.infoText.setPadding(params[3], 0, params[3], 0)
 
     }
 
-    private fun unpackKernel(bootIMG:String = "/dev/block/by-name/boot$(getprop ro.boot.slot_suffix)"){
+    private fun unpackKernel(bootIMG: String = "/dev/block/by-name/boot$(getprop ro.boot.slot_suffix)") {
         File("$filesDir/temp").mkdir()
         rootCommand("( cd $filesDir/temp ; $(find /data/adb -name magiskboot) unpack $bootIMG)")
     }
 
-    private fun repackKernel(bootIMG:String = "/dev/block/by-name/boot$(getprop ro.boot.slot_suffix)"){
+    private fun repackKernel(bootIMG: String = "/dev/block/by-name/boot$(getprop ro.boot.slot_suffix)") {
         rootCommand("( cd $filesDir/temp ; $(find /data/adb -name magiskboot) repack $bootIMG)")
     }
 
@@ -923,10 +1066,15 @@ class MainActivity : AppCompatActivity() {
             override fun run() {
                 androidBackup()
                 rootCommand("wget $link -O $filesDir/temp/file.fd")
-                val succ = Dbkp.patch(File("$filesDir/temp/kernel"), File("$filesDir/temp/file.fd"),File("$filesDir/temp/dbkp.bin"),
-                    File("$filesDir/temp/output"), File("$filesDir/dbkp8150.cfg"))
-                Log.d("debug dbkp install", succ.toString() )
-                if (succ != 0){
+                val succ = Dbkp.patch(
+                    File("$filesDir/temp/kernel"),
+                    File("$filesDir/temp/file.fd"),
+                    File("$filesDir/temp/dbkp.bin"),
+                    File("$filesDir/temp/output"),
+                    File("$filesDir/dbkp8150.cfg")
+                )
+                Log.d("debug dbkp install", succ.toString())
+                if (succ != 0) {
                     runOnUiThread {
                         Dlg.clearButtons()
                         Dlg.setText(R.string.wrong)
@@ -953,8 +1101,8 @@ class MainActivity : AppCompatActivity() {
             }
         }.init(message, link)).start()
     }
-	
-	private fun kernelRemove() {
+
+    private fun kernelRemove() {
         Thread(object : Runnable {
 
             fun init(): Runnable {
@@ -987,14 +1135,14 @@ class MainActivity : AppCompatActivity() {
                 runOnUiThread {
                     Dlg.clearButtons()
                     Dlg.setText(getString(R.string.dbkpuninstall))
-                    Dlg.setNo(R.string.reboot) {rootCommand("/system/bin/svc power reboot") }
+                    Dlg.setNo(R.string.reboot) { rootCommand("/system/bin/svc power reboot") }
                     Dlg.setDismiss(R.string.dismiss) { Dlg.close() }
                 }
             }
         }.init()).start()
     }
 
-	private fun kernelReinstall(message: String, link: String) {
+    private fun kernelReinstall(message: String, link: String) {
         Thread(object : Runnable {
             private var message: String? = null
             private var link: String? = null
@@ -1008,9 +1156,13 @@ class MainActivity : AppCompatActivity() {
             override fun run() {
                 androidBackup()
                 rootCommand("wget $link -O $filesDir/temp/file.fd")
-                val succ = Dbkp.updateFD(File("$filesDir/temp/kernel"), File("$filesDir/temp/file.fd"), File("$filesDir/temp/out"))
+                val succ = Dbkp.updateFD(
+                    File("$filesDir/temp/kernel"),
+                    File("$filesDir/temp/file.fd"),
+                    File("$filesDir/temp/out")
+                )
                 Log.d("debug dbkp update", succ.toString())
-                if (succ != 0){
+                if (succ != 0) {
                     runOnUiThread {
                         Dlg.clearButtons()
                         Dlg.setText(R.string.wrong)
@@ -1031,7 +1183,7 @@ class MainActivity : AppCompatActivity() {
                     Dlg.clearButtons()
                     Dlg.setText(getString(R.string.dbkp, message))
                     Dlg.setDismiss(R.string.dismiss) { Dlg.close() }
-                    Dlg.setNo(R.string.reboot) {rootCommand("/system/bin/svc power reboot") }
+                    Dlg.setNo(R.string.reboot) { rootCommand("/system/bin/svc power reboot") }
                 }
             }
         }.init(message, link)).start()
@@ -1058,10 +1210,13 @@ class MainActivity : AppCompatActivity() {
 
         @JvmStatic
         fun isNetworkConnected(context: Context): Boolean {
-            val connectivityManager = context.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+            val connectivityManager =
+                context.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
             val activeNetwork = connectivityManager.activeNetwork
             val capabilities = connectivityManager.getNetworkCapabilities(activeNetwork)
-            return null != capabilities && (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) || capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) || capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET))
+            return null != capabilities && (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) || capabilities.hasTransport(
+                NetworkCapabilities.TRANSPORT_CELLULAR
+            ) || capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET))
         }
 
         internal fun flash(uefi: String?) {
@@ -1071,7 +1226,14 @@ class MainActivity : AppCompatActivity() {
         @JvmStatic
         fun mountUI() {
             if (winpath.isEmpty()) updateWinPath()
-            Dlg.show(context!!, if (isMounted()) context!!.getString(R.string.unmount_question) else context!!.getString(R.string.mount_question, winpath), R.drawable.ic_mnt)
+            Dlg.show(
+                context!!,
+                if (isMounted()) context!!.getString(R.string.unmount_question) else context!!.getString(
+                    R.string.mount_question,
+                    winpath
+                ),
+                R.drawable.ic_mnt
+            )
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
                 Dlg.dialogLoading()
@@ -1086,7 +1248,13 @@ class MainActivity : AppCompatActivity() {
                     mount()
                     if (isMounted()) {
                         Dlg.setText("${context!!.getString(R.string.mounted)}\n$winpath")
-                        MountWidget.updateText(context!!, context!!.getString(R.string.mnt_title, context!!.getString(R.string.unmountt)))
+                        MountWidget.updateText(
+                            context!!,
+                            context!!.getString(
+                                R.string.mnt_title,
+                                context!!.getString(R.string.unmountt)
+                            )
+                        )
                         Dlg.dismissButton()
                         return@postDelayed
                     }
@@ -1121,19 +1289,32 @@ class MainActivity : AppCompatActivity() {
                     }
                     if (Pref.getDevcfg1(context!!)) {
                         if (!isNetworkConnected(context!!)) {
-                            val finddevcfg = rootCommand("find ${context!!.filesDir} -maxdepth 1 -name OOS11_devcfg_*")
+                            val finddevcfg =
+                                rootCommand("find ${context!!.filesDir} -maxdepth 1 -name OOS11_devcfg_*")
                             if (finddevcfg.isEmpty()) {
                                 nointernet()
                                 return@postDelayed
                             }
                         }
-                        val devcfgDevice = if (arrayOf("guacamole", "OnePlus7Pro", "OnePlus7Pro4G").contains(device)) "guacamole" else (if (arrayOf("hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(device)) "hotdog" else null)!!
-                        val findoriginaldevcfg = rootCommand("find ${context!!.filesDir} -maxdepth 1 -name original-devcfg.img")
+                        val devcfgDevice = if (arrayOf(
+                                "guacamole",
+                                "OnePlus7Pro",
+                                "OnePlus7Pro4G"
+                            ).contains(device)
+                        ) "guacamole" else (if (arrayOf(
+                                "hotdog",
+                                "OnePlus7TPro",
+                                "OnePlus7TPro4G"
+                            ).contains(device)
+                        ) "hotdog" else null)!!
+                        val findoriginaldevcfg =
+                            rootCommand("find ${context!!.filesDir} -maxdepth 1 -name original-devcfg.img")
                         if (findoriginaldevcfg.isEmpty()) {
                             rootCommand("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=/sdcard/original-devcfg.img")
                             rootCommand("cp /sdcard/original-devcfg.img ${context!!.filesDir}/original-devcfg.img")
                         }
-                        val finddevcfg = rootCommand("find ${context!!.filesDir} -maxdepth 1 -name OOS11_devcfg_*")
+                        val finddevcfg =
+                            rootCommand("find ${context!!.filesDir} -maxdepth 1 -name OOS11_devcfg_*")
                         if (finddevcfg.isEmpty()) {
                             rootCommand("wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_$devcfgDevice.img -O /sdcard/OOS11_devcfg_$devcfgDevice.img")
                             rootCommand("wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_$devcfgDevice.img -O /sdcard/OOS12_devcfg_$devcfgDevice.img")
@@ -1152,10 +1333,11 @@ class MainActivity : AppCompatActivity() {
                         rootCommand("cp ${context!!.filesDir}/original-devcfg.img $winpath/original-devcfg.img")
                     }
                     flash(finduefi)
-                    val findmodem = rootCommand("find /sdcard/WOAHelper/Backups | grep modemst1.img")
-					if (findmodem.isEmpty()) {
-               			modemBackup()
-            		}
+                    val findmodem =
+                        rootCommand("find /sdcard/WOAHelper/Backups | grep modemst1.img")
+                    if (findmodem.isEmpty()) {
+                        modemBackup()
+                    }
                     rootCommand("/system/bin/svc power reboot")
                     Dlg.setText(R.string.wrong)
                     Dlg.dismissButton()
@@ -1174,7 +1356,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         private fun unmount() {
-            rootCommand("umount $winpath",true)
+            rootCommand("umount $winpath", true)
             rootCommand("rmdir $winpath")
             updateMountText()
         }
@@ -1185,18 +1367,18 @@ class MainActivity : AppCompatActivity() {
         }
 
         internal fun androidBackup() {
-		    rootCommand("mkdir -p /sdcard/WOAHelper/Backups || true")
+            rootCommand("mkdir -p /sdcard/WOAHelper/Backups || true")
             rootCommand("dd bs=8M if=$boot of=/sdcard/WOAHelper/Backups/boot.img")
         }
-		
-		internal fun modemBackup() {
+
+        internal fun modemBackup() {
             rootCommand("dd bs=8M if=/dev/block/by-name/modemst1 of=/sdcard/WOAHelper/Backups/modemst1.img")
-			rootCommand("dd bs=8M if=/dev/block/by-name/modemst2 of=/sdcard/WOAHelper/Backups/modemst2.img")
-			rootCommand("dd bs=8M if=/dev/block/by-name/fsc of=/sdcard/WOAHelper/Backups/fsc.img")
-			rootCommand("dd bs=8M if=/dev/block/by-name/fsg of=/sdcard/WOAHelper/Backups/fsg.img")
-			rootCommand("dd bs=8M if=/dev/block/by-name/ftm of=/sdcard/WOAHelper/Backups/ftm.img")
-			rootCommand("dd bs=8M if=/dev/block/by-name/persist of=/sdcard/WOAHelper/Backups/persist.img")
-			rootCommand("dd bs=8M if=/dev/block/by-name/efs of=/sdcard/WOAHelper/Backups/efs.img")
+            rootCommand("dd bs=8M if=/dev/block/by-name/modemst2 of=/sdcard/WOAHelper/Backups/modemst2.img")
+            rootCommand("dd bs=8M if=/dev/block/by-name/fsc of=/sdcard/WOAHelper/Backups/fsc.img")
+            rootCommand("dd bs=8M if=/dev/block/by-name/fsg of=/sdcard/WOAHelper/Backups/fsg.img")
+            rootCommand("dd bs=8M if=/dev/block/by-name/ftm of=/sdcard/WOAHelper/Backups/ftm.img")
+            rootCommand("dd bs=8M if=/dev/block/by-name/persist of=/sdcard/WOAHelper/Backups/persist.img")
+            rootCommand("dd bs=8M if=/dev/block/by-name/efs of=/sdcard/WOAHelper/Backups/efs.img")
         }
 
         internal fun nointernet() {
@@ -1207,7 +1389,11 @@ class MainActivity : AppCompatActivity() {
         @JvmStatic
         fun showBlur() {
             blur++
-            runSilently { arrayOf(x.blur, k.blur, n.blur, z.blur).forEach { it.visibility = View.VISIBLE } }
+            runSilently {
+                arrayOf(x.blur, k.blur, n.blur, z.blur).forEach {
+                    it.visibility = View.VISIBLE
+                }
+            }
         }
 
         @JvmStatic
@@ -1215,7 +1401,11 @@ class MainActivity : AppCompatActivity() {
             if (!check) blur = 1
             blur--
             if (0 < blur) return
-            runSilently { arrayOf(x.blur, k.blur, n.blur, z.blur).forEach { it.visibility = View.GONE } }
+            runSilently {
+                arrayOf(x.blur, k.blur, n.blur, z.blur).forEach {
+                    it.visibility = View.GONE
+                }
+            }
         }
 
         @JvmStatic
@@ -1234,20 +1424,26 @@ class MainActivity : AppCompatActivity() {
         }
 
         internal fun updateMountText() {
-            mounted = if (isMounted()) context!!.getString(R.string.unmountt) else context!!.getString(R.string.mountt)
+            mounted =
+                if (isMounted()) context!!.getString(R.string.unmountt) else context!!.getString(R.string.mountt)
             context!!.runOnUiThread {
                 x.mnt.setTitle(String.format(context!!.getString(R.string.mnt_title), mounted))
             }
-            MountWidget.updateText(context!!, String.format(context!!.getString(R.string.mnt_title), mounted))
+            MountWidget.updateText(
+                context!!,
+                String.format(context!!.getString(R.string.mnt_title), mounted)
+            )
         }
 
         internal fun getWin(): String {
-            val partition = rootCommand("find /dev/block | grep -i -E \"win|mindows|windows\" | head -1")
+            val partition =
+                rootCommand("find /dev/block | grep -i -E \"win|mindows|windows\" | head -1")
             return rootCommand("realpath $partition")
         }
 
         internal fun updateWinPath(): String {
-            winpath = if (Pref.getMountLocation(context!!)) "/mnt/Windows" else "${Environment.getExternalStorageDirectory().path}/Windows"
+            winpath =
+                if (Pref.getMountLocation(context!!)) "/mnt/Windows" else "${Environment.getExternalStorageDirectory().path}/Windows"
             return winpath
         }
 
@@ -1257,38 +1453,40 @@ class MainActivity : AppCompatActivity() {
         }
 
         internal fun getBoot(): String {
-            val partition = rootCommand("find /dev/block | grep -i \"/boot$(getprop ro.boot.slot_suffix)$\" | head -1")
+            val partition =
+                rootCommand("find /dev/block | grep -i \"/boot$(getprop ro.boot.slot_suffix)$\" | head -1")
             Log.d("INFO", partition)
             return rootCommand("realpath $partition")
         }
-        fun shellInit(dir : File) {
+
+        fun shellInit(dir: File) {
             if (::rootShell.isInitialized)
                 return
             rootShell = Shell.Builder.create().build()
             masterShell = Shell.Builder.create().setFlags(Shell.FLAG_MOUNT_MASTER).build()
-            for (i in listOf(rootShell, masterShell)){
+            for (i in listOf(rootShell, masterShell)) {
                 rootCommand("ASH_STANDALONE=1 $(find /data/adb/ -name busybox) ash", i)
                 rootCommand("cd $dir", i)
                 Log.d("storage", dir.toString())
             }
         }
 
-        fun rootCommand(command: String, master : Boolean = false) : String{
-            return rootCommand(command,if (master) masterShell else rootShell)
+        fun rootCommand(command: String, master: Boolean = false): String {
+            return rootCommand(command, if (master) masterShell else rootShell)
         }
 
         fun rootCommand(command: String, shell: Shell): String {
 
             if (BuildConfig.DEBUG)
-                Log.d("debug stdout",command)
-            val out=ArrayList<String>()
-            val err=ArrayList<String>()
-            shell.newJob().add(command).to(out,err).exec()
+                Log.d("debug stdout", command)
+            val out = ArrayList<String>()
+            val err = ArrayList<String>()
+            shell.newJob().add(command).to(out, err).exec()
             if (BuildConfig.DEBUG) {
                 if (out.isNotEmpty())
-                    Log.d("debug stdout",out.toString())
+                    Log.d("debug stdout", out.toString())
                 if (err.isNotEmpty())
-                    Log.w("debug stderr",err.toString())
+                    Log.w("debug stderr", err.toString())
             }
             if (out.isNotEmpty())
                 return out.last()
