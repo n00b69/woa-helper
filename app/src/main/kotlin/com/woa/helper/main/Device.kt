@@ -132,7 +132,7 @@ object Device {
                 panel = View.VISIBLE,
                 dbkp = View.VISIBLE,
                 dbkpCodename = "nabu",
-                dbkpLink = "https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/releases/download/1.0/nabu.fd",
+                dbkpLink = "https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/releases/download/Files/nabu.fd",
             )
 
             "perseus" -> DeviceConfig (
