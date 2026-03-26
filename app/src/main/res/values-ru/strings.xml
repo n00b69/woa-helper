@@ -21,7 +21,7 @@
     <string name="tablet_title">ПЕРЕКЛЮЧЕНИЕ РЕЖИМА ПЛАНШЕТА</string>
     <string name="devcfg_title">DEVCFG FLASHER</string>
 
-    <string name="backup_boot_subtitle">Сделать бэкап boot.img в Android или в Windows</string>
+    <string name="backup_boot_subtitle">Сделать бэкап boot.img в Android или Windows</string>
     <string name="mnt_subtitle">Смонтировать раздел Windows, чтобы просматривать и изменять его содержимое</string>
     <string name="toolbox_subtitle">Утилиты и скрипты для повышения удобства использования Windows</string>
     <string name="dump_modem_subtitle">Сделать дамп modem чтобы починить LTE на SIM1 в Windows. Необходимо перед первым запуском Windows</string>
@@ -85,12 +85,12 @@
     <string name="flash">UEFI прошит успешно.\nПри следующей перезагрузке устройство загрузится в Windows.</string>
     <string name="backuped">Бэкап boot выполнен успешно\n</string>
     <string name="preferences">Настройки</string>
-    <string name="bwarn">!! ВНИМАНИЕ!!\n UFS может износиться из-за этой функции, включайте её только если вам часто приходят OTA обновления</string>
+    <string name="bwarn">!! ВНИМАНИЕ!!\n UFS может износиться из-за этой функции, включайте её только, если вам часто приходят OTA обновления</string>
     <string name="agree">Согласен(на)</string>
     <string name="nonroot">ROOT не обнаружен</string>
     <string name="unsupported">!! ВНИМАНИЕ!!\nУстройство не поддерживается!\nИспользуйте это приложение на свой страх и риск.</string>
     <string name="sure">Хорошо, я понимаю возможные последствия.</string>
-    <string name="upanel">Ваш дисплей может не поддерживаться, поделитесь своим опытом с Windows в чате в Telegram</string>
+    <string name="upanel">Ваш дисплей может не поддерживаться. Поделитесь своим опытом использования Windows в чате в Telegram</string>
     <string name="chat">Чат</string>
     <string name="nah">Нет</string>
     <string name="later">Позже</string>
@@ -113,14 +113,14 @@
     <string name="not_found">Не найден</string>
 
     <string name="yes">ДА</string>
-    <string name="dismiss">ОТКЛОНИТЬ</string>
+    <string name="dismiss">ЗАКРЫТЬ</string>
     <string name="no">НЕТ</string>
     <string name="please_wait">Пожалуйста подождите…</string>
 
     <string name="preference1">Всегда делать бэкап boot.img во время быстрой загрузки (Windows)</string>
     <string name="preference2">Всегда делать бэкап boot.img во время быстрой загрузки (Android)</string>
-    <string name="preference3">Сделать бэкап boot.img если он не обнаружен (Windows)</string>
-    <string name="preference4">Сделать бэкап boot.img если он не обнаружен (Android)</string>
+    <string name="preference3">Сделать бэкап boot.img, если он не обнаружен (Windows)</string>
+    <string name="preference4">Сделать бэкап boot.img, если он не обнаружен (Android)</string>
     <string name="preference5">Требовать подтверждение для плитки быстрой загрузки в шторке</string>
     <string name="preference6">Выбрать язык</string>
     <string name="preference7">Автоматически монтировать Windows при запуске устройства</string>
@@ -128,7 +128,7 @@
     <string name="preference9">Экран должен быть разблокирован для быстрой загрузки в Windows</string>
     <string name="preference10">Смонтировать Windows в /mnt вместо /sdcard</string>
     <string name="preference11">Выключить проверку обновлений приложения</string>
-    <string name="preference12">Проошить OOS11 devcfg при быстрой загрузке</string>
+    <string name="preference12">Прошить OOS11 devcfg при быстрой загрузке</string>
     <string name="preference13">Проверить необходимые файлы при прошивке devcfg</string>
 
     <string name="default1">По-умолчанию</string>
