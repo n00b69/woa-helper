@@ -40,7 +40,7 @@
     <string name="setup_subtitle">Добавляет установщики для нескольких фреймворков в C:\\Toolbox</string>
     <string name="dbkp_subtitle">Патчинг ядра для постоянной двойной загрузки</string>
     <string name="tablet_subtitle">Добавляет утилиту для переключения режима планшета в C:\\Toolbox</string>
-    <string name="devcfg_subtitle">Прошивает devcfg OOS11 чтобы Windows могла загрузиться на устройствах с OOS12</string>
+    <string name="devcfg_subtitle">Прошивает devcfg OOS11, чтобы Windows могла загрузиться на устройствах с OOS12</string>
 
     <string name="backup_boot_question">Сделать бэкап текущего boot образа?</string>
     <string name="mount_question">Смонтировать Windows в %s?</string>
