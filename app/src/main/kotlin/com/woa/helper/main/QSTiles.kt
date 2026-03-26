@@ -88,12 +88,12 @@ class QuickBootTile : CommonTileService() {
         var notFound = rootCommand("ls $img").isEmpty()
         var backupDone = false
         if (Pref.getBackup(this) || (!Pref.getAuto(this) && notFound)) {
-            rootCommand("dd bs=8388608 if=$boot of=$img")
+            rootCommand("dd bs=8M if=$boot of=$img")
             backupDone = true
         }
         notFound = rootCommand("find -maxdepth 1 /sdcard | grep boot.img").isEmpty()
         if (Pref.getBackupA(this) || (!Pref.getAutoA(this) && notFound)) {
-            rootCommand("dd bs=8388608 if=$boot of=$sdcard/boot.img")
+            rootCommand("dd bs=8M if=$boot of=$sdcard/boot.img")
             backupDone = true
         }
         if (backupDone) {
@@ -148,7 +148,7 @@ class QuickBootTile : CommonTileService() {
     }
 
     private fun flash() {
-        rootCommand("dd if=$findUefi of=/dev/block/bootdevice/by-name/boot$(getprop ro.boot.slot_suffix) bs=16777216")
+        rootCommand("dd if=$findUefi of=/dev/block/bootdevice/by-name/boot$(getprop ro.boot.slot_suffix) bs=16M")
     }
 
     private fun checkuefi() {
