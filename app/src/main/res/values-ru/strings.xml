@@ -85,7 +85,7 @@
     <string name="flash">UEFI прошит успешно.\nПри следующей перезагрузке устройство загрузится в Windows.</string>
     <string name="backuped">Бэкап boot выполнен успешно\n</string>
     <string name="preferences">Настройки</string>
-    <string name="bwarn">!!ВНИМАНИЕ!!\n UFS изнашивается быстрее при включении этой функции. Включайте её только если вам часто приходят OTA обновления </string>
+    <string name="bwarn">!!ВНИМАНИЕ!!\n UFS изнашивается быстрее при включении этой функции. Включайте её, только если вам часто приходят OTA обновления </string>
     <string name="agree">Согласен(на)</string>
     <string name="nonroot">ROOT не обнаружен</string>
     <string name="unsupported">!!ВНИМАНИЕ!!\nУстройство не поддерживается!\nИспользуйте это приложение на свой страх и риск.</string>
@@ -131,5 +131,5 @@
     <string name="preference12">Прошить OOS11 devcfg при быстрой загрузке</string>
     <string name="preference13">Проверить необходимые файлы при прошивке devcfg</string>
 
-    <string name="default1">По-умолчанию</string>
+    <string name="default1">По умолчанию</string>
 </resources>
