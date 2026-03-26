@@ -82,7 +82,7 @@
     <string name="unmounted">Windows размонтирована</string>
     <string name="rebootr">Необходима перезагрузка</string>
     <string name="lte">Наслаждайтесь LTE в Windows</string>
-    <string name="flash">UEFI прошит успешно.\nПри следующей перезагрузке устройство загрузится в Windows.</string>
+    <string name="flash">UEFI прошито успешно.\nПри следующей перезагрузке устройство загрузится в Windows.</string>
     <string name="backuped">Бэкап boot выполнен успешно\n</string>
     <string name="preferences">Настройки</string>
     <string name="bwarn">!!ВНИМАНИЕ!!\n UFS изнашивается быстрее при включении этой функции. Включите её, в случае если вам часто приходят OTA обновления </string>
