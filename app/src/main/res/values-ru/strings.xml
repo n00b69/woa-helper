@@ -70,7 +70,7 @@
     <string name="dbkp">boot.img был пропатчен и прошит.\nПропатченый boot.img можно найти по пути /sdcard/WOAHelper/Backups.\nИспользуйте %s для переключения между Windows и Android.</string>
     <string name="uninstall">Удалить</string>
 	<string name="reinstall">Переустановить</string>
-	<string name="dbkpuninstall">Dualboot Kernel Patcher успешно удален.\nПожайлуста перезагрузитесь.</string>
+	<string name="dbkpuninstall">Dualboot Kernel Patcher успешно удален.\nПожайлуста, перезагрузитесь.</string>
     <string name="devcfg">OOS11 devcfg успешно прошит.\nОригинальный devcfg можно найти по пути /sdcard/WOAHelper/Backups.\nИспользуйте sdd.exe (в STA Creator) чтобы прошивать OOS12 devcfg при перезагрузке обратно в Android</string>
     <string name="op7">ползунок оповещения</string>
     <string name="cepheus">вспомогательную кнопку</string>
