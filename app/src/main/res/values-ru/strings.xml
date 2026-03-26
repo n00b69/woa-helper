@@ -115,7 +115,7 @@
     <string name="yes">ДА</string>
     <string name="dismiss">ЗАКРЫТЬ</string>
     <string name="no">НЕТ</string>
-    <string name="please_wait">Пожалуйста подождите…</string>
+    <string name="please_wait">Пожалуйста, подождите…</string>
 
     <string name="preference1">Всегда делать бэкап boot.img во время быстрой загрузки (Windows)</string>
     <string name="preference2">Всегда делать бэкап boot.img во время быстрой загрузки (Android)</string>
