@@ -9,7 +9,7 @@
     <string name="uefi_not_found">ОБРАЗ UEFI НЕ НАЙДЕН</string>
     <string name="quickboot_title">БЫСТРАЯ ЗАГРУЗКА В WINDOWS</string>
     <string name="sta_title">STA CREATOR</string>
-    <string name="usbhost_title">ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ USB</string>
+    <string name="usbhost_title">ПЕРЕКЛЮЧЕНИЕ РЕЖИМА USB</string>
     <string name="software_title">ARM ПРОГРАММЫ</string>
     <string name="rotation_title">ПЕРЕКЛЮЧЕНИЕ ЭКРАННОЙ ОРИЕНТАЦИИ</string>
     <string name="autoflash_title">АВТОМАТИЧЕСКАЯ ПРОШИВКА ANDROID BOOT</string>
@@ -18,10 +18,10 @@
     <string name="script_title">ПОЛЕЗНЫЕ ИНСТРУМЕНТЫ</string>
     <string name="setup_title">УСТАНОВЩИК ФРЕЙМВОРКОВ</string>
     <string name="dbkp_title">ПАТЧИНГ ЯДРА ДЛЯ ДВОЙНОЙ ЗАГРУЗКИ</string>
-    <string name="tablet_title">ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ ПЛАНШЕТА</string>
+    <string name="tablet_title">ПЕРЕКЛЮЧЕНИЕ РЕЖИМА ПЛАНШЕТА</string>
     <string name="devcfg_title">DEVCFG FLASHER</string>
 
-    <string name="backup_boot_subtitle">Сделать бэкап boot.img в Android или в Windows</string>
+    <string name="backup_boot_subtitle">Сделать бэкап boot.img в Android или Windows</string>
     <string name="mnt_subtitle">Смонтировать раздел Windows, чтобы просматривать и изменять его содержимое</string>
     <string name="toolbox_subtitle">Утилиты и скрипты для повышения удобства использования Windows</string>
     <string name="dump_modem_subtitle">Сделать дамп modem чтобы починить LTE на SIM1 в Windows. Необходимо перед первым запуском Windows</string>
@@ -32,15 +32,15 @@
     <string name="sta_subtitle">Добавляет приложение “Switch to Android” в Windows</string>
     <string name="usbhost_subtitle">Добавляет утилиту для переключения режима USB в C:\\Toolbox</string>
     <string name="software_subtitle">Добавляет ярлык на сайт с программами для ARM в C:\\Toolbox</string>
-    <string name="rotation_subtitle">Добавляет утилиту для переключения ориентации экрана с помощью ярлыка в C:\\Toolbox\n (Полезно для устройств без работающих сенсоров)</string>
+    <string name="rotation_subtitle">Добавляет утилиту для переключения ориентации экрана с помощью ярлыка в C:\\Toolbox\n (Полезно для устройств у которых не работают сенсоры)</string>
     <string name="autoflash_subtitle">Добавляет утилиту для автоматической прошивки boot.img Android (при загрузке Windows \/ низком уровне заряда батареи) в C:\\Toolbox</string>
     <string name="atlasos_subtitle">Копирует AtlasOS или ReviOS playbook и AME Wizard в C:\\Toolbox</string>
     <string name="defender_subtitle">Добавляет скрипт в C:\\Toolbox для удаления Microsoft Edge / Windows Defender</string>
     <string name="script_subtitle">Утилиты и скрипты для повышения удобства использования Windows</string>
     <string name="setup_subtitle">Добавляет установщики для нескольких фреймворков в C:\\Toolbox</string>
     <string name="dbkp_subtitle">Патчинг ядра для постоянной двойной загрузки</string>
-    <string name="tablet_subtitle">Добавляет утилиту для переключения режимов планшета в C:\\Toolbox</string>
-    <string name="devcfg_subtitle">Прошивает devcfg OOS11 чтобы Windows могла загрузиться на устройствах с OOS12</string>
+    <string name="tablet_subtitle">Добавляет утилиту для переключения режима планшета в C:\\Toolbox</string>
+    <string name="devcfg_subtitle">Прошивает devcfg OOS11, чтобы Windows могла загрузиться на устройствах с OOS12</string>
 
     <string name="backup_boot_question">Сделать бэкап текущего boot образа?</string>
     <string name="mount_question">Смонтировать Windows в %s?</string>
@@ -48,8 +48,8 @@
     <string name="dump_modem_question">Сдампить modem1st и modem2st в Windows?</string>
     <string name="flash_uefi_question">Прошить UEFI? \nЕсли да, то следующая загрузка будет в Windows</string>
     <string name="quickboot_question">Перезагрузиться в Windows?</string>
-    <string name="sta_question">Создать приложение “Switch to Android” в C:\\sta?</string>
-    <string name="usbhost_question">Скопировать утилиту для переключения режимов USB в C:\\Toolbox?</string>
+    <string name="sta_question">Скопировать приложение “Switch to Android” в C:\\sta?</string>
+    <string name="usbhost_question">Скопировать утилиту для переключения режима USB в C:\\Toolbox?</string>
     <string name="software_question">Скопировать ярлык на сайт в C:\\Toolbox?</string>
     <string name="rotation_question">Скопировать утилиту для переключения ориентации экрана в C:\\Toolbox?</string>
     <string name="autoflash_question">Скопировать утилиту автоматической прошивки boot.img в C:\\Toolbox?</string>
@@ -58,19 +58,19 @@
     <string name="setup_question">Скачать и переместить установщики C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, и XNA в C:\\Toolbox?\n(это может занять некоторое время)</string>
     <string name="dbkp_question">Пропатчить и прошить ваше текущее ядро?\n!!!НЕ НАЖИМАЙТЕ КНОПКУ “ДА”, ЕСЛИ ВАШЕ УСТРОЙСТВО НЕ %s!!!</string>
 	<string name="dbkp_question2">Обновить/Переустановить или удалить DBKP на текущем образа?\n</string>
-    <string name="tablet_question">Скопировать утилиту для переключения режимов планшета в C:\\Toolbox?</string>
+    <string name="tablet_question">Скопировать утилиту для переключения режима планшета в C:\\Toolbox?</string>
     <string name="devcfg_question">Прошить devcfg OOS11?\n!!!НЕ НАЖИМАЙТЕ КНОПКУ “ДА”, ЕСЛИ ВАШЕ УСТРОЙСТВО НЕ %s!!!</string>
 
     <string name="wrong">Что-то пошло не так</string>
     <string name="mountfail">Что-то пошло не так, \nНе удалось смонтировать Windows.\nОбратитесь за помощью в чат Telegram.</string>
     <string name="ntfs">Поддержка NTFS не найдена. \nУстановить NTFS3G модуль?</string>
     <string name="internet">Нет интернет соединения.\nПодключитесь к интернету и повторите процесс.</string>
-    <string name="partition">Рздел Windows не найден.</string>
-    <string name="internalstorage">Файлы загруженны во внутреннее хранилище</string>
+    <string name="partition">Раздел Windows не найден.</string>
+    <string name="internalstorage">Файлы загружены во внутреннее хранилище</string>
     <string name="dbkp">boot.img был пропатчен и прошит.\nПропатченый boot.img можно найти по пути /sdcard/WOAHelper/Backups.\nИспользуйте %s для переключения между Windows и Android.</string>
     <string name="uninstall">Удалить</string>
 	<string name="reinstall">Переустановить</string>
-	<string name="dbkpuninstall">Dualboot Kernel Patcher успешно удален.\nPlease reboot your system now.</string>
+	<string name="dbkpuninstall">Dualboot Kernel Patcher успешно удален.\nПожайлуста, перезагрузитесь.</string>
     <string name="devcfg">OOS11 devcfg успешно прошит.\nОригинальный devcfg можно найти по пути /sdcard/WOAHelper/Backups.\nИспользуйте sdd.exe (в STA Creator) чтобы прошивать OOS12 devcfg при перезагрузке обратно в Android</string>
     <string name="op7">ползунок оповещения</string>
     <string name="cepheus">вспомогательную кнопку</string>
@@ -78,19 +78,19 @@
     <string name="nabu2">кнопки громкости</string>
     <string name="reboot">Перезагрузка</string>
     <string name="cancel">Отмена</string>
-    <string name="mounted">Windows смонтирован</string>
-    <string name="unmounted">Windows размонтирован</string>
+    <string name="mounted">Windows смонтирована</string>
+    <string name="unmounted">Windows размонтирована</string>
     <string name="rebootr">Необходима перезагрузка</string>
     <string name="lte">Наслаждайтесь LTE в Windows</string>
     <string name="flash">UEFI прошито успешно.\nПри следующей перезагрузке устройство загрузится в Windows.</string>
     <string name="backuped">Бэкап boot выполнен успешно\n</string>
     <string name="preferences">Настройки</string>
-    <string name="bwarn">!! ВНИМАНИЕ!!\n UFS может износиться из-за этой функции, включайте её только если вам часто приходят OTA обновления</string>
+    <string name="bwarn">!!ВНИМАНИЕ!!\n UFS изнашивается быстрее при включении этой функции. Включите её, в случае если вам часто приходят OTA обновления </string>
     <string name="agree">Согласен(на)</string>
     <string name="nonroot">ROOT не обнаружен</string>
-    <string name="unsupported">!! ВНИМАНИЕ!!\nУстройство не поддерживается!\nИспользуйте это приложение на свой страх и риск.</string>
+    <string name="unsupported">!!ВНИМАНИЕ!!\nУстройство не поддерживается!\nИспользуйте это приложение на свой страх и риск.</string>
     <string name="sure">Хорошо, я понимаю возможные последствия.</string>
-    <string name="upanel">Ваш дисплей может не поддерживаться, поделитесь своим опытом с Windows в чате в Telegram</string>
+    <string name="upanel">Ваш дисплей может не поддерживаться. Поделитесь своим опытом использования Windows в чате в Telegram</string>
     <string name="chat">Чат</string>
     <string name="nah">Нет</string>
     <string name="later">Позже</string>
@@ -113,14 +113,14 @@
     <string name="not_found">Не найден</string>
 
     <string name="yes">ДА</string>
-    <string name="dismiss">ОТКЛОНИТЬ</string>
+    <string name="dismiss">ЗАКРЫТЬ</string>
     <string name="no">НЕТ</string>
-    <string name="please_wait">Пожалуйста подождите…</string>
+    <string name="please_wait">Пожалуйста, подождите…</string>
 
     <string name="preference1">Всегда делать бэкап boot.img во время быстрой загрузки (Windows)</string>
     <string name="preference2">Всегда делать бэкап boot.img во время быстрой загрузки (Android)</string>
-    <string name="preference3">Сделать бэкап boot.img если он не обнаружен (Windows)</string>
-    <string name="preference4">Сделать бэкап boot.img если он не обнаружен (Android)</string>
+    <string name="preference3">Сделать бэкап boot.img, если он не обнаружен (Windows)</string>
+    <string name="preference4">Сделать бэкап boot.img, если он не обнаружен (Android)</string>
     <string name="preference5">Требовать подтверждение для плитки быстрой загрузки в шторке</string>
     <string name="preference6">Выбрать язык</string>
     <string name="preference7">Автоматически монтировать Windows при запуске устройства</string>
@@ -128,8 +128,8 @@
     <string name="preference9">Экран должен быть разблокирован для быстрой загрузки в Windows</string>
     <string name="preference10">Смонтировать Windows в /mnt вместо /sdcard</string>
     <string name="preference11">Выключить проверку обновлений приложения</string>
-    <string name="preference12">Проошить OOS11 devcfg при быстрой загрузке</string>
+    <string name="preference12">Прошить OOS11 devcfg при быстрой загрузке</string>
     <string name="preference13">Проверить необходимые файлы при прошивке devcfg</string>
 
-    <string name="default1">По-умолчанию</string>
+    <string name="default1">По умолчанию</string>
 </resources>
