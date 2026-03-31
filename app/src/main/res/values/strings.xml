@@ -107,6 +107,7 @@
     <string name="update">UPDATE</string>
     <string name="update1">Update available</string>
     <string name="update2">Updating…</string>
+	<string name="update3">No update available</string>
     <string name="qspressagain">Press again</string>
     <string name="qsinternet">Internet required</string>
 
