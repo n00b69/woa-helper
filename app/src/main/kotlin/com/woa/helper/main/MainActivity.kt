@@ -982,7 +982,7 @@ class MainActivity : AppCompatActivity() {
         }
         if (BuildConfig.VERSION_NAME == version) {
             if (manual) {
-                Dlg.setText(getString(R.string.update3)
+                Dlg.setText(getString(R.string.update3))
                 Dlg.dismissButton()
             }
             return
