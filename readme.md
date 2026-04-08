@@ -27,7 +27,7 @@ This project is in late stages of development. Most features have already been a
 | StA Creator & Auto boot flasher | Creates dualboot files & tool to automatically flash boot.img                   | ✅      |
 | Provisioning Modem              | Only for devices that may need it for LTE to work                               | ✅      |
 | DBKP (DualBoot Kernel Patcher)  | Only for supported devices: OnePlus 7(T) Pro 4G, Xiaomi Mi 9 & Xiaomi Pad 5     | ✅      |
-| DBKP uninstaller                | To be added in the future. To uninstall manually, flash the boot.img backup     | ❌      |
+| DBKP uninstaller                |                                                                                 | ✅      |
 | Devcfg flasher                  | Only for OnePlus 7(T) Pro 4G, needed on OOS12 to boot Windows                   | ✅      |
 | Devcfg Quick Settings toggle    | To be added in the future                                                       | ❌      |
 | Devcfg flasher widget           | To be added in the future                                                       | ❌      |
@@ -40,7 +40,7 @@ This project is in late stages of development. Most features have already been a
 
 ## Requirements
 
-- Android **7**¹ and up (Only Android 8+ was tested).
+- Android **7.1**¹ and up (Only Android 8+ was tested).
 - Rooted² device with Windows installed (Windows partition must be named **win**, **windows**, **mindows**, **Win**, **Windows**, or **Mindows**).
 - UEFI image (To boot Windows).
 
@@ -73,7 +73,7 @@ If you are using KSU and mount does not work, change kernels or try using Magisk
 - English ([the sog](https://github.com/n00b69))
 - French (YourAvgEngineer)
 - German ([the sog](https://github.com/n00b69))
-- Georgian (Nikka)
+- Georgian ([Nikka](https://github.com/NikkaGames))
 - Indonesian ([ArToSeVeN](https://github.com/Artoseven))
 - Japanese (Hiroshi Takaoka)
 - Korean ([galaxysollector](https://github.com/galaxysollector))
