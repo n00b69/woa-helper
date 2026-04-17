@@ -990,24 +990,7 @@ class MainActivity : AppCompatActivity() {
         if (!manual) Dlg.show(this, "")
         Dlg.setText(getString(R.string.update1) + ": " + version + "\n" + changelog)
         Dlg.setNo(R.string.later) { Dlg.close() }
-        Dlg.setYes(R.string.update) {
-            Dlg.clearButtons()
-            Dlg.setCancelable(false)
-            Dlg.setText(
-                """
-                    ${getString(R.string.update2)}
-                    ${getString(R.string.please_wait)}
-                    """.trimIndent()
-            )
-            update()
-        }
-    }
-
-    private fun update() {
-        Thread {
-            rootCommand("wget https://raw.githubusercontent.com/n00b69/woa-helper-update/main/woahelper.apk -O $filesDir/woahelper.apk")
-            rootCommand("pm install $filesDir/woahelper.apk && rm $filesDir/woahelper.apk")
-        }.start()
+        Dlg.setYes(R.string.update) { openLink("https://github.com/n00b69/woa-helper/releases/tag/APK") }
     }
 
     private fun mountfail() {
