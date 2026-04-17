@@ -40,9 +40,9 @@ This project is in late stages of development. Most features have already been a
 
 ## Requirements
 
-- Android **7.1**¹ and up (Only Android 8+ was tested).
+- Android **7**¹ and up (Only Android 8+ was tested).
 - Rooted² device with Windows installed (Windows partition must be named **win**, **windows**, **mindows**, **Win**, **Windows**, or **Mindows**).
-- UEFI image (To boot Windows).
+- UEFI image (to boot into Windows).
 
 ¹: App features are likely limited to just Quickbooting & backing up boot.img on Android versions lower than 12 or 11, as mounting likely doesn't work on them.
 
@@ -83,12 +83,10 @@ If you are using KSU and mount does not work, change kernels or try using Magisk
 - Polish (Win Polish)
 - Portuguese ([AdrianoA3](https://github.com/AdrianoA3))
 - Romanian ([Graphael](https://github.com/grphks), [Victoria Freeman](https://github.com/Victoria-Freeman) & [David42069](https://github.com/david-42069))
-- Russian ([Misha803](https://github.com/Misha803) & [Nikroks](https://github.com/N1kroks))
+- Russian ([Misha803](https://github.com/Misha803) & [Nikroks](https://github.com/N1kroks)) & [Tvorogo](https://github.com/tvorogo)
 - Spanish ([carloss15](https://github.com/rodriguezst))
 - Thai ([JadeKubPom](https://www.facebook.com/groups/jadekubpomservicethailand/))
 - Turkish (sercancamli, [ErdilS](https://github.com/erdilS) & [Kaan Dikeç](https://github.com/dikeckaan))
 - Ukrainian ([Ost268](https://github.com/Ost268) & [Ilya114](https://github.com/Ilya114))
 - Vietnamese (HieusayHi & bobert10)
-
-
 
