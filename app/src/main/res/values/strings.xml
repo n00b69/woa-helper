@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">WOA Helper</string>
     <string name="app_subtitle" translatable="false">v1.8.4"</string>
-    <string name="creator" translatable="false">Victoria Freeman, the sog, remtrik, Marius586, halal-beef &amp; KuatoDev ©️2025</string>
+    <string name="creator" translatable="false">Victoria Freeman, the sog, remtrik, Marius586, halal-beef &amp; KuatoDev ©️2026</string>
     <string name="android" translatable="false">Android</string>
     <string name="windows" translatable="false">Windows</string>
     <string name="revios" translatable="false">ReviOS</string>
@@ -28,7 +28,7 @@
     <string name="tablet_title">TABLET MODE TOGGLE</string>
     <string name="devcfg_title">DEVCFG FLASHER</string>
 
-    <string name="backup_boot_subtitle">Back up boot image to Android and/or Windows</string>
+    <string name="backup_boot_subtitle">Back up boot image to Android or Windows</string>
     <string name="mnt_subtitle">Toggle mounting Windows partition in order to view or edit content inside</string>
     <string name="toolbox_subtitle">Tools and scripts for a more enjoyable Windows experience</string>
     <string name="dump_modem_subtitle">Dump modem to Windows to fix LTE on SIM1 in Windows.\nRequired before every Windows boot</string>
@@ -64,6 +64,7 @@
     <string name="defender_question">Copy Edge \/ Defender remover scripts to C:\\Toolbox?</string>
     <string name="setup_question">Download and move C++ Redistributable, DirectX, OpenGL, OpenAL, PhysX, and XNA framework installers to C:\\Toolbox?\n(this may take some time)</string>
     <string name="dbkp_question">Patch and flash your current kernel?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
+	<string name="dbkp_question2">Update/reinstall or uninstall DBKP from your current kernel?\n</string>
     <string name="tablet_question">Copy OptimizedTaskbarControl tool to C:\\Toolbox?</string>
     <string name="devcfg_question">Flash OOS11 devcfg?\n!!!DO NOT PRESS YES UNLESS YOUR DEVICE IS %s!!!</string>
 
@@ -74,6 +75,9 @@
     <string name="partition">No Windows partition detected.</string>
     <string name="internalstorage">Files downloaded in internal storage</string>
     <string name="dbkp">Boot image has been patched and flashed.\nPatched image can also be found at /sdcard/WOAHelper/Backups.\nUse your %s to switch between Windows and Android.</string>
+	<string name="uninstall">Uninstall</string>
+	<string name="reinstall">Reinstall</string>
+	<string name="dbkpuninstall">Dualboot Kernel Patcher has been uninstalled.\nPlease reboot your system now.</string>
     <string name="devcfg">OOS11 devcfg has been flashed.\nOriginal devcfg can be found at /sdcard/WOAHelper/Backups.\nUse sdd.exe in STA Creator to flash OOS12 devcfg when returning to Android</string>
     <string name="op7">alert slider</string>
     <string name="cepheus">assistant button</string>
@@ -103,6 +107,7 @@
     <string name="update">UPDATE</string>
     <string name="update1">Update available</string>
     <string name="update2">Updating…</string>
+	<string name="update3">No update available</string>
     <string name="qspressagain">Press again</string>
     <string name="qsinternet">Internet required</string>
 
@@ -116,7 +121,7 @@
     <string name="not_found">Not Found</string>
 
     <string name="yes">YES</string>
-    <string name="dismiss">DISMISS</string>
+    <string name="dismiss">CLOSE</string>
     <string name="no">NO</string>
     <string name="please_wait">Please wait…</string>
 
@@ -134,7 +139,7 @@
     <string name="preference12">Flash OOS11 devcfg when quickbooting</string>
     <string name="preference13">Check for required files when flashing devcfg</string>
 
-    <string name="uefiChk" translatable="false">su -c find /mnt/sdcard/UEFI/ -type f  | grep ".img" | head -n 1 </string>
+    <string name="uefiChk" translatable="false">find /mnt/sdcard/UEFI/ -type f  | grep ".img" | head -n 1 </string>
 
     <string name="default1">Default</string>
 </resources>
