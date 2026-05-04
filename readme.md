@@ -48,7 +48,7 @@ This project is in late stages of development. Most features have already been a
 
 ²: Your device must be rooted with Magisk **v28.1** or higher to ensure the most functionality. Forks such as Magisk Alpha are not supported.
 
-If you are using KSU and mount does not work, change kernels or try using Magisk. If you are using KSU-Next; suffer.
+If you are using KSU and mount does not work, change kernels or try using Magisk. If you are using KSU-Next or SukiSU (Ultra); suffer.
 
 ## Credits
 
