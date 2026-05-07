@@ -8,7 +8,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.net.URL
 
-object download{
+object Download{
 
     fun permission(context : Context){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {

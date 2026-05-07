@@ -44,10 +44,7 @@ class QuickBootTile : CommonTileService() {
         shellInit(this.filesDir)
         val tile = qsTile
         checkuefi()
-        device = if (null == MainActivity.context)
-            Build.DEVICE
-        else
-            Pref.codenameChanger(false, MainActivity.context!!, Build.DEVICE)
+        device = Pref.codenameChanger(false, this, Build.DEVICE)
         findWin = rootCommand("find /dev/block | grep -i -E \"win|mindows|windows\" | head -1")
         if (findUefi.isEmpty() || (isSecure && !Pref.getSecure(this)) || findWin.isEmpty()) tile.state =
             0

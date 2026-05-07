@@ -5,43 +5,64 @@ import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
-import android.widget.CompoundButton
 import android.widget.FrameLayout
 import com.woa.helper.R
 import com.woa.helper.databinding.SettingsButtonBinding
 
-class SettingsButton(private val context: Context, attrs: AttributeSet?) : FrameLayout(context, attrs) {
-    private val layout: SettingsButtonBinding = SettingsButtonBinding.inflate(LayoutInflater.from(context), this, true)
+class SettingsButton @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : FrameLayout(context, attrs, defStyleAttr) {
+
+    private val binding: SettingsButtonBinding =
+        SettingsButtonBinding.inflate(LayoutInflater.from(context), this, true)
+
+    private var onCheckedChangeListener: ((Boolean) -> Unit)? = null
+
+    var isChecked: Boolean
+        get() = binding.switchButton.isChecked
+        set(value) {
+            binding.switchButton.isChecked = value
+        }
 
     init {
         val a = context.theme.obtainStyledAttributes(attrs, R.styleable.SettingsButton, 0, 0)
-        if (null != attrs) {
-            val text = a.getString(R.styleable.SettingsButton_text)
-            layout.text.text = text
-            setCornerRadius()
-            setOnChangeListener { state: Boolean -> }
+        try {
+            binding.text.text = a.getString(R.styleable.SettingsButton_text)
+        } finally {
+            a.recycle()
         }
+
+        binding.switchButton.setOnCheckedChangeListener { _, isChecked ->
+            updateBackground()
+            onCheckedChangeListener?.invoke(isChecked)
+        }
+
+        updateBackground()
     }
 
     fun setOnChangeListener(onChangeListener: OnChangeClickListener) {
-        layout.switchButton.setOnCheckedChangeListener { v: CompoundButton?, state: Boolean ->
-            setCornerRadius()
-            onChangeListener.onClick(state)
+        this.onCheckedChangeListener = { state -> onChangeListener.onClick(state) }
+    }
+
+    fun setOnCheckedChangeListener(listener: (Boolean) -> Unit) {
+        this.onCheckedChangeListener = listener
+    }
+
+    private val backgroundColor: Int
+        get() = if (isChecked) 0xFF196500.toInt() else 0xFF870002.toInt()
+
+    private fun updateBackground() {
+        val background = GradientDrawable().apply {
+            setColor(backgroundColor)
+            cornerRadius = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                5.0f,
+                resources.displayMetrics
+            )
         }
-    }
-
-    fun setChecked(state: Boolean) {
-        layout.switchButton.isChecked = state
-    }
-
-    private val color: Int
-        get() = if (layout.switchButton.isChecked) -0xe69b00 else -0x78fffe
-
-    private fun setCornerRadius() {
-        val background = GradientDrawable()
-        background.setColor(this.color)
-        background.cornerRadius = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5.0f, context.resources.displayMetrics)
-        layout.getRoot().background = background
+        binding.root.background = background
     }
 
     fun interface OnChangeClickListener {

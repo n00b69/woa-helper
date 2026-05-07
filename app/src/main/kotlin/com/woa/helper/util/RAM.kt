@@ -7,7 +7,6 @@ class RAM {
     private fun getTotalMemory(context: Context): Long {
         val actManager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         val memInfo = ActivityManager.MemoryInfo()
-        checkNotNull(actManager)
         actManager.getMemoryInfo(memInfo)
         return memInfo.totalMem
     }

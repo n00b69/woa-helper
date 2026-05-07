@@ -15,7 +15,6 @@ import com.google.android.material.button.MaterialButton
 import com.woa.helper.R
 import com.woa.helper.main.MainActivity.Companion.hideBlur
 import com.woa.helper.main.MainActivity.Companion.showBlur
-import com.woa.helper.widgets.WidgetActivity
 import java.util.Objects
 
 @SuppressLint("StaticFieldLeak")
@@ -54,10 +53,13 @@ object Dlg {
 
         setText(text)
         setCancelable(true)
-        showBlur()
+        if (context is MainActivity) {
+            showBlur(context)
+        }
         dialog!!.setOnDismissListener { v: DialogInterface? ->
-            hideBlur(true)
-            if (WidgetActivity.active) MainActivity.context!!.finish()
+            if (context is MainActivity) {
+                hideBlur(context, true)
+            }
         }
 
         dialog!!.show()

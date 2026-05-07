@@ -1,7 +1,10 @@
 plugins {
     alias(libs.plugins.agp.app)
-    alias(libs.plugins.kotlin.android)
 }
+
+val locales = listOf(
+    "ar", "az", "be", "cs", "de", "en", "es", "fa", "fr", "ind", "ja", "ka", "ko", "ms", "nl", "pl", "pt", "ru", "ro", "ro-rMD", "th", "tr", "uk", "vi", "zh", "zh-rCN", "zh-rHK", "zh-rMO", "zh-rSG", "zh-rTW"
+)
 
 android {
     namespace = "com.woa.helper"
@@ -14,10 +17,19 @@ android {
         versionCode = 5
         versionName = "1.8.5"
 
-        val locales = listOf(
-            "ar", "az", "be", "cs", "de", "en", "es", "fa", "fr", "ind", "ja", "ka", "ko", "ms", "nl", "pl", "pt", "ru", "ro", "ro-rMD", "th", "tr", "uk", "vi", "zh", "zh-rCN", "zh-rHK", "zh-rMO", "zh-rSG", "zh-rTW"
-        )
-        buildConfigField("String[]", "LOCALES", "{\"${locales.toString().trim('[').trim(']').replace(", ", "\",\"").replace("zh-", "zh-Hans-").replace("-r", "-")}\"}")
+        val localesArray = locales.joinToString(", ") { tag ->
+            val bcpTag = tag.replace("-r", "-").let { cleanTag ->
+                when (cleanTag) {
+                    "zh" -> "zh-Hans"
+                    "zh-CN", "zh-SG" -> "zh-Hans-${cleanTag.substringAfter("-")}"
+                    "zh-TW", "zh-HK", "zh-MO" -> "zh-Hant-${cleanTag.substringAfter("-")}"
+                    else -> cleanTag
+                }
+            }
+            "\"$bcpTag\""
+        }
+        buildConfigField("String[]", "LOCALES", "{$localesArray}")
+
         androidResources.localeFilters += locales
     }
 
@@ -26,23 +38,15 @@ android {
             isShrinkResources = true
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"))
-            isDebuggable = false
-            isJniDebuggable = false
         }
-        debug {
-            isDebuggable = true
-        }
-    }
 
-    buildFeatures {
-        aidl = true
-        renderScript = true
     }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
     }
+
     kotlin {
         jvmToolchain(21)
     }

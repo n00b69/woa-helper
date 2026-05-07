@@ -24,30 +24,6 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="tiramisu">
         <receiver
-            android:name=".widgets.MountWidget"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="android.appwidget.action.ACTION_CLICK" />
-                <action android:name="android.appwidget.action.UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/mount_widget_info" />
-        </receiver>
-        <receiver
-            android:name=".widgets.QuickBootWidget"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="android.appwidget.action.ACTION_CLICK" />
-                <action android:name="android.appwidget.action.UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/quickboot_widget_info" />
-        </receiver>
-        <receiver
             android:name=".main.AutoMount"
             android:enabled="true"
             android:exported="true">
@@ -87,14 +63,6 @@
                 android:value="true" />
         </service>
 
-        <activity
-            android:name=".widgets.WidgetActivity"
-            android:excludeFromRecents="true"
-            android:exported="true"
-            android:launchMode="singleInstance"
-            android:noHistory="true"
-            android:taskAffinity=""
-            android:theme="@style/TransparentTheme" />
         <activity
             android:name=".main.MainActivity"
             android:configChanges="orientation|screenSize"
