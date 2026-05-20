@@ -81,6 +81,7 @@
     <string name="sure">Dobře, nech mě používat aplikaci</string>
     <string name="upanel">Nebylo potvrzeno, že váše obrazovka (touchscreen) funguje v režimu Windows, podělte se prosím o své zkušenosti s Windows v chatu Telegram</string>
     <string name="chat">Chat</string>
+    <string name="github">GitHub</string>
     <string name="nah">Ne</string>
     <string name="later">Později</string>
     <string name="done">Hotovo!</string>

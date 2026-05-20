@@ -81,6 +81,7 @@
     <string name="sure">동의하고 앱을 사용하겠습니다</string>
     <string name="upanel">이 기기의 패널이 작동하는지 확인되지 않았습니다. 텔레그램 채팅에서 Windows에서의 상황이 어떠한지 알려주세요</string>
     <string name="chat">채팅</string>
+    <string name="github">GitHub</string>
     <string name="nah">아니요</string>
     <string name="later">나중에</string>
     <string name="done">끝!</string>

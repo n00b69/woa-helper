@@ -81,6 +81,7 @@
     <string name="sure">TAMAM, kullanmama müsade et</string>
     <string name="upanel">Panelinizin çalıştığı teyit edilmemiştir, lütfen Telegram grubunda deneyiminizi paylaşın</string>
     <string name="chat">Sohbet</string>
+    <string name="github">GitHub</string>
     <string name="nah">Hayır</string>
     <string name="later">Sonra</string>
     <string name="done">Bitti!</string>

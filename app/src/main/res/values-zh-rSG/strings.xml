@@ -81,6 +81,7 @@
     <string name="sure">无论如何我都要用</string>
     <string name="upanel">你的设备使用的显示面板兼容性未知，请在 Telegram 中分享你的 Windows 情况。</string>
     <string name="chat">聊天</string>
+    <string name="github">GitHub</string>
     <string name="nah">取消</string>
     <string name="later">稍后</string>
     <string name="done">完成!</string>

@@ -81,6 +81,7 @@
     <string name="sure">OK, mənə tətbiqdən istifadə etməyə icazə verin</string>
     <string name="upanel">Panelinizin işləməsi təsdiqlənməyib, Windows təcrübənizi Telegram çatında paylaşın</string>
     <string name="chat">Çat</string>
+    <string name="github">GitHub</string>
     <string name="nah">Yox</string>
     <string name="later">Sonra</string>
     <string name="done">Done!</string>

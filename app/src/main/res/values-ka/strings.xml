@@ -81,6 +81,7 @@
     <string name="sure">კარგი, უბრალოდ ნება მომეცი გამოვიყენო აპლიკაცია</string>
     <string name="upanel">თქვენი პანელის მუშაობა არ არის დადასტურებული, გთხოვ გააზიარო Windows-ის თქვენი გამოცდილება Telegram-ის ჩატში</string>
     <string name="chat">ჩატი</string>
+    <string name="github">GitHub</string>
     <string name="nah">არა</string>
     <string name="later">სხვა დროს</string>
     <string name="done">შესრულებულია!</string>

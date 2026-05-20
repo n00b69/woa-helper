@@ -81,6 +81,7 @@
     <string name="sure">OK、このアプリを使わせてください</string>
     <string name="upanel">お使いのパネルは動作確認されていません。Windowsの使用感をTelegramチャットで共有してください</string>
     <string name="chat">チャット</string>
+    <string name="github">GitHub</string>
     <string name="nah">いいえ</string>
     <string name="later">後で</string>
     <string name="done">完了！</string>

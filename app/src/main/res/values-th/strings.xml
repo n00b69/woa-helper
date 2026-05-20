@@ -81,6 +81,7 @@
     <string name="sure">ฉันจะใช้มันต่อไป</string>
     <string name="upanel">ฉันไม่รู้ว่าแผงควบคุมทำงานปกติหรือไม่ โปรดแชร์สถานการณ์ Windows ของคุณใน Telegram</string>
     <string name="chat">แชท</string>
+    <string name="github">GitHub</string>
     <string name="done">เสร็จแล้ว!</string>
     <string name="nah">ยกเลิก</string>
     <string name="later">ภายหลัง</string>

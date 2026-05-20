@@ -93,6 +93,7 @@
     <string name="sure">OK, just let me use the app</string>
     <string name="upanel">Your panel has not been confirmed to work, please share your Windows experience in the Telegram chat</string>
     <string name="chat">Chat</string>
+    <string name="github">GitHub</string>
     <string name="nah">Nah</string>
     <string name="later">Later</string>
     <string name="done">Done!</string>

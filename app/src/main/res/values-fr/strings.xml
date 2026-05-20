@@ -81,6 +81,7 @@
     <string name="sure">OK, laissez-moi utiliser l\’application</string>
     <string name="upanel">Le fonctionnement de votre panneau n\’a pas été confirmé, veuillez partager votre expérience de Windows dans le chat Telegram.</string>
     <string name="chat">Discutez</string>
+    <string name="github">GitHub</string>
     <string name="nah">Non</string>
     <string name="later">Plus tard</string>
     <string name="done">Done!</string>

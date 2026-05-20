@@ -81,6 +81,7 @@
     <string name="sure">موافق، دعني أستخدم التطبيق</string>
     <string name="upanel">لم يتم تحديد نوع شاشتك، يرجى مشاركة ملاحظاتك عبر مجموعة التيليجرام.</string>
     <string name="chat">الدردشة</string>
+    <string name="github">GitHub</string>
     <string name="nah">لا</string>
     <string name="later">لاحقاً</string>
     <string name="done">تم!</string>

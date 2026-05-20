@@ -398,6 +398,13 @@ class MainActivity : AppCompatActivity() {
         settingsBinding.automount.setOnChangeListener { b -> Pref.setAutoMount(this, b) }
         settingsBinding.appUpdate.setOnChangeListener { b -> Pref.setAppUpdate(this, b) }
 
+        settingsBinding.chatButton.setOnClickListener {
+            openLink(this, "https://t.me/woahelperchat")
+        }
+        settingsBinding.githubButton.setOnClickListener {
+            openLink(this, "https://github.com/n00b69/woa-helper")
+        }
+
         setupDevcfgSettings()
     }
 
