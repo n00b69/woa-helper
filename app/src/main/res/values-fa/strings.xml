@@ -11,10 +11,8 @@
     <string name="usbhost_title">USB host فعال سازی</string>
     <string name="software_title">ARM برنامه های</string>
     <string name="rotation_title">فعال سازی چرخش صفحه در ویندوز</string>
-    <string name="autoflash_title">فلش خودکار اندروید</string>
     <string name="atlasos_title">کپی کردن فایل های ATLASOS / REVIOS</string>
     <string name="defender_title">حذف کردن EDGE / DEFENDER</string>
-    <string name="script_title">جعبه ابزار کد های اجرایی</string>
     <string name="setup_title">FRAMEWORK نصب کننده</string>
     <string name="dbkp_title">پچ کردن کرنل دوگانه</string>
     <string name="tablet_title">فعال سازی حالت تبلت</string>
@@ -32,10 +30,8 @@
     <string name="usbhost_subtitle">افزودن کد اجرایی USB Host به C:⧹Toolbox</string>
     <string name="software_subtitle">اضافه کردن لینک دسترسی به برنامه های ویندوز در C:⧹Toolbox</string>
     <string name="rotation_subtitle">اضافه کردن کد اجرایی برای چرخش صفحه(مخصوص دستگاه های بدون دسترسی سنسور)</string>
-    <string name="autoflash_subtitle">اضافه کردن کد اجرایی برای فلش خودکار بوت اندروید بعد از روشن شدن ویندوز</string>
     <string name="atlasos_subtitle">کپی کردن ReviOS playbook یا AtlasOS</string>
     <string name="defender_subtitle">اضافه کردن کد اجرایی برای پاکسازی Microsoft Edge / Windows Defender</string>
-    <string name="script_subtitle">اضافه کردن کد های اجرایی کارآمد در C:⧹Toolbox</string>
     <string name="setup_subtitle">افزودن نصب کننده framework</string>
     <string name="dbkp_subtitle">پچ کردن کرنل برای بوت دوگانه همزمان</string>
     <string name="tablet_subtitle">اضافه کردن کد اجرایی برای فعال سازی حالت تبلت</string>
@@ -52,7 +48,6 @@
     <string name="usbhost_question">کپی کردن فایل اجرایی حالت USB Host به ویندوز؟</string>
     <string name="software_question">کپی کردن لینک ها به ویندوز؟</string>
     <string name="rotation_question">کپی کردن حالت چرخش خودکار به ویندوز؟ </string>
-    <string name="autoflash_question">نصب کردن کد اجرایی فلش خودکار  در ویندوز</string>
     <string name="atlasos_question">"دانلود کردن ReviOS playbook یا AtlasOS و قرار دادن در مسیر:
 C:⧹Toolbox?"</string>
     <string name="defender_question">کپی کردن کد اجرایی Defender و پاک کردن Edge؟</string>
@@ -77,7 +72,6 @@ C:⧹Toolbox?"</string>
     <string name="op7">کشاننده هشدار </string>
     <string name="cepheus">دکمه دستیار کمک</string>
     <string name="nabu">قاب آهنربایی</string>
-    <string name="nabu2">volume buttons</string>
     <string name="reboot">راه‌اندازی مجدد</string>
     <string name="cancel">بازگشت</string>
     <string name="mounted">ویندوز سوار شد</string>
@@ -128,7 +122,6 @@ C:⧹Toolbox?"</string>
     <string name="preference5">درخواست تأییدیه هنگام استفاده از رفتن سریع به ویندوز</string>
     <string name="preference6">انتخاب زبان</string>
     <string name="preference7">سوار سازی اتوماتیک ویندوز بعد از راه‌اندازی</string>
-    <string name="preference8">غیرفعال کردن دامپ مودم</string>
     <string name="preference9">نیاز به بازبودن قفل صفحه برای استفاده از رفتن سریع به ویندوز</string>
     <string name="preference10">دسترسی به فایل های ویندوز در مسیر mnt/ به جای sdcard/</string>
     <string name="preference11">غیر فعال کردن بروزرسانی های نرم‌افزار</string>

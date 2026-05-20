@@ -11,10 +11,8 @@
     <string name="usbhost_title">สลับโหมดโฮสต์ USB</string>
     <string name="software_title">ซอฟต์แวร์ ARM</string>
     <string name="rotation_title">สลับการหมุน</string>
-    <string name="autoflash_title">แฟลช Android อัตโนมัติ</string>
     <string name="atlasos_title">คัดลอกไฟล์ ATLASOS / REVIOS</string>
     <string name="defender_title">ลบ EDGE / DEFENDER</string>
-    <string name="script_title">กล่องเครื่องมือสคริปต์</string>
     <string name="setup_title">ติดตั้งเฟรมเวิร์ก</string>
     <string name="dbkp_title">โปรแกรมแก้ไขเคอร์เนล DUALBOOT</string>
     <string name="tablet_title">สคริปต์โหมดแท็บเล็ต</string>
@@ -32,10 +30,8 @@
     <string name="usbhost_subtitle">เพิ่มสคริปต์ไปที่ C:⧹Toolbox ซึ่งช่วยให้คุณสามารถสลับโหมดโฮสต์ USB ได้</string>
     <string name="software_subtitle">เพิ่มทางลัดเบราว์เซอร์ที่มีซอฟต์แวร์ ARM ไปที่ C:⧹Toolbox</string>
     <string name="rotation_subtitle">เพิ่มสคริปต์ไปที่ C:⧹Toolbox ที่ให้คุณหมุนหน้าจอด้วยทางลัด\n(มีประโยชน์สำหรับอุปกรณ์ที่ไม่มีเซ็นเซอร์ทำงาน)</string>
-    <string name="autoflash_subtitle">เพิ่มสคริปต์ลงใน Windows ซึ่งจะ flash boot.img ของ Android โดยอัตโนมัติทุกครั้งที่ Windows บูท</string>
     <string name="atlasos_subtitle">คัดลอก AtlasOS หรือ ReviOS playbook และ AME ไปยัง C:⧹Toolbox</string>
     <string name="defender_subtitle">เพิ่มสคริปต์ที่ C:⧹Toolbox ซึ่งช่วยให้คุณสามารถลบ Microsoft Edge / Windows Defender ได้</string>
-    <string name="script_subtitle">เพิ่มสคริปต์และการปรับแต่งต่างๆ ที่ C:⧹Toolbox</string>
     <string name="setup_subtitle">เพิ่มตัวติดตั้งสำหรับเฟรมเวิร์กต่างๆ ลงใน C:⧹Toolbox</string>
     <string name="dbkp_subtitle">แก้ไขเคอร์เนลเพื่อการบูตคู่แบบราบรื่น</string>
     <string name="tablet_subtitle">เพิ่มสคริปต์ไปที่ C:⧹Toolbox ซึ่งช่วยให้คุณสามารถสลับโหมดแท็บเล็ตได้</string>
@@ -51,7 +47,6 @@
     <string name="usbhost_question">คัดลอกสคริปต์โหมดโฮสต์ USB ไปที่ C:⧹Toolbox?</string>
     <string name="software_question">คัดลอกทางลัดของเบราว์เซอร์ไปที่ C:⧹Toolbox?</string>
     <string name="rotation_question">คัดลอกทางลัดการหมุนไปที่ C:⧹Toolbox?</string>
-    <string name="autoflash_question">ติดตั้งสคริปต์แฟลชอัตโนมัติ boot.img ลงใน Windows หรือไม่</string>
     <string name="atlasos_question">ดาวน์โหลดและย้าย AtlasOS หรือ ReviOS playbook ไปที่ C:⧹Toolbox?</string>
     <string name="defender_question">คัดลอกสคริปต์ลบ Edge / Defender ไปที่ C:⧹Toolbox?</string>
     <string name="setup_question">ดาวน์โหลดและย้ายตัวติดตั้ง C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX และ XNA ไปที่ C:⧹Toolbox?\n(อาจใช้เวลาสักครู่)</string>
@@ -70,7 +65,6 @@
     <string name="op7">แถบเลื่อนการแจ้งเตือน</string>
     <string name="cepheus">ปุ่มผู้ช่วย</string>
     <string name="nabu">เคสแม่เหล็ก</string>
-    <string name="nabu2">volume buttons</string>
     <string name="reboot">เริ่มใหม่</string>
     <string name="cancel">ยกเลิก</string>
     <string name="mounted">การเชื่อมต่อ Windows</string>
@@ -119,7 +113,6 @@
     <string name="preference5">ต้องมีการยืนยันสำหรับไทล์ QS การบูตด่วน</string>
     <string name="preference6">เลือกภาษา</string>
     <string name="preference7">ติดตั้ง Windows โดยอัตโนมัติเมื่อเริ่มต้นอุปกรณ์</string>
-    <string name="preference8">ปิดใช้งานฟังก์ชันดัมพ์โมเด็ม</string>
     <string name="preference9">ต้องใช้หน้าจอที่ปลดล็อคสำหรับการบูตอย่างรวดเร็ว</string>
     <string name="preference10">เชื่อมต่อ Windows ไปที่ /mnt แทน /sdcard</string>
     <string name="preference11">ปิดการตรวจสอบการอัปเดตแอป</string>

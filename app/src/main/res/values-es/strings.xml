@@ -11,10 +11,8 @@
     <string name="usbhost_title">CAMBIAR MODO DE HOST USB</string>
     <string name="software_title">SOFTWARE ARM</string>
     <string name="rotation_title">CAMBIO DE ROTACIÓN</string>
-    <string name="autoflash_title">FLASHEO AUTOMÁTICO DE ANDROID</string>
     <string name="atlasos_title">COPIAR ARCHIVOS DE ATLASOS / REVIOS</string>
     <string name="defender_title">ELIMINAR MICROSOFT EDGE / WINDOWS DEFENDER</string>
-    <string name="script_title">AÑADIR SCRIPTS</string>
     <string name="setup_title">INSTALAR FRAMEWORKS</string>
     <string name="dbkp_title">PARCHEAR KERNEL PARA DUALBOOT</string>
     <string name="tablet_title">SCRIPT MODO TABLET</string>
@@ -32,10 +30,8 @@
     <string name="usbhost_subtitle">Agrega un script a C:⧹Toolbox que le permite alternar el modo del host USB</string>
     <string name="software_subtitle">Agrega accesos directos del navegador que contienen software ARM a C:⧹Toolbox</string>
     <string name="rotation_subtitle">Agrega un script a C:⧹Toolbox que te permite rotar la pantalla con un acceso directo\n(útil para dispositivos a los que no les funcionen los sensores)</string>
-    <string name="autoflash_subtitle">Agrega un script a Windows que muestra automáticamente el archivo boot.img de Android cada vez que se inicia Windows</string>
     <string name="atlasos_subtitle">Copia el playbook de ReviOS o AtlasOS y AME Wizard a C:⧹Toolbox</string>
     <string name="defender_subtitle">Añade un script a C:⧹Toolbox que te permite eliminar Microsoft Edge / Windows Defender</string>
-    <string name="script_subtitle">Añade un conjunto de scripts y modificaciones a C:⧹Toolbox</string>
     <string name="setup_subtitle">Añade instaladores de diversos frameworks a C:⧹Toolbox</string>
     <string name="dbkp_subtitle">Parchea el kernel para hacer dualboot</string>
     <string name="tablet_subtitle">Añade un script a C:⧹Toolbox que te permita habilitar el modo tablet</string>
@@ -51,7 +47,6 @@
     <string name="usbhost_question">¿Copiar el script de USB en modo host a C:⧹Toolbox?</string>
     <string name="software_question">¿Copiar los accesos directos de los navegadores web a  C:⧹Toolbox?</string>
     <string name="rotation_question">¿Copiar acceso directo de rotación a C:⧹Toolbox?</string>
-    <string name="autoflash_question">¿Instalar el script para flashear automaticamente boot.img en Windows?</string>
     <string name="atlasos_question">¿Descargar y mover el playbook de ReviOS o AtlasOS a C:⧹Toolbox?</string>
     <string name="defender_question">¿Copiar script para eliminar Microsoft Edge / Windows Defender a C:⧹Toolbox?</string>
     <string name="setup_question">¿Descargar y mover los instaladores de: C++ Redistributables y DirectX, OpenGL, OpenAL, PhysX, XNAF a C:⧹Toolbox?\n(puede tardar un tiempo)</string>
@@ -70,7 +65,6 @@
     <string name="op7">alert slider</string>
     <string name="cepheus">assistant button</string>
     <string name="nabu">magnetic case</string>
-    <string name="nabu2">volume buttons</string>
     <string name="reboot">Reiniciar</string>
     <string name="cancel">Cancelar</string>
     <string name="mounted">Windows montado</string>
@@ -119,7 +113,6 @@
     <string name="preference5">Requerir confirmación para el mosaico QS Arranque Rápido</string>
     <string name="preference6">Seleccionar idioma</string>
     <string name="preference7">Montar Windows automáticamente al iniciar el dispositivo</string>
-    <string name="preference8">Desactivar el volcado del módem</string>
     <string name="preference9">Requerir pantalla desbloqueada para el arranque rápido</string>
     <string name="preference10">Inicializar la partición de Windows en /mnt en lugar de /sdcard</string>
     <string name="preference11">Dejar de comprobar nuevas actualizaciones de la app</string>

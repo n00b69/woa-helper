@@ -18,7 +18,7 @@ import java.util.Locale
  *  * limitations under the License.
  *  */
 
-internal class MemoryUtils {
+internal object MemoryUtils {
     private fun floatForm(d: Double): String {
         return String.format(Locale.US, "%.2f", d)
     }

@@ -11,10 +11,8 @@
     <string name="usbhost_title">ПЕРЕМИКАЧ USB-HOST РЕЖИМУ</string>
     <string name="software_title">ПРОГРАМНЕ ЗАБЕЗПЕЧЕННЯ ARM</string>
     <string name="rotation_title">ПЕРЕМИКАЧ ОБЕРТАННЯ ЄКРАНУ</string>
-    <string name="autoflash_title">АВТОПРОШИВКА ANDROID</string>
     <string name="atlasos_title">СКОПІЮВАТИ ФАЙЛИ ATLASOS / REVIOS</string>
     <string name="defender_title">ВИДАЛЯЧ EDGE / DEFENDER</string>
-    <string name="script_title">ПАНЕЛЬ СКРІПТІВ</string>
     <string name="setup_title">ВСТАНОВЛЮВАЧІ FRAMEWORK</string>
     <string name="dbkp_title">ПАТЧЕР ЯДРА DUALBOOT</string>
     <string name="tablet_title">СЦЕНАРІЙ РЕЖИМУ ПЛАНШЕТА</string>
@@ -32,10 +30,8 @@
     <string name="usbhost_subtitle">Додає скрипт до C:⧹Toolbox який дозволяє перемикати телефон в режим USB Host</string>
     <string name="software_subtitle">Додає ярлики браузера, що містять програмне забезпечення ARM до C:⧹Toolbox</string>
     <string name="rotation_subtitle">Додає скрипт до C:⧹Toolbox, який дозволяє повертати екран за допомогою ярлика\n(корисно для пристроїв без робочих датчиків)</string>
-    <string name="autoflash_subtitle">Додає скрипт до Windows, який автоматично прошиває Android boot.img при кожному завантаженні Windows</string>
     <string name="atlasos_subtitle">Копіює AtlasOS або ReviOS і AME Wizard в C:⧹Toolbox</string>
     <string name="defender_subtitle">Додає скрипт в C:⧹Toolbox який дозволяє видалити Microsoft Edge / Windows Defender</string>
-    <string name="script_subtitle">Додає асортимент скриптів і твиків в C:⧹Toolbox</string>
     <string name="setup_subtitle">Додає встановлювачі фреймворків в C:⧹Toolbox</string>
     <string name="dbkp_subtitle">Виправляє ядро ​​для безпроблемного подвійного завантаження</string>
     <string name="tablet_subtitle">Додає сценарій до C:⧹Toolbox, який дозволяє вмикати режим планшета</string>
@@ -51,7 +47,6 @@
     <string name="usbhost_question">Скопіювати сценарій USB Host Mode до C:⧹Toolbox?</string>
     <string name="software_question">Скопіювати ярлик браузера до C:⧹Toolbox?</string>
     <string name="rotation_question">Скопіювати ярлик обертання до C:⧹Toolbox?</string>
-    <string name="autoflash_question">Встановити сценарій автопрошивки boot.img у Windows?</string>
     <string name="atlasos_question">Завантажити і перемістити AtlasOS або ReviOS в C:⧹Toolbox?</string>
     <string name="defender_question">Скопіювати скрипт видалення Edge / Defender в C:⧹Toolbox?</string>
     <string name="setup_question">Завантажити і перемістити у C:⧹Toolbox встановлювачі C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX і XNA?\n(це може заняти деякий час)</string>
@@ -70,7 +65,6 @@
     <string name="op7">повзунок</string>
     <string name="cepheus">кнопку помічника</string>
     <string name="nabu">магнітний футляр</string>
-    <string name="nabu2">volume buttons</string>
     <string name="reboot">Перезавантаження</string>
     <string name="cancel">Відмінити</string>
     <string name="mounted">Windows змонтований</string>
@@ -119,7 +113,6 @@
     <string name="preference5">Вимагати підтвердження для швидкого завантаження QS tile</string>
     <string name="preference6">Оберіть мову</string>
     <string name="preference7">Автоматично монтувати Windows під час запуску пристрою</string>
-    <string name="preference8">Вимкнути функцію дампа модему</string>
     <string name="preference9">Для швидкого завантаження потрібен розблокований екран</string>
     <string name="preference10">Змонтувати Windows в /mnt замість /sdcard</string>
     <string name="preference11">Вимкнути перевірку оновлень додатка</string>

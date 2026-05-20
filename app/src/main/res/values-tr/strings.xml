@@ -11,10 +11,8 @@
     <string name="usbhost_title">USB HOST MODE ANAHTARI</string>
     <string name="software_title">ARM SOFTWARE</string>
     <string name="rotation_title">EKRAN DONDURME ANAHTARI</string>
-    <string name="autoflash_title">OTOMATIK ANDROID FLASHLAYICI</string>
     <string name="atlasos_title">ATLASOS / REVIOS DOSYALARINI KOPYALA</string>
     <string name="defender_title">EDGE / DEFENDER SILICI</string>
-    <string name="script_title">SCRIPT ARAÇ KUTUSU</string>
     <string name="setup_title">FRAMEWORK INSTALLERS</string>
     <string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
     <string name="tablet_title">TABLET MODE SCRIPT</string>
@@ -32,10 +30,8 @@
     <string name="usbhost_subtitle">USB Host Modunu geçiş yapmanızı sağlayan bir scripti C:⧹Toolbox içine ekler</string>
     <string name="software_subtitle">ARM yazılımı içeren tarayıcı kısayollarını C:⧹Toolbox içine ekler</string>
     <string name="rotation_subtitle">Kısayol ile ekranı döndürmenizi sağlayan bir scripti C:⧹Toolbox içine ekler\n(çalışmayan sensörlü cihazlar için kullanışlıdır)</string>
-    <string name="autoflash_subtitle">Windows her başlatıldığında Android boot.img dosyasını otomatik olarak flaşlayan bir scripti Windows\’a ekler</string>
     <string name="atlasos_subtitle">AtlasOS veya ReviOS kitapçığını ve AME Wizard\’ı C:⧹Toolbox içine kopyalar</string>
     <string name="defender_subtitle">Microsoft Edge / Windows Defender\’ı kaldırmanızı sağlayan bir scripti C:⧹Toolbox içine ekler</string>
-    <string name="script_subtitle">Çeşitli scriptler ve tweaks\’i C:⧹Toolbox içine ekler</string>
     <string name="setup_subtitle">Adds installers for several frameworks into C:⧹Toolbox</string>
     <string name="dbkp_subtitle">Patches the kernel for seamless dualbooting</string>
     <string name="tablet_subtitle">Adds a script to C:⧹Toolbox which allows you to toggle tablet mode</string>
@@ -51,7 +47,6 @@
     <string name="usbhost_question">USB Host Modu scriptini C:⧹Toolbox içine kopyalalım mı?</string>
     <string name="software_question">Tarayıcı kısayollarını C:⧹Toolbox içine kopyalalım mı?</string>
     <string name="rotation_question">Dönüş kısayolunu C:⧹Toolbox içine kopyalalım mı?</string>
-    <string name="autoflash_question">Windows içine boot.img otomatik flaşlayıcı scripti yükleyelim mi?</string>
     <string name="atlasos_question">AtlasOS veya ReviOS kitapçığını C:⧹Toolbox içine indirip taşıyalim mı?</string>
     <string name="defender_question">Edge / Defender kaldırıcı scripti C:⧹Toolbox içine kopyalalım mı?</string>
     <string name="setup_question">Download and move C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, and XNA framework installers to C:⧹Toolbox?\n(this may take some time)</string>
@@ -70,7 +65,6 @@
     <string name="op7">alert slider</string>
     <string name="cepheus">assistant button</string>
     <string name="nabu">magnetic case</string>
-    <string name="nabu2">volume buttons</string>
     <string name="reboot">Yeniden başlat</string>
     <string name="cancel">İptal et</string>
     <string name="mounted">Windows bağlandı</string>
@@ -119,7 +113,6 @@
     <string name="preference5">QS quickboot kutucuğu için onay iste</string>
     <string name="preference6">Dil seç</string>
     <string name="preference7">Cihaz açılışında otomatik olarak Windows\’u bağla</string>
-    <string name="preference8">Modem yedeklemesini devre dışı bırak</string>
     <string name="preference9">Quickboot için ekran kilidi açmayı zorunlu kıl</string>
     <string name="preference10">Mount Windows to /mnt instead of /sdcard</string>
     <string name="preference11">Disable checking for app updates</string>

@@ -1,7 +1,10 @@
 package com.woa.helper.main
 
+import android.content.Context
+import android.os.Build
 import com.woa.helper.R
 import android.view.View
+import com.woa.helper.preference.Pref
 
 data class DeviceConfig(
     val guideLink: String,
@@ -11,13 +14,19 @@ data class DeviceConfig(
     val dbkp: Int = View.GONE,
     val dbkpLink: String = "",
     val dbkpCodename: String = "",
-    val modem: Int = View.GONE,
     val unsupported: Boolean = false
 )
 
 
 object Device {
-    fun getVars(codename: String): DeviceConfig {
+    var codename: String = ""
+    var uefiPath: String = ""
+
+    fun init(context: Context) {
+        codename = Pref.codenameChanger(false, context, Build.DEVICE)
+    }
+
+    fun getVars(): DeviceConfig {
         return when (codename) {
             "alphalm", "alphaplus", "alpha_lao_com", "alphalm_lao_com", "alphaplus_lao_com" -> DeviceConfig(
                 guideLink = "https://github.com/n00b69/woa-alphaplus",
@@ -89,7 +98,6 @@ object Device {
                 image = R.drawable.cepheus,
                 panel = View.VISIBLE,
                 dbkp = View.VISIBLE,
-                modem = View.VISIBLE,
                 dbkpCodename = "cepheus",
                 dbkpLink = "https://github.com/n00b69/woa-cepheus/releases/download/Files/cepheus.fd",
             )
@@ -148,7 +156,8 @@ object Device {
                 image = R.drawable.pipa,
                 panel = View.VISIBLE,
                 dbkp = View.VISIBLE,
-
+                dbkpCodename = "nabu",
+                dbkpLink = "https://github.com/erdilS/Port-Windows-11-Xiaomi-Pad-5/releases/download/Files/nabu.fd",
                 )
 
             "polaris" -> DeviceConfig(
@@ -163,7 +172,6 @@ object Device {
                 groupLink = "https://t.me/woaraphael",
                 image = R.drawable.raphael,
                 panel = View.VISIBLE,
-                modem = View.VISIBLE,
             )
 
             "surya", "karna" -> DeviceConfig(
@@ -220,7 +228,6 @@ object Device {
                 groupLink = "https://t.me/oneplus7woa",
                 image = R.drawable.hotdog,
                 dbkp = View.VISIBLE,
-                modem = View.VISIBLE,
                 dbkpLink = "https://github.com/n00b69/woa-op7/releases/download/DBKP/hotdog.fd",
                 dbkpCodename = "hotdog",
             )
@@ -230,7 +237,6 @@ object Device {
                 groupLink = "https://t.me/oneplus7woa",
                 image = R.drawable.guacamole,
                 dbkp = View.VISIBLE,
-                modem = View.VISIBLE,
                 dbkpLink = "https://github.com/n00b69/woa-op7/releases/download/DBKP/guacamole.fd",
                 dbkpCodename = "hotdog",
             )
@@ -239,7 +245,6 @@ object Device {
                 guideLink = "https://project-aloha.github.io/",
                 groupLink = "https://t.me/project_aloha_issues",
                 image = R.drawable.unknown,
-                modem = View.VISIBLE,
             )
 
             "OnePlus7TPro5G", "OnePlus7TProNR", "hotdogg" -> DeviceConfig(
@@ -408,7 +413,6 @@ object Device {
                 guideLink = "https://renegade-project.tech/",
                 groupLink = "https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA",
                 image = R.drawable.unknown,
-                modem = View.VISIBLE,
                 unsupported = true
             )
         }

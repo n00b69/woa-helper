@@ -11,10 +11,8 @@
     <string name="usbhost_title">USB HOST MODUS SCHAKELAAR</string>
     <string name="software_title">ARM SOFTWARE</string>
     <string name="rotation_title">ROTATIE SHORTCUT</string>
-    <string name="autoflash_title">AUTO ANDROID FLASHER</string>
     <string name="atlasos_title">KOPIEER ATLASOS / REVIOS INSTALLER</string>
     <string name="defender_title">EDGE / DEFENDER VERWIJDERAAR</string>
-    <string name="script_title">SCRIPT TOOLBOX</string>
     <string name="setup_title">FRAMEWORK INSTALLERS</string>
     <string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
     <string name="tablet_title">TABLET MODE SCRIPT</string>
@@ -32,10 +30,8 @@
     <string name="usbhost_subtitle">Plaatst een script in C:⧹Toolbox waarmee je USB Host Modus aan/uit kan zetten</string>
     <string name="software_subtitle">Plaatst browser snelkoppelingen met ARM software in C:⧹Toolbox</string>
     <string name="rotation_subtitle">Plaatst een script in C:⧹Toolbox waarmee je het scherm kan draaien\n(handig voor toestellen zonder werkende sensors)</string>
-    <string name="autoflash_subtitle">Installeert een Windows script die automatisch de Android boot.img flasht</string>
     <string name="atlasos_subtitle">Kopieert de AtlasOS of ReviOS playbook en AME Wizard naar C:⧹Toolbox</string>
     <string name="defender_subtitle">Plaatst een script in C:⧹Toolbox waarmee je Microsoft Edge / Windows Defender kan verwijderen</string>
-    <string name="script_subtitle">Plaatst meerdere scripts en tweaks in C:⧹Toolbox</string>
     <string name="setup_subtitle">Plaatst installers voor verschillende frameworks in C:⧹Toolbox</string>
     <string name="dbkp_subtitle">Patcht de kernel om naadloos dualbooten te kunnen</string>
     <string name="tablet_subtitle">Plaatst een script in C:⧹Toolbox waarmee je de tablet modus aan/uit kan zetten</string>
@@ -51,7 +47,6 @@
     <string name="usbhost_question">Kopieer USB Host Mode schakelaar naar C:⧹Toolbox?</string>
     <string name="software_question">Kopieer browser snelkoppeling naar C:⧹Toolbox?</string>
     <string name="rotation_question">Kopieer rotatie snelkoppeling naar C:⧹Toolbox?</string>
-    <string name="autoflash_question">Installeer boot.img autoflasher script in Windows?</string>
     <string name="atlasos_question">Download en kopieer AtlasOS of ReviOS playbook naar C:⧹Toolbox?</string>
     <string name="defender_question">Kopieer Edge / Defender verwijder scripts naar C:⧹Toolbox?</string>
     <string name="setup_question">Download en kopieer C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, en XNA framework installers naar C:⧹Toolbox?\n(dit kan enkele momenten duren)</string>
@@ -70,7 +65,6 @@
     <string name="op7">alert slider</string>
     <string name="cepheus">assistant knop</string>
     <string name="nabu">magnetische hoes</string>
-    <string name="nabu2">volume knoppen</string>
     <string name="reboot">Herstart</string>
     <string name="cancel">Annuleren</string>
     <string name="mounted">Windows mounted</string>
@@ -119,7 +113,6 @@
     <string name="preference5">Bevestiging vereist voor QS quickboot knop</string>
     <string name="preference6">Taal selecteren</string>
     <string name="preference7">Windows automatisch mounten wanneer uw toestel opstart</string>
-    <string name="preference8">Modem functie uitschakelen</string>
     <string name="preference9">Vereist ontgrendeld scherm voor quickboot</string>
     <string name="preference10">Mount Windows naar /mnt i.p.v /sdcard</string>
     <string name="preference11">Zoeken naar app-updates stopzetten</string>

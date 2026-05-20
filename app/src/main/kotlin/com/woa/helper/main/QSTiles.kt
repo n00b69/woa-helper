@@ -1,198 +1,192 @@
 package com.woa.helper.main
 
-import android.os.Build
 import android.os.Environment
+import android.os.Handler
+import android.os.Looper
 import android.service.quicksettings.TileService
 import android.widget.Toast
 import com.woa.helper.R
-import com.woa.helper.main.MainActivity.Companion.isNetworkConnected
-import com.woa.helper.main.MainActivity.Companion.rootCommand
-import com.woa.helper.main.MainActivity.Companion.shellInit
 import com.woa.helper.preference.Pref
+import com.woa.helper.util.MountManager
+import com.woa.helper.util.ShellManager
+import com.woa.helper.util.ShellResult
+import com.woa.helper.util.DevcfgManager
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-private lateinit var win: String
-private lateinit var findWin: String
-private lateinit var winPath: String
-private var sdcard = Environment.getExternalStorageDirectory().path.toString()
-
 abstract class CommonTileService : TileService() {
-    protected fun mount() {
-        val mntstat = rootCommand("mount | grep $win")
-        if (mntstat.isEmpty()) {
-            rootCommand("mkdir $winPath")
-            rootCommand("./mount.ntfs $win $winPath", master = true)
+    protected fun mount(): String? {
+        MountManager.init(filesDir, this)
+        return when (val result = MountManager.mount()) {
+            is ShellResult.Success -> null
+            is ShellResult.Error -> result.message
         }
     }
 
-    protected fun unmount() {
-        rootCommand("umount $winPath", master = true)
-        rootCommand("rmdir $winPath")
+    protected fun unmount(): String? {
+        return when (val result = MountManager.unmount()) {
+            is ShellResult.Success -> null
+            is ShellResult.Error -> result.message
+        }
+    }
+
+    protected fun updateTileState(state: Int) {
+        Handler(Looper.getMainLooper()).post {
+            qsTile.state = state
+            qsTile.updateTile()
+        }
     }
 }
 
 class QuickBootTile : CommonTileService() {
-    private lateinit var findUefi: String
-    private var device: String? = null
-    private var findBoot: String? = null
-    private var boot: String? = null
+    private var findUefi: String = ""
+    private var boot: String = ""
 
     override fun onStartListening() {
         super.onStartListening()
-        shellInit(this.filesDir)
-        val tile = qsTile
-        checkuefi()
-        device = Pref.codenameChanger(false, this, Build.DEVICE)
-        findWin = rootCommand("find /dev/block | grep -i -E \"win|mindows|windows\" | head -1")
-        if (findUefi.isEmpty() || (isSecure && !Pref.getSecure(this)) || findWin.isEmpty()) tile.state =
-            0
-        else tile.state = 1
-        if (Pref.getDevcfg1(this)) {
-            if (!isNetworkConnected(this)) {
-                val finddevcfg = rootCommand("find $filesDir -maxdepth 1 -name OOS11_devcfg_*")
-                if (finddevcfg.isEmpty()) {
-                    tile.state = 0
-                    // These titles don't actually even seem to work and are obsolete I guess, is there even a way to change the titles?
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                        tile.subtitle = getString(R.string.qsinternet)
-                    }
+        Thread {
+            ShellManager.init(filesDir)
+            checkUefi()
+            val newState = if (findUefi.isEmpty() || (isSecure && !Pref.getSecure(this)) || MountManager.getWinPartition().isEmpty()) {
+                0
+            } else {
+                1
+            }
+            if (Pref.getDevcfg1(this) && !MainActivity.isNetworkConnected(this)) {
+                val findDevcfg = ShellManager.exec("find ${filesDir.absolutePath} -maxdepth 1 -name OOS11_devcfg_*")
+                if (findDevcfg.isEmpty()) {
+                    updateTileState(0)
+                    return@Thread
                 }
             }
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            tile.subtitle = ""
-        }
-        tile.updateTile()
+            updateTileState(newState)
+        }.start()
     }
 
     override fun onClick() {
         super.onClick()
         val tile = qsTile
-        if (1 == tile.state && Pref.getConfirm(this)) {
+        if (tile.state == 1 && Pref.getConfirm(this)) {
             tile.state = 2
-            if (Build.VERSION_CODES.Q <= Build.VERSION.SDK_INT) {
-                tile.subtitle = getString(R.string.qspressagain)
-            }
             tile.updateTile()
             return
         }
 
-        mount()
-        val img =
-            if (Pref.getMountLocation(this)) "/mnt/Windows/boot.img" else "$sdcard/Windows/boot.img"
-        var notFound = rootCommand("ls $img").isEmpty()
-        var backupDone = false
-        if (Pref.getBackup(this) || (!Pref.getAuto(this) && notFound)) {
-            rootCommand("dd bs=8M if=$boot of=$img")
-            backupDone = true
-        }
-        notFound = rootCommand("find -maxdepth 1 /sdcard | grep boot.img").isEmpty()
-        if (Pref.getBackupA(this) || (!Pref.getAutoA(this) && notFound)) {
-            rootCommand("dd bs=8M if=$boot of=$sdcard/boot.img")
-            backupDone = true
-        }
-        if (backupDone) {
-            val sdf = SimpleDateFormat("dd-MM HH:mm", Locale.US)
-            val currentDateAndTime = sdf.format(Date())
-            Pref.setDate(this, currentDateAndTime)
-        }
-        // This whole feature feels very laggy to me in the QS tile, needs overhauling.
-        if (Pref.getDevcfg1(this)) {
-            val findDevCfg = rootCommand("find $filesDir -maxdepth 1 -name OOS11_devcfg_*")
-            if (!isNetworkConnected(this)) {
-                if (findDevCfg.isEmpty()) {
-                    Toast.makeText(this, (getString(R.string.internet)), Toast.LENGTH_LONG).show()
-                    tile.state = 0
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                        tile.subtitle = getString(R.string.qsinternet)
-                    }
-                    return
-                } else {
-                    tile.state = 1
+        Thread {
+            ShellManager.init(filesDir)
+            val mountError = mount()
+            if (mountError != null) {
+                Toast.makeText(this, "${getString(R.string.wrong)}\n$mountError", Toast.LENGTH_LONG).show()
+                updateTileState(0)
+                return@Thread
+            }
+            val img = if (Pref.getMountLocation(this)) "/mnt/Windows/boot.img" else "${Environment.getExternalStorageDirectory().path}/Windows/boot.img"
+            var notFound = ShellManager.exec("ls $img").isEmpty()
+            var backupDone = false
+            if (Pref.getBackup(this) || (!Pref.getAuto(this) && notFound)) {
+                ShellManager.exec("dd bs=8M if=$boot of=$img")
+                backupDone = true
+            }
+            notFound = ShellManager.exec("find -maxdepth 1 /sdcard | grep boot.img").isEmpty()
+            if (Pref.getBackupA(this) || (!Pref.getAutoA(this) && notFound)) {
+                val sdcard = Environment.getExternalStorageDirectory().path
+                ShellManager.exec("dd bs=8M if=$boot of=$sdcard/boot.img")
+                backupDone = true
+            }
+            if (backupDone) {
+                val sdf = SimpleDateFormat("dd-MM HH:mm", Locale.US)
+                Pref.setDate(this, sdf.format(Date()))
+            }
+            if (Pref.getDevcfg1(this)) {
+                val findDevcfg = ShellManager.exec("find ${filesDir.absolutePath} -maxdepth 1 -name OOS11_devcfg_*")
+                if (!MainActivity.isNetworkConnected(this) && findDevcfg.isEmpty()) {
+                    Toast.makeText(this, getString(R.string.internet), Toast.LENGTH_LONG).show()
+                    updateTileState(0)
+                    return@Thread
+                }
+                val devcfgDevice = DevcfgManager.getDevcfgDevice(Device.codename)
+                val backupResult = DevcfgManager.backupDevcfg(filesDir.absolutePath)
+                if (backupResult is ShellResult.Error) {
+                    Toast.makeText(this, "${getString(R.string.wrong)}\n\n${backupResult.message}", Toast.LENGTH_LONG).show()
+                    updateTileState(0)
+                    return@Thread
+                }
+                val downloadResult = DevcfgManager.downloadDevcfgImages(filesDir.absolutePath, devcfgDevice)
+                if (downloadResult is ShellResult.Error) {
+                    Toast.makeText(this, "${getString(R.string.wrong)}\n\n${downloadResult.message}", Toast.LENGTH_LONG).show()
+                    updateTileState(0)
+                    return@Thread
+                }
+                val flashResult = DevcfgManager.flashDevcfg(filesDir.absolutePath, devcfgDevice)
+                if (flashResult is ShellResult.Error) {
+                    Toast.makeText(this, "${getString(R.string.wrong)}\n\n${flashResult.message}", Toast.LENGTH_LONG).show()
+                    updateTileState(0)
+                    return@Thread
                 }
             }
-            var devcfgDevice = ""
-            when (device) {
-                "guacamole", "OnePlus7Pro", "OnePlus7Pro4G" -> devcfgDevice = "guacamole"
-                "hotdog", "OnePlus7TPro", "OnePlus7TPro4G" -> devcfgDevice = "hotdog"
+            if (Pref.getDevcfg2(this) && Pref.getDevcfg1(this)) {
+                val copyResult = DevcfgManager.copyDevcfgToWindows(filesDir.absolutePath, useBootSddConf = true, copyBackup = true)
+                if (copyResult is ShellResult.Error) {
+                    Toast.makeText(this, "${getString(R.string.wrong)}\n\n${copyResult.message}", Toast.LENGTH_LONG).show()
+                    updateTileState(0)
+                    return@Thread
+                }
             }
-            val findoriginaldevcfg =
-                rootCommand("find $filesDir -maxdepth 1 -name original-devcfg.img")
-            if (findoriginaldevcfg.isEmpty()) {
-                rootCommand("dd bs=8M if=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix) of=$sdcard/original-devcfg.img")
-                rootCommand("cp /sdcard/original-devcfg.img $filesDir/original-devcfg.img")
-            }
-            if (findDevCfg.isEmpty()) {
-                rootCommand("wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_$devcfgDevice.img -O $sdcard/OOS11_devcfg_$devcfgDevice.img")
-                rootCommand("wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_$devcfgDevice.img -O $sdcard/OOS12_devcfg_$devcfgDevice.img")
-                rootCommand("cp $sdcard/OOS11_devcfg_$devcfgDevice.img $filesDir")
-                rootCommand("cp /sdcard/OOS12_devcfg_$devcfgDevice.img $filesDir")
-            }
-            rootCommand("dd bs=8M if=$filesDir/OOS11_devcfg_$devcfgDevice.img of=/dev/block/by-name/devcfg$(getprop ro.boot.slot_suffix)")
-        }
-        if (Pref.getDevcfg2(this) && Pref.getDevcfg1(this)) {
-            rootCommand("mkdir $winPath/sta || true ")
-            rootCommand("cp '$filesDir/Flash Devcfg.lnk' $winPath/Users/Public/Desktop")
-            rootCommand("cp $filesDir/sdd.exe $winPath/sta/sdd.exe")
-            rootCommand("cp $filesDir/devcfg-boot-sdd.conf $winPath/sta/sdd.conf")
-            rootCommand("cp $filesDir/original-devcfg.img $winPath/original-devcfg.img")
-        }
-        //	Toast.makeText(this, "This should appear if it reaches the (disabled) flash uefi section", Toast.LENGTH_LONG).show();
-        flash()
-        rootCommand("/system/bin/svc power reboot")
+            flash()
+            ShellManager.exec("/system/bin/svc power reboot")
+        }.start()
     }
 
     private fun flash() {
-        rootCommand("dd if=$findUefi of=/dev/block/bootdevice/by-name/boot$(getprop ro.boot.slot_suffix) bs=16M")
+        if (findUefi.isEmpty()) return
+        val slotSuffix = ShellManager.exec("getprop ro.boot.slot_suffix")
+        ShellManager.exec("dd if=$findUefi of=/dev/block/bootdevice/by-name/boot$slotSuffix bs=16M")
     }
 
-    private fun checkuefi() {
-        findUefi = rootCommand(getString(R.string.uefiChk))
-        findWin = rootCommand("find /dev/block | grep -i -E \"win|mindows|windows\" | head -1")
-        win = rootCommand("realpath $findWin")
-        winPath = (if (Pref.getMountLocation(this)) "/mnt/Windows" else "$sdcard/Windows")
-        findBoot = rootCommand("find /dev/block | grep boot$(getprop ro.boot.slot_suffix)")
-        if (findBoot!!.isEmpty()) findBoot =
-            rootCommand("find /dev/block | grep BOOT$(getprop ro.boot.slot_suffix)")
-        boot = rootCommand("realpath $findBoot")
+    private fun checkUefi() {
+        MountManager.init(filesDir, this)
+        Device.init(this)
+        findUefi = ShellManager.exec(getString(R.string.uefiChk))
+        MountManager.getWinPartition()
+        val slotSuffix = ShellManager.exec("getprop ro.boot.slot_suffix")
+        val findBoot = ShellManager.exec("find /dev/block | grep -i boot$slotSuffix | head -1")
+        boot = if (findBoot.isNotEmpty()) ShellManager.exec("realpath $findBoot") else ""
     }
 }
 
 class MountTile : CommonTileService() {
-    private var mntStat: String? = null
 
     override fun onStartListening() {
         super.onStartListening()
-        shellInit(this.filesDir)
-        update()
+        Thread {
+            ShellManager.init(filesDir)
+            update()
+        }.start()
     }
 
     override fun onClick() {
         super.onClick()
-        if (mntStat!!.isEmpty()) mount()
-        else unmount()
-        update()
+        Thread {
+            ShellManager.init(filesDir)
+            val error = if (MountManager.isMounted()) unmount() else mount()
+            if (error != null) {
+                Toast.makeText(this, "${getString(R.string.wrong)}\n$error", Toast.LENGTH_LONG).show()
+            }
+            update()
+        }.start()
     }
 
     private fun update() {
-        val tile = qsTile
         if (isSecure && !Pref.getSecure(this)) {
-            tile.state = 0
+            updateTileState(0)
             return
         }
-        findWin = rootCommand("find /dev/block | grep -i -E \"win|mindows|windows\" | head -1")
-        if (findWin.isEmpty()) {
-            tile.state = 0
-            tile.updateTile()
+        if (MountManager.getWinPartition().isEmpty()) {
+            updateTileState(0)
             return
         }
-        win = rootCommand("realpath $findWin")
-        winPath = (if (Pref.getMountLocation(this)) "/mnt/Windows" else "$sdcard/Windows")
-        mntStat = rootCommand("mount | grep $win")
-        if (mntStat!!.isEmpty()) tile.state = 1
-        else tile.state = 2
-        tile.updateTile()
+        MountManager.init(filesDir, this)
+        updateTileState(if (MountManager.isMounted()) 2 else 1)
     }
 }

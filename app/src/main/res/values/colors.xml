@@ -143,17 +143,8 @@
     <color name="md_theme_surfaceContainerHighest_highContrast">#C9C6C5</color>
     <color name="transparent">@android:color/transparent</color>
     <color name="white">#ffffffff</color>
-    <color name="orange">@color/firebase_orange</color>
-    <color name="icon_bg">@color/firebase_orange</color>
     <color name="red">#FFD40000</color>
     <color name="blue">#FF1387B1</color>
     <color name="colorAccent">?attr/colorAccent</color>
     <color name="white_translucent">#3ACDCDCD</color>
-    <color name="firebase_yellow">#FFCA28</color>
-    <color name="firebase_amber">#FFA000</color>
-    <color name="firebase_orange">#F57C00</color>
-    <color name="firebase_blue">#039BE5</color>
-    <color name="firebase_navy">#2C384A</color>
-    <color name="firebase_coral">#FF8A65</color>
-    <color name="firebase_grey">#ECEFF1</color>
 </resources>

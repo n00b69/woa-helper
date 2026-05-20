@@ -3,6 +3,7 @@
     android:id="@+id/settingsPanel"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorOnSurfaceInverse"
     android:orientation="vertical">
 
 
@@ -26,14 +27,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
-                <com.woa.helper.main.SettingsButton
-                    android:id="@+id/modemdump"
-                    style="@style/settingsButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
-                    android:visibility="gone"
-                    app:text="Disable modem dump option" />
 
                 <com.woa.helper.main.SettingsButton
                     android:id="@+id/backupQB"
@@ -90,6 +83,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_35sdp"
                     app:text="@string/preference10" />
+
+                <com.woa.helper.main.SettingsButton
+                    android:id="@+id/selinux"
+                    style="@style/settingsButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    app:text="@string/preference14" />
 
                 <com.woa.helper.main.SettingsButton
                     android:id="@+id/appUpdate"

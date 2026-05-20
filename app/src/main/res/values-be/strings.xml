@@ -11,10 +11,8 @@
     <string name="usbhost_title">ПЕРАКЛЮЧАЛЬНІК РЭЖЫМУ USB</string>
     <string name="software_title">ARM ПРАГРАМЫ</string>
     <string name="rotation_title">ПЕРАКЛЮЧАЛЬНІК АРЫЕНТАЦЫІ</string>
-    <string name="autoflash_title">АЎТАМАТЫЧНАЯ ПРАШЫЎКА ANDROID</string>
     <string name="atlasos_title">КАПІРАВАЦЬ ФАЙЛЫ ATLASOS / REVIOS</string>
     <string name="defender_title">ВЫДАЛІЦЬ EDGE / DEFENDER</string>
-    <string name="script_title">СКРЫПТ TOOLBOX</string>
     <string name="setup_title">ЎСТАНОЎНІКІ ФРЭЙМВОРКАЎ</string>
     <string name="dbkp_title">DUALBOOT ПАТЧАР ДЛЯ ЯДРА</string>
     <string name="tablet_title">СЦЭНАРЫЙ РЭЖЫМУ ПЛАНШЭТА</string>
@@ -32,10 +30,8 @@
     <string name="usbhost_subtitle">Дадае скрыпт у C:⧹Toolbox для пераключэння рэжыму USB</string>
     <string name="software_subtitle">Дадае спасылку на сайт з праграмамі для ARM у C:⧹Toolbox</string>
     <string name="rotation_subtitle">Дадае скрыпт у C:⧹Toolbox для пераключэння арыентацыі экрана праз ярлык\n (Карысна для прылад без працуючых сенсараў)</string>
-    <string name="autoflash_subtitle">Дадае скрыпт у Windows для аўтаматычнай прашыўкі Android boot.img пры запуску Windows</string>
     <string name="atlasos_subtitle">Капіруе AtlasOS або ReviOS playbook і AME Wizard у C:⧹Toolbox</string>
     <string name="defender_subtitle">Дадае скрыпт у C:⧹Toolbox для выдалення Microsoft Edge / Windows Defender</string>
-    <string name="script_subtitle">Дадае набор скрыптаў і налад у C:⧹Toolbox</string>
     <string name="setup_subtitle">Дадае ўстаноўнікі для некалькіх фрэймворкаў у C:⧹Toolbox</string>
     <string name="dbkp_subtitle">Патчыць ядро для бесперашкоднага dualboot загрузчыка.</string>
     <string name="tablet_subtitle">Дадае сцэнарый у C:⧹Toolbox, які дазваляе пераключаць рэжым планшэта.</string>
@@ -51,7 +47,6 @@
     <string name="usbhost_question">Скапіраваць скрыпт для пераключэння рэжымаў USB у C:⧹Toolbox?</string>
     <string name="software_question">Скапіраваць спасылку на сайт у C:⧹Toolbox?</string>
     <string name="rotation_question">Скапіраваць спасылку для пераключэння арыентацыі экрана ў C:⧹Toolbox?</string>
-    <string name="autoflash_question">Усталяваць скрыпт аўтаматычнай прашыўкі boot.img у Windows?</string>
     <string name="atlasos_question">Загрузіць і перанесці AtlasOS або ReviOS playbook у C:⧹Toolbox?</string>
     <string name="defender_question">Скапіраваць скрыпт для выдалення Edge / Defender у C:⧹Toolbox?</string>
     <string name="setup_question">Спампаваць і змясціць C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX і XNA усталёўнікі ў C:⧹Toolbox?\n(гэта можа заняць некаторы час)</string>
@@ -70,7 +65,6 @@
     <string name="op7">слайдэр апавяшчэнняў</string>
     <string name="cepheus">кнопку памочніка</string>
     <string name="nabu">magnetic case</string>
-    <string name="nabu2">volume buttons</string>
     <string name="reboot">Перазагрузка</string>
     <string name="cancel">Адмена</string>
     <string name="mounted">Windows змантаваны</string>
@@ -119,7 +113,6 @@
     <string name="preference5">Запытваць пацвярджэнне для хуткай загрузкі ў фіраначцы</string>
     <string name="preference6">Выбраць мову</string>
     <string name="preference7">Аўтаматычна мантаваць Windows пры запуску прылады</string>
-    <string name="preference8">Адключыць функцыю дампа modem</string>
     <string name="preference9">Запытваць разблакаваны экран для хуткай загрузкі ў Windows</string>
     <string name="preference10">Мантаваць Windows у /mnt замест /sdcard</string>
     <string name="preference11">Адключыць праверку абнаўленняў прыкладання.</string>

@@ -6,19 +6,17 @@ import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 
 object Pref {
-    private const val MODEM = "woa unsupported modem"
     private const val BACKUP_QUICK = "woa backup when quickboot windows"
     private const val BACKUP_QUICK_A = "woa backup when quickboot android"
     private const val BACKUP_DATE = "woa last backup date"
     private const val AGREED = "woa unsupported"
-    private const val AGREED_NTFS = "ntfs unsupported"
     private const val AUTOBACKUP = "woa force autobackup windows"
     private const val AUTOBACKUP_A = "woa force autobackup android"
     private const val CONFIRMATION = "woa quickboot confirmation"
     const val AUTOMOUNT = "woa auto mount preference"
     private const val SECURE = "woa secure tile"
-    private const val LOCALE = "woa active language locale"
     const val MOUNT_LOCATION = "woa mount location"
+    private const val SELINUX = "woa selinux permissive on mount"
     private const val APP_UPDATE = "woa app update"
     private const val DEVCFG1 = "devcfg flasher"
     private const val DEVCFG2 = "devcfg flasher & check for sdd.exe etc."
@@ -38,12 +36,6 @@ object Pref {
         }
     }
 
-    fun setLocale(context: Context, value: String?) = getSharedPreference(context).edit { putString(LOCALE, value) }
-    fun getLocale(context: Context): String = getSharedPreference(context).getString(LOCALE, "") ?: ""
-
-    fun setModem(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(MODEM, value) }
-    fun getModem(context: Context): Boolean = getSharedPreference(context).getBoolean(MODEM, false)
-
     fun setAuto(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(AUTOBACKUP, value) }
     fun getAuto(context: Context): Boolean = getSharedPreference(context).getBoolean(AUTOBACKUP, false)
 
@@ -55,9 +47,6 @@ object Pref {
 
     fun setAGREE(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(AGREED, value) }
     fun getAGREE(context: Context): Boolean = getSharedPreference(context).getBoolean(AGREED, false)
-
-    fun setAgreeNTFS(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(AGREED_NTFS, value) }
-    fun getAgreeNTFS(context: Context): Boolean = getSharedPreference(context).getBoolean(AGREED_NTFS, false)
 
     fun setBackup(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(BACKUP_QUICK, value) }
     fun getBackup(context: Context): Boolean = getSharedPreference(context).getBoolean(BACKUP_QUICK, false)
@@ -76,6 +65,9 @@ object Pref {
 
     fun setMountLocation(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(MOUNT_LOCATION, value) }
     fun getMountLocation(context: Context): Boolean = getSharedPreference(context).getBoolean(MOUNT_LOCATION, false)
+
+    fun setSelinux(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(SELINUX, value) }
+    fun getSelinux(context: Context): Boolean = getSharedPreference(context).getBoolean(SELINUX, false)
 
     fun setAppUpdate(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(APP_UPDATE, value) }
     fun getAppUpdate(context: Context): Boolean = getSharedPreference(context).getBoolean(APP_UPDATE, false)

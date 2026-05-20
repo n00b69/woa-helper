@@ -11,10 +11,8 @@
     <string name="usbhost_title">USB ჰოსტის რეჟიმის გადართვა</string>
     <string name="software_title">ARM პროგრამული უზრუნველყოფა</string>
     <string name="rotation_title">როტაციის გადართვა</string>
-    <string name="autoflash_title">ავტომატური ანდროიდ ფლეშერი</string>
     <string name="atlasos_title">დააკოპირეთ ATLASOS / REVIOS ფაილები</string>
     <string name="defender_title">EDGE-ს / DEFENDER-ის მომშორებელი</string>
-    <string name="script_title">სკრიპტის ხელსაწყოს ყუთი</string>
     <string name="setup_title">ფრეიმვორკის ინსტალატორები</string>
     <string name="dbkp_title">DUALBOOT კერნელის პატჩერი</string>
     <string name="tablet_title">ტაბლეტის რეჟიმის სკრიპტი</string>
@@ -32,10 +30,8 @@
     <string name="usbhost_subtitle">ამატებს სკრიპტს C:⧹Toolbox -ში, რომელიც საშუალებას გაძლევთ გადართოთ USB ჰოსტის რეჟიმი</string>
     <string name="software_subtitle">ამატებს ბრაუზერის მალსახმობებს, რომლებიც შეიცავს ARM პროგრამულ უზრუნველყოფას C:⧹Toolbox -ში</string>
     <string name="rotation_subtitle">ამატებს სკრიპტს C:⧹Toolbox-ში, რომელიც საშუალებას გაძლევთ დაატრიალოთ ეკრანი მალსახმობის საშუალებით\n(გამოსადეგია მოწყობილობებისთვის სამუშაო სენსორების გარეშე)</string>
-    <string name="autoflash_subtitle">ამატებს სკრიპტს Windows-ში, რომელიც ავტომატურად აფლაშებს Android boot.img-ს, როდესაც Windows ჩაიტვირთება</string>
     <string name="atlasos_subtitle">აკოპირებს AtlasOS ან ReviOS სათამაშო წიგნს და AME Wizard-ს C:⧹Toolbox -ში</string>
     <string name="defender_subtitle">ამატებს სკრიპტს C:⧹Toolbox -ში, რომელიც საშუალებას გაძლევთ წაშალოთ Microsoft Edge \/ Windows Defender</string>
-    <string name="script_subtitle">ამატებს სკრიპტების ასორტიმენტს და შესწორებებს C:⧹Toolbox -ში</string>
     <string name="setup_subtitle">ამატებს ინსტალერებს რამდენიმე ფრეიმიკისთვის C:⧹Toolbox -ში</string>
     <string name="dbkp_subtitle">პატჩავს კერნელს უწყვეტი ორმაგი ჩატვირთვისთვის</string>
     <string name="tablet_subtitle">ამატებს სკრიპტს C:⧹Toolbox -ში, რომელიც საშუალებას იძლევა გადართოთ ტაბლეტის რეჟიმში</string>
@@ -51,7 +47,6 @@
     <string name="usbhost_question">დაკოპირდეს USB Host Mode სკრიპტი C:⧹Toolbox -ში?</string>
     <string name="software_question">დაკოპირდეს ბრაუზერის მალსახმობები C:⧹Toolbox -ში?</string>
     <string name="rotation_question">დაკოპირდეს ბრუნვის მალსახმობი C:⧹Toolbox -ში?</string>
-    <string name="autoflash_question">დააინსტალირდეს boot.img autoflasher სკრიპტი Windows-ში?</string>
     <string name="atlasos_question">ჩამოიტვირთოს AtlasOS ან ReviOS სათამაშო წიგნი C:⧹Toolbox -ში?</string>
     <string name="defender_question">დაკოპირეს Edge \/ Defender Remover სკრიპტები C:⧹Toolbox -ში?</string>
     <string name="setup_question">ჩამოიტვირთოს C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX და XNA Framework ინსტალერები C:⧹Toolbox-ში?\n(ამას შეიძლება გარკვეული დრო დასჭირდეს)</string>
@@ -70,7 +65,6 @@
     <string name="op7">გაფრთხილების სლაიდერი</string>
     <string name="cepheus">დახმარების ღილაკი</string>
     <string name="nabu">მაგნიტური საფარი</string>
-    <string name="nabu2">volume buttons</string>
     <string name="reboot">გადატვირთვა</string>
     <string name="cancel">გაუქმება</string>
     <string name="mounted">Windows მიბმულია</string>
@@ -119,7 +113,6 @@
     <string name="preference5">მოითხოვეთ დადასტურება QS quickboot ფილისთვის</string>
     <string name="preference6">აირჩიეთ ენა</string>
     <string name="preference7">Windows-ის ავტომატურად მიბმა მოწყობილობის ჩართვისას</string>
-    <string name="preference8">გამორთეთ მოდემის დადამპვის ფუნქცია</string>
     <string name="preference9">სწრაფი ჩატვირთვისთვის საჭიროა განბლოკილი ეკრანი</string>
     <string name="preference10">მიაბი Windows /mnt-ზე /sdcard-ის</string>
     <string name="preference11">Disable checking for app updates</string>

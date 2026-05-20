@@ -14,13 +14,4 @@
         android:textColor="@color/white"
         android:textSize="@dimen/_8ssp"
         android:textStyle="bold" />
-
-    <Switch
-        android:id="@+id/switchButton"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@null"
-        android:thumbTint="@android:color/transparent"
-        android:trackTint="@android:color/transparent"
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
 </FrameLayout>

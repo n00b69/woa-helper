@@ -11,10 +11,8 @@
     <string name="usbhost_title">AKTIF/NONAKTIF MODE HOST USB</string>
     <string name="software_title">SOFTWARE ARM</string>
     <string name="rotation_title">AKTIF/NONAKTIF ROTASI</string>
-    <string name="autoflash_title">FLASHER ANDROID OTOMATIS</string>
     <string name="atlasos_title">SALIN FILE ATLASOS / REVIOS</string>
     <string name="defender_title">PENGHAPUS EDGE / DEFENDER</string>
-    <string name="script_title">ALAT SCRIPT</string>
     <string name="setup_title">PENGINSTAL FRAMEWORK</string>
     <string name="dbkp_title">PATCHER KERNEL DUALBOOT</string>
     <string name="tablet_title">SCRIPT MODE TABLET</string>
@@ -32,10 +30,8 @@
     <string name="usbhost_subtitle">Menambahkan script ke dalam C:⧹Toolbox yang memungkinkan mengaktifkan Mode Host USB</string>
     <string name="software_subtitle">Menambahkan shortcut browser yang berisi software ARM ke C:⧹Toolbox</string>
     <string name="rotation_subtitle">Menambahkan script ke dalam C:⧹Toolbox yang memungkinkan rotasi layar dengan shortcut\n(berguna untuk perangkat dengan sensor yang tidak berfungsi)</string>
-    <string name="autoflash_subtitle">Menambahkan script ke Windows yang secara otomatis mem-flash boot.img Android setiap kali Windows melakukan booting</string>
     <string name="atlasos_subtitle">Menyalin playbook AtlasOS atau ReviOS dan AME Wizard ke dalam C:⧹Toolbox</string>
     <string name="defender_subtitle">Menambahkan script ke dalam C:⧹Toolbox yang memungkinkan menghapus Microsoft Edge / Windows Defender</string>
-    <string name="script_subtitle">Menambahkan berbagai script dan tweak ke dalam C:⧹Toolbox</string>
     <string name="setup_subtitle">Menambahkan penginstal untuk beberapa framework ke dalam C:⧹Toolbox</string>
     <string name="dbkp_subtitle">Patch kernel untuk dualbooting secara seamless</string>
     <string name="tablet_subtitle">Menambahkan script ke dalam C:⧹Toolbox yang memungkinkan untuk beralih mode tablet</string>
@@ -51,7 +47,6 @@
     <string name="usbhost_question">Salin script Mode Host USB ke C:⧹Toolbox?</string>
     <string name="software_question">Salin shortcut browser ke C:⧹Toolbox?</string>
     <string name="rotation_question">Salin shortcut rotasi ke C:⧹Toolbox?</string>
-    <string name="autoflash_question">Instal script autoflasher boot.img ke Windows?</string>
     <string name="atlasos_question">Unduh dan pindahkan playbook AtlasOS atau ReviOS ke C:⧹Toolbox?</string>
     <string name="defender_question">Salin script penghapus Edge / Defender ke C:⧹Toolbox?</string>
     <string name="setup_question">Unduh dan pindahkan C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, dan XNA framework installer ke dalam C:⧹Toolbox?\n(ini mungkin memerlukan waktu)</string>
@@ -70,7 +65,6 @@
     <string name="op7">slider peringatan</string>
     <string name="cepheus">tombol asisten</string>
     <string name="nabu">magnetic case</string>
-    <string name="nabu2">volume buttons</string>
     <string name="reboot">Reboot</string>
     <string name="cancel">Batal</string>
     <string name="mounted">Windows di-mount</string>
@@ -119,7 +113,6 @@
     <string name="preference5">Memerlukan konfirmasi untuk ubin quickboot QS</string>
     <string name="preference6">Pilih bahasa</string>
     <string name="preference7">Mount Windows secara otomatis saat perangkat dimulai</string>
-    <string name="preference8">Nonaktifkan fungsionalitas dump modem</string>
     <string name="preference9">Memerlukan layar tidak terkunci untuk quickboot</string>
     <string name="preference10">Mount Windows ke dalam /mnt daripada ke dalam /sdcard</string>
     <string name="preference11">Nonaktifkan Pemeriksaan Pembaruan Aplikasi</string>

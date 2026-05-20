@@ -3,9 +3,7 @@ package com.woa.helper.main
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
-import android.content.DialogInterface
 import android.view.View
-import android.view.Window
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -15,54 +13,56 @@ import com.google.android.material.button.MaterialButton
 import com.woa.helper.R
 import com.woa.helper.main.MainActivity.Companion.hideBlur
 import com.woa.helper.main.MainActivity.Companion.showBlur
-import java.util.Objects
 
 @SuppressLint("StaticFieldLeak")
 object Dlg {
 
     @JvmField
     var dialog: Dialog? = null
+    var bar: ProgressBar? = null
+
     private var yes: MaterialButton? = null
     private var no: MaterialButton? = null
     private var dismiss: MaterialButton? = null
     private var icon: ImageView? = null
-    var bar: ProgressBar? = null
     private var text: TextView? = null
     private var ctx: Context? = null
 
     fun dialogLoading() {
         setCancelable(false)
         clearButtons()
-        setText(ctx!!.getString(R.string.please_wait))
+        setText(ctx?.getString(R.string.please_wait) ?: "")
     }
 
     fun show(context: Context, text: String?) {
-        if (null != dialog && dialog!!.isShowing) {
-            dialog!!.dismiss()
+        if (dialog?.isShowing == true) {
+            dialog?.dismiss()
         }
         ctx = context
-        dialog = Dialog(context)
-        dialog!!.setContentView(R.layout.dialog)
-        Objects.requireNonNull<Window>(dialog!!.window).setBackgroundDrawableResource(android.R.color.transparent)
-        yes = dialog!!.findViewById(R.id.yes)
-        no = dialog!!.findViewById(R.id.no)
-        dismiss = dialog!!.findViewById(R.id.dismiss)
-        Dlg.text = dialog!!.findViewById(R.id.messages)
-        icon = dialog!!.findViewById(R.id.icon)
-        bar = dialog!!.findViewById(R.id.progress)
+        dialog = Dialog(context).apply {
+            setContentView(R.layout.dialog)
+            window?.setBackgroundDrawableResource(android.R.color.transparent)
+        }
+        yes = dialog?.findViewById(R.id.yes)
+        no = dialog?.findViewById(R.id.no)
+        dismiss = dialog?.findViewById(R.id.dismiss)
+        this.text = dialog?.findViewById(R.id.messages)
+        icon = dialog?.findViewById(R.id.icon)
+        bar = dialog?.findViewById(R.id.progress)
 
         setText(text)
         setCancelable(true)
         if (context is MainActivity) {
             showBlur(context)
         }
-        dialog!!.setOnDismissListener { v: DialogInterface? ->
+        dialog?.setOnDismissListener {
             if (context is MainActivity) {
                 hideBlur(context, true)
             }
+            ctx = null
         }
 
-        dialog!!.show()
+        dialog?.show()
     }
 
     fun show(context: Context, @StringRes stringId: Int) {
@@ -79,62 +79,68 @@ object Dlg {
     }
 
     fun close() {
-        dialog!!.dismiss()
+        dialog?.dismiss()
     }
 
     fun clearButtons() {
-        yes!!.visibility = View.GONE
-        no!!.visibility = View.GONE
-        dismiss!!.visibility = View.GONE
+        yes?.visibility = View.GONE
+        no?.visibility = View.GONE
+        dismiss?.visibility = View.GONE
     }
 
     fun setCancelable(state: Boolean) {
-        dialog!!.setCancelable(state)
+        dialog?.setCancelable(state)
     }
 
     fun dismissButton() {
-        setDismiss(R.string.dismiss) { dialog!!.dismiss() }
+        setDismiss(R.string.dismiss) { dialog?.dismiss() }
         setCancelable(true)
     }
 
     fun setDismiss(@StringRes stringId: Int, onButtonClick: OnButtonClick) {
-        setButton(dismiss!!, ctx!!.getString(stringId), onButtonClick)
+        setButton(dismiss, ctx?.getString(stringId), onButtonClick)
     }
 
     fun setNo(@StringRes stringId: Int, onButtonClick: OnButtonClick) {
-        setButton(no!!, ctx!!.getString(stringId), onButtonClick)
+        setButton(no, ctx?.getString(stringId), onButtonClick)
     }
 
     fun setYes(@StringRes stringId: Int, onButtonClick: OnButtonClick) {
-        setButton(yes!!, ctx!!.getString(stringId), onButtonClick)
+        setButton(yes, ctx?.getString(stringId), onButtonClick)
     }
 
-    private fun setButton(button: MaterialButton, text: String?, onButtonClick: OnButtonClick) {
-        button.visibility = View.VISIBLE
-        button.text = text
-        button.setOnClickListener { v: View? -> onButtonClick.execute() }
+    private fun setButton(button: MaterialButton?, text: String?, onButtonClick: OnButtonClick) {
+        button?.apply {
+            visibility = View.VISIBLE
+            this.text = text
+            setOnClickListener { onButtonClick.execute() }
+        }
     }
 
     fun setText(@StringRes stringId: Int) {
-        setText(ctx!!.getString(stringId))
+        setText(ctx?.getString(stringId))
     }
 
     fun setText(text: String?) {
-        Dlg.text!!.text = text
+        this.text?.text = text
     }
 
     fun setIcon(@DrawableRes resId: Int) {
-        icon!!.visibility = View.VISIBLE
-        icon!!.setImageResource(resId)
+        icon?.apply {
+            visibility = View.VISIBLE
+            setImageResource(resId)
+        }
     }
 
     fun hideIcon() {
-        icon!!.visibility = View.GONE
+        icon?.visibility = View.GONE
     }
 
     private fun setBar(progress: Int, animate: Boolean) {
-        bar!!.visibility = View.VISIBLE
-        bar!!.setProgress(progress, animate)
+        bar?.apply {
+            visibility = View.VISIBLE
+            setProgress(progress, animate)
+        }
     }
 
     fun setBar(progress: Int) {
@@ -142,11 +148,11 @@ object Dlg {
     }
 
     fun hideBar() {
-        bar!!.visibility = View.GONE
+        bar?.visibility = View.GONE
     }
 
     fun onCancel(event: OnButtonClick) {
-        dialog!!.setOnCancelListener { v: DialogInterface? ->
+        dialog?.setOnCancelListener {
             event.execute()
             close()
         }

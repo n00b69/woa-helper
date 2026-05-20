@@ -11,10 +11,8 @@
     <string name="usbhost_title">التحكم في وضع مضيف الـ USB</string>
     <string name="software_title">برامج ARM</string>
     <string name="rotation_title">التحكم في دوران الشاشة</string>
-    <string name="autoflash_title">تفليش الأندرويد التلقائي</string>
     <string name="atlasos_title">انسخ ملفات ATLASOS / REVIOS</string>
     <string name="defender_title">إزالة WINDOWS DEFENDER / EDGE</string>
-    <string name="script_title">صندوق أدوات البرامج النصية (Scripts)</string>
     <string name="setup_title">مثبتات الإطارات (FRAMEWORKS)</string>
     <string name="dbkp_title">باتشر نواة التشغيل المزدوج</string>
     <string name="tablet_title">برنامج وضع التابلت</string>
@@ -32,10 +30,8 @@
     <string name="usbhost_subtitle">يضيف برنامج إلى C:⧹Toolbox للتحكم في وضع مضيف الـ USB</string>
     <string name="software_subtitle">يضيف اختصار متصفح إلى C:⧹Toolbox لبرامج ARM</string>
     <string name="rotation_subtitle">يضيف برنامج تنفيذي للتحكم في دوران الشاشة\n(مفيد للأجهزة بدون حساسات شغالة)</string>
-    <string name="autoflash_subtitle">يضيف برنامج نصي لتفليش Boot.img الخاص بالأندرويد عند كل إقلاع لويندوز</string>
     <string name="atlasos_subtitle">ينسخ AtlasOS أو ReviOS وبرنامج AME Wizard إلى C:⧹Toolbox</string>
     <string name="defender_subtitle">يضيف برنامج نصي إلى C:⧹Toolbox لإزالة Microsoft Edge / Windows Defender</string>
-    <string name="script_subtitle">يضيف مجموعة من البرامج النصية إلى C:⧹Toolbox</string>
     <string name="setup_subtitle">يضيف مثبتات لإطارات متعددة إلى C:⧹Toolbox</string>
     <string name="dbkp_subtitle">يعدل النواة لتسهيل الإقلاع المزدوج</string>
     <string name="tablet_subtitle">يضيف برنامج إلى C:⧹Toolbox يسمح بتفعيل وضع التابلت</string>
@@ -51,7 +47,6 @@
     <string name="usbhost_question">نسخ برنامج التحكم في وضع مضيف USB إلى C:⧹Toolbox؟</string>
     <string name="software_question">نسخ اختصارات المتصفح إلى C:⧹Toolbox؟</string>
     <string name="rotation_question">نسخ اختصار التحكم بدوران الشاشة إلى C:⧹Toolbox؟</string>
-    <string name="autoflash_question">تثبيت برنامج تفليش Boot.img التلقائي لويندوز؟</string>
     <string name="atlasos_question">تنزيل ونقل AtlasOS أو ReviOS إلى C:⧹Toolbox؟</string>
     <string name="defender_question">نسخ مزيل Edge / Windows Defender إلى C:⧹Toolbox؟</string>
     <string name="setup_question">تنزيل وتثبيت C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX, مثبت XNA إلى C:⧹Toolbox؟\n(قد يستغرق هذا وقتاً)</string>
@@ -70,7 +65,6 @@
     <string name="op7">شريط التنبيهات</string>
     <string name="cepheus">مساعد بوتوn</string>
     <string name="nabu">حالة مغناطيسية</string>
-    <string name="nabu2">volume buttons</string>
     <string name="reboot">إعادة تشغيل</string>
     <string name="cancel">إلغاء</string>
     <string name="mounted">تم الماونت لويندوز</string>
@@ -119,7 +113,6 @@
     <string name="preference5">إظهار إشعار أو تأكيد عند كل إقلاع سريع من الإشعارات</string>
     <string name="preference6">اختر اللغة</string>
     <string name="preference7">وصل قسم تخزين ويندوز تلقائياً عند تشغيل الجهاز</string>
-    <string name="preference8">تعطيل خاصية نسخ المودم</string>
     <string name="preference9">فرض فتح قفل الشاشة لتفعيل الإقلاع السريع</string>
     <string name="preference10">Mount لويندوز إلى /mnt بدلاً من /sdcard</string>
     <string name="preference11">تعطيل التحقق من تحديثات التطبيق</string>

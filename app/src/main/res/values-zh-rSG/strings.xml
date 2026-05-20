@@ -11,10 +11,8 @@
     <string name="usbhost_title">切换 USB 主机模式</string>
     <string name="software_title">ARM 软件</string>
     <string name="rotation_title">旋转屏幕方向</string>
-    <string name="autoflash_title">自动刷入安卓</string>
     <string name="atlasos_title">复制 ATLASOS / REVIOS 文件</string>
     <string name="defender_title">EDGE / DEFENDER 卸载器</string>
-    <string name="script_title">脚本工具箱</string>
     <string name="setup_title">安装运行库</string>
     <string name="dbkp_title">双系统内核修补工具</string>
     <string name="tablet_title">平板模式切换</string>
@@ -32,10 +30,8 @@
     <string name="usbhost_subtitle">将切换 USB 主机模式的脚本添加到 C:⧹Toolbox</string>
     <string name="software_subtitle">将 ARM 软件的网页链接添加到 C:⧹Toolbox</string>
     <string name="rotation_subtitle">将旋转屏幕的脚本添加到 C:⧹Toolbox\n（用于重力传感器不能工作的设备）</string>
-    <string name="autoflash_subtitle">向 Windows 添加一个脚本，每当 Windows 启动时，该脚本会自动刷入安卓 boot 镜像</string>
     <string name="atlasos_subtitle">将 AtlasOS / ReviOS playbook 和 AME Wizard 添加到 C:⧹Toolbox</string>
     <string name="defender_subtitle">将卸载 Microsoft Edge / Windows Defender 的脚本添加到 C:⧹Toolbox</string>
-    <string name="script_subtitle">将一系列优化脚本添加到 C:⧹Toolbox</string>
     <string name="setup_subtitle">将一些运行库的安装包添加到 C:⧹Toolbox</string>
     <string name="dbkp_subtitle">修补内核以更快捷地切换双系统</string>
     <string name="tablet_subtitle">将快捷切换平板模式的脚本添加到 C:⧹Toolbox</string>
@@ -51,7 +47,6 @@
     <string name="usbhost_question">是否在 C:⧹Toolbox 中安装 USB 主机模式切换脚本?</string>
     <string name="software_question">是否在 to C:⧹Toolbox 中添加这些网页链接?</string>
     <string name="rotation_question">是否在 C:⧹Toolbox 中安装旋转屏幕脚本?</string>
-    <string name="autoflash_question">是否将 boot.img 自动刷入脚本安装到 Windows?</string>
     <string name="atlasos_question">是否要在 C:⧹Toolbox 中下载 AtlasOS / ReviOS playbook?</string>
     <string name="defender_question">是否在 C:⧹Toolbox 中安装 Edge / Defender 卸载器?</string>
     <string name="setup_question">是否下载 MSVC 运行库, DirectX, OpenGL, OpenAL, PhysX, 和 XNA 运行库的安装程序，并置于 C:⧹Toolbox?\n(可能会花费很长时间)</string>
@@ -70,7 +65,6 @@
     <string name="op7">警报滑块</string>
     <string name="cepheus">AI按钮</string>
     <string name="nabu">磁性外壳</string>
-    <string name="nabu2">volume buttons</string>
     <string name="reboot">重启</string>
     <string name="cancel">取消</string>
     <string name="mounted">已挂载 Windows</string>
@@ -119,7 +113,6 @@
     <string name="preference5">从操作中心快速启动到 Windows 时需要确认</string>
     <string name="preference6">选择语言</string>
     <string name="preference7">在装置启动时自动安装 Windows</string>
-    <string name="preference8">禁用自动提取基带功能</string>
     <string name="preference9">从操作中心快速启动到 Windows 需要先解锁屏幕</string>
     <string name="preference10">把 Windows 分区挂载到 /mnt 而不是 /sdcard</string>
     <string name="preference11">禁用应用更新检查</string>

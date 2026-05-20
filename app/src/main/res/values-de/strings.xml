@@ -11,10 +11,8 @@
     <string name="usbhost_title">USB HOST MODUS UMSCHALTER</string>
     <string name="software_title">ARM SOFTWARE</string>
     <string name="rotation_title">BILDSCHIRMAUSRICHTUNGSUMSCHALTER</string>
-    <string name="autoflash_title">AUTOMATISCHER ANDROID FLASHER</string>
     <string name="atlasos_title">ATLASOS / REVIOS INSTALLIEREN</string>
     <string name="defender_title">EDGE / DEFENDER ENTFERNER</string>
-    <string name="script_title">SCRIPT TOOLBOX</string>
     <string name="setup_title">FRAMEWORK INSTALLERS</string>
     <string name="dbkp_title">DUALBOOT KERNEL PATCHER</string>
     <string name="tablet_title">TABLET MODE SKRIPT</string>
@@ -32,10 +30,8 @@
     <string name="usbhost_subtitle">Fügt in C:⧹Toolbox einen Skript hinzu, mit dem Sie den USB Host Modus umschalten können</string>
     <string name="software_subtitle">Kopiert Browser-Verknüpfungen zur ARM Software zur C:⧹Toolbox</string>
     <string name="rotation_subtitle">Fügt in C:⧹Toolbox einen Skript hinzu, mit dem Sie den Bildschirm mit einer Verknüpfung drehen können\n(nützlich für Geräte ohne funktionierende Sensoren)</string>
-    <string name="autoflash_subtitle">Installiert einen Autoflashskript der bei jedem Windows Start automatisch das Boot.img flasht</string>
     <string name="atlasos_subtitle">Kopiert die AtlasOS oder ReviOS Playbook und AME Wizard zur C:⧹Toolbox</string>
     <string name="defender_subtitle">Fügt in C:⧹Toolbox einen Skript hinzu, mit dem Sie Microsoft Edge / Windows Defender entfernen können</string>
-    <string name="script_subtitle">Fügt in C:⧹Toolbox mehrere Skript und Tweaks hinzu</string>
     <string name="setup_subtitle">Fügt in C:⧹Toolbox mehrere Framework Installers hinzu</string>
     <string name="dbkp_subtitle">Patcht den kernel um nahtlos dualbooten zu können</string>
     <string name="tablet_subtitle">Fügt in C:⧹Toolbox einen Skript hinzu womit Sie den Tablet-Modus umschalten können</string>
@@ -51,7 +47,6 @@
     <string name="usbhost_question">USB Host Modus Skript nach C:⧹Toolbox kopieren?</string>
     <string name="software_question">Browser-Verknüpfungen nach C:⧹Toolbox kopieren?</string>
     <string name="rotation_question">Bildschirmausrichtungsumschalter nach C:⧹Toolbox kopieren?</string>
-    <string name="autoflash_question">Boot.img autoflasher Skript in Windows installieren?</string>
     <string name="atlasos_question">AtlasOS oder ReviOS Playbook herunterladen und nach C:⧹Toolbox kopieren?</string>
     <string name="defender_question">Edge / Defender entferner Skript nach C:⧹Toolbox kopieren?</string>
     <string name="setup_question">C++ Redistributables, DirectX, OpenGL, OpenAL, PhysX und XNA framework Installers herunterladen und nach C:⧹Toolbox kopieren?\n(es kann eine weile dauern)</string>
@@ -70,7 +65,6 @@
     <string name="op7">Alert Slider</string>
     <string name="cepheus">Assistant Knopf</string>
     <string name="nabu">Magnetische Hülle</string>
-    <string name="nabu2">Lautstärketasten</string>
     <string name="reboot">Neustart</string>
     <string name="cancel">Annulieren</string>
     <string name="mounted">Windows mounted</string>
@@ -119,7 +113,6 @@
     <string name="preference5">Bestätigung erforderlich beim QS quickboot Knopf </string>
     <string name="preference6">Sprache auswählen</string>
     <string name="preference7">Windows automatisch mounten beim Gerätestart</string>
-    <string name="preference8">Modem-bereitstellungsfunktion ausschalten</string>
     <string name="preference9">Entsperrter Bildschirm für Quickboot erforderlich</string>
     <string name="preference10">Mount Windows nach /mnt statt /sdcard</string>
     <string name="preference11">Suchen nach App-Updates beenden</string>

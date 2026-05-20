@@ -21,9 +21,10 @@ class SettingsButton @JvmOverloads constructor(
     private var onCheckedChangeListener: ((Boolean) -> Unit)? = null
 
     var isChecked: Boolean
-        get() = binding.switchButton.isChecked
+        get() = binding.root.tag as? Boolean ?: false
         set(value) {
-            binding.switchButton.isChecked = value
+            binding.root.tag = value
+            updateBackground()
         }
 
     init {
@@ -34,8 +35,9 @@ class SettingsButton @JvmOverloads constructor(
             a.recycle()
         }
 
-        binding.switchButton.setOnCheckedChangeListener { _, isChecked ->
-            updateBackground()
+        binding.root.setOnClickListener {
+            if (!isEnabled) return@setOnClickListener
+            isChecked = !isChecked
             onCheckedChangeListener?.invoke(isChecked)
         }
 
@@ -46,8 +48,9 @@ class SettingsButton @JvmOverloads constructor(
         this.onCheckedChangeListener = { state -> onChangeListener.onClick(state) }
     }
 
-    fun setOnCheckedChangeListener(listener: (Boolean) -> Unit) {
-        this.onCheckedChangeListener = listener
+    override fun setEnabled(enabled: Boolean) {
+        super.setEnabled(enabled)
+        updateBackground()
     }
 
     private val backgroundColor: Int
@@ -63,6 +66,7 @@ class SettingsButton @JvmOverloads constructor(
             )
         }
         binding.root.background = background
+        binding.root.alpha = if (isEnabled) 1.0f else 0.5f
     }
 
     fun interface OnChangeClickListener {

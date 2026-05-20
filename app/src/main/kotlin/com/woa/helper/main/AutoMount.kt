@@ -4,11 +4,9 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import com.woa.helper.main.MainActivity.Companion.getWin
-import com.woa.helper.main.MainActivity.Companion.rootCommand
-import com.woa.helper.main.MainActivity.Companion.shellInit
-import com.woa.helper.main.MainActivity.Companion.updateWinPath
 import com.woa.helper.preference.Pref
+import com.woa.helper.util.MountManager
+import com.woa.helper.util.ShellManager
 import java.io.File
 import kotlin.concurrent.thread
 
@@ -19,17 +17,19 @@ class AutoMount : BroadcastReceiver() {
         if (intent?.action != Intent.ACTION_BOOT_COMPLETED) return
 
         val pendingResult = goAsync()
-        
+
         thread {
             try {
                 val filesDir = Pref.getSharedPreference(ctx).getString(Pref.FILESDIR, "") ?: ""
-                shellInit(File(filesDir))
-                if (Pref.getAutoMount(ctx)) {
-                    val winPartition = getWin()
-                    val winDir = updateWinPath(ctx)
-
-                    rootCommand("mkdir -p $winDir")
-                    rootCommand("./mount.ntfs $winPartition $winDir", master = true)
+                if (filesDir.isNotEmpty()) {
+                    ShellManager.init(File(filesDir))
+                    MountManager.init(File(filesDir), ctx)
+                    if (Pref.getAutoMount(ctx)) {
+                        MountManager.getWinPartition()
+                        MountManager.mount()
+                    }
+                } else {
+                    Log.w("AutoMount", "filesDir not set, skipping auto-mount")
                 }
             } catch (e: Exception) {
                 Log.e("AutoMount", "Auto-mount failed", e)

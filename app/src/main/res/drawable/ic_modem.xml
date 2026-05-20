@@ -6,7 +6,7 @@
     android:viewportHeight="400">
 
     <path
-        android:fillColor="@color/firebase_orange"
+        android:fillColor="#F57C00"
         android:fillType="evenOdd"
         android:pathData="M108.768 126.52c-0.609 0.121 -1.222 0.334 -1.363 0.475 -0.14 0.14 -0.429 0.257
 -0.642 0.26 -1.861 0.021 -4.985 3.727-6.189 7.34l-0.574 1.72v117.467l0.516
