@@ -107,10 +107,6 @@
     <string name="no">取消</string>
     <string name="please_wait">稍安勿躁</string>
 
-    <string name="preference1">在快速啟動時強制備份 boot.img (Windows)</string>
-    <string name="preference2">在快速啟動時強制備份 boot.img (Android)</string>
-    <string name="preference3">當沒有被檢測到則備份 boot.img (Windows)</string>
-    <string name="preference4">當沒有被檢測到則備份 boot.img (Android)</string>
     <string name="preference5">從操作中心快速啟動到 Windows 時需要確認</string>
     <string name="preference6">選擇語言</string>
     <string name="preference7">在裝置啟動時自動安裝 Windows</string>

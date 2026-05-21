@@ -107,10 +107,6 @@
     <string name="no">KHÔNG</string>
     <string name="please_wait">XIN CHỜ…</string>
 
-    <string name="preference1">Buộc sao lưu boot.img khi quickboot (Windows)</string>
-    <string name="preference2">Buộc sao lưu boot.img khi quickboot (Android)</string>
-    <string name="preference3">Sao lưu boot.img nếu không phát hiện thấy gì (Windows)</string>
-    <string name="preference4">Sao lưu boot.img nếu không phát hiện thấy gì (Android)</string>
     <string name="preference5">Yêu cầu xác nhận cho ô khởi động nhanh QS</string>
     <string name="preference6">Chọn ngôn ngữ</string>
     <string name="preference7">Tự động gắn Windows khi khởi động thiết bị</string>

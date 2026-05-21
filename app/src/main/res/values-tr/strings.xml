@@ -107,10 +107,6 @@
     <string name="no">HAYIR</string>
     <string name="please_wait">Lütfen bekleyin…</string>
 
-    <string name="preference1">Quickboot ederken boot.img yedeklemeyi zorla (Windows)</string>
-    <string name="preference2">Quickboot ederken boot.img yedeklemeyi zorla (Android)</string>
-    <string name="preference3">Eğer bulunamazsa boot.img\’i yedekle (Windows)</string>
-    <string name="preference4">Eğer bulunamazsa boot.img\’i yedekle (Android)</string>
     <string name="preference5">QS quickboot kutucuğu için onay iste</string>
     <string name="preference6">Dil seç</string>
     <string name="preference7">Cihaz açılışında otomatik olarak Windows\’u bağla</string>

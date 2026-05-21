@@ -120,10 +120,9 @@
     <string name="no">NO</string>
     <string name="please_wait">Please wait…</string>
 
-    <string name="preference1">Force backup boot.img when quickboot (Windows)</string>
-    <string name="preference2">Force backup boot.img when quickboot (Android)</string>
-    <string name="preference3">Back up boot.img if none is detected (Windows)</string>
-    <string name="preference4">Back up boot.img if none is detected (Android)</string>
+    <string name="quickboot_backup">Backup boot.img when quickboot</string>
+    <string name="force">Force</string>
+
     <string name="preference5">Require confirmation for QS quickboot tile</string>
     <string name="preference6">Select language</string>
     <string name="preference7">Automatically mount Windows on device start</string>

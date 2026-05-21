@@ -84,12 +84,12 @@ class QuickBootTile : CommonTileService() {
             val img = if (Pref.getMountLocation(this)) "/mnt/Windows/boot.img" else "${Environment.getExternalStorageDirectory().path}/Windows/boot.img"
             var notFound = ShellManager.exec("ls $img").isEmpty()
             var backupDone = false
-            if (Pref.getBackup(this) || (!Pref.getAuto(this) && notFound)) {
+            if (Pref.getBackupIfNoneWindows(this) || (Pref.getForceBackupWindows(this) && notFound)) {
                 ShellManager.exec("dd bs=8M if=$boot of=$img")
                 backupDone = true
             }
             notFound = ShellManager.exec("find -maxdepth 1 /sdcard | grep boot.img").isEmpty()
-            if (Pref.getBackupA(this) || (!Pref.getAutoA(this) && notFound)) {
+            if (Pref.getBackupIfNoneAndroid(this) || (Pref.getForceBackupAndroid(this) && notFound)) {
                 val sdcard = Environment.getExternalStorageDirectory().path
                 ShellManager.exec("dd bs=8M if=$boot of=$sdcard/boot.img")
                 backupDone = true

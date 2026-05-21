@@ -54,6 +54,7 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import androidx.core.content.edit
 
 @SuppressLint("StaticFieldLeak")
 class MainActivity : AppCompatActivity() {
@@ -389,13 +390,6 @@ class MainActivity : AppCompatActivity() {
             MountManager.init(filesDir, this)
         }
 
-        setupQuickBootCheckboxes()
-
-        settingsBinding.autobackup.setOnChangeListener { b -> Pref.setAuto(this, !b) }
-        settingsBinding.autobackupA.setOnChangeListener { b -> Pref.setAutoA(this, !b) }
-        settingsBinding.confirmation.setOnChangeListener { b -> Pref.setConfirm(this, b) }
-        settingsBinding.securelock.setOnChangeListener { b -> Pref.setSecure(this, !b) }
-        settingsBinding.automount.setOnChangeListener { b -> Pref.setAutoMount(this, b) }
         settingsBinding.appUpdate.setOnChangeListener { b -> Pref.setAppUpdate(this, b) }
 
         settingsBinding.chatButton.setOnClickListener {
@@ -405,15 +399,12 @@ class MainActivity : AppCompatActivity() {
             openLink(this, "https://github.com/n00b69/woa-helper")
         }
 
+        setupQuickBootDropdown()
         setupDevcfgSettings()
     }
 
     private fun updateSettingsCheckboxes() {
         val pairs = listOf(
-            settingsBinding.backupQB to Pref.getBackup(this),
-            settingsBinding.backupQBA to Pref.getBackupA(this),
-            settingsBinding.autobackup to !Pref.getAuto(this),
-            settingsBinding.autobackupA to !Pref.getAutoA(this),
             settingsBinding.confirmation to Pref.getConfirm(this),
             settingsBinding.automount to Pref.getAutoMount(this),
             settingsBinding.securelock to !Pref.getSecure(this),
@@ -427,46 +418,73 @@ class MainActivity : AppCompatActivity() {
         val isMounted = MountManager.isMounted()
         settingsBinding.mountLocation.isEnabled = !isMounted
         settingsBinding.selinux.isEnabled = !isMounted
+        updateQuickBootDropdown()
     }
 
-    private fun setupQuickBootCheckboxes() {
-        settingsBinding.backupQB.setOnChangeListener { _ ->
-            if (Pref.getBackup(this)) {
-                Pref.setBackup(this, false)
-                settingsBinding.autobackup.visibility = View.VISIBLE
+    private fun setupQuickBootDropdown() {
+        settingsBinding.quickbootBackupHeader.setOnClickListener {
+            val isVisible = settingsBinding.quickbootBackupContent.isVisible
+            settingsBinding.quickbootBackupContent.visibility = if (isVisible) View.GONE else View.VISIBLE
+            settingsBinding.quickbootBackupChevron.rotation = if (isVisible) 0f else 180f
+        }
+
+        settingsBinding.backupWindows.setOnChangeListener { b ->
+            if (b) {
+                Pref.setBackupIfNoneWindows(this, true)
+                settingsBinding.forceWindowsSwitch.isEnabled = true
             } else {
-                showBackupWarning {
-                    Pref.setBackup(this, true)
-                    settingsBinding.autobackup.visibility = View.GONE
-                    settingsBinding.backupQB.isChecked = true
-                }
-                settingsBinding.backupQB.isChecked = false
+                Pref.setBackupIfNoneWindows(this, false)
+                Pref.setForceBackupWindows(this, false)
+                settingsBinding.forceWindowsSwitch.isChecked = false
+                settingsBinding.forceWindowsSwitch.isEnabled = false
             }
         }
 
-        settingsBinding.backupQBA.setOnChangeListener { _ ->
-            if (Pref.getBackupA(this)) {
-                Pref.setBackupA(this, false)
-                settingsBinding.autobackupA.visibility = View.VISIBLE
+        settingsBinding.backupAndroid.setOnChangeListener { b ->
+            if (b) {
+                Pref.setBackupIfNoneAndroid(this, true)
+                settingsBinding.forceAndroidSwitch.isEnabled = true
             } else {
-                showBackupWarning {
-                    Pref.setBackupA(this, true)
-                    settingsBinding.autobackupA.visibility = View.GONE
-                    settingsBinding.backupQBA.isChecked = true
-                }
-                settingsBinding.backupQBA.isChecked = false
+                Pref.setBackupIfNoneAndroid(this, false)
+                Pref.setForceBackupAndroid(this, false)
+                settingsBinding.forceAndroidSwitch.isChecked = false
+                settingsBinding.forceAndroidSwitch.isEnabled = false
+            }
+        }
+
+        settingsBinding.forceWindowsSwitch.setOnCheckedChangeListener { _, b ->
+            if (b) {
+                Pref.setForceBackupWindows(this, true)
+                Pref.setBackupIfNoneWindows(this, false)
+            } else {
+                Pref.setForceBackupWindows(this, false)
+                Pref.setBackupIfNoneWindows(this, true)
+            }
+        }
+
+        settingsBinding.forceAndroidSwitch.setOnCheckedChangeListener { _, b ->
+            if (b) {
+                Pref.setForceBackupAndroid(this, true)
+                Pref.setBackupIfNoneAndroid(this, false)
+            } else {
+                Pref.setForceBackupAndroid(this, false)
+                Pref.setBackupIfNoneAndroid(this, true)
             }
         }
     }
 
-    private fun showBackupWarning(onAgree: () -> Unit) {
-        Dlg.show(this, R.string.bwarn)
-        Dlg.onCancel { }
-        Dlg.setDismiss(R.string.cancel) { Dlg.close() }
-        Dlg.setYes(R.string.agree) {
-            onAgree()
-            Dlg.close()
-        }
+    private fun updateQuickBootDropdown() {
+        val windowsEnabled = Pref.getBackupIfNoneWindows(this) || Pref.getForceBackupWindows(this)
+        val androidEnabled = Pref.getBackupIfNoneAndroid(this) || Pref.getForceBackupAndroid(this)
+        val forceWindows = Pref.getForceBackupWindows(this)
+        val forceAndroid = Pref.getForceBackupAndroid(this)
+
+        settingsBinding.backupWindows.isChecked = windowsEnabled
+        settingsBinding.backupAndroid.isChecked = androidEnabled
+        settingsBinding.forceWindowsSwitch.isChecked = forceWindows
+        settingsBinding.forceAndroidSwitch.isChecked = forceAndroid
+        settingsBinding.forceWindowsSwitch.isEnabled = windowsEnabled
+        settingsBinding.forceAndroidSwitch.isEnabled = androidEnabled
     }
 
     private fun setupDevcfgSettings() {
@@ -1136,11 +1154,11 @@ class MainActivity : AppCompatActivity() {
             val currentWinPath = MountManager.getWinPath()
             val boot = getBoot()
 
-            if (Pref.getBackup(activity) || (!Pref.getAuto(activity) && ShellManager.exec("ls $currentWinPath | grep boot.img").isEmpty())) {
+            if (Pref.getBackupIfNoneWindows(activity) || (Pref.getForceBackupWindows(activity) && ShellManager.exec("ls $currentWinPath | grep boot.img").isEmpty())) {
                 BackupManager.winBackup(boot)
                 (activity as Activity).runOnUiThread { (activity as? MainActivity)?.updateLastBackupDate() }
             }
-            if (Pref.getBackupA(activity) || (!Pref.getAutoA(activity) && ShellManager.exec("find /sdcard/WOAHelper/Backups | grep boot.img").isEmpty())) {
+            if (Pref.getBackupIfNoneAndroid(activity) || (Pref.getForceBackupAndroid(activity) && ShellManager.exec("find /sdcard/WOAHelper/Backups | grep boot.img").isEmpty())) {
                 BackupManager.androidBackup(boot)
                 (activity as Activity).runOnUiThread { (activity as? MainActivity)?.updateLastBackupDate() }
             }

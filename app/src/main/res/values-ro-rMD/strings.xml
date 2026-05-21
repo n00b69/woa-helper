@@ -107,10 +107,6 @@
     <string name="no">NU</string>
     <string name="please_wait">Brat așteaptă…</string>
 
-    <string name="preference1">Impune backup boot.img la quickboot (Windows)</string>
-    <string name="preference2">Impune backup boot.img la quickboot (Android)</string>
-    <string name="preference3">Backup boot.img dacă nui deamu găsit (Windows)</string>
-    <string name="preference4">Backup boot.img dacă nu deamu găsit (Android)</string>
     <string name="preference5">Șeri confirmațtie pentru tileu quickboot</string>
     <string name="preference6">Vîbirești limba</string>
     <string name="preference7">Montează automat Windows la pornirea dispozitivului</string>

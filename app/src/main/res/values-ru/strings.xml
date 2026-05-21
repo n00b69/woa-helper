@@ -113,10 +113,6 @@
     <string name="no">НЕТ</string>
     <string name="please_wait">Пожалуйста, подождите…</string>
 
-    <string name="preference1">Всегда делать бэкап boot.img во время быстрой загрузки (Windows)</string>
-    <string name="preference2">Всегда делать бэкап boot.img во время быстрой загрузки (Android)</string>
-    <string name="preference3">Сделать бэкап boot.img, если он не обнаружен (Windows)</string>
-    <string name="preference4">Сделать бэкап boot.img, если он не обнаружен (Android)</string>
     <string name="preference5">Требовать подтверждение для плитки быстрой загрузки в шторке</string>
     <string name="preference6">Выбрать язык</string>
     <string name="preference7">Автоматически монтировать Windows при запуске устройства</string>

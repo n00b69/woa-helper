@@ -107,10 +107,6 @@
     <string name="no">НІ</string>
     <string name="please_wait">Будь ласка, зачекайте…</string>
 
-    <string name="preference1">Примусове резервне копіювання boot.img під час швидкого завантаження (Windows)</string>
-    <string name="preference2">Примусове резервне копіювання boot.img під час швидкого завантаження (Android)</string>
-    <string name="preference3">Створіть резервну копію boot.img, якщо нічого не виявлено (Windows)</string>
-    <string name="preference4">Створіть резервну копію boot.img, якщо нічого не виявлено (Android)</string>
     <string name="preference5">Вимагати підтвердження для швидкого завантаження QS tile</string>
     <string name="preference6">Оберіть мову</string>
     <string name="preference7">Автоматично монтувати Windows під час запуску пристрою</string>

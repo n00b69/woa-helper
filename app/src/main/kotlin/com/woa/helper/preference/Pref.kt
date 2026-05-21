@@ -6,12 +6,12 @@ import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 
 object Pref {
-    private const val BACKUP_QUICK = "woa backup when quickboot windows"
-    private const val BACKUP_QUICK_A = "woa backup when quickboot android"
+    private const val BACKUP_IF_NONE_WINDOWS = "woa backup when quickboot windows"
+    private const val BACKUP_IF_NONE_ANDROID = "woa backup when quickboot android"
     private const val BACKUP_DATE = "woa last backup date"
     private const val AGREED = "woa unsupported"
-    private const val AUTOBACKUP = "woa force autobackup windows"
-    private const val AUTOBACKUP_A = "woa force autobackup android"
+    private const val BACKUP_FORCE_WINDOWS = "woa force autobackup windows"
+    private const val BACKUP_FORCE_ANDROID = "woa force autobackup android"
     private const val CONFIRMATION = "woa quickboot confirmation"
     const val AUTOMOUNT = "woa auto mount preference"
     private const val SECURE = "woa secure tile"
@@ -36,11 +36,11 @@ object Pref {
         }
     }
 
-    fun setAuto(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(AUTOBACKUP, value) }
-    fun getAuto(context: Context): Boolean = getSharedPreference(context).getBoolean(AUTOBACKUP, false)
+    fun setForceBackupWindows(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(BACKUP_FORCE_WINDOWS, value) }
+    fun getForceBackupWindows(context: Context): Boolean = getSharedPreference(context).getBoolean(BACKUP_FORCE_WINDOWS, false)
 
-    fun setAutoA(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(AUTOBACKUP_A, value) }
-    fun getAutoA(context: Context): Boolean = getSharedPreference(context).getBoolean(AUTOBACKUP_A, false)
+    fun setForceBackupAndroid(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(BACKUP_FORCE_ANDROID, value) }
+    fun getForceBackupAndroid(context: Context): Boolean = getSharedPreference(context).getBoolean(BACKUP_FORCE_ANDROID, false)
 
     fun setConfirm(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(CONFIRMATION, value) }
     fun getConfirm(context: Context): Boolean = getSharedPreference(context).getBoolean(CONFIRMATION, false)
@@ -48,11 +48,11 @@ object Pref {
     fun setAGREE(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(AGREED, value) }
     fun getAGREE(context: Context): Boolean = getSharedPreference(context).getBoolean(AGREED, false)
 
-    fun setBackup(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(BACKUP_QUICK, value) }
-    fun getBackup(context: Context): Boolean = getSharedPreference(context).getBoolean(BACKUP_QUICK, false)
+    fun setBackupIfNoneWindows(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(BACKUP_IF_NONE_WINDOWS, value) }
+    fun getBackupIfNoneWindows(context: Context): Boolean = getSharedPreference(context).getBoolean(BACKUP_IF_NONE_WINDOWS, true)
 
-    fun setBackupA(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(BACKUP_QUICK_A, value) }
-    fun getBackupA(context: Context): Boolean = getSharedPreference(context).getBoolean(BACKUP_QUICK_A, false)
+    fun setBackupIfNoneAndroid(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(BACKUP_IF_NONE_ANDROID, value) }
+    fun getBackupIfNoneAndroid(context: Context): Boolean = getSharedPreference(context).getBoolean(BACKUP_IF_NONE_ANDROID, true)
 
     fun setDate(context: Context, value: String?) = getSharedPreference(context).edit { putString(BACKUP_DATE, value) }
     fun getDate(context: Context): String = getSharedPreference(context).getString(BACKUP_DATE, "") ?: ""
