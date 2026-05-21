@@ -45,6 +45,7 @@ import com.woa.helper.util.ShellResult
 import com.woa.helper.util.ToolboxDeployer
 import com.woa.helper.util.UpdateChecker
 import com.woa.helper.util.RAM
+import com.woa.helper.widget.MountWidget
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -1068,7 +1069,6 @@ class MainActivity : AppCompatActivity() {
         updateSettingsCheckboxes()
     }
 
-
     companion object {
         @JvmStatic
         fun isNetworkConnected(context: Context): Boolean {
@@ -1099,7 +1099,8 @@ class MainActivity : AppCompatActivity() {
                     val isNowMounted = MountManager.isMounted()
 
                     withContext(Dispatchers.Main) {
-                        (activity as? MainActivity)?.updateMountText()
+                        activity.updateMountText()
+                        if (result is ShellResult.Success) MountWidget.requestUpdate(activity)
                         if (wasMounted) {
                             when (result) {
                                 is ShellResult.Success -> {

@@ -11,6 +11,7 @@ import com.woa.helper.util.MountManager
 import com.woa.helper.util.ShellManager
 import com.woa.helper.util.ShellResult
 import com.woa.helper.util.DevcfgManager
+import com.woa.helper.widget.MountWidget
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -172,6 +173,8 @@ class MountTile : CommonTileService() {
             val error = if (MountManager.isMounted()) unmount() else mount()
             if (error != null) {
                 Toast.makeText(this, "${getString(R.string.wrong)}\n$error", Toast.LENGTH_LONG).show()
+            } else {
+                MountWidget.requestUpdate(this)
             }
             update()
         }.start()
