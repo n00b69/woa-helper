@@ -175,6 +175,7 @@ class MountTile : CommonTileService() {
                 Toast.makeText(this, "${getString(R.string.wrong)}\n$error", Toast.LENGTH_LONG).show()
             } else {
                 MountWidget.requestUpdate(this)
+                MainActivity.instance?.get()?.updateMountText()
             }
             update()
         }.start()

@@ -57,6 +57,8 @@ import java.util.Date
 import java.util.Locale
 import androidx.core.content.edit
 
+import java.lang.ref.WeakReference
+
 @SuppressLint("StaticFieldLeak")
 class MainActivity : AppCompatActivity() {
     private lateinit var mainBinding: ActivityMainBinding
@@ -67,6 +69,7 @@ class MainActivity : AppCompatActivity() {
     private var blurCount = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        instance = WeakReference(this)
         enableEdgeToEdge()
         WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars =
             resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK != Configuration.UI_MODE_NIGHT_YES
@@ -811,6 +814,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        if (instance?.get() == this) {
+            instance?.clear()
+            instance = null
+        }
         ShellManager.close()
     }
 
@@ -1064,12 +1071,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun updateMountText() {
-        val mounted = getString(if (MountManager.isMounted()) R.string.unmountt else R.string.mountt)
-        mainBinding.mnt.setTitle(getString(R.string.mnt_title, mounted))
-        updateSettingsCheckboxes()
+        runOnUiThread {
+            val mounted = getString(if (MountManager.isMounted()) R.string.unmountt else R.string.mountt)
+            mainBinding.mnt.setTitle(getString(R.string.mnt_title, mounted))
+            updateSettingsCheckboxes()
+        }
     }
 
     companion object {
+        @JvmStatic
+        var instance: WeakReference<MainActivity>? = null
         @JvmStatic
         fun isNetworkConnected(context: Context): Boolean {
             val connectivityManager = context.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
