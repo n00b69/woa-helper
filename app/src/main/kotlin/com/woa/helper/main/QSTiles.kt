@@ -32,8 +32,11 @@ abstract class CommonTileService : TileService() {
         }
     }
 
-    protected fun updateTileState(state: Int) {
+    protected fun updateTileState(state: Int, subtitleText: String? = null) {
         Handler(Looper.getMainLooper()).post {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q && subtitleText != null) {
+                qsTile.subtitle = subtitleText
+            }
             qsTile.state = state
             qsTile.updateTile()
         }
@@ -69,10 +72,11 @@ class QuickBootTile : CommonTileService() {
         super.onClick()
         val tile = qsTile
         if (tile.state == 1 && Pref.getConfirm(this)) {
-            tile.state = 2
-            tile.updateTile()
+            updateTileState(2, getString(R.string.qspressagain))
             return
         }
+        
+        updateTileState(1, "")
 
         Thread {
             ShellManager.init(filesDir)

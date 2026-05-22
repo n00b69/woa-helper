@@ -384,6 +384,10 @@ class MainActivity : AppCompatActivity() {
             it.setOnClickListener(settingsClick)
         }
 
+        settingsBinding.confirmation.setOnChangeListener { b -> Pref.setConfirm(this, b) }
+        settingsBinding.automount.setOnChangeListener { b -> Pref.setAutoMount(this, b) }
+        settingsBinding.securelock.setOnChangeListener { b -> Pref.setSecure(this, !b) }
+
         settingsBinding.mountLocation.setOnChangeListener { b ->
             Pref.setMountLocation(this, b)
             MountManager.init(filesDir, this)
@@ -456,20 +460,28 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        settingsBinding.forceWindowsSwitch.setOnCheckedChangeListener { _, b ->
-            if (b) {
-                Pref.setForceBackupWindows(this, true)
-                Pref.setBackupIfNoneWindows(this, false)
+        settingsBinding.forceWindowsSwitch.setOnClickListener {
+            if (settingsBinding.forceWindowsSwitch.isChecked) {
+                Dlg.showBackupWarning(this) {
+                    Pref.setForceBackupWindows(this, true)
+                    Pref.setBackupIfNoneWindows(this, false)
+                    settingsBinding.forceWindowsSwitch.isChecked = true
+                }
+                settingsBinding.forceWindowsSwitch.isChecked = false
             } else {
                 Pref.setForceBackupWindows(this, false)
                 Pref.setBackupIfNoneWindows(this, true)
             }
         }
 
-        settingsBinding.forceAndroidSwitch.setOnCheckedChangeListener { _, b ->
-            if (b) {
-                Pref.setForceBackupAndroid(this, true)
-                Pref.setBackupIfNoneAndroid(this, false)
+        settingsBinding.forceAndroidSwitch.setOnClickListener {
+            if (settingsBinding.forceAndroidSwitch.isChecked) {
+                Dlg.showBackupWarning(this) {
+                    Pref.setForceBackupAndroid(this, true)
+                    Pref.setBackupIfNoneAndroid(this, false)
+                    settingsBinding.forceAndroidSwitch.isChecked = true
+                }
+                settingsBinding.forceAndroidSwitch.isChecked = false
             } else {
                 Pref.setForceBackupAndroid(this, false)
                 Pref.setBackupIfNoneAndroid(this, true)

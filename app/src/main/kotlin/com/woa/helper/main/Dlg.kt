@@ -158,6 +158,16 @@ object Dlg {
         }
     }
 
+    fun showBackupWarning(context: Context, onAgree: () -> Unit) {
+        show(context, context.getString(R.string.bwarn))
+        onCancel { }
+        setDismiss(R.string.cancel) { close() }
+        setYes(R.string.agree) {
+            onAgree()
+            close()
+        }
+    }
+
     fun interface OnButtonClick {
         fun execute()
     }
