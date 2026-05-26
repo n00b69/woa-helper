@@ -107,10 +107,6 @@
     <string name="no">아니요</string>
     <string name="please_wait">잠시만 기다려 주세요…</string>
 
-    <string name="preference1">즉시 부팅을 실행했을 때 boot.img를 강제로 백업합니다 (Windows)</string>
-    <string name="preference2">즉시 부팅을 실행했을 때 boot.img를 강제로 백업합니다 (Android)</string>
-    <string name="preference3">백업이 없으면 boot.img를 백업합니다 (Windows)</string>
-    <string name="preference4">백업이 없으면 boot.img를 백업합니다 (Android)</string>
     <string name="preference5">빠른 설정창에서 즉시 부팅을 선택할 경우 다시 한 번 확인합니다</string>
     <string name="preference6">언어 선택</string>
     <string name="preference7">부팅 시 자동으로 Windows 파티션 마운트</string>

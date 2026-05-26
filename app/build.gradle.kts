@@ -15,7 +15,7 @@ android {
         minSdk = 25
         targetSdk = 36
         versionCode = 5
-        versionName = "1.8.5 BETA (DO NOT DISTRIBUTE)"
+        versionName = "1.8.5 UI REWRITE"
 
         val localesArray = locales.joinToString(", ") { tag ->
             val bcpTag = tag.replace("-r", "-").let { cleanTag ->
@@ -58,8 +58,6 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.appcompat.appcompat)
-    implementation(libs.material)
     implementation(libs.androidx.preference.preference)
     implementation(libs.com.intuit.sdp.sdp.android)
     implementation(libs.com.intuit.ssp.ssp.android)

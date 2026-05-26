@@ -107,10 +107,6 @@
     <string name="no">لا</string>
     <string name="please_wait">يرجى الانتظار…</string>
 
-    <string name="preference1">فرض أخذ نسخة احتياطية للـ Boot عند كل إقلاع سريع، احفظها في (Windows)</string>
-    <string name="preference2">فرض أخذ نسخة احتياطية للـ Boot عند كل إقلاع سريع، احفظها في (Android)</string>
-    <string name="preference3">خذ نسخة احتياطية للـ Boot إذا لم يتم اكتشاف واحدة، احفظها في (Windows)</string>
-    <string name="preference4">خذ نسخة احتياطية للـ Boot إذا لم يتم اكتشاف واحدة، احفظها في (Android)</string>
     <string name="preference5">إظهار إشعار أو تأكيد عند كل إقلاع سريع من الإشعارات</string>
     <string name="preference6">اختر اللغة</string>
     <string name="preference7">وصل قسم تخزين ويندوز تلقائياً عند تشغيل الجهاز</string>

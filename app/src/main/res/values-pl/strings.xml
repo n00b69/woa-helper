@@ -107,10 +107,6 @@
     <string name="no">NIE</string>
     <string name="please_wait">Proszę czekać…</string>
 
-    <string name="preference1">Wymuś zrzut obrazu rozruchu przy szybkim uruchamianiu (Windows)</string>
-    <string name="preference2">Wymuś zrzut obrazu rozruchu przy szybkim uruchamianiu (Android)</string>
-    <string name="preference3">Zapisz obraz rozruchu, jeśli nie zostanie wykryty (Windows)</string>
-    <string name="preference4">Zapisz obraz rozruchu, jeśli nie zostanie wykryty (Android)</string>
     <string name="preference5">Wymagaj potwierdzenia dla kafelka QS szybkiego uruchamiania</string>
     <string name="preference6">Wybierz język</string>
     <string name="preference7">Automatyczne montowanie Windows przy starcie urządzenia</string>

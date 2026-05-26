@@ -1,15 +1,21 @@
 package com.woa.helper.main
 
 import android.content.Context
+import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.widget.FrameLayout
 import androidx.annotation.StringRes
-import com.google.android.material.card.MaterialCardView
 import com.woa.helper.R
 import com.woa.helper.databinding.ButtonBinding
 
-class Button(private val context: Context, attrs: AttributeSet?) : MaterialCardView(context, attrs) {
+class Button(context: Context, attrs: AttributeSet?) : FrameLayout(context, attrs) {
     private val layout: ButtonBinding = ButtonBinding.inflate(LayoutInflater.from(context), this, true)
+
+    private val cornerRadiusPx = resources.getDimension(R.dimen.cardCornerRadius)
+    private val strokeWidthPx = resources.getDimensionPixelSize(R.dimen.strokeWidth)
+    private val fillColor = context.getColor(R.color.md_theme_inverseOnSurface)
+    private val strokeColor = context.getColor(R.color.md_theme_outlineVariant)
 
     init {
         val a = context.theme.obtainStyledAttributes(attrs, R.styleable.Button, 0, 0)
@@ -20,6 +26,23 @@ class Button(private val context: Context, attrs: AttributeSet?) : MaterialCardV
             layout.title.text = title
             layout.subtitle.text = subtitle
             layout.image.setImageResource(imageId)
+        }
+
+        clipToOutline = true
+        updateBackground()
+    }
+
+    override fun setEnabled(enabled: Boolean) {
+        super.setEnabled(enabled)
+        updateBackground()
+    }
+
+    private fun updateBackground() {
+        background = GradientDrawable().apply {
+            shape = GradientDrawable.RECTANGLE
+            cornerRadius = cornerRadiusPx
+            setColor(fillColor)
+            setStroke(if (isEnabled) strokeWidthPx else 0, strokeColor)
         }
     }
 

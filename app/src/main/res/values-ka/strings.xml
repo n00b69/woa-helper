@@ -107,10 +107,6 @@
     <string name="no">არა</string>
     <string name="please_wait">გთხოვთ დაელოდოთ…</string>
 
-    <string name="preference1">სარეზერვო ასლის იძულება boot.img სწრაფი ჩატვირთვისას (Windows)</string>
-    <string name="preference2">სწრაფი ჩატვირთვისას boot.img-ის სარეზერვო ასლის იძულება (Android)</string>
-    <string name="preference3">შექმენით boot.img-ის სარეზერვო ასლი, თუ არცერთი არ არის აღმოჩენილი (Windows)</string>
-    <string name="preference4">შექმენით boot.img-ის სარეზერვო ასლი, თუ არცერთი არ არის აღმოჩენილი (Android)</string>
     <string name="preference5">მოითხოვეთ დადასტურება QS quickboot ფილისთვის</string>
     <string name="preference6">აირჩიეთ ენა</string>
     <string name="preference7">Windows-ის ავტომატურად მიბმა მოწყობილობის ჩართვისას</string>

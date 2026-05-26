@@ -107,10 +107,6 @@
     <string name="no">NE</string>
     <string name="please_wait">Prosím, čekejte…</string>
 
-    <string name="preference1">Vynutit zálohování boot.img při rychlém spuštění (Windows)</string>
-    <string name="preference2">Vynutit zálohování boot.img při rychlém spuštění (Android)</string>
-    <string name="preference3">Zálohujte soubor boot.img, pokud není detekován (Windows)</string>
-    <string name="preference4">Pokud není detekován žádný soubor boot.img, zálohujte jej (Android)</string>
     <string name="preference5">Vyžadovat potvrzení pro dlaždici rychlého spuštění QS</string>
     <string name="preference6">Vybrat jazyk</string>
     <string name="preference7">Automaticky připojit Windows při spuštění zařízení</string>

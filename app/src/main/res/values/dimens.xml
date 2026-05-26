@@ -1,5 +1,6 @@
 <resources>
     <dimen name="cardCornerRadius">12dp</dimen>
-    <dimen name="cardElevation">6dp</dimen>
-    <dimen name="parentMargin">8dp</dimen>
+    <dimen name="dialogCornerRadius">8dp</dimen>
+    <dimen name="strokeWidth">1dp</dimen>
+    <dimen name="settingsCornerRadius">5dp</dimen>
 </resources>

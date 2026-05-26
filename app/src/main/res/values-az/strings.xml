@@ -107,10 +107,6 @@
     <string name="no">YOX</string>
     <string name="please_wait">Zəhmət olmasa, gözləyin…</string>
 
-    <string name="preference1">Quickboot zamanı məcbur boot.img ehtiyat nüsxəsi yaradılsın(Windows)</string>
-    <string name="preference2">quickboot zamanı məcbur boot.img ehtiyat nüsxəsi yaradılsın(Android)</string>
-    <string name="preference3">Əgər aşkar olunmadı boot.img ehtiyat nüsxəsi yaradılsın (Windows)</string>
-    <string name="preference4">Əgər aşkar olunmadı boot.img ehtiyat nüsxəsi yaradılsın (Android)</string>
     <string name="preference5">QS quickboot yükləmə üçün təsdiq tələb edin</string>
     <string name="preference6">Dil seç</string>
     <string name="preference7">Cihaz işə salındıqda Windows avtomatik quraşdırılsın</string>

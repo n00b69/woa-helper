@@ -116,10 +116,6 @@ C:⧹Toolbox?"</string>
     <string name="no">نه</string>
     <string name="please_wait">لطفاً منتظر بمانید…</string>
 
-    <string name="preference1">در صورت استفاده از راه‌اندازی سریع به اجبار از فایل بوت در ویندوز پشتیبان گیری شود</string>
-    <string name="preference2">در صورت استفاده از راه‌اندازی سریع به اجبار از فایل بوت در اندروید پشتیبان گیری شود</string>
-    <string name="preference3">پشتیبان گیری از فایل بوت اگر موردی یافت نشد (ویندوز)</string>
-    <string name="preference4">پشتیبان گیری از فایل بوت اگر موردی یافت نشد (اندروید)</string>
     <string name="preference5">درخواست تأییدیه هنگام استفاده از رفتن سریع به ویندوز</string>
     <string name="preference6">انتخاب زبان</string>
     <string name="preference7">سوار سازی اتوماتیک ویندوز بعد از راه‌اندازی</string>

@@ -1,16 +1,12 @@
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/Widget.Material3.CardView.Filled"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:adjustViewBounds="true"
-    android:foreground="?android:attr/selectableItemBackground"
-    app:cardBackgroundColor="?attr/colorOnSurfaceInverse">
+    android:clipToOutline="true"
+    android:foreground="?android:attr/selectableItemBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="0dp"
         android:gravity="left|center"
         android:orientation="horizontal">
 
@@ -46,4 +42,4 @@
                 android:textStyle="italic" />
         </LinearLayout>
     </LinearLayout>
-</com.google.android.material.card.MaterialCardView>
+</FrameLayout>

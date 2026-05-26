@@ -107,10 +107,6 @@
     <string name="no">NÃO</string>
     <string name="please_wait">Aguarde…</string>
 
-    <string name="preference1">Forçar o backup de boot.img quando usar o reinício rápido (Windows)</string>
-    <string name="preference2">Forçar o backup de boot.img quando usar o reinício rápido (Android)</string>
-    <string name="preference3">Criat backup de boot.img se nenhum backup for encontrado (Windows)</string>
-    <string name="preference4">Criat backup de boot.img se nenhum backup for encontrado (Android)</string>
     <string name="preference5">Solicitar confirmação para inicialização rápida pelo atalho QS</string>
     <string name="preference6">Selecinoar idioma</string>
     <string name="preference7">Montar a partição do Windows ao</string>

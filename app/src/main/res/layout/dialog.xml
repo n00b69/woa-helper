@@ -1,20 +1,15 @@
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="4dp"
     android:animateLayoutChanges="true"
-    android:clickable="false"
-    android:foreground="?android:attr/selectableItemBackground"
-    android:stateListAnimator="@animator/state_list_anim"
-    app:cardCornerRadius="@dimen/cardCornerRadius">
+    android:background="@drawable/dialog_background"
+    android:clipToOutline="true"
+    android:stateListAnimator="@animator/state_list_anim">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="0dp"
-        android:background="?attr/colorOnSurfaceInverse"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -43,58 +38,53 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
             android:gravity="center"
             android:orientation="horizontal">
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/yes"
-                style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="2dp"
                 android:layout_weight="1"
                 android:animateLayoutChanges="true"
-                android:clipToOutline="true"
+                android:background="@drawable/dialog_button_ripple"
+                android:backgroundTint="?attr/colorAccent"
                 android:stateListAnimator="@animator/state_list_anim"
+                android:textColor="@color/md_theme_onPrimary"
                 android:textStyle="bold"
-                android:visibility="gone"
-                app:backgroundTint="?attr/colorAccent"
-                app:cornerRadius="@dimen/parentMargin"
-                tools:targetApi="s" />
+                android:visibility="gone" />
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/no"
-                style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="2dp"
                 android:layout_weight="1"
                 android:animateLayoutChanges="true"
-                android:clipToOutline="true"
+                android:background="@drawable/dialog_button_ripple"
+                android:backgroundTint="?attr/colorAccent"
                 android:stateListAnimator="@animator/state_list_anim"
+                android:textColor="@color/md_theme_onPrimary"
                 android:textStyle="bold"
-                android:visibility="gone"
-                app:backgroundTint="?attr/colorAccent"
-                app:cornerRadius="@dimen/parentMargin"
-                tools:targetApi="s" />
+                android:visibility="gone" />
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/dismiss"
-                style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="2dp"
                 android:layout_weight="1"
                 android:animateLayoutChanges="true"
-                android:clipToOutline="true"
+                android:background="@drawable/dialog_button_ripple"
+                android:backgroundTint="?attr/colorAccent"
                 android:stateListAnimator="@animator/state_list_anim"
                 android:text="@string/no"
+                android:textColor="@color/md_theme_onPrimary"
                 android:textStyle="bold"
-                android:visibility="gone"
-                app:backgroundTint="?attr/colorAccent"
-                app:cornerRadius="@dimen/parentMargin"
-                tools:targetApi="s" />
+                android:visibility="gone" />
 
         </LinearLayout>
     </LinearLayout>
-</com.google.android.material.card.MaterialCardView>
+</FrameLayout>

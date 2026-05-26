@@ -107,10 +107,6 @@
     <string name="no">NO</string>
     <string name="please_wait">Por favor espera…</string>
 
-    <string name="preference1">Forzar respaldo de boot.img en Arranque Rápido (Windows)</string>
-    <string name="preference2">Forzar respaldo de boot.img en Arranque Rápido (Android)</string>
-    <string name="preference3">Respaldar boot.img si no se detecta ninguna (Windows)</string>
-    <string name="preference4">Respaldar boot.img si no se detecta ninguna (Android)</string>
     <string name="preference5">Requerir confirmación para el mosaico QS Arranque Rápido</string>
     <string name="preference6">Seleccionar idioma</string>
     <string name="preference7">Montar Windows automáticamente al iniciar el dispositivo</string>

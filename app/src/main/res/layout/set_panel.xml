@@ -1,10 +1,9 @@
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/settingsPanel"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorOnSurfaceInverse"
-    android:orientation="vertical">
+    android:background="@color/md_theme_inverseOnSurface">
 
 
     <LinearLayout
@@ -102,7 +101,7 @@
                                         android:textSize="@dimen/_10ssp"
                                         android:textStyle="bold" />
 
-                                    <androidx.appcompat.widget.SwitchCompat
+                                    <Switch
                                         android:id="@+id/forceWindowsSwitch"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content" />
@@ -138,7 +137,7 @@
                                         android:textSize="@dimen/_10ssp"
                                         android:textStyle="bold" />
 
-                                    <androidx.appcompat.widget.SwitchCompat
+                                    <Switch
                                         android:id="@+id/forceAndroidSwitch"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content" />
@@ -222,7 +221,7 @@
                         android:textSize="@dimen/_11ssp"
                         android:textStyle="bold" />
 
-                    <androidx.appcompat.widget.AppCompatSpinner
+                    <Spinner
                         android:id="@+id/languages"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -291,4 +290,4 @@
         android:visibility="gone"
         app:realtimeBlurRadius="10dp"
         app:realtimeOverlayColor="#80000000" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</FrameLayout>

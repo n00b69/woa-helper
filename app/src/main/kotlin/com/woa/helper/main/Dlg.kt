@@ -4,12 +4,12 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import com.google.android.material.button.MaterialButton
 import com.woa.helper.R
 import com.woa.helper.main.MainActivity.Companion.hideBlur
 import com.woa.helper.main.MainActivity.Companion.showBlur
@@ -21,24 +21,22 @@ object Dlg {
     var dialog: Dialog? = null
     var bar: ProgressBar? = null
 
-    private var yes: MaterialButton? = null
-    private var no: MaterialButton? = null
-    private var dismiss: MaterialButton? = null
+    private var yes: Button? = null
+    private var no: Button? = null
+    private var dismiss: Button? = null
     private var icon: ImageView? = null
     private var text: TextView? = null
-    private var ctx: Context? = null
 
     fun dialogLoading() {
         setCancelable(false)
         clearButtons()
-        setText(ctx?.getString(R.string.please_wait) ?: "")
+        setText(dialog?.context?.getString(R.string.please_wait) ?: "")
     }
 
     fun show(context: Context, text: String?) {
         if (dialog?.isShowing == true) {
-            dialog?.dismiss()
+            try { dialog?.dismiss() } catch (_: IllegalArgumentException) {}
         }
-        ctx = context
         dialog = Dialog(context).apply {
             setContentView(R.layout.dialog)
             window?.setBackgroundDrawableResource(android.R.color.transparent)
@@ -59,7 +57,6 @@ object Dlg {
             if (context is MainActivity) {
                 hideBlur(context, true)
             }
-            ctx = null
         }
 
         dialog?.show()
@@ -93,23 +90,24 @@ object Dlg {
     }
 
     fun dismissButton() {
+        hideBar()
         setDismiss(R.string.dismiss) { dialog?.dismiss() }
         setCancelable(true)
     }
 
     fun setDismiss(@StringRes stringId: Int, onButtonClick: OnButtonClick) {
-        setButton(dismiss, ctx?.getString(stringId), onButtonClick)
+        setButton(dismiss, dialog?.context?.getString(stringId), onButtonClick)
     }
 
     fun setNo(@StringRes stringId: Int, onButtonClick: OnButtonClick) {
-        setButton(no, ctx?.getString(stringId), onButtonClick)
+        setButton(no, dialog?.context?.getString(stringId), onButtonClick)
     }
 
     fun setYes(@StringRes stringId: Int, onButtonClick: OnButtonClick) {
-        setButton(yes, ctx?.getString(stringId), onButtonClick)
+        setButton(yes, dialog?.context?.getString(stringId), onButtonClick)
     }
 
-    private fun setButton(button: MaterialButton?, text: String?, onButtonClick: OnButtonClick) {
+    private fun setButton(button: Button?, text: String?, onButtonClick: OnButtonClick) {
         button?.apply {
             visibility = View.VISIBLE
             this.text = text
@@ -118,7 +116,7 @@ object Dlg {
     }
 
     fun setText(@StringRes stringId: Int) {
-        setText(ctx?.getString(stringId))
+        setText(dialog?.context?.getString(stringId))
     }
 
     fun setText(text: String?) {

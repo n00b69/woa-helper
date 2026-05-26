@@ -1,32 +1,28 @@
-<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_40sdp"
-    android:backgroundTint="?attr/colorOnSurfaceInverse">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <com.google.android.material.appbar.MaterialToolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:animateLayoutChanges="true"
         android:gravity="center_vertical"
-        app:subtitleCentered="false"
-        app:titleCentered="false"
         app:titleTextAppearance="@style/Toolbar.TitleText">
 
         <ImageButton
             android:id="@+id/settings"
-            style="@style/Widget.Material3.CardView.Filled"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_marginRight="@dimen/_12sdp"
             android:background="@android:color/transparent"
             android:clickable="true"
-            android:elevation="@dimen/cardElevation"
             android:focusable="true"
             android:src="@drawable/settings" />
 
-    </com.google.android.material.appbar.MaterialToolbar>
-</com.google.android.material.appbar.AppBarLayout>
+    </androidx.appcompat.widget.Toolbar>
+</LinearLayout>

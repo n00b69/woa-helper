@@ -145,6 +145,7 @@
     <color name="white">#ffffffff</color>
     <color name="red">#FFD40000</color>
     <color name="blue">#FF1387B1</color>
-    <color name="colorAccent">?attr/colorAccent</color>
     <color name="white_translucent">#3ACDCDCD</color>
+    <color name="settings_checked">#FF196500</color>
+    <color name="settings_unchecked">#FF870002</color>
 </resources>

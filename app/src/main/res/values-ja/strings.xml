@@ -107,10 +107,6 @@
     <string name="no">いいえ</string>
     <string name="please_wait">お待ちください…</string>
 
-    <string name="preference1">クイックブート時に boot.img を強制的にバックアップ (Windows)</string>
-    <string name="preference2">クイックブート時に boot.img を強制的にバックアップ (Android)</string>
-    <string name="preference3">boot.img が検出されない場合にバックアップ (Windows)</string>
-    <string name="preference4">boot.img が検出されない場合にバックアップ (Android)</string>
     <string name="preference5">QS クイックブートタイルの確認を要求する</string>
     <string name="preference6">言語を選択</string>
     <string name="preference7">デバイス起動時に自動的に Windows をマウント</string>

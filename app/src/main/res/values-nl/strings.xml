@@ -107,10 +107,6 @@
     <string name="no">NEE</string>
     <string name="please_wait">Even wachten a.u.b…</string>
 
-    <string name="preference1">Forceer boot.img backup bij iedere snelstart (Windows)</string>
-    <string name="preference2">Forceer boot.img backup bij iedere snelstart (Android)</string>
-    <string name="preference3">Back up boot.img indien niet gedetecteerd (Windows)</string>
-    <string name="preference4">Back up boot.img indien niet gedetecteerd (Android)</string>
     <string name="preference5">Bevestiging vereist voor QS quickboot knop</string>
     <string name="preference6">Taal selecteren</string>
     <string name="preference7">Windows automatisch mounten wanneer uw toestel opstart</string>

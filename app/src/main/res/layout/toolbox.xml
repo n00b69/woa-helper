@@ -1,17 +1,16 @@
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toolboxtab"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorOnSurfaceInverse"
+    android:background="@color/md_theme_inverseOnSurface"
     tools:context=".main.MainActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/transparent"
         android:orientation="vertical">
 
         <include
@@ -22,9 +21,7 @@
             android:id="@+id/app"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
             android:background="@color/md_theme_background"
-            android:foregroundGravity="center"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="@dimen/_8sdp">
@@ -174,4 +171,4 @@
         android:visibility="gone"
         app:realtimeBlurRadius="10dp"
         app:realtimeOverlayColor="#80000000" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</FrameLayout>

@@ -3,7 +3,6 @@ package com.woa.helper.main
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import com.woa.helper.R
@@ -54,16 +53,12 @@ class SettingsButton @JvmOverloads constructor(
     }
 
     private val backgroundColor: Int
-        get() = if (isChecked) 0xFF196500.toInt() else 0xFF870002.toInt()
+        get() = if (isChecked) context.getColor(R.color.settings_checked) else context.getColor(R.color.settings_unchecked)
 
     private fun updateBackground() {
         val background = GradientDrawable().apply {
             setColor(backgroundColor)
-            cornerRadius = TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                5.0f,
-                resources.displayMetrics
-            )
+            cornerRadius = resources.getDimension(R.dimen.settingsCornerRadius)
         }
         binding.root.background = background
         binding.root.alpha = if (isEnabled) 1.0f else 0.5f

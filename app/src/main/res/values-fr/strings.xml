@@ -107,10 +107,6 @@
     <string name="no">NON</string>
     <string name="please_wait">Veuillez patienter…</string>
 
-    <string name="preference1">Devez sauvegarder le fichier boot.img lors du démarrage rapide (Windows)</string>
-    <string name="preference2">Devez sauvegarder le fichier boot.img lors du démarrage rapide (Android)</string>
-    <string name="preference3">Sauvegarde du fichier boot.img si aucun n\’est détecté (Windows)</string>
-    <string name="preference4">Sauvegarde du fichier boot.img si aucun n\’est détecté (Android)</string>
     <string name="preference5">Demande de confirmation pour la tuile QS démarrage rapide</string>
     <string name="preference6">Sélectionnez la langue</string>
     <string name="preference7">Montez automatiquement Windows au démarrage de l\’appareil</string>

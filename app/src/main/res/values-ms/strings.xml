@@ -107,10 +107,6 @@
     <string name="no">TIDAK</string>
     <string name="please_wait">Harap tunggu…</string>
 
-    <string name="preference1">Paksa backup boot.img saat quickboot (Windows)</string>
-    <string name="preference2">Paksa backup boot.img saat quickboot (Android)</string>
-    <string name="preference3">Backup boot.img jika tidak ada yang terdeteksi (Windows)</string>
-    <string name="preference4">Backup boot.img jika tidak ada yang terdeteksi (Android)</string>
     <string name="preference5">Memerlukan konfirmasi untuk ubin quickboot QS</string>
     <string name="preference6">Pilih bahasa</string>
     <string name="preference7">Mount Windows secara otomatis saat perangkat dimulai</string>

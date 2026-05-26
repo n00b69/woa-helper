@@ -1,6 +1,5 @@
 [versions]
 agp = "9.2.1"
-material = "1.13.0"
 libsu = "6.0.0"
 realtimeblurview = "82df3520b4"
 
@@ -9,7 +8,6 @@ agp-app = { id = "com.android.application", version.ref = "agp" }
 agp-lib = { id = "com.android.library", version.ref = "agp" }
 
 [libraries]
-androidx-appcompat-appcompat = { group = "androidx.appcompat", name = "appcompat", version = "1.7.1" }
 androidx-preference-preference = { group = "androidx.preference", name = "preference", version = "1.2.1" }
 
 com-github-topjohnwu-libsu-core = { group = "com.github.topjohnwu.libsu", name = "core", version.ref = "libsu" }
@@ -19,5 +17,4 @@ com-github-topjohnwu-libsu-nio = { group = "com.github.topjohnwu.libsu", name = 
 com-intuit-sdp-sdp-android = { group = "com.intuit.sdp", name = "sdp-android", version = "1.1.1" }
 com-intuit-ssp-ssp-android = { group = "com.intuit.ssp", name = "ssp-android", version = "1.1.1" }
 
-material = { module = "com.google.android.material:material", version.ref = "material" }
 realtimeblurview = { module = "com.github.mmin18:realtimeblurview", version.ref = "realtimeblurview" }

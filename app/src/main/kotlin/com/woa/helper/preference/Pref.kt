@@ -21,6 +21,7 @@ object Pref {
     private const val DEVCFG1 = "devcfg flasher"
     private const val DEVCFG2 = "devcfg flasher & check for sdd.exe etc."
     private const val CODENAME = "woa_codename_changer"
+    private const val LOCALE = "woa_selected_locale"
     const val FILESDIR = "woa_app_filesdir"
 
     fun getSharedPreference(context: Context): SharedPreferences =
@@ -79,4 +80,7 @@ object Pref {
     fun setDevcfg2(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(DEVCFG2, value) }
 
     fun setFilesDir(context: Context, value: String?) = getSharedPreference(context).edit { putString(FILESDIR, value) }
+
+    fun setLocale(context: Context, value: String) = getSharedPreference(context).edit { putString(LOCALE, value) }
+    fun getLocale(context: Context): String = getSharedPreference(context).getString(LOCALE, "und") ?: "und"
 }

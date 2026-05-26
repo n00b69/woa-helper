@@ -13,20 +13,20 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.window.OnBackInvokedDispatcher
 import android.view.animation.AnimationUtils
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.LinearLayout
 import androidx.activity.addCallback
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.core.os.LocaleListCompat
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.lifecycleScope
@@ -52,8 +52,6 @@ import kotlinx.coroutines.withContext
 import androidx.core.view.isVisible
 import java.io.File
 import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Locale
 import androidx.core.content.edit
 
@@ -70,7 +68,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         instance = WeakReference(this)
-        enableEdgeToEdge()
+        applySavedLocale()
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars =
             resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK != Configuration.UI_MODE_NIGHT_YES
         super.onCreate(savedInstanceState)
@@ -91,14 +90,48 @@ class MainActivity : AppCompatActivity() {
         ShellManager.init(filesDir)
     }
 
+    private fun applySavedLocale() {
+        val tag = Pref.getLocale(this)
+        val locales = if (tag == "und") {
+            Resources.getSystem().configuration.locales
+        } else {
+            val compat = LocaleListCompat.forLanguageTags(tag)
+            android.os.LocaleList(*(0 until compat.size()).map { compat[it] }.toTypedArray())
+        }
+        val config = Configuration(resources.configuration)
+        config.setLocales(locales)
+        @Suppress("DEPRECATION")
+        resources.updateConfiguration(config, resources.displayMetrics)
+    }
+
+    private fun restartApp() {
+        val intent = Intent(this, MainActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        }
+        startActivity(intent)
+        finishAffinity()
+    }
+
+    private var backInvokedCallback: android.window.OnBackInvokedCallback? = null
+
     private fun setupNavigation() {
-        onBackPressedDispatcher.addCallback(this) {
-            if (views.size <= 1) {
-                moveTaskToBack(true)
-                finish()
-            } else {
-                handleBackNavigation()
-            }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val callback = android.window.OnBackInvokedCallback { onBackHandled() }
+            backInvokedCallback = callback
+            onBackInvokedDispatcher.registerOnBackInvokedCallback(
+                OnBackInvokedDispatcher.PRIORITY_DEFAULT, callback
+            )
+        } else {
+            onBackPressedDispatcher.addCallback(this) { onBackHandled() }
+        }
+    }
+
+    private fun onBackHandled() {
+        if (views.size <= 1) {
+            moveTaskToBack(true)
+            finish()
+        } else {
+            handleBackNavigation()
         }
     }
 
@@ -153,6 +186,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private var lastSpinnerPosition = -1
+
     private fun setupLanguageSpinner() {
         val languages = mutableListOf(getString(R.string.default1))
         val locales = mutableListOf("und")
@@ -168,20 +203,19 @@ class MainActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, languages)
         settingsBinding.languages.adapter = adapter
 
-        val currentLocale = AppCompatDelegate.getApplicationLocales()[0]
+        val currentLocale = resources.configuration.locales[0]
         if (currentLocale != null) {
             val index = locales.indexOf(currentLocale.toLanguageTag().lowercase())
             if (index != -1) settingsBinding.languages.setSelection(index)
         }
+        lastSpinnerPosition = settingsBinding.languages.selectedItemPosition
 
         settingsBinding.languages.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val localeList = if (languages[position] == getString(R.string.default1)) {
-                    LocaleListCompat.getEmptyLocaleList()
-                } else {
-                    LocaleListCompat.forLanguageTags(locales[position])
-                }
-                AppCompatDelegate.setApplicationLocales(localeList)
+                if (position == lastSpinnerPosition) return
+                lastSpinnerPosition = position
+                Pref.setLocale(this@MainActivity, locales[position])
+                restartApp()
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
@@ -370,7 +404,7 @@ class MainActivity : AppCompatActivity() {
             else -> mainBinding.toolbarlayout.toolbar
         }
         toolbar.title = getString(titleRes)
-        toolbar.navigationIcon = AppCompatResources.getDrawable(this, R.drawable.ic_launcher_foreground)
+        toolbar.navigationIcon = ContextCompat.getDrawable(this, R.drawable.ic_launcher_foreground)
     }
 
     private fun setupSettingsListeners() {
@@ -826,6 +860,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            backInvokedCallback?.let { onBackInvokedDispatcher.unregisterOnBackInvokedCallback(it) }
+        }
         if (instance?.get() == this) {
             instance?.clear()
             instance = null
@@ -1028,6 +1065,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkUpdate(manual: Boolean) {
+        if (!ShellManager.isRootGranted() && !manual) return
         if (!isNetworkConnected(this)) {
             if (manual) noInternet()
             return
