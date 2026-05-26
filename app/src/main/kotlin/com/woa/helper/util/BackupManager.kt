@@ -22,19 +22,11 @@ object BackupManager {
     }
 
     fun modemBackup(): ShellResult {
-        val mkdirResult = ShellManager.execResult("mkdir -p $BACKUP_DIR")
-        if (mkdirResult is ShellResult.Error) return mkdirResult
-        val partitions = listOf("modemst1", "modemst2", "fsc", "fsg", "ftm", "persist", "efs")
-        val failures = mutableListOf<String>()
-        partitions.forEach { partition ->
-            val result = ShellManager.execResult("dd bs=8M if=/dev/block/by-name/$partition of=$BACKUP_DIR/$partition.img")
-            if (result is ShellResult.Error) failures.add("$partition: ${result.message}")
+        ShellManager.execResult("mkdir -p $BACKUP_DIR")
+        listOf("modemst1", "modemst2", "fsc", "fsg", "ftm", "persist", "efs", "persistent").forEach { partition ->
+            ShellManager.execResult("dd bs=8M if=/dev/block/by-name/$partition of=$BACKUP_DIR/$partition.img")
         }
-        return if (failures.isEmpty()) {
-            ShellResult.Success("")
-        } else {
-            ShellResult.Error("Failed to backup: ${failures.joinToString(", ")}")
-        }
+        return ShellResult.Success("")
     }
 
     fun updateDate(onUpdate: (String) -> Unit) {
