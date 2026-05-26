@@ -978,7 +978,8 @@ class MainActivity : AppCompatActivity() {
     private fun kernelPatch(message: String, link: String) {
         executeKernelOperation(
             prepare = {
-                ShellManager.exec("wget $link -O ${filesDir.absolutePath}/temp/file.fd")
+                val dl = Download.file(link, "${filesDir.absolutePath}/temp/file.fd")
+                if (dl is ShellResult.Error) return@executeKernelOperation -1
                 val fd = File("${filesDir.absolutePath}/temp/file.fd")
                 val shellCode = File("${filesDir.absolutePath}/temp/dbkp.bin")
                 val patched = File("${filesDir.absolutePath}/temp/output")
@@ -1009,7 +1010,8 @@ class MainActivity : AppCompatActivity() {
     private fun kernelReinstall(message: String, link: String) {
         executeKernelOperation(
             prepare = {
-                ShellManager.exec("wget $link -O ${filesDir.absolutePath}/temp/file.fd")
+                val dl = Download.file(link, "${filesDir.absolutePath}/temp/file.fd")
+                if (dl is ShellResult.Error) return@executeKernelOperation -1
                 val fd = File("${filesDir.absolutePath}/temp/file.fd")
                 val output = File("${filesDir.absolutePath}/temp/out")
                 KernelManager.updateFD(KernelManager.getKernelFile()!!, fd, output).also {

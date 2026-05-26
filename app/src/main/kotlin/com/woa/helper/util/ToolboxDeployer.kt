@@ -1,5 +1,7 @@
 package com.woa.helper.util
 
+import com.woa.helper.main.Download
+
 object ToolboxDeployer {
     private const val TOOLBOX_DIR = "/sdcard/WOAHelper/Toolbox"
 
@@ -47,11 +49,11 @@ object ToolboxDeployer {
     fun deployAtlasOS(url: String, targetName: String, onProgress: (Int) -> Unit): ShellResult {
         val mkdir = ShellManager.execResult("mkdir -p $TOOLBOX_DIR")
         if (mkdir is ShellResult.Error) return mkdir
-        val wget1 = ShellManager.execResult("wget $url -O $TOOLBOX_DIR/$targetName")
-        if (wget1 is ShellResult.Error) return wget1
+        val dl1 = Download.file(url, "$TOOLBOX_DIR/$targetName")
+        if (dl1 is ShellResult.Error) return dl1
         onProgress(50)
-        val wget2 = ShellManager.execResult("wget https://download.ameliorated.io/AME%20Beta.zip -O $TOOLBOX_DIR/AMEWizardBeta.zip")
-        if (wget2 is ShellResult.Error) return wget2
+        val dl2 = Download.file("https://download.ameliorated.io/AME%20Beta.zip", "$TOOLBOX_DIR/AMEWizardBeta.zip")
+        if (dl2 is ShellResult.Error) return dl2
         onProgress(80)
         val mountResult = MountManager.mount()
         if (mountResult is ShellResult.Error) return mountResult
@@ -125,7 +127,7 @@ object ToolboxDeployer {
         )
         val failures = mutableListOf<String>()
         installers.forEach { installer ->
-            val result = ShellManager.execResult("wget https://github.com/n00b69/woasetup/releases/download/Installers/$installer -O $frameworksDir/$installer")
+            val result = Download.file("https://github.com/n00b69/woasetup/releases/download/Installers/$installer", "$frameworksDir/$installer")
             if (result is ShellResult.Error) failures.add("$installer: ${result.message}")
             onProgress(5)
         }
@@ -144,8 +146,8 @@ object ToolboxDeployer {
         if (mkdir is ShellResult.Error) return mkdir
         if (ShellManager.exec("find $filesDir -maxdepth 1 -name DefenderRemover.exe").isEmpty()) {
             if (!isNetworkConnected) return ShellResult.Error("DefenderRemover not found and no internet to download")
-            val wget = ShellManager.execResult("wget https://github.com/n00b69/woasetup/releases/download/Installers/DefenderRemover.exe -O $TOOLBOX_DIR/DefenderRemover.exe")
-            if (wget is ShellResult.Error) return wget
+            val dl = Download.file("https://github.com/n00b69/woasetup/releases/download/Installers/DefenderRemover.exe", "$TOOLBOX_DIR/DefenderRemover.exe")
+            if (dl is ShellResult.Error) return dl
             val cp = ShellManager.execResult("cp $TOOLBOX_DIR/DefenderRemover.exe $filesDir/DefenderRemover.exe")
             if (cp is ShellResult.Error) return cp
         } else {

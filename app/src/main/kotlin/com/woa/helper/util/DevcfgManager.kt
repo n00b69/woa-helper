@@ -1,5 +1,7 @@
 package com.woa.helper.util
 
+import com.woa.helper.main.Download
+
 object DevcfgManager {
     private const val BACKUP_DIR = "/sdcard/WOAHelper/Backups"
     private const val DEVCFG_BACKUP = "original-devcfg.img"
@@ -28,9 +30,9 @@ object DevcfgManager {
         if (ShellManager.exec("find $filesDir -maxdepth 1 -name OOS11_devcfg_*").isEmpty()) {
             val mkdirResult = ShellManager.execResult("mkdir -p $BACKUP_DIR")
             if (mkdirResult is ShellResult.Error) return mkdirResult
-            val oos11Result = ShellManager.execResult("wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_$devcfgDevice.img -O $BACKUP_DIR/OOS11_devcfg_$devcfgDevice.img")
+            val oos11Result = Download.file("https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_$devcfgDevice.img", "$BACKUP_DIR/OOS11_devcfg_$devcfgDevice.img")
             if (oos11Result is ShellResult.Error) return oos11Result
-            val oos12Result = ShellManager.execResult("wget https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_$devcfgDevice.img -O $BACKUP_DIR/OOS12_devcfg_$devcfgDevice.img")
+            val oos12Result = Download.file("https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_$devcfgDevice.img", "$BACKUP_DIR/OOS12_devcfg_$devcfgDevice.img")
             if (oos12Result is ShellResult.Error) return oos12Result
             val cp1 = ShellManager.execResult("cp $BACKUP_DIR/OOS11_devcfg_$devcfgDevice.img $filesDir/")
             if (cp1 is ShellResult.Error) return cp1
