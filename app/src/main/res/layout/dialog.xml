@@ -23,8 +23,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="24dp"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="24dp"
             android:textSize="@dimen/_10ssp" />
+
+        <TextView
+            android:id="@+id/filename"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingHorizontal="24dp"
+            android:textSize="@dimen/_8ssp"
+            android:visibility="gone" />
 
         <ProgressBar
             android:id="@+id/progress"
@@ -38,6 +48,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:layout_marginBottom="2dp"
             android:gravity="center"
             android:orientation="horizontal">

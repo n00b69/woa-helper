@@ -753,9 +753,7 @@ class MainActivity : AppCompatActivity() {
             Dlg.setBar(0)
             Dlg.setIcon(R.drawable.ic_download)
             lifecycleScope.launch(Dispatchers.IO) {
-                val result = ToolboxDeployer.deployAtlasOS(url, targetName) { progress ->
-                    runOnUiThread { Dlg.setBar(progress) }
-                }
+                val result = ToolboxDeployer.deployAtlasOS(url, targetName)
                 withContext(Dispatchers.Main) {
                     when (result) {
                         is ShellResult.Success -> {
@@ -777,7 +775,7 @@ class MainActivity : AppCompatActivity() {
             downloadPlaybook("ReviOS", "https://github.com/n00b69/modified-playbooks/releases/download/ReviOS/ReviPlaybook.apbx", "ReviPlaybook.apbx")
         }
         Dlg.setYes(R.string.atlasos) {
-            downloadPlaybook("AtlasOS", "https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook_v0.5.0.apbx", "AtlasPlaybook_v0.5.0.apbx")
+            downloadPlaybook("AtlasOS", "https://github.com/n00b69/modified-playbooks/releases/download/AtlasOS/AtlasPlaybook.apbx", "AtlasPlaybook.apbx")
         }
     }
 
@@ -802,9 +800,7 @@ class MainActivity : AppCompatActivity() {
             Dlg.setIcon(R.drawable.ic_download)
             Dlg.setBar(0)
             lifecycleScope.launch(Dispatchers.IO) {
-                val result = ToolboxDeployer.deployFrameworks(filesDir.absolutePath) {
-                    runOnUiThread { Dlg.setBar((Dlg.bar?.progress ?: 0) + 5) }
-                }
+                val result = ToolboxDeployer.deployFrameworks(filesDir.absolutePath)
                 withContext(Dispatchers.Main) {
                     when (result) {
                         is ShellResult.Success -> {
@@ -828,6 +824,7 @@ class MainActivity : AppCompatActivity() {
         Dlg.setNo(R.string.no) { Dlg.close() }
         Dlg.setYes(R.string.yes) {
             Dlg.dialogLoading()
+            Dlg.setBar(0)
             lifecycleScope.launch(Dispatchers.IO) {
                 val result = ToolboxDeployer.deployDefenderEdge(filesDir.absolutePath, isNetworkConnected(this@MainActivity))
                 withContext(Dispatchers.Main) {
@@ -950,7 +947,7 @@ class MainActivity : AppCompatActivity() {
     private fun kernelPatch(message: String, link: String) {
         executeKernelOperation(
             prepare = {
-                val dl = Download.file(link, "${filesDir.absolutePath}/temp/file.fd")
+                val dl = Download.file(link, "${filesDir.absolutePath}/temp/file.fd", Dlg.downloadCallback())
                 if (dl is ShellResult.Error) return@executeKernelOperation -1
                 val fd = File("${filesDir.absolutePath}/temp/file.fd")
                 val shellCode = File("${filesDir.absolutePath}/temp/dbkp.bin")
@@ -982,7 +979,7 @@ class MainActivity : AppCompatActivity() {
     private fun kernelReinstall(message: String, link: String) {
         executeKernelOperation(
             prepare = {
-                val dl = Download.file(link, "${filesDir.absolutePath}/temp/file.fd")
+                val dl = Download.file(link, "${filesDir.absolutePath}/temp/file.fd", Dlg.downloadCallback())
                 if (dl is ShellResult.Error) return@executeKernelOperation -1
                 val fd = File("${filesDir.absolutePath}/temp/file.fd")
                 val output = File("${filesDir.absolutePath}/temp/out")

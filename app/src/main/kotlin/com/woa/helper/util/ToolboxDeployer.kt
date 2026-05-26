@@ -1,5 +1,6 @@
 package com.woa.helper.util
 
+import com.woa.helper.main.Dlg
 import com.woa.helper.main.Download
 
 object ToolboxDeployer {
@@ -46,15 +47,15 @@ object ToolboxDeployer {
         return ShellResult.Success("")
     }
 
-    fun deployAtlasOS(url: String, targetName: String, onProgress: (Int) -> Unit): ShellResult {
+    fun deployAtlasOS(url: String, targetName: String, onProgress: Download.ProgressCallback = Dlg.downloadCallback()): ShellResult {
         val mkdir = ShellManager.execResult("mkdir -p $TOOLBOX_DIR")
         if (mkdir is ShellResult.Error) return mkdir
-        val dl1 = Download.file(url, "$TOOLBOX_DIR/$targetName")
+        val dl1 = Download.file(url, "$TOOLBOX_DIR/$targetName", onProgress)
         if (dl1 is ShellResult.Error) return dl1
-        onProgress(50)
-        val dl2 = Download.file("https://download.ameliorated.io/AME%20Beta.zip", "$TOOLBOX_DIR/AMEWizardBeta.zip")
+        onProgress.onProgress(50, "AMEWizardBeta.zip")
+        val dl2 = Download.file("https://download.ameliorated.io/AME%20Beta.zip", "$TOOLBOX_DIR/AMEWizardBeta.zip", onProgress)
         if (dl2 is ShellResult.Error) return dl2
-        onProgress(80)
+        onProgress.onProgress(80, "")
         val mountResult = MountManager.mount()
         if (mountResult is ShellResult.Error) return mountResult
         val winPath = MountManager.getWinPath()
@@ -112,7 +113,7 @@ object ToolboxDeployer {
         return ShellManager.execResult("cp $TOOLBOX_DIR/OptimizedTaskbarControl_V3.2.exe $winPath/Toolbox")
     }
 
-    fun deployFrameworks(filesDir: String, onProgress: (Int) -> Unit): ShellResult {
+    fun deployFrameworks(filesDir: String, onProgress: Download.ProgressCallback = Dlg.downloadCallback()): ShellResult {
         val frameworksDir = "/sdcard/WOAHelper/Frameworks"
         val mkdir1 = ShellManager.execResult("mkdir -p $frameworksDir")
         if (mkdir1 is ShellResult.Error) return mkdir1
@@ -125,11 +126,15 @@ object ToolboxDeployer {
             "2013vcredist_x64.exe", "2013vcredist_x86.exe", "2015VC_redist.x64.exe", "2015VC_redist.x86.exe",
             "2022VC_redist.arm64.exe", "dxwebsetup.exe", "oalinst.exe"
         )
+        val total = installers.size
         val failures = mutableListOf<String>()
-        installers.forEach { installer ->
-            val result = Download.file("https://github.com/n00b69/woasetup/releases/download/Installers/$installer", "$frameworksDir/$installer")
+        installers.forEachIndexed { index, installer ->
+            val baseProgress = (index * 100 / total)
+            val result = Download.file("https://github.com/n00b69/woasetup/releases/download/Installers/$installer", "$frameworksDir/$installer") { percent, _ ->
+                val overall = baseProgress + percent / total
+                onProgress.onProgress(overall.coerceAtMost(99), installer)
+            }
             if (result is ShellResult.Error) failures.add("$installer: ${result.message}")
-            onProgress(5)
         }
         if (failures.isNotEmpty()) return ShellResult.Error("Download failed: ${failures.take(3).joinToString(", ")}${if (failures.size > 3) " (+${failures.size - 3} more)" else ""}")
         val mountResult = MountManager.mount()
@@ -141,12 +146,12 @@ object ToolboxDeployer {
         return ShellManager.execResult("cp $frameworksDir/* $winPath/Toolbox/Frameworks")
     }
 
-    fun deployDefenderEdge(filesDir: String, isNetworkConnected: Boolean): ShellResult {
+    fun deployDefenderEdge(filesDir: String, isNetworkConnected: Boolean, onProgress: Download.ProgressCallback = Dlg.downloadCallback()): ShellResult {
         val mkdir = ShellManager.execResult("mkdir -p $TOOLBOX_DIR")
         if (mkdir is ShellResult.Error) return mkdir
         if (ShellManager.exec("find $filesDir -maxdepth 1 -name DefenderRemover.exe").isEmpty()) {
             if (!isNetworkConnected) return ShellResult.Error("DefenderRemover not found and no internet to download")
-            val dl = Download.file("https://github.com/n00b69/woasetup/releases/download/Installers/DefenderRemover.exe", "$TOOLBOX_DIR/DefenderRemover.exe")
+            val dl = Download.file("https://github.com/n00b69/woasetup/releases/download/Installers/DefenderRemover.exe", "$TOOLBOX_DIR/DefenderRemover.exe", onProgress)
             if (dl is ShellResult.Error) return dl
             val cp = ShellManager.execResult("cp $TOOLBOX_DIR/DefenderRemover.exe $filesDir/DefenderRemover.exe")
             if (cp is ShellResult.Error) return cp

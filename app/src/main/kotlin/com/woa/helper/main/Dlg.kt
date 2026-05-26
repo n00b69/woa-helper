@@ -3,6 +3,8 @@ package com.woa.helper.main
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -19,13 +21,14 @@ object Dlg {
 
     @JvmField
     var dialog: Dialog? = null
-    var bar: ProgressBar? = null
+    private var bar: ProgressBar? = null
 
     private var yes: Button? = null
     private var no: Button? = null
     private var dismiss: Button? = null
     private var icon: ImageView? = null
     private var text: TextView? = null
+    private var filename: TextView? = null
 
     fun dialogLoading() {
         setCancelable(false)
@@ -47,6 +50,7 @@ object Dlg {
         this.text = dialog?.findViewById(R.id.messages)
         icon = dialog?.findViewById(R.id.icon)
         bar = dialog?.findViewById(R.id.progress)
+        filename = dialog?.findViewById(R.id.filename)
 
         setText(text)
         setCancelable(true)
@@ -134,6 +138,23 @@ object Dlg {
         icon?.visibility = View.GONE
     }
 
+    fun setFileName(name: String?) {
+        filename?.apply {
+            text = name
+            visibility = if (name.isNullOrEmpty()) View.GONE else View.VISIBLE
+        }
+    }
+
+    fun downloadCallback(): Download.ProgressCallback {
+        val handler = Handler(Looper.getMainLooper())
+        return Download.ProgressCallback { percent, name ->
+            handler.post {
+                setBar(percent)
+                setFileName(name)
+            }
+        }
+    }
+
     private fun setBar(progress: Int, animate: Boolean) {
         bar?.apply {
             visibility = View.VISIBLE
@@ -147,6 +168,7 @@ object Dlg {
 
     fun hideBar() {
         bar?.visibility = View.GONE
+        filename?.visibility = View.GONE
     }
 
     fun onCancel(event: OnButtonClick) {

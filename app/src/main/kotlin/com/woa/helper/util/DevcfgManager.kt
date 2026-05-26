@@ -1,5 +1,6 @@
 package com.woa.helper.util
 
+import com.woa.helper.main.Dlg
 import com.woa.helper.main.Download
 
 object DevcfgManager {
@@ -26,13 +27,19 @@ object DevcfgManager {
         return ShellResult.Success("")
     }
 
-    fun downloadDevcfgImages(filesDir: String, devcfgDevice: String): ShellResult {
+    fun downloadDevcfgImages(filesDir: String, devcfgDevice: String, onProgress: Download.ProgressCallback = Dlg.downloadCallback()): ShellResult {
         if (ShellManager.exec("find $filesDir -maxdepth 1 -name OOS11_devcfg_*").isEmpty()) {
             val mkdirResult = ShellManager.execResult("mkdir -p $BACKUP_DIR")
             if (mkdirResult is ShellResult.Error) return mkdirResult
-            val oos11Result = Download.file("https://github.com/n00b69/woa-op7/releases/download/Files/OOS11_devcfg_$devcfgDevice.img", "$BACKUP_DIR/OOS11_devcfg_$devcfgDevice.img")
+            val oos11Name = "OOS11_devcfg_$devcfgDevice.img"
+            val oos12Name = "OOS12_devcfg_$devcfgDevice.img"
+            val oos11Result = Download.file("https://github.com/n00b69/woa-op7/releases/download/Files/$oos11Name", "$BACKUP_DIR/$oos11Name") { percent, _ ->
+                onProgress.onProgress(percent / 2, oos11Name)
+            }
             if (oos11Result is ShellResult.Error) return oos11Result
-            val oos12Result = Download.file("https://github.com/n00b69/woa-op7/releases/download/Files/OOS12_devcfg_$devcfgDevice.img", "$BACKUP_DIR/OOS12_devcfg_$devcfgDevice.img")
+            val oos12Result = Download.file("https://github.com/n00b69/woa-op7/releases/download/Files/$oos12Name", "$BACKUP_DIR/$oos12Name") { percent, _ ->
+                onProgress.onProgress(50 + percent / 2, oos12Name)
+            }
             if (oos12Result is ShellResult.Error) return oos12Result
             val cp1 = ShellManager.execResult("cp $BACKUP_DIR/OOS11_devcfg_$devcfgDevice.img $filesDir/")
             if (cp1 is ShellResult.Error) return cp1

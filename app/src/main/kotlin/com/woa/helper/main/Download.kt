@@ -12,6 +12,10 @@ import java.net.URL
 
 object Download {
 
+    fun interface ProgressCallback {
+        fun onProgress(percent: Int, fileName: String)
+    }
+
     fun permission(context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             if (!Environment.isExternalStorageManager()) {
@@ -28,7 +32,7 @@ object Download {
         }
     }
 
-    fun file(url: String, output: String): ShellResult {
+    fun file(url: String, output: String, onProgress: ProgressCallback? = null): ShellResult {
         val file = File(output)
         return try {
             val dir = file.parentFile
@@ -42,13 +46,26 @@ object Download {
                 conn.disconnect()
                 return ShellResult.Error("HTTP $responseCode downloading $url")
             }
+            val contentLength = conn.contentLengthLong
+            val fileName = file.name
             conn.inputStream.use { input ->
-                FileOutputStream(file).use { output ->
+                FileOutputStream(file).use { out ->
                     val buf = ByteArray(8192)
+                    var total: Long = 0
                     var n: Int
+                    var lastPercent = -1
                     while (input.read(buf).also { n = it } != -1) {
-                        output.write(buf, 0, n)
+                        out.write(buf, 0, n)
+                        total += n
+                        if (onProgress != null && contentLength > 0) {
+                            val percent = (total * 100 / contentLength).toInt().coerceIn(0, 100)
+                            if (percent != lastPercent) {
+                                lastPercent = percent
+                                onProgress.onProgress(percent, fileName)
+                            }
+                        }
                     }
+                    if (lastPercent >= 0) onProgress?.onProgress(100, fileName)
                 }
             }
             conn.disconnect()

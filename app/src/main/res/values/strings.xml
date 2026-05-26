@@ -120,7 +120,7 @@
     <string name="no">NO</string>
     <string name="please_wait">Please wait…</string>
 
-    <string name="quickboot_backup">Backup boot.img when quickboot</string>
+    <string name="quickboot_backup">Back up boot.img when quickboot</string>
     <string name="force">Force</string>
 
     <string name="preference5">Require confirmation for QS quickboot tile</string>
