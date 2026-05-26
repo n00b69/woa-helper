@@ -270,8 +270,6 @@ class MainActivity : AppCompatActivity() {
         toolboxBinding.dbkp.visibility = props.dbkp
         toolboxBinding.flashUefi.visibility = if (props.dbkp == View.VISIBLE) View.GONE else View.VISIBLE
 
-        onConfigurationChanged(resources.configuration)
-
         if (props.unsupported && !Pref.getAGREE(this)) {
             Dlg.show(this, R.string.unsupported)
             Dlg.setYes(R.string.sure) {
@@ -885,33 +883,6 @@ class MainActivity : AppCompatActivity() {
         ShellManager.exec("chmod 644 ${filesDir.absolutePath}/libfuse-lite.so && chown root:root ${filesDir.absolutePath}/libfuse-lite.so")
         ShellManager.exec("chmod 644 ${filesDir.absolutePath}/libntfs-3g.so && chown root:root ${filesDir.absolutePath}/libntfs-3g.so")
         ShellManager.exec("chmod 755 ${filesDir.absolutePath}/mount.ntfs && chown root:root ${filesDir.absolutePath}/mount.ntfs")
-    }
-
-    private fun aspectRatio(): Float {
-        val metrics = Resources.getSystem().displayMetrics
-        val width = metrics.widthPixels.toFloat()
-        val height = metrics.heightPixels.toFloat()
-        return if (width > height) width / height else height / width
-    }
-
-    private fun isTablet(): Boolean = aspectRatio() < 1.7f
-
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-
-        val isPortrait = newConfig.orientation == Configuration.ORIENTATION_PORTRAIT
-
-        mainBinding.app.orientation = if (isPortrait) LinearLayout.VERTICAL else LinearLayout.HORIZONTAL
-        mainBinding.top.orientation = if (isPortrait) LinearLayout.HORIZONTAL else LinearLayout.VERTICAL
-
-        if (!isTablet()) {
-            mainBinding.DeviceImage.setImageResource(Device.getVars().image)
-            mainBinding.DeviceImage.visibility = if (isPortrait) View.VISIBLE else View.GONE
-            mainBinding.up.layoutParams.height = if (isPortrait) LinearLayout.LayoutParams.WRAP_CONTENT else LinearLayout.LayoutParams.MATCH_PARENT
-
-            val padding = if (isPortrait) 0 else 100
-            mainBinding.infoText.setPadding(padding, 0, padding, 0)
-        }
     }
 
     private fun executeKernelOperation(
