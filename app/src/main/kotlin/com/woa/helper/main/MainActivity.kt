@@ -746,6 +746,7 @@ class MainActivity : AppCompatActivity() {
         if (!isNetworkConnected(this)) { noInternet(); return }
         Dlg.show(this, R.string.atlasos_question, R.drawable.ic_ar)
         Dlg.dismissButton()
+        Dlg.setCancelable(true)
 
         val downloadPlaybook = { _: String, url: String, targetName: String ->
             Dlg.dialogLoading()

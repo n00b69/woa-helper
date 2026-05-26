@@ -92,7 +92,7 @@ object Dlg {
     fun dismissButton() {
         hideBar()
         setDismiss(R.string.dismiss) { dialog?.dismiss() }
-        setCancelable(true)
+        setCancelable(false)
     }
 
     fun setDismiss(@StringRes stringId: Int, onButtonClick: OnButtonClick) {
