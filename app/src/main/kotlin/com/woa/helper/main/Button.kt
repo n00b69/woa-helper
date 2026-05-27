@@ -37,6 +37,7 @@ class Button(context: Context, attrs: AttributeSet?) : FrameLayout(context, attr
     }
 
     private fun updateBackground() {
+        alpha = if (isEnabled) 1f else 0.5f
         background = GradientDrawable().apply {
             shape = GradientDrawable.RECTANGLE
             cornerRadius = cornerRadiusPx
