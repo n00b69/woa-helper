@@ -1,16 +1,13 @@
 <resources>
 
-    <style name="Theme.MyApplication" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/md_theme_primary</item>
-        <item name="colorAccent">@color/md_theme_primary</item>
+    <style name="Theme.MyApplication" parent="@android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:colorPrimary">@color/md_theme_primary</item>
+        <item name="android:colorAccent">@color/md_theme_primary</item>
         <item name="android:colorBackground">@color/md_theme_background</item>
-        <item name="preferenceTheme">@style/PreferenceFragment.Material</item>
         <item name="android:windowTranslucentStatus">false</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@color/md_theme_inverseOnSurface</item>
         <item name="android:navigationBarColor">@color/transparent</item>
-        <item name="android:windowActivityTransitions">true</item>
-        <item name="android:windowContentTransitions">true</item>
     </style>
 
     <style name="button">
@@ -23,7 +20,7 @@
         <item name="android:layout_margin">5dp</item>
     </style>
 
-    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+    <style name="ToolbarTitleText">
         <item name="android:textSize">@dimen/_13ssp</item>
         <item name="android:textStyle">bold</item>
     </style>

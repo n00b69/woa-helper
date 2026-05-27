@@ -10,6 +10,7 @@ import android.graphics.RenderEffect
 import android.graphics.Shader
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -18,18 +19,6 @@ import android.view.animation.AnimationUtils
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.LinearLayout
-import androidx.activity.addCallback
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
-import androidx.core.os.LocaleListCompat
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat
-import androidx.lifecycle.lifecycleScope
 import com.woa.helper.BuildConfig
 import com.woa.helper.R
 import com.woa.helper.databinding.ActivityMainBinding
@@ -46,19 +35,13 @@ import com.woa.helper.util.ToolboxDeployer
 import com.woa.helper.util.UpdateChecker
 import com.woa.helper.util.RAM
 import com.woa.helper.widget.MountWidget
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import androidx.core.view.isVisible
 import java.io.File
 import java.io.IOException
 import java.util.Locale
-import androidx.core.content.edit
-
 import java.lang.ref.WeakReference
 
 @SuppressLint("StaticFieldLeak")
-class MainActivity : AppCompatActivity() {
+class MainActivity : Activity() {
     private lateinit var mainBinding: ActivityMainBinding
     private lateinit var settingsBinding: SetPanelBinding
     private lateinit var toolboxBinding: ToolboxBinding
@@ -66,14 +49,15 @@ class MainActivity : AppCompatActivity() {
     private val views: MutableList<View> = ArrayList()
     private var blurCount = 0
 
+    private fun postUi(action: () -> Unit) {
+        if (!isDestroyed) runOnUiThread(action)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         instance = WeakReference(this)
         applySavedLocale()
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-        WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars =
-            resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK != Configuration.UI_MODE_NIGHT_YES
+        setupEdgeToEdge()
         super.onCreate(savedInstanceState)
-
         initBase()
         setupNavigation()
         inflateLayouts()
@@ -95,8 +79,7 @@ class MainActivity : AppCompatActivity() {
         val locales = if (tag == "und") {
             Resources.getSystem().configuration.locales
         } else {
-            val compat = LocaleListCompat.forLanguageTags(tag)
-            android.os.LocaleList(*(0 until compat.size()).map { compat[it] }.toTypedArray())
+            android.os.LocaleList.forLanguageTags(tag)
         }
         val config = Configuration(resources.configuration)
         config.setLocales(locales)
@@ -121,9 +104,12 @@ class MainActivity : AppCompatActivity() {
             onBackInvokedDispatcher.registerOnBackInvokedCallback(
                 OnBackInvokedDispatcher.PRIORITY_DEFAULT, callback
             )
-        } else {
-            onBackPressedDispatcher.addCallback(this) { onBackHandled() }
         }
+    }
+
+    @Suppress("DEPRECATION")
+    override fun onBackPressed() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) onBackHandled()
     }
 
     private fun onBackHandled() {
@@ -140,10 +126,8 @@ class MainActivity : AppCompatActivity() {
         if (BuildConfig.DEBUG && currentView === settingsBinding.root) {
             saveCodenameIfChanged()
         }
-
         currentView.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_out))
         views.removeAt(views.lastIndex)
-
         val previousView = views.last()
         setContentView(previousView)
         previousView.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_back_in))
@@ -158,29 +142,45 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @Suppress("DEPRECATION")
+    private fun setupEdgeToEdge() {
+        val isLight = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK != Configuration.UI_MODE_NIGHT_YES
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.setDecorFitsSystemWindows(false)
+            window.decorView.windowInsetsController?.setSystemBarsAppearance(
+                if (isLight) android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS else 0,
+                android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+            )
+        } else {
+            window.decorView.systemUiVisibility = window.decorView.systemUiVisibility or
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
+                (if (isLight) View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR else 0)
+        }
+    }
+
     private fun inflateLayouts() {
         copyAssets()
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         settingsBinding = SetPanelBinding.inflate(layoutInflater)
         toolboxBinding = ToolboxBinding.inflate(layoutInflater)
-
         Download.permission(this)
         setContentView(mainBinding.root)
-
         views.clear()
         views.add(mainBinding.root)
     }
 
+    @Suppress("DEPRECATION")
     private fun setupWindowInsets() {
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content)) { _, insets ->
-            val sysInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-
+        findViewById<View>(android.R.id.content).setOnApplyWindowInsetsListener { _, insets ->
+            val left = insets.systemWindowInsetLeft
+            val top = insets.systemWindowInsetTop
+            val right = insets.systemWindowInsetRight
+            val bottom = insets.systemWindowInsetBottom
             listOf(mainBinding.app, toolboxBinding.app, settingsBinding.app).forEach {
-                it.setPadding(0, 0, 0, sysInsets.bottom)
+                it.setPadding(0, 0, 0, bottom)
             }
-
             listOf(mainBinding.linearLayout, toolboxBinding.linearLayout, settingsBinding.linearLayout).forEach {
-                it.setPadding(sysInsets.left, sysInsets.top, sysInsets.right, 0)
+                it.setPadding(left, top, right, 0)
             }
             insets
         }
@@ -191,25 +191,21 @@ class MainActivity : AppCompatActivity() {
     private fun setupLanguageSpinner() {
         val languages = mutableListOf(getString(R.string.default1))
         val locales = mutableListOf("und")
-
         for (tag in BuildConfig.LOCALES) {
             locales.add(tag!!.lowercase(Locale.getDefault()))
-            val locale = checkNotNull(LocaleListCompat.forLanguageTags(tag)[0])
+            val locale = checkNotNull(android.os.LocaleList.forLanguageTags(tag).get(0))
             val country = locale.getDisplayCountry(locale)
             val lang = locale.getDisplayLanguage(locale) + if (country.isNotEmpty()) " ($country)" else ""
             languages.add(lang)
         }
-
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, languages)
         settingsBinding.languages.adapter = adapter
-
         val currentLocale = resources.configuration.locales[0]
         if (currentLocale != null) {
             val index = locales.indexOf(currentLocale.toLanguageTag().lowercase())
             if (index != -1) settingsBinding.languages.setSelection(index)
         }
         lastSpinnerPosition = settingsBinding.languages.selectedItemPosition
-
         settingsBinding.languages.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 if (position == lastSpinnerPosition) return
@@ -222,17 +218,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupToolbar() {
-        setSupportActionBar(mainBinding.toolbarlayout.toolbar)
-
         val toolbarBindings = listOf(mainBinding.toolbarlayout, settingsBinding.toolbarlayout, toolboxBinding.toolbarlayout)
         toolbarBindings.forEach { binding ->
-            binding.toolbar.setNavigationIcon(R.drawable.ic_launcher_foreground)
+            binding.toolbar.navigationIcon = getDrawable(R.drawable.ic_launcher_foreground)
             binding.settings.setColorFilter(getColor(R.color.md_theme_primary))
         }
-
         mainBinding.toolbarlayout.toolbar.setTitle(R.string.app_name)
         mainBinding.toolbarlayout.toolbar.subtitle = "v${BuildConfig.VERSION_NAME}${if (BuildConfig.DEBUG) " (Debug)" else ""}"
-
         settingsBinding.toolbarlayout.toolbar.setTitle(R.string.preferences)
     }
 
@@ -244,32 +236,27 @@ class MainActivity : AppCompatActivity() {
         updateMountText()
         checkWin()
         checkUefi()
-
-        lifecycleScope.launch(Dispatchers.IO) {
-            withContext(Dispatchers.Main) {
-                if (MountManager.isSelinuxPermissive() && !Pref.getSelinux(this@MainActivity)) {
+        Thread {
+            val selinuxPermissive = MountManager.isSelinuxPermissive() && !Pref.getSelinux(this)
+            postUi {
+                if (selinuxPermissive) {
                     settingsBinding.selinux.visibility = View.GONE
                 }
             }
-        }
-
+        }.start()
         mainBinding.tvDate.text = getString(R.string.last, Pref.getDate(this))
-
         val slot = ShellManager.exec("getprop ro.boot.slot_suffix")
         if (slot.isEmpty()) {
             mainBinding.tvSlot.visibility = View.GONE
         } else {
             mainBinding.tvSlot.text = getString(R.string.slot, slot.drop(1)).uppercase(Locale.getDefault())
         }
-
         mainBinding.deviceName.text = "${Build.MODEL} (${Device.codename})"
         val props = Device.getVars()
-
         mainBinding.DeviceImage.setImageResource(props.image)
         mainBinding.tvPanel.visibility = props.panel
         toolboxBinding.dbkp.visibility = props.dbkp
         toolboxBinding.flashUefi.visibility = if (props.dbkp == View.VISIBLE) View.GONE else View.VISIBLE
-
         if (props.unsupported && !Pref.getAGREE(this)) {
             Dlg.show(this, R.string.unsupported)
             Dlg.setYes(R.string.sure) {
@@ -277,12 +264,10 @@ class MainActivity : AppCompatActivity() {
                 Dlg.close()
             }
         }
-
         val panel = detectPanelType()
         if (!Pref.getAGREE(this) && (panel.contains("f1p2_2") || panel.contains("f1_cmd"))) {
             showPanelWarning()
         }
-
         mainBinding.tvRamvalue.text = getString(R.string.ramvalue, RAM.getMemory(this).toDouble())
         mainBinding.tvPanel.text = getString(R.string.paneltype, panel)
     }
@@ -322,7 +307,6 @@ class MainActivity : AppCompatActivity() {
         mainBinding.cvInfo.setOnClickListener { checkUpdate(true) }
         mainBinding.mnt.setOnClickListener { mountUI(this, filesDir) }
         mainBinding.quickBoot.setOnClickListener { quickbootUI(this, filesDir) }
-
         setupBackupListener()
         setupToolboxListeners()
         setupSettingsListeners()
@@ -344,19 +328,16 @@ class MainActivity : AppCompatActivity() {
     private fun performBackup(isAndroid: Boolean) {
         Dlg.dialogLoading()
         updateLastBackupDate()
-        lifecycleScope.launch(Dispatchers.IO) {
+        Thread {
             val bootPartition = getBoot()
             val result = if (isAndroid) {
                 val backupResult = BackupManager.androidBackup(bootPartition)
-                if (backupResult is ShellResult.Success) {
-                    BackupManager.modemBackup()
-                } else {
-                    backupResult
-                }
+                if (backupResult is ShellResult.Success) BackupManager.modemBackup()
+                else backupResult
             } else {
                 BackupManager.winBackup(bootPartition)
             }
-            withContext(Dispatchers.Main) {
+            postUi {
                 when (result) {
                     is ShellResult.Success -> {
                         Dlg.setText(R.string.backuped)
@@ -368,14 +349,13 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-        }
+        }.start()
     }
 
     private fun setupToolboxListeners() {
         mainBinding.toolbox.setOnClickListener {
             navigateToView(toolboxBinding.root, R.string.toolbox_title)
         }
-
         toolboxBinding.sta.setOnClickListener { setupSta() }
         toolboxBinding.dumpModem.setOnClickListener { setupDumpModem() }
         toolboxBinding.flashUefi.setOnClickListener { setupFlashUefi() }
@@ -395,14 +375,13 @@ class MainActivity : AppCompatActivity() {
         views[views.size - 2].startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out))
         setContentView(targetView)
         targetView.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in))
-
         val toolbar = when (targetView) {
             toolboxBinding.root -> toolboxBinding.toolbarlayout.toolbar
             settingsBinding.root -> settingsBinding.toolbarlayout.toolbar
             else -> mainBinding.toolbarlayout.toolbar
         }
         toolbar.title = getString(titleRes)
-        toolbar.navigationIcon = ContextCompat.getDrawable(this, R.drawable.ic_launcher_foreground)
+        toolbar.navigationIcon = getDrawable(R.drawable.ic_launcher_foreground)
     }
 
     private fun setupSettingsListeners() {
@@ -411,34 +390,23 @@ class MainActivity : AppCompatActivity() {
             updateSettingsCheckboxes()
             settingsBinding.toolbarlayout.settings.visibility = View.GONE
         }
-
         listOf(mainBinding.toolbarlayout.settings, toolboxBinding.toolbarlayout.settings).forEach {
             it.setOnClickListener(settingsClick)
         }
-
         settingsBinding.confirmation.setOnChangeListener { b -> Pref.setConfirm(this, b) }
         settingsBinding.automount.setOnChangeListener { b -> Pref.setAutoMount(this, b) }
         settingsBinding.securelock.setOnChangeListener { b -> Pref.setSecure(this, !b) }
-
         settingsBinding.mountLocation.setOnChangeListener { b ->
             Pref.setMountLocation(this, b)
             MountManager.init(filesDir, this)
         }
-
         settingsBinding.selinux.setOnChangeListener { b ->
             Pref.setSelinux(this, b)
             MountManager.init(filesDir, this)
         }
-
         settingsBinding.appUpdate.setOnChangeListener { b -> Pref.setAppUpdate(this, b) }
-
-        settingsBinding.chatButton.setOnClickListener {
-            openLink(this, "https://t.me/woahelperchat")
-        }
-        settingsBinding.githubButton.setOnClickListener {
-            openLink(this, "https://github.com/n00b69/woa-helper")
-        }
-
+        settingsBinding.chatButton.setOnClickListener { openLink(this, "https://t.me/woahelperchat") }
+        settingsBinding.githubButton.setOnClickListener { openLink(this, "https://github.com/n00b69/woa-helper") }
         setupQuickBootDropdown()
         setupDevcfgSettings()
     }
@@ -451,7 +419,7 @@ class MainActivity : AppCompatActivity() {
             settingsBinding.mountLocation to Pref.getMountLocation(this),
             settingsBinding.selinux to Pref.getSelinux(this),
             settingsBinding.appUpdate to Pref.getAppUpdate(this),
-            settingsBinding.devcfg1 to (Pref.getDevcfg1(this) && settingsBinding.devcfg1.isVisible),
+            settingsBinding.devcfg1 to (Pref.getDevcfg1(this) && settingsBinding.devcfg1.visibility == View.VISIBLE),
             settingsBinding.devcfg2 to Pref.getDevcfg2(this)
         )
         pairs.forEach { it.first.isChecked = it.second }
@@ -463,11 +431,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupQuickBootDropdown() {
         settingsBinding.quickbootBackupHeader.setOnClickListener {
-            val isVisible = settingsBinding.quickbootBackupContent.isVisible
+            val isVisible = settingsBinding.quickbootBackupContent.visibility == View.VISIBLE
             settingsBinding.quickbootBackupContent.visibility = if (isVisible) View.GONE else View.VISIBLE
             settingsBinding.quickbootBackupChevron.rotation = if (isVisible) 0f else 180f
         }
-
         settingsBinding.backupWindows.setOnChangeListener { b ->
             if (b) {
                 Pref.setBackupIfNoneWindows(this, true)
@@ -479,7 +446,6 @@ class MainActivity : AppCompatActivity() {
                 settingsBinding.forceWindowsSwitch.isEnabled = false
             }
         }
-
         settingsBinding.backupAndroid.setOnChangeListener { b ->
             if (b) {
                 Pref.setBackupIfNoneAndroid(this, true)
@@ -491,7 +457,6 @@ class MainActivity : AppCompatActivity() {
                 settingsBinding.forceAndroidSwitch.isEnabled = false
             }
         }
-
         settingsBinding.forceWindowsSwitch.setOnClickListener {
             if (settingsBinding.forceWindowsSwitch.isChecked) {
                 Dlg.showBackupWarning(this) {
@@ -505,7 +470,6 @@ class MainActivity : AppCompatActivity() {
                 Pref.setBackupIfNoneWindows(this, true)
             }
         }
-
         settingsBinding.forceAndroidSwitch.setOnClickListener {
             if (settingsBinding.forceAndroidSwitch.isChecked) {
                 Dlg.showBackupWarning(this) {
@@ -524,23 +488,19 @@ class MainActivity : AppCompatActivity() {
     private fun updateQuickBootDropdown() {
         val windowsEnabled = Pref.getBackupIfNoneWindows(this) || Pref.getForceBackupWindows(this)
         val androidEnabled = Pref.getBackupIfNoneAndroid(this) || Pref.getForceBackupAndroid(this)
-        val forceWindows = Pref.getForceBackupWindows(this)
-        val forceAndroid = Pref.getForceBackupAndroid(this)
-
         settingsBinding.backupWindows.isChecked = windowsEnabled
         settingsBinding.backupAndroid.isChecked = androidEnabled
-        settingsBinding.forceWindowsSwitch.isChecked = forceWindows
-        settingsBinding.forceAndroidSwitch.isChecked = forceAndroid
+        settingsBinding.forceWindowsSwitch.isChecked = Pref.getForceBackupWindows(this)
+        settingsBinding.forceAndroidSwitch.isChecked = Pref.getForceBackupAndroid(this)
         settingsBinding.forceWindowsSwitch.isEnabled = windowsEnabled
         settingsBinding.forceAndroidSwitch.isEnabled = androidEnabled
     }
 
     private fun setupDevcfgSettings() {
-        lifecycleScope.launch(Dispatchers.IO) {
+        Thread {
             val op7funny = ShellManager.exec("cat /proc/cmdline | grep oplus")
             val isOP7Variant = setOf("guacamole", "guacamolet", "OnePlus7Pro", "OnePlus7Pro4G", "OnePlus7ProTMO", "hotdog", "OnePlus7TPro", "OnePlus7TPro4G").contains(Device.codename)
-
-            withContext(Dispatchers.Main) {
+            postUi {
                 if (isOP7Variant && op7funny.isNotEmpty()) {
                     settingsBinding.devcfg1.setOnChangeListener { b ->
                         Pref.setDevcfg1(this@MainActivity, b)
@@ -556,7 +516,7 @@ class MainActivity : AppCompatActivity() {
                     Pref.setDevcfg2(this@MainActivity, false)
                 }
             }
-        }
+        }.start()
     }
 
     private fun checkUpdatesAndModels() {
@@ -566,14 +526,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupToolboxAction(@StringRes question: Int, @DrawableRes icon: Int, deploy: suspend (String) -> ShellResult) {
+    private fun setupToolboxAction(question: Int, icon: Int, deploy: (String) -> ShellResult) {
         Dlg.show(this, question, icon)
         Dlg.setNo(R.string.no) { Dlg.close() }
         Dlg.setYes(R.string.yes) {
             Dlg.dialogLoading()
-            lifecycleScope.launch(Dispatchers.IO) {
+            Thread {
                 val result = deploy(filesDir.absolutePath)
-                withContext(Dispatchers.Main) {
+                postUi {
                     when (result) {
                         is ShellResult.Success -> {
                             Dlg.setText(R.string.done)
@@ -585,7 +545,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 }
-            }
+            }.start()
         }
     }
 
@@ -598,9 +558,9 @@ class MainActivity : AppCompatActivity() {
         Dlg.setNo(R.string.no) { Dlg.close() }
         Dlg.setYes(R.string.yes) {
             Dlg.dialogLoading()
-            lifecycleScope.launch(Dispatchers.IO) {
+            Thread {
                 val result = ToolboxDeployer.dumpModem()
-                withContext(Dispatchers.Main) {
+                postUi {
                     when (result) {
                         is ShellResult.Success -> {
                             Dlg.setText(R.string.lte)
@@ -612,7 +572,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 }
-            }
+            }.start()
         }
     }
 
@@ -621,45 +581,44 @@ class MainActivity : AppCompatActivity() {
         Dlg.setNo(R.string.no) { Dlg.close() }
         Dlg.setYes(R.string.yes) {
             Dlg.dialogLoading()
-            lifecycleScope.launch(Dispatchers.IO) {
+            Thread {
                 flash(Device.uefiPath)
-                withContext(Dispatchers.Main) {
+                postUi {
                     Dlg.setText(R.string.flash)
                     Dlg.dismissButton()
                 }
-            }
+            }.start()
         }
     }
 
     private fun setupDbkp() {
         Dlg.dialogLoading()
-        lifecycleScope.launch(Dispatchers.IO) {
+        Thread {
             val bootIMG = "/dev/block/by-name/boot${ShellManager.exec("getprop ro.boot.slot_suffix")}"
             val tempDirResult = KernelManager.getTempDir(filesDir)
             if (tempDirResult is ShellResult.Error) {
-                withContext(Dispatchers.Main) {
+                postUi {
                     Dlg.setText("Failed to setup: ${tempDirResult.message}")
                     Dlg.dismissButton()
                 }
-                return@launch
+                return@Thread
             }
             val unpackResult = KernelManager.unpackKernel(bootIMG)
             if (unpackResult is ShellResult.Error) {
-                withContext(Dispatchers.Main) {
+                postUi {
                     Dlg.setText("Failed to unpack kernel: ${unpackResult.message}")
                     Dlg.dismissButton()
                 }
-                return@launch
+                return@Thread
             }
             val patched = KernelManager.isPatched()
             val props = Device.getVars()
-
-            withContext(Dispatchers.Main) {
+            postUi {
                 if (!patched) {
                     Dlg.show(this@MainActivity, getString(R.string.dbkp_question, getDbkpModel()), R.drawable.ic_uefi)
                     Dlg.setNo(R.string.no) {
                         Dlg.close()
-                        lifecycleScope.launch(Dispatchers.IO) { KernelManager.cleanup() }
+                        Thread { KernelManager.cleanup() }.start()
                     }
                     Dlg.setYes(R.string.yes) {
                         ShellManager.exec("cp ${filesDir.absolutePath}/dbkp.${props.dbkpCodename}.bin ${filesDir.absolutePath}/temp/dbkp.bin")
@@ -669,7 +628,7 @@ class MainActivity : AppCompatActivity() {
                     Dlg.show(this@MainActivity, getString(R.string.dbkp_question2), R.drawable.ic_uefi)
                     Dlg.setNo(R.string.no) {
                         Dlg.close()
-                        lifecycleScope.launch(Dispatchers.IO) { KernelManager.cleanup() }
+                        Thread { KernelManager.cleanup() }.start()
                     }
                     Dlg.setYes(R.string.reinstall) {
                         ShellManager.exec("cp ${filesDir.absolutePath}/dbkp.${props.dbkpCodename}.bin ${filesDir.absolutePath}/temp/dbkp.bin")
@@ -681,7 +640,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-        }
+        }.start()
     }
 
     private fun getDbkpMessage(codename: String) = when (codename) {
@@ -702,9 +661,7 @@ class MainActivity : AppCompatActivity() {
         Dlg.setNo(R.string.no) { Dlg.close() }
         Dlg.setYes(R.string.yes) {
             Dlg.dialogLoading()
-            lifecycleScope.launch(Dispatchers.IO) {
-                performDevcfgFlash()
-            }
+            Thread { performDevcfgFlash() }.start()
         }
     }
 
@@ -712,26 +669,25 @@ class MainActivity : AppCompatActivity() {
         val devcfgDevice = DevcfgManager.getDevcfgDevice(Device.codename)
         val backupResult = DevcfgManager.backupDevcfg(filesDir.absolutePath)
         if (backupResult is ShellResult.Error) {
-            runOnUiThread { Dlg.setText("${getString(R.string.wrong)}\n\n${backupResult.message}"); Dlg.dismissButton() }
+            postUi { Dlg.setText("${getString(R.string.wrong)}\n\n${backupResult.message}"); Dlg.dismissButton() }
             return
         }
         val downloadResult = DevcfgManager.downloadDevcfgImages(filesDir.absolutePath, devcfgDevice)
         if (downloadResult is ShellResult.Error) {
-            runOnUiThread { Dlg.setText("${getString(R.string.wrong)}\n\n${downloadResult.message}"); Dlg.dismissButton() }
+            postUi { Dlg.setText("${getString(R.string.wrong)}\n\n${downloadResult.message}"); Dlg.dismissButton() }
             return
         }
         val flashResult = DevcfgManager.flashDevcfg(filesDir.absolutePath, devcfgDevice)
         if (flashResult is ShellResult.Error) {
-            runOnUiThread { Dlg.setText("${getString(R.string.wrong)}\n\n${flashResult.message}"); Dlg.dismissButton() }
+            postUi { Dlg.setText("${getString(R.string.wrong)}\n\n${flashResult.message}"); Dlg.dismissButton() }
             return
         }
         val copyResult = DevcfgManager.copyDevcfgToWindows(filesDir.absolutePath, useBootSddConf = false, copyBackup = true)
         if (copyResult is ShellResult.Error) {
-            runOnUiThread { Dlg.setText("${getString(R.string.wrong)}\n\n${copyResult.message}"); Dlg.dismissButton() }
+            postUi { Dlg.setText("${getString(R.string.wrong)}\n\n${copyResult.message}"); Dlg.dismissButton() }
             return
         }
-
-        runOnUiThread {
+        postUi {
             Dlg.setText(R.string.devcfg)
             Dlg.setDismiss(R.string.dismiss) { Dlg.close() }
             Dlg.setYes(R.string.reboot) { ShellManager.exec("/system/bin/svc power reboot") }
@@ -747,14 +703,13 @@ class MainActivity : AppCompatActivity() {
         Dlg.show(this, R.string.atlasos_question, R.drawable.ic_ar)
         Dlg.dismissButton()
         Dlg.setCancelable(true)
-
         val downloadPlaybook = { _: String, url: String, targetName: String ->
             Dlg.dialogLoading()
             Dlg.setBar(0)
             Dlg.setIcon(R.drawable.ic_download)
-            lifecycleScope.launch(Dispatchers.IO) {
+            Thread {
                 val result = ToolboxDeployer.deployAtlasOS(url, targetName)
-                withContext(Dispatchers.Main) {
+                postUi {
                     when (result) {
                         is ShellResult.Success -> {
                             Dlg.setIcon(R.drawable.ic_ar)
@@ -768,9 +723,8 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 }
-            }
+            }.start()
         }
-
         Dlg.setNo(R.string.revios) {
             downloadPlaybook("ReviOS", "https://github.com/n00b69/modified-playbooks/releases/download/ReviOS/ReviPlaybook.apbx", "ReviPlaybook.apbx")
         }
@@ -799,9 +753,9 @@ class MainActivity : AppCompatActivity() {
             Dlg.dialogLoading()
             Dlg.setIcon(R.drawable.ic_download)
             Dlg.setBar(0)
-            lifecycleScope.launch(Dispatchers.IO) {
+            Thread {
                 val result = ToolboxDeployer.deployFrameworks(filesDir.absolutePath)
-                withContext(Dispatchers.Main) {
+                postUi {
                     when (result) {
                         is ShellResult.Success -> {
                             Dlg.setIcon(R.drawable.ic_mnt)
@@ -815,7 +769,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 }
-            }
+            }.start()
         }
     }
 
@@ -825,9 +779,9 @@ class MainActivity : AppCompatActivity() {
         Dlg.setYes(R.string.yes) {
             Dlg.dialogLoading()
             Dlg.setBar(0)
-            lifecycleScope.launch(Dispatchers.IO) {
+            Thread {
                 val result = ToolboxDeployer.deployDefenderEdge(filesDir.absolutePath, isNetworkConnected(this@MainActivity))
-                withContext(Dispatchers.Main) {
+                postUi {
                     when (result) {
                         is ShellResult.Success -> {
                             Dlg.setText(R.string.done)
@@ -839,7 +793,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 }
-            }
+            }.start()
         }
     }
 
@@ -874,74 +828,68 @@ class MainActivity : AppCompatActivity() {
                         input.copyTo(output)
                     }
                 }
-            } catch (_: IOException) {
-            }
+            } catch (_: IOException) {}
         }
-
         ShellManager.exec("chmod 644 ${filesDir.absolutePath}/libfuse-lite.so && chown root:root ${filesDir.absolutePath}/libfuse-lite.so")
         ShellManager.exec("chmod 644 ${filesDir.absolutePath}/libntfs-3g.so && chown root:root ${filesDir.absolutePath}/libntfs-3g.so")
         ShellManager.exec("chmod 755 ${filesDir.absolutePath}/mount.ntfs && chown root:root ${filesDir.absolutePath}/mount.ntfs")
     }
 
     private fun executeKernelOperation(
-        prepare: suspend () -> Int,
+        prepare: () -> Int,
         backupName: String,
-        @StringRes resultText: Int,
+        resultText: Int,
         resultArgs: Array<Any> = emptyArray()
     ) {
-        lifecycleScope.launch(Dispatchers.IO) {
+        Thread {
             val bootPartition = getBoot()
             val backupResult = BackupManager.androidBackup(bootPartition)
             if (backupResult is ShellResult.Error) {
-                withContext(Dispatchers.Main) {
+                postUi {
                     Dlg.clearButtons()
                     Dlg.setText("${getString(R.string.wrong)}\n\n${backupResult.message}")
                     Dlg.setDismiss(R.string.dismiss) { Dlg.close() }
                 }
-                return@launch
+                return@Thread
             }
             val kernel = KernelManager.getKernelFile()
-            if (kernel == null) return@launch
-
+            if (kernel == null) return@Thread
             val succ = prepare()
             if (succ != 0) {
                 KernelManager.cleanup()
-                withContext(Dispatchers.Main) {
+                postUi {
                     Dlg.clearButtons()
                     Dlg.setText(R.string.wrong)
                     Dlg.setDismiss(R.string.dismiss) { Dlg.close() }
                 }
-                return@launch
+                return@Thread
             }
-
             val bootIMG = "/dev/block/by-name/boot${ShellManager.exec("getprop ro.boot.slot_suffix")}"
             val repackResult = KernelManager.repackKernel(bootIMG)
             if (repackResult is ShellResult.Error) {
-                withContext(Dispatchers.Main) {
+                postUi {
                     Dlg.clearButtons()
                     Dlg.setText("${getString(R.string.wrong)}\n\n${repackResult.message}")
                     Dlg.setDismiss(R.string.dismiss) { Dlg.close() }
                 }
                 KernelManager.cleanup()
-                return@launch
+                return@Thread
             }
             ShellManager.exec("cp ${filesDir.absolutePath}/temp/new-boot.img /sdcard/WOAHelper/Backups/$backupName")
-
             val slotSuffix = ShellManager.exec("getprop ro.boot.slot_suffix")
             val targetPartition = if ("cepheus" == Device.codename) "boot" else "boot_a"
             ShellManager.exec("dd if=/sdcard/WOAHelper/Backups/$backupName of=/dev/block/by-name/$targetPartition bs=16M")
             if ("cepheus" != Device.codename) {
                 ShellManager.exec("dd if=/sdcard/WOAHelper/Backups/$backupName of=/dev/block/by-name/boot_b bs=16M")
             }
-
             KernelManager.cleanup()
-            withContext(Dispatchers.Main) {
+            postUi {
                 Dlg.clearButtons()
                 Dlg.setText(getString(resultText, *resultArgs))
                 Dlg.setDismiss(R.string.dismiss) { Dlg.close() }
                 Dlg.setNo(R.string.reboot) { ShellManager.exec("/system/bin/svc power reboot") }
             }
-        }
+        }.start()
     }
 
     private fun kernelPatch(message: String, link: String) {
@@ -1002,25 +950,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkUefi() {
-        lifecycleScope.launch(Dispatchers.IO) {
+        Thread {
             ShellManager.exec("mkdir /sdcard/UEFI")
             Device.uefiPath = "\"" + ShellManager.exec(getString(R.string.uefiChk)) + "\""
             val found = Device.uefiPath.contains("img")
-
-            withContext(Dispatchers.Main) {
+            postUi {
                 listOf(mainBinding.quickBoot, toolboxBinding.flashUefi).forEach { it.isEnabled = found }
                 mainBinding.quickBoot.setTitle(if (found) R.string.quickboot_title else R.string.uefi_not_found)
                 toolboxBinding.flashUefi.setTitle(if (found) R.string.flash_uefi_title else R.string.uefi_not_found)
                 mainBinding.quickBoot.setSubtitle(if (found) getString(R.string.quickboot_subtitle_nabu) else getString(R.string.uefi_not_found_subtitle, Device.codename))
                 toolboxBinding.flashUefi.setSubtitle(if (found) getString(R.string.flash_uefi_subtitle) else getString(R.string.uefi_not_found_subtitle, Device.codename))
             }
-        }
+        }.start()
     }
 
     private fun checkWin() {
-        lifecycleScope.launch(Dispatchers.IO) {
+        Thread {
             val hasPartition = MountManager.getWinPartition().isNotEmpty()
-            withContext(Dispatchers.Main) {
+            postUi {
                 if (!hasPartition && !BuildConfig.DEBUG) {
                     Dlg.show(this@MainActivity, R.string.partition)
                     Dlg.setCancelable(false)
@@ -1028,49 +975,31 @@ class MainActivity : AppCompatActivity() {
                     listOf(mainBinding.mnt, mainBinding.toolbox, mainBinding.quickBoot, toolboxBinding.flashUefi).forEach { it.isEnabled = false }
                 }
             }
-        }
+        }.start()
     }
 
-    private fun checkUpdate() {
-        checkUpdate(false)
-    }
+    private fun checkUpdate() { checkUpdate(false) }
 
     private fun checkUpdate(manual: Boolean) {
         if (!ShellManager.isRootGranted() && !manual) return
-        if (!isNetworkConnected(this)) {
-            if (manual) noInternet()
-            return
-        }
+        if (!isNetworkConnected(this)) { if (manual) noInternet(); return }
         if (Pref.getAppUpdate(this) && !manual) return
-        if (manual) {
-            Dlg.show(this, R.string.please_wait)
-            Dlg.setCancelable(false)
-        }
-
-        lifecycleScope.launch(Dispatchers.IO) {
+        if (manual) { Dlg.show(this, R.string.please_wait); Dlg.setCancelable(false) }
+        Thread {
             val version = UpdateChecker.getRemoteVersion(BuildConfig.DEBUG)
             val changelog = UpdateChecker.getChangelog(BuildConfig.DEBUG)
-
-            withContext(Dispatchers.Main) {
-                if (version.isEmpty()) {
-                    if (manual) noInternet()
-                    return@withContext
-                }
-
+            postUi {
+                if (version.isEmpty()) { if (manual) noInternet(); return@postUi }
                 if (BuildConfig.VERSION_NAME == version) {
-                    if (manual) {
-                        Dlg.setText(getString(R.string.update3))
-                        Dlg.dismissButton()
-                    }
-                    return@withContext
+                    if (manual) { Dlg.setText(getString(R.string.update3)); Dlg.dismissButton() }
+                    return@postUi
                 }
-
                 if (!manual) Dlg.show(this@MainActivity, "")
                 Dlg.setText("${getString(R.string.update1)}: $version\n$changelog")
                 Dlg.setNo(R.string.later) { Dlg.close() }
                 Dlg.setYes(R.string.update) { openLink(this@MainActivity, "https://github.com/n00b69/woa-helper/releases/tag/APK") }
             }
-        }
+        }.start()
     }
 
     private fun mountFail() {
@@ -1102,6 +1031,11 @@ class MainActivity : AppCompatActivity() {
     companion object {
         @JvmStatic
         var instance: WeakReference<MainActivity>? = null
+
+        private fun postOnUiThread(activity: Activity, action: () -> Unit) {
+            if (!activity.isDestroyed) activity.runOnUiThread(action)
+        }
+
         @JvmStatic
         fun isNetworkConnected(context: Context): Boolean {
             val connectivityManager = context.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -1113,7 +1047,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         @JvmStatic
-        fun mountUI(activity: AppCompatActivity, filesDir: File) {
+        fun mountUI(activity: Activity, filesDir: File) {
             MountManager.init(filesDir, activity)
             val wasMounted = MountManager.isMounted()
             val question = if (wasMounted) R.string.unmount_question else R.string.mount_question
@@ -1121,24 +1055,16 @@ class MainActivity : AppCompatActivity() {
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
                 Dlg.dialogLoading()
-                val scope = (activity as? MainActivity)?.lifecycleScope
-                scope?.launch(Dispatchers.IO) {
-                    val result = if (wasMounted) {
-                        MountManager.unmount()
-                    } else {
-                        MountManager.mount()
-                    }
+                Thread {
+                    val result = if (wasMounted) MountManager.unmount() else MountManager.mount()
                     val isNowMounted = MountManager.isMounted()
-
-                    withContext(Dispatchers.Main) {
-                        activity.updateMountText()
+                    if (activity.isDestroyed) return@Thread
+                    postOnUiThread(activity) {
+                        (activity as? MainActivity)?.updateMountText()
                         if (result is ShellResult.Success) MountWidget.requestUpdate(activity)
                         if (wasMounted) {
                             when (result) {
-                                is ShellResult.Success -> {
-                                    Dlg.setText(R.string.unmounted)
-                                    Dlg.dismissButton()
-                                }
+                                is ShellResult.Success -> { Dlg.setText(R.string.unmounted); Dlg.dismissButton() }
                                 is ShellResult.Error -> {
                                     Dlg.hideIcon()
                                     Dlg.setText("${activity.getString(R.string.wrong)}\n\n${result.message}")
@@ -1157,28 +1083,25 @@ class MainActivity : AppCompatActivity() {
                             Dlg.setNo(R.string.dismiss) { Dlg.close() }
                         }
                     }
-                }
+                }.start()
             }
         }
 
         @JvmStatic
-        fun quickbootUI(activity: AppCompatActivity, filesDir: File) {
+        fun quickbootUI(activity: Activity, filesDir: File) {
             MountManager.init(filesDir, activity)
             Dlg.show(activity, R.string.quickboot_question, R.drawable.ic_launcher_foreground)
             Dlg.setNo(R.string.no) { Dlg.close() }
             Dlg.setYes(R.string.yes) {
                 Dlg.dialogLoading()
-                val scope = (activity as? MainActivity)?.lifecycleScope
-                scope?.launch(Dispatchers.IO) {
-                    performQuickBoot(activity, filesDir)
-                }
+                Thread { performQuickBoot(activity, filesDir) }.start()
             }
         }
 
-        private fun performQuickBoot(activity: AppCompatActivity, filesDir: File) {
+        private fun performQuickBoot(activity: Activity, filesDir: File) {
             val mountResult = MountManager.mount()
             if (mountResult is ShellResult.Error) {
-                (activity as Activity).runOnUiThread {
+                postOnUiThread(activity) {
                     Dlg.setText("${activity.getString(R.string.wrong)}\n\n${mountResult.message}")
                     Dlg.dismissButton()
                 }
@@ -1186,29 +1109,26 @@ class MainActivity : AppCompatActivity() {
             }
             val currentWinPath = MountManager.getWinPath()
             val boot = getBoot()
-
             if (Pref.getBackupIfNoneWindows(activity) || (Pref.getForceBackupWindows(activity) && ShellManager.exec("ls $currentWinPath | grep boot.img").isEmpty())) {
                 BackupManager.winBackup(boot)
-                (activity as Activity).runOnUiThread { (activity as? MainActivity)?.updateLastBackupDate() }
+                postOnUiThread(activity) { (activity as? MainActivity)?.updateLastBackupDate() }
             }
             if (Pref.getBackupIfNoneAndroid(activity) || (Pref.getForceBackupAndroid(activity) && ShellManager.exec("find /sdcard/WOAHelper/Backups | grep boot.img").isEmpty())) {
                 BackupManager.androidBackup(boot)
-                (activity as Activity).runOnUiThread { (activity as? MainActivity)?.updateLastBackupDate() }
+                postOnUiThread(activity) { (activity as? MainActivity)?.updateLastBackupDate() }
             }
-
             if (Pref.getDevcfg1(activity)) {
                 if (!isNetworkConnected(activity)) {
-                    (activity as Activity).runOnUiThread { (activity as? MainActivity)?.noInternet() }
+                    postOnUiThread(activity) { (activity as? MainActivity)?.noInternet() }
                     return
                 }
                 if (!flashDevcfgQuickBoot(activity, filesDir)) return
             }
-
             flash(Device.uefiPath)
             if (ShellManager.exec("find /sdcard/WOAHelper/Backups | grep modemst1.img").isEmpty()) {
                 val modemResult = BackupManager.modemBackup()
                 if (modemResult is ShellResult.Error) {
-                    (activity as Activity).runOnUiThread {
+                    postOnUiThread(activity) {
                         Dlg.setText("${activity.getString(R.string.wrong)}\n\n${modemResult.message}")
                         Dlg.dismissButton()
                     }
@@ -1222,7 +1142,7 @@ class MainActivity : AppCompatActivity() {
             val devcfgDevice = DevcfgManager.getDevcfgDevice(Device.codename)
             val backupResult = DevcfgManager.backupDevcfg(filesDir.absolutePath)
             if (backupResult is ShellResult.Error) {
-                (activity as Activity).runOnUiThread {
+                postOnUiThread(activity as Activity) {
                     Dlg.setText("${activity.getString(R.string.wrong)}\n\n${backupResult.message}")
                     Dlg.dismissButton()
                 }
@@ -1230,7 +1150,7 @@ class MainActivity : AppCompatActivity() {
             }
             val downloadResult = DevcfgManager.downloadDevcfgImages(filesDir.absolutePath, devcfgDevice)
             if (downloadResult is ShellResult.Error) {
-                (activity as Activity).runOnUiThread {
+                postOnUiThread(activity as Activity) {
                     Dlg.setText("${activity.getString(R.string.wrong)}\n\n${downloadResult.message}")
                     Dlg.dismissButton()
                 }
@@ -1238,17 +1158,16 @@ class MainActivity : AppCompatActivity() {
             }
             val flashResult = DevcfgManager.flashDevcfg(filesDir.absolutePath, devcfgDevice)
             if (flashResult is ShellResult.Error) {
-                (activity as Activity).runOnUiThread {
+                postOnUiThread(activity as Activity) {
                     Dlg.setText("${activity.getString(R.string.wrong)}\n\n${flashResult.message}")
                     Dlg.dismissButton()
                 }
                 return false
             }
-
             if (Pref.getDevcfg2(activity)) {
                 val copyResult = DevcfgManager.copyDevcfgToWindows(filesDir.absolutePath, useBootSddConf = true, copyBackup = true)
                 if (copyResult is ShellResult.Error) {
-                    (activity as Activity).runOnUiThread {
+                    postOnUiThread(activity as Activity) {
                         Dlg.setText("${activity.getString(R.string.wrong)}\n\n${copyResult.message}")
                         Dlg.dismissButton()
                     }
@@ -1307,7 +1226,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         internal fun openLink(context: Context, link: String) {
-            context.startActivity(Intent(Intent.ACTION_VIEW, link.toUri()))
+            context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(link)))
         }
     }
 }

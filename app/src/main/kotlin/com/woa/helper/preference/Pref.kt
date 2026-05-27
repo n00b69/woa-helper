@@ -2,8 +2,6 @@ package com.woa.helper.preference
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.core.content.edit
-import androidx.preference.PreferenceManager
 
 object Pref {
     private const val BACKUP_IF_NONE_WINDOWS = "woa backup when quickboot windows"
@@ -25,62 +23,62 @@ object Pref {
     const val FILESDIR = "woa_app_filesdir"
 
     fun getSharedPreference(context: Context): SharedPreferences =
-        PreferenceManager.getDefaultSharedPreferences(context)
+        context.getSharedPreferences("${context.packageName}_preferences", Context.MODE_PRIVATE)
 
     fun codenameChanger(rw: Boolean, context: Context, value: String): String {
         val prefs = getSharedPreference(context)
         return if (rw) {
-            prefs.edit { putString(CODENAME, value) }
+            prefs.edit().putString(CODENAME, value).apply()
             ""
         } else {
             prefs.getString(CODENAME, value) ?: value
         }
     }
 
-    fun setForceBackupWindows(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(BACKUP_FORCE_WINDOWS, value) }
+    fun setForceBackupWindows(context: Context, value: Boolean) = getSharedPreference(context).edit().putBoolean(BACKUP_FORCE_WINDOWS, value).apply()
     fun getForceBackupWindows(context: Context): Boolean = getSharedPreference(context).getBoolean(BACKUP_FORCE_WINDOWS, false)
 
-    fun setForceBackupAndroid(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(BACKUP_FORCE_ANDROID, value) }
+    fun setForceBackupAndroid(context: Context, value: Boolean) = getSharedPreference(context).edit().putBoolean(BACKUP_FORCE_ANDROID, value).apply()
     fun getForceBackupAndroid(context: Context): Boolean = getSharedPreference(context).getBoolean(BACKUP_FORCE_ANDROID, false)
 
-    fun setConfirm(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(CONFIRMATION, value) }
+    fun setConfirm(context: Context, value: Boolean) = getSharedPreference(context).edit().putBoolean(CONFIRMATION, value).apply()
     fun getConfirm(context: Context): Boolean = getSharedPreference(context).getBoolean(CONFIRMATION, false)
 
-    fun setAGREE(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(AGREED, value) }
+    fun setAGREE(context: Context, value: Boolean) = getSharedPreference(context).edit().putBoolean(AGREED, value).apply()
     fun getAGREE(context: Context): Boolean = getSharedPreference(context).getBoolean(AGREED, false)
 
-    fun setBackupIfNoneWindows(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(BACKUP_IF_NONE_WINDOWS, value) }
+    fun setBackupIfNoneWindows(context: Context, value: Boolean) = getSharedPreference(context).edit().putBoolean(BACKUP_IF_NONE_WINDOWS, value).apply()
     fun getBackupIfNoneWindows(context: Context): Boolean = getSharedPreference(context).getBoolean(BACKUP_IF_NONE_WINDOWS, true)
 
-    fun setBackupIfNoneAndroid(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(BACKUP_IF_NONE_ANDROID, value) }
+    fun setBackupIfNoneAndroid(context: Context, value: Boolean) = getSharedPreference(context).edit().putBoolean(BACKUP_IF_NONE_ANDROID, value).apply()
     fun getBackupIfNoneAndroid(context: Context): Boolean = getSharedPreference(context).getBoolean(BACKUP_IF_NONE_ANDROID, true)
 
-    fun setDate(context: Context, value: String?) = getSharedPreference(context).edit { putString(BACKUP_DATE, value) }
+    fun setDate(context: Context, value: String?) = getSharedPreference(context).edit().putString(BACKUP_DATE, value).apply()
     fun getDate(context: Context): String = getSharedPreference(context).getString(BACKUP_DATE, "") ?: ""
 
-    fun setAutoMount(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(AUTOMOUNT, value) }
+    fun setAutoMount(context: Context, value: Boolean) = getSharedPreference(context).edit().putBoolean(AUTOMOUNT, value).apply()
     fun getAutoMount(context: Context): Boolean = getSharedPreference(context).getBoolean(AUTOMOUNT, false)
 
-    fun setSecure(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(SECURE, value) }
+    fun setSecure(context: Context, value: Boolean) = getSharedPreference(context).edit().putBoolean(SECURE, value).apply()
     fun getSecure(context: Context): Boolean = getSharedPreference(context).getBoolean(SECURE, false)
 
-    fun setMountLocation(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(MOUNT_LOCATION, value) }
+    fun setMountLocation(context: Context, value: Boolean) = getSharedPreference(context).edit().putBoolean(MOUNT_LOCATION, value).apply()
     fun getMountLocation(context: Context): Boolean = getSharedPreference(context).getBoolean(MOUNT_LOCATION, false)
 
-    fun setSelinux(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(SELINUX, value) }
+    fun setSelinux(context: Context, value: Boolean) = getSharedPreference(context).edit().putBoolean(SELINUX, value).apply()
     fun getSelinux(context: Context): Boolean = getSharedPreference(context).getBoolean(SELINUX, false)
 
-    fun setAppUpdate(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(APP_UPDATE, value) }
+    fun setAppUpdate(context: Context, value: Boolean) = getSharedPreference(context).edit().putBoolean(APP_UPDATE, value).apply()
     fun getAppUpdate(context: Context): Boolean = getSharedPreference(context).getBoolean(APP_UPDATE, false)
 
     fun getDevcfg1(context: Context): Boolean = getSharedPreference(context).getBoolean(DEVCFG1, false)
     fun getDevcfg2(context: Context): Boolean = getSharedPreference(context).getBoolean(DEVCFG2, false)
 
-    fun setDevcfg1(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(DEVCFG1, value) }
-    fun setDevcfg2(context: Context, value: Boolean) = getSharedPreference(context).edit { putBoolean(DEVCFG2, value) }
+    fun setDevcfg1(context: Context, value: Boolean) = getSharedPreference(context).edit().putBoolean(DEVCFG1, value).apply()
+    fun setDevcfg2(context: Context, value: Boolean) = getSharedPreference(context).edit().putBoolean(DEVCFG2, value).apply()
 
-    fun setFilesDir(context: Context, value: String?) = getSharedPreference(context).edit { putString(FILESDIR, value) }
+    fun setFilesDir(context: Context, value: String?) = getSharedPreference(context).edit().putString(FILESDIR, value).apply()
 
-    fun setLocale(context: Context, value: String) = getSharedPreference(context).edit { putString(LOCALE, value) }
+    fun setLocale(context: Context, value: String) = getSharedPreference(context).edit().putString(LOCALE, value).apply()
     fun getLocale(context: Context): String = getSharedPreference(context).getString(LOCALE, "und") ?: "und"
 }

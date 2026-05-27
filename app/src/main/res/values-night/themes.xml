@@ -1,0 +1,13 @@
+<resources>
+
+    <style name="Theme.MyApplication" parent="@android:style/Theme.Material.NoActionBar">
+        <item name="android:colorPrimary">@color/md_theme_primary</item>
+        <item name="android:colorAccent">@color/md_theme_primary</item>
+        <item name="android:colorBackground">@color/md_theme_background</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@color/md_theme_inverseOnSurface</item>
+        <item name="android:navigationBarColor">@color/transparent</item>
+    </style>
+
+</resources>

@@ -5,7 +5,6 @@ import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
-import androidx.annotation.StringRes
 import com.woa.helper.R
 import com.woa.helper.databinding.ButtonBinding
 
@@ -46,7 +45,7 @@ class Button(context: Context, attrs: AttributeSet?) : FrameLayout(context, attr
         }
     }
 
-    fun setTitle(@StringRes stringId: Int) {
+    fun setTitle(stringId: Int) {
         layout.title.text = context.getString(stringId)
     }
 
@@ -54,7 +53,7 @@ class Button(context: Context, attrs: AttributeSet?) : FrameLayout(context, attr
         layout.title.text = title
     }
 
-    fun setSubtitle(@StringRes stringId: Int) {
+    fun setSubtitle(stringId: Int) {
         layout.subtitle.text = context.getString(stringId)
     }
 

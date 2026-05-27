@@ -1,17 +1,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
+    <android.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:animateLayoutChanges="true"
         android:gravity="center_vertical"
-        app:titleTextAppearance="@style/Toolbar.TitleText">
+        android:titleTextAppearance="@style/ToolbarTitleText">
 
         <ImageButton
             android:id="@+id/settings"
@@ -24,5 +23,5 @@
             android:focusable="true"
             android:src="@drawable/settings" />
 
-    </androidx.appcompat.widget.Toolbar>
+    </android.widget.Toolbar>
 </LinearLayout>

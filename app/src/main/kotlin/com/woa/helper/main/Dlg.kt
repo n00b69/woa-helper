@@ -10,8 +10,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import com.woa.helper.R
 import com.woa.helper.main.MainActivity.Companion.hideBlur
 import com.woa.helper.main.MainActivity.Companion.showBlur
@@ -66,15 +64,15 @@ object Dlg {
         dialog?.show()
     }
 
-    fun show(context: Context, @StringRes stringId: Int) {
+    fun show(context: Context, stringId: Int) {
         show(context, context.getString(stringId))
     }
 
-    fun show(context: Context, @StringRes stringId: Int, @DrawableRes resId: Int) {
+    fun show(context: Context, stringId: Int, resId: Int) {
         show(context, context.getString(stringId), resId)
     }
 
-    fun show(context: Context, text: String?, @DrawableRes resId: Int) {
+    fun show(context: Context, text: String?, resId: Int) {
         show(context, text)
         setIcon(resId)
     }
@@ -99,15 +97,15 @@ object Dlg {
         setCancelable(false)
     }
 
-    fun setDismiss(@StringRes stringId: Int, onButtonClick: OnButtonClick) {
+    fun setDismiss(stringId: Int, onButtonClick: OnButtonClick) {
         setButton(dismiss, dialog?.context?.getString(stringId), onButtonClick)
     }
 
-    fun setNo(@StringRes stringId: Int, onButtonClick: OnButtonClick) {
+    fun setNo(stringId: Int, onButtonClick: OnButtonClick) {
         setButton(no, dialog?.context?.getString(stringId), onButtonClick)
     }
 
-    fun setYes(@StringRes stringId: Int, onButtonClick: OnButtonClick) {
+    fun setYes(stringId: Int, onButtonClick: OnButtonClick) {
         setButton(yes, dialog?.context?.getString(stringId), onButtonClick)
     }
 
@@ -119,7 +117,7 @@ object Dlg {
         }
     }
 
-    fun setText(@StringRes stringId: Int) {
+    fun setText(stringId: Int) {
         setText(dialog?.context?.getString(stringId))
     }
 
@@ -127,7 +125,7 @@ object Dlg {
         this.text?.text = text
     }
 
-    fun setIcon(@DrawableRes resId: Int) {
+    fun setIcon(resId: Int) {
         icon?.apply {
             visibility = View.VISIBLE
             setImageResource(resId)
