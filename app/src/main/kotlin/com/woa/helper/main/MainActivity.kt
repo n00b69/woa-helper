@@ -817,7 +817,6 @@ class MainActivity : Activity() {
             instance?.clear()
             instance = null
         }
-        ShellManager.close()
     }
 
     private fun copyAssets() {
