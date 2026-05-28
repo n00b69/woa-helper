@@ -335,7 +335,9 @@ class MainActivity : Activity() {
                 if (backupResult is ShellResult.Success) BackupManager.modemBackup()
                 else backupResult
             } else {
-                BackupManager.winBackup(bootPartition)
+                val mountResult = MountManager.mount()
+                if (mountResult is ShellResult.Error) mountResult
+                else BackupManager.winBackup(bootPartition)
             }
             postUi {
                 when (result) {
@@ -343,10 +345,7 @@ class MainActivity : Activity() {
                         Dlg.setText(R.string.backuped)
                         Dlg.dismissButton()
                     }
-                    is ShellResult.Error -> {
-                        Dlg.setText("${getString(R.string.wrong)}\n\n${result.message}")
-                        Dlg.dismissButton()
-                    }
+                        is ShellResult.Error -> Dlg.showError(result)
                 }
             }
         }.start()
@@ -532,6 +531,11 @@ class MainActivity : Activity() {
         Dlg.setYes(R.string.yes) {
             Dlg.dialogLoading()
             Thread {
+                val mountResult = MountManager.mount()
+                if (mountResult is ShellResult.Error) {
+                    postUi { Dlg.showMountError(mountResult.message) }
+                    return@Thread
+                }
                 val result = deploy(filesDir.absolutePath)
                 postUi {
                     when (result) {
@@ -539,10 +543,7 @@ class MainActivity : Activity() {
                             Dlg.setText(R.string.done)
                             Dlg.dismissButton()
                         }
-                        is ShellResult.Error -> {
-                            Dlg.setText("${getString(R.string.wrong)}\n\n${result.message}")
-                            Dlg.dismissButton()
-                        }
+                        is ShellResult.Error -> Dlg.showError(result)
                     }
                 }
             }.start()
@@ -559,6 +560,11 @@ class MainActivity : Activity() {
         Dlg.setYes(R.string.yes) {
             Dlg.dialogLoading()
             Thread {
+                val mountResult = MountManager.mount()
+                if (mountResult is ShellResult.Error) {
+                    postUi { Dlg.showMountError(mountResult.message) }
+                    return@Thread
+                }
                 val result = ToolboxDeployer.dumpModem()
                 postUi {
                     when (result) {
@@ -566,10 +572,7 @@ class MainActivity : Activity() {
                             Dlg.setText(R.string.lte)
                             Dlg.dismissButton()
                         }
-                        is ShellResult.Error -> {
-                            Dlg.setText("${getString(R.string.wrong)}\n\n${result.message}")
-                            Dlg.dismissButton()
-                        }
+                        is ShellResult.Error -> Dlg.showError(result)
                     }
                 }
             }.start()
@@ -669,22 +672,27 @@ class MainActivity : Activity() {
         val devcfgDevice = DevcfgManager.getDevcfgDevice(Device.codename)
         val backupResult = DevcfgManager.backupDevcfg(filesDir.absolutePath)
         if (backupResult is ShellResult.Error) {
-            postUi { Dlg.setText("${getString(R.string.wrong)}\n\n${backupResult.message}"); Dlg.dismissButton() }
+            postUi { Dlg.showError(backupResult) }
             return
         }
         val downloadResult = DevcfgManager.downloadDevcfgImages(filesDir.absolutePath, devcfgDevice)
         if (downloadResult is ShellResult.Error) {
-            postUi { Dlg.setText("${getString(R.string.wrong)}\n\n${downloadResult.message}"); Dlg.dismissButton() }
+            postUi { Dlg.showError(downloadResult) }
             return
         }
         val flashResult = DevcfgManager.flashDevcfg(filesDir.absolutePath, devcfgDevice)
         if (flashResult is ShellResult.Error) {
-            postUi { Dlg.setText("${getString(R.string.wrong)}\n\n${flashResult.message}"); Dlg.dismissButton() }
+            postUi { Dlg.showError(flashResult) }
+            return
+        }
+        val mountResult = MountManager.mount()
+        if (mountResult is ShellResult.Error) {
+            postUi { Dlg.showMountError(mountResult.message) }
             return
         }
         val copyResult = DevcfgManager.copyDevcfgToWindows(filesDir.absolutePath, useBootSddConf = false, copyBackup = true)
         if (copyResult is ShellResult.Error) {
-            postUi { Dlg.setText("${getString(R.string.wrong)}\n\n${copyResult.message}"); Dlg.dismissButton() }
+            postUi { Dlg.showError(copyResult) }
             return
         }
         postUi {
@@ -708,6 +716,11 @@ class MainActivity : Activity() {
             Dlg.setBar(0)
             Dlg.setIcon(R.drawable.ic_download)
             Thread {
+                val mountResult = MountManager.mount()
+                if (mountResult is ShellResult.Error) {
+                    postUi { Dlg.showMountError(mountResult.message) }
+                    return@Thread
+                }
                 val result = ToolboxDeployer.deployAtlasOS(url, targetName)
                 postUi {
                     when (result) {
@@ -717,10 +730,7 @@ class MainActivity : Activity() {
                             Dlg.setText(R.string.done)
                             Dlg.dismissButton()
                         }
-                        is ShellResult.Error -> {
-                            Dlg.setText("${getString(R.string.wrong)}\n\n${result.message}")
-                            Dlg.dismissButton()
-                        }
+                        is ShellResult.Error -> Dlg.showError(result)
                     }
                 }
             }.start()
@@ -754,6 +764,11 @@ class MainActivity : Activity() {
             Dlg.setIcon(R.drawable.ic_download)
             Dlg.setBar(0)
             Thread {
+                val mountResult = MountManager.mount()
+                if (mountResult is ShellResult.Error) {
+                    postUi { Dlg.showMountError(mountResult.message) }
+                    return@Thread
+                }
                 val result = ToolboxDeployer.deployFrameworks(filesDir.absolutePath)
                 postUi {
                     when (result) {
@@ -763,10 +778,7 @@ class MainActivity : Activity() {
                             Dlg.setText(R.string.done)
                             Dlg.dismissButton()
                         }
-                        is ShellResult.Error -> {
-                            Dlg.setText("${getString(R.string.wrong)}\n\n${result.message}")
-                            Dlg.dismissButton()
-                        }
+                        is ShellResult.Error -> Dlg.showError(result)
                     }
                 }
             }.start()
@@ -780,6 +792,11 @@ class MainActivity : Activity() {
             Dlg.dialogLoading()
             Dlg.setBar(0)
             Thread {
+                val mountResult = MountManager.mount()
+                if (mountResult is ShellResult.Error) {
+                    postUi { Dlg.showMountError(mountResult.message) }
+                    return@Thread
+                }
                 val result = ToolboxDeployer.deployDefenderEdge(filesDir.absolutePath, isNetworkConnected(this@MainActivity))
                 postUi {
                     when (result) {
@@ -787,10 +804,7 @@ class MainActivity : Activity() {
                             Dlg.setText(R.string.done)
                             Dlg.dismissButton()
                         }
-                        is ShellResult.Error -> {
-                            Dlg.setText("${getString(R.string.wrong)}\n\n${result.message}")
-                            Dlg.dismissButton()
-                        }
+                        is ShellResult.Error -> Dlg.showError(result)
                     }
                 }
             }.start()
@@ -1001,12 +1015,6 @@ class MainActivity : Activity() {
         }.start()
     }
 
-    private fun mountFail() {
-        Dlg.show(this, "${getString(R.string.mountfail)}\n\n${getString(R.string.internalstorage)}")
-        Dlg.dismissButton()
-        Dlg.setYes(R.string.chat) { openLink(this, "https://t.me/woahelperchat") }
-    }
-
     private fun noInternet() {
         Dlg.show(this, R.string.internet)
         Dlg.dismissButton()
@@ -1076,11 +1084,8 @@ class MainActivity : Activity() {
                             Dlg.setText("${activity.getString(R.string.mounted)}\n\n${MountManager.getWinPath()}")
                             Dlg.dismissButton()
                         } else {
-                            Dlg.hideIcon()
                             val errorMsg = (result as? ShellResult.Error)?.message ?: "Unknown error"
-                            Dlg.setText("${activity.getString(R.string.mountfail)}\n$errorMsg")
-                            Dlg.setYes(R.string.chat) { openLink(activity, "https://t.me/woahelperchat") }
-                            Dlg.setNo(R.string.dismiss) { Dlg.close() }
+                            Dlg.showMountError(errorMsg)
                         }
                     }
                 }.start()
@@ -1101,10 +1106,7 @@ class MainActivity : Activity() {
         private fun performQuickBoot(activity: Activity, filesDir: File) {
             val mountResult = MountManager.mount()
             if (mountResult is ShellResult.Error) {
-                postOnUiThread(activity) {
-                    Dlg.setText("${activity.getString(R.string.wrong)}\n\n${mountResult.message}")
-                    Dlg.dismissButton()
-                }
+                postOnUiThread(activity) { Dlg.showMountError(mountResult.message) }
                 return
             }
             val currentWinPath = MountManager.getWinPath()
@@ -1140,37 +1142,26 @@ class MainActivity : Activity() {
 
         private fun flashDevcfgQuickBoot(activity: Context, filesDir: File): Boolean {
             val devcfgDevice = DevcfgManager.getDevcfgDevice(Device.codename)
+            val act = activity as Activity
             val backupResult = DevcfgManager.backupDevcfg(filesDir.absolutePath)
             if (backupResult is ShellResult.Error) {
-                postOnUiThread(activity as Activity) {
-                    Dlg.setText("${activity.getString(R.string.wrong)}\n\n${backupResult.message}")
-                    Dlg.dismissButton()
-                }
+                postOnUiThread(act) { Dlg.showError(backupResult) }
                 return false
             }
             val downloadResult = DevcfgManager.downloadDevcfgImages(filesDir.absolutePath, devcfgDevice)
             if (downloadResult is ShellResult.Error) {
-                postOnUiThread(activity as Activity) {
-                    Dlg.setText("${activity.getString(R.string.wrong)}\n\n${downloadResult.message}")
-                    Dlg.dismissButton()
-                }
+                postOnUiThread(act) { Dlg.showError(downloadResult) }
                 return false
             }
             val flashResult = DevcfgManager.flashDevcfg(filesDir.absolutePath, devcfgDevice)
             if (flashResult is ShellResult.Error) {
-                postOnUiThread(activity as Activity) {
-                    Dlg.setText("${activity.getString(R.string.wrong)}\n\n${flashResult.message}")
-                    Dlg.dismissButton()
-                }
+                postOnUiThread(act) { Dlg.showError(flashResult) }
                 return false
             }
             if (Pref.getDevcfg2(activity)) {
                 val copyResult = DevcfgManager.copyDevcfgToWindows(filesDir.absolutePath, useBootSddConf = true, copyBackup = true)
                 if (copyResult is ShellResult.Error) {
-                    postOnUiThread(activity as Activity) {
-                        Dlg.setText("${activity.getString(R.string.wrong)}\n\n${copyResult.message}")
-                        Dlg.dismissButton()
-                    }
+                    postOnUiThread(act) { Dlg.showError(copyResult) }
                     return false
                 }
             }
@@ -1225,7 +1216,7 @@ class MainActivity : Activity() {
             try { action() } catch (_: Exception) {}
         }
 
-        internal fun openLink(context: Context, link: String) {
+        fun openLink(context: Context, link: String) {
             context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(link)))
         }
     }

@@ -13,8 +13,6 @@ object ToolboxDeployer {
             val cp = ShellManager.execResult("cp $filesDir/$file /sdcard/WOAHelper/sta/")
             if (cp is ShellResult.Error) return cp
         }
-        val mountResult = MountManager.mount()
-        if (mountResult is ShellResult.Error) return mountResult
         val winPath = MountManager.getWinPath()
         if (winPath.isEmpty()) return ShellResult.Error("Mount path is empty")
         val mkdir2 = ShellManager.execResult("mkdir -p $winPath/sta")
@@ -27,8 +25,6 @@ object ToolboxDeployer {
     }
 
     fun deploySoftware(filesDir: String): ShellResult {
-        val mountResult = MountManager.mount()
-        if (mountResult is ShellResult.Error) return mountResult
         val winPath = MountManager.getWinPath()
         if (winPath.isEmpty()) return ShellResult.Error("Mount path is empty")
         val mkdir1 = ShellManager.execResult("mkdir -p $TOOLBOX_DIR")
@@ -56,8 +52,6 @@ object ToolboxDeployer {
         val dl2 = Download.file("https://download.ameliorated.io/AME%20Beta.zip", "$TOOLBOX_DIR/AMEWizardBeta.zip", onProgress)
         if (dl2 is ShellResult.Error) return dl2
         onProgress.onProgress(80, "")
-        val mountResult = MountManager.mount()
-        if (mountResult is ShellResult.Error) return mountResult
         val winPath = MountManager.getWinPath()
         if (winPath.isEmpty()) return ShellResult.Error("Mount path is empty")
         val mkdir2 = ShellManager.execResult("mkdir -p $winPath/Toolbox")
@@ -72,8 +66,6 @@ object ToolboxDeployer {
         if (mkdir1 is ShellResult.Error) return mkdir1
         val cp1 = ShellManager.execResult("cp $filesDir/usbhostmode.exe $TOOLBOX_DIR/")
         if (cp1 is ShellResult.Error) return cp1
-        val mountResult = MountManager.mount()
-        if (mountResult is ShellResult.Error) return mountResult
         val winPath = MountManager.getWinPath()
         if (winPath.isEmpty()) return ShellResult.Error("Mount path is empty")
         val mkdir2 = ShellManager.execResult("mkdir -p $winPath/Toolbox")
@@ -88,8 +80,6 @@ object ToolboxDeployer {
         if (mkdir1 is ShellResult.Error) return mkdir1
         val cp1 = ShellManager.execResult("cp $filesDir/QuickRotate_V6.1.6.exe $TOOLBOX_DIR/")
         if (cp1 is ShellResult.Error) return cp1
-        val mountResult = MountManager.mount()
-        if (mountResult is ShellResult.Error) return mountResult
         val winPath = MountManager.getWinPath()
         if (winPath.isEmpty()) return ShellResult.Error("Mount path is empty")
         val mkdir2 = ShellManager.execResult("mkdir -p $winPath/Toolbox")
@@ -104,8 +94,6 @@ object ToolboxDeployer {
         if (mkdir1 is ShellResult.Error) return mkdir1
         val cp1 = ShellManager.execResult("cp $filesDir/OptimizedTaskbarControl_V3.2.exe $TOOLBOX_DIR/")
         if (cp1 is ShellResult.Error) return cp1
-        val mountResult = MountManager.mount()
-        if (mountResult is ShellResult.Error) return mountResult
         val winPath = MountManager.getWinPath()
         if (winPath.isEmpty()) return ShellResult.Error("Mount path is empty")
         val mkdir2 = ShellManager.execResult("mkdir -p $winPath/Toolbox")
@@ -137,8 +125,6 @@ object ToolboxDeployer {
             if (result is ShellResult.Error) failures.add("$installer: ${result.message}")
         }
         if (failures.isNotEmpty()) return ShellResult.Error("Download failed: ${failures.take(3).joinToString(", ")}${if (failures.size > 3) " (+${failures.size - 3} more)" else ""}")
-        val mountResult = MountManager.mount()
-        if (mountResult is ShellResult.Error) return mountResult
         val winPath = MountManager.getWinPath()
         if (winPath.isEmpty()) return ShellResult.Error("Mount path is empty")
         val mkdir2 = ShellManager.execResult("mkdir -p $winPath/Toolbox/Frameworks")
@@ -159,8 +145,6 @@ object ToolboxDeployer {
             val cp = ShellManager.execResult("cp $filesDir/DefenderRemover.exe $TOOLBOX_DIR/DefenderRemover.exe")
             if (cp is ShellResult.Error) return cp
         }
-        val mountResult = MountManager.mount()
-        if (mountResult is ShellResult.Error) return mountResult
         val winPath = MountManager.getWinPath()
         if (winPath.isEmpty()) return ShellResult.Error("Mount path is empty")
         val mkdir2 = ShellManager.execResult("mkdir -p $winPath/Toolbox")
@@ -173,8 +157,6 @@ object ToolboxDeployer {
     }
 
     fun dumpModem(): ShellResult {
-        val mountResult = MountManager.mount()
-        if (mountResult is ShellResult.Error) return mountResult
         val winPath = MountManager.getWinPath()
         if (winPath.isEmpty()) return ShellResult.Error("Mount path is empty")
         val failures = mutableListOf<String>()

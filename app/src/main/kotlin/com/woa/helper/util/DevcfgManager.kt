@@ -54,8 +54,6 @@ object DevcfgManager {
     }
 
     fun copyDevcfgToWindows(filesDir: String, useBootSddConf: Boolean, copyBackup: Boolean): ShellResult {
-        val mountResult = MountManager.mount()
-        if (mountResult is ShellResult.Error) return mountResult
         val winPath = MountManager.getWinPath()
         if (winPath.isEmpty()) return ShellResult.Error("Mount path is empty")
         val sddConf = if (useBootSddConf) "devcfg-boot-sdd.conf" else "devcfg-sdd.conf"

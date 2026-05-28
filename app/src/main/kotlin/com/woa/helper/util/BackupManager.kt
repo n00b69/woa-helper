@@ -8,8 +8,6 @@ object BackupManager {
     private const val BACKUP_DIR = "/sdcard/WOAHelper/Backups"
 
     fun winBackup(bootPartition: String): ShellResult {
-        val mountResult = MountManager.mount()
-        if (mountResult is ShellResult.Error) return mountResult
         val winPath = MountManager.getWinPath()
         if (winPath.isEmpty()) return ShellResult.Error("Mount path is empty")
         return ShellManager.execResult("dd bs=8M if=$bootPartition of=$winPath/boot.img")

@@ -12,7 +12,9 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import com.woa.helper.R
 import com.woa.helper.main.MainActivity.Companion.hideBlur
+import com.woa.helper.main.MainActivity.Companion.openLink
 import com.woa.helper.main.MainActivity.Companion.showBlur
+import com.woa.helper.util.ShellResult
 
 @SuppressLint("StaticFieldLeak")
 object Dlg {
@@ -184,6 +186,18 @@ object Dlg {
             onAgree()
             close()
         }
+    }
+
+    fun showMountError(message: String) {
+        hideIcon()
+        setText("${dialog?.context?.getString(R.string.mountfail)}\n$message")
+        setYes(R.string.chat) { MainActivity.openLink(dialog?.context!!, "https://t.me/woahelperchat") }
+        setNo(R.string.dismiss) { close() }
+    }
+
+    fun showError(result: ShellResult.Error) {
+        setText("${dialog?.context?.getString(R.string.wrong)}\n\n${result.message}")
+        dismissButton()
     }
 
     fun interface OnButtonClick {
