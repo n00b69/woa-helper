@@ -29,8 +29,7 @@
             <LinearLayout
                 android:id="@+id/up"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="@dimen/info_container_height"
+                android:layout_height="@dimen/info_container_height"
                 android:paddingTop="6dp"
                 android:orientation="vertical">
 

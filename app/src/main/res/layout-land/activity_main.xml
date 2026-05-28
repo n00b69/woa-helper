@@ -24,34 +24,34 @@
             android:background="@color/md_theme_background"
             android:gravity="center"
             android:orientation="horizontal"
-            android:padding="@dimen/_8sdp">
+            android:paddingTop="@dimen/content_padding"
+            android:paddingLeft="@dimen/content_padding"
+            android:paddingRight="@dimen/content_padding"
+            >
 
-            <ImageView
-                android:id="@+id/DeviceImage"
-                android:layout_width="@dimen/_115sdp"
-                android:layout_height="@dimen/_138sdp"
-                android:layout_gravity="center"
-                android:layout_marginEnd="@dimen/_4sdp"
-                android:scaleType="fitXY"
-                android:src="@drawable/unknown" />
 
             <FrameLayout
                 android:id="@+id/cv_info"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/_138sdp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/card_spacing"
                 android:animateLayoutChanges="true"
                 android:background="@drawable/card_background"
                 android:backgroundTint="@color/md_theme_inverseOnSurface"
-                android:clipToOutline="true"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:stateListAnimator="@animator/state_list_anim">
 
                 <LinearLayout
                     android:id="@+id/info_text"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="14dp"
-                    android:gravity="left|center_vertical"
+                    android:layout_marginTop="@dimen/content_padding"
+                    android:layout_marginStart="@dimen/content_padding"
+                    android:layout_marginEnd="@dimen/content_padding"
+                    android:layout_marginBottom="@dimen/content_padding"
+                    android:gravity="left|top"
                     android:orientation="vertical">
 
                     <TextView
@@ -61,7 +61,7 @@
                         android:layout_marginVertical="4dp"
                         android:gravity="center"
                         android:text="WINDOWS ON ARM"
-                        android:textSize="@dimen/_12ssp"
+                        android:textSize="@dimen/text_title"
                         android:textStyle="bold" />
 
                     <TextView
@@ -69,21 +69,21 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="left"
-                        android:textSize="@dimen/_9ssp" />
+                        android:textSize="@dimen/text_label" />
 
                     <TextView
                         android:id="@+id/tv_ramvalue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="left"
-                        android:textSize="@dimen/_9ssp" />
+                        android:textSize="@dimen/text_label" />
 
                     <TextView
                         android:id="@+id/tv_panel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="left"
-                        android:textSize="@dimen/_9ssp"
+                        android:textSize="@dimen/text_label"
                         android:visibility="gone" />
 
                     <TextView
@@ -91,14 +91,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="left"
-                        android:textSize="@dimen/_9ssp" />
+                        android:textSize="@dimen/text_label" />
 
                     <TextView
                         android:id="@+id/tv_slot"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="left"
-                        android:textSize="@dimen/_9ssp" />
+                        android:textSize="@dimen/text_label" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -119,16 +119,21 @@
                             android:clipToOutline="true"
                             android:focusable="true"
                             android:foreground="?android:attr/selectableItemBackground"
+                            android:minHeight="@dimen/chip_height"
                             android:stateListAnimator="@animator/state_list_anim">
 
                             <android.widget.TextView
                                 android:id="@+id/guide_text"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:autoSizeMaxTextSize="@dimen/text_header"
+                                android:autoSizeMinTextSize="10sp"
+                                android:autoSizeStepGranularity="1sp"
+                                android:autoSizeTextType="uniform"
                                 android:gravity="center"
+                                android:maxLines="1"
                                 android:paddingVertical="4dp"
                                 android:text="@string/guide"
-                                android:textSize="@dimen/_11ssp"
                                 android:textStyle="bold" />
                         </FrameLayout>
 
@@ -145,16 +150,21 @@
                             android:clipToOutline="true"
                             android:focusable="true"
                             android:foreground="?android:attr/selectableItemBackground"
+                            android:minHeight="@dimen/chip_height"
                             android:stateListAnimator="@animator/state_list_anim">
 
                             <android.widget.TextView
                                 android:id="@+id/group_text"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:autoSizeMaxTextSize="@dimen/text_header"
+                                android:autoSizeMinTextSize="10sp"
+                                android:autoSizeStepGranularity="1sp"
+                                android:autoSizeTextType="uniform"
                                 android:gravity="center"
+                                android:maxLines="1"
                                 android:paddingVertical="4dp"
                                 android:text="@string/group"
-                                android:textSize="@dimen/_11ssp"
                                 android:textStyle="bold" />
 
                         </FrameLayout>
@@ -167,10 +177,8 @@
                 android:id="@+id/appRight"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/_4sdp"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:paddingBottom="6dp">
+                android:layout_weight="2"
+                android:orientation="vertical">
 
                 <com.woa.helper.main.Button
                     android:id="@+id/backup"

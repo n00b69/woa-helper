@@ -12,6 +12,6 @@
         android:gravity="center"
         android:text="TEMPLATE"
         android:textColor="@color/white"
-        android:textSize="@dimen/_8ssp"
+        android:textSize="@dimen/text_small"
         android:textStyle="bold" />
 </FrameLayout>

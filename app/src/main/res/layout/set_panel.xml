@@ -34,12 +34,12 @@
                     android:layout_margin="5dp"
                     android:background="@drawable/default_background"
                     android:orientation="vertical"
-                    android:padding="@dimen/_5sdp">
+                    android:padding="@dimen/settings_padding">
 
                     <LinearLayout
                         android:id="@+id/quickbootBackupHeader"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_35sdp"
+                        android:layout_height="@dimen/settings_row_height"
                         android:clickable="true"
                         android:gravity="center">
 
@@ -47,7 +47,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/quickboot_backup"
-                            android:textSize="@dimen/_11ssp"
+                            android:textSize="@dimen/text_header"
                             android:textStyle="bold" />
 
                         <ImageView
@@ -82,12 +82,12 @@
                                     android:id="@+id/backupWindows"
                                     style="@style/settingsButton"
                                     android:layout_width="match_parent"
-                                    android:layout_height="@dimen/_35sdp"
+                                    android:layout_height="@dimen/settings_row_height"
                                     app:text="@string/windows" />
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="@dimen/_35sdp"
+                                    android:layout_height="@dimen/settings_row_height"
                                     android:gravity="center_vertical"
                                     android:orientation="horizontal"
                                     android:paddingStart="8dp"
@@ -98,7 +98,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:text="@string/force"
-                                        android:textSize="@dimen/_10ssp"
+                                        android:textSize="@dimen/text_body"
                                         android:textStyle="bold" />
 
                                     <Switch
@@ -118,12 +118,12 @@
                                     android:id="@+id/backupAndroid"
                                     style="@style/settingsButton"
                                     android:layout_width="match_parent"
-                                    android:layout_height="@dimen/_35sdp"
+                                    android:layout_height="@dimen/settings_row_height"
                                     app:text="@string/android" />
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="@dimen/_35sdp"
+                                    android:layout_height="@dimen/settings_row_height"
                                     android:gravity="center_vertical"
                                     android:orientation="horizontal"
                                     android:paddingStart="8dp"
@@ -134,7 +134,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:text="@string/force"
-                                        android:textSize="@dimen/_10ssp"
+                                        android:textSize="@dimen/text_body"
                                         android:textStyle="bold" />
 
                                     <Switch
@@ -151,74 +151,74 @@
                     android:id="@+id/confirmation"
                     style="@style/settingsButton"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
+                    android:layout_height="@dimen/settings_row_height"
                     app:text="@string/preference5" />
 
                 <com.woa.helper.main.SettingsButton
                     android:id="@+id/automount"
                     style="@style/settingsButton"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
+                    android:layout_height="@dimen/settings_row_height"
                     app:text="@string/preference7" />
 
                 <com.woa.helper.main.SettingsButton
                     android:id="@+id/securelock"
                     style="@style/settingsButton"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
+                    android:layout_height="@dimen/settings_row_height"
                     app:text="@string/preference9" />
 
                 <com.woa.helper.main.SettingsButton
                     android:id="@+id/mountLocation"
                     style="@style/settingsButton"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
+                    android:layout_height="@dimen/settings_row_height"
                     app:text="@string/preference10" />
 
                 <com.woa.helper.main.SettingsButton
                     android:id="@+id/selinux"
                     style="@style/settingsButton"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
+                    android:layout_height="@dimen/settings_row_height"
                     app:text="@string/preference14" />
 
                 <com.woa.helper.main.SettingsButton
                     android:id="@+id/appUpdate"
                     style="@style/settingsButton"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
+                    android:layout_height="@dimen/settings_row_height"
                     app:text="@string/preference11" />
 
                 <com.woa.helper.main.SettingsButton
                     android:id="@+id/devcfg1"
                     style="@style/settingsButton"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
+                    android:layout_height="@dimen/settings_row_height"
                     app:text="@string/preference12" />
 
                 <com.woa.helper.main.SettingsButton
                     android:id="@+id/devcfg2"
                     style="@style/settingsButton"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
+                    android:layout_height="@dimen/settings_row_height"
                     android:visibility="gone"
                     app:text="@string/preference13" />
 
                 <LinearLayout
                     style="@style/settingsButton"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
+                    android:layout_height="@dimen/settings_row_height"
                     android:layout_gravity="center"
                     android:background="@drawable/default_background"
                     android:gravity="center"
-                    android:padding="@dimen/_5sdp">
+                    android:padding="@dimen/settings_padding">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="20dp"
                         android:text="@string/preference6"
-                        android:textSize="@dimen/_11ssp"
+                        android:textSize="@dimen/text_header"
                         android:textStyle="bold" />
 
                     <Spinner
@@ -226,7 +226,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="@dimen/_11ssp" />
+                        android:textSize="@dimen/text_header" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -238,37 +238,37 @@
                     <LinearLayout
                         android:id="@+id/chatButton"
                         android:layout_width="0dp"
-                        android:layout_height="@dimen/_35sdp"
+                        android:layout_height="@dimen/settings_row_height"
                         android:layout_weight="1"
                         android:layout_marginEnd="10dp"
                         android:background="@drawable/default_background"
                         android:clickable="true"
                         android:gravity="center"
-                        android:padding="@dimen/_5sdp">
+                        android:padding="@dimen/settings_padding">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/chat"
-                            android:textSize="@dimen/_11ssp"
+                            android:textSize="@dimen/text_header"
                             android:textStyle="bold" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/githubButton"
                         android:layout_width="0dp"
-                        android:layout_height="@dimen/_35sdp"
+                        android:layout_height="@dimen/settings_row_height"
                         android:layout_weight="1"
                         android:background="@drawable/default_background"
                         android:clickable="true"
                         android:gravity="center"
-                        android:padding="@dimen/_5sdp">
+                        android:padding="@dimen/settings_padding">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/github"
-                            android:textSize="@dimen/_11ssp"
+                            android:textSize="@dimen/text_header"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>

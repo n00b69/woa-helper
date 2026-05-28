@@ -253,7 +253,7 @@ class MainActivity : Activity() {
         }
         mainBinding.deviceName.text = "${Build.MODEL} (${Device.codename})"
         val props = Device.getVars()
-        mainBinding.DeviceImage.setImageResource(props.image)
+        mainBinding.DeviceImage?.setImageResource(props.image)
         mainBinding.tvPanel.visibility = props.panel
         toolboxBinding.dbkp.visibility = props.dbkp
         toolboxBinding.flashUefi.visibility = if (props.dbkp == View.VISIBLE) View.GONE else View.VISIBLE
@@ -520,7 +520,7 @@ class MainActivity : Activity() {
     }
 
     private fun checkUpdatesAndModels() {
-        checkUpdate()
+        if (!autoUpdateChecked) { checkUpdate(); autoUpdateChecked = true }
         if (!BuildConfig.DEBUG) {
             settingsBinding.codename.visibility = View.GONE
         }
@@ -1030,6 +1030,7 @@ class MainActivity : Activity() {
     companion object {
         @JvmStatic
         var instance: WeakReference<MainActivity>? = null
+        private var autoUpdateChecked = false
 
         private fun postOnUiThread(activity: Activity, action: () -> Unit) {
             if (!activity.isDestroyed) activity.runOnUiThread(action)

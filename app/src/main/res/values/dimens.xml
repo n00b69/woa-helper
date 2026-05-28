@@ -3,4 +3,25 @@
     <dimen name="dialogCornerRadius">8dp</dimen>
     <dimen name="strokeWidth">1dp</dimen>
     <dimen name="settingsCornerRadius">5dp</dimen>
+
+    <dimen name="card_spacing">5.3dp</dimen>
+    <dimen name="settings_padding">6.7dp</dimen>
+    <dimen name="dialog_progress_height">6.7dp</dimen>
+    <dimen name="content_padding">10.7dp</dimen>
+    <dimen name="toolbar_icon_margin">16dp</dimen>
+    <dimen name="button_subtitle_trailing">20dp</dimen>
+    <dimen name="settings_icon_size">33.3dp</dimen>
+    <dimen name="settings_row_height">46.7dp</dimen>
+    <dimen name="button_icon_size">64dp</dimen>
+    <dimen name="toolbox_button_height">73.3dp</dimen>
+    <dimen name="info_container_height">200dp</dimen>
+    <dimen name="info_container_side_margin">20dp</dimen>
+    <dimen name="chip_height">20dp</dimen>
+
+    <dimen name="text_small">10.7sp</dimen>
+    <dimen name="text_label">12sp</dimen>
+    <dimen name="text_body">13.3sp</dimen>
+    <dimen name="text_header">14.7sp</dimen>
+    <dimen name="text_title">16sp</dimen>
+    <dimen name="text_toolbar_title">17.3sp</dimen>
 </resources>

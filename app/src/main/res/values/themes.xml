@@ -21,7 +21,7 @@
     </style>
 
     <style name="ToolbarTitleText">
-        <item name="android:textSize">@dimen/_13ssp</item>
+        <item name="android:textSize">@dimen/text_toolbar_title</item>
         <item name="android:textStyle">bold</item>
     </style>
 

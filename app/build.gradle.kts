@@ -58,8 +58,6 @@ android {
 }
 
 dependencies {
-    implementation(libs.com.intuit.sdp.sdp.android)
-    implementation(libs.com.intuit.ssp.ssp.android)
     implementation(libs.com.github.topjohnwu.libsu.core)
     implementation(libs.com.github.topjohnwu.libsu.service)
     implementation(libs.com.github.topjohnwu.libsu.nio)

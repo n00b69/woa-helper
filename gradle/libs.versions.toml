@@ -12,7 +12,4 @@ com-github-topjohnwu-libsu-core = { group = "com.github.topjohnwu.libsu", name =
 com-github-topjohnwu-libsu-service = { group = "com.github.topjohnwu.libsu", name = "service", version.ref = "libsu" }
 com-github-topjohnwu-libsu-nio = { group = "com.github.topjohnwu.libsu", name = "nio", version.ref = "libsu" }
 
-com-intuit-sdp-sdp-android = { group = "com.intuit.sdp", name = "sdp-android", version = "1.1.1" }
-com-intuit-ssp-ssp-android = { group = "com.intuit.ssp", name = "ssp-android", version = "1.1.1" }
-
 realtimeblurview = { module = "com.github.mmin18:realtimeblurview", version.ref = "realtimeblurview" }
