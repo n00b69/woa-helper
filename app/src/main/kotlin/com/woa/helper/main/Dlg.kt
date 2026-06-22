@@ -49,6 +49,7 @@ object Dlg {
         dismiss = dialog?.findViewById(R.id.dismiss)
         this.text = dialog?.findViewById(R.id.messages)
         icon = dialog?.findViewById(R.id.icon)
+        icon?.visibility = View.GONE
         bar = dialog?.findViewById(R.id.progress)
         filename = dialog?.findViewById(R.id.filename)
 

@@ -979,6 +979,7 @@ class MainActivity : Activity() {
 
     private fun checkWin() {
         Thread {
+            if (!ShellManager.isRootGranted()) return@Thread
             val hasPartition = MountManager.getWinPartition().isNotEmpty()
             postUi {
                 if (!hasPartition && !BuildConfig.DEBUG) {
