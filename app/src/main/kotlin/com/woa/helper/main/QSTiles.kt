@@ -154,9 +154,7 @@ class QuickBootTile : CommonTileService() {
         Device.init(this)
         findUefi = ShellManager.exec(getString(R.string.uefiChk))
         MountManager.getWinPartition()
-        val slotSuffix = ShellManager.exec("getprop ro.boot.slot_suffix")
-        val findBoot = ShellManager.exec("find /dev/block | grep -i boot$slotSuffix | head -1")
-        boot = if (findBoot.isNotEmpty()) ShellManager.exec("realpath $findBoot") else ""
+        boot = MainActivity.getBoot()
     }
 }
 

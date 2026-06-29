@@ -1169,7 +1169,7 @@ class MainActivity : Activity() {
             return true
         }
 
-        private fun getBoot(): String {
+        fun getBoot(): String {
             val slotSuffix = ShellManager.exec("getprop ro.boot.slot_suffix")
             val partition = ShellManager.exec("find /dev/block | grep -i \"/boot$slotSuffix$\" | head -1")
             return if (partition.isNotEmpty()) ShellManager.exec("realpath $partition") else ""
