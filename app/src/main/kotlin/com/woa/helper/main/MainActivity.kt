@@ -33,6 +33,7 @@ import com.woa.helper.util.ShellManager
 import com.woa.helper.util.ShellResult
 import com.woa.helper.util.ToolboxDeployer
 import com.woa.helper.util.UpdateChecker
+import com.woa.helper.util.UpdateResult
 import com.woa.helper.util.RAM
 import com.woa.helper.widget.MountWidget
 import java.io.File
@@ -995,23 +996,31 @@ class MainActivity : Activity() {
     private fun checkUpdate() { checkUpdate(false) }
 
     private fun checkUpdate(manual: Boolean) {
-        if (!ShellManager.isRootGranted() && !manual) return
-        if (!isNetworkConnected(this)) { if (manual) noInternet(); return }
-        if (Pref.getAppUpdate(this) && !manual) return
         if (manual) { Dlg.show(this, R.string.please_wait); Dlg.setCancelable(false) }
         Thread {
-            val version = UpdateChecker.getRemoteVersion(BuildConfig.DEBUG)
-            val changelog = UpdateChecker.getChangelog(BuildConfig.DEBUG)
+            val result = UpdateChecker.check(
+                currentVersion = BuildConfig.VERSION_NAME,
+                debug = BuildConfig.DEBUG,
+                rootGranted = ShellManager.isRootGranted(),
+                networkAvailable = isNetworkConnected(this@MainActivity),
+                autoUpdateDisabled = Pref.getAppUpdate(this@MainActivity),
+                manual = manual
+            )
             postUi {
-                if (version.isEmpty()) { if (manual) noInternet(); return@postUi }
-                if (BuildConfig.VERSION_NAME == version) {
-                    if (manual) { Dlg.setText(getString(R.string.update3)); Dlg.dismissButton() }
-                    return@postUi
+                when (result) {
+                    is UpdateResult.Available -> {
+                        if (!manual) Dlg.show(this@MainActivity, "")
+                        Dlg.setText("${getString(R.string.update1)}: ${result.version}\n${result.changelog}")
+                        Dlg.setNo(R.string.later) { Dlg.close() }
+                        Dlg.setYes(R.string.update) { openLink(this@MainActivity, UpdateChecker.UPDATE_URL) }
+                    }
+                    UpdateResult.UpToDate -> {
+                        if (manual) { Dlg.setText(getString(R.string.update3)); Dlg.dismissButton() }
+                    }
+                    UpdateResult.Skipped -> {
+                        if (manual) noInternet()
+                    }
                 }
-                if (!manual) Dlg.show(this@MainActivity, "")
-                Dlg.setText("${getString(R.string.update1)}: $version\n$changelog")
-                Dlg.setNo(R.string.later) { Dlg.close() }
-                Dlg.setYes(R.string.update) { openLink(this@MainActivity, "https://github.com/n00b69/woa-helper/releases/tag/APK") }
             }
         }.start()
     }
