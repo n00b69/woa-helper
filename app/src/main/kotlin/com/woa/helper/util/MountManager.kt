@@ -34,7 +34,7 @@ object MountManager {
     fun isMounted(): Boolean {
         val win = getWinPartition()
         if (win.isEmpty()) return false
-        return ShellManager.execResult("mount | grep -Fq '$win'") is ShellResult.Success
+        return ShellManager.exec("mount | grep '$win'", master = true).isNotEmpty()
     }
 
     fun mount(): ShellResult {
