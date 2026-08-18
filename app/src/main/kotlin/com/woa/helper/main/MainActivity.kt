@@ -306,8 +306,8 @@ class MainActivity : Activity() {
         mainBinding.guide.setOnClickListener { openLink(this, Device.getVars().guideLink) }
         mainBinding.group.setOnClickListener { openLink(this, Device.getVars().groupLink) }
         mainBinding.cvInfo.setOnClickListener { checkUpdate(true) }
-        mainBinding.mnt.setOnClickListener { mountUI(this, filesDir) }
-        mainBinding.quickBoot.setOnClickListener { quickbootUI(this, filesDir) }
+        mainBinding.mnt.setOnClickListener { mountUI(filesDir) }
+        mainBinding.quickBoot.setOnClickListener { quickbootUI(filesDir) }
         setupBackupListener()
         setupToolboxListeners()
         setupSettingsListeners()
@@ -1045,14 +1045,126 @@ class MainActivity : Activity() {
         }
     }
 
+    fun quickbootUI(filesDir: File) {
+        MountManager.init(filesDir, this)
+        Dlg.show(this, R.string.quickboot_question, R.drawable.ic_launcher_foreground)
+        Dlg.setNo(R.string.no) { Dlg.close() }
+        Dlg.setYes(R.string.yes) {
+            Dlg.dialogLoading()
+            Thread { performQuickBoot(filesDir) }.start()
+        }
+    }
+
+    private fun performQuickBoot(filesDir: File) {
+        val boot = getBoot()
+        val winPath = MountManager.getWinPath()
+
+        val needWindowsBackup = Pref.getBackupIfNoneWindows(this) ||
+            (Pref.getForceBackupWindows(this) && ShellManager.isEmpty("ls $winPath | grep boot.img"))
+        val needAndroidBackup = Pref.getBackupIfNoneAndroid(this) ||
+            (Pref.getForceBackupAndroid(this) && ShellManager.isEmpty("find /sdcard/WOAHelper/Backups | grep boot.img"))
+        val needDevcfgCopy = Pref.getDevcfg1(this) && Pref.getDevcfg2(this)
+
+        if (needWindowsBackup || needDevcfgCopy) {
+            val mountResult = MountManager.mount()
+            if (mountResult is ShellResult.Error) {
+                postUi { Dlg.showMountError(mountResult.message) }
+                return
+            }
+        }
+        if (needWindowsBackup) {
+            BackupManager.winBackup(boot)
+            postUi { updateLastBackupDate() }
+        }
+        if (needAndroidBackup) {
+            BackupManager.androidBackup(boot)
+            postUi { updateLastBackupDate() }
+        }
+        if (Pref.getDevcfg1(this)) {
+            if (!isNetworkConnected(this)) {
+                postUi { noInternet() }
+                return
+            }
+            if (!flashDevcfgQuickBoot(filesDir)) return
+        }
+        flash(Device.uefiPath)
+        if (ShellManager.isEmpty("find /sdcard/WOAHelper/Backups | grep modemst1.img")) {
+            val modemResult = BackupManager.modemBackup()
+            if (modemResult is ShellResult.Error) {
+                postUi { Dlg.showError(modemResult) }
+                return
+            }
+        }
+        ShellManager.exec("/system/bin/svc power reboot")
+    }
+
+    private fun flashDevcfgQuickBoot(filesDir: File): Boolean {
+        val devcfgDevice = DevcfgManager.getDevcfgDevice(Device.codename)
+        val backupResult = DevcfgManager.backupDevcfg(filesDir.absolutePath)
+        if (backupResult is ShellResult.Error) {
+            postUi { Dlg.showError(backupResult) }
+            return false
+        }
+        val downloadResult = DevcfgManager.downloadDevcfgImages(filesDir.absolutePath, devcfgDevice)
+        if (downloadResult is ShellResult.Error) {
+            postUi { Dlg.showError(downloadResult) }
+            return false
+        }
+        val flashResult = DevcfgManager.flashDevcfg(filesDir.absolutePath, devcfgDevice)
+        if (flashResult is ShellResult.Error) {
+            postUi { Dlg.showError(flashResult) }
+            return false
+        }
+        if (Pref.getDevcfg2(this)) {
+            val copyResult = DevcfgManager.copyDevcfgToWindows(filesDir.absolutePath, useBootSddConf = true, copyBackup = true)
+            if (copyResult is ShellResult.Error) {
+                postUi { Dlg.showError(copyResult) }
+                return false
+            }
+        }
+        return true
+    }
+
+    fun mountUI(filesDir: File) {
+        MountManager.init(filesDir, this)
+        val wasMounted = MountManager.isMounted()
+        val question = if (wasMounted) R.string.unmount_question else R.string.mount_question
+        Dlg.show(this, if (wasMounted) getString(question) else getString(question, MountManager.getWinPath()), R.drawable.ic_mnt)
+        Dlg.setNo(R.string.no) { Dlg.close() }
+        Dlg.setYes(R.string.yes) {
+            Dlg.dialogLoading()
+            Thread {
+                val result = if (wasMounted) MountManager.unmount() else MountManager.mount()
+                val isNowMounted = MountManager.isMounted()
+                postUi {
+                    updateMountText()
+                    if (result is ShellResult.Success) MountWidget.requestUpdate(this)
+                    if (wasMounted) {
+                        when (result) {
+                            is ShellResult.Success -> { Dlg.setText(R.string.unmounted); Dlg.dismissButton() }
+                            is ShellResult.Error -> {
+                                Dlg.hideIcon()
+                                Dlg.setText("${getString(R.string.wrong)}\n\n${result.message}")
+                                Dlg.setYes(R.string.chat) { openLink(this, "https://t.me/woahelperchat") }
+                                Dlg.setNo(R.string.dismiss) { Dlg.close() }
+                            }
+                        }
+                    } else if (isNowMounted) {
+                        Dlg.setText("${getString(R.string.mounted)}\n\n${MountManager.getWinPath()}")
+                        Dlg.dismissButton()
+                    } else {
+                        val errorMsg = (result as? ShellResult.Error)?.message ?: "Unknown error"
+                        Dlg.showMountError(errorMsg)
+                    }
+                }
+            }.start()
+        }
+    }
+
     companion object {
         @JvmStatic
         var instance: WeakReference<MainActivity>? = null
         private var autoUpdateChecked = false
-
-        private fun postOnUiThread(activity: Activity, action: () -> Unit) {
-            if (!activity.isDestroyed) activity.runOnUiThread(action)
-        }
 
         @JvmStatic
         fun isNetworkConnected(context: Context): Boolean {
@@ -1062,120 +1174,6 @@ class MainActivity : Activity() {
             return capabilities != null && (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) ||
                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET))
-        }
-
-        @JvmStatic
-        fun mountUI(activity: Activity, filesDir: File) {
-            MountManager.init(filesDir, activity)
-            val wasMounted = MountManager.isMounted()
-            val question = if (wasMounted) R.string.unmount_question else R.string.mount_question
-            Dlg.show(activity, if (wasMounted) activity.getString(question) else activity.getString(question, MountManager.getWinPath()), R.drawable.ic_mnt)
-            Dlg.setNo(R.string.no) { Dlg.close() }
-            Dlg.setYes(R.string.yes) {
-                Dlg.dialogLoading()
-                Thread {
-                    val result = if (wasMounted) MountManager.unmount() else MountManager.mount()
-                    val isNowMounted = MountManager.isMounted()
-                    if (activity.isDestroyed) return@Thread
-                    postOnUiThread(activity) {
-                        (activity as? MainActivity)?.updateMountText()
-                        if (result is ShellResult.Success) MountWidget.requestUpdate(activity)
-                        if (wasMounted) {
-                            when (result) {
-                                is ShellResult.Success -> { Dlg.setText(R.string.unmounted); Dlg.dismissButton() }
-                                is ShellResult.Error -> {
-                                    Dlg.hideIcon()
-                                    Dlg.setText("${activity.getString(R.string.wrong)}\n\n${result.message}")
-                                    Dlg.setYes(R.string.chat) { openLink(activity, "https://t.me/woahelperchat") }
-                                    Dlg.setNo(R.string.dismiss) { Dlg.close() }
-                                }
-                            }
-                        } else if (isNowMounted) {
-                            Dlg.setText("${activity.getString(R.string.mounted)}\n\n${MountManager.getWinPath()}")
-                            Dlg.dismissButton()
-                        } else {
-                            val errorMsg = (result as? ShellResult.Error)?.message ?: "Unknown error"
-                            Dlg.showMountError(errorMsg)
-                        }
-                    }
-                }.start()
-            }
-        }
-
-        @JvmStatic
-        fun quickbootUI(activity: Activity, filesDir: File) {
-            MountManager.init(filesDir, activity)
-            Dlg.show(activity, R.string.quickboot_question, R.drawable.ic_launcher_foreground)
-            Dlg.setNo(R.string.no) { Dlg.close() }
-            Dlg.setYes(R.string.yes) {
-                Dlg.dialogLoading()
-                Thread { performQuickBoot(activity, filesDir) }.start()
-            }
-        }
-
-        private fun performQuickBoot(activity: Activity, filesDir: File) {
-            val mountResult = MountManager.mount()
-            if (mountResult is ShellResult.Error) {
-                postOnUiThread(activity) { Dlg.showMountError(mountResult.message) }
-                return
-            }
-            val currentWinPath = MountManager.getWinPath()
-            val boot = getBoot()
-            if (Pref.getBackupIfNoneWindows(activity) || (Pref.getForceBackupWindows(activity) && ShellManager.exec("ls $currentWinPath | grep boot.img").isEmpty())) {
-                BackupManager.winBackup(boot)
-                postOnUiThread(activity) { (activity as? MainActivity)?.updateLastBackupDate() }
-            }
-            if (Pref.getBackupIfNoneAndroid(activity) || (Pref.getForceBackupAndroid(activity) && ShellManager.exec("find /sdcard/WOAHelper/Backups | grep boot.img").isEmpty())) {
-                BackupManager.androidBackup(boot)
-                postOnUiThread(activity) { (activity as? MainActivity)?.updateLastBackupDate() }
-            }
-            if (Pref.getDevcfg1(activity)) {
-                if (!isNetworkConnected(activity)) {
-                    postOnUiThread(activity) { (activity as? MainActivity)?.noInternet() }
-                    return
-                }
-                if (!flashDevcfgQuickBoot(activity, filesDir)) return
-            }
-            flash(Device.uefiPath)
-            if (ShellManager.exec("find /sdcard/WOAHelper/Backups | grep modemst1.img").isEmpty()) {
-                val modemResult = BackupManager.modemBackup()
-                if (modemResult is ShellResult.Error) {
-                    postOnUiThread(activity) {
-                        Dlg.setText("${activity.getString(R.string.wrong)}\n\n${modemResult.message}")
-                        Dlg.dismissButton()
-                    }
-                    return
-                }
-            }
-            ShellManager.exec("/system/bin/svc power reboot")
-        }
-
-        private fun flashDevcfgQuickBoot(activity: Context, filesDir: File): Boolean {
-            val devcfgDevice = DevcfgManager.getDevcfgDevice(Device.codename)
-            val act = activity as Activity
-            val backupResult = DevcfgManager.backupDevcfg(filesDir.absolutePath)
-            if (backupResult is ShellResult.Error) {
-                postOnUiThread(act) { Dlg.showError(backupResult) }
-                return false
-            }
-            val downloadResult = DevcfgManager.downloadDevcfgImages(filesDir.absolutePath, devcfgDevice)
-            if (downloadResult is ShellResult.Error) {
-                postOnUiThread(act) { Dlg.showError(downloadResult) }
-                return false
-            }
-            val flashResult = DevcfgManager.flashDevcfg(filesDir.absolutePath, devcfgDevice)
-            if (flashResult is ShellResult.Error) {
-                postOnUiThread(act) { Dlg.showError(flashResult) }
-                return false
-            }
-            if (Pref.getDevcfg2(activity)) {
-                val copyResult = DevcfgManager.copyDevcfgToWindows(filesDir.absolutePath, useBootSddConf = true, copyBackup = true)
-                if (copyResult is ShellResult.Error) {
-                    postOnUiThread(act) { Dlg.showError(copyResult) }
-                    return false
-                }
-            }
-            return true
         }
 
         fun getBoot(): String {

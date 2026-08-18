@@ -1,12 +1,12 @@
 package com.woa.helper.main
 
-import android.os.Environment
 import android.os.Handler
 import android.os.Looper
 import android.service.quicksettings.TileService
 import android.widget.Toast
 import com.woa.helper.R
 import com.woa.helper.preference.Pref
+import com.woa.helper.util.BackupManager
 import com.woa.helper.util.MountManager
 import com.woa.helper.util.ShellManager
 import com.woa.helper.util.ShellResult
@@ -80,29 +80,32 @@ class QuickBootTile : CommonTileService() {
 
         Thread {
             ShellManager.init(filesDir)
-            val mountError = mount()
-            if (mountError != null) {
-                Toast.makeText(this, "${getString(R.string.wrong)}\n$mountError", Toast.LENGTH_LONG).show()
-                updateTileState(0)
-                return@Thread
+            MountManager.init(filesDir, this)
+            val winPath = MountManager.getWinPath()
+
+            val needWindowsBackup = Pref.getBackupIfNoneWindows(this) ||
+                (Pref.getForceBackupWindows(this) && ShellManager.isEmpty("ls $winPath | grep boot.img"))
+            val needAndroidBackup = Pref.getBackupIfNoneAndroid(this) ||
+                (Pref.getForceBackupAndroid(this) && ShellManager.isEmpty("find /sdcard/WOAHelper/Backups | grep boot.img"))
+            val needDevcfgCopy = Pref.getDevcfg1(this) && Pref.getDevcfg2(this)
+
+            if (needWindowsBackup || needDevcfgCopy) {
+                val mountError = mount()
+                if (mountError != null) {
+                    Toast.makeText(this, "${getString(R.string.wrong)}\n$mountError", Toast.LENGTH_LONG).show()
+                    updateTileState(0)
+                    return@Thread
+                }
             }
-            val img = if (Pref.getMountLocation(this)) "/mnt/Windows/boot.img" else "${Environment.getExternalStorageDirectory().path}/Windows/boot.img"
-            var notFound = ShellManager.exec("ls $img").isEmpty()
-            var backupDone = false
-            if (Pref.getBackupIfNoneWindows(this) || (Pref.getForceBackupWindows(this) && notFound)) {
-                ShellManager.exec("dd bs=8M if=$boot of=$img")
-                backupDone = true
-            }
-            notFound = ShellManager.exec("find -maxdepth 1 /sdcard | grep boot.img").isEmpty()
-            if (Pref.getBackupIfNoneAndroid(this) || (Pref.getForceBackupAndroid(this) && notFound)) {
-                val sdcard = Environment.getExternalStorageDirectory().path
-                ShellManager.exec("dd bs=8M if=$boot of=$sdcard/boot.img")
-                backupDone = true
-            }
-            if (backupDone) {
-                val sdf = SimpleDateFormat("dd-MM HH:mm", Locale.US)
-                Pref.setDate(this, sdf.format(Date()))
-            }
+            if (needWindowsBackup)
+                BackupManager.winBackup(boot)
+
+            if (needAndroidBackup)
+                BackupManager.androidBackup(boot)
+
+            if (needWindowsBackup || needAndroidBackup)
+                Pref.setDate(this, SimpleDateFormat("dd-MM HH:mm", Locale.US).format(Date()))
+            
             if (Pref.getDevcfg1(this)) {
                 val findDevcfg = ShellManager.exec("find ${filesDir.absolutePath} -maxdepth 1 -name OOS11_devcfg_*")
                 if (!MainActivity.isNetworkConnected(this) && findDevcfg.isEmpty()) {

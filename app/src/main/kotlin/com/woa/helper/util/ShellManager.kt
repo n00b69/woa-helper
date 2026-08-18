@@ -89,4 +89,6 @@ object ShellManager {
     }
 
     fun isRootGranted(): Boolean = Shell.isAppGrantedRoot() == true
+
+    fun isEmpty(command: String): Boolean = exec(command).isEmpty()
 }
