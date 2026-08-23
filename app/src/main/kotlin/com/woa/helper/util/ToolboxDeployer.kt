@@ -19,8 +19,6 @@ object ToolboxDeployer {
         if (mkdir2 is ShellResult.Error) return mkdir2
         val cp1 = ShellManager.execResult("cp '$filesDir/Switch to Android.lnk' $winPath/Users/Public/Desktop")
         if (cp1 is ShellResult.Error) return cp1
-        val cp2 = ShellManager.execResult("cp $filesDir/sta.exe $winPath/ProgramData/sta/sta.exe")
-        if (cp2 is ShellResult.Error) return cp2
         return ShellManager.execResult("cp /sdcard/WOAHelper/sta/* $winPath/sta/")
     }
 
