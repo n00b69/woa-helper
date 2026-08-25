@@ -585,10 +585,10 @@ class MainActivity : Activity() {
         Dlg.setYes(R.string.yes) {
             Dlg.dialogLoading()
             Thread {
-                flash(Device.uefiPath)
+                val flashResult = flash(Device.uefiPath)
                 postUi {
-                    Dlg.setText(R.string.flash)
-                    Dlg.dismissButton()
+                    if (flashResult is ShellResult.Error) Dlg.showError(flashResult)
+                    else { Dlg.setText(R.string.flash); Dlg.dismissButton() }
                 }
             }.start()
         }
@@ -1086,7 +1086,11 @@ class MainActivity : Activity() {
             }
             if (!flashDevcfgQuickBoot(filesDir)) return
         }
-        flash(Device.uefiPath)
+        val flashResult = flash(Device.uefiPath)
+        if (flashResult is ShellResult.Error) {
+            postUi { Dlg.showError(flashResult) }
+            return
+        }
         if (ShellManager.isEmpty("find /sdcard/WOAHelper/Backups | grep modemst1.img")) {
             val modemResult = BackupManager.modemBackup()
             if (modemResult is ShellResult.Error) {
@@ -1160,6 +1164,12 @@ class MainActivity : Activity() {
         }
     }
 
+    private fun flash(uefi: String?): ShellResult {
+        if (uefi.isNullOrEmpty()) return ShellResult.Error(getString(R.string.uefi_not_found))
+        val slotSuffix = ShellManager.exec("getprop ro.boot.slot_suffix")
+        return ShellManager.execResult("dd if=$uefi of=/dev/block/bootdevice/by-name/boot$slotSuffix bs=16M")
+    }
+
     companion object {
         @JvmStatic
         var instance: WeakReference<MainActivity>? = null
@@ -1179,12 +1189,6 @@ class MainActivity : Activity() {
             val slotSuffix = ShellManager.exec("getprop ro.boot.slot_suffix")
             val partition = ShellManager.exec("find /dev/block | grep -i \"/boot$slotSuffix$\" | head -1")
             return if (partition.isNotEmpty()) ShellManager.exec("realpath $partition") else ""
-        }
-
-        private fun flash(uefi: String?) {
-            if (uefi.isNullOrEmpty()) return
-            val slotSuffix = ShellManager.exec("getprop ro.boot.slot_suffix")
-            ShellManager.exec("dd if=$uefi of=/dev/block/bootdevice/by-name/boot$slotSuffix bs=16M")
         }
 
         @JvmStatic

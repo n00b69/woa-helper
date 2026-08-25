@@ -141,15 +141,19 @@ class QuickBootTile : CommonTileService() {
                     return@Thread
                 }
             }
-            flash()
+            val flashResult = flash()
+            if (flashResult is ShellResult.Error) {
+                Toast.makeText(this, "${getString(R.string.wrong)}\n\n${flashResult.message}", Toast.LENGTH_LONG).show()
+                return@Thread
+            }
             ShellManager.exec("/system/bin/svc power reboot")
         }.start()
     }
 
-    private fun flash() {
-        if (findUefi.isEmpty()) return
+    private fun flash(): ShellResult {
+        if (findUefi.isEmpty()) return ShellResult.Error(getString(R.string.uefi_not_found))
         val slotSuffix = ShellManager.exec("getprop ro.boot.slot_suffix")
-        ShellManager.exec("dd if=$findUefi of=/dev/block/bootdevice/by-name/boot$slotSuffix bs=16M")
+        return ShellManager.execResult("dd if=$findUefi of=/dev/block/bootdevice/by-name/boot$slotSuffix bs=16M")
     }
 
     private fun checkUefi() {
