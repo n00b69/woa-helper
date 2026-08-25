@@ -1058,10 +1058,10 @@ class MainActivity : Activity() {
         val boot = getBoot()
         val winPath = MountManager.getWinPath()
 
-        val needWindowsBackup = Pref.getBackupIfNoneWindows(this) ||
-            (Pref.getForceBackupWindows(this) && ShellManager.isEmpty("ls $winPath | grep boot.img"))
-        val needAndroidBackup = Pref.getBackupIfNoneAndroid(this) ||
-            (Pref.getForceBackupAndroid(this) && ShellManager.isEmpty("find /sdcard/WOAHelper/Backups | grep boot.img"))
+        val needWindowsBackup = Pref.getForceBackupWindows(this) ||
+            (Pref.getBackupIfNoneWindows(this) && ShellManager.isEmpty("ls $winPath | grep boot.img"))
+        val needAndroidBackup = Pref.getForceBackupAndroid(this) ||
+            (Pref.getBackupIfNoneAndroid(this) && ShellManager.isEmpty("find /sdcard/WOAHelper/Backups | grep boot.img"))
         val needDevcfgCopy = Pref.getDevcfg1(this) && Pref.getDevcfg2(this)
 
         if (needWindowsBackup || needDevcfgCopy) {
