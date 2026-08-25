@@ -820,6 +820,7 @@ class MainActivity : Activity() {
             Dlg.show(this, R.string.nonroot)
             Dlg.setCancelable(false)
         }
+        checkUefi()
     }
 
     override fun onDestroy() {
