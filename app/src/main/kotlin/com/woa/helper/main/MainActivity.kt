@@ -18,7 +18,6 @@ import android.window.OnBackInvokedDispatcher
 import android.view.animation.AnimationUtils
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.LinearLayout
 import com.woa.helper.BuildConfig
 import com.woa.helper.R
 import com.woa.helper.databinding.ActivityMainBinding
