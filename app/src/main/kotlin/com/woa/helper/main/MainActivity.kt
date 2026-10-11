@@ -109,7 +109,7 @@ class MainActivity : Activity() {
 
     @Suppress("DEPRECATION")
     override fun onBackPressed() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) onBackHandled()
+        onBackHandled()
     }
 
     private fun onBackHandled() {
