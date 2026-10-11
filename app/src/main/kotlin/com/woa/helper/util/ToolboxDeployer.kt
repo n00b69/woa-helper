@@ -15,13 +15,13 @@ object ToolboxDeployer {
         }
         val winPath = MountManager.getWinPath()
         if (winPath.isEmpty()) return ShellResult.Error("Mount path is empty")
-        val mkdir2 = ShellManager.execResult("mkdir -p $winPath/sta")
+        val mkdir2 = ShellManager.execResult("mkdir -p $winPath/sta", master = true)
         if (mkdir2 is ShellResult.Error) return mkdir2
-        val cp1 = ShellManager.execResult("cp '$filesDir/Switch to Android.lnk' $winPath/Users/Public/Desktop")
+        val cp1 = ShellManager.execResult("cp '$filesDir/Switch to Android.lnk' $winPath/Users/Public/Desktop", master = true)
         if (cp1 is ShellResult.Error) return cp1
-        val cp2 = ShellManager.execResult("cp $filesDir/sta.exe $winPath/ProgramData/sta/sta.exe")
+        val cp2 = ShellManager.execResult("cp $filesDir/sta.exe $winPath/ProgramData/sta/sta.exe", master = true)
         if (cp2 is ShellResult.Error) return cp2
-        return ShellManager.execResult("cp /sdcard/WOAHelper/sta/* $winPath/sta/")
+        return ShellManager.execResult("cp /sdcard/WOAHelper/sta/* $winPath/sta/", master = true)
     }
 
     fun deploySoftware(filesDir: String): ShellResult {
@@ -34,10 +34,10 @@ object ToolboxDeployer {
             val cp = ShellManager.execResult("cp $filesDir/$file $TOOLBOX_DIR")
             if (cp is ShellResult.Error) return cp
         }
-        val mkdir2 = ShellManager.execResult("mkdir -p $winPath/Toolbox")
+        val mkdir2 = ShellManager.execResult("mkdir -p $winPath/Toolbox", master = true)
         if (mkdir2 is ShellResult.Error) return mkdir2
         files.forEach { file ->
-            val cp = ShellManager.execResult("cp $filesDir/$file $winPath/Toolbox")
+            val cp = ShellManager.execResult("cp $filesDir/$file $winPath/Toolbox", master = true)
             if (cp is ShellResult.Error) return cp
         }
         return ShellResult.Success("")
@@ -54,11 +54,11 @@ object ToolboxDeployer {
         onProgress.onProgress(80, "")
         val winPath = MountManager.getWinPath()
         if (winPath.isEmpty()) return ShellResult.Error("Mount path is empty")
-        val mkdir2 = ShellManager.execResult("mkdir -p $winPath/Toolbox")
+        val mkdir2 = ShellManager.execResult("mkdir -p $winPath/Toolbox", master = true)
         if (mkdir2 is ShellResult.Error) return mkdir2
-        val cp1 = ShellManager.execResult("cp $TOOLBOX_DIR/$targetName $winPath/Toolbox/$targetName")
+        val cp1 = ShellManager.execResult("cp $TOOLBOX_DIR/$targetName $winPath/Toolbox/$targetName", master = true)
         if (cp1 is ShellResult.Error) return cp1
-        return ShellManager.execResult("cp $TOOLBOX_DIR/AMEWizardBeta.zip $winPath/Toolbox")
+        return ShellManager.execResult("cp $TOOLBOX_DIR/AMEWizardBeta.zip $winPath/Toolbox", master = true)
     }
 
     fun deployUsbHost(filesDir: String): ShellResult {
@@ -68,11 +68,11 @@ object ToolboxDeployer {
         if (cp1 is ShellResult.Error) return cp1
         val winPath = MountManager.getWinPath()
         if (winPath.isEmpty()) return ShellResult.Error("Mount path is empty")
-        val mkdir2 = ShellManager.execResult("mkdir -p $winPath/Toolbox")
+        val mkdir2 = ShellManager.execResult("mkdir -p $winPath/Toolbox", master = true)
         if (mkdir2 is ShellResult.Error) return mkdir2
-        val cp2 = ShellManager.execResult("cp $TOOLBOX_DIR/usbhostmode.exe $winPath/Toolbox")
+        val cp2 = ShellManager.execResult("cp $TOOLBOX_DIR/usbhostmode.exe $winPath/Toolbox", master = true)
         if (cp2 is ShellResult.Error) return cp2
-        return ShellManager.execResult("cp '$filesDir/USB Host Mode.lnk' $winPath/Users/Public/Desktop")
+        return ShellManager.execResult("cp '$filesDir/USB Host Mode.lnk' $winPath/Users/Public/Desktop", master = true)
     }
 
     fun deployRotation(filesDir: String): ShellResult {
@@ -82,11 +82,11 @@ object ToolboxDeployer {
         if (cp1 is ShellResult.Error) return cp1
         val winPath = MountManager.getWinPath()
         if (winPath.isEmpty()) return ShellResult.Error("Mount path is empty")
-        val mkdir2 = ShellManager.execResult("mkdir -p $winPath/Toolbox")
+        val mkdir2 = ShellManager.execResult("mkdir -p $winPath/Toolbox", master = true)
         if (mkdir2 is ShellResult.Error) return mkdir2
-        val cp2 = ShellManager.execResult("cp $TOOLBOX_DIR/QuickRotate_V6.1.6.exe $winPath/Toolbox")
+        val cp2 = ShellManager.execResult("cp $TOOLBOX_DIR/QuickRotate_V6.1.6.exe $winPath/Toolbox", master = true)
         if (cp2 is ShellResult.Error) return cp2
-        return ShellManager.execResult("cp $TOOLBOX_DIR/QuickRotate_V6.1.6.exe $winPath/Users/Public/Desktop")
+        return ShellManager.execResult("cp $TOOLBOX_DIR/QuickRotate_V6.1.6.exe $winPath/Users/Public/Desktop", master = true)
     }
 
     fun deployTabletMode(filesDir: String): ShellResult {
@@ -96,9 +96,9 @@ object ToolboxDeployer {
         if (cp1 is ShellResult.Error) return cp1
         val winPath = MountManager.getWinPath()
         if (winPath.isEmpty()) return ShellResult.Error("Mount path is empty")
-        val mkdir2 = ShellManager.execResult("mkdir -p $winPath/Toolbox")
+        val mkdir2 = ShellManager.execResult("mkdir -p $winPath/Toolbox", master = true)
         if (mkdir2 is ShellResult.Error) return mkdir2
-        return ShellManager.execResult("cp $TOOLBOX_DIR/OptimizedTaskbarControl_V3.2.exe $winPath/Toolbox")
+        return ShellManager.execResult("cp $TOOLBOX_DIR/OptimizedTaskbarControl_V3.2.exe $winPath/Toolbox", master = true)
     }
 
     fun deployFrameworks(filesDir: String, onProgress: Download.ProgressCallback = Dlg.downloadCallback()): ShellResult {
@@ -127,9 +127,9 @@ object ToolboxDeployer {
         if (failures.isNotEmpty()) return ShellResult.Error("Download failed: ${failures.take(3).joinToString(", ")}${if (failures.size > 3) " (+${failures.size - 3} more)" else ""}")
         val winPath = MountManager.getWinPath()
         if (winPath.isEmpty()) return ShellResult.Error("Mount path is empty")
-        val mkdir2 = ShellManager.execResult("mkdir -p $winPath/Toolbox/Frameworks")
+        val mkdir2 = ShellManager.execResult("mkdir -p $winPath/Toolbox/Frameworks", master = true)
         if (mkdir2 is ShellResult.Error) return mkdir2
-        return ShellManager.execResult("cp $frameworksDir/* $winPath/Toolbox/Frameworks")
+        return ShellManager.execResult("cp $frameworksDir/* $winPath/Toolbox/Frameworks", master = true)
     }
 
     fun deployDefenderEdge(filesDir: String, isNetworkConnected: Boolean, onProgress: Download.ProgressCallback = Dlg.downloadCallback()): ShellResult {
@@ -147,13 +147,13 @@ object ToolboxDeployer {
         }
         val winPath = MountManager.getWinPath()
         if (winPath.isEmpty()) return ShellResult.Error("Mount path is empty")
-        val mkdir2 = ShellManager.execResult("mkdir -p $winPath/Toolbox")
+        val mkdir2 = ShellManager.execResult("mkdir -p $winPath/Toolbox", master = true)
         if (mkdir2 is ShellResult.Error) return mkdir2
         val cp1 = ShellManager.execResult("cp $filesDir/RemoveEdge.bat $TOOLBOX_DIR")
         if (cp1 is ShellResult.Error) return cp1
-        val cp2 = ShellManager.execResult("cp $filesDir/DefenderRemover.exe $winPath/Toolbox")
+        val cp2 = ShellManager.execResult("cp $filesDir/DefenderRemover.exe $winPath/Toolbox", master = true)
         if (cp2 is ShellResult.Error) return cp2
-        return ShellManager.execResult("cp $filesDir/RemoveEdge.bat $winPath/Toolbox")
+        return ShellManager.execResult("cp $filesDir/RemoveEdge.bat $winPath/Toolbox", master = true)
     }
 
     fun dumpModem(): ShellResult {
@@ -161,7 +161,7 @@ object ToolboxDeployer {
         if (winPath.isEmpty()) return ShellResult.Error("Mount path is empty")
         val failures = mutableListOf<String>()
         listOf("modemst1" to "bootmodem_fs1", "modemst2" to "bootmodem_fs2").forEach { (partition, target) ->
-            val result = ShellManager.execResult("dd if=/dev/block/by-name/$partition of=\$(find $winPath/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/$target")
+            val result = ShellManager.execResult("dd if=/dev/block/by-name/$partition of=\$(find $winPath/Windows/System32/DriverStore/FileRepository -name qcremotefs8150.inf_arm64_*)/$target", master = true)
             if (result is ShellResult.Error) failures.add("$partition: ${result.message}")
         }
         return if (failures.isEmpty()) ShellResult.Success("") else ShellResult.Error("Dump failed: ${failures.joinToString(", ")}")

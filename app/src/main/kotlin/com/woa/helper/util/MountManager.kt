@@ -47,7 +47,7 @@ object MountManager {
             val selinuxResult = ShellManager.execResult("echo 0 > /sys/fs/selinux/enforce")
             if (selinuxResult is ShellResult.Error) return selinuxResult
         }
-        val mkdirResult = ShellManager.execResult("mkdir -p $winPath")
+        val mkdirResult = ShellManager.execResult("mkdir -p $winPath", master = true)
         if (mkdirResult is ShellResult.Error) return mkdirResult
         val mountResult = ShellManager.execResult("./mount.ntfs $win $winPath", master = true)
         if (mountResult is ShellResult.Error) return mountResult
@@ -62,7 +62,7 @@ object MountManager {
             restoreSelinux()
             return umountResult
         }
-        val rmdirResult = ShellManager.execResult("rmdir $winPath")
+        val rmdirResult = ShellManager.execResult("rmdir $winPath", master = true)
         if (rmdirResult is ShellResult.Error) {
             restoreSelinux()
             return rmdirResult

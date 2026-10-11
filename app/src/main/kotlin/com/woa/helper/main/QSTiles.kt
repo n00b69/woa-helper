@@ -84,7 +84,7 @@ class QuickBootTile : CommonTileService() {
             val winPath = MountManager.getWinPath()
 
             val needWindowsBackup = Pref.getForceBackupWindows(this) ||
-                    (Pref.getBackupIfNoneWindows(this) && ShellManager.isEmpty("ls $winPath | grep boot.img"))
+                    (Pref.getBackupIfNoneWindows(this) && ShellManager.isEmpty("ls $winPath | grep boot.img", master = true))
             val needAndroidBackup = Pref.getForceBackupAndroid(this) ||
                     (Pref.getBackupIfNoneAndroid(this) && ShellManager.isEmpty("find /sdcard/WOAHelper/Backups | grep boot.img"))
             val needDevcfgCopy = Pref.getDevcfg1(this) && Pref.getDevcfg2(this)
