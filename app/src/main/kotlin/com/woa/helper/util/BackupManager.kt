@@ -10,7 +10,7 @@ object BackupManager {
     fun winBackup(bootPartition: String): ShellResult {
         val winPath = MountManager.getWinPath()
         if (winPath.isEmpty()) return ShellResult.Error("Mount path is empty")
-        return ShellManager.execResult("dd bs=8M if=$bootPartition of=$winPath/boot.img")
+        return ShellManager.execResult("dd bs=8M if=$bootPartition of=$winPath/boot.img", master = true)
     }
 
     fun androidBackup(bootPartition: String): ShellResult {
