@@ -240,7 +240,6 @@
                         android:layout_width="0dp"
                         android:layout_height="@dimen/settings_row_height"
                         android:layout_weight="1"
-                        android:layout_marginEnd="10dp"
                         android:background="@drawable/default_background"
                         android:clickable="true"
                         android:gravity="center"
@@ -261,6 +260,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/default_background"
                         android:clickable="true"
+                        android:layout_marginStart="10dp"
                         android:gravity="center"
                         android:visibility="gone"
                         android:padding="@dimen/settings_padding">
