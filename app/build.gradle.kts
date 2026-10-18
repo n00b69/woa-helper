@@ -15,7 +15,7 @@ android {
         minSdk = 25
         targetSdk = 36
         versionCode = 5
-        versionName = "1.8.7.2"
+        versionName = "1.8.7.3"
 
         val localesArray = locales.joinToString(", ") { tag ->
             val bcpTag = tag.replace("-r", "-").let { cleanTag ->
