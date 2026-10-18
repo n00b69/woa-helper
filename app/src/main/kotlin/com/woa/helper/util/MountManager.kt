@@ -8,16 +8,14 @@ import java.io.File
 object MountManager {
     private var cachedWinPartition: String = ""
     private var cachedWinPath: String = ""
+    private var cachedStorageWinPath: String = ""
     private var cachedFilesDir: File? = null
     private var selinuxOnMount: Boolean = false
 
     fun init(filesDir: File, context: Context) {
         cachedFilesDir = filesDir
-        cachedWinPath = if (Pref.getMountLocation(context)) {
-            "/mnt/Windows"
-        } else {
-            "${Environment.getExternalStorageDirectory().path}/Windows"
-        }
+        cachedWinPath = "/mnt/Windows"
+        cachedStorageWinPath = "${Environment.getExternalStorageDirectory().path}/Windows"
         selinuxOnMount = Pref.getSelinux(context)
     }
 
@@ -47,22 +45,29 @@ object MountManager {
             val selinuxResult = ShellManager.execResult("echo 0 > /sys/fs/selinux/enforce")
             if (selinuxResult is ShellResult.Error) return selinuxResult
         }
-        val mkdirResult = ShellManager.execResult("mkdir -p $winPath", master = true)
+        val mkdirResult = ShellManager.execResult("mkdir -p $winPath $cachedStorageWinPath", master = true)
         if (mkdirResult is ShellResult.Error) return mkdirResult
         val mountResult = ShellManager.execResult("./mount.ntfs $win $winPath", master = true)
         if (mountResult is ShellResult.Error) return mountResult
+        val bindResult = ShellManager.execResult("mount --bind /mnt/Windows $cachedStorageWinPath", master = true)
+        if (bindResult is ShellResult.Error) return bindResult
         return if (isMounted()) ShellResult.Success("") else ShellResult.Error("Mount verification failed")
     }
 
     fun unmount(): ShellResult {
         val winPath = cachedWinPath
         if (winPath.isEmpty()) return ShellResult.Error("Mount path not configured")
+        val unbindResult = ShellManager.execResult("umount $cachedStorageWinPath", master = true)
+        if (unbindResult is ShellResult.Error) {
+            restoreSelinux()
+            return unbindResult
+        }
         val umountResult = ShellManager.execResult("umount $winPath", master = true)
         if (umountResult is ShellResult.Error) {
             restoreSelinux()
             return umountResult
         }
-        val rmdirResult = ShellManager.execResult("rmdir $winPath", master = true)
+        val rmdirResult = ShellManager.execResult("rmdir $winPath $cachedStorageWinPath", master = true)
         if (rmdirResult is ShellResult.Error) {
             restoreSelinux()
             return rmdirResult
@@ -80,6 +85,7 @@ object MountManager {
     fun resetCache() {
         cachedWinPartition = ""
         cachedWinPath = ""
+        cachedStorageWinPath = ""
         selinuxOnMount = false
     }
 

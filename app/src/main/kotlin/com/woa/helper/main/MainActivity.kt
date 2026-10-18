@@ -266,7 +266,7 @@ class MainActivity : Activity() {
             //binding.navigationIcon.setImageResource(R.drawable.ic_launcher_foreground)
             binding.settings.setColorFilter(getColor(R.color.md_theme_primary))
         }
-        mainBinding.toolbarlayout.title.setText(R.string.app_name)
+    mainBinding.toolbarlayout.title.setText(R.string.app_name)
         mainBinding.toolbarlayout.subtitle.setText("v${BuildConfig.VERSION_NAME}${if (BuildConfig.DEBUG) " (Debug)" else ""}")
         settingsBinding.toolbarlayout.title.setText(R.string.preferences)
     }
@@ -1105,7 +1105,7 @@ class MainActivity : Activity() {
         val winPath = MountManager.getWinPath()
 
         var needWindowsBackup = Pref.getForceBackupWindows(this) ||
-            (Pref.getBackupIfNoneWindows(this) && ShellManager.isEmpty("ls $winPath | grep boot.img", master = true))
+            (Pref.getBackupIfNoneWindows(this) && ShellManager.isEmpty("ls $winPath | grep boot.img"))
         val needAndroidBackup = Pref.getForceBackupAndroid(this) ||
             (Pref.getBackupIfNoneAndroid(this) && ShellManager.isEmpty("find /sdcard/WOAHelper/Backups | grep boot.img"))
         val needDevcfgCopy = Pref.getDevcfg1(this) && Pref.getDevcfg2(this)

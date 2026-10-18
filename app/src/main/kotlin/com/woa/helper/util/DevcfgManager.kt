@@ -63,16 +63,16 @@ object DevcfgManager {
         if (cp1 is ShellResult.Error) return cp1
         val cp2 = ShellManager.execResult("cp $filesDir/$sddConf /sdcard/WOAHelper/staDevcfg/sdd.conf")
         if (cp2 is ShellResult.Error) return cp2
-        val mkdir2 = ShellManager.execResult("mkdir -p $winPath/sta", master = true)
+        val mkdir2 = ShellManager.execResult("mkdir -p $winPath/sta")
         if (mkdir2 is ShellResult.Error) return mkdir2
-        val cp3 = ShellManager.execResult("cp '$filesDir/Flash Devcfg.lnk' $winPath/Users/Public/Desktop", master = true)
+        val cp3 = ShellManager.execResult("cp '$filesDir/Flash Devcfg.lnk' $winPath/Users/Public/Desktop")
         if (cp3 is ShellResult.Error) return cp3
-        val cp4 = ShellManager.execResult("cp $filesDir/sdd.exe $winPath/sta/sdd.exe", master = true)
+        val cp4 = ShellManager.execResult("cp $filesDir/sdd.exe $winPath/sta/sdd.exe")
         if (cp4 is ShellResult.Error) return cp4
-        val cp5 = ShellManager.execResult("cp $filesDir/$sddConf $winPath/sta/sdd.conf", master = true)
+        val cp5 = ShellManager.execResult("cp $filesDir/$sddConf $winPath/sta/sdd.conf")
         if (cp5 is ShellResult.Error) return cp5
         if (copyBackup) {
-            val cp6 = ShellManager.execResult("cp $filesDir/$DEVCFG_BACKUP $winPath/original-devcfg.img", master = true)
+            val cp6 = ShellManager.execResult("cp $filesDir/$DEVCFG_BACKUP $winPath/original-devcfg.img")
             if (cp6 is ShellResult.Error) return cp6
         }
         return ShellResult.Success("")
