@@ -136,4 +136,5 @@
     <string name="uefiChk" translatable="false">find /mnt/sdcard/UEFI/ -type f  | grep ".img" | head -n 1 </string>
 
     <string name="default1">Default</string>
+    <string name="font">Select font</string>
 </resources>

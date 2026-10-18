@@ -45,7 +45,7 @@ class MainActivity : Activity() {
     private lateinit var mainBinding: ActivityMainBinding
     private lateinit var settingsBinding: SetPanelBinding
     private lateinit var toolboxBinding: ToolboxBinding
-
+    private val FONT_SELECT = 50
     private val views: MutableList<View> = ArrayList()
     private var blurCount = 0
 
@@ -53,6 +53,44 @@ class MainActivity : Activity() {
         if (!isDestroyed) runOnUiThread(action)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == FONT_SELECT && resultCode == RESULT_OK) {
+            if (data == null) return
+            val content = data.data ?: return
+            val fontFile = contentResolver.openInputStream(content) ?: return
+            val file = File("$filesDir/font.ttf")
+            if (!file.exists()) file.createNewFile()
+            fontFile.copyTo(file.outputStream())
+            FontHelper.setFont(file)
+            updateFont()
+        }
+    }
+
+    fun clearFont(){
+        val file = File("$filesDir/font.ttf")
+        if (file.exists()) file.delete()
+        FontHelper.resetFont()
+        updateFont()
+    }
+
+    fun updateFont(){
+        FontHelper.recursiveFont(this, mainBinding.linearLayout)
+        FontHelper.recursiveFont(this, settingsBinding.linearLayout)
+        FontHelper.recursiveFont(this, toolboxBinding.linearLayout)
+        FontHelper.recursiveFont(this, findViewById(R.id.toolbar))
+        if (!FontHelper.isSet())
+            settingsBinding.fontResetButton.visibility = View.GONE
+        else
+            settingsBinding.fontResetButton.visibility = View.VISIBLE
+    }
+
+    fun fontSelect() {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("*/*");
+        startActivityForResult(intent, FONT_SELECT);
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         instance = WeakReference(this)
         applySavedLocale()
@@ -167,6 +205,11 @@ class MainActivity : Activity() {
         setContentView(mainBinding.root)
         views.clear()
         views.add(mainBinding.root)
+        val font = File("$filesDir/font.ttf")
+        if (font.exists()) {
+            FontHelper.setFont(font)
+            updateFont()
+        }
     }
 
     @Suppress("DEPRECATION")
@@ -220,12 +263,12 @@ class MainActivity : Activity() {
     private fun setupToolbar() {
         val toolbarBindings = listOf(mainBinding.toolbarlayout, settingsBinding.toolbarlayout, toolboxBinding.toolbarlayout)
         toolbarBindings.forEach { binding ->
-            binding.toolbar.navigationIcon = getDrawable(R.drawable.ic_launcher_foreground)
+            //binding.navigationIcon.setImageResource(R.drawable.ic_launcher_foreground)
             binding.settings.setColorFilter(getColor(R.color.md_theme_primary))
         }
-        mainBinding.toolbarlayout.toolbar.setTitle(R.string.app_name)
-        mainBinding.toolbarlayout.toolbar.subtitle = "v${BuildConfig.VERSION_NAME}${if (BuildConfig.DEBUG) " (Debug)" else ""}"
-        settingsBinding.toolbarlayout.toolbar.setTitle(R.string.preferences)
+        mainBinding.toolbarlayout.title.setText(R.string.app_name)
+        mainBinding.toolbarlayout.subtitle.setText("v${BuildConfig.VERSION_NAME}${if (BuildConfig.DEBUG) " (Debug)" else ""}")
+        settingsBinding.toolbarlayout.title.setText(R.string.preferences)
     }
 
     private fun initDeviceData() {
@@ -375,12 +418,12 @@ class MainActivity : Activity() {
         setContentView(targetView)
         targetView.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in))
         val toolbar = when (targetView) {
-            toolboxBinding.root -> toolboxBinding.toolbarlayout.toolbar
-            settingsBinding.root -> settingsBinding.toolbarlayout.toolbar
-            else -> mainBinding.toolbarlayout.toolbar
+            toolboxBinding.root -> toolboxBinding.toolbarlayout
+            settingsBinding.root -> settingsBinding.toolbarlayout
+            else -> mainBinding.toolbarlayout
         }
-        toolbar.title = getString(titleRes)
-        toolbar.navigationIcon = getDrawable(R.drawable.ic_launcher_foreground)
+        toolbar.title.setText(titleRes)
+        //toolbar.navigationIcon.setImageResource(R.drawable.ic_launcher_foreground)
     }
 
     private fun setupSettingsListeners() {
@@ -408,6 +451,8 @@ class MainActivity : Activity() {
         settingsBinding.githubButton.setOnClickListener { openLink(this, "https://github.com/n00b69/woa-helper") }
         setupQuickBootDropdown()
         setupDevcfgSettings()
+        settingsBinding.fontButton.setOnClickListener { fontSelect() }
+        settingsBinding.fontResetButton.setOnClickListener {clearFont()}
     }
 
     private fun updateSettingsCheckboxes() {

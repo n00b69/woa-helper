@@ -12,7 +12,6 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import com.woa.helper.R
 import com.woa.helper.main.MainActivity.Companion.hideBlur
-import com.woa.helper.main.MainActivity.Companion.openLink
 import com.woa.helper.main.MainActivity.Companion.showBlur
 import com.woa.helper.util.ShellResult
 
@@ -43,6 +42,7 @@ object Dlg {
         dialog = Dialog(context).apply {
             setContentView(R.layout.dialog)
             window?.setBackgroundDrawableResource(android.R.color.transparent)
+            FontHelper.recursiveFont(context,findViewById<View>(R.id.dialogLayout))
         }
         yes = dialog?.findViewById(R.id.yes)
         no = dialog?.findViewById(R.id.no)

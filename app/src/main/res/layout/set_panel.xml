@@ -236,6 +236,51 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/fontButton"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/settings_row_height"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/default_background"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:padding="@dimen/settings_padding">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/font"
+                            android:textSize="@dimen/text_header"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/fontResetButton"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/settings_row_height"
+                        android:layout_weight="1"
+                        android:background="@drawable/default_background"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        android:padding="@dimen/settings_padding">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/cancel"
+                            android:textSize="@dimen/text_header"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
                         android:id="@+id/chatButton"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/settings_row_height"
