@@ -267,6 +267,7 @@ class MainActivity : Activity() {
             binding.settings.setColorFilter(getColor(R.color.md_theme_primary))
         }
         mainBinding.toolbarlayout.title.setText(R.string.app_name)
+        mainBinding.toolbarlayout.subtitle.visibility = View.VISIBLE
         mainBinding.toolbarlayout.subtitle.setText("v${BuildConfig.VERSION_NAME}${if (BuildConfig.DEBUG) " (Debug)" else ""}")
         settingsBinding.toolbarlayout.title.setText(R.string.preferences)
     }
